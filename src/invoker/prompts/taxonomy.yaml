@@ -1,0 +1,98 @@
+# Taxonomy version. Bump on any structural change.
+version: 1
+
+tags:
+  # Damage archetypes
+  big_burst:
+    definition: "Single-cast magical damage window ≥200 at max level, or combo ≥400 within 2s."
+    examples: [Lina, Lion, Zeus]
+  sustained_magical:
+    definition: "Continuous magical DPS over ≥3s per cast window."
+    examples: [Zeus, Jakiro]
+  physical_carry:
+    definition: "Late-game right-click carry with scaling physical damage."
+    examples: ["Phantom Assassin", Juggernaut]
+
+  # Disable
+  single_target_disable:
+    definition: "Single-target hard disable (stun/hex/sleep) ≥1.2s."
+    examples: [Lion, Bane]
+  aoe_disable:
+    definition: "Area hard disable ≥1.0s hitting ≥2 heroes reliably."
+    examples: [Magnus, Tidehunter]
+  long_disable:
+    definition: "Single-target hard disable ≥3.0s at any level."
+    examples: [Bane, Shadow Shaman]
+
+  # Amplifiers / utility
+  armor_reduction:
+    definition: "Reduces enemy armor by ≥6 via debuff or passive for ≥10s."
+    examples: [Slardar, Dazzle]
+  physical_damage_amplifier:
+    definition: "Increases physical damage taken on target or dealt by ally."
+    examples: [Slardar, Chen]
+  magic_amplifier:
+    definition: "Increases magic damage taken on target."
+    examples: [Veno, "Ancient Apparition"]
+  silence:
+    definition: "Prevents spellcasting for ≥2s."
+    examples: [Silencer, Drow]
+
+  # Mobility
+  blink:
+    definition: "Built-in short-range teleport or dash on ≤18s cooldown."
+    examples: [AM, QOP]
+  global_presence:
+    definition: "Map-wide ability (teleport, ult, or passive) influencing any lane."
+    examples: [Zeus, Spectre, Io]
+
+  # Initiation / saves
+  initiation:
+    definition: "Engages fights via blink/charge/teleport with follow-up disable."
+    examples: [Magnus, Tidehunter, Slardar]
+  save:
+    definition: "Targeted ally protection (shield / dispel / invuln) on ≤40s cooldown."
+    examples: [Dazzle, Oracle, Io]
+
+  # Sustain / push
+  sustain:
+    definition: "Ally healing or regen throughput ≥60 HP/s at max level."
+    examples: [Dazzle, Omni, Io]
+  siege:
+    definition: "Objective damage via splash, mini-stuns, or ranged AoE."
+    examples: [Leshrac, "Death Prophet"]
+  pusher:
+    definition: "Fast creep-wave clear leading to ≥1-tower advantage in lane."
+    examples: ["Death Prophet", Leshrac]
+
+  # Vision / control
+  vision_control:
+    definition: "Grants vision or True Sight via ability, passive, or summon."
+    examples: [Slardar, "Bounty Hunter", Zeus]
+  summons:
+    definition: "Controllable units with combat utility beyond hero itself."
+    examples: ["Lone Druid", Meepo, Beastmaster]
+
+  # Defensive
+  magic_immunity_source:
+    definition: "Grants allies or self spell immunity / high magic resistance."
+    examples: [AA, Juggernaut]
+  evasion:
+    definition: "Passive or active physical evasion ≥30%."
+    examples: [PA, Riki]
+  high_base_armor:
+    definition: "Base armor ≥5 at level 1 with natural tankiness."
+    examples: [Timbersaw, Centaur]
+
+  # Economy / scaling
+  tempo:
+    definition: "Mid-game spike windows where hero out-paces opponents 15–30 min."
+    examples: [Storm, QOP]
+  late_game_scaling:
+    definition: "Significant power per minute after 40:00 via stacks or items."
+    examples: [Medusa, Spectre]
+  farming_acceleration:
+    definition: "Self-farm acceleration via split-push, jungle, or ranged clear."
+    examples: [AM, Sven]
+
+  # More as we iterate
