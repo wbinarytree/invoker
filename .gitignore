@@ -1,0 +1,21 @@
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.pyright/
+
+# Invoker ships as a framework with no data. All knowledge is bootstrapped.
+data/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
