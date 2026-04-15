@@ -48,7 +48,3 @@ class StratzSynergyEdge(BaseModel):
     matchCount: int  # noqa: N815
 
 
-class LiquipediaAbility(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    name: str
-    text: str

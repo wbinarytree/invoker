@@ -1,5 +1,4 @@
 from invoker.schemas.raw import (
-    LiquipediaAbility,
     ODAbility,
     ODHero,
     ODMatchup,
@@ -20,4 +19,3 @@ def test_smoke_models():
     ODProMatch(match_id=123456)
     ODAbility(dname="Mana Break")
     StratzSynergyEdge(heroId1=1, heroId2=2, synergy=0.12, matchCount=500)  # noqa: N815
-    LiquipediaAbility(name="Slithereen Crush", text="Slams the ground.")

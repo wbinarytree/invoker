@@ -4,6 +4,8 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -17,6 +19,7 @@ class Config:
 
     @classmethod
     def load(cls) -> Config:
+        load_dotenv()
         data_dir = Path(os.environ.get("INVOKER_DATA_DIR", "data"))
         if not data_dir.is_absolute():
             data_dir = PROJECT_ROOT / data_dir

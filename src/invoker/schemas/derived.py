@@ -61,7 +61,7 @@ class HeroDerived(BaseModel):
     hero_id: int
     localized_name: str
     internal_name: str
-    liquipedia_roles: list[str]
+    roles: list[str]
 
     functional_tags: list[str]
     tag_sources: list[TagSource]
