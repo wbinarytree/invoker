@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
@@ -17,8 +17,13 @@ from invoker.pipeline.reason import (
 )
 from invoker.pipeline.summarize import write_summary
 from invoker.pipeline.validators import ValidationContext, validate_hero
-from invoker.pipeline.writer import write_hero
+from invoker.paths import hero_file
+from invoker.pipeline.writer import read_hero, write_hero
 from invoker.schemas.derived import MetaBlock, MetaHistoryEntry, PositionBlock
+
+
+def _trace(msg: str) -> None:
+    print(f"[pipeline] {msg}", flush=True)
 
 
 @dataclass
@@ -26,7 +31,7 @@ class HeroRawBundle:
     hero_id: int
     localized_name: str
     internal_name: str
-    liquipedia_roles: list[str]
+    roles: list[str]
     abilities: list[dict]
     stratz_edges: list[dict] | None
     opendota_matchups: list[dict] | None
@@ -36,7 +41,29 @@ class HeroRawBundle:
     contest_rate: float
     win_rate: float
     meta_history: list[MetaHistoryEntry]
-    liquipedia_snapshot: str
+
+
+@dataclass
+class HeroResult:
+    hero_id: int
+    success: bool
+    reasons_written: int = 0
+    reasons_skipped: int = 0
+    failure_reason: str | None = None
+
+
+def _try_load_hero_context(
+    data_dir: Path, patch: str, hero_id: int
+) -> tuple[str, list[str]]:
+    """
+    Return (localized_name, functional_tags) for an already-written hero.
+    Falls back to placeholder values when the file does not exist yet.
+    """
+    try:
+        b = read_hero(data_dir, patch, hero_id)
+        return b.localized_name, b.functional_tags
+    except Exception:
+        return f"hero_{hero_id}", []
 
 
 def run_for_hero(
@@ -45,55 +72,79 @@ def run_for_hero(
     generator_version: str,
     bundle: HeroRawBundle,
     client: LLMClient,
-) -> None:
-    mech = extract_mechanical(
-        HeroExtractionInput(
-            hero_id=bundle.hero_id,
-            hero_name=bundle.localized_name,
-            liquipedia_roles=bundle.liquipedia_roles,
-            abilities=bundle.abilities,
-        ),
-        client,
-    )
+) -> HeroResult:
+    hero_label = f"hero={bundle.hero_id} ({bundle.localized_name})"
 
+    # --- Extraction ---
+    _trace(f"extract  start   {hero_label}")
+    try:
+        mech = extract_mechanical(
+            HeroExtractionInput(
+                hero_id=bundle.hero_id,
+                hero_name=bundle.localized_name,
+                roles=bundle.roles,
+                abilities=bundle.abilities,
+            ),
+            client,
+        )
+    except Exception as exc:
+        _trace(f"extract  failed  {hero_label}  ({exc})")
+        return HeroResult(hero_id=bundle.hero_id, success=False, failure_reason=str(exc))
+    _trace(f"extract  done    {hero_label}  tags={mech.functional_tags}")
+
+    # --- Stat edges ---
     synergies, counters = merge_matchups(
         bundle.stratz_edges, bundle.opendota_matchups, hero_id=bundle.hero_id
     )
 
+    # --- Reason generation ---
     reasons: dict[tuple[str, int], tuple[str, dict]] = {}
+    reasons_written = 0
+    reasons_skipped = 0
     syn_ids = {e.hero_id for e in synergies}
+
     for e in synergies + counters:
         if e.confidence not in ("med", "high"):
             continue
         relation = "synergy" if e.hero_id in syn_ids else "counter"
+        edge_label = f"{relation}  {bundle.hero_id}→{e.hero_id}"
+        _trace(f"reason   start   {edge_label}")
+
+        hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id)
         inp = ReasonInput(
             hero_a_id=bundle.hero_id,
             hero_a_name=bundle.localized_name,
             hero_a_tags=mech.functional_tags,
             hero_b_id=e.hero_id,
-            hero_b_name=f"hero_{e.hero_id}",
-            hero_b_tags=[],
+            hero_b_name=hero_b_name,
+            hero_b_tags=hero_b_tags,
             score=e.score or 0.0,
             games=e.games,
         )
         gen = generate_synergy_reason if relation == "synergy" else generate_counter_reason
-        out = gen(inp, client)
         try:
-            validate_grounding(out.reason, mech.functional_tags, [])
-        except Exception:
+            out = gen(inp, client)
+            validate_grounding(out.reason, mech.functional_tags, hero_b_tags)
+        except Exception as exc:
+            _trace(f"reason   skip    {edge_label}  ({exc})")
+            reasons_skipped += 1
             continue
+
         reasons[(relation, e.hero_id)] = (
             out.reason,
             {"model": out.model, "prompt_version": out.prompt_version},
         )
+        reasons_written += 1
+        _trace(f"reason   done    {edge_label}")
 
+    # --- Assemble and write ---
     hero = assemble_hero(
         hero_id=bundle.hero_id,
         localized_name=bundle.localized_name,
         internal_name=bundle.internal_name,
         source_patch=patch,
         generator_version=generator_version,
-        liquipedia_roles=bundle.liquipedia_roles,
+        roles=bundle.roles,
         mechanical=mech,
         positions_pro=PositionBlock(
             weights=position_weights(bundle.position_counts),
@@ -111,11 +162,18 @@ def run_for_hero(
         ),
         meta_history=bundle.meta_history,
         statistical_provenance={"window_days": bundle.window_days},
-        liquipedia_snapshot=bundle.liquipedia_snapshot,
     )
 
     write_hero(data_dir, patch, hero)
     write_summary(data_dir, hero, "pro")
+    _trace(f"written  {hero_label}  reasons={reasons_written}  skipped={reasons_skipped}")
+
+    return HeroResult(
+        hero_id=bundle.hero_id,
+        success=True,
+        reasons_written=reasons_written,
+        reasons_skipped=reasons_skipped,
+    )
 
 
 def finalize_patch(
@@ -125,9 +183,6 @@ def finalize_patch(
     *,
     complete: bool = True,
 ) -> None:
-    from invoker.paths import hero_file
-    from invoker.pipeline.writer import read_hero
-
     ctx = ValidationContext(roster_hero_ids=set(hero_ids))
     written_ids = [hid for hid in hero_ids if hero_file(data_dir, patch, hid).exists()]
     for hid in written_ids:

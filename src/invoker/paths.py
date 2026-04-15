@@ -31,5 +31,9 @@ def graph_file(data_dir: Path, patch: str) -> Path:
     return cache_dir(data_dir, patch) / "graph.pkl"
 
 
+def llm_cache_dir(data_dir: Path) -> Path:
+    return data_dir / "cache" / "llm"
+
+
 def dist_file(data_dir: Path, patch: str) -> Path:
     return data_dir.parent / "dist" / f"invoker-kb-{patch}.tar.gz"
