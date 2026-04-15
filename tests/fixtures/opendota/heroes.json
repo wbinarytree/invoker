@@ -1,0 +1,5 @@
+[
+  {"id": 1, "name": "npc_dota_hero_antimage", "localized_name": "Anti-Mage", "primary_attr": "agi", "attack_type": "Melee", "roles": ["Carry", "Escape", "Nuker"]},
+  {"id": 2, "name": "npc_dota_hero_axe", "localized_name": "Axe", "primary_attr": "str", "attack_type": "Melee", "roles": ["Initiator", "Durable", "Disabler", "Jungler"]},
+  {"id": 3, "name": "npc_dota_hero_bane", "localized_name": "Bane", "primary_attr": "int", "attack_type": "Ranged", "roles": ["Support", "Disabler", "Nuker", "Durable"]}
+]
