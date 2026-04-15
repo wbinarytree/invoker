@@ -50,7 +50,7 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
     rendered = prompt.render(
         TAXONOMY=tax.as_prompt_block(),
         HERO_NAME=h.hero_name,
-        LIQUIPEDIA_ROLES=", ".join(h.roles) or "(none)",
+        ROLES=", ".join(h.roles) or "(none)",
         ABILITIES=abilities_block,
     )
     response = client.complete_json(rendered, prompt_version=prompt.version)

@@ -3,8 +3,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from invoker.llm.cache import CachingLLMClient, _cache_key
 from invoker.llm.client import LLMResponse
 
