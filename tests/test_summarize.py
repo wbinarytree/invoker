@@ -21,7 +21,10 @@ def _hero() -> HeroDerived:
         liquipedia_roles=["Initiator"],
         functional_tags=["armor_reduction", "single_target_disable"],
         tag_sources=[
-            TagSource(tag="armor_reduction", ability="Corrosive Haze", evidence="-20 armor")
+            TagSource(tag="armor_reduction", ability="Corrosive Haze", evidence="-20 armor"),
+            TagSource(
+                tag="single_target_disable", ability="Slithereen Crush", evidence="1.5s stun"
+            ),
         ],
         positions={"pro": PositionBlock(weights={"3": 1.0}, games=34, window_days=90)},
         synergies={
@@ -44,7 +47,7 @@ def _hero() -> HeroDerived:
                     games=34,
                     confidence="med",
                     source="opendota",
-                    reason="natural armor",
+                    reason="armor reduction does not overcome innate armor",
                 )
             ]
         },
