@@ -1,0 +1,15 @@
+{
+  "hero_id": 28,
+  "hero_name": "Slardar",
+  "expected_tags": [
+    "armor_reduction",
+    "single_target_disable",
+    "physical_damage_amplifier",
+    "initiation",
+    "vision_control"
+  ],
+  "forbidden_tags": [
+    "big_burst",
+    "sustained_magical"
+  ]
+}
