@@ -1,6 +1,6 @@
 # Invoker Phase 1.1 — Stabilization Plan
 
-Status: Draft
+Status: In Progress
 Date: 2026-04-15
 Scope: Close the Phase 1 operational gaps discovered during initial real-world trials before moving to Phase 1.5 or Phase 2.
 
@@ -53,8 +53,8 @@ The first Gemini trials immediately hit RPM and then daily quota issues. The sys
 
 Tasks:
 
-- [ ] Add proactive Gemini pacing for the known free-tier `5 RPM` cap.
-- [ ] Add bounded retry/backoff for quota-style responses.
+- [x] Add proactive Gemini pacing for the known free-tier `5 RPM` cap.
+- [x] Add bounded retry/backoff for quota-style responses.
 - [ ] Add explicit reason-budget controls:
   - `--skip-reasons`
   - or `--max-reason-edges <n>`
@@ -70,18 +70,18 @@ We already burned quota on successful calls that were not reused. This is the bi
 
 Tasks:
 
-- [ ] Add an on-disk cache for successful LLM responses at the `LLMClient` boundary.
-- [ ] Key cache entries by:
+- [x] Add an on-disk cache for successful LLM responses at the `LLMClient` boundary.
+- [x] Key cache entries by:
   - provider/model
   - prompt version
   - rendered prompt hash
-- [ ] Store cache under `data/cache/llm/`.
-- [ ] Emit trace lines for:
+- [x] Store cache under `data/cache/llm/`.
+- [x] Emit trace lines for:
   - request
   - cache hit
   - retry
   - final failure
-- [ ] Ensure repeated subset reruns reuse extraction and reason outputs automatically.
+- [x] Ensure repeated subset reruns reuse extraction and reason outputs automatically.
 
 ### 4. Recoverable Pipeline Semantics
 
@@ -90,16 +90,16 @@ Today the pipeline is still too all-or-nothing. One failure can waste earlier su
 
 Tasks:
 
-- [ ] If extraction fails for one hero after retries:
+- [x] If extraction fails for one hero after retries:
   - log it
   - skip that hero
   - continue remaining heroes
-- [ ] If one reason call fails:
+- [x] If one reason call fails:
   - omit that reason
   - still write the hero artifact
-- [ ] Persist successful hero output even when some reasons are missing.
-- [ ] Finalization should still run for successfully written heroes.
-- [ ] Manifest should reflect partial success honestly.
+- [x] Persist successful hero output even when some reasons are missing.
+- [x] Finalization should still run for successfully written heroes.
+- [x] Manifest should reflect partial success honestly.
 
 ### 5. Manual Mode UX
 
@@ -125,16 +125,13 @@ Tasks:
 Why:
 The Puck trial showed the current Liquipedia spell extraction is not reliable enough. Bad source text poisons the prompt before the LLM even starts.
 
+**Decision (2026-04-15):** Liquipedia replaced entirely with OpenDota constants (`/api/constants/abilities` + `/api/constants/hero_abilities`). Simpler, more reliable, no HTML parsing. Tasks below are superseded.
+
 Tasks:
 
-- [ ] Fix `LiquipediaFetcher.extract_abilities()` so it prefers the main spell description.
-- [ ] Exclude or separately handle:
-  - alt-cast notes
-  - shard/scepter upgrade text
-  - unrelated nested fragments
-- [ ] Add a regression fixture/test for the Puck page.
-- [ ] Add at least one more tricky-hero parser regression test after Puck.
-- [ ] If Liquipedia extraction is incomplete, prefer a cleaner fallback from OpenDota ability descriptions where possible.
+- [x] ~~Fix `LiquipediaFetcher.extract_abilities()`~~ — dropped Liquipedia entirely.
+- [x] Ability text now sourced from OpenDota constants API. Fixtures updated for Slardar.
+- [ ] Add regression fixtures for additional complex heroes (Puck, Invoker) once ability quality is validated.
 
 ### 7. LLM Call Tracing
 
@@ -143,15 +140,15 @@ We need to know what the pipeline is doing before and during provider calls.
 
 Tasks:
 
-- [ ] Add structured trace lines around each LLM-backed stage.
-- [ ] Include:
+- [x] Add structured trace lines around each LLM-backed stage.
+- [x] Include:
   - stage
   - hero id
   - hero name
   - relation type when relevant
   - other hero id when relevant
   - cache hit / request / retry / fail
-- [ ] Keep output concise enough to read during subset bootstrap.
+- [x] Keep output concise enough to read during subset bootstrap.
 
 ### 8. Reason Generation Quality Baseline
 
@@ -160,8 +157,8 @@ Even within Phase 1, relation reasoning is weaker than advertised because the se
 
 Tasks:
 
-- [ ] Pass real second-hero name and tags into reason generation for subset runs where data is available.
-- [ ] Tighten reason validation toward grounding in both sides, not only hero A.
+- [x] Pass real second-hero name and tags into reason generation for subset runs where data is available.
+- [x] Tighten reason validation toward grounding in both sides, not only hero A.
 - [ ] Add tests for the improved reason input path.
 
 This remains Phase 1.1 because it is a quality correction to an existing feature, not a new drafting-context schema.
@@ -175,6 +172,13 @@ Tasks:
 
 - [ ] Emit explicit no-data edges where the Phase 1 contract says they should exist.
 - [ ] Add a validator or regression test that protects this behavior.
+
+## Unplanned Work Completed In This Phase
+
+These were not in the original scope but were discovered and fixed during Phase 1.1 execution:
+
+- **`.env` loading**: `Config.load()` never called `load_dotenv()`, so the `.env` file documented in the README had no effect. Fixed by adding `load_dotenv()` as the first operation in `Config.load()`.
+- **STRATZ GraphQL schema migration**: The `heroVsHeroMatchup` query was removed from the live STRATZ API. Introspected the live schema, found `matchUp` with a new nested `with`/`vs` structure. Rewrote the query and added `flatten_edges()` normalization.
 
 ## Deliberately Deferred To Later Phases
 
