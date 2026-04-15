@@ -15,6 +15,9 @@ venv/
 # Invoker ships as a framework with no data. All knowledge is bootstrapped.
 data/
 
+# Local scratch / working notes — not for version control
+docs/tmp/
+
 # OS / editor
 .DS_Store
 .idea/

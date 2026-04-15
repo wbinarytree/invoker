@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import threading
 import time
+from dataclasses import dataclass
 
 from invoker.llm.client import LLMResponse
 
@@ -28,29 +29,43 @@ def _is_quota_error(exc: Exception) -> bool:
     )
 
 
+@dataclass(frozen=True)
+class GeminiModelConfig:
+    model: str
+    rpm: int  # requests per minute (free-tier ceiling)
+    rpd: int  # requests per day (free-tier ceiling)
+
+    @property
+    def min_interval(self) -> float:
+        """Minimum seconds between requests to stay under RPM ceiling."""
+        return 60.0 / self.rpm + 0.5  # small buffer above the hard limit
+
+
+GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
+
+
 class GeminiClient:
     # Class-level pacing state shared across all instances (same process = same quota bucket).
     _rpm_lock = threading.Lock()
     _last_call_time: float = 0.0
-    _min_interval: float = 12.5  # 5 RPM = 12 s/request; 12.5 adds a small safety buffer
 
-    def __init__(self, model: str = "gemini-2.5-flash") -> None:
+    def __init__(self, config: GeminiModelConfig = GEMINI_2_5_FLASH) -> None:
         key = os.environ.get("GOOGLE_API_KEY")
         if not key:
             raise RuntimeError("GOOGLE_API_KEY not set")
-        # google.generativeai re-exports these at runtime but omits them from __all__.
         genai.configure(api_key=key)  # pyright: ignore[reportPrivateImportUsage]
-        self.model_name = model
-        self._model = genai.GenerativeModel(model)  # pyright: ignore[reportPrivateImportUsage]
+        self._config = config
+        self.model_name = config.model
+        self._model = genai.GenerativeModel(config.model)  # pyright: ignore[reportPrivateImportUsage]
 
     def _pace(self) -> None:
-        """Enforce the free-tier 5 RPM ceiling proactively."""
+        """Enforce the RPM ceiling proactively."""
         with GeminiClient._rpm_lock:
             now = time.monotonic()
             gap = now - GeminiClient._last_call_time
-            if gap < self._min_interval:
-                wait = self._min_interval - gap
-                _trace(f"pacing  sleep={wait:.1f}s  (5 RPM ceiling)")
+            if gap < self._config.min_interval:
+                wait = self._config.min_interval - gap
+                _trace(f"pacing  sleep={wait:.1f}s  ({self._config.rpm} RPM ceiling)")
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
