@@ -25,9 +25,10 @@ def parse_json_response(text: str) -> Any:
     except json.JSONDecodeError:
         pass
 
-    # Find the last opening brace/bracket and try from there.
+    # Find the first opening brace/bracket and try from there.
+    # Reasoning preamble precedes the JSON, so the first { or [ is the start.
     for char in ("{", "["):
-        idx = text.rfind(char)
+        idx = text.find(char)
         if idx != -1:
             try:
                 return json.loads(text[idx:])
