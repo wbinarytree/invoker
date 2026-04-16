@@ -32,8 +32,9 @@ def _is_quota_error(exc: Exception) -> bool:
 @dataclass(frozen=True)
 class GeminiModelConfig:
     model: str
-    rpm: int  # requests per minute (free-tier ceiling)
-    rpd: int  # requests per day (free-tier ceiling)
+    rpm: int   # requests per minute (free-tier ceiling)
+    rpd: int   # requests per day (free-tier ceiling)
+    supports_json_mode: bool = True  # response_mime_type="application/json" support
 
     @property
     def min_interval(self) -> float:
@@ -42,7 +43,7 @@ class GeminiModelConfig:
 
 
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
-GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100)
+GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100, supports_json_mode=False)
 
 
 class GeminiClient:
@@ -76,15 +77,24 @@ class GeminiClient:
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
-                resp = self._model.generate_content(
-                    prompt,
-                    generation_config={
-                        "temperature": 0.0,
-                        "response_mime_type": "application/json",
-                    },
+                gen_cfg: dict[str, object] = {"temperature": 0.0}
+                if self._config.supports_json_mode:
+                    gen_cfg["response_mime_type"] = "application/json"
+                t0 = time.monotonic()
+                _trace(
+                    f"generate     model={self.model_name}"
+                    f"  prompt_chars={len(prompt)}"
+                    + (f"  attempt={attempt}" if attempt else "")
+                )
+                resp = self._model.generate_content(prompt, generation_config=gen_cfg)  # pyright: ignore[reportArgumentType]
+                elapsed = time.monotonic() - t0
+                text = resp.text or ""
+                _trace(
+                    f"generate_ok  model={self.model_name}"
+                    f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
                 )
                 return LLMResponse(
-                    text=resp.text, model=self.model_name, prompt_version=prompt_version
+                    text=text, model=self.model_name, prompt_version=prompt_version
                 )
             except Exception as exc:
                 if attempt == max_retries:
