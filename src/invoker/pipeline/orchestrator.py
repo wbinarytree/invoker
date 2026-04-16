@@ -212,7 +212,7 @@ def finalize_patch(
     *,
     complete: bool = True,
 ) -> None:
-    ctx = ValidationContext(roster_hero_ids=set(hero_ids))
+    ctx = ValidationContext(roster_hero_ids=set(hero_ids), partial=not complete)
     written_ids = [hid for hid in hero_ids if hero_file(data_dir, patch, hid).exists()]
     for hid in written_ids:
         validate_hero(read_hero(data_dir, patch, hid), ctx)

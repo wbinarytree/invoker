@@ -132,6 +132,10 @@ class GeminiClient:
                     f"generate_ok  model={self.model_name}"
                     f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
                 )
+                if not text:
+                    raise RuntimeError(
+                        f"Empty response from {self.model_name} after {elapsed:.1f}s"
+                    )
                 return LLMResponse(
                     text=text, model=self.model_name, prompt_version=prompt_version
                 )
