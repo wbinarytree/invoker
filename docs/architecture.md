@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-15
+Last updated: 2026-04-16
 Phase: 1.1
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
@@ -80,14 +80,24 @@ Writes the rendered prompt to a file and waits for a hand-written response file.
 ## Pipeline Stages
 
 ```
-fetch → extract → derive → reason → assemble → write → summarize → finalize
+fetch → bundle → extract → derive → reason → assemble → write → summarize → finalize
 ```
 
 ### fetch (`pipeline/fetch.py`)
 
-Collects raw data into a `HeroRawBundle`:
-- OpenDota: hero list, abilities, matchups, position counts, meta history
-- STRATZ: `matchUp` edges (optional; `None` if unavailable)
+Fetches raw data from all sources:
+- OpenDota: hero list, abilities dict, hero→ability map, pro matches, per-hero matchups
+- STRATZ: `matchUp` edges per hero (optional; skipped if unavailable)
+
+When `hero_filter` is set, per-hero calls (matchups, STRATZ) are restricted to the filtered set. Global calls (hero list, abilities, pro matches) always run.
+
+### bundle (`pipeline/bundle.py`)
+
+Converts `fetch_all` output into `HeroRawBundle` objects for the orchestrator.
+
+- Resolves each hero's abilities by joining `hero_abilities` map → `abilities` dict, keeping only entries with a display name and description.
+- Passes through per-hero matchups and STRATZ edges.
+- Meta stats (`position_counts`, `contest_rate`, `win_rate`, `meta_history`) are zeroed — no source exists for these without fetching individual match details. Explicit zeros are used; consumers should treat `games=0` as "no data".
 
 ### extract (`pipeline/extract.py`)
 
@@ -165,6 +175,21 @@ Key fields:
 ## Config and Environment
 
 `Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GEMINI_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
+
+### Dev Hero Filter
+
+Gemini free tier caps at 20 calls/day. To avoid burning quota during development, a hero filter limits which heroes receive per-hero API calls and LLM extractions.
+
+Two ways to set it (CLI flag takes precedence):
+
+| Method | Example |
+|--------|---------|
+| `INVOKER_DEV_HEROES` env var | `INVOKER_DEV_HEROES=Pangolier,Slardar` in `.env` |
+| `--heroes` CLI flag | `invoker bootstrap --patch 7.41b --heroes "Pangolier,Slardar"` |
+
+Accepts hero **names** (case-insensitive) or numeric **ids**. The global hero roster fetch still runs (single cached call); only per-hero calls (matchups, STRATZ synergies) and LLM extractions are restricted. No filter = all heroes (production behaviour unchanged).
+
+Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstrap is attempted.
 
 ---
 

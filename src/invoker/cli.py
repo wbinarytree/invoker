@@ -21,21 +21,61 @@ def version() -> None:
 def bootstrap(
     patch: str = typer.Option(..., help="Patch string, e.g. 7.41b"),
     force: bool = typer.Option(False, help="Ignore caches and refetch."),
-    heroes: str | None = typer.Option(None, help="Comma-separated hero_ids (dev: limit scope)."),
+    heroes: str | None = typer.Option(
+        None, help="Comma-separated hero names or ids (overrides INVOKER_DEV_HEROES)."
+    ),
     skip_extract: bool = typer.Option(False, help="Skip LLM extraction; use last run."),
 ) -> None:
     """Run the full bootstrap pipeline for a patch."""
+    from invoker import __version__
+    from invoker.llm import CachingLLMClient, make_client
+    from invoker.pipeline.bundle import build_bundles
     from invoker.pipeline.fetch import fetch_all
+    from invoker.pipeline.orchestrator import HeroResult, finalize_patch, run_for_hero
 
     cfg = Config.load()
+
+    # CLI flag takes precedence over env var; both are optional.
+    if heroes is not None:
+        hero_filter: set[str] | None = {t.strip() for t in heroes.split(",") if t.strip()}
+    elif cfg.dev_heroes:
+        hero_filter = set(cfg.dev_heroes)
+    else:
+        hero_filter = None
+
+    if hero_filter:
+        typer.echo(f"Hero filter active: {sorted(hero_filter)}")
+
     typer.echo(f"Fetching raw data for {patch}...")
-    raw = asyncio.run(fetch_all(cfg, patch, force=force))
+    raw = asyncio.run(fetch_all(cfg, patch, force=force, hero_filter=hero_filter))
     typer.echo(f"Fetched {len(raw['heroes'])} heroes.")
 
-    typer.echo(
-        "Run programmatically via invoker.pipeline.orchestrator.run_for_hero + "
-        "finalize_patch until the bundle-assembly helper lands."
-    )
+    bundles = build_bundles(raw, patch)
+
+    inner = make_client(cfg.llm_client)
+    client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
+
+    results: list[HeroResult] = []
+    for bundle in bundles:
+        result = run_for_hero(cfg.data_dir, patch, __version__, bundle, client)
+        status = "ok" if result.success else f"FAILED ({result.failure_reason})"
+        typer.echo(
+            f"  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
+            f"{status}  reasons={result.reasons_written}"
+        )
+        results.append(result)
+
+    succeeded = [r for r in results if r.success]
+    typer.echo(f"\n{len(succeeded)}/{len(results)} heroes succeeded.")
+
+    if succeeded:
+        finalize_patch(
+            cfg.data_dir,
+            patch,
+            [r.hero_id for r in succeeded],
+            complete=hero_filter is None,
+        )
+        typer.echo("Manifest and graph written.")
 
 
 @app.command()

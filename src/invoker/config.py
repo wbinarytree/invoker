@@ -16,6 +16,7 @@ class Config:
     data_dir: Path
     llm_client: str
     log_level: str
+    dev_heroes: frozenset[str] | None  # name or numeric-id tokens; None = no filter
 
     @classmethod
     def load(cls) -> Config:
@@ -23,10 +24,17 @@ class Config:
         data_dir = Path(os.environ.get("INVOKER_DATA_DIR", "data"))
         if not data_dir.is_absolute():
             data_dir = PROJECT_ROOT / data_dir
+        raw_dev = os.environ.get("INVOKER_DEV_HEROES") or None
+        dev_heroes = (
+            frozenset(t.strip() for t in raw_dev.split(",") if t.strip())
+            if raw_dev
+            else None
+        )
         return cls(
             stratz_token=os.environ.get("STRATZ_API_TOKEN") or None,
             google_api_key=os.environ.get("GOOGLE_API_KEY") or None,
             data_dir=data_dir,
             llm_client=os.environ.get("INVOKER_LLM_CLIENT", "gemini"),
             log_level=os.environ.get("INVOKER_LOG_LEVEL", "INFO"),
+            dev_heroes=dev_heroes,
         )

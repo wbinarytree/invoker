@@ -5,15 +5,43 @@ from invoker.sources.opendota import OpenDotaFetcher
 from invoker.sources.stratz import StratzFetcher
 
 
-async def fetch_all(cfg: Config, patch: str, *, force: bool = False) -> dict:
+def _apply_filter(heroes: list[dict], hero_filter: set[str] | None) -> list[dict]:
+    """Return only heroes matching the filter (by name or numeric id string)."""
+    if hero_filter is None:
+        return heroes
+    normalised = {t.lower() for t in hero_filter}
+    return [
+        h
+        for h in heroes
+        if h.get("localized_name", "").lower() in normalised
+        or str(h.get("id", "")) in normalised
+    ]
+
+
+async def fetch_all(
+    cfg: Config,
+    patch: str,
+    *,
+    force: bool = False,
+    hero_filter: set[str] | None = None,
+) -> dict:
+    """
+    Fetch raw data for the given patch.
+
+    hero_filter: set of name or numeric-id strings to restrict per-hero calls.
+    None means fetch all heroes (production behaviour).
+    """
     cache = cfg.data_dir / "raw"
     od = OpenDotaFetcher(cache, patch)
     strat = StratzFetcher(cache, patch, cfg.stratz_token)
     try:
-        heroes = await od.heroes()
+        all_heroes = await od.heroes()
         abilities = await od.abilities()
         hero_abilities = await od.hero_abilities_map()
         pro_matches = await od.pro_matches()
+
+        heroes = _apply_filter(all_heroes, hero_filter)
+
         matchups = {h["id"]: await od.matchups(h["id"]) for h in heroes}
         stratz_edges = (
             {h["id"]: await strat.synergies(h["id"]) for h in heroes}
