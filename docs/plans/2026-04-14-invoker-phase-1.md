@@ -3352,3 +3352,4 @@ Phase 1 is complete when:
 - The offline smoke test (Task 20) passes.
 - Individual pipeline modules are exercised by their own tests.
 - The full `invoker bootstrap --patch <v>` flow, running against live APIs and a live LLM, is deferred to the first Phase 1.5 task (wiring the orchestrator).
+- A later roadmap phase should add self-evolving support for downstream drafting agents: `invoker` should emit stable critique/evidence artifacts that can feed agent self-review and proposal generation, but any learned update path must remain human-reviewed and reproducible.
