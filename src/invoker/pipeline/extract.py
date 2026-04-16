@@ -14,7 +14,7 @@ from invoker.taxonomy import load_taxonomy
 class HeroExtractionInput:
     hero_id: int
     hero_name: str
-    liquipedia_roles: list[str]
+    roles: list[str]
     abilities: list[dict]
 
 
@@ -50,7 +50,7 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
     rendered = prompt.render(
         TAXONOMY=tax.as_prompt_block(),
         HERO_NAME=h.hero_name,
-        LIQUIPEDIA_ROLES=", ".join(h.liquipedia_roles) or "(none)",
+        ROLES=", ".join(h.roles) or "(none)",
         ABILITIES=abilities_block,
     )
     response = client.complete_json(rendered, prompt_version=prompt.version)

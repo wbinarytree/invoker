@@ -18,7 +18,7 @@ def _hero() -> HeroDerived:
         hero_id=28,
         localized_name="Slardar",
         internal_name="npc_dota_hero_slardar",
-        liquipedia_roles=["Initiator"],
+        roles=["Initiator"],
         functional_tags=["armor_reduction", "single_target_disable"],
         tag_sources=[
             TagSource(tag="armor_reduction", ability="Corrosive Haze", evidence="-20 armor"),

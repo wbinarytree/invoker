@@ -34,7 +34,7 @@ def assemble_hero(
     internal_name: str,
     source_patch: str,
     generator_version: str,
-    liquipedia_roles: list[str],
+    roles: list[str],
     mechanical: MechanicalExtraction,
     positions_pro: PositionBlock,
     synergies_pro: list[StatisticalEdge],
@@ -43,7 +43,6 @@ def assemble_hero(
     meta_pro: MetaBlock,
     meta_history: list[MetaHistoryEntry],
     statistical_provenance: dict,
-    liquipedia_snapshot: str,
 ) -> HeroDerived:
     def wrap(edges: list[StatisticalEdge], relation: str) -> list[StatEdge]:
         out: list[StatEdge] = []
@@ -61,7 +60,7 @@ def assemble_hero(
         hero_id=hero_id,
         localized_name=localized_name,
         internal_name=internal_name,
-        liquipedia_roles=liquipedia_roles,
+        roles=roles,
         functional_tags=mechanical.functional_tags,
         tag_sources=[TagSource(**s.__dict__) for s in mechanical.tag_sources],
         positions={"pro": positions_pro},
@@ -76,7 +75,6 @@ def assemble_hero(
                 "prompt_hash": mechanical.prompt_hash,
                 "input_hash": mechanical.input_hash,
                 "extracted_at": mechanical.extracted_at,
-                "liquipedia_snapshot": liquipedia_snapshot,
             },
             statistical={"pro": statistical_provenance},
         ),

@@ -61,7 +61,7 @@ def test_orchestrator_produces_valid_hero(tmp_path: Path):
         hero_id=28,
         localized_name="Slardar",
         internal_name="npc_dota_hero_slardar",
-        liquipedia_roles=["Initiator", "Disabler"],
+        roles=["Initiator", "Disabler"],
         abilities=[
             {"name": "Slithereen Crush", "text": "AoE stun with armor reduction"},
             {"name": "Corrosive Haze", "text": "Armor reduction debuff"},
@@ -74,7 +74,6 @@ def test_orchestrator_produces_valid_hero(tmp_path: Path):
         contest_rate=0.12,
         win_rate=0.51,
         meta_history=[],
-        liquipedia_snapshot="liquipedia:Slardar@test",
     )
     run_for_hero(tmp_path, "7.41b", "invoker@test", bundle, ScriptedClient())
     finalize_patch(tmp_path, "7.41b", [28, 120, 96], complete=True)

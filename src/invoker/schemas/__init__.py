@@ -1,5 +1,4 @@
 from invoker.schemas.raw import (
-    LiquipediaAbility,
     ODAbility,
     ODHero,
     ODMatchup,
@@ -8,7 +7,6 @@ from invoker.schemas.raw import (
 )
 
 __all__ = [
-    "LiquipediaAbility",
     "ODAbility",
     "ODHero",
     "ODMatchup",

@@ -35,7 +35,7 @@ def test_extract_returns_parsed_tags():
     inp = HeroExtractionInput(
         hero_id=28,
         hero_name="Slardar",
-        liquipedia_roles=["Initiator", "Disabler"],
+        roles=["Initiator", "Disabler"],
         abilities=[
             {"name": "Slithereen Crush", "text": "AoE stun"},
             {"name": "Corrosive Haze", "text": "Armor reduction"},
