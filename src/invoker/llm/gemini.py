@@ -5,12 +5,10 @@ import threading
 import time
 from dataclasses import dataclass
 
-from invoker.llm.client import LLMResponse
+from google import genai
+from google.genai import types
 
-try:
-    import google.generativeai as genai
-except ImportError as e:
-    raise RuntimeError("google-generativeai not installed") from e
+from invoker.llm.client import LLMResponse
 
 
 def _trace(msg: str) -> None:
@@ -34,7 +32,8 @@ class GeminiModelConfig:
     model: str
     rpm: int   # requests per minute (free-tier ceiling)
     rpd: int   # requests per day (free-tier ceiling)
-    supports_json_mode: bool = True  # response_mime_type="application/json" support
+    supports_json_mode: bool = True   # response_mime_type="application/json" support
+    supports_thinking_config: bool = False  # ThinkingConfig (disable chain-of-thought)
 
     @property
     def min_interval(self) -> float:
@@ -43,7 +42,35 @@ class GeminiModelConfig:
 
 
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
-GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100, supports_json_mode=False)
+GEMMA_4_31B = GeminiModelConfig(
+    model="gemma-4-31b-it",
+    rpm=5,
+    rpd=100,
+    supports_json_mode=False,
+    supports_thinking_config=True,
+)
+
+# Known-model registry: looked up by model name in make_model_config().
+_KNOWN: dict[str, GeminiModelConfig] = {
+    GEMINI_2_5_FLASH.model: GEMINI_2_5_FLASH,
+    GEMMA_4_31B.model: GEMMA_4_31B,
+}
+
+
+def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:
+    """
+    Build a GeminiModelConfig from env-var values.
+    For known models the capability flags (json_mode, thinking_config) are
+    inherited from the registry; unknown models get safe defaults.
+    """
+    known = _KNOWN.get(model)
+    return GeminiModelConfig(
+        model=model,
+        rpm=rpm,
+        rpd=rpd,
+        supports_json_mode=known.supports_json_mode if known else True,
+        supports_thinking_config=known.supports_thinking_config if known else False,
+    )
 
 
 class GeminiClient:
@@ -55,10 +82,9 @@ class GeminiClient:
         key = os.environ.get("GOOGLE_API_KEY")
         if not key:
             raise RuntimeError("GOOGLE_API_KEY not set")
-        genai.configure(api_key=key)  # pyright: ignore[reportPrivateImportUsage]
+        self._client = genai.Client(api_key=key)
         self._config = config
         self.model_name = config.model
-        self._model = genai.GenerativeModel(config.model)  # pyright: ignore[reportPrivateImportUsage]
 
     def _pace(self) -> None:
         """Enforce the RPM ceiling proactively."""
@@ -77,16 +103,29 @@ class GeminiClient:
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
-                gen_cfg: dict[str, object] = {"temperature": 0.0}
+                cfg = types.GenerateContentConfig(temperature=0.0)
                 if self._config.supports_json_mode:
-                    gen_cfg["response_mime_type"] = "application/json"
+                    cfg = types.GenerateContentConfig(
+                        temperature=0.0,
+                        response_mime_type="application/json",
+                    )
+                if self._config.supports_thinking_config:
+                    cfg = types.GenerateContentConfig(
+                        temperature=0.0,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    )
+
                 t0 = time.monotonic()
                 _trace(
                     f"generate     model={self.model_name}"
                     f"  prompt_chars={len(prompt)}"
                     + (f"  attempt={attempt}" if attempt else "")
                 )
-                resp = self._model.generate_content(prompt, generation_config=gen_cfg)  # pyright: ignore[reportArgumentType]
+                resp = self._client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config=cfg,
+                )
                 elapsed = time.monotonic() - t0
                 text = resp.text or ""
                 _trace(
@@ -108,4 +147,4 @@ class GeminiClient:
                     delay *= 2
                 else:
                     raise
-        raise RuntimeError("unreachable")  # loop always raises or returns
+        raise RuntimeError("unreachable")
