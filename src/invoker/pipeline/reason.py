@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 
-from invoker.llm import LLMClient
+from invoker.llm import LLMClient, parse_json_response
 from invoker.prompts import load
 
 
@@ -75,7 +74,7 @@ def generate_reasons_batch(
         EDGES=_format_edges(inp.edges),
     )
     response = client.complete_json(rendered, prompt_version=prompt.version)
-    parsed = json.loads(response.text)
+    parsed = parse_json_response(response.text)
 
     if not isinstance(parsed, list):
         raise ValueError(f"Expected JSON array, got {type(parsed).__name__}")

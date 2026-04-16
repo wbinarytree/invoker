@@ -5,7 +5,7 @@ import json
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 
-from invoker.llm import LLMClient
+from invoker.llm import LLMClient, parse_json_response
 from invoker.prompts import load
 from invoker.taxonomy import load_taxonomy
 
@@ -54,7 +54,7 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
         ABILITIES=abilities_block,
     )
     response = client.complete_json(rendered, prompt_version=prompt.version)
-    parsed = json.loads(response.text)
+    parsed = parse_json_response(response.text)
 
     return MechanicalExtraction(
         hero_id=h.hero_id,
