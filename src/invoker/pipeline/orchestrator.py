@@ -72,7 +72,7 @@ def run_for_hero(
     generator_version: str,
     bundle: HeroRawBundle,
     client: LLMClient,
-    max_edges: int = 20,
+    max_edges: int = 5,
 ) -> HeroResult:
     hero_label = f"hero={bundle.hero_id} ({bundle.localized_name})"
 
