@@ -10,9 +10,9 @@ from invoker.pipeline.derive import merge_matchups, meta_tier, position_weights
 from invoker.pipeline.extract import HeroExtractionInput, extract_mechanical
 from invoker.pipeline.manifest import build_manifest, write_manifest
 from invoker.pipeline.reason import (
-    ReasonInput,
-    generate_counter_reason,
-    generate_synergy_reason,
+    BatchReasonInput,
+    EdgeReasonInput,
+    generate_reasons_batch,
     validate_grounding,
 )
 from invoker.pipeline.summarize import write_summary
@@ -72,6 +72,7 @@ def run_for_hero(
     generator_version: str,
     bundle: HeroRawBundle,
     client: LLMClient,
+    max_edges: int = 20,
 ) -> HeroResult:
     hero_label = f"hero={bundle.hero_id} ({bundle.localized_name})"
 
@@ -97,45 +98,73 @@ def run_for_hero(
         bundle.stratz_edges, bundle.opendota_matchups, hero_id=bundle.hero_id
     )
 
-    # --- Reason generation ---
+    # --- Reason generation (single batch call) ---
     reasons: dict[tuple[str, int], tuple[str, dict]] = {}
     reasons_written = 0
     reasons_skipped = 0
-    syn_ids = {e.hero_id for e in synergies}
 
-    for e in synergies + counters:
-        if e.confidence not in ("med", "high"):
-            continue
-        relation = "synergy" if e.hero_id in syn_ids else "counter"
-        edge_label = f"{relation}  {bundle.hero_id}→{e.hero_id}"
-        _trace(f"reason   start   {edge_label}")
+    # Cap to top max_edges per relation (lists already sorted by |score| desc).
+    candidate_syn = [e for e in synergies if e.confidence in ("med", "high")][:max_edges]
+    candidate_ctr = [e for e in counters if e.confidence in ("med", "high")][:max_edges]
+    candidates = candidate_syn + candidate_ctr
+    syn_ids = {e.hero_id for e in candidate_syn}
 
-        hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id)
-        inp = ReasonInput(
-            hero_a_id=bundle.hero_id,
+    if candidates:
+        _trace(
+            f"reason   batch   hero={bundle.hero_id}"
+            f"  syn={len(candidate_syn)}  ctr={len(candidate_ctr)}"
+        )
+        edge_inputs: list[EdgeReasonInput] = []
+        for e in candidates:
+            relation = "synergy" if e.hero_id in syn_ids else "counter"
+            hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id)
+            edge_inputs.append(
+                EdgeReasonInput(
+                    hero_b_id=e.hero_id,
+                    hero_b_name=hero_b_name,
+                    hero_b_tags=hero_b_tags,
+                    relation=relation,
+                    score=e.score or 0.0,
+                    games=e.games,
+                )
+            )
+
+        batch_inp = BatchReasonInput(
             hero_a_name=bundle.localized_name,
             hero_a_tags=mech.functional_tags,
-            hero_b_id=e.hero_id,
-            hero_b_name=hero_b_name,
-            hero_b_tags=hero_b_tags,
-            score=e.score or 0.0,
-            games=e.games,
+            edges=edge_inputs,
         )
-        gen = generate_synergy_reason if relation == "synergy" else generate_counter_reason
         try:
-            out = gen(inp, client)
-            validate_grounding(out.reason, mech.functional_tags, hero_b_tags)
+            outputs = generate_reasons_batch(batch_inp, client)
         except Exception as exc:
-            _trace(f"reason   skip    {edge_label}  ({exc})")
-            reasons_skipped += 1
-            continue
+            _trace(f"reason   batch_failed  hero={bundle.hero_id}  ({exc})")
+            outputs = []
 
-        reasons[(relation, e.hero_id)] = (
-            out.reason,
-            {"model": out.model, "prompt_version": out.prompt_version},
+        # Build a lookup from hero_b_id to (EdgeReasonInput, EdgeReasonOutput).
+        inp_by_id = {ei.hero_b_id: ei for ei in edge_inputs}
+        for out in outputs:
+            ei = inp_by_id.get(out.hero_b_id)
+            if ei is None:
+                continue
+            relation = ei.relation
+            try:
+                validate_grounding(out.reason, mech.functional_tags, ei.hero_b_tags)
+            except Exception as exc:
+                _trace(
+                    f"reason   skip    {relation}  {bundle.hero_id}→{out.hero_b_id}  ({exc})"
+                )
+                reasons_skipped += 1
+                continue
+            reasons[(relation, out.hero_b_id)] = (
+                out.reason,
+                {"model": out.model, "prompt_version": out.prompt_version},
+            )
+            reasons_written += 1
+
+        _trace(
+            f"reason   done    hero={bundle.hero_id}"
+            f"  written={reasons_written}  skipped={reasons_skipped}"
         )
-        reasons_written += 1
-        _trace(f"reason   done    {edge_label}")
 
     # --- Assemble and write ---
     hero = assemble_hero(

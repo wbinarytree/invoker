@@ -116,12 +116,20 @@ Pure computation from raw stats:
 
 ### reason (`pipeline/reason.py`)
 
-Two prompts: `synergy_reason`, `counter_reason`.
-Input: `ReasonInput` with both hero names, tags, score, and game count.
-Only `med` and `high` confidence edges get a reason call.
-Hero B name and tags are loaded from the already-written hero file if it exists (`_try_load_hero_context`), or fall back to `("hero_{id}", [])`.
+Single prompt: `edge_reasons_batch`.
 
-Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects a reason that mentions no tag from either hero.
+All synergy and counter edges for a hero are batched into **one LLM call** per hero.
+Hero A name and tags appear once in the prompt header; each edge item carries hero B info,
+relation type, score, and game count. The model returns a JSON array parallel to the input.
+
+Only `med` and `high` confidence edges are included. Edges are capped to `max_edges`
+(default 20) per relation before batching — lists are already sorted by `|score|` descending
+so the highest-signal edges are always kept.
+
+Call budget: `1 extract + 1 batch reason = 2 calls per hero`.
+
+Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects any item whose
+reason cites no tag from either hero. Failing items are skipped; the rest are kept.
 
 ### assemble (`pipeline/assemble.py`)
 
