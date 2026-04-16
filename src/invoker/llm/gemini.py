@@ -42,6 +42,7 @@ class GeminiModelConfig:
 
 
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
+GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100)
 
 
 class GeminiClient:

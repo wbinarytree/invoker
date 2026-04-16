@@ -52,7 +52,10 @@ def bootstrap(
 
     bundles = build_bundles(raw, patch)
 
-    inner = make_client(cfg.llm_client)
+    from invoker.llm.gemini import GeminiModelConfig
+    model_cfg = GeminiModelConfig(model=cfg.llm_model, rpm=cfg.llm_rpm, rpd=cfg.llm_rpd)
+    typer.echo(f"LLM: {cfg.llm_client}  model={cfg.llm_model}  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}")
+    inner = make_client(cfg.llm_client, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
     results: list[HeroResult] = []

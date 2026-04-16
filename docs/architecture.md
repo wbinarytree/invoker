@@ -66,10 +66,14 @@ Trace output: `[llm] cache_hit key=<12chars> model=<name>` or `[llm] request key
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
-- Class-level rate limiter: minimum 12.5 s between calls (enforces ≤ 5 RPM free-tier).
+- Configured by `GeminiModelConfig(model, rpm, rpd)`. Two named constants ship as defaults:
+  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100
+- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s).
 - Retry: up to 3 retries on quota/rate errors; exponential backoff starting at 65 s, doubling each attempt.
 - Non-quota errors are re-raised immediately (no retry).
-- `model_name` is the Gemini model string used as the cache key dimension.
+- `model_name` is the model string used as the cache key dimension.
+- Model is selected at runtime via `INVOKER_LLM_MODEL` / `INVOKER_LLM_RPM` / `INVOKER_LLM_RPD` env vars (see Config).
 
 ### ManualClient (`src/invoker/llm/manual.py`)
 

@@ -15,6 +15,9 @@ class Config:
     google_api_key: str | None
     data_dir: Path
     llm_client: str
+    llm_model: str
+    llm_rpm: int
+    llm_rpd: int
     log_level: str
     dev_heroes: frozenset[str] | None  # name or numeric-id tokens; None = no filter
 
@@ -35,6 +38,9 @@ class Config:
             google_api_key=os.environ.get("GOOGLE_API_KEY") or None,
             data_dir=data_dir,
             llm_client=os.environ.get("INVOKER_LLM_CLIENT", "gemini"),
+            llm_model=os.environ.get("INVOKER_LLM_MODEL", "gemini-2.5-flash"),
+            llm_rpm=int(os.environ.get("INVOKER_LLM_RPM", "5")),
+            llm_rpd=int(os.environ.get("INVOKER_LLM_RPD", "20")),
             log_level=os.environ.get("INVOKER_LOG_LEVEL", "INFO"),
             dev_heroes=dev_heroes,
         )
