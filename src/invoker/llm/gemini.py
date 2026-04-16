@@ -47,7 +47,7 @@ GEMMA_4_31B = GeminiModelConfig(
     rpm=5,
     rpd=100,
     supports_json_mode=False,
-    supports_thinking_config=True,
+    supports_thinking_config=False,  # ThinkingConfig not supported via Google AI API
 )
 
 # Known-model registry: looked up by model name in make_model_config().
