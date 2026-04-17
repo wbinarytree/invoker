@@ -5,6 +5,8 @@ import json
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 
+from pydantic import BaseModel
+
 from invoker.llm import LLMClient
 from invoker.prompts import load
 from invoker.taxonomy import load_taxonomy
@@ -37,6 +39,17 @@ class MechanicalExtraction:
     extracted_at: str
 
 
+class _TagSourceItem(BaseModel):
+    tag: str
+    ability: str
+    evidence: str
+
+
+class _ExtractionResponse(BaseModel):
+    functional_tags: list[str]
+    tag_sources: list[_TagSourceItem]
+
+
 def _input_hash(h: HeroExtractionInput) -> str:
     blob = json.dumps(asdict(h), sort_keys=True).encode()
     return "sha256:" + hashlib.sha256(blob).hexdigest()
@@ -53,13 +66,21 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
         ROLES=", ".join(h.roles) or "(none)",
         ABILITIES=abilities_block,
     )
-    response = client.complete_json(rendered, prompt_version=prompt.version)
-    parsed = json.loads(response.text)
+    response = client.generate_json(
+        rendered,
+        prompt_version=prompt.version,
+        schema=_ExtractionResponse,
+        cache_tag=f"extract/{h.hero_name}",
+    )
+    parsed = _ExtractionResponse.model_validate_json(response.text)
 
     return MechanicalExtraction(
         hero_id=h.hero_id,
-        functional_tags=list(parsed["functional_tags"]),
-        tag_sources=[TagSource(**s) for s in parsed["tag_sources"]],
+        functional_tags=list(parsed.functional_tags),
+        tag_sources=[
+            TagSource(tag=s.tag, ability=s.ability, evidence=s.evidence)
+            for s in parsed.tag_sources
+        ],
         model=response.model,
         prompt_version=response.prompt_version,
         prompt_hash=prompt.sha256,

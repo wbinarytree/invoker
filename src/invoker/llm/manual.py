@@ -23,7 +23,14 @@ class ManualClient:
         self.inbox.mkdir(parents=True, exist_ok=True)
         self.outbox.mkdir(parents=True, exist_ok=True)
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def generate_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         h = hashlib.sha256(prompt.encode()).hexdigest()[:12]
         prompt_path = self.inbox / f"{h}.md"
         response_path = self.outbox / f"{h}.txt"

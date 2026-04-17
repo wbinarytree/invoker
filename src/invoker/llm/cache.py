@@ -5,7 +5,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from invoker.llm.client import LLMClient, LLMResponse
+from invoker.llm.client import LLMClient, LLMResponse, strip_fences
 
 
 def _cache_key(model: str, prompt_version: int, prompt: str) -> str:
@@ -18,7 +18,8 @@ def _now_iso() -> str:
 
 
 def _trace(msg: str) -> None:
-    print(f"[llm] {msg}", flush=True)
+    ts = datetime.now(UTC).strftime("%H:%M:%S.%f")[:-3]
+    print(f"{ts} [llm] {msg}", flush=True)
 
 
 class CachingLLMClient:
@@ -35,22 +36,29 @@ class CachingLLMClient:
         self._cache_dir = cache_dir
         self.model_name = inner.model_name
 
-    def _path(self, key: str) -> Path:
-        return self._cache_dir / key[:2] / f"{key}.json"
+    def _path(self, key: str, tag: str | None = None) -> Path:
+        base = self._cache_dir / tag if tag else self._cache_dir
+        return base / key[:2] / f"{key}.json"
 
-    def _read(self, key: str) -> LLMResponse | None:
-        p = self._path(key)
+    def _read(self, key: str, tag: str | None = None) -> LLMResponse | None:
+        p = self._path(key, tag)
         if not p.exists():
             return None
         entry = json.loads(p.read_text())
         return LLMResponse(
-            text=entry["text"],
+            text=strip_fences(entry["text"]),
             model=entry["model"],
             prompt_version=entry["prompt_version"],
         )
 
-    def _write(self, key: str, response: LLMResponse) -> None:
-        p = self._path(key)
+    def _write(
+        self,
+        key: str,
+        response: LLMResponse,
+        tag: str | None = None,
+        prompt: str = "",
+    ) -> None:
+        p = self._path(key, tag)
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(
             json.dumps(
@@ -59,18 +67,30 @@ class CachingLLMClient:
                     "model": response.model,
                     "prompt_version": response.prompt_version,
                     "cached_at": _now_iso(),
+                    "prompt": prompt,
                 },
                 indent=2,
             )
         )
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def generate_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         key = _cache_key(self.model_name, prompt_version, prompt)
-        cached = self._read(key)
+        cached = self._read(key, cache_tag)
         if cached is not None:
             _trace(f"cache_hit   key={key[:12]}  model={self.model_name}")
             return cached
         _trace(f"request     key={key[:12]}  model={self.model_name}")
-        response = self._inner.complete_json(prompt, prompt_version=prompt_version)
-        self._write(key, response)
+        response = self._inner.generate_json(
+            prompt,
+            prompt_version=prompt_version,
+            schema=schema,
+        )
+        self._write(key, response, cache_tag, prompt)
         return response

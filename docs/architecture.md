@@ -1,7 +1,7 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-15
-Phase: 1.1
+Last updated: 2026-04-17
+Phase: 1.1 (Phase 1.2 spec signed off — not yet implemented)
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
 
@@ -58,36 +58,61 @@ CachingLLMClient
 
 Wraps any `LLMClient`. Before every call:
 1. Compute `key = sha256(model_name + ":" + prompt_version + ":" + rendered_prompt)`
-2. Check `data/cache/llm/<key[:2]>/<key>.json`
-3. On hit: return cached response, skip inner client entirely (no quota, no pacing wait)
-4. On miss: call inner client, write response to disk, return
+2. Check `data/cache/llm/<cache_tag>/<key[:2]>/<key>.json` (or `data/cache/llm/<key[:2]>/...` if no tag)
+3. On hit: return cached response, strip any markdown fences, skip inner client entirely (no quota, no pacing wait)
+4. On miss: call inner client, write response + rendered prompt to disk, return
 
-Trace output: `[llm] cache_hit key=<12chars> model=<name>` or `[llm] request key=<12chars> model=<name>`.
+Cache entry shape: `{text, model, prompt_version, cached_at, prompt}`. The `prompt` field makes entries human-readable and traceable without running the pipeline again.
+
+`cache_tag` is an optional human-readable path segment (e.g. `extract/Slardar`, `reason/Axe`) that groups related entries into subdirectories.
+
+Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:MM:SS.mmm [llm] request key=<12chars> model=<name>`.
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
-- Class-level rate limiter: minimum 12.5 s between calls (enforces ≤ 5 RPM free-tier).
-- Retry: up to 3 retries on quota/rate errors; exponential backoff starting at 65 s, doubling each attempt.
-- Non-quota errors are re-raised immediately (no retry).
-- `model_name` is the Gemini model string used as the cache key dimension.
+- Configured by `GeminiModelConfig(model, rpm, rpd)`. Two named constants:
+  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100
+- `make_model_config(model, rpm, rpd)` is a thin env-var adapter; the client no longer carries a per-model capability registry.
+- **HTTP timeout:** client is constructed with `http_options={"timeout": 120_000}` (120 s). Calls that stall at the network level raise a timeout exception rather than hanging indefinitely.
+- **JSON output:** every request sets `response_mime_type="application/json"`. When `schema` is provided, the same request also sets `response_schema=schema` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
+- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s). Trace: `HH:MM:SS.mmm [llm] pacing sleep=Xs`.
+- Retry: up to 3 retries.
+  - Quota / rate errors (`429`, `ResourceExhausted`): exponential backoff starting at 65 s, doubling each attempt.
+  - Timeout errors: fixed 20 s delay before retry.
+  - All other errors: re-raised immediately (no retry).
+- **Empty response handling:** when `resp.text` is empty, returns `LLMResponse(text="")` and caches it to prevent the same quota-burning call on the next run. Callers receive a Pydantic `ValidationError` when they attempt to parse the empty text.
+- Model is selected at runtime via `INVOKER_LLM_MODEL` / `INVOKER_LLM_RPM` / `INVOKER_LLM_RPD` env vars (see Config).
 
 ### ManualClient (`src/invoker/llm/manual.py`)
 
-Writes the rendered prompt to a file and waits for a hand-written response file. Used when `--manual` flag is passed to the CLI.
+Writes the rendered prompt to a file and waits for a hand-written response file. The client exists and can be selected via `INVOKER_LLM_CLIENT=manual`, but the CLI does not currently expose a dedicated `--manual` flag or special UX wrapper.
 
 ---
 
 ## Pipeline Stages
 
 ```
-fetch → extract → derive → reason → assemble → write → summarize → finalize
+fetch → bundle → extract → derive → reason → assemble → write → summarize → finalize
 ```
 
 ### fetch (`pipeline/fetch.py`)
 
-Collects raw data into a `HeroRawBundle`:
-- OpenDota: hero list, abilities, matchups, position counts, meta history
-- STRATZ: `matchUp` edges (optional; `None` if unavailable)
+Fetches raw data from all sources:
+- OpenDota: hero list, abilities dict, hero→ability map, pro matches, per-hero matchups
+- STRATZ: `matchUp` edges per hero (optional; skipped if unavailable)
+
+When `hero_filter` is set, per-hero calls (matchups, STRATZ) are restricted to the filtered set. Global calls (hero list, abilities, pro matches) always run.
+
+Returns `hero_names: dict[int, str]` built from the **full pre-filter roster** so downstream stages can look up names for edge heroes that aren't in the filtered set.
+
+### bundle (`pipeline/bundle.py`)
+
+Converts `fetch_all` output into `HeroRawBundle` objects for the orchestrator.
+
+- Resolves each hero's abilities by joining `hero_abilities` map → `abilities` dict, keeping only entries with a display name and description.
+- Passes through per-hero matchups and STRATZ edges.
+- Meta stats (`position_counts`, `contest_rate`, `win_rate`, `meta_history`) are still placeholders for now because the current bootstrap path does not derive them from `pro_matches`. This is a known Phase 1.1 gap, not a settled contract.
 
 ### extract (`pipeline/extract.py`)
 
@@ -106,12 +131,30 @@ Pure computation from raw stats:
 
 ### reason (`pipeline/reason.py`)
 
-Two prompts: `synergy_reason`, `counter_reason`.
-Input: `ReasonInput` with both hero names, tags, score, and game count.
-Only `med` and `high` confidence edges get a reason call.
-Hero B name and tags are loaded from the already-written hero file if it exists (`_try_load_hero_context`), or fall back to `("hero_{id}", [])`.
+Single prompt: `edge_reasons_batch`.
 
-Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects a reason that mentions no tag from either hero.
+All synergy and counter edges for a hero are batched into **one LLM call** per hero.
+Hero A name and tags appear once in the prompt header; each edge item carries hero B info,
+relation type, score, and game count. The model returns a JSON array parallel to the input.
+
+Only `med` and `high` confidence edges are included. Edges are capped to `max_edges`
+(default 5) per relation before batching — lists are already sorted by `|score|` descending
+so the highest-signal edges are always kept.
+
+Heroes appearing in both the synergy and counter candidate lists are excluded from the counter
+list to prevent duplicate `hero_b_id` values in the batch prompt.
+
+Hero B names are resolved from the written hero file if available, falling back to the full
+roster `hero_names` map from `fetch_all`. Placeholder names like `hero_55` must be avoided —
+thinking models enter infinite ID-verification loops when names are missing.
+
+Call budget: `1 extract + 1 batch reason = 2 calls per hero`.
+
+Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects any item whose
+reason cites no tag from either hero. Failing items are skipped; the rest are kept.
+
+Batch validation is strict: the returned `hero_b_id` list must exactly match the input
+edge order. Duplicate ids, missing ids, or reordered ids fail the whole batch.
 
 ### assemble (`pipeline/assemble.py`)
 
@@ -130,6 +173,17 @@ Runs after all heroes are written:
 
 ---
 
+## Known Gaps (Phase 1.2)
+
+The current orchestrator runs extract → reason → write per hero in a single sequential pass. This means hero B's functional tags are often unavailable when hero A's reason batch runs (hero B hasn't been extracted yet). Consequences:
+
+- All `hero_b_tags` in the reason prompt show `(no tags)`, forcing the model to ground every reason in hero A's tags only.
+- When hero A has relational tags like `physical_damage_amplifier`, the LLM has no context for what hero B offers and may enter a thinking loop, returning an empty response.
+
+Phase 1.2 will split the orchestrator into two explicit passes (extract all → reason all) and add a guard that skips the reason batch when no hero_b has tags. It will also introduce a `tag_affinity.py` module so that extracted tags supplement Stratz/OpenDota as a candidate source. See `docs/specs/2026-04-17-phase-1.2-pipeline-correctness.md`.
+
+---
+
 ## Error Recovery
 
 `run_for_hero()` returns `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason)`.
@@ -139,6 +193,8 @@ Runs after all heroes are written:
 - Hero still written even with missing reasons
 
 `finalize_patch` only processes heroes whose output files exist — partial runs don't block finalisation.
+The manifest is marked `complete` only when there is no hero filter and every requested
+hero succeeded. Filtered runs and failed full-roster runs both write `partial`.
 
 ---
 
@@ -164,7 +220,22 @@ Key fields:
 
 ## Config and Environment
 
-`Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GEMINI_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
+`Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GOOGLE_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
+
+### Dev Hero Filter
+
+Gemini free tier caps at 20 calls/day. To avoid burning quota during development, a hero filter limits which heroes receive per-hero API calls and LLM extractions.
+
+Two ways to set it (CLI flag takes precedence):
+
+| Method | Example |
+|--------|---------|
+| `INVOKER_DEV_HEROES` env var | `INVOKER_DEV_HEROES=Pangolier,Slardar` in `.env` |
+| `--heroes` CLI flag | `invoker bootstrap --patch 7.41b --heroes "Pangolier,Slardar"` |
+
+Accepts hero **names** (case-insensitive) or numeric **ids**. The global hero roster fetch still runs (single cached call); only per-hero calls (matchups, STRATZ synergies) and LLM extractions are restricted. No filter = all heroes (production behaviour unchanged).
+
+Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstrap is attempted.
 
 ---
 
@@ -180,8 +251,9 @@ All prompts live in `src/invoker/prompts/` as `.md` files with a `<!-- prompt_ve
 data/
   cache/
     llm/
-      <key[:2]>/
-        <key>.json      # {text, model, prompt_version, cached_at}
+      <tag>/            # optional; e.g. extract/Slardar, reason/Axe
+        <key[:2]>/
+          <key>.json    # {text, model, prompt_version, cached_at, prompt}
   derived/
     <patch>/
       <hero_id>.json    # HeroDerived

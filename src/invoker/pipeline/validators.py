@@ -14,6 +14,7 @@ class ValidationError(Exception):
 @dataclass
 class ValidationContext:
     roster_hero_ids: set[int]
+    partial: bool = False  # True when only a subset of heroes was processed
 
 
 def validate_hero(hero: HeroDerived, ctx: ValidationContext) -> None:
@@ -76,6 +77,8 @@ def _validate_statistical_sanity(h: HeroDerived) -> None:
 def _validate_id_integrity(h: HeroDerived, ctx: ValidationContext) -> None:
     if h.hero_id not in ctx.roster_hero_ids:
         raise ValidationError(f"hero_id {h.hero_id} not in current roster")
+    if ctx.partial:
+        return  # edges to heroes outside the filter are expected in partial runs
     for dct in (h.synergies, h.counters):
         for lst in dct.values():
             for e in lst:
@@ -87,8 +90,8 @@ def _validate_id_integrity(h: HeroDerived, ctx: ValidationContext) -> None:
 
 def _validate_bracket_consistency(h: HeroDerived) -> None:
     for br, block in h.positions.items():
-        if block.window_days <= 0:
-            raise ValidationError(f"positions[{br}]: window_days must be > 0")
+        if block.games > 0 and block.window_days <= 0:
+            raise ValidationError(f"positions[{br}]: window_days must be > 0 when games > 0")
     for br, block in h.meta.items():
         if block.games < 0:
             raise ValidationError(f"meta[{br}]: games negative")

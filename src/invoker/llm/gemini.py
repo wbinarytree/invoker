@@ -4,17 +4,18 @@ import os
 import threading
 import time
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, cast
 
-from invoker.llm.client import LLMResponse
+from google import genai
+from google.genai import types
 
-try:
-    import google.generativeai as genai
-except ImportError as e:
-    raise RuntimeError("google-generativeai not installed") from e
+from invoker.llm.client import LLMResponse, strip_fences
 
 
 def _trace(msg: str) -> None:
-    print(f"[llm] {msg}", flush=True)
+    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+    print(f"{ts} [llm] {msg}", flush=True)
 
 
 def _is_quota_error(exc: Exception) -> bool:
@@ -29,6 +30,10 @@ def _is_quota_error(exc: Exception) -> bool:
     )
 
 
+def _is_timeout_error(exc: Exception) -> bool:
+    return "timeout" in type(exc).__name__.lower()
+
+
 @dataclass(frozen=True)
 class GeminiModelConfig:
     model: str
@@ -40,8 +45,22 @@ class GeminiModelConfig:
         """Minimum seconds between requests to stay under RPM ceiling."""
         return 60.0 / self.rpm + 0.5  # small buffer above the hard limit
 
-
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
+GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100)
+
+
+def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:
+    """Build a GeminiModelConfig from env-var values."""
+    return GeminiModelConfig(model=model, rpm=rpm, rpd=rpd)
+
+
+def _json_config(schema: object | None) -> types.GenerateContentConfig:
+    extra = cast(Any, {"response_schema": schema} if schema is not None else {})
+    return types.GenerateContentConfig(
+        temperature=0.0,
+        response_mime_type="application/json",
+        **extra,
+    )
 
 
 class GeminiClient:
@@ -53,10 +72,9 @@ class GeminiClient:
         key = os.environ.get("GOOGLE_API_KEY")
         if not key:
             raise RuntimeError("GOOGLE_API_KEY not set")
-        genai.configure(api_key=key)  # pyright: ignore[reportPrivateImportUsage]
+        self._client = genai.Client(api_key=key, http_options={"timeout": 120_000})
         self._config = config
         self.model_name = config.model
-        self._model = genai.GenerativeModel(config.model)  # pyright: ignore[reportPrivateImportUsage]
 
     def _pace(self) -> None:
         """Enforce the RPM ceiling proactively."""
@@ -69,26 +87,57 @@ class GeminiClient:
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def generate_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         self._pace()
         max_retries = 3
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
-                resp = self._model.generate_content(
-                    prompt,
-                    generation_config={
-                        "temperature": 0.0,
-                        "response_mime_type": "application/json",
-                    },
+                cfg = _json_config(schema)
+
+                t0 = time.monotonic()
+                _trace(
+                    f"generate     model={self.model_name}"
+                    f"  prompt_chars={len(prompt)}"
+                    + (f"  attempt={attempt}" if attempt else "")
                 )
+                resp = self._client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config=cfg,
+                )
+                elapsed = time.monotonic() - t0
+                text = strip_fences(resp.text or "")
+                if text:
+                    _trace(
+                        f"generate_ok  model={self.model_name}"
+                        f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
+                    )
+                else:
+                    _trace(
+                        f"empty_response  model={self.model_name}"
+                        f"  elapsed={elapsed:.1f}s  (will cache to prevent retry)"
+                    )
                 return LLMResponse(
-                    text=resp.text, model=self.model_name, prompt_version=prompt_version
+                    text=text, model=self.model_name, prompt_version=prompt_version
                 )
             except Exception as exc:
                 if attempt == max_retries:
                     raise
-                if _is_quota_error(exc):
+                if _is_timeout_error(exc):
+                    _trace(
+                        f"timeout_error  retry={attempt + 1}/{max_retries}"
+                        f"  sleep=20s  ({type(exc).__name__})"
+                    )
+                    time.sleep(20)
+                elif _is_quota_error(exc):
                     _trace(
                         f"quota_error  retry={attempt + 1}/{max_retries}"
                         f"  sleep={delay:.0f}s  ({exc})"
@@ -97,4 +146,4 @@ class GeminiClient:
                     delay *= 2
                 else:
                     raise
-        raise RuntimeError("unreachable")  # loop always raises or returns
+        raise RuntimeError("unreachable")
