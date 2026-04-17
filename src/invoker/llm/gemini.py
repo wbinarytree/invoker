@@ -46,7 +46,7 @@ class GeminiModelConfig:
         return 60.0 / self.rpm + 0.5  # small buffer above the hard limit
 
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
-GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100)
+GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=15, rpd=1500)
 
 
 def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:

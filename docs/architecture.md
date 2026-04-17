@@ -72,7 +72,7 @@ Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:M
 
 - Configured by `GeminiModelConfig(model, rpm, rpd)`. Two named constants:
   - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20
-  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=15, RPD=1500
 - `make_model_config(model, rpm, rpd)` is a thin env-var adapter; the client no longer carries a per-model capability registry.
 - **HTTP timeout:** client is constructed with `http_options={"timeout": 120_000}` (120 s). Calls that stall at the network level raise a timeout exception rather than hanging indefinitely.
 - **JSON output:** every request sets `response_mime_type="application/json"`. When `schema` is provided, the same request also sets `response_schema=schema` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
