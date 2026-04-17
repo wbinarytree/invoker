@@ -66,7 +66,8 @@ Cache entry shape: `{text, model, prompt_version, cached_at, prompt}`. The `prom
 
 `cache_tag` is an optional human-readable path segment (e.g. `extract/Slardar`, `reason/Axe`) that groups related entries into subdirectories.
 
-Logs are emitted through the shared `invoker.logging` module as structured key-value events such as `event=cache_hit key="..." model="..." cache_tag="..."`.
+Logging uses the standard library `logging` module with per-module loggers (`getLogger(__name__)`).
+`invoker.logging.configure_logging()` sets handlers/formatters centrally; application code logs through normal `logger.debug/info/warning/exception(...)` calls.
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
@@ -76,7 +77,7 @@ Logs are emitted through the shared `invoker.logging` module as structured key-v
 - `make_model_config(model, rpm, rpd)` is a thin env-var adapter; the client no longer carries a per-model capability registry.
 - **HTTP timeout:** client is constructed with `http_options={"timeout": 120_000}` (120 s). Calls that stall at the network level raise a timeout exception rather than hanging indefinitely.
 - **JSON output:** every request sets `response_mime_type="application/json"`. When `schema` is provided, the same request also sets `response_schema=schema` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
-- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s). Pacing, requests, successful generations, empty responses, and retries are all emitted through the shared logger.
+- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s). Pacing, requests, successful generations, empty responses, and retries are all emitted through the module logger.
 - Retry: up to 3 retries.
   - Quota / rate errors (`429`, `ResourceExhausted`): exponential backoff starting at 65 s, doubling each attempt.
   - Timeout errors: fixed 20 s delay before retry.
@@ -106,7 +107,7 @@ When `hero_filter` is set, per-hero calls (matchups, STRATZ) are restricted to t
 
 Returns `hero_names: dict[int, str]` built from the **full pre-filter roster** so downstream stages can look up names for edge heroes that aren't in the filtered set.
 
-The fetch layer also emits structured source-cache and source-request events from `CachedClient`, so bootstrap logs now show when a call was reused from disk versus sent over the network.
+The fetch layer also emits source-cache and source-request log lines from `CachedClient`, so bootstrap logs show when a call was reused from disk versus sent over the network.
 
 ### bundle (`pipeline/bundle.py`)
 
@@ -224,7 +225,7 @@ Key fields:
 
 `Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GOOGLE_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
 
-`INVOKER_LOG_LEVEL` controls process logging. The CLI configures the shared logger at startup and defaults to `INFO`.
+`INVOKER_LOG_LEVEL` controls process logging. The CLI configures the root logger at startup and defaults to `INFO`.
 
 ### Dev Hero Filter
 

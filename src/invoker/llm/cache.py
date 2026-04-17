@@ -2,12 +2,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-import logging
 from datetime import UTC, datetime
 from pathlib import Path
 
 from invoker.llm.client import LLMClient, LLMResponse, strip_fences
-from invoker.logging import get_logger, log_event
+from invoker.logging import get_logger
 
 
 def _cache_key(model: str, prompt_version: int, prompt: str) -> str:
@@ -84,22 +83,18 @@ class CachingLLMClient:
         key = _cache_key(self.model_name, prompt_version, prompt)
         cached = self._read(key, cache_tag)
         if cached is not None:
-            log_event(
-                logger,
-                logging.INFO,
-                "cache_hit",
-                key=key[:12],
-                model=self.model_name,
-                cache_tag=cache_tag,
+            logger.debug(
+                "Cache hit for model=%s key=%s cache_tag=%s",
+                self.model_name,
+                key[:12],
+                cache_tag,
             )
             return cached
-        log_event(
-            logger,
-            logging.INFO,
-            "request",
-            key=key[:12],
-            model=self.model_name,
-            cache_tag=cache_tag,
+        logger.info(
+            "LLM request model=%s key=%s cache_tag=%s",
+            self.model_name,
+            key[:12],
+            cache_tag,
         )
         response = self._inner.generate_json(
             prompt,

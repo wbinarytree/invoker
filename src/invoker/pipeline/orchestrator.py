@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import logging
 from dataclasses import dataclass
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
 from invoker.llm import LLMClient
-from invoker.logging import get_logger, log_event
+from invoker.logging import get_logger
 from invoker.paths import hero_file
 from invoker.pipeline.assemble import assemble_hero
 from invoker.pipeline.derive import merge_matchups, meta_tier, position_weights
@@ -80,12 +79,10 @@ def run_for_hero(
     hero_names: dict[int, str] | None = None,
 ) -> HeroResult:
     # --- Extraction ---
-    log_event(
-        logger,
-        logging.INFO,
-        "extract_start",
-        hero_id=bundle.hero_id,
-        hero_name=bundle.localized_name,
+    logger.info(
+        "Extract start hero_id=%s hero_name=%s",
+        bundle.hero_id,
+        bundle.localized_name,
     )
     try:
         mech = extract_mechanical(
@@ -99,18 +96,16 @@ def run_for_hero(
         )
     except Exception as exc:
         logger.exception(
-            "event=extract_failed hero_id=%s hero_name=%s",
+            "Extract failed hero_id=%s hero_name=%s",
             bundle.hero_id,
             bundle.localized_name,
         )
         return HeroResult(hero_id=bundle.hero_id, success=False, failure_reason=str(exc))
-    log_event(
-        logger,
-        logging.INFO,
-        "extract_done",
-        hero_id=bundle.hero_id,
-        hero_name=bundle.localized_name,
-        tags=mech.functional_tags,
+    logger.info(
+        "Extract done hero_id=%s hero_name=%s tags=%s",
+        bundle.hero_id,
+        bundle.localized_name,
+        mech.functional_tags,
     )
 
     # --- Stat edges ---
@@ -133,13 +128,11 @@ def run_for_hero(
     candidates = candidate_syn + candidate_ctr
 
     if candidates:
-        log_event(
-            logger,
-            logging.INFO,
-            "reason_batch_start",
-            hero_id=bundle.hero_id,
-            synergies=len(candidate_syn),
-            counters=len(candidate_ctr),
+        logger.info(
+            "Reason batch start hero_id=%s synergies=%s counters=%s",
+            bundle.hero_id,
+            len(candidate_syn),
+            len(candidate_ctr),
         )
         edge_inputs: list[EdgeReasonInput] = []
         for e in candidates:
@@ -171,7 +164,7 @@ def run_for_hero(
         try:
             outputs = generate_reasons_batch(batch_inp, client)
         except Exception:
-            logger.exception("event=reason_batch_failed hero_id=%s", bundle.hero_id)
+            logger.exception("Reason batch failed hero_id=%s", bundle.hero_id)
             outputs = []
 
         # Build a lookup from hero_b_id to (EdgeReasonInput, EdgeReasonOutput).
@@ -184,14 +177,12 @@ def run_for_hero(
             try:
                 validate_grounding(out.reason, mech.functional_tags, ei.hero_b_tags)
             except Exception as exc:
-                log_event(
-                    logger,
-                    logging.WARNING,
-                    "reason_skip",
-                    relation=relation,
-                    hero_id=bundle.hero_id,
-                    other_hero_id=out.hero_b_id,
-                    error=str(exc),
+                logger.warning(
+                    "Reason skipped relation=%s hero_id=%s other_hero_id=%s error=%s",
+                    relation,
+                    bundle.hero_id,
+                    out.hero_b_id,
+                    exc,
                 )
                 reasons_skipped += 1
                 continue
@@ -201,13 +192,11 @@ def run_for_hero(
             )
             reasons_written += 1
 
-        log_event(
-            logger,
-            logging.INFO,
-            "reason_batch_done",
-            hero_id=bundle.hero_id,
-            reasons_written=reasons_written,
-            reasons_skipped=reasons_skipped,
+        logger.info(
+            "Reason batch done hero_id=%s reasons_written=%s reasons_skipped=%s",
+            bundle.hero_id,
+            reasons_written,
+            reasons_skipped,
         )
 
     # --- Assemble and write ---
@@ -239,14 +228,12 @@ def run_for_hero(
 
     write_hero(data_dir, patch, hero)
     write_summary(data_dir, hero, "pro")
-    log_event(
-        logger,
-        logging.INFO,
-        "hero_written",
-        hero_id=bundle.hero_id,
-        hero_name=bundle.localized_name,
-        reasons_written=reasons_written,
-        reasons_skipped=reasons_skipped,
+    logger.info(
+        "Hero written hero_id=%s hero_name=%s reasons_written=%s reasons_skipped=%s",
+        bundle.hero_id,
+        bundle.localized_name,
+        reasons_written,
+        reasons_skipped,
     )
 
     return HeroResult(

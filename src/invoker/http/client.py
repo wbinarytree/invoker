@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -10,7 +9,7 @@ from typing import Any
 import httpx
 
 from invoker.http.ratelimit import TokenBucket
-from invoker.logging import get_logger, log_event
+from invoker.logging import get_logger
 
 
 @dataclass
@@ -78,27 +77,23 @@ class CachedClient:
         key = _cache_key(method, url, params, body)
         cache_path = self.cache_root / f"{key}.json"
         if not force and cache_path.exists():
-            log_event(
-                logger,
-                logging.INFO,
-                "source_cache_hit",
-                source=self.source.name,
-                method=method,
-                url=url,
-                key=key,
+            logger.debug(
+                "Source cache hit source=%s method=%s key=%s url=%s",
+                self.source.name,
+                method,
+                key,
+                url,
             )
             return json.loads(cache_path.read_text())
 
         await self.bucket.acquire()
-        log_event(
-            logger,
-            logging.INFO,
-            "source_request",
-            source=self.source.name,
-            method=method,
-            url=url,
-            key=key,
-            force=force,
+        logger.info(
+            "Source request source=%s method=%s key=%s force=%s url=%s",
+            self.source.name,
+            method,
+            key,
+            force,
+            url,
         )
         r = await self._client.request(method, url, params=params, json=body)
         r.raise_for_status()

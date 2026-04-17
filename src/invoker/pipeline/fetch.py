@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import logging
-
 from invoker.config import Config
-from invoker.logging import get_logger, log_event
+from invoker.logging import get_logger
 from invoker.sources.opendota import OpenDotaFetcher
 from invoker.sources.stratz import StratzFetcher
 
@@ -40,13 +38,11 @@ async def fetch_all(
     od = OpenDotaFetcher(cache, patch)
     strat = StratzFetcher(cache, patch, cfg.stratz_token)
     try:
-        log_event(
-            logger,
-            logging.INFO,
-            "fetch_start",
-            patch=patch,
-            hero_filter=sorted(hero_filter) if hero_filter else None,
-            stratz_available=strat.available,
+        logger.info(
+            "Fetch start patch=%s hero_filter=%s stratz_available=%s",
+            patch,
+            sorted(hero_filter) if hero_filter else None,
+            strat.available,
         )
         all_heroes = await od.heroes()
         abilities = await od.abilities()
@@ -62,14 +58,12 @@ async def fetch_all(
             if strat.available
             else {}
         )
-        log_event(
-            logger,
-            logging.INFO,
-            "fetch_done",
-            patch=patch,
-            roster_heroes=len(all_heroes),
-            selected_heroes=len(heroes),
-            stratz_heroes=len(stratz_edges),
+        logger.info(
+            "Fetch done patch=%s roster_heroes=%s selected_heroes=%s stratz_heroes=%s",
+            patch,
+            len(all_heroes),
+            len(heroes),
+            len(stratz_edges),
         )
         return {
             "heroes": heroes,
