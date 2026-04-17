@@ -4,6 +4,16 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 
 
+def strip_fences(text: str) -> str:
+    """Remove markdown code fences that some models wrap around JSON output."""
+    stripped = text.strip()
+    if stripped.startswith("```"):
+        stripped = stripped[stripped.find("\n") + 1:]
+    if stripped.endswith("```"):
+        stripped = stripped[: stripped.rfind("```")].rstrip()
+    return stripped
+
+
 @dataclass(frozen=True)
 class LLMResponse:
     text: str

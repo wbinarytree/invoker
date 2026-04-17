@@ -5,7 +5,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from invoker.llm.client import LLMClient, LLMResponse
+from invoker.llm.client import LLMClient, LLMResponse, strip_fences
 
 
 def _cache_key(model: str, prompt_version: int, prompt: str) -> str:
@@ -44,7 +44,7 @@ class CachingLLMClient:
             return None
         entry = json.loads(p.read_text())
         return LLMResponse(
-            text=entry["text"],
+            text=strip_fences(entry["text"]),
             model=entry["model"],
             prompt_version=entry["prompt_version"],
         )

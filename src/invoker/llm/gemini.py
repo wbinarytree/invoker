@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from google import genai
 from google.genai import types
 
-from invoker.llm.client import LLMResponse
+from invoker.llm.client import LLMResponse, strip_fences
 
 
 def _trace(msg: str) -> None:
@@ -136,7 +136,7 @@ class GeminiClient:
                     config=cfg,
                 )
                 elapsed = time.monotonic() - t0
-                text = resp.text or ""
+                text = strip_fences(resp.text or "")
                 if not text:
                     # Output text is empty — collect thinking parts as fallback.
                     # Thinking models sometimes put all content in thought=True parts.
