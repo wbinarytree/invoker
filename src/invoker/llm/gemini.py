@@ -128,10 +128,33 @@ class GeminiClient:
                 )
                 elapsed = time.monotonic() - t0
                 text = resp.text or ""
-                _trace(
-                    f"generate_ok  model={self.model_name}"
-                    f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
-                )
+                if not text:
+                    # Output text is empty — collect thinking parts as fallback.
+                    # Thinking models sometimes put all content in thought=True parts.
+                    # Using the thinking text: (a) gets cached so the call isn't repeated,
+                    # (b) lets parse_json_response find JSON if the model reasoned to one.
+                    try:
+                        candidate = resp.candidates[0] if resp.candidates else None
+                        parts = candidate.content.parts if candidate else []
+                        thinking_parts = [
+                            getattr(p, "text", "") or ""
+                            for p in parts
+                            if getattr(p, "thought", False)
+                        ]
+                        text = "\n".join(thinking_parts)
+                        _trace(
+                            f"generate_ok  model={self.model_name}"
+                            f"  elapsed={elapsed:.1f}s  response_chars=0"
+                            f"  thinking_chars={len(text)}"
+                            f"  (using thinking fallback)"
+                        )
+                    except Exception as diag_exc:
+                        _trace(f"thinking_fallback_failed  ({diag_exc})")
+                else:
+                    _trace(
+                        f"generate_ok  model={self.model_name}"
+                        f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
+                    )
                 if not text:
                     raise RuntimeError(
                         f"Empty response from {self.model_name} after {elapsed:.1f}s"
