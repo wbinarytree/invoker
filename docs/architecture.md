@@ -1,9 +1,16 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-17
-Phase: 1.1 (near exit — see `docs/plans/2026-04-15-invoker-phase-1.1.md`; Phase 1.2 spec signed off, not yet implemented)
+Last updated: 2026-04-18
+Phase: transition after 1.1; current code still reflects the hero-KB-first architecture, while the active roadmap has shifted to a KG-first validation path
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
+
+As of 2026-04-18, there is an important distinction:
+
+- the **implemented system** is still hero-centric and uses STRATZ/OpenDota pair stats plus LLM-generated reasons
+- the **active roadmap** has shifted toward a KG-first, mechanics-first relation model that will be validated on a small benchmark before broader rollout
+
+Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
 
 ---
 
@@ -102,6 +109,8 @@ File-based LLM loop for rate-limit emergencies and spot-checks.
 fetch → bundle → extract → derive → reason → assemble → write → summarize → finalize
 ```
 
+This remains the actual current pipeline. It has **not** yet been redesigned into a facts/relations/views architecture.
+
 ### fetch (`pipeline/fetch.py`)
 
 Fetches raw data from all sources:
@@ -166,6 +175,8 @@ reason cites no tag from either hero. Failing items are skipped; the rest are ke
 Batch validation is strict: the returned `hero_b_id` list must exactly match the input
 edge order. Duplicate ids, missing ids, or reordered ids fail the whole batch.
 
+Important: this stage is part of the **current implementation**, not the active long-term direction. The project is no longer treating "STRATZ-selected pairs plus better prose reasons" as the intended final relation architecture.
+
 ### assemble (`pipeline/assemble.py`)
 
 Combines all stage outputs into a `HeroDerived` model. No LLM calls.
@@ -183,14 +194,62 @@ Runs after all heroes are written:
 
 ---
 
-## Known Gaps (Phase 1.2)
+## Current Direction Shift
+
+The project direction changed on 2026-04-18 after reviewing the current relation path against the actual product goal.
+
+### Current product goal
+
+Invoker is now being treated explicitly as a patch-aware knowledge graph for a drafting agent, not primarily as a hero knowledge base with explained pair stats.
+
+### Consequence
+
+The current relation path:
+
+- extract hero tags
+- use STRATZ/OpenDota to select pairs
+- generate prose reasons for those pairs
+
+is now considered a **transitional implementation**, not the target architecture.
+
+The target direction is:
+
+- hero facts represented more explicitly (`capabilities`, `requirements`, `liabilities`, later draft traits)
+- mechanics-first relation inference
+- statistical sources used as evidence, not ontology
+- structured relation records treated as primary artifacts
+- prose reasons demoted to derived or convenience fields
+
+The active roadmap for this direction lives in:
+
+- `docs/specs/2026-04-18-kg-design-guidelines.md`
+- `docs/specs/2026-04-18-kg-relation-representation.md`
+- `docs/plans/2026-04-18-kg-execution-plan.md`
+- `docs/plans/2026-04-18-kg-validation-plan.md`
+
+### What this means for implementation planning
+
+Only low-regret infrastructure work from the old path should still move forward immediately.
+
+At the moment, that mainly means:
+
+- the two-pass orchestrator split
+- skipping relation/reason calls when hero B semantic coverage is absent
+
+Broader work on improving the existing STRATZ-first reason pipeline is no longer the preferred roadmap.
+
+---
+
+## Known Gaps In The Current Implementation
 
 The current orchestrator runs extract → reason → write per hero in a single sequential pass. This means hero B's functional tags are often unavailable when hero A's reason batch runs (hero B hasn't been extracted yet). Consequences:
 
 - All `hero_b_tags` in the reason prompt show `(no tags)`, forcing the model to ground every reason in hero A's tags only.
 - When hero A has relational tags like `physical_damage_amplifier`, the LLM has no context for what hero B offers and may enter a thinking loop, returning an empty response.
 
-Phase 1.2 will split the orchestrator into two explicit passes (extract all → reason all) and add a guard that skips the reason batch when no hero_b has tags. It will also introduce a `tag_affinity.py` module so that extracted tags supplement Stratz/OpenDota as a candidate source. See `docs/specs/2026-04-17-phase-1.2-pipeline-correctness.md`.
+The still-relevant fix is to split the orchestrator into two explicit passes (extract all → reason/relation stage all) and add a guard that skips the reason batch when no hero B semantics are available.
+
+The older Phase 1.2 notion of improving the STRATZ-first candidate path is no longer the active roadmap. See `docs/CURRENT_DIRECTION.md`.
 
 ---
 
@@ -225,6 +284,14 @@ Key fields:
 | `provenance` | Provenance | `mechanical` + `statistical` sub-dicts |
 
 `schema_version` is bumped on breaking schema changes.
+
+This remains the current on-disk hero artifact. It is useful for the present implementation, but it is not yet the intended final KG representation. In particular:
+
+- hero files are still the main artifact
+- relation records do not yet exist as first-class stored objects
+- `reason` prose still carries more semantic weight than the new direction intends
+
+These are active design limitations, not accidental omissions.
 
 ---
 
