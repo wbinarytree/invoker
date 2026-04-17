@@ -166,8 +166,9 @@ class GeminiClient:
                         f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
                     )
                 if not text:
-                    raise RuntimeError(
-                        f"Empty response from {self.model_name} after {elapsed:.1f}s"
+                    _trace(
+                        f"empty_response  model={self.model_name}"
+                        f"  elapsed={elapsed:.1f}s  (will cache to prevent retry)"
                     )
                 return LLMResponse(
                     text=text, model=self.model_name, prompt_version=prompt_version
