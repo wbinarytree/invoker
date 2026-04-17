@@ -253,7 +253,6 @@ Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstra
 |------|--------|
 | `--patch` | Required. Patch string, e.g. `7.41b`. |
 | `--heroes <ids-or-names>` | Subset mode. Overrides `INVOKER_DEV_HEROES`. Manifest is written as `partial`. |
-| `--force` | Declared but not yet plumbed through source fetchers (see Phase 1.1 plan §1). |
 | `--skip-extract` | Reserved flag; currently a no-op pending hook into the extract stage. |
 | `--skip-reasons` | Write heroes with stat edges only — no reason LLM call at all. |
 | `--max-reason-edges N` | Cap edges fed to the batch reason call per relation per hero (default 5). |

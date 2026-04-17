@@ -37,7 +37,7 @@ Tasks:
 
 - [x] Wire `bootstrap --heroes ...` into the real current pipeline.
 - [x] Mark subset runs as `partial`.
-- [ ] Propagate `force` through source fetchers. (Deferred — CLI flag exists but not plumbed into `OpenDotaFetcher` / `StratzFetcher` methods; needs design discussion.)
+- [x] Dropped `--force`. It was a no-op (CLI flag never reached `CachedClient.get`), and subset mode doesn't need it — the URL-keyed cache reuses hero data across runs correctly. Targeted cache invalidation for meta shifts will arrive later as a dedicated operation (e.g. `invoker refresh <hero>`), not a global flag threaded through every fetcher. `CachedClient.get(..., force=...)` remains as dormant machinery for that future work.
 - [x] Add explicit CLI messaging about what subset mode does and does not populate.
 - [x] Add a small success summary at the end:
   - heroes requested

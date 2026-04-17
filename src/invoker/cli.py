@@ -27,7 +27,6 @@ def version() -> None:
 @app.command()
 def bootstrap(
     patch: str = typer.Option(..., help="Patch string, e.g. 7.41b"),
-    force: bool = typer.Option(False, help="Ignore caches and refetch."),
     heroes: str | None = typer.Option(
         None, help="Comma-separated hero names or ids (overrides INVOKER_DEV_HEROES)."
     ),
@@ -72,7 +71,7 @@ def bootstrap(
         )
 
     typer.echo(f"Fetching raw data for {patch}...")
-    raw = asyncio.run(fetch_all(cfg, patch, force=force, hero_filter=hero_filter))
+    raw = asyncio.run(fetch_all(cfg, patch, hero_filter=hero_filter))
     typer.echo(f"Fetched {len(raw['heroes'])} heroes.")
 
     bundles = build_bundles(raw, patch)

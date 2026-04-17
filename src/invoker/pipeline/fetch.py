@@ -25,7 +25,6 @@ async def fetch_all(
     cfg: Config,
     patch: str,
     *,
-    force: bool = False,
     hero_filter: set[str] | None = None,
 ) -> dict:
     """
