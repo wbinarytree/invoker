@@ -32,8 +32,9 @@ class GeminiModelConfig:
     model: str
     rpm: int   # requests per minute (free-tier ceiling)
     rpd: int   # requests per day (free-tier ceiling)
-    supports_json_mode: bool = True   # response_mime_type="application/json" support
-    supports_thinking_config: bool = False  # ThinkingConfig (disable chain-of-thought)
+    supports_json_mode: bool = True          # response_mime_type="application/json"
+    supports_thinking_config: bool = False   # ThinkingConfig (disable chain-of-thought)
+    supports_structured_output: bool = True  # response_schema enforcement via Pydantic
 
     @property
     def min_interval(self) -> float:
@@ -47,7 +48,8 @@ GEMMA_4_31B = GeminiModelConfig(
     rpm=5,
     rpd=100,
     supports_json_mode=False,
-    supports_thinking_config=False,  # ThinkingConfig not supported via Google AI API
+    supports_thinking_config=False,   # ThinkingConfig not supported via Google AI API
+    supports_structured_output=True,   # model card claims support; verify empirically
 )
 
 # Known-model registry: looked up by model name in make_model_config().
@@ -70,6 +72,7 @@ def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:
         rpd=rpd,
         supports_json_mode=known.supports_json_mode if known else True,
         supports_thinking_config=known.supports_thinking_config if known else False,
+        supports_structured_output=known.supports_structured_output if known else True,
     )
 
 
@@ -97,14 +100,20 @@ class GeminiClient:
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
         self._pace()
         max_retries = 3
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
                 cfg = types.GenerateContentConfig(temperature=0.0)
-                if self._config.supports_json_mode:
+                if schema is not None and self._config.supports_structured_output:
+                    cfg = types.GenerateContentConfig(
+                        temperature=0.0,
+                        response_mime_type="application/json",
+                        response_schema=schema,
+                    )
+                elif self._config.supports_json_mode:
                     cfg = types.GenerateContentConfig(
                         temperature=0.0,
                         response_mime_type="application/json",
@@ -135,7 +144,8 @@ class GeminiClient:
                     # (b) lets parse_json_response find JSON if the model reasoned to one.
                     try:
                         candidate = resp.candidates[0] if resp.candidates else None
-                        parts = candidate.content.parts if candidate else []
+                        content = getattr(candidate, "content", None)
+                        parts = getattr(content, "parts", []) or []
                         thinking_parts = [
                             getattr(p, "text", "") or ""
                             for p in parts

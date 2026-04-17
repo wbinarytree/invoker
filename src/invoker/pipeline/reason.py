@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from invoker.llm import LLMClient, parse_json_response
+from pydantic import BaseModel, TypeAdapter
+
+from invoker.llm import LLMClient
 from invoker.prompts import load
 
 
@@ -33,6 +35,14 @@ class EdgeReasonOutput:
 
 class ReasonNotGroundedError(ValueError):
     pass
+
+
+class _EdgeReasonItem(BaseModel):
+    hero_b_id: int
+    reason: str
+
+
+_REASON_BATCH_ADAPTER: TypeAdapter[list[_EdgeReasonItem]] = TypeAdapter(list[_EdgeReasonItem])
 
 
 def validate_grounding(reason: str, a_tags: list[str], b_tags: list[str]) -> None:
@@ -73,11 +83,9 @@ def generate_reasons_batch(
         HERO_A_TAGS=", ".join(inp.hero_a_tags) or "(no tags)",
         EDGES=_format_edges(inp.edges),
     )
-    response = client.complete_json(rendered, prompt_version=prompt.version)
-    parsed = parse_json_response(response.text)
+    response = client.complete_json(rendered, prompt_version=prompt.version, schema=list[_EdgeReasonItem])
+    parsed = _REASON_BATCH_ADAPTER.validate_json(response.text)
 
-    if not isinstance(parsed, list):
-        raise ValueError(f"Expected JSON array, got {type(parsed).__name__}")
     if len(parsed) != len(inp.edges):
         raise ValueError(
             f"Response length {len(parsed)} != input length {len(inp.edges)}"
@@ -86,13 +94,12 @@ def generate_reasons_batch(
     expected_ids = {e.hero_b_id for e in inp.edges}
     outputs: list[EdgeReasonOutput] = []
     for item in parsed:
-        hero_b_id = int(item["hero_b_id"])
-        if hero_b_id not in expected_ids:
-            raise ValueError(f"Unexpected hero_b_id {hero_b_id} in response")
+        if item.hero_b_id not in expected_ids:
+            raise ValueError(f"Unexpected hero_b_id {item.hero_b_id} in response")
         outputs.append(
             EdgeReasonOutput(
-                hero_b_id=hero_b_id,
-                reason=str(item["reason"]),
+                hero_b_id=item.hero_b_id,
+                reason=item.reason,
                 model=response.model,
                 prompt_version=response.prompt_version,
             )

@@ -64,13 +64,13 @@ class CachingLLMClient:
             )
         )
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
         key = _cache_key(self.model_name, prompt_version, prompt)
         cached = self._read(key)
         if cached is not None:
             _trace(f"cache_hit   key={key[:12]}  model={self.model_name}")
             return cached
         _trace(f"request     key={key[:12]}  model={self.model_name}")
-        response = self._inner.complete_json(prompt, prompt_version=prompt_version)
+        response = self._inner.complete_json(prompt, prompt_version=prompt_version, schema=schema)
         self._write(key, response)
         return response

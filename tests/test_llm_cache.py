@@ -16,7 +16,7 @@ class CountingClient:
         self.calls = 0
         self._text = response_text
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
         self.calls += 1
         return LLMResponse(text=self._text, model=self.model_name, prompt_version=prompt_version)
 
@@ -83,13 +83,13 @@ def test_different_models_have_different_keys(tmp_path: Path) -> None:
     class ModelA:
         model_name = "model-a"
 
-        def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+        def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
             return LLMResponse(text='{"a": 1}', model=self.model_name, prompt_version=prompt_version)
 
     class ModelB:
         model_name = "model-b"
 
-        def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+        def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
             return LLMResponse(text='{"b": 2}', model=self.model_name, prompt_version=prompt_version)
 
     client_a = CachingLLMClient(ModelA(), tmp_path)

@@ -7,7 +7,7 @@ from invoker.pipeline.extract import HeroExtractionInput, extract_mechanical
 class FakeClient:
     model_name = "fake"
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
         return LLMResponse(
             text=json.dumps(
                 {

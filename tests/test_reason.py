@@ -4,41 +4,75 @@ import pytest
 
 from invoker.llm.client import LLMResponse
 from invoker.pipeline.reason import (
-    ReasonInput,
+    BatchReasonInput,
+    EdgeReasonInput,
     ReasonNotGroundedError,
-    generate_synergy_reason,
+    generate_reasons_batch,
     validate_grounding,
 )
 
 
 class CannedClient:
-    def __init__(self, reason: str) -> None:
-        self.reason = reason
-        self.model_name = "canned"
+    model_name = "canned"
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
-        return LLMResponse(
-            text=json.dumps({"reason": self.reason}),
-            model="canned",
-            prompt_version=prompt_version,
-        )
+    def __init__(self, payload: list[dict]) -> None:
+        self._text = json.dumps(payload)
+
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
+        return LLMResponse(text=self._text, model="canned", prompt_version=prompt_version)
 
 
-def test_synergy_reason_generates():
-    inp = ReasonInput(
-        hero_a_id=28,
+def _make_batch(edges: list[tuple[int, str, str]]) -> BatchReasonInput:
+    """edges: (hero_b_id, relation, hero_b_name)"""
+    return BatchReasonInput(
         hero_a_name="Slardar",
-        hero_a_tags=["armor_reduction"],
-        hero_b_id=120,
-        hero_b_name="Pangolier",
-        hero_b_tags=["physical_damage_amplifier"],
-        score=0.08,
-        games=50,
+        hero_a_tags=["armor_reduction", "single_target_disable"],
+        edges=[
+            EdgeReasonInput(
+                hero_b_id=hid,
+                hero_b_name=name,
+                hero_b_tags=["physical_carry"],
+                relation=rel,
+                score=0.1,
+                games=100,
+            )
+            for hid, rel, name in edges
+        ],
     )
-    out = generate_synergy_reason(
-        inp, CannedClient("Armor reduction stacks with physical damage amplifier.")
-    )
-    assert "armor" in out.reason.lower()
+
+
+def test_batch_reason_generates():
+    inp = _make_batch([(120, "synergy", "Pangolier")])
+    payload = [{"hero_b_id": 120, "reason": "Armor reduction stacks with physical carry."}]
+    out = generate_reasons_batch(inp, CannedClient(payload))
+    assert len(out) == 1
+    assert out[0].hero_b_id == 120
+    assert "armor" in out[0].reason.lower()
+
+
+def test_batch_reason_multiple_edges():
+    inp = _make_batch([(120, "synergy", "Pangolier"), (1, "counter", "Anti-Mage")])
+    payload = [
+        {"hero_b_id": 120, "reason": "Armor reduction stacks with physical carry."},
+        {"hero_b_id": 1, "reason": "Single target disable catches Anti-Mage."},
+    ]
+    out = generate_reasons_batch(inp, CannedClient(payload))
+    assert len(out) == 2
+    assert out[1].hero_b_id == 1
+
+
+def test_batch_reason_length_mismatch_raises():
+    inp = _make_batch([(120, "synergy", "Pangolier"), (1, "counter", "Anti-Mage")])
+    payload = [{"hero_b_id": 120, "reason": "Only one item returned."}]
+    with pytest.raises(ValueError, match="length"):
+        generate_reasons_batch(inp, CannedClient(payload))
+
+
+def test_batch_reason_unexpected_id_raises():
+    inp = _make_batch([(120, "synergy", "Pangolier")])
+    payload = [{"hero_b_id": 999, "reason": "Unknown hero."}]
+    with pytest.raises(ValueError, match="Unexpected hero_b_id"):
+        generate_reasons_batch(inp, CannedClient(payload))
 
 
 def test_validate_grounding_accepts_tag_mention():

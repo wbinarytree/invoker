@@ -11,7 +11,7 @@ class ScriptedClient:
 
     model_name = "scripted"
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
         if "functional_tags" in prompt:
             return LLMResponse(
                 text=json.dumps(
@@ -43,14 +43,14 @@ class ScriptedClient:
                 model="scripted",
                 prompt_version=prompt_version,
             )
-        if "synergy" in prompt.lower():
-            return LLMResponse(
-                text=json.dumps({"reason": "Armor reduction amplifies physical damage output."}),
-                model="scripted",
-                prompt_version=prompt_version,
-            )
+        # Batch reason prompt: extract hero_b_ids and return one reason per edge.
+        import re
+        ids = [int(m) for m in re.findall(r"hero_b_id=(\d+)", prompt)]
         return LLMResponse(
-            text=json.dumps({"reason": "Natural single_target_disable resists ganks."}),
+            text=json.dumps([
+                {"hero_b_id": hid, "reason": f"Armor reduction amplifies single_target_disable against {hid}."}
+                for hid in ids
+            ]),
             model="scripted",
             prompt_version=prompt_version,
         )

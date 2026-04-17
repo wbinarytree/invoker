@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from typing import Any, Protocol
 
@@ -12,37 +11,23 @@ class LLMResponse:
     prompt_version: int
 
 
-def parse_json_response(text: str) -> Any:
-    """
-    Parse JSON from a model response that may include chain-of-thought reasoning.
-
-    Tries direct parse first (fast path for models that return pure JSON).
-    On failure, scans for the last outermost { or [ and parses from there —
-    handles models that prefix the JSON with reasoning text.
-    """
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        pass
-
-    # Find the first opening brace/bracket and try from there.
-    # Reasoning preamble precedes the JSON, so the first { or [ is the start.
-    for char in ("{", "["):
-        idx = text.find(char)
-        if idx != -1:
-            try:
-                return json.loads(text[idx:])
-            except json.JSONDecodeError:
-                pass
-
-    raise ValueError(f"No valid JSON found in response (length={len(text)})")
-
-
 class LLMClient(Protocol):
     model_name: str
 
-    def complete_json(self, prompt: str, *, prompt_version: int) -> LLMResponse:
-        """Call the model with a prompt expected to produce JSON. Returns raw text."""
+    def complete_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: Any | None = None,
+    ) -> LLMResponse:
+        """
+        Call the model with a prompt expected to produce JSON.
+
+        schema: a Pydantic BaseModel class (or generic alias like list[MyModel]).
+        When provided and the underlying client supports it, the API enforces
+        the schema so the response is always valid JSON matching that shape.
+        """
         ...
 
 
