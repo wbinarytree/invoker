@@ -114,6 +114,8 @@ Returns `hero_names: dict[int, str]` built from the **full pre-filter roster** s
 
 The fetch layer also emits source-cache and source-request log lines from `CachedClient`, so bootstrap logs show when a call was reused from disk versus sent over the network.
 
+`CachedClient` keys payloads on `(source, method, url, params, body)` and writes them to `data/raw/<source>/<patch>/<key>.json`. Cache is reused across runs unconditionally; there is no CLI flag to bypass it. To force a refetch for a specific endpoint, delete the matching file (or the patch subtree) and rerun. The `force=True` kwarg on `CachedClient.get/post` exists for a future targeted-refresh command and is not wired to any user-facing flag today.
+
 ### bundle (`pipeline/bundle.py`)
 
 Converts `fetch_all` output into `HeroRawBundle` objects for the orchestrator.
@@ -278,6 +280,16 @@ Pytest runs in `importlib` mode so mirrored test modules do not rely on path-bas
 
 ```
 data/
+  raw/
+    <source>/           # opendota, stratz
+      <patch>/
+        <key>.json      # CachedClient payload; key = sha256(method,url,params,body)[:16]
+    manual_prompts/     # manual LLM mode
+      <cache_tag>/
+        <hash>.md
+    manual_responses/
+      <cache_tag>/
+        <hash>.txt
   cache/
     llm/
       <tag>/            # optional; e.g. extract/Slardar, reason/Axe
