@@ -1,0 +1,16 @@
+{
+  "hero_id": 13,
+  "hero_name": "Puck",
+  "expected_tags": [
+    "silence",
+    "blink",
+    "aoe_disable",
+    "initiation"
+  ],
+  "forbidden_tags": [
+    "physical_carry",
+    "armor_reduction",
+    "sustain",
+    "summons"
+  ]
+}
