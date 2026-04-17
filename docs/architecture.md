@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-16
+Last updated: 2026-04-17
 Phase: 1.1
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
@@ -66,13 +66,14 @@ Trace output: `[llm] cache_hit key=<12chars> model=<name>` or `[llm] request key
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
-- Configured by `GeminiModelConfig(model, rpm, rpd)`. Two named constants ship as defaults:
-  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20
-  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100
+- Configured by `GeminiModelConfig(model, rpm, rpd, supports_json_mode, supports_thinking_config)`. Two named constants:
+  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20, `json_mode=True`
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100, `json_mode=False`, `thinking_config=False`
+- `make_model_config(model, rpm, rpd)` builds a config from env vars; known models inherit capability flags from the registry, unknown models get safe defaults.
 - Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s).
 - Retry: up to 3 retries on quota/rate errors; exponential backoff starting at 65 s, doubling each attempt.
 - Non-quota errors are re-raised immediately (no retry).
-- `model_name` is the model string used as the cache key dimension.
+- **Thinking-model fallback:** when `resp.text` is empty (pure thinking models emit no output text), the client collects `thought=True` parts and uses their text as the response. This ensures the call is cached and `parse_json_response` can scan the thinking content for JSON. If both `resp.text` and all thinking parts are empty, `RuntimeError` is raised and the call is not cached.
 - Model is selected at runtime via `INVOKER_LLM_MODEL` / `INVOKER_LLM_RPM` / `INVOKER_LLM_RPD` env vars (see Config).
 
 ### ManualClient (`src/invoker/llm/manual.py`)
@@ -94,6 +95,8 @@ Fetches raw data from all sources:
 - STRATZ: `matchUp` edges per hero (optional; skipped if unavailable)
 
 When `hero_filter` is set, per-hero calls (matchups, STRATZ) are restricted to the filtered set. Global calls (hero list, abilities, pro matches) always run.
+
+Returns `hero_names: dict[int, str]` built from the **full pre-filter roster** so downstream stages can look up names for edge heroes that aren't in the filtered set.
 
 ### bundle (`pipeline/bundle.py`)
 
@@ -127,8 +130,15 @@ Hero A name and tags appear once in the prompt header; each edge item carries he
 relation type, score, and game count. The model returns a JSON array parallel to the input.
 
 Only `med` and `high` confidence edges are included. Edges are capped to `max_edges`
-(default 20) per relation before batching — lists are already sorted by `|score|` descending
+(default 5) per relation before batching — lists are already sorted by `|score|` descending
 so the highest-signal edges are always kept.
+
+Heroes appearing in both the synergy and counter candidate lists are excluded from the counter
+list to prevent duplicate `hero_b_id` values in the batch prompt.
+
+Hero B names are resolved from the written hero file if available, falling back to the full
+roster `hero_names` map from `fetch_all`. Placeholder names like `hero_55` must be avoided —
+thinking models enter infinite ID-verification loops when names are missing.
 
 Call budget: `1 extract + 1 batch reason = 2 calls per hero`.
 
