@@ -5,11 +5,12 @@ from invoker.kb import KnowledgeBase
 from invoker.pipeline.manifest import build_manifest, write_manifest
 from invoker.pipeline.summarize import write_summary
 from invoker.pipeline.writer import write_hero
-from tests.test_summarize import _hero
+
+from ..support.factories import make_hero
 
 
 def _setup(tmp_path: Path):
-    h = _hero()
+    h = make_hero()
     write_hero(tmp_path, "7.41b", h)
     write_summary(tmp_path, h, "pro")
     m = build_manifest(tmp_path, "7.41b", [h.hero_id], ["pro"], complete=True)

@@ -1,4 +1,3 @@
-from invoker.pipeline.summarize import summarize
 from invoker.schemas.derived import (
     HeroDerived,
     MetaBlock,
@@ -9,7 +8,7 @@ from invoker.schemas.derived import (
 )
 
 
-def _hero() -> HeroDerived:
+def make_hero() -> HeroDerived:
     return HeroDerived(
         schema_version=1,
         generator_version="invoker@0.1.0",
@@ -23,7 +22,9 @@ def _hero() -> HeroDerived:
         tag_sources=[
             TagSource(tag="armor_reduction", ability="Corrosive Haze", evidence="-20 armor"),
             TagSource(
-                tag="single_target_disable", ability="Slithereen Crush", evidence="1.5s stun"
+                tag="single_target_disable",
+                ability="Slithereen Crush",
+                evidence="1.5s stun",
             ),
         ],
         positions={"pro": PositionBlock(weights={"3": 1.0}, games=34, window_days=90)},
@@ -55,12 +56,3 @@ def _hero() -> HeroDerived:
         meta_history=[],
         provenance=Provenance(mechanical={"model": "fake"}, statistical={}),
     )
-
-
-def test_summary_contains_all_sections():
-    s = summarize(_hero(), "pro")
-    assert "Slardar" in s
-    assert "armor_reduction" in s
-    assert "h120" in s
-    assert "h96" in s
-    assert "tier: situational" in s

@@ -4,18 +4,15 @@ import os
 import threading
 import time
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Any, cast
 
 from google import genai
 from google.genai import types
 
 from invoker.llm.client import LLMResponse, strip_fences
+from invoker.logging import get_logger
 
-
-def _trace(msg: str) -> None:
-    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    print(f"{ts} [llm] {msg}", flush=True)
+logger = get_logger(__name__)
 
 
 def _is_quota_error(exc: Exception) -> bool:
@@ -83,7 +80,12 @@ class GeminiClient:
             gap = now - GeminiClient._last_call_time
             if gap < self._config.min_interval:
                 wait = self._config.min_interval - gap
-                _trace(f"pacing  sleep={wait:.1f}s  ({self._config.rpm} RPM ceiling)")
+                logger.debug(
+                    "Pacing model=%s sleep=%.1fs rpm=%s",
+                    self.model_name,
+                    wait,
+                    self._config.rpm,
+                )
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
@@ -103,10 +105,11 @@ class GeminiClient:
                 cfg = _json_config(schema)
 
                 t0 = time.monotonic()
-                _trace(
-                    f"generate     model={self.model_name}"
-                    f"  prompt_chars={len(prompt)}"
-                    + (f"  attempt={attempt}" if attempt else "")
+                logger.info(
+                    "Generating JSON model=%s prompt_chars=%s attempt=%s",
+                    self.model_name,
+                    len(prompt),
+                    attempt,
                 )
                 resp = self._client.models.generate_content(
                     model=self.model_name,
@@ -116,14 +119,17 @@ class GeminiClient:
                 elapsed = time.monotonic() - t0
                 text = strip_fences(resp.text or "")
                 if text:
-                    _trace(
-                        f"generate_ok  model={self.model_name}"
-                        f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
+                    logger.info(
+                        "Generated JSON model=%s elapsed=%.1fs response_chars=%s",
+                        self.model_name,
+                        elapsed,
+                        len(text),
                     )
                 else:
-                    _trace(
-                        f"empty_response  model={self.model_name}"
-                        f"  elapsed={elapsed:.1f}s  (will cache to prevent retry)"
+                    logger.warning(
+                        "Empty response model=%s elapsed=%.1fs",
+                        self.model_name,
+                        elapsed,
                     )
                 return LLMResponse(
                     text=text, model=self.model_name, prompt_version=prompt_version
@@ -132,15 +138,22 @@ class GeminiClient:
                 if attempt == max_retries:
                     raise
                 if _is_timeout_error(exc):
-                    _trace(
-                        f"timeout_error  retry={attempt + 1}/{max_retries}"
-                        f"  sleep=20s  ({type(exc).__name__})"
+                    logger.warning(
+                        "Timeout model=%s retry=%s/%s sleep=20s error=%s",
+                        self.model_name,
+                        attempt + 1,
+                        max_retries,
+                        type(exc).__name__,
                     )
                     time.sleep(20)
                 elif _is_quota_error(exc):
-                    _trace(
-                        f"quota_error  retry={attempt + 1}/{max_retries}"
-                        f"  sleep={delay:.0f}s  ({exc})"
+                    logger.warning(
+                        "Quota error model=%s retry=%s/%s sleep=%ss error=%s",
+                        self.model_name,
+                        attempt + 1,
+                        max_retries,
+                        round(delay),
+                        exc,
                     )
                     time.sleep(delay)
                     delay *= 2

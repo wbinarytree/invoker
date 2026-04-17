@@ -13,7 +13,7 @@ Used as a regression harness for prompt changes.
 1. Pick 1-3 heroes per archetype (carry, support, pusher, tempo mid, tank).
 2. Hand-label `expected_tags` from the taxonomy.
 3. Add any tags you explicitly reject under `forbidden_tags`.
-4. Run `pytest tests/test_gold.py`.
+4. Run `pytest tests/invoker/test_gold.py`.
 
 ## Target coverage for Phase 1
 15-20 heroes across all roles.

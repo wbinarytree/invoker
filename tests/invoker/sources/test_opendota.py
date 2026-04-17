@@ -1,7 +1,8 @@
 import json
-from pathlib import Path
 
-FIXTURE_DIR = Path(__file__).parent / "fixtures" / "opendota"
+from ...support import FIXTURES_DIR
+
+FIXTURE_DIR = FIXTURES_DIR / "opendota"
 
 
 def test_heroes_fixture_shape():

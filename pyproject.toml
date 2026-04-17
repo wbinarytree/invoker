@@ -8,7 +8,6 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "beautifulsoup4>=4.12",
     "google-genai>=1.73.1",
     "httpx>=0.28.1",
     "networkx>=3.6.1",
@@ -47,5 +46,5 @@ typeCheckingMode = "basic"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra --strict-markers"
+addopts = "-ra --strict-markers --import-mode=importlib"
 asyncio_mode = "auto"

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from invoker.pipeline.orchestrator import HeroRawBundle
-from invoker.schemas.derived import MetaHistoryEntry
 
 
 def _resolve_abilities(

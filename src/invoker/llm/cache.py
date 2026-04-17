@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from invoker.llm.client import LLMClient, LLMResponse, strip_fences
+from invoker.logging import get_logger
 
 
 def _cache_key(model: str, prompt_version: int, prompt: str) -> str:
@@ -17,9 +18,7 @@ def _now_iso() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds")
 
 
-def _trace(msg: str) -> None:
-    ts = datetime.now(UTC).strftime("%H:%M:%S.%f")[:-3]
-    print(f"{ts} [llm] {msg}", flush=True)
+logger = get_logger(__name__)
 
 
 class CachingLLMClient:
@@ -84,9 +83,19 @@ class CachingLLMClient:
         key = _cache_key(self.model_name, prompt_version, prompt)
         cached = self._read(key, cache_tag)
         if cached is not None:
-            _trace(f"cache_hit   key={key[:12]}  model={self.model_name}")
+            logger.debug(
+                "Cache hit for model=%s key=%s cache_tag=%s",
+                self.model_name,
+                key[:12],
+                cache_tag,
+            )
             return cached
-        _trace(f"request     key={key[:12]}  model={self.model_name}")
+        logger.info(
+            "LLM request model=%s key=%s cache_tag=%s",
+            self.model_name,
+            key[:12],
+            cache_tag,
+        )
         response = self._inner.generate_json(
             prompt,
             prompt_version=prompt_version,

@@ -9,6 +9,7 @@ from typing import Any
 import httpx
 
 from invoker.http.ratelimit import TokenBucket
+from invoker.logging import get_logger
 
 
 @dataclass
@@ -22,7 +23,8 @@ class SourceLimits:
 
 OPENDOTA = SourceLimits("opendota", per_minute=60, per_day=3000)
 STRATZ = SourceLimits("stratz", per_minute=250, per_day=10_000)
-LIQUIPEDIA = SourceLimits("liquipedia", per_minute=30)
+
+logger = get_logger(__name__)
 
 
 def _cache_key(method: str, url: str, params: dict[str, Any] | None, body: Any) -> str:
@@ -75,9 +77,24 @@ class CachedClient:
         key = _cache_key(method, url, params, body)
         cache_path = self.cache_root / f"{key}.json"
         if not force and cache_path.exists():
+            logger.debug(
+                "Source cache hit source=%s method=%s key=%s url=%s",
+                self.source.name,
+                method,
+                key,
+                url,
+            )
             return json.loads(cache_path.read_text())
 
         await self.bucket.acquire()
+        logger.info(
+            "Source request source=%s method=%s key=%s force=%s url=%s",
+            self.source.name,
+            method,
+            key,
+            force,
+            url,
+        )
         r = await self._client.request(method, url, params=params, json=body)
         r.raise_for_status()
         payload = r.json()

@@ -4,7 +4,9 @@ from pathlib import Path
 
 from invoker.sources.stratz import StratzFetcher, flatten_edges
 
-FIXTURE = Path(__file__).parent / "fixtures" / "stratz" / "pangolier_matchup.json"
+from ...support import FIXTURES_DIR
+
+FIXTURE = FIXTURES_DIR / "stratz" / "pangolier_matchup.json"
 
 
 def test_missing_token_returns_none(tmp_path: Path):
