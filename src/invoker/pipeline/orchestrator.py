@@ -77,6 +77,7 @@ def run_for_hero(
     client: LLMClient,
     max_edges: int = 5,
     hero_names: dict[int, str] | None = None,
+    skip_reasons: bool = False,
 ) -> HeroResult:
     # --- Extraction ---
     logger.info(
@@ -126,6 +127,13 @@ def run_for_hero(
         e for e in counters if e.confidence in ("med", "high") and e.hero_id not in syn_ids
     ][:max_edges]
     candidates = candidate_syn + candidate_ctr
+
+    if skip_reasons:
+        logger.info(
+            "Reason batch skipped hero_id=%s (skip_reasons flag)",
+            bundle.hero_id,
+        )
+        candidates = []
 
     if candidates:
         logger.info(

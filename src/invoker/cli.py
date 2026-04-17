@@ -32,6 +32,14 @@ def bootstrap(
         None, help="Comma-separated hero names or ids (overrides INVOKER_DEV_HEROES)."
     ),
     skip_extract: bool = typer.Option(False, help="Skip LLM extraction; use last run."),
+    skip_reasons: bool = typer.Option(
+        False, help="Skip reason generation; write heroes with stat edges only."
+    ),
+    max_reason_edges: int = typer.Option(
+        5,
+        help="Cap synergy and counter edges fed to the batch reason call, per hero.",
+        min=0,
+    ),
 ) -> None:
     """Run the full bootstrap pipeline for a patch."""
     from invoker import __version__
@@ -69,6 +77,13 @@ def bootstrap(
     inner = make_client(cfg.llm_client, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
+    per_hero_calls = 1 + (0 if skip_reasons else 1)
+    typer.echo(
+        f"Planning up to {len(bundles) * per_hero_calls} LLM calls "
+        f"({len(bundles)} heroes x {per_hero_calls} call/hero, worst case; "
+        f"cache hits reduce this)."
+    )
+
     results: list[HeroResult] = []
     for bundle in bundles:
         result = run_for_hero(
@@ -78,6 +93,8 @@ def bootstrap(
             bundle,
             client,
             hero_names=hero_names,
+            max_edges=max_reason_edges,
+            skip_reasons=skip_reasons,
         )
         status = "ok" if result.success else f"FAILED ({result.failure_reason})"
         typer.echo(
