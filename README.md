@@ -4,7 +4,7 @@ Knowledge base framework for Dota 2 fundamentals - structured, patch-aware, LLM-
 
 ## What's here
 
-The repo ships as a framework with **no data**. All knowledge is bootstrapped from public sources (OpenDota, STRATZ, Liquipedia) and enriched with LLM-extracted mechanical tags.
+The repo ships as a framework with **no data**. All knowledge is bootstrapped from public sources (OpenDota and STRATZ) and enriched with LLM-extracted mechanical tags.
 
 ## Quick start
 

@@ -6,11 +6,12 @@ from invoker.pipeline.manifest import build_manifest, write_manifest
 from invoker.pipeline.summarize import write_summary
 from invoker.pipeline.validators import ValidationContext, validate_hero
 from invoker.pipeline.writer import write_hero
-from tests.test_summarize import _hero
+
+from ..support.factories import make_hero
 
 
 def test_full_pipeline_on_one_hero(tmp_path: Path):
-    h = _hero()
+    h = make_hero()
 
     write_hero(tmp_path, "7.41b", h)
 

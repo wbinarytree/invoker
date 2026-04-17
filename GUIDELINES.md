@@ -77,6 +77,12 @@ Pragmatic. Not TDD.
 - Test the boundaries that matter: fetchers (with recorded fixtures), validators, query API, schema compatibility.
 - Do not unit-test LLM prose. Test the validator that gates it.
 - Fixtures = real recorded responses in `tests/fixtures/`, trimmed to what is needed.
+- Test layout should stay navigable:
+  - `tests/unit/<area>/` for isolated module tests
+  - `tests/integration/` for multi-module flows
+  - `tests/support/` for shared factories and helpers
+  - `tests/fixtures/` for recorded payloads and gold files
+- Test modules should not import helpers from other test modules. Shared builders belong in `tests/support/`.
 - Write a test when a bug bites twice or when a contract crosses a module boundary.
 - Do not test private helpers.
 

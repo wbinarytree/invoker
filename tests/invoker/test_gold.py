@@ -3,7 +3,9 @@ from pathlib import Path
 
 import pytest
 
-GOLD_DIR = Path(__file__).parent / "fixtures" / "gold"
+from ..support import FIXTURES_DIR
+
+GOLD_DIR = FIXTURES_DIR / "gold"
 
 
 @pytest.mark.skipif(not os.environ.get("INVOKER_RUN_LIVE_LLM"), reason="live LLM disabled")

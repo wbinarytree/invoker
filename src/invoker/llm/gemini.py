@@ -1,21 +1,19 @@
 from __future__ import annotations
 
+import logging
 import os
 import threading
 import time
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Any, cast
 
 from google import genai
 from google.genai import types
 
 from invoker.llm.client import LLMResponse, strip_fences
+from invoker.logging import get_logger, log_event
 
-
-def _trace(msg: str) -> None:
-    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    print(f"{ts} [llm] {msg}", flush=True)
+logger = get_logger(__name__)
 
 
 def _is_quota_error(exc: Exception) -> bool:
@@ -83,7 +81,14 @@ class GeminiClient:
             gap = now - GeminiClient._last_call_time
             if gap < self._config.min_interval:
                 wait = self._config.min_interval - gap
-                _trace(f"pacing  sleep={wait:.1f}s  ({self._config.rpm} RPM ceiling)")
+                log_event(
+                    logger,
+                    logging.INFO,
+                    "pacing",
+                    sleep=round(wait, 1),
+                    rpm=self._config.rpm,
+                    model=self.model_name,
+                )
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
@@ -103,10 +108,13 @@ class GeminiClient:
                 cfg = _json_config(schema)
 
                 t0 = time.monotonic()
-                _trace(
-                    f"generate     model={self.model_name}"
-                    f"  prompt_chars={len(prompt)}"
-                    + (f"  attempt={attempt}" if attempt else "")
+                log_event(
+                    logger,
+                    logging.INFO,
+                    "generate",
+                    model=self.model_name,
+                    prompt_chars=len(prompt),
+                    attempt=attempt if attempt else None,
                 )
                 resp = self._client.models.generate_content(
                     model=self.model_name,
@@ -116,14 +124,21 @@ class GeminiClient:
                 elapsed = time.monotonic() - t0
                 text = strip_fences(resp.text or "")
                 if text:
-                    _trace(
-                        f"generate_ok  model={self.model_name}"
-                        f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
+                    log_event(
+                        logger,
+                        logging.INFO,
+                        "generate_ok",
+                        model=self.model_name,
+                        elapsed=round(elapsed, 1),
+                        response_chars=len(text),
                     )
                 else:
-                    _trace(
-                        f"empty_response  model={self.model_name}"
-                        f"  elapsed={elapsed:.1f}s  (will cache to prevent retry)"
+                    log_event(
+                        logger,
+                        logging.WARNING,
+                        "empty_response",
+                        model=self.model_name,
+                        elapsed=round(elapsed, 1),
                     )
                 return LLMResponse(
                     text=text, model=self.model_name, prompt_version=prompt_version
@@ -132,15 +147,25 @@ class GeminiClient:
                 if attempt == max_retries:
                     raise
                 if _is_timeout_error(exc):
-                    _trace(
-                        f"timeout_error  retry={attempt + 1}/{max_retries}"
-                        f"  sleep=20s  ({type(exc).__name__})"
+                    log_event(
+                        logger,
+                        logging.WARNING,
+                        "timeout_error",
+                        model=self.model_name,
+                        retry=f"{attempt + 1}/{max_retries}",
+                        sleep=20,
+                        error=type(exc).__name__,
                     )
                     time.sleep(20)
                 elif _is_quota_error(exc):
-                    _trace(
-                        f"quota_error  retry={attempt + 1}/{max_retries}"
-                        f"  sleep={delay:.0f}s  ({exc})"
+                    log_event(
+                        logger,
+                        logging.WARNING,
+                        "quota_error",
+                        model=self.model_name,
+                        retry=f"{attempt + 1}/{max_retries}",
+                        sleep=round(delay),
+                        error=str(exc),
                     )
                     time.sleep(delay)
                     delay *= 2

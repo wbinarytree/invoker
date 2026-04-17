@@ -7,9 +7,16 @@ import typer
 
 from invoker import __version__
 from invoker.config import Config
+from invoker.logging import configure_logging
 from invoker.paths import manifest_file
 
 app = typer.Typer(help="Invoker - Dota 2 knowledge framework")
+
+
+def _load_config() -> Config:
+    cfg = Config.load()
+    configure_logging(cfg.log_level)
+    return cfg
 
 
 @app.command()
@@ -33,7 +40,7 @@ def bootstrap(
     from invoker.pipeline.fetch import fetch_all
     from invoker.pipeline.orchestrator import HeroResult, finalize_patch, run_for_hero
 
-    cfg = Config.load()
+    cfg = _load_config()
 
     # CLI flag takes precedence over env var; both are optional.
     if heroes is not None:
@@ -94,7 +101,7 @@ def bootstrap(
 
 @app.command()
 def status(patch: str = typer.Option(..., help="Patch to inspect.")) -> None:
-    cfg = Config.load()
+    cfg = _load_config()
     p = manifest_file(cfg.data_dir, patch)
     if not p.exists():
         typer.echo(f"No manifest for {patch}.")
@@ -107,7 +114,7 @@ def validate(patch: str = typer.Option(..., help="Patch to validate.")) -> None:
     from invoker.pipeline.validators import ValidationContext, validate_hero
     from invoker.pipeline.writer import read_hero
 
-    cfg = Config.load()
+    cfg = _load_config()
     m = json.loads(manifest_file(cfg.data_dir, patch).read_text())
     ids = {e["hero_id"] for e in m.get("heroes", [])}
     ctx = ValidationContext(roster_hero_ids=ids)
@@ -129,7 +136,7 @@ def publish(patch: str = typer.Option(..., help="Patch to bundle.")) -> None:
 
     from invoker.paths import derived_patch_dir, dist_file
 
-    cfg = Config.load()
+    cfg = _load_config()
     src = derived_patch_dir(cfg.data_dir, patch)
     if not src.exists():
         typer.echo(f"No derived data for {patch}.")

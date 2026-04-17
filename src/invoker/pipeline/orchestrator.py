@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
-from datetime import datetime
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
 from invoker.llm import LLMClient
+from invoker.logging import get_logger, log_event
+from invoker.paths import hero_file
 from invoker.pipeline.assemble import assemble_hero
 from invoker.pipeline.derive import merge_matchups, meta_tier, position_weights
 from invoker.pipeline.extract import HeroExtractionInput, extract_mechanical
@@ -18,14 +20,10 @@ from invoker.pipeline.reason import (
 )
 from invoker.pipeline.summarize import write_summary
 from invoker.pipeline.validators import ValidationContext, validate_hero
-from invoker.paths import hero_file
 from invoker.pipeline.writer import read_hero, write_hero
 from invoker.schemas.derived import MetaBlock, MetaHistoryEntry, PositionBlock
 
-
-def _trace(msg: str) -> None:
-    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-    print(f"{ts} [pipeline] {msg}", flush=True)
+logger = get_logger(__name__)
 
 
 @dataclass
@@ -81,10 +79,14 @@ def run_for_hero(
     max_edges: int = 5,
     hero_names: dict[int, str] | None = None,
 ) -> HeroResult:
-    hero_label = f"hero={bundle.hero_id} ({bundle.localized_name})"
-
     # --- Extraction ---
-    _trace(f"extract  start   {hero_label}")
+    log_event(
+        logger,
+        logging.INFO,
+        "extract_start",
+        hero_id=bundle.hero_id,
+        hero_name=bundle.localized_name,
+    )
     try:
         mech = extract_mechanical(
             HeroExtractionInput(
@@ -96,9 +98,20 @@ def run_for_hero(
             client,
         )
     except Exception as exc:
-        _trace(f"extract  failed  {hero_label}  ({exc})")
+        logger.exception(
+            "event=extract_failed hero_id=%s hero_name=%s",
+            bundle.hero_id,
+            bundle.localized_name,
+        )
         return HeroResult(hero_id=bundle.hero_id, success=False, failure_reason=str(exc))
-    _trace(f"extract  done    {hero_label}  tags={mech.functional_tags}")
+    log_event(
+        logger,
+        logging.INFO,
+        "extract_done",
+        hero_id=bundle.hero_id,
+        hero_name=bundle.localized_name,
+        tags=mech.functional_tags,
+    )
 
     # --- Stat edges ---
     synergies, counters = merge_matchups(
@@ -120,14 +133,25 @@ def run_for_hero(
     candidates = candidate_syn + candidate_ctr
 
     if candidates:
-        _trace(
-            f"reason   batch   hero={bundle.hero_id}"
-            f"  syn={len(candidate_syn)}  ctr={len(candidate_ctr)}"
+        log_event(
+            logger,
+            logging.INFO,
+            "reason_batch_start",
+            hero_id=bundle.hero_id,
+            synergies=len(candidate_syn),
+            counters=len(candidate_ctr),
         )
         edge_inputs: list[EdgeReasonInput] = []
         for e in candidates:
-            relation = "synergy" if e.hero_id in syn_ids else "counter"  # syn_ids already disjoint from ctr
-            hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id, hero_names)
+            relation = (
+                "synergy" if e.hero_id in syn_ids else "counter"
+            )  # syn_ids already disjoint from ctr
+            hero_b_name, hero_b_tags = _try_load_hero_context(
+                data_dir,
+                patch,
+                e.hero_id,
+                hero_names,
+            )
             edge_inputs.append(
                 EdgeReasonInput(
                     hero_b_id=e.hero_id,
@@ -146,8 +170,8 @@ def run_for_hero(
         )
         try:
             outputs = generate_reasons_batch(batch_inp, client)
-        except Exception as exc:
-            _trace(f"reason   batch_failed  hero={bundle.hero_id}  ({exc})")
+        except Exception:
+            logger.exception("event=reason_batch_failed hero_id=%s", bundle.hero_id)
             outputs = []
 
         # Build a lookup from hero_b_id to (EdgeReasonInput, EdgeReasonOutput).
@@ -160,8 +184,14 @@ def run_for_hero(
             try:
                 validate_grounding(out.reason, mech.functional_tags, ei.hero_b_tags)
             except Exception as exc:
-                _trace(
-                    f"reason   skip    {relation}  {bundle.hero_id}→{out.hero_b_id}  ({exc})"
+                log_event(
+                    logger,
+                    logging.WARNING,
+                    "reason_skip",
+                    relation=relation,
+                    hero_id=bundle.hero_id,
+                    other_hero_id=out.hero_b_id,
+                    error=str(exc),
                 )
                 reasons_skipped += 1
                 continue
@@ -171,9 +201,13 @@ def run_for_hero(
             )
             reasons_written += 1
 
-        _trace(
-            f"reason   done    hero={bundle.hero_id}"
-            f"  written={reasons_written}  skipped={reasons_skipped}"
+        log_event(
+            logger,
+            logging.INFO,
+            "reason_batch_done",
+            hero_id=bundle.hero_id,
+            reasons_written=reasons_written,
+            reasons_skipped=reasons_skipped,
         )
 
     # --- Assemble and write ---
@@ -205,7 +239,15 @@ def run_for_hero(
 
     write_hero(data_dir, patch, hero)
     write_summary(data_dir, hero, "pro")
-    _trace(f"written  {hero_label}  reasons={reasons_written}  skipped={reasons_skipped}")
+    log_event(
+        logger,
+        logging.INFO,
+        "hero_written",
+        hero_id=bundle.hero_id,
+        hero_name=bundle.localized_name,
+        reasons_written=reasons_written,
+        reasons_skipped=reasons_skipped,
+    )
 
     return HeroResult(
         hero_id=bundle.hero_id,
