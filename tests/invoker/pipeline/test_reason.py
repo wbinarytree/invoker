@@ -17,6 +17,8 @@ class CannedClient:
 
     def __init__(self, payload: list[dict]) -> None:
         self._text = json.dumps(payload)
+        self.last_prompt: str | None = None
+        self.last_cache_tag: str | None = None
 
     def generate_json(
         self,
@@ -26,6 +28,8 @@ class CannedClient:
         schema: object | None = None,
         cache_tag: str | None = None,
     ) -> LLMResponse:
+        self.last_prompt = prompt
+        self.last_cache_tag = cache_tag
         return LLMResponse(text=self._text, model="canned", prompt_version=prompt_version)
 
 
@@ -101,3 +105,51 @@ def test_validate_grounding_rejects_no_mention():
         validate_grounding(
             "they both win fights", ["armor_reduction"], ["physical_damage_amplifier"]
         )
+
+
+def test_validate_grounding_accepts_hero_b_tag_only():
+    validate_grounding(
+        "physical damage amplifier synergy",
+        ["armor_reduction"],
+        ["physical_damage_amplifier"],
+    )
+
+
+def test_batch_prompt_carries_hero_b_name_and_tags():
+    inp = _make_batch([(120, "synergy", "Pangolier")])
+    payload = [{"hero_b_id": 120, "reason": "armor reduction works."}]
+    client = CannedClient(payload)
+    generate_reasons_batch(inp, client)
+    assert client.last_prompt is not None
+    assert "Pangolier" in client.last_prompt
+    assert "physical_carry" in client.last_prompt
+    # Negative: placeholder names must not leak when the real name is provided.
+    assert "hero_120" not in client.last_prompt
+
+
+def test_batch_prompt_falls_back_to_no_tags_marker_when_missing():
+    inp = BatchReasonInput(
+        hero_a_name="Slardar",
+        hero_a_tags=["armor_reduction"],
+        edges=[
+            EdgeReasonInput(
+                hero_b_id=55,
+                hero_b_name="Pudge",
+                hero_b_tags=[],
+                relation="synergy",
+                score=0.1,
+                games=100,
+            )
+        ],
+    )
+    client = CannedClient([{"hero_b_id": 55, "reason": "armor_reduction benefits Pudge."}])
+    generate_reasons_batch(inp, client)
+    assert "Pudge" in client.last_prompt
+    assert "(no tags)" in client.last_prompt
+
+
+def test_batch_cache_tag_includes_hero_a_name():
+    inp = _make_batch([(120, "synergy", "Pangolier")])
+    client = CannedClient([{"hero_b_id": 120, "reason": "armor reduction works."}])
+    generate_reasons_batch(inp, client)
+    assert client.last_cache_tag == "reason/Slardar"

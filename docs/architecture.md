@@ -1,7 +1,7 @@
 # Invoker — Architecture (Implementation Artifact)
 
 Last updated: 2026-04-17
-Phase: 1.1 (Phase 1.2 spec signed off — not yet implemented)
+Phase: 1.1 (near exit — see `docs/plans/2026-04-15-invoker-phase-1.1.md`; Phase 1.2 spec signed off, not yet implemented)
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
 
@@ -87,7 +87,12 @@ Logging uses the standard library `logging` module with per-module loggers (`get
 
 ### ManualClient (`src/invoker/llm/manual.py`)
 
-Writes the rendered prompt to a file and waits for a hand-written response file. The client exists and can be selected via `INVOKER_LLM_CLIENT=manual`, but the CLI does not currently expose a dedicated `--manual` flag or special UX wrapper.
+File-based LLM loop for rate-limit emergencies and spot-checks.
+
+- `bootstrap --manual` selects it for a single run (also available via `INVOKER_LLM_CLIENT=manual`).
+- Prompts are written under `data/raw/manual_prompts/<cache_tag>/<hash>.md` and expected responses under `data/raw/manual_responses/<cache_tag>/<hash>.txt`; `cache_tag` comes from the caller (e.g. `extract/Slardar`, `reason/Axe`) and groups files by stage + hero. The prompt file starts with `<!-- cache_tag: ... prompt_version: ... -->` so a reader can tell what produced it.
+- When the response file is missing the client raises `PendingManualResponseError` carrying both paths. The orchestrator catches it and marks the hero as `failure_reason="pending_manual"` (extract stage) or records the pending reason path on the successful hero result (reason stage). The CLI aggregates all pending paths into a single paste-and-rerun block at the end of the run — no traceback is surfaced to the operator.
+- `CachingLLMClient` forwards `cache_tag` to the inner client, so the layout above works through the cache wrapper.
 
 ---
 
@@ -108,6 +113,8 @@ When `hero_filter` is set, per-hero calls (matchups, STRATZ) are restricted to t
 Returns `hero_names: dict[int, str]` built from the **full pre-filter roster** so downstream stages can look up names for edge heroes that aren't in the filtered set.
 
 The fetch layer also emits source-cache and source-request log lines from `CachedClient`, so bootstrap logs show when a call was reused from disk versus sent over the network.
+
+`CachedClient` keys payloads on `(source, method, url, params, body)` and writes them to `data/raw/<source>/<patch>/<key>.json`. Cache is reused across runs unconditionally; there is no CLI flag to bypass it. To force a refetch for a specific endpoint, delete the matching file (or the patch subtree) and rerun. The `force=True` kwarg on `CachedClient.get/post` exists for a future targeted-refresh command and is not wired to any user-facing flag today.
 
 ### bundle (`pipeline/bundle.py`)
 
@@ -242,6 +249,19 @@ Accepts hero **names** (case-insensitive) or numeric **ids**. The global hero ro
 
 Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstrap is attempted.
 
+### Bootstrap CLI options
+
+| Flag | Effect |
+|------|--------|
+| `--patch` | Required. Patch string, e.g. `7.41b`. |
+| `--heroes <ids-or-names>` | Subset mode. Overrides `INVOKER_DEV_HEROES`. Manifest is written as `partial`. |
+| `--skip-extract` | Reserved flag; currently a no-op pending hook into the extract stage. |
+| `--skip-reasons` | Write heroes with stat edges only — no reason LLM call at all. |
+| `--max-reason-edges N` | Cap edges fed to the batch reason call per relation per hero (default 5). |
+| `--manual` | Force the manual file-based client for this run. |
+
+Before the orchestrator loop runs, bootstrap prints a worst-case LLM call estimate (`heroes × (1 extract + 1 reason)`; `1` when `--skip-reasons`) so the operator can compare it against the daily quota. At the end of the run it prints an aggregate summary (heroes requested / written / failed, reasons written / skipped) plus per-hero failure reasons, and — in manual mode — a paste-and-rerun block listing every pending prompt path.
+
 ---
 
 ## Prompts
@@ -260,6 +280,16 @@ Pytest runs in `importlib` mode so mirrored test modules do not rely on path-bas
 
 ```
 data/
+  raw/
+    <source>/           # opendota, stratz
+      <patch>/
+        <key>.json      # CachedClient payload; key = sha256(method,url,params,body)[:16]
+    manual_prompts/     # manual LLM mode
+      <cache_tag>/
+        <hash>.md
+    manual_responses/
+      <cache_tag>/
+        <hash>.txt
   cache/
     llm/
       <tag>/            # optional; e.g. extract/Slardar, reason/Axe

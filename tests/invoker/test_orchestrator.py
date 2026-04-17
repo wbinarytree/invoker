@@ -71,8 +71,8 @@ class ScriptedClient:
         )
 
 
-def test_orchestrator_produces_valid_hero(tmp_path: Path):
-    bundle = HeroRawBundle(
+def _slardar_bundle() -> HeroRawBundle:
+    return HeroRawBundle(
         hero_id=28,
         localized_name="Slardar",
         internal_name="npc_dota_hero_slardar",
@@ -90,6 +90,10 @@ def test_orchestrator_produces_valid_hero(tmp_path: Path):
         win_rate=0.51,
         meta_history=[],
     )
+
+
+def test_orchestrator_produces_valid_hero(tmp_path: Path):
+    bundle = _slardar_bundle()
     run_for_hero(tmp_path, "7.41b", "invoker@test", bundle, ScriptedClient())
     finalize_patch(tmp_path, "7.41b", [28, 120, 96], complete=True)
 
@@ -99,3 +103,133 @@ def test_orchestrator_produces_valid_hero(tmp_path: Path):
     assert "armor_reduction" in h.functional_tags
     assert len(h.synergies["pro"]) == 1
     assert h.synergies["pro"][0].reason is not None
+
+
+def test_skip_reasons_emits_no_reason_calls(tmp_path: Path):
+    class CountingClient(ScriptedClient):
+        def __init__(self) -> None:
+            self.reason_calls = 0
+            self.extract_calls = 0
+
+        def generate_json(self, prompt, **kwargs):
+            if "functional_tags" in prompt:
+                self.extract_calls += 1
+            else:
+                self.reason_calls += 1
+            return super().generate_json(prompt, **kwargs)
+
+    client = CountingClient()
+    result = run_for_hero(
+        tmp_path, "7.41b", "invoker@test", _slardar_bundle(), client, skip_reasons=True
+    )
+    assert result.success
+    assert result.reasons_written == 0
+    assert client.extract_calls == 1
+    assert client.reason_calls == 0
+    finalize_patch(tmp_path, "7.41b", [28, 120, 96], complete=True)
+
+    kb = KnowledgeBase(patch="7.41b", bracket="pro", data_dir=tmp_path)
+    assert kb.hero(28).synergies["pro"][0].reason is None
+
+
+def test_manual_client_extract_returns_pending(tmp_path: Path):
+    from invoker.llm import CachingLLMClient
+    from invoker.llm.manual import ManualClient
+
+    inner = ManualClient(inbox=tmp_path / "in", outbox=tmp_path / "out")
+    client = CachingLLMClient(inner, tmp_path / "cache")
+
+    result = run_for_hero(tmp_path, "7.41b", "invoker@test", _slardar_bundle(), client)
+
+    assert result.success is False
+    assert result.failure_reason == "pending_manual"
+    assert result.pending_manual_paths is not None
+    prompt = result.pending_manual_paths[0]
+    assert prompt.exists()
+    assert "extract/Slardar" in str(prompt)
+
+
+def test_manual_client_resumes_after_response_written(tmp_path: Path):
+    import json
+
+    from invoker.llm import CachingLLMClient
+    from invoker.llm.manual import ManualClient, PendingManualResponseError
+
+    inner = ManualClient(inbox=tmp_path / "in", outbox=tmp_path / "out")
+    client = CachingLLMClient(inner, tmp_path / "cache")
+    bundle = _slardar_bundle()
+
+    # Round 1: extract prompt written, run aborts cleanly.
+    r1 = run_for_hero(tmp_path, "7.41b", "invoker@test", bundle, client)
+    assert r1.success is False
+
+    # Fill extract response; rerun. Reason prompt should then be pending.
+    extract_prompt = r1.pending_manual_paths[0]
+    extract_response = tmp_path / "out" / extract_prompt.relative_to(tmp_path / "in")
+    extract_response = extract_response.with_suffix(".txt")
+    extract_response.parent.mkdir(parents=True, exist_ok=True)
+    extract_response.write_text(
+        json.dumps(
+            {
+                "functional_tags": ["armor_reduction"],
+                "tag_sources": [
+                    {
+                        "tag": "armor_reduction",
+                        "ability": "Corrosive Haze",
+                        "evidence": "reduces armor",
+                    }
+                ],
+            }
+        )
+    )
+
+    r2 = run_for_hero(tmp_path, "7.41b", "invoker@test", bundle, client)
+    # Extract succeeds now; reason batch left as pending manual — hero still written.
+    assert r2.success is True
+    assert r2.pending_manual_paths is not None
+    assert "reason/Slardar" in str(r2.pending_manual_paths[0])
+
+    # Fill reason response; rerun should cache-hit everything.
+    reason_prompt = r2.pending_manual_paths[0]
+    reason_response_path = (
+        tmp_path / "out" / reason_prompt.relative_to(tmp_path / "in")
+    ).with_suffix(".txt")
+    reason_response_path.parent.mkdir(parents=True, exist_ok=True)
+    reason_response_path.write_text(
+        json.dumps(
+            [
+                {"hero_b_id": 120, "reason": "armor_reduction amplifies carries."},
+                {"hero_b_id": 96, "reason": "armor_reduction shreds this matchup."},
+            ]
+        )
+    )
+
+    r3 = run_for_hero(tmp_path, "7.41b", "invoker@test", bundle, client)
+    assert r3.success is True
+    assert r3.reasons_written == 2
+    assert r3.pending_manual_paths is None
+
+
+def test_max_reason_edges_caps_candidates(tmp_path: Path):
+    bundle = _slardar_bundle()
+    bundle.opendota_matchups = None
+    bundle.stratz_edges = [
+        {"heroId1": 28, "heroId2": hid, "synergy": 0.1 - 0.001 * i, "matchCount": 50}
+        for i, hid in enumerate([120, 121, 122, 123, 124, 125, 126])
+    ]
+
+    class CountingClient(ScriptedClient):
+        def __init__(self) -> None:
+            self.batch_edge_count = 0
+
+        def generate_json(self, prompt, **kwargs):
+            if "hero_b_id" in prompt:
+                import re
+                self.batch_edge_count = len(re.findall(r"hero_b_id=", prompt))
+            return super().generate_json(prompt, **kwargs)
+
+    client = CountingClient()
+    run_for_hero(
+        tmp_path, "7.41b", "invoker@test", bundle, client, max_edges=3
+    )
+    assert client.batch_edge_count == 3

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
-from invoker.llm import LLMClient
+from invoker.llm import LLMClient, PendingManualResponseError
 from invoker.logging import get_logger
 from invoker.paths import hero_file
 from invoker.pipeline.assemble import assemble_hero
@@ -49,6 +49,7 @@ class HeroResult:
     reasons_written: int = 0
     reasons_skipped: int = 0
     failure_reason: str | None = None
+    pending_manual_paths: list[Path] | None = None
 
 
 def _try_load_hero_context(
@@ -77,6 +78,7 @@ def run_for_hero(
     client: LLMClient,
     max_edges: int = 5,
     hero_names: dict[int, str] | None = None,
+    skip_reasons: bool = False,
 ) -> HeroResult:
     # --- Extraction ---
     logger.info(
@@ -93,6 +95,19 @@ def run_for_hero(
                 abilities=bundle.abilities,
             ),
             client,
+        )
+    except PendingManualResponseError as exc:
+        logger.info(
+            "Extract pending manual response hero_id=%s hero_name=%s prompt=%s",
+            bundle.hero_id,
+            bundle.localized_name,
+            exc.prompt_path,
+        )
+        return HeroResult(
+            hero_id=bundle.hero_id,
+            success=False,
+            failure_reason="pending_manual",
+            pending_manual_paths=[exc.prompt_path],
         )
     except Exception as exc:
         logger.exception(
@@ -117,6 +132,7 @@ def run_for_hero(
     reasons: dict[tuple[str, int], tuple[str, dict]] = {}
     reasons_written = 0
     reasons_skipped = 0
+    pending_reason_prompt: Path | None = None
 
     # Cap to top max_edges per relation (lists already sorted by |score| desc).
     candidate_syn = [e for e in synergies if e.confidence in ("med", "high")][:max_edges]
@@ -126,6 +142,13 @@ def run_for_hero(
         e for e in counters if e.confidence in ("med", "high") and e.hero_id not in syn_ids
     ][:max_edges]
     candidates = candidate_syn + candidate_ctr
+
+    if skip_reasons:
+        logger.info(
+            "Reason batch skipped hero_id=%s (skip_reasons flag)",
+            bundle.hero_id,
+        )
+        candidates = []
 
     if candidates:
         logger.info(
@@ -163,6 +186,14 @@ def run_for_hero(
         )
         try:
             outputs = generate_reasons_batch(batch_inp, client)
+        except PendingManualResponseError as exc:
+            logger.info(
+                "Reason batch pending manual response hero_id=%s prompt=%s",
+                bundle.hero_id,
+                exc.prompt_path,
+            )
+            pending_reason_prompt = exc.prompt_path
+            outputs = []
         except Exception:
             logger.exception("Reason batch failed hero_id=%s", bundle.hero_id)
             outputs = []
@@ -241,6 +272,7 @@ def run_for_hero(
         success=True,
         reasons_written=reasons_written,
         reasons_skipped=reasons_skipped,
+        pending_manual_paths=[pending_reason_prompt] if pending_reason_prompt else None,
     )
 
 

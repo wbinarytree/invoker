@@ -100,6 +100,7 @@ class CachingLLMClient:
             prompt,
             prompt_version=prompt_version,
             schema=schema,
+            cache_tag=cache_tag,
         )
         self._write(key, response, cache_tag, prompt)
         return response
