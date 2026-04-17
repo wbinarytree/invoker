@@ -131,7 +131,7 @@ Tasks:
 
 - [x] ~~Fix `LiquipediaFetcher.extract_abilities()`~~ — dropped Liquipedia entirely.
 - [x] Ability text now sourced from OpenDota constants API. Fixtures updated for Slardar.
-- [ ] Add regression fixtures for additional complex heroes (Puck, Invoker) once ability quality is validated.
+- [x] Regression fixtures for Puck and Invoker landed: OpenDota snapshots, shape + core-spell tests (parametrised across heroes), and hand-labeled gold-tag files grounded in the taxonomy. Gold files are validated for taxonomy membership and expected/forbidden non-overlap in `tests/invoker/test_gold.py`. The live-LLM contract test remains skipped pending Phase 1.5 wiring.
 
 ### 7. LLM Call Tracing
 

@@ -153,7 +153,7 @@ def test_manual_client_resumes_after_response_written(tmp_path: Path):
     import json
 
     from invoker.llm import CachingLLMClient
-    from invoker.llm.manual import ManualClient, PendingManualResponseError
+    from invoker.llm.manual import ManualClient
 
     inner = ManualClient(inbox=tmp_path / "in", outbox=tmp_path / "out")
     client = CachingLLMClient(inner, tmp_path / "cache")

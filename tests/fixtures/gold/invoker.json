@@ -1,0 +1,17 @@
+{
+  "hero_id": 74,
+  "hero_name": "Invoker",
+  "expected_tags": [
+    "aoe_disable",
+    "sustained_magical",
+    "global_presence",
+    "armor_reduction",
+    "summons"
+  ],
+  "forbidden_tags": [
+    "physical_carry",
+    "silence",
+    "blink",
+    "evasion"
+  ]
+}
