@@ -70,12 +70,12 @@ Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:M
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
-- Configured by `GeminiModelConfig(model, rpm, rpd, supports_json_mode, supports_thinking_config, supports_structured_output)`. Two named constants:
-  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20, `json_mode=True`
-  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100, `json_mode=False`, `thinking_config=False`, `structured_output=True`
-- `make_model_config(model, rpm, rpd)` builds a config from env vars; known models inherit capability flags from the registry, unknown models get safe defaults.
+- Configured by `GeminiModelConfig(model, rpm, rpd)`. Two named constants:
+  - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100
+- `make_model_config(model, rpm, rpd)` is a thin env-var adapter; the client no longer carries a per-model capability registry.
 - **HTTP timeout:** client is constructed with `http_options={"timeout": 120_000}` (120 s). Calls that stall at the network level raise a timeout exception rather than hanging indefinitely.
-- **Structured output:** when `schema` is provided and `supports_structured_output=True`, sets `response_schema=schema` in `GenerateContentConfig` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
+- **JSON output:** every request sets `response_mime_type="application/json"`. When `schema` is provided, the same request also sets `response_schema=schema` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
 - Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s). Trace: `HH:MM:SS.mmm [llm] pacing sleep=Xs`.
 - Retry: up to 3 retries.
   - Quota / rate errors (`429`, `ResourceExhausted`): exponential backoff starting at 65 s, doubling each attempt.
@@ -86,7 +86,7 @@ Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:M
 
 ### ManualClient (`src/invoker/llm/manual.py`)
 
-Writes the rendered prompt to a file and waits for a hand-written response file. Used when `--manual` flag is passed to the CLI.
+Writes the rendered prompt to a file and waits for a hand-written response file. The client exists and can be selected via `INVOKER_LLM_CLIENT=manual`, but the CLI does not currently expose a dedicated `--manual` flag or special UX wrapper.
 
 ---
 
@@ -112,7 +112,7 @@ Converts `fetch_all` output into `HeroRawBundle` objects for the orchestrator.
 
 - Resolves each hero's abilities by joining `hero_abilities` map → `abilities` dict, keeping only entries with a display name and description.
 - Passes through per-hero matchups and STRATZ edges.
-- Meta stats (`position_counts`, `contest_rate`, `win_rate`, `meta_history`) are zeroed — no source exists for these without fetching individual match details. Explicit zeros are used; consumers should treat `games=0` as "no data".
+- Meta stats (`position_counts`, `contest_rate`, `win_rate`, `meta_history`) are still placeholders for now because the current bootstrap path does not derive them from `pro_matches`. This is a known Phase 1.1 gap, not a settled contract.
 
 ### extract (`pipeline/extract.py`)
 
@@ -153,6 +153,9 @@ Call budget: `1 extract + 1 batch reason = 2 calls per hero`.
 Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects any item whose
 reason cites no tag from either hero. Failing items are skipped; the rest are kept.
 
+Batch validation is strict: the returned `hero_b_id` list must exactly match the input
+edge order. Duplicate ids, missing ids, or reordered ids fail the whole batch.
+
 ### assemble (`pipeline/assemble.py`)
 
 Combines all stage outputs into a `HeroDerived` model. No LLM calls.
@@ -190,6 +193,8 @@ Phase 1.2 will split the orchestrator into two explicit passes (extract all → 
 - Hero still written even with missing reasons
 
 `finalize_patch` only processes heroes whose output files exist — partial runs don't block finalisation.
+The manifest is marked `complete` only when there is no hero filter and every requested
+hero succeeded. Filtered runs and failed full-roster runs both write `partial`.
 
 ---
 

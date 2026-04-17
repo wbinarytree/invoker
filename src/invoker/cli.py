@@ -55,13 +55,23 @@ def bootstrap(
 
     from invoker.llm.gemini import make_model_config
     model_cfg = make_model_config(cfg.llm_model, cfg.llm_rpm, cfg.llm_rpd)
-    typer.echo(f"LLM: {cfg.llm_client}  model={cfg.llm_model}  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}")
+    typer.echo(
+        f"LLM: {cfg.llm_client}  model={cfg.llm_model}"
+        f"  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}"
+    )
     inner = make_client(cfg.llm_client, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
     results: list[HeroResult] = []
     for bundle in bundles:
-        result = run_for_hero(cfg.data_dir, patch, __version__, bundle, client, hero_names=hero_names)
+        result = run_for_hero(
+            cfg.data_dir,
+            patch,
+            __version__,
+            bundle,
+            client,
+            hero_names=hero_names,
+        )
         status = "ok" if result.success else f"FAILED ({result.failure_reason})"
         typer.echo(
             f"  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
@@ -77,7 +87,7 @@ def bootstrap(
             cfg.data_dir,
             patch,
             [r.hero_id for r in succeeded],
-            complete=hero_filter is None,
+            complete=hero_filter is None and len(succeeded) == len(results),
         )
         typer.echo("Manifest and graph written.")
 

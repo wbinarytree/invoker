@@ -83,19 +83,27 @@ def generate_reasons_batch(
         HERO_A_TAGS=", ".join(inp.hero_a_tags) or "(no tags)",
         EDGES=_format_edges(inp.edges),
     )
-    response = client.complete_json(rendered, prompt_version=prompt.version, schema=list[_EdgeReasonItem], cache_tag=f"reason/{inp.hero_a_name}")
+    response = client.complete_json(
+        rendered,
+        prompt_version=prompt.version,
+        schema=list[_EdgeReasonItem],
+        cache_tag=f"reason/{inp.hero_a_name}",
+    )
     parsed = _REASON_BATCH_ADAPTER.validate_json(response.text)
 
-    if len(parsed) != len(inp.edges):
+    expected_ids = [e.hero_b_id for e in inp.edges]
+    actual_ids = [item.hero_b_id for item in parsed]
+    if len(actual_ids) != len(expected_ids):
         raise ValueError(
-            f"Response length {len(parsed)} != input length {len(inp.edges)}"
+            f"Response length {len(actual_ids)} != input length {len(expected_ids)}"
+        )
+    if actual_ids != expected_ids:
+        raise ValueError(
+            f"Response hero_b_ids {actual_ids} != input hero_b_ids {expected_ids}"
         )
 
-    expected_ids = {e.hero_b_id for e in inp.edges}
     outputs: list[EdgeReasonOutput] = []
     for item in parsed:
-        if item.hero_b_id not in expected_ids:
-            raise ValueError(f"Unexpected hero_b_id {item.hero_b_id} in response")
         outputs.append(
             EdgeReasonOutput(
                 hero_b_id=item.hero_b_id,

@@ -36,50 +36,21 @@ def _is_timeout_error(exc: Exception) -> bool:
 @dataclass(frozen=True)
 class GeminiModelConfig:
     model: str
-    rpm: int   # requests per minute (free-tier ceiling)
-    rpd: int   # requests per day (free-tier ceiling)
-    supports_json_mode: bool = True          # response_mime_type="application/json"
-    supports_thinking_config: bool = False   # ThinkingConfig (disable chain-of-thought)
-    supports_structured_output: bool = True  # response_schema enforcement via Pydantic
+    rpm: int  # requests per minute (free-tier ceiling)
+    rpd: int  # requests per day (free-tier ceiling)
 
     @property
     def min_interval(self) -> float:
         """Minimum seconds between requests to stay under RPM ceiling."""
         return 60.0 / self.rpm + 0.5  # small buffer above the hard limit
 
-
 GEMINI_2_5_FLASH = GeminiModelConfig(model="gemini-2.5-flash", rpm=5, rpd=20)
-GEMMA_4_31B = GeminiModelConfig(
-    model="gemma-4-31b-it",
-    rpm=5,
-    rpd=100,
-    supports_json_mode=False,
-    supports_thinking_config=False,   # ThinkingConfig not supported via Google AI API
-    supports_structured_output=True,   # model card claims support; verify empirically
-)
-
-# Known-model registry: looked up by model name in make_model_config().
-_KNOWN: dict[str, GeminiModelConfig] = {
-    GEMINI_2_5_FLASH.model: GEMINI_2_5_FLASH,
-    GEMMA_4_31B.model: GEMMA_4_31B,
-}
+GEMMA_4_31B = GeminiModelConfig(model="gemma-4-31b-it", rpm=5, rpd=100)
 
 
 def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:
-    """
-    Build a GeminiModelConfig from env-var values.
-    For known models the capability flags (json_mode, thinking_config) are
-    inherited from the registry; unknown models get safe defaults.
-    """
-    known = _KNOWN.get(model)
-    return GeminiModelConfig(
-        model=model,
-        rpm=rpm,
-        rpd=rpd,
-        supports_json_mode=known.supports_json_mode if known else True,
-        supports_thinking_config=known.supports_thinking_config if known else False,
-        supports_structured_output=known.supports_structured_output if known else True,
-    )
+    """Build a GeminiModelConfig from env-var values."""
+    return GeminiModelConfig(model=model, rpm=rpm, rpd=rpd)
 
 
 class GeminiClient:
@@ -106,28 +77,29 @@ class GeminiClient:
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
+    def complete_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         self._pace()
         max_retries = 3
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
-                cfg = types.GenerateContentConfig(temperature=0.0)
-                if schema is not None and self._config.supports_structured_output:
+                if schema is not None:
                     cfg = types.GenerateContentConfig(
                         temperature=0.0,
                         response_mime_type="application/json",
                         response_schema=schema,
                     )
-                elif self._config.supports_json_mode:
+                else:
                     cfg = types.GenerateContentConfig(
                         temperature=0.0,
                         response_mime_type="application/json",
-                    )
-                if self._config.supports_thinking_config:
-                    cfg = types.GenerateContentConfig(
-                        temperature=0.0,
-                        thinking_config=types.ThinkingConfig(thinking_budget=0),
                     )
 
                 t0 = time.monotonic()

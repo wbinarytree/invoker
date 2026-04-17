@@ -18,7 +18,14 @@ class CannedClient:
     def __init__(self, payload: list[dict]) -> None:
         self._text = json.dumps(payload)
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
+    def complete_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         return LLMResponse(text=self._text, model="canned", prompt_version=prompt_version)
 
 
@@ -68,10 +75,20 @@ def test_batch_reason_length_mismatch_raises():
         generate_reasons_batch(inp, CannedClient(payload))
 
 
-def test_batch_reason_unexpected_id_raises():
+def test_batch_reason_wrong_ids_raises():
     inp = _make_batch([(120, "synergy", "Pangolier")])
     payload = [{"hero_b_id": 999, "reason": "Unknown hero."}]
-    with pytest.raises(ValueError, match="Unexpected hero_b_id"):
+    with pytest.raises(ValueError, match="Response hero_b_ids"):
+        generate_reasons_batch(inp, CannedClient(payload))
+
+
+def test_batch_reason_duplicate_id_raises():
+    inp = _make_batch([(120, "synergy", "Pangolier"), (1, "counter", "Anti-Mage")])
+    payload = [
+        {"hero_b_id": 120, "reason": "First."},
+        {"hero_b_id": 120, "reason": "Duplicate."},
+    ]
+    with pytest.raises(ValueError, match="Response hero_b_ids"):
         generate_reasons_batch(inp, CannedClient(payload))
 
 
