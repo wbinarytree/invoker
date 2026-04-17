@@ -16,7 +16,14 @@ class CountingClient:
         self.calls = 0
         self._text = response_text
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
+    def generate_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         self.calls += 1
         return LLMResponse(text=self._text, model=self.model_name, prompt_version=prompt_version)
 
@@ -25,7 +32,7 @@ def test_cache_miss_calls_inner(tmp_path: Path) -> None:
     inner = CountingClient()
     client = CachingLLMClient(inner, tmp_path)
 
-    resp = client.complete_json("hello", prompt_version=1)
+    resp = client.generate_json("hello", prompt_version=1)
 
     assert inner.calls == 1
     assert resp.text == '{"ok": true}'
@@ -36,8 +43,8 @@ def test_cache_hit_skips_inner(tmp_path: Path) -> None:
     inner = CountingClient()
     client = CachingLLMClient(inner, tmp_path)
 
-    first = client.complete_json("hello", prompt_version=1)
-    second = client.complete_json("hello", prompt_version=1)
+    first = client.generate_json("hello", prompt_version=1)
+    second = client.generate_json("hello", prompt_version=1)
 
     assert inner.calls == 1  # only called once
     assert first.text == second.text
@@ -47,7 +54,7 @@ def test_cache_written_to_disk(tmp_path: Path) -> None:
     inner = CountingClient(response_text='{"result": 42}')
     client = CachingLLMClient(inner, tmp_path)
 
-    client.complete_json("my prompt", prompt_version=2)
+    client.generate_json("my prompt", prompt_version=2)
 
     key = _cache_key("counting", 2, "my prompt")
     cache_file = tmp_path / key[:2] / f"{key}.json"
@@ -63,8 +70,8 @@ def test_different_prompts_have_different_keys(tmp_path: Path) -> None:
     inner = CountingClient()
     client = CachingLLMClient(inner, tmp_path)
 
-    client.complete_json("prompt A", prompt_version=1)
-    client.complete_json("prompt B", prompt_version=1)
+    client.generate_json("prompt A", prompt_version=1)
+    client.generate_json("prompt B", prompt_version=1)
 
     assert inner.calls == 2
 
@@ -73,8 +80,8 @@ def test_different_prompt_versions_have_different_keys(tmp_path: Path) -> None:
     inner = CountingClient()
     client = CachingLLMClient(inner, tmp_path)
 
-    client.complete_json("same prompt", prompt_version=1)
-    client.complete_json("same prompt", prompt_version=2)
+    client.generate_json("same prompt", prompt_version=1)
+    client.generate_json("same prompt", prompt_version=2)
 
     assert inner.calls == 2
 
@@ -83,20 +90,42 @@ def test_different_models_have_different_keys(tmp_path: Path) -> None:
     class ModelA:
         model_name = "model-a"
 
-        def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
-            return LLMResponse(text='{"a": 1}', model=self.model_name, prompt_version=prompt_version)
+        def generate_json(
+            self,
+            prompt: str,
+            *,
+            prompt_version: int,
+            schema: object | None = None,
+            cache_tag: str | None = None,
+        ) -> LLMResponse:
+            return LLMResponse(
+                text='{"a": 1}',
+                model=self.model_name,
+                prompt_version=prompt_version,
+            )
 
     class ModelB:
         model_name = "model-b"
 
-        def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
-            return LLMResponse(text='{"b": 2}', model=self.model_name, prompt_version=prompt_version)
+        def generate_json(
+            self,
+            prompt: str,
+            *,
+            prompt_version: int,
+            schema: object | None = None,
+            cache_tag: str | None = None,
+        ) -> LLMResponse:
+            return LLMResponse(
+                text='{"b": 2}',
+                model=self.model_name,
+                prompt_version=prompt_version,
+            )
 
     client_a = CachingLLMClient(ModelA(), tmp_path)
     client_b = CachingLLMClient(ModelB(), tmp_path)
 
-    resp_a = client_a.complete_json("same", prompt_version=1)
-    resp_b = client_b.complete_json("same", prompt_version=1)
+    resp_a = client_a.generate_json("same", prompt_version=1)
+    resp_b = client_b.generate_json("same", prompt_version=1)
 
     assert resp_a.text == '{"a": 1}'
     assert resp_b.text == '{"b": 2}'

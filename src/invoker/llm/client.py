@@ -24,7 +24,7 @@ class LLMResponse:
 class LLMClient(Protocol):
     model_name: str
 
-    def complete_json(
+    def generate_json(
         self,
         prompt: str,
         *,

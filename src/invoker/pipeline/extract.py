@@ -66,13 +66,21 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
         ROLES=", ".join(h.roles) or "(none)",
         ABILITIES=abilities_block,
     )
-    response = client.complete_json(rendered, prompt_version=prompt.version, schema=_ExtractionResponse, cache_tag=f"extract/{h.hero_name}")
+    response = client.generate_json(
+        rendered,
+        prompt_version=prompt.version,
+        schema=_ExtractionResponse,
+        cache_tag=f"extract/{h.hero_name}",
+    )
     parsed = _ExtractionResponse.model_validate_json(response.text)
 
     return MechanicalExtraction(
         hero_id=h.hero_id,
         functional_tags=list(parsed.functional_tags),
-        tag_sources=[TagSource(tag=s.tag, ability=s.ability, evidence=s.evidence) for s in parsed.tag_sources],
+        tag_sources=[
+            TagSource(tag=s.tag, ability=s.ability, evidence=s.evidence)
+            for s in parsed.tag_sources
+        ],
         model=response.model,
         prompt_version=response.prompt_version,
         prompt_hash=prompt.sha256,

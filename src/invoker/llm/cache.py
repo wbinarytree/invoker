@@ -51,7 +51,13 @@ class CachingLLMClient:
             prompt_version=entry["prompt_version"],
         )
 
-    def _write(self, key: str, response: LLMResponse, tag: str | None = None, prompt: str = "") -> None:
+    def _write(
+        self,
+        key: str,
+        response: LLMResponse,
+        tag: str | None = None,
+        prompt: str = "",
+    ) -> None:
         p = self._path(key, tag)
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(
@@ -67,13 +73,24 @@ class CachingLLMClient:
             )
         )
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
+    def generate_json(
+        self,
+        prompt: str,
+        *,
+        prompt_version: int,
+        schema: object | None = None,
+        cache_tag: str | None = None,
+    ) -> LLMResponse:
         key = _cache_key(self.model_name, prompt_version, prompt)
         cached = self._read(key, cache_tag)
         if cached is not None:
             _trace(f"cache_hit   key={key[:12]}  model={self.model_name}")
             return cached
         _trace(f"request     key={key[:12]}  model={self.model_name}")
-        response = self._inner.complete_json(prompt, prompt_version=prompt_version, schema=schema)
+        response = self._inner.generate_json(
+            prompt,
+            prompt_version=prompt_version,
+            schema=schema,
+        )
         self._write(key, response, cache_tag, prompt)
         return response

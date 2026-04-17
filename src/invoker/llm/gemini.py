@@ -5,6 +5,7 @@ import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any, cast
 
 from google import genai
 from google.genai import types
@@ -53,6 +54,15 @@ def make_model_config(model: str, rpm: int, rpd: int) -> GeminiModelConfig:
     return GeminiModelConfig(model=model, rpm=rpm, rpd=rpd)
 
 
+def _json_config(schema: object | None) -> types.GenerateContentConfig:
+    extra = cast(Any, {"response_schema": schema} if schema is not None else {})
+    return types.GenerateContentConfig(
+        temperature=0.0,
+        response_mime_type="application/json",
+        **extra,
+    )
+
+
 class GeminiClient:
     # Class-level pacing state shared across all instances (same process = same quota bucket).
     _rpm_lock = threading.Lock()
@@ -77,7 +87,7 @@ class GeminiClient:
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
-    def complete_json(
+    def generate_json(
         self,
         prompt: str,
         *,
@@ -90,17 +100,7 @@ class GeminiClient:
         delay = 65.0  # start above 60 s to clear the RPM window
         for attempt in range(max_retries + 1):
             try:
-                if schema is not None:
-                    cfg = types.GenerateContentConfig(
-                        temperature=0.0,
-                        response_mime_type="application/json",
-                        response_schema=schema,
-                    )
-                else:
-                    cfg = types.GenerateContentConfig(
-                        temperature=0.0,
-                        response_mime_type="application/json",
-                    )
+                cfg = _json_config(schema)
 
                 t0 = time.monotonic()
                 _trace(
@@ -115,35 +115,12 @@ class GeminiClient:
                 )
                 elapsed = time.monotonic() - t0
                 text = strip_fences(resp.text or "")
-                if not text:
-                    # Output text is empty — collect thinking parts as fallback.
-                    # Thinking models sometimes put all content in thought=True parts.
-                    # Using the thinking text: (a) gets cached so the call isn't repeated,
-                    # (b) lets parse_json_response find JSON if the model reasoned to one.
-                    try:
-                        candidate = resp.candidates[0] if resp.candidates else None
-                        content = getattr(candidate, "content", None)
-                        parts = getattr(content, "parts", []) or []
-                        thinking_parts = [
-                            getattr(p, "text", "") or ""
-                            for p in parts
-                            if getattr(p, "thought", False)
-                        ]
-                        text = "\n".join(thinking_parts)
-                        _trace(
-                            f"generate_ok  model={self.model_name}"
-                            f"  elapsed={elapsed:.1f}s  response_chars=0"
-                            f"  thinking_chars={len(text)}"
-                            f"  (using thinking fallback)"
-                        )
-                    except Exception as diag_exc:
-                        _trace(f"thinking_fallback_failed  ({diag_exc})")
-                else:
+                if text:
                     _trace(
                         f"generate_ok  model={self.model_name}"
                         f"  elapsed={elapsed:.1f}s  response_chars={len(text)}"
                     )
-                if not text:
+                else:
                     _trace(
                         f"empty_response  model={self.model_name}"
                         f"  elapsed={elapsed:.1f}s  (will cache to prevent retry)"

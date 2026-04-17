@@ -81,7 +81,7 @@ Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:M
   - Quota / rate errors (`429`, `ResourceExhausted`): exponential backoff starting at 65 s, doubling each attempt.
   - Timeout errors: fixed 20 s delay before retry.
   - All other errors: re-raised immediately (no retry).
-- **Empty response handling:** when both `resp.text` and all thinking parts are empty, returns `LLMResponse(text="")` and caches it to prevent the same quota-burning call on the next run. Callers receive a Pydantic `ValidationError` when they attempt to parse the empty text.
+- **Empty response handling:** when `resp.text` is empty, returns `LLMResponse(text="")` and caches it to prevent the same quota-burning call on the next run. Callers receive a Pydantic `ValidationError` when they attempt to parse the empty text.
 - Model is selected at runtime via `INVOKER_LLM_MODEL` / `INVOKER_LLM_RPM` / `INVOKER_LLM_RPD` env vars (see Config).
 
 ### ManualClient (`src/invoker/llm/manual.py`)

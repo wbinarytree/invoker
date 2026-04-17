@@ -18,7 +18,7 @@ class CannedClient:
     def __init__(self, payload: list[dict]) -> None:
         self._text = json.dumps(payload)
 
-    def complete_json(
+    def generate_json(
         self,
         prompt: str,
         *,

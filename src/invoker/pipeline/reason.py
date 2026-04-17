@@ -83,7 +83,7 @@ def generate_reasons_batch(
         HERO_A_TAGS=", ".join(inp.hero_a_tags) or "(no tags)",
         EDGES=_format_edges(inp.edges),
     )
-    response = client.complete_json(
+    response = client.generate_json(
         rendered,
         prompt_version=prompt.version,
         schema=list[_EdgeReasonItem],
