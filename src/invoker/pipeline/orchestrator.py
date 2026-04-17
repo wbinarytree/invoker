@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
@@ -23,7 +24,8 @@ from invoker.schemas.derived import MetaBlock, MetaHistoryEntry, PositionBlock
 
 
 def _trace(msg: str) -> None:
-    print(f"[pipeline] {msg}", flush=True)
+    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+    print(f"{ts} [pipeline] {msg}", flush=True)
 
 
 @dataclass

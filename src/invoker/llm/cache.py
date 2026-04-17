@@ -18,7 +18,8 @@ def _now_iso() -> str:
 
 
 def _trace(msg: str) -> None:
-    print(f"[llm] {msg}", flush=True)
+    ts = datetime.now(UTC).strftime("%H:%M:%S.%f")[:-3]
+    print(f"{ts} [llm] {msg}", flush=True)
 
 
 class CachingLLMClient:

@@ -4,6 +4,7 @@ import os
 import threading
 import time
 from dataclasses import dataclass
+from datetime import datetime
 
 from google import genai
 from google.genai import types
@@ -12,7 +13,8 @@ from invoker.llm.client import LLMResponse, strip_fences
 
 
 def _trace(msg: str) -> None:
-    print(f"[llm] {msg}", flush=True)
+    ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+    print(f"{ts} [llm] {msg}", flush=True)
 
 
 def _is_quota_error(exc: Exception) -> bool:
@@ -25,6 +27,10 @@ def _is_quota_error(exc: Exception) -> bool:
         or "rate_limit" in msg
         or "ratelimit" in msg
     )
+
+
+def _is_timeout_error(exc: Exception) -> bool:
+    return "timeout" in type(exc).__name__.lower()
 
 
 @dataclass(frozen=True)
@@ -85,7 +91,7 @@ class GeminiClient:
         key = os.environ.get("GOOGLE_API_KEY")
         if not key:
             raise RuntimeError("GOOGLE_API_KEY not set")
-        self._client = genai.Client(api_key=key)
+        self._client = genai.Client(api_key=key, http_options={"timeout": 120_000})
         self._config = config
         self.model_name = config.model
 
@@ -176,7 +182,13 @@ class GeminiClient:
             except Exception as exc:
                 if attempt == max_retries:
                     raise
-                if _is_quota_error(exc):
+                if _is_timeout_error(exc):
+                    _trace(
+                        f"timeout_error  retry={attempt + 1}/{max_retries}"
+                        f"  sleep=20s  ({type(exc).__name__})"
+                    )
+                    time.sleep(20)
+                elif _is_quota_error(exc):
                     _trace(
                         f"quota_error  retry={attempt + 1}/{max_retries}"
                         f"  sleep={delay:.0f}s  ({exc})"

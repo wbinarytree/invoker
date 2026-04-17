@@ -1,7 +1,7 @@
 # Invoker — Architecture (Implementation Artifact)
 
 Last updated: 2026-04-17
-Phase: 1.1
+Phase: 1.1 (Phase 1.2 spec signed off — not yet implemented)
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
 
@@ -58,22 +58,30 @@ CachingLLMClient
 
 Wraps any `LLMClient`. Before every call:
 1. Compute `key = sha256(model_name + ":" + prompt_version + ":" + rendered_prompt)`
-2. Check `data/cache/llm/<key[:2]>/<key>.json`
-3. On hit: return cached response, skip inner client entirely (no quota, no pacing wait)
-4. On miss: call inner client, write response to disk, return
+2. Check `data/cache/llm/<cache_tag>/<key[:2]>/<key>.json` (or `data/cache/llm/<key[:2]>/...` if no tag)
+3. On hit: return cached response, strip any markdown fences, skip inner client entirely (no quota, no pacing wait)
+4. On miss: call inner client, write response + rendered prompt to disk, return
 
-Trace output: `[llm] cache_hit key=<12chars> model=<name>` or `[llm] request key=<12chars> model=<name>`.
+Cache entry shape: `{text, model, prompt_version, cached_at, prompt}`. The `prompt` field makes entries human-readable and traceable without running the pipeline again.
+
+`cache_tag` is an optional human-readable path segment (e.g. `extract/Slardar`, `reason/Axe`) that groups related entries into subdirectories.
+
+Trace output: `HH:MM:SS.mmm [llm] cache_hit key=<12chars> model=<name>` or `HH:MM:SS.mmm [llm] request key=<12chars> model=<name>`.
 
 ### GeminiClient (`src/invoker/llm/gemini.py`)
 
-- Configured by `GeminiModelConfig(model, rpm, rpd, supports_json_mode, supports_thinking_config)`. Two named constants:
+- Configured by `GeminiModelConfig(model, rpm, rpd, supports_json_mode, supports_thinking_config, supports_structured_output)`. Two named constants:
   - `GEMINI_2_5_FLASH` — `gemini-2.5-flash`, RPM=5, RPD=20, `json_mode=True`
-  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100, `json_mode=False`, `thinking_config=False`
+  - `GEMMA_4_31B` — `gemma-4-31b-it`, RPM=5, RPD=100, `json_mode=False`, `thinking_config=False`, `structured_output=True`
 - `make_model_config(model, rpm, rpd)` builds a config from env vars; known models inherit capability flags from the registry, unknown models get safe defaults.
-- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s).
-- Retry: up to 3 retries on quota/rate errors; exponential backoff starting at 65 s, doubling each attempt.
-- Non-quota errors are re-raised immediately (no retry).
-- **Thinking-model fallback:** when `resp.text` is empty (pure thinking models emit no output text), the client collects `thought=True` parts and uses their text as the response. This ensures the call is cached and `parse_json_response` can scan the thinking content for JSON. If both `resp.text` and all thinking parts are empty, `RuntimeError` is raised and the call is not cached.
+- **HTTP timeout:** client is constructed with `http_options={"timeout": 120_000}` (120 s). Calls that stall at the network level raise a timeout exception rather than hanging indefinitely.
+- **Structured output:** when `schema` is provided and `supports_structured_output=True`, sets `response_schema=schema` in `GenerateContentConfig` so the API enforces the JSON shape. Markdown fences are stripped from all responses via `strip_fences()`.
+- Class-level rate limiter enforces the RPM ceiling proactively (min interval = 60/rpm + 0.5 s). Trace: `HH:MM:SS.mmm [llm] pacing sleep=Xs`.
+- Retry: up to 3 retries.
+  - Quota / rate errors (`429`, `ResourceExhausted`): exponential backoff starting at 65 s, doubling each attempt.
+  - Timeout errors: fixed 20 s delay before retry.
+  - All other errors: re-raised immediately (no retry).
+- **Empty response handling:** when both `resp.text` and all thinking parts are empty, returns `LLMResponse(text="")` and caches it to prevent the same quota-burning call on the next run. Callers receive a Pydantic `ValidationError` when they attempt to parse the empty text.
 - Model is selected at runtime via `INVOKER_LLM_MODEL` / `INVOKER_LLM_RPM` / `INVOKER_LLM_RPD` env vars (see Config).
 
 ### ManualClient (`src/invoker/llm/manual.py`)
@@ -162,6 +170,17 @@ Runs after all heroes are written:
 
 ---
 
+## Known Gaps (Phase 1.2)
+
+The current orchestrator runs extract → reason → write per hero in a single sequential pass. This means hero B's functional tags are often unavailable when hero A's reason batch runs (hero B hasn't been extracted yet). Consequences:
+
+- All `hero_b_tags` in the reason prompt show `(no tags)`, forcing the model to ground every reason in hero A's tags only.
+- When hero A has relational tags like `physical_damage_amplifier`, the LLM has no context for what hero B offers and may enter a thinking loop, returning an empty response.
+
+Phase 1.2 will split the orchestrator into two explicit passes (extract all → reason all) and add a guard that skips the reason batch when no hero_b has tags. It will also introduce a `tag_affinity.py` module so that extracted tags supplement Stratz/OpenDota as a candidate source. See `docs/specs/2026-04-17-phase-1.2-pipeline-correctness.md`.
+
+---
+
 ## Error Recovery
 
 `run_for_hero()` returns `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason)`.
@@ -196,7 +215,7 @@ Key fields:
 
 ## Config and Environment
 
-`Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GEMINI_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
+`Config.load()` calls `load_dotenv()` first, so `.env` in the project root is honoured by the CLI. Required env vars: `GOOGLE_API_KEY` (for Gemini client), `STRATZ_API_KEY` (optional; STRATZ works without auth but at lower rate limits).
 
 ### Dev Hero Filter
 
@@ -227,8 +246,9 @@ All prompts live in `src/invoker/prompts/` as `.md` files with a `<!-- prompt_ve
 data/
   cache/
     llm/
-      <key[:2]>/
-        <key>.json      # {text, model, prompt_version, cached_at}
+      <tag>/            # optional; e.g. extract/Slardar, reason/Axe
+        <key[:2]>/
+          <key>.json    # {text, model, prompt_version, cached_at, prompt}
   derived/
     <patch>/
       <hero_id>.json    # HeroDerived
