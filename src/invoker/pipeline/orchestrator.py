@@ -53,17 +53,21 @@ class HeroResult:
 
 
 def _try_load_hero_context(
-    data_dir: Path, patch: str, hero_id: int
+    data_dir: Path,
+    patch: str,
+    hero_id: int,
+    hero_names: dict[int, str] | None = None,
 ) -> tuple[str, list[str]]:
     """
     Return (localized_name, functional_tags) for an already-written hero.
-    Falls back to placeholder values when the file does not exist yet.
+    Falls back to the roster name map (if provided) or a placeholder.
     """
     try:
         b = read_hero(data_dir, patch, hero_id)
         return b.localized_name, b.functional_tags
     except Exception:
-        return f"hero_{hero_id}", []
+        name = (hero_names or {}).get(hero_id, f"hero_{hero_id}")
+        return name, []
 
 
 def run_for_hero(
@@ -73,6 +77,7 @@ def run_for_hero(
     bundle: HeroRawBundle,
     client: LLMClient,
     max_edges: int = 5,
+    hero_names: dict[int, str] | None = None,
 ) -> HeroResult:
     hero_label = f"hero={bundle.hero_id} ({bundle.localized_name})"
 
@@ -105,9 +110,12 @@ def run_for_hero(
 
     # Cap to top max_edges per relation (lists already sorted by |score| desc).
     candidate_syn = [e for e in synergies if e.confidence in ("med", "high")][:max_edges]
-    candidate_ctr = [e for e in counters if e.confidence in ("med", "high")][:max_edges]
-    candidates = candidate_syn + candidate_ctr
     syn_ids = {e.hero_id for e in candidate_syn}
+    # Exclude heroes already in candidate_syn to avoid duplicate hero_b_ids in the batch.
+    candidate_ctr = [
+        e for e in counters if e.confidence in ("med", "high") and e.hero_id not in syn_ids
+    ][:max_edges]
+    candidates = candidate_syn + candidate_ctr
 
     if candidates:
         _trace(
@@ -116,8 +124,8 @@ def run_for_hero(
         )
         edge_inputs: list[EdgeReasonInput] = []
         for e in candidates:
-            relation = "synergy" if e.hero_id in syn_ids else "counter"
-            hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id)
+            relation = "synergy" if e.hero_id in syn_ids else "counter"  # syn_ids already disjoint from ctr
+            hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, e.hero_id, hero_names)
             edge_inputs.append(
                 EdgeReasonInput(
                     hero_b_id=e.hero_id,

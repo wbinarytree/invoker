@@ -51,6 +51,7 @@ def bootstrap(
     typer.echo(f"Fetched {len(raw['heroes'])} heroes.")
 
     bundles = build_bundles(raw, patch)
+    hero_names: dict[int, str] = raw["hero_names"]
 
     from invoker.llm.gemini import make_model_config
     model_cfg = make_model_config(cfg.llm_model, cfg.llm_rpm, cfg.llm_rpd)
@@ -60,7 +61,7 @@ def bootstrap(
 
     results: list[HeroResult] = []
     for bundle in bundles:
-        result = run_for_hero(cfg.data_dir, patch, __version__, bundle, client)
+        result = run_for_hero(cfg.data_dir, patch, __version__, bundle, client, hero_names=hero_names)
         status = "ok" if result.success else f"FAILED ({result.failure_reason})"
         typer.echo(
             f"  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "

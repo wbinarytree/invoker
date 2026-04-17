@@ -41,6 +41,7 @@ async def fetch_all(
         pro_matches = await od.pro_matches()
 
         heroes = _apply_filter(all_heroes, hero_filter)
+        hero_names = {h["id"]: h["localized_name"] for h in all_heroes}
 
         matchups = {h["id"]: await od.matchups(h["id"]) for h in heroes}
         stratz_edges = (
@@ -50,6 +51,7 @@ async def fetch_all(
         )
         return {
             "heroes": heroes,
+            "hero_names": hero_names,
             "abilities": abilities,
             "hero_abilities": hero_abilities,
             "pro_matches": pro_matches,
