@@ -35,11 +35,11 @@ We now have a subset bootstrap path, but it is still only suitable for controlle
 
 Tasks:
 
-- [ ] Wire `bootstrap --heroes ...` into the real current pipeline.
-- [ ] Mark subset runs as `partial`.
-- [ ] Propagate `force` through source fetchers.
-- [ ] Add explicit CLI messaging about what subset mode does and does not populate.
-- [ ] Add a small success summary at the end:
+- [x] Wire `bootstrap --heroes ...` into the real current pipeline.
+- [x] Mark subset runs as `partial`.
+- [ ] Propagate `force` through source fetchers. (Deferred — CLI flag exists but not plumbed into `OpenDotaFetcher` / `StratzFetcher` methods; needs design discussion.)
+- [x] Add explicit CLI messaging about what subset mode does and does not populate.
+- [x] Add a small success summary at the end:
   - heroes requested
   - heroes written
   - heroes skipped
@@ -55,13 +55,13 @@ Tasks:
 
 - [x] Add proactive Gemini pacing for the known free-tier `5 RPM` cap.
 - [x] Add bounded retry/backoff for quota-style responses.
-- [ ] Add explicit reason-budget controls:
+- [x] Add explicit reason-budget controls:
   - `--skip-reasons`
-  - or `--max-reason-edges <n>`
+  - and `--max-reason-edges <n>`
 - [ ] Distinguish high-value and low-value retries:
   - extraction may retry more
   - reasons should retry less
-- [ ] Surface estimated request count before subset bootstrap begins.
+- [x] Surface estimated request count before subset bootstrap begins.
 
 ### 3. LLM Response Cache
 
@@ -108,17 +108,17 @@ Manual mode currently writes prompts and then crashes with a traceback. That is 
 
 Tasks:
 
-- [ ] Catch manual-response-missing errors in the CLI.
-- [ ] Replace stack traces with direct instructions:
+- [x] Catch manual-response-missing errors in the CLI.
+- [x] Replace stack traces with direct instructions:
   - prompt path
   - response path
   - rerun guidance
-- [ ] Show which hero and stage generated the prompt:
+- [x] Show which hero and stage generated the prompt:
   - extract
   - synergy reason
   - counter reason
-- [ ] Make rerunning the same command continue cleanly once the response file exists.
-- [ ] Add a manual-mode smoke test through the CLI, not just the client helper.
+- [x] Make rerunning the same command continue cleanly once the response file exists.
+- [x] Add a manual-mode smoke test through the orchestrator layer (CLI-level smoke still absent — the orchestrator path is what actually calls the client).
 
 ### 6. Source Quality: Ability Extraction
 
@@ -159,7 +159,7 @@ Tasks:
 
 - [x] Pass real second-hero name and tags into reason generation for subset runs where data is available.
 - [x] Tighten reason validation toward grounding in both sides, not only hero A.
-- [ ] Add tests for the improved reason input path.
+- [x] Add tests for the improved reason input path.
 
 This remains Phase 1.1 because it is a quality correction to an existing feature, not a new drafting-context schema.
 
