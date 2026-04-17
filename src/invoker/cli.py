@@ -60,6 +60,11 @@ def bootstrap(
 
     if hero_filter:
         typer.echo(f"Hero filter active: {sorted(hero_filter)}")
+        typer.echo(
+            "Subset mode: per-hero matchups, STRATZ edges and LLM extractions "
+            "run only for the filtered heroes. Global roster, ability and pro-match "
+            "fetches still run. Manifest will be written as 'partial'."
+        )
 
     typer.echo(f"Fetching raw data for {patch}...")
     raw = asyncio.run(fetch_all(cfg, patch, force=force, hero_filter=hero_filter))
@@ -104,7 +109,20 @@ def bootstrap(
         results.append(result)
 
     succeeded = [r for r in results if r.success]
-    typer.echo(f"\n{len(succeeded)}/{len(results)} heroes succeeded.")
+    failed = [r for r in results if not r.success]
+    reasons_written = sum(r.reasons_written for r in results)
+    reasons_skipped = sum(r.reasons_skipped for r in results)
+
+    typer.echo("")
+    typer.echo("Bootstrap summary:")
+    typer.echo(f"  heroes requested:  {len(bundles)}")
+    typer.echo(f"  heroes written:    {len(succeeded)}")
+    typer.echo(f"  heroes failed:     {len(failed)}")
+    typer.echo(f"  reasons written:   {reasons_written}")
+    typer.echo(f"  reasons skipped:   {reasons_skipped}")
+    if failed:
+        for r in failed:
+            typer.echo(f"    failed hero {r.hero_id}: {r.failure_reason}")
 
     if succeeded:
         finalize_patch(
