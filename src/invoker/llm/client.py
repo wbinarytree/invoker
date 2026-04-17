@@ -30,6 +30,7 @@ class LLMClient(Protocol):
         *,
         prompt_version: int,
         schema: Any | None = None,
+        cache_tag: str | None = None,
     ) -> LLMResponse:
         """
         Call the model with a prompt expected to produce JSON.

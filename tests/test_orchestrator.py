@@ -11,7 +11,7 @@ class ScriptedClient:
 
     model_name = "scripted"
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
         if "functional_tags" in prompt:
             return LLMResponse(
                 text=json.dumps(

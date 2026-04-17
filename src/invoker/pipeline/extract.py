@@ -66,7 +66,7 @@ def extract_mechanical(h: HeroExtractionInput, client: LLMClient) -> MechanicalE
         ROLES=", ".join(h.roles) or "(none)",
         ABILITIES=abilities_block,
     )
-    response = client.complete_json(rendered, prompt_version=prompt.version, schema=_ExtractionResponse)
+    response = client.complete_json(rendered, prompt_version=prompt.version, schema=_ExtractionResponse, cache_tag=f"extract/{h.hero_name}")
     parsed = _ExtractionResponse.model_validate_json(response.text)
 
     return MechanicalExtraction(

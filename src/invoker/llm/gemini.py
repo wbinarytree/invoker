@@ -100,7 +100,7 @@ class GeminiClient:
                 time.sleep(wait)
             GeminiClient._last_call_time = time.monotonic()
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
         self._pace()
         max_retries = 3
         delay = 65.0  # start above 60 s to clear the RPM window

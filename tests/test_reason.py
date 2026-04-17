@@ -18,7 +18,7 @@ class CannedClient:
     def __init__(self, payload: list[dict]) -> None:
         self._text = json.dumps(payload)
 
-    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None) -> LLMResponse:
+    def complete_json(self, prompt: str, *, prompt_version: int, schema: object | None = None, cache_tag: str | None = None) -> LLMResponse:
         return LLMResponse(text=self._text, model="canned", prompt_version=prompt_version)
 
 
