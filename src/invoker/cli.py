@@ -40,6 +40,11 @@ def bootstrap(
         help="Cap synergy and counter edges fed to the batch reason call, per hero.",
         min=0,
     ),
+    manual: bool = typer.Option(
+        False,
+        help="Use the manual/file-based LLM client. Prompts are written to disk "
+        "and the run pauses for you to paste responses; rerun to continue.",
+    ),
 ) -> None:
     """Run the full bootstrap pipeline for a patch."""
     from invoker import __version__
@@ -74,12 +79,16 @@ def bootstrap(
     hero_names: dict[int, str] = raw["hero_names"]
 
     from invoker.llm.gemini import make_model_config
+    llm_kind = "manual" if manual else cfg.llm_client
     model_cfg = make_model_config(cfg.llm_model, cfg.llm_rpm, cfg.llm_rpd)
-    typer.echo(
-        f"LLM: {cfg.llm_client}  model={cfg.llm_model}"
-        f"  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}"
-    )
-    inner = make_client(cfg.llm_client, config=model_cfg)
+    if llm_kind == "manual":
+        typer.echo("LLM: manual (file-based; prompts under data/raw/manual_prompts/)")
+    else:
+        typer.echo(
+            f"LLM: {llm_kind}  model={cfg.llm_model}"
+            f"  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}"
+        )
+    inner = make_client(llm_kind, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
     per_hero_calls = 1 + (0 if skip_reasons else 1)
@@ -112,6 +121,10 @@ def bootstrap(
     failed = [r for r in results if not r.success]
     reasons_written = sum(r.reasons_written for r in results)
     reasons_skipped = sum(r.reasons_skipped for r in results)
+    pending_prompts: list = []
+    for r in results:
+        if r.pending_manual_paths:
+            pending_prompts.extend(r.pending_manual_paths)
 
     typer.echo("")
     typer.echo("Bootstrap summary:")
@@ -123,6 +136,17 @@ def bootstrap(
     if failed:
         for r in failed:
             typer.echo(f"    failed hero {r.hero_id}: {r.failure_reason}")
+
+    if pending_prompts:
+        typer.echo("")
+        typer.echo(f"Manual mode: {len(pending_prompts)} prompt(s) awaiting response.")
+        typer.echo("Paste the JSON output for each prompt into the matching response path:")
+        for p in pending_prompts:
+            response = str(p).replace("manual_prompts", "manual_responses")
+            response = response[:-3] + ".txt"
+            typer.echo(f"  prompt:   {p}")
+            typer.echo(f"  response: {response}")
+        typer.echo("Then rerun the same bootstrap command to continue.")
 
     if succeeded:
         finalize_patch(
