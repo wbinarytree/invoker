@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -339,6 +340,77 @@ def reason_hero(
         reasons_skipped=reasons_skipped,
         pending_manual_paths=[pending_reason_prompt] if pending_reason_prompt else None,
     )
+
+
+ProgressCallback = Callable[["HeroRawBundle", HeroResult], None]
+
+
+def _merge_pass_results(hero_id: int, extract: HeroResult, reason: HeroResult) -> HeroResult:
+    pending: list[Path] = []
+    if extract.pending_manual_paths:
+        pending.extend(extract.pending_manual_paths)
+    if reason.pending_manual_paths:
+        pending.extend(reason.pending_manual_paths)
+    return HeroResult(
+        hero_id=hero_id,
+        success=reason.success,
+        reasons_written=reason.reasons_written,
+        reasons_skipped=reason.reasons_skipped,
+        failure_reason=reason.failure_reason,
+        pending_manual_paths=pending or None,
+    )
+
+
+def run_bootstrap(
+    data_dir: Path,
+    patch: str,
+    generator_version: str,
+    bundles: list[HeroRawBundle],
+    client: LLMClient,
+    *,
+    max_reason_edges: int = 5,
+    skip_reasons: bool = False,
+    hero_names: dict[int, str] | None = None,
+    on_extract: ProgressCallback | None = None,
+    on_reason: ProgressCallback | None = None,
+) -> list[HeroResult]:
+    """
+    Drive the two-pass bootstrap across a roster. Pass 1 extracts every hero's
+    tags before pass 2 runs so cross-hero reasons can see hero_b tags on disk.
+
+    Returned list preserves `bundles` order. `on_extract` / `on_reason` fire
+    per hero with the bundle and the merged HeroResult for that phase — use
+    them for CLI progress output; neither is required.
+    """
+    extract_results: dict[int, HeroResult] = {}
+    for bundle in bundles:
+        result = extract_hero(data_dir, patch, generator_version, bundle, client)
+        extract_results[bundle.hero_id] = result
+        if on_extract is not None:
+            on_extract(bundle, result)
+
+    if skip_reasons:
+        return [extract_results[b.hero_id] for b in bundles]
+
+    merged_results: list[HeroResult] = []
+    for bundle in bundles:
+        extract = extract_results[bundle.hero_id]
+        if not extract.success:
+            merged_results.append(extract)
+            continue
+        reason = reason_hero(
+            data_dir,
+            patch,
+            bundle.hero_id,
+            client,
+            max_edges=max_reason_edges,
+            hero_names=hero_names,
+        )
+        merged = _merge_pass_results(bundle.hero_id, extract, reason)
+        if on_reason is not None:
+            on_reason(bundle, merged)
+        merged_results.append(merged)
+    return merged_results
 
 
 def finalize_patch(

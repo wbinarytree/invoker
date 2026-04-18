@@ -51,10 +51,10 @@ def bootstrap(
     from invoker.pipeline.bundle import build_bundles
     from invoker.pipeline.fetch import fetch_all
     from invoker.pipeline.orchestrator import (
+        HeroRawBundle,
         HeroResult,
-        extract_hero,
         finalize_patch,
-        reason_hero,
+        run_bootstrap,
     )
 
     cfg = _load_config()
@@ -83,15 +83,13 @@ def bootstrap(
     hero_names: dict[int, str] = raw["hero_names"]
 
     from invoker.llm.gemini import make_model_config
+
     llm_kind = "manual" if manual else cfg.llm_client
     model_cfg = make_model_config(cfg.llm_model, cfg.llm_rpm, cfg.llm_rpd)
     if llm_kind == "manual":
         typer.echo("LLM: manual (file-based; prompts under data/raw/manual_prompts/)")
     else:
-        typer.echo(
-            f"LLM: {llm_kind}  model={cfg.llm_model}"
-            f"  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}"
-        )
+        typer.echo(f"LLM: {llm_kind}  model={cfg.llm_model}  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}")
     inner = make_client(llm_kind, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
@@ -102,56 +100,34 @@ def bootstrap(
         f"cache hits reduce this)."
     )
 
-    # Pass 1: extract every hero's tags before any reason pass runs.
-    # This guarantees pass 2 can see hero_b tags for cross-hero grounding.
-    typer.echo("Pass 1/2: extracting hero tags...")
-    extract_results: dict[int, HeroResult] = {}
-    for bundle in bundles:
-        r = extract_hero(cfg.data_dir, patch, __version__, bundle, client)
+    def _on_extract(bundle: HeroRawBundle, r: HeroResult) -> None:
         status = "ok" if r.success else f"FAILED ({r.failure_reason})"
         typer.echo(f"  extract hero {bundle.hero_id:>4} {bundle.localized_name:<24} {status}")
-        extract_results[bundle.hero_id] = r
 
-    # Pass 2: reason only over heroes whose extraction succeeded.
-    results: list[HeroResult] = []
-    if skip_reasons:
-        typer.echo("Pass 2/2: skipped (--skip-reasons).")
-        for bundle in bundles:
-            results.append(extract_results[bundle.hero_id])
-    else:
-        typer.echo("Pass 2/2: generating reasons...")
-        for bundle in bundles:
-            ext = extract_results[bundle.hero_id]
-            if not ext.success:
-                results.append(ext)
-                continue
-            rsn = reason_hero(
-                cfg.data_dir,
-                patch,
-                bundle.hero_id,
-                client,
-                max_edges=max_reason_edges,
-                hero_names=hero_names,
-            )
-            merged_pending: list = []
-            if ext.pending_manual_paths:
-                merged_pending.extend(ext.pending_manual_paths)
-            if rsn.pending_manual_paths:
-                merged_pending.extend(rsn.pending_manual_paths)
-            merged = HeroResult(
-                hero_id=bundle.hero_id,
-                success=rsn.success,
-                reasons_written=rsn.reasons_written,
-                reasons_skipped=rsn.reasons_skipped,
-                failure_reason=rsn.failure_reason,
-                pending_manual_paths=merged_pending or None,
-            )
-            status = "ok" if merged.success else f"FAILED ({merged.failure_reason})"
-            typer.echo(
-                f"  reason  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
-                f"{status}  reasons={merged.reasons_written}"
-            )
-            results.append(merged)
+    def _on_reason(bundle: HeroRawBundle, r: HeroResult) -> None:
+        status = "ok" if r.success else f"FAILED ({r.failure_reason})"
+        typer.echo(
+            f"  reason  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
+            f"{status}  reasons={r.reasons_written}"
+        )
+
+    typer.echo(
+        "Two-pass bootstrap: extracting all hero tags first, "
+        + ("then skipping reasons." if skip_reasons else "then generating reasons.")
+    )
+
+    results = run_bootstrap(
+        cfg.data_dir,
+        patch,
+        __version__,
+        bundles,
+        client,
+        max_reason_edges=max_reason_edges,
+        skip_reasons=skip_reasons,
+        hero_names=hero_names,
+        on_extract=_on_extract,
+        on_reason=_on_reason,
+    )
 
     succeeded = [r for r in results if r.success]
     failed = [r for r in results if not r.success]

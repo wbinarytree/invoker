@@ -5,9 +5,11 @@ from invoker.kb import KnowledgeBase
 from invoker.llm.client import LLMResponse
 from invoker.pipeline.orchestrator import (
     HeroRawBundle,
+    HeroResult,
     extract_hero,
     finalize_patch,
     reason_hero,
+    run_bootstrap,
 )
 
 
@@ -431,3 +433,67 @@ def test_reason_hero_is_idempotent_under_caching(tmp_path: Path):
     # Second reason pass: every prompt is cache-hot.
     reason_hero(tmp_path, "7.41b", 28, client)
     assert inner.calls == first_calls
+
+
+def test_run_bootstrap_drives_both_passes_and_invokes_callbacks(tmp_path: Path):
+    """run_bootstrap runs extract over all bundles first, then reason over the
+    same set, merges pending paths per hero, and fires progress callbacks."""
+    client = ScriptedClient()
+    bundles = [_slardar_bundle(), _stub_bundle(120, "DragonKnight"), _stub_bundle(96, "Mirana")]
+
+    extract_events: list[tuple[int, bool]] = []
+    reason_events: list[tuple[int, int]] = []
+
+    def _on_extract(bundle: HeroRawBundle, r: HeroResult) -> None:
+        extract_events.append((bundle.hero_id, r.success))
+
+    def _on_reason(bundle: HeroRawBundle, r: HeroResult) -> None:
+        reason_events.append((bundle.hero_id, r.reasons_written))
+
+    results = run_bootstrap(
+        tmp_path,
+        "7.41b",
+        "invoker@test",
+        bundles,
+        client,
+        on_extract=_on_extract,
+        on_reason=_on_reason,
+    )
+
+    assert [b.hero_id for b in bundles] == [r.hero_id for r in results]
+    assert all(r.success for r in results)
+    assert extract_events == [(28, True), (120, True), (96, True)]
+    # Only Slardar has med/high STRATZ/OpenDota edges, so only its reason runs.
+    assert [e[0] for e in reason_events] == [28, 120, 96]
+    slardar_reason = next(e for e in reason_events if e[0] == 28)
+    assert slardar_reason[1] >= 1
+
+
+def test_run_bootstrap_skip_reasons_returns_extract_results(tmp_path: Path):
+    class CountingClient(ScriptedClient):
+        def __init__(self) -> None:
+            self.reason_calls = 0
+
+        def generate_json(self, prompt, **kwargs):
+            if "hero_b_id" in prompt:
+                self.reason_calls += 1
+            return super().generate_json(prompt, **kwargs)
+
+    client = CountingClient()
+    bundles = [_slardar_bundle(), _stub_bundle(120, "DragonKnight"), _stub_bundle(96, "Mirana")]
+
+    reason_events: list[int] = []
+    results = run_bootstrap(
+        tmp_path,
+        "7.41b",
+        "invoker@test",
+        bundles,
+        client,
+        skip_reasons=True,
+        on_reason=lambda b, r: reason_events.append(b.hero_id),
+    )
+
+    assert all(r.success for r in results)
+    assert all(r.reasons_written == 0 for r in results)
+    assert client.reason_calls == 0
+    assert reason_events == []

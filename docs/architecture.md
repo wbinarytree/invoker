@@ -117,7 +117,7 @@ The orchestrator now runs two explicit passes across the hero roster:
 - **Pass 1 — `extract_hero`**: extract tags, derive stat edges, write the hero file with no reasons.
 - **Pass 2 — `reason_hero`**: read the written hero, build candidates from disk, run the reason batch, merge reasons into the hero, rewrite.
 
-`run_for_hero` is preserved as a thin compose (`extract_hero` → `reason_hero`) for single-hero callers and tests. Production bootstrap calls the two pass functions separately so every hero has tags on disk before any reason batch fires.
+Production bootstrap calls `run_bootstrap` (in `pipeline/orchestrator.py`), which drives pass 1 across every bundle before pass 2 starts and merges each hero's extract+reason `HeroResult` into one per-hero record. The CLI is a thin layer: it wires config into `run_bootstrap` and supplies `on_extract` / `on_reason` callbacks for progress output — no per-hero control flow lives there.
 
 The overall stage boundaries (fetch / bundle / extract / derive / reason / assemble / write / summarize / finalize) are still the actual contract. What changed is how the orchestrator sequences extract vs. reason across heroes — not the stages themselves. The pipeline has **not** yet been redesigned into a facts/relations/views architecture.
 
@@ -259,7 +259,7 @@ The older Phase 1.2 notion of improving the STRATZ-first candidate path is no lo
 
 ## Error Recovery
 
-`extract_hero()` and `reason_hero()` both return `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason, pending_manual_paths)`. The CLI merges the two results per hero; `run_for_hero()` does the same for single-hero callers.
+`extract_hero()` and `reason_hero()` both return `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason, pending_manual_paths)`. `run_bootstrap()` merges the two results per hero so callers see one record per hero with pending paths from either pass aggregated.
 
 - Extraction failure (pass 1) → log, return `success=False` with a `failure_reason`; pass 2 is skipped for that hero, the next hero continues.
 - Pending manual extract → `failure_reason="pending_manual"` with the prompt path attached; pass 2 is skipped for that hero.
@@ -331,7 +331,7 @@ Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstra
 | `--max-reason-edges N` | Cap edges fed to the batch reason call per relation per hero (default 5). |
 | `--manual` | Force the manual file-based client for this run. |
 
-Before the orchestrator loop runs, bootstrap prints a worst-case LLM call estimate (`heroes × (1 extract + 1 reason)`; `1` when `--skip-reasons`) so the operator can compare it against the daily quota. The bootstrap loop prints progress for both passes (`Pass 1/2: extracting hero tags...` then `Pass 2/2: generating reasons...`). At the end of the run it prints an aggregate summary (heroes requested / written / failed, reasons written / skipped) plus per-hero failure reasons, and — in manual mode — a paste-and-rerun block listing every pending prompt path.
+Before invoking `run_bootstrap`, the CLI prints a worst-case LLM call estimate (`heroes × (1 extract + 1 reason)`; `1` when `--skip-reasons`) so the operator can compare it against the daily quota. Per-hero `extract` / `reason` progress lines come from the `on_extract` / `on_reason` callbacks the CLI passes into `run_bootstrap`. At the end of the run the CLI prints an aggregate summary (heroes requested / written / failed, reasons written / skipped) plus per-hero failure reasons, and — in manual mode — a paste-and-rerun block listing every pending prompt path.
 
 ---
 
