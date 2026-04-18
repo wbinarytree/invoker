@@ -1,5 +1,7 @@
 # Batch Reason Generation
 
+> Superseded on 2026-04-18 by the KG-first direction. Keep only as implementation history for the old stat-selected pair reasoning path. Active docs now start at [docs/CURRENT_DIRECTION.md](/Users/yaoda/Projects/invoker/docs/CURRENT_DIRECTION.md:1).
+
 **Date:** 2026-04-16  
 **Status:** approved  
 **Scope:** small; new prompts, updated `reason.py` and `orchestrator.py`
