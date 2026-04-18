@@ -50,7 +50,12 @@ def bootstrap(
     from invoker.llm import CachingLLMClient, make_client
     from invoker.pipeline.bundle import build_bundles
     from invoker.pipeline.fetch import fetch_all
-    from invoker.pipeline.orchestrator import HeroResult, finalize_patch, run_for_hero
+    from invoker.pipeline.orchestrator import (
+        HeroResult,
+        extract_hero,
+        finalize_patch,
+        reason_hero,
+    )
 
     cfg = _load_config()
 
@@ -97,24 +102,56 @@ def bootstrap(
         f"cache hits reduce this)."
     )
 
-    results: list[HeroResult] = []
+    # Pass 1: extract every hero's tags before any reason pass runs.
+    # This guarantees pass 2 can see hero_b tags for cross-hero grounding.
+    typer.echo("Pass 1/2: extracting hero tags...")
+    extract_results: dict[int, HeroResult] = {}
     for bundle in bundles:
-        result = run_for_hero(
-            cfg.data_dir,
-            patch,
-            __version__,
-            bundle,
-            client,
-            hero_names=hero_names,
-            max_edges=max_reason_edges,
-            skip_reasons=skip_reasons,
-        )
-        status = "ok" if result.success else f"FAILED ({result.failure_reason})"
-        typer.echo(
-            f"  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
-            f"{status}  reasons={result.reasons_written}"
-        )
-        results.append(result)
+        r = extract_hero(cfg.data_dir, patch, __version__, bundle, client)
+        status = "ok" if r.success else f"FAILED ({r.failure_reason})"
+        typer.echo(f"  extract hero {bundle.hero_id:>4} {bundle.localized_name:<24} {status}")
+        extract_results[bundle.hero_id] = r
+
+    # Pass 2: reason only over heroes whose extraction succeeded.
+    results: list[HeroResult] = []
+    if skip_reasons:
+        typer.echo("Pass 2/2: skipped (--skip-reasons).")
+        for bundle in bundles:
+            results.append(extract_results[bundle.hero_id])
+    else:
+        typer.echo("Pass 2/2: generating reasons...")
+        for bundle in bundles:
+            ext = extract_results[bundle.hero_id]
+            if not ext.success:
+                results.append(ext)
+                continue
+            rsn = reason_hero(
+                cfg.data_dir,
+                patch,
+                bundle.hero_id,
+                client,
+                max_edges=max_reason_edges,
+                hero_names=hero_names,
+            )
+            merged_pending: list = []
+            if ext.pending_manual_paths:
+                merged_pending.extend(ext.pending_manual_paths)
+            if rsn.pending_manual_paths:
+                merged_pending.extend(rsn.pending_manual_paths)
+            merged = HeroResult(
+                hero_id=bundle.hero_id,
+                success=rsn.success,
+                reasons_written=rsn.reasons_written,
+                reasons_skipped=rsn.reasons_skipped,
+                failure_reason=rsn.failure_reason,
+                pending_manual_paths=merged_pending or None,
+            )
+            status = "ok" if merged.success else f"FAILED ({merged.failure_reason})"
+            typer.echo(
+                f"  reason  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
+                f"{status}  reasons={merged.reasons_written}"
+            )
+            results.append(merged)
 
     succeeded = [r for r in results if r.success]
     failed = [r for r in results if not r.success]
