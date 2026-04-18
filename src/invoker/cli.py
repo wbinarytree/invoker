@@ -50,7 +50,12 @@ def bootstrap(
     from invoker.llm import CachingLLMClient, make_client
     from invoker.pipeline.bundle import build_bundles
     from invoker.pipeline.fetch import fetch_all
-    from invoker.pipeline.orchestrator import HeroResult, finalize_patch, run_for_hero
+    from invoker.pipeline.orchestrator import (
+        HeroRawBundle,
+        HeroResult,
+        finalize_patch,
+        run_bootstrap,
+    )
 
     cfg = _load_config()
 
@@ -78,15 +83,13 @@ def bootstrap(
     hero_names: dict[int, str] = raw["hero_names"]
 
     from invoker.llm.gemini import make_model_config
+
     llm_kind = "manual" if manual else cfg.llm_client
     model_cfg = make_model_config(cfg.llm_model, cfg.llm_rpm, cfg.llm_rpd)
     if llm_kind == "manual":
         typer.echo("LLM: manual (file-based; prompts under data/raw/manual_prompts/)")
     else:
-        typer.echo(
-            f"LLM: {llm_kind}  model={cfg.llm_model}"
-            f"  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}"
-        )
+        typer.echo(f"LLM: {llm_kind}  model={cfg.llm_model}  rpm={cfg.llm_rpm}  rpd={cfg.llm_rpd}")
     inner = make_client(llm_kind, config=model_cfg)
     client = CachingLLMClient(inner, cfg.data_dir / "cache" / "llm")
 
@@ -97,24 +100,34 @@ def bootstrap(
         f"cache hits reduce this)."
     )
 
-    results: list[HeroResult] = []
-    for bundle in bundles:
-        result = run_for_hero(
-            cfg.data_dir,
-            patch,
-            __version__,
-            bundle,
-            client,
-            hero_names=hero_names,
-            max_edges=max_reason_edges,
-            skip_reasons=skip_reasons,
-        )
-        status = "ok" if result.success else f"FAILED ({result.failure_reason})"
+    def _on_extract(bundle: HeroRawBundle, r: HeroResult) -> None:
+        status = "ok" if r.success else f"FAILED ({r.failure_reason})"
+        typer.echo(f"  extract hero {bundle.hero_id:>4} {bundle.localized_name:<24} {status}")
+
+    def _on_reason(bundle: HeroRawBundle, r: HeroResult) -> None:
+        status = "ok" if r.success else f"FAILED ({r.failure_reason})"
         typer.echo(
-            f"  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
-            f"{status}  reasons={result.reasons_written}"
+            f"  reason  hero {bundle.hero_id:>4} {bundle.localized_name:<24} "
+            f"{status}  reasons={r.reasons_written}"
         )
-        results.append(result)
+
+    typer.echo(
+        "Two-pass bootstrap: extracting all hero tags first, "
+        + ("then skipping reasons." if skip_reasons else "then generating reasons.")
+    )
+
+    results = run_bootstrap(
+        cfg.data_dir,
+        patch,
+        __version__,
+        bundles,
+        client,
+        max_reason_edges=max_reason_edges,
+        skip_reasons=skip_reasons,
+        hero_names=hero_names,
+        on_extract=_on_extract,
+        on_reason=_on_reason,
+    )
 
     succeeded = [r for r in results if r.success]
     failed = [r for r in results if not r.success]
