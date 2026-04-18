@@ -1,7 +1,7 @@
 # Invoker — Architecture (Implementation Artifact)
 
 Last updated: 2026-04-18
-Phase: transition after 1.1; current code still reflects the hero-KB-first architecture, while the active roadmap has shifted to a KG-first validation path
+Phase: transition after 1.1; the KG-first direction is active on paper and the two-pass infrastructure fix (Stage 1 of the execution plan) is landed. The rest of the code still reflects the hero-KB-first architecture.
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
 
@@ -106,10 +106,20 @@ File-based LLM loop for rate-limit emergencies and spot-checks.
 ## Pipeline Stages
 
 ```
-fetch → bundle → extract → derive → reason → assemble → write → summarize → finalize
+fetch → bundle
+       → (pass 1)  extract → derive → assemble → write → summarize
+       → (pass 2)  reason  → merge reasons → rewrite → summarize
+       → finalize
 ```
 
-This remains the actual current pipeline. It has **not** yet been redesigned into a facts/relations/views architecture.
+The orchestrator now runs two explicit passes across the hero roster:
+
+- **Pass 1 — `extract_hero`**: extract tags, derive stat edges, write the hero file with no reasons.
+- **Pass 2 — `reason_hero`**: read the written hero, build candidates from disk, run the reason batch, merge reasons into the hero, rewrite.
+
+`run_for_hero` is preserved as a thin compose (`extract_hero` → `reason_hero`) for single-hero callers and tests. Production bootstrap calls the two pass functions separately so every hero has tags on disk before any reason batch fires.
+
+The overall stage boundaries (fetch / bundle / extract / derive / reason / assemble / write / summarize / finalize) are still the actual contract. What changed is how the orchestrator sequences extract vs. reason across heroes — not the stages themselves. The pipeline has **not** yet been redesigned into a facts/relations/views architecture.
 
 ### fetch (`pipeline/fetch.py`)
 
@@ -148,32 +158,25 @@ Pure computation from raw stats:
 - `meta_tier`: classifies hero into tier based on contest_rate and win_rate
 - `position_weights`: normalises position count dict to weights
 
-### reason (`pipeline/reason.py`)
+### reason (`pipeline/reason.py`, driven by `orchestrator.reason_hero`)
 
 Single prompt: `edge_reasons_batch`.
 
-All synergy and counter edges for a hero are batched into **one LLM call** per hero.
-Hero A name and tags appear once in the prompt header; each edge item carries hero B info,
-relation type, score, and game count. The model returns a JSON array parallel to the input.
+`reason_hero` reads the already-written hero file from disk, selects candidates from its `synergies`/`counters` lists, and batches them into **one LLM call** per hero. Hero A name and tags appear once in the prompt header; each edge item carries hero B info, relation type, score, and game count. The model returns a JSON array parallel to the input.
 
-Only `med` and `high` confidence edges are included. Edges are capped to `max_edges`
-(default 5) per relation before batching — lists are already sorted by `|score|` descending
-so the highest-signal edges are always kept.
+Only `med` and `high` confidence edges are included. Edges are capped to `max_edges` (default 5) per relation before batching — lists are already sorted by `|score|` descending so the highest-signal edges are always kept.
 
-Heroes appearing in both the synergy and counter candidate lists are excluded from the counter
-list to prevent duplicate `hero_b_id` values in the batch prompt.
+Heroes appearing in both the synergy and counter candidate lists are excluded from the counter list to prevent duplicate `hero_b_id` values in the batch prompt.
 
-Hero B names are resolved from the written hero file if available, falling back to the full
-roster `hero_names` map from `fetch_all`. Placeholder names like `hero_55` must be avoided —
-thinking models enter infinite ID-verification loops when names are missing.
+Hero B names and tags are resolved from the written hero file on disk; when hero B has not been written yet, `hero_names` from `fetch_all` provides a fallback name and tags are empty. Placeholder names like `hero_55` must be avoided — thinking models enter infinite ID-verification loops when names are missing.
 
-Call budget: `1 extract + 1 batch reason = 2 calls per hero`.
+**Tag-coverage guard (`tagged == 0`):** before the batch fires, `reason_hero` counts candidates whose hero_b has tags on disk. If none do, the batch is skipped cleanly with a structured log line and the hero is left written without reasons. This prevents wasted quota when hero B extraction is incomplete and prevents ungrounded prose from landing in the artifact. Two-pass bootstrap ordering ensures the guard fires only as an edge case (e.g. hero B extraction failed), not on every run.
 
-Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects any item whose
-reason cites no tag from either hero. Failing items are skipped; the rest are kept.
+Call budget: `1 extract + 1 batch reason = 2 calls per hero` (when the guard does not trip).
 
-Batch validation is strict: the returned `hero_b_id` list must exactly match the input
-edge order. Duplicate ids, missing ids, or reordered ids fail the whole batch.
+Grounding check: `validate_grounding(reason, a_tags, b_tags)` — rejects any item whose reason cites no tag from either hero. Failing items are skipped; the rest are kept.
+
+Batch validation is strict: the returned `hero_b_id` list must exactly match the input edge order. Duplicate ids, missing ids, or reordered ids fail the whole batch.
 
 Important: this stage is part of the **current implementation**, not the active long-term direction. The project is no longer treating "STRATZ-selected pairs plus better prose reasons" as the intended final relation architecture.
 
@@ -231,23 +234,24 @@ The active roadmap for this direction lives in:
 
 Only low-regret infrastructure work from the old path should still move forward immediately.
 
-At the moment, that mainly means:
+Landed as of this update:
 
-- the two-pass orchestrator split
-- skipping relation/reason calls when hero B semantic coverage is absent
+- two-pass orchestrator split (`extract_hero` + `reason_hero`)
+- `tagged == 0` guard that skips the reason batch when no hero B has tags
 
-Broader work on improving the existing STRATZ-first reason pipeline is no longer the preferred roadmap.
+Remaining Stage 1 deliverables from the execution plan are complete. Broader work on improving the existing STRATZ-first reason pipeline is no longer the preferred roadmap. The next real architectural step is Stage 2 — canonical schema design for hero facts and relation records.
 
 ---
 
 ## Known Gaps In The Current Implementation
 
-The current orchestrator runs extract → reason → write per hero in a single sequential pass. This means hero B's functional tags are often unavailable when hero A's reason batch runs (hero B hasn't been extracted yet). Consequences:
+**Resolved:** the sequential extract→reason per hero gap is fixed. Pass 1 now materialises every hero's tags before pass 2 runs, and the `tagged == 0` guard skips the reason batch cleanly when hero B coverage is still absent. The motivating failure mode (empty `hero_b_tags`, thinking loops on ungrounded prompts) is no longer reachable on a full roster run.
 
-- All `hero_b_tags` in the reason prompt show `(no tags)`, forcing the model to ground every reason in hero A's tags only.
-- When hero A has relational tags like `physical_damage_amplifier`, the LLM has no context for what hero B offers and may enter a thinking loop, returning an empty response.
+**Still open:**
 
-The still-relevant fix is to split the orchestrator into two explicit passes (extract all → reason/relation stage all) and add a guard that skips the reason batch when no hero B semantics are available.
+- The relation layer is still prose-over-stat-selected pairs. This is acceptable as a transitional implementation; the KG execution plan replaces it in Stages 4–6, not now.
+- `HeroDerived` does not yet encode `capabilities` / `requirements` / `liabilities`. The schema redesign is Stage 2 of the execution plan.
+- Relation records are still denormalised inside hero files. Canonical relation artifacts are deferred to Stage 2/5.
 
 The older Phase 1.2 notion of improving the STRATZ-first candidate path is no longer the active roadmap. See `docs/CURRENT_DIRECTION.md`.
 
@@ -255,15 +259,15 @@ The older Phase 1.2 notion of improving the STRATZ-first candidate path is no lo
 
 ## Error Recovery
 
-`run_for_hero()` returns `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason)`.
+`extract_hero()` and `reason_hero()` both return `HeroResult(hero_id, success, reasons_written, reasons_skipped, failure_reason, pending_manual_paths)`. The CLI merges the two results per hero; `run_for_hero()` does the same for single-hero callers.
 
-- Extraction failure → log, return `success=False`, continue next hero
-- Reason failure → log, increment `reasons_skipped`, continue other reasons
-- Hero still written even with missing reasons
+- Extraction failure (pass 1) → log, return `success=False` with a `failure_reason`; pass 2 is skipped for that hero, the next hero continues.
+- Pending manual extract → `failure_reason="pending_manual"` with the prompt path attached; pass 2 is skipped for that hero.
+- Reason batch failure (pass 2) → log, hero remains written from pass 1 with no reasons; the run continues.
+- Reason grounding rejection → log, increment `reasons_skipped`, keep other reasons.
+- `reason_hero` on a hero with no written file → `failure_reason="hero_file_missing"`. Should not happen on a normal run because pass 2 only iterates heroes whose pass 1 succeeded.
 
-`finalize_patch` only processes heroes whose output files exist — partial runs don't block finalisation.
-The manifest is marked `complete` only when there is no hero filter and every requested
-hero succeeded. Filtered runs and failed full-roster runs both write `partial`.
+`finalize_patch` only processes heroes whose output files exist — partial runs don't block finalisation. The manifest is marked `complete` only when there is no hero filter and every requested hero succeeded. Filtered runs and failed full-roster runs both write `partial`.
 
 ---
 
@@ -327,7 +331,7 @@ Milestone gate: Pangolier + Slardar pass `invoker validate` before full bootstra
 | `--max-reason-edges N` | Cap edges fed to the batch reason call per relation per hero (default 5). |
 | `--manual` | Force the manual file-based client for this run. |
 
-Before the orchestrator loop runs, bootstrap prints a worst-case LLM call estimate (`heroes × (1 extract + 1 reason)`; `1` when `--skip-reasons`) so the operator can compare it against the daily quota. At the end of the run it prints an aggregate summary (heroes requested / written / failed, reasons written / skipped) plus per-hero failure reasons, and — in manual mode — a paste-and-rerun block listing every pending prompt path.
+Before the orchestrator loop runs, bootstrap prints a worst-case LLM call estimate (`heroes × (1 extract + 1 reason)`; `1` when `--skip-reasons`) so the operator can compare it against the daily quota. The bootstrap loop prints progress for both passes (`Pass 1/2: extracting hero tags...` then `Pass 2/2: generating reasons...`). At the end of the run it prints an aggregate summary (heroes requested / written / failed, reasons written / skipped) plus per-hero failure reasons, and — in manual mode — a paste-and-rerun block listing every pending prompt path.
 
 ---
 
