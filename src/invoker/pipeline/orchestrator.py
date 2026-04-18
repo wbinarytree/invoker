@@ -170,18 +170,14 @@ def extract_hero(
     return HeroResult(hero_id=bundle.hero_id, success=True)
 
 
-def _select_reason_candidates(
-    hero: HeroDerived, max_edges: int
-) -> list[tuple[StatEdge, str]]:
+def _select_reason_candidates(hero: HeroDerived, max_edges: int) -> list[tuple[StatEdge, str]]:
     """
     Candidates come from the written hero's synergies/counters, already sorted
     by |score| desc, filtered to med/high confidence, capped at max_edges per
     relation. Counter list excludes heroes already chosen as synergies so the
     batch never contains duplicate hero_b_ids.
     """
-    syn = [e for e in hero.synergies.get("pro", []) if e.confidence in ("med", "high")][
-        :max_edges
-    ]
+    syn = [e for e in hero.synergies.get("pro", []) if e.confidence in ("med", "high")][:max_edges]
     syn_ids = {e.hero_id for e in syn}
     ctr = [
         e
@@ -248,9 +244,7 @@ def reason_hero(
 
     edge_inputs: list[EdgeReasonInput] = []
     for edge, relation in pairs:
-        hero_b_name, hero_b_tags = _try_load_hero_context(
-            data_dir, patch, edge.hero_id, hero_names
-        )
+        hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, edge.hero_id, hero_names)
         edge_inputs.append(
             EdgeReasonInput(
                 hero_b_id=edge.hero_id,
@@ -344,52 +338,6 @@ def reason_hero(
         reasons_written=reasons_written,
         reasons_skipped=reasons_skipped,
         pending_manual_paths=[pending_reason_prompt] if pending_reason_prompt else None,
-    )
-
-
-def run_for_hero(
-    data_dir: Path,
-    patch: str,
-    generator_version: str,
-    bundle: HeroRawBundle,
-    client: LLMClient,
-    max_edges: int = 5,
-    hero_names: dict[int, str] | None = None,
-    skip_reasons: bool = False,
-) -> HeroResult:
-    """
-    Convenience compose: run pass 1 then pass 2 for a single hero.
-
-    Production bootstrap should call `extract_hero` and `reason_hero` across
-    the full roster separately so pass 2 can see every hero's tags. This
-    helper keeps single-hero test paths and ad-hoc callers simple.
-    """
-    extract = extract_hero(data_dir, patch, generator_version, bundle, client)
-    if not extract.success or skip_reasons:
-        return extract
-
-    reason = reason_hero(
-        data_dir,
-        patch,
-        bundle.hero_id,
-        client,
-        max_edges=max_edges,
-        hero_names=hero_names,
-    )
-
-    pending: list[Path] = []
-    if extract.pending_manual_paths:
-        pending.extend(extract.pending_manual_paths)
-    if reason.pending_manual_paths:
-        pending.extend(reason.pending_manual_paths)
-
-    return HeroResult(
-        hero_id=bundle.hero_id,
-        success=reason.success,
-        reasons_written=reason.reasons_written,
-        reasons_skipped=reason.reasons_skipped,
-        failure_reason=reason.failure_reason,
-        pending_manual_paths=pending or None,
     )
 
 

@@ -26,7 +26,8 @@ def _resolve_abilities(
 
 def build_bundles(raw: dict, patch: str) -> list[HeroRawBundle]:
     """
-    Convert fetch_all output into HeroRawBundle objects ready for run_for_hero.
+    Convert fetch_all output into HeroRawBundle objects ready for the two-pass
+    orchestrator (`extract_hero` then `reason_hero`).
 
     Meta stats (position_counts, contest_rate, win_rate) are zeroed — no source
     exists yet without fetching individual match details. Explicit zeros are used
