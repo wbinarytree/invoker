@@ -82,6 +82,21 @@ Recommended generation path:
    - `A.capability -> B.liability`
    - `A.capability -> B.requirement`
 
+This is intentional for the benchmark phase.
+
+We are trying to validate the representation itself:
+
+- are the hero fact objects useful?
+- are the relation objects useful?
+- are the patterns expressive enough?
+
+If we asked an LLM to infer the relations at this stage, we would blur two different questions:
+
+1. is the representation good?
+2. is the LLM good at discovering relations through it?
+
+For the first validation slice, deterministic inference is better because it makes failure easier to diagnose.
+
 3. Attach `RelationEvidence` afterward.
    Stats support or challenge the inferred relation; they do not define it.
 
@@ -265,7 +280,7 @@ Attach support, absence, or contradiction without letting stats define ontology.
     "source": "stratz",
     "score": 0.08,
     "games": 50,
-    "status": "supports"
+    "alignment": "aligned"
   }
 }
 ```
@@ -274,10 +289,10 @@ Attach support, absence, or contradiction without letting stats define ontology.
 
 The benchmark prototype must distinguish at least these cases:
 
-- `supports`
-- `weak_support`
-- `absent`
-- `contradicts`
+- `aligned`
+- `weakly_aligned`
+- `unobserved`
+- `contradicted`
 
 If the first slice cannot carry those four states, the evidence layer is too weak.
 
