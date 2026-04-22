@@ -24,6 +24,50 @@ def version() -> None:
     typer.echo(f"invoker {__version__}")
 
 
+@app.command("draft-facts")
+def draft_facts_cmd(
+    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+    patch: str = typer.Option(
+        "authoring",
+        help="Cache namespace for OpenDota prompt inputs; does not affect authored YAML format.",
+    ),
+) -> None:
+    from invoker.kg.authoring import draft_facts
+
+    cfg = _load_config()
+    result = draft_facts(cfg.data_dir, hero, patch=patch)
+    if result.pending:
+        typer.echo(f"Prompt written: {result.prompt_path}")
+        typer.echo(f"Paste the LLM response into: {result.response_path}")
+        raise typer.Exit(code=0)
+    typer.echo(f"Wrote draft facts: {result.authored_path}")
+
+
+@app.command("validate-facts")
+def validate_facts_cmd(
+    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+) -> None:
+    from invoker.kg.authoring import (
+        resolve_authored_file,
+        validate_authored_file,
+    )
+
+    cfg = _load_config()
+    path = resolve_authored_file(cfg.data_dir, hero)
+    profile = validate_authored_file(path)
+    typer.echo(f"{path}: valid ({profile.localized_name})")
+
+
+@app.command("show-relations")
+def show_relations_cmd(
+    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+) -> None:
+    from invoker.kg.authoring import format_relations_for_hero
+
+    cfg = _load_config()
+    typer.echo(format_relations_for_hero(cfg.data_dir, hero))
+
+
 @app.command()
 def bootstrap(
     patch: str = typer.Option(..., help="Patch string, e.g. 7.41b"),

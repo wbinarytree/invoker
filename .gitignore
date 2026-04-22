@@ -14,6 +14,11 @@ venv/
 
 # Invoker ships as a framework with no data. All knowledge is bootstrapped.
 data/
+!data/
+data/*
+!data/authored/
+data/authored/*
+!data/authored/README.md
 
 # Local scratch / working notes — not for version control
 docs/tmp/
