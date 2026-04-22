@@ -24,6 +24,8 @@ class HeroFactProfile(BaseModel):
     capabilities: list[HeroFactFeature] = Field(default_factory=list)
     requirements: list[HeroFactFeature] = Field(default_factory=list)
     liabilities: list[HeroFactFeature] = Field(default_factory=list)
+    targets: list[HeroFactFeature] = Field(default_factory=list)
+    role_distribution: dict[str, float] = Field(default_factory=dict)
     provenance: dict = Field(default_factory=dict)
 
 
@@ -53,7 +55,7 @@ class RelationEvidenceStatistical(BaseModel):
 class RelationEvidence(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mechanical: RelationEvidenceMechanical
-    statistical: RelationEvidenceStatistical | None = None
+    statistical: list[RelationEvidenceStatistical] = Field(default_factory=list)
 
 
 class HeroRelation(BaseModel):

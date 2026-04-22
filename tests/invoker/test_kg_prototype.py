@@ -21,6 +21,8 @@ def _profile(
     capabilities: list[str],
     requirements: list[str] | None = None,
     liabilities: list[str] | None = None,
+    targets: list[str] | None = None,
+    role_distribution: dict[str, float] | None = None,
 ) -> HeroFactProfile:
     return HeroFactProfile(
         hero_id=hero_id,
@@ -30,6 +32,8 @@ def _profile(
         capabilities=[_feature(t) for t in capabilities],
         requirements=[_feature(t) for t in (requirements or [])],
         liabilities=[_feature(t) for t in (liabilities or [])],
+        targets=[_feature(t) for t in (targets or [])],
+        role_distribution=role_distribution or {},
         provenance={"prototype": True},
     )
 
@@ -55,7 +59,7 @@ def test_antimage_counters_medusa_via_resource_punish():
     assert rel.pattern == "resource_punish"
     assert rel.source_feature == "mana_burn"
     assert rel.target_feature == "mana_dependence"
-    assert rel.evidence.statistical is None
+    assert rel.evidence.statistical == []
 
 
 def test_slardar_counters_riki_via_vision_exposure():
@@ -120,3 +124,15 @@ def test_oracle_to_nyx_negative_control_is_empty():
     relations = infer_relation(oracle, nyx)
 
     assert relations == []
+
+
+def test_profile_accepts_targets_and_role_distribution():
+    profile = _profile(
+        120,
+        "Pangolier",
+        capabilities=["mobility"],
+        targets=["punishes_immobile_backline"],
+        role_distribution={"mid": 0.6, "offlane": 0.3, "roamer": 0.1},
+    )
+    assert [f.type for f in profile.targets] == ["punishes_immobile_backline"]
+    assert profile.role_distribution["mid"] == 0.6

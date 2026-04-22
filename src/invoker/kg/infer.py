@@ -53,7 +53,6 @@ def _make_relation(
                     ),
                 ],
             ),
-            statistical=None,
         ),
         confidence=confidence,
     )
