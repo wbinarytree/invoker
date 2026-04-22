@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from invoker.kg import (
+    FactProvenance,
     HeroFactFeature,
     HeroFactProfile,
     RelationsReader,
@@ -32,12 +33,20 @@ def _profile(
 ) -> HeroFactProfile:
     return HeroFactProfile(
         hero_id=hero_id,
+        hero_slug=name.lower(),
         localized_name=name,
         source_patch="7.41b",
         cohort="pro",
         capabilities=[_feature(t) for t in (capabilities or [])],
         requirements=[_feature(t) for t in (requirements or [])],
         liabilities=[_feature(t) for t in (liabilities or [])],
+        targets=[],
+        role_distribution={},
+        provenance=FactProvenance(
+            authored_by="human",
+            authored_at="2026-04-22",
+            assist_model=None,
+        ),
     )
 
 

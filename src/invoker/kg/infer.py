@@ -104,7 +104,10 @@ def infer_relation(source: HeroFactProfile, target: HeroFactProfile) -> list[Her
                 pattern="enabler_payoff",
                 source_feature="armor_reduction",
                 target_feature="magic_burst",
-                rationale="damage amplification or setup creates a payoff window for burst follow-up",
+                rationale=(
+                    "damage amplification or setup creates a payoff window "
+                    "for burst follow-up"
+                ),
                 confidence="med",
                 mechanical_confidence=0.65,
             )
@@ -134,7 +137,10 @@ def infer_relation(source: HeroFactProfile, target: HeroFactProfile) -> list[Her
                 pattern="mobility_punish",
                 source_feature="reliable_stun",
                 target_feature="mobility",
-                rationale="reliable lockdown punishes heroes whose value depends on movement freedom",
+                rationale=(
+                    "reliable lockdown punishes heroes whose value depends "
+                    "on movement freedom"
+                ),
                 confidence="med",
                 mechanical_confidence=0.7,
             )

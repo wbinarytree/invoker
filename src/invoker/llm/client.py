@@ -43,11 +43,6 @@ class LLMClient(Protocol):
 
 
 def make_client(kind: str, config: object | None = None) -> LLMClient:
-    if kind == "gemini":
-        from invoker.llm.gemini import GEMINI_2_5_FLASH, GeminiClient, GeminiModelConfig
-
-        resolved = config if isinstance(config, GeminiModelConfig) else GEMINI_2_5_FLASH
-        return GeminiClient(config=resolved)
     if kind == "manual":
         from invoker.llm.manual import ManualClient
 

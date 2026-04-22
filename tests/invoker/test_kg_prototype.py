@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from invoker.kg import HeroFactFeature, HeroFactProfile, infer_relation
+from invoker.kg import FactProvenance, HeroFactFeature, HeroFactProfile, infer_relation
 from invoker.kg.vocabulary import (
     CAPABILITIES,
     LIABILITIES,
@@ -26,6 +26,7 @@ def _profile(
 ) -> HeroFactProfile:
     return HeroFactProfile(
         hero_id=hero_id,
+        hero_slug=name.lower(),
         localized_name=name,
         source_patch="7.41b",
         cohort="pro",
@@ -34,7 +35,11 @@ def _profile(
         liabilities=[_feature(t) for t in (liabilities or [])],
         targets=[_feature(t) for t in (targets or [])],
         role_distribution=role_distribution or {},
-        provenance={"prototype": True},
+        provenance=FactProvenance(
+            authored_by="human",
+            authored_at="2026-04-22",
+            assist_model=None,
+        ),
     )
 
 
@@ -68,7 +73,12 @@ def test_slardar_counters_riki_via_vision_exposure():
         "Slardar",
         capabilities=["armor_reduction", "vision_reveal", "initiation", "reliable_stun"],
     )
-    riki = _profile(48, "Riki", capabilities=["mobility", "silence"], liabilities=["weak_to_reveal"])
+    riki = _profile(
+        48,
+        "Riki",
+        capabilities=["mobility", "silence"],
+        liabilities=["weak_to_reveal"],
+    )
 
     relations = infer_relation(slardar, riki)
 

@@ -5,13 +5,20 @@ from functools import cached_property
 from pathlib import Path
 
 from invoker.graph import load_graph
-from invoker.paths import manifest_file, summary_file
+from invoker.kg.reader import RelationsReader
+from invoker.paths import manifest_file, relations_file, summary_file
 from invoker.pipeline.writer import read_hero
 from invoker.schemas.derived import HeroDerived
 
 
 class KnowledgeBase:
-    def __init__(self, patch: str, bracket: str = "pro", *, data_dir: Path | None = None) -> None:
+    def __init__(
+        self,
+        patch: str,
+        bracket: str | None = None,
+        *,
+        data_dir: Path | None = None,
+    ) -> None:
         from invoker.config import Config
 
         cfg = Config.load()
@@ -28,13 +35,15 @@ class KnowledgeBase:
     def _graph(self):
         return load_graph(self.data_dir, self.patch)
 
+    @cached_property
+    def _relations(self) -> RelationsReader:
+        return RelationsReader.load(relations_file(self.data_dir, self.patch))
+
     def patches(self) -> list[str]:
         root = self.data_dir / "derived"
         return sorted(p.name for p in root.iterdir() if p.is_dir()) if root.exists() else []
 
     def brackets(self) -> list[str]:
-        for entry in self._manifest.get("heroes", []):
-            return entry.get("brackets", [])
         return []
 
     def hero(self, key: int | str) -> HeroDerived:
@@ -46,42 +55,54 @@ class KnowledgeBase:
 
     def _by_name(self, name: str) -> HeroDerived:
         for entry in self._manifest.get("heroes", []):
-            h = self.hero(entry["hero_id"])
-            if h.localized_name.lower() == name.lower():
-                return h
+            hero = self.hero(entry["hero_id"])
+            if hero.localized_name.lower() == name.lower():
+                return hero
         raise KeyError(f"hero not found: {name}")
 
     def synergies(self, key: int | str, *, min_confidence: str = "med") -> list:
         order = ["none", "low", "med", "high"]
         cutoff = order.index(min_confidence)
         return [
-            e
-            for e in self.hero(key).synergies.get(self.bracket, [])
-            if order.index(e.confidence) >= cutoff
+            rel
+            for rel in self._relations.synergies_with(self.hero(key).hero_id)
+            if order.index(rel.confidence) >= cutoff
         ]
 
     def counters(self, key: int | str, *, min_confidence: str = "med") -> list:
         order = ["none", "low", "med", "high"]
         cutoff = order.index(min_confidence)
         return [
-            e
-            for e in self.hero(key).counters.get(self.bracket, [])
-            if order.index(e.confidence) >= cutoff
+            rel
+            for rel in self._relations.relations_for(self.hero(key).hero_id)
+            if rel.relation_kind == "counter" and order.index(rel.confidence) >= cutoff
         ]
 
     def neighbors(self, key: int | str, *, relation: str = "synergy", top_k: int = 5) -> list:
-        h = self.hero(key)
-        edges = (h.synergies if relation == "synergy" else h.counters).get(self.bracket, [])
+        hero_id = self.hero(key).hero_id
+        edges = (
+            self._relations.synergies_with(hero_id)
+            if relation == "synergy"
+            else [
+                rel
+                for rel in self._relations.relations_for(hero_id)
+                if rel.relation_kind == "counter"
+            ]
+        )
         return edges[:top_k]
 
     def summary(self, key: int | str) -> str:
         hid = self.hero(key).hero_id
-        return summary_file(self.data_dir, self.patch, self.bracket, hid).read_text()
+        return summary_file(self.data_dir, self.patch, hid).read_text()
 
     def by_tag(self, tag: str) -> list[HeroDerived]:
         results: list[HeroDerived] = []
         for entry in self._manifest.get("heroes", []):
-            h = self.hero(entry["hero_id"])
-            if tag in h.functional_tags:
-                results.append(h)
+            hero = self.hero(entry["hero_id"])
+            if any(
+                feature.type == tag
+                for bucket in (hero.capabilities, hero.requirements, hero.liabilities, hero.targets)
+                for feature in bucket
+            ):
+                results.append(hero)
         return results

@@ -1,416 +1,86 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 
 from invoker.graph import build_graph, cache_graph
-from invoker.llm import LLMClient, PendingManualResponseError
-from invoker.logging import get_logger
-from invoker.paths import hero_file
-from invoker.pipeline.assemble import assemble_hero
-from invoker.pipeline.derive import merge_matchups, meta_tier, position_weights
-from invoker.pipeline.extract import HeroExtractionInput, extract_mechanical
-from invoker.pipeline.manifest import build_manifest, write_manifest
-from invoker.pipeline.reason import (
-    BatchReasonInput,
-    EdgeReasonInput,
-    generate_reasons_batch,
-    validate_grounding,
+from invoker.kg import (
+    HeroFactProfile,
+    RelationsReader,
+    infer_relations,
+    load_hero_facts,
+    write_relations,
 )
+from invoker.paths import authored_dir, hero_file, relations_file
+from invoker.pipeline.manifest import build_manifest, write_manifest
 from invoker.pipeline.summarize import write_summary
 from invoker.pipeline.validators import ValidationContext, validate_hero
-from invoker.pipeline.writer import read_hero, write_hero
-from invoker.schemas.derived import (
-    HeroDerived,
-    MetaBlock,
-    MetaHistoryEntry,
-    PositionBlock,
-    StatEdge,
-)
-
-logger = get_logger(__name__)
-
-
-@dataclass
-class HeroRawBundle:
-    hero_id: int
-    localized_name: str
-    internal_name: str
-    roles: list[str]
-    abilities: list[dict]
-    stratz_edges: list[dict] | None
-    opendota_matchups: list[dict] | None
-    position_counts: dict[str, int]
-    total_pro_games: int
-    window_days: int
-    contest_rate: float
-    win_rate: float
-    meta_history: list[MetaHistoryEntry]
+from invoker.pipeline.writer import write_hero
+from invoker.schemas.derived import HeroDerived
 
 
 @dataclass
 class HeroResult:
     hero_id: int
     success: bool
-    reasons_written: int = 0
-    reasons_skipped: int = 0
+    hero_slug: str | None = None
     failure_reason: str | None = None
-    pending_manual_paths: list[Path] | None = None
 
 
-def _try_load_hero_context(
-    data_dir: Path,
-    patch: str,
-    hero_id: int,
-    hero_names: dict[int, str] | None = None,
-) -> tuple[str, list[str]]:
-    """
-    Return (localized_name, functional_tags) for an already-written hero.
-    Falls back to the roster name map (if provided) or a placeholder.
-    """
-    try:
-        b = read_hero(data_dir, patch, hero_id)
-        return b.localized_name, b.functional_tags
-    except Exception:
-        name = (hero_names or {}).get(hero_id, f"hero_{hero_id}")
-        return name, []
+def _now_iso() -> str:
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
-def extract_hero(
-    data_dir: Path,
-    patch: str,
+def _to_derived(
+    profile: HeroFactProfile,
+    *,
     generator_version: str,
-    bundle: HeroRawBundle,
-    client: LLMClient,
-) -> HeroResult:
-    """
-    Pass 1: extract mechanical tags, compute statistical edges, write the hero
-    file with no reasons. Idempotent when the LLM client is cache-hot.
-    """
-    logger.info(
-        "Extract start hero_id=%s hero_name=%s",
-        bundle.hero_id,
-        bundle.localized_name,
-    )
-    try:
-        mech = extract_mechanical(
-            HeroExtractionInput(
-                hero_id=bundle.hero_id,
-                hero_name=bundle.localized_name,
-                roles=bundle.roles,
-                abilities=bundle.abilities,
-            ),
-            client,
-        )
-    except PendingManualResponseError as exc:
-        logger.info(
-            "Extract pending manual response hero_id=%s hero_name=%s prompt=%s",
-            bundle.hero_id,
-            bundle.localized_name,
-            exc.prompt_path,
-        )
-        return HeroResult(
-            hero_id=bundle.hero_id,
-            success=False,
-            failure_reason="pending_manual",
-            pending_manual_paths=[exc.prompt_path],
-        )
-    except Exception as exc:
-        logger.exception(
-            "Extract failed hero_id=%s hero_name=%s",
-            bundle.hero_id,
-            bundle.localized_name,
-        )
-        return HeroResult(hero_id=bundle.hero_id, success=False, failure_reason=str(exc))
-    logger.info(
-        "Extract done hero_id=%s hero_name=%s tags=%s",
-        bundle.hero_id,
-        bundle.localized_name,
-        mech.functional_tags,
-    )
-
-    synergies, counters = merge_matchups(
-        bundle.stratz_edges, bundle.opendota_matchups, hero_id=bundle.hero_id
-    )
-
-    hero = assemble_hero(
-        hero_id=bundle.hero_id,
-        localized_name=bundle.localized_name,
-        internal_name=bundle.internal_name,
-        source_patch=patch,
-        generator_version=generator_version,
-        roles=bundle.roles,
-        mechanical=mech,
-        positions_pro=PositionBlock(
-            weights=position_weights(bundle.position_counts),
-            games=bundle.total_pro_games,
-            window_days=bundle.window_days,
-        ),
-        synergies_pro=synergies,
-        counters_pro=counters,
-        reasons_by_edge={},
-        meta_pro=MetaBlock(
-            contest_rate=bundle.contest_rate,
-            win_rate=bundle.win_rate,
-            tier=meta_tier(bundle.contest_rate, bundle.win_rate),
-            games=bundle.total_pro_games,
-        ),
-        meta_history=bundle.meta_history,
-        statistical_provenance={"window_days": bundle.window_days},
-    )
-
-    write_hero(data_dir, patch, hero)
-    write_summary(data_dir, hero, "pro")
-    logger.info(
-        "Hero written (extract pass) hero_id=%s hero_name=%s",
-        bundle.hero_id,
-        bundle.localized_name,
-    )
-
-    return HeroResult(hero_id=bundle.hero_id, success=True)
-
-
-def _select_reason_candidates(hero: HeroDerived, max_edges: int) -> list[tuple[StatEdge, str]]:
-    """
-    Candidates come from the written hero's synergies/counters, already sorted
-    by |score| desc, filtered to med/high confidence, capped at max_edges per
-    relation. Counter list excludes heroes already chosen as synergies so the
-    batch never contains duplicate hero_b_ids.
-    """
-    syn = [e for e in hero.synergies.get("pro", []) if e.confidence in ("med", "high")][:max_edges]
-    syn_ids = {e.hero_id for e in syn}
-    ctr = [
-        e
-        for e in hero.counters.get("pro", [])
-        if e.confidence in ("med", "high") and e.hero_id not in syn_ids
-    ][:max_edges]
-    return [(e, "synergy") for e in syn] + [(e, "counter") for e in ctr]
-
-
-def _apply_reasons(
-    hero: HeroDerived,
-    reasons: dict[tuple[str, int], tuple[str, dict]],
+    generated_at: str,
 ) -> HeroDerived:
-    """Return a new HeroDerived with reasons merged into synergies/counters."""
-
-    def merge(edges: list[StatEdge], relation: str) -> list[StatEdge]:
-        out: list[StatEdge] = []
-        for e in edges:
-            pair = reasons.get((relation, e.hero_id))
-            if pair is None:
-                out.append(e)
-                continue
-            reason, prov = pair
-            out.append(e.model_copy(update={"reason": reason, "reason_provenance": prov}))
-        return out
-
-    synergies = {b: merge(v, "synergy") for b, v in hero.synergies.items()}
-    counters = {b: merge(v, "counter") for b, v in hero.counters.items()}
-    return hero.model_copy(update={"synergies": synergies, "counters": counters})
+    return HeroDerived(
+        generator_version=generator_version,
+        source_patch=profile.source_patch,
+        generated_at=generated_at,
+        hero_id=profile.hero_id,
+        hero_slug=profile.hero_slug,
+        localized_name=profile.localized_name,
+        capabilities=profile.capabilities,
+        requirements=profile.requirements,
+        liabilities=profile.liabilities,
+        targets=profile.targets,
+        role_distribution=profile.role_distribution,
+        provenance=profile.provenance,
+    )
 
 
-def reason_hero(
+def discover_authored_files(data_dir: Path, heroes: set[str] | None = None) -> list[Path]:
+    root = authored_dir(data_dir)
+    files = sorted(root.glob("*.yaml"))
+    if heroes is None:
+        return files
+
+    wanted = {token.strip().lower() for token in heroes if token.strip()}
+    selected: list[Path] = []
+    for path in files:
+        profile = load_hero_facts(path, source_patch="__filter__", cohort="pub")
+        tokens = {path.stem.lower(), profile.localized_name.lower(), str(profile.hero_id)}
+        if tokens & wanted:
+            selected.append(path)
+    return selected
+
+
+def load_profiles(
     data_dir: Path,
     patch: str,
-    hero_id: int,
-    client: LLMClient,
     *,
-    max_edges: int = 5,
-    hero_names: dict[int, str] | None = None,
-) -> HeroResult:
-    """
-    Pass 2: read the written hero, run the reason batch against the current
-    pool of hero facts on disk, and rewrite the hero with reasons attached.
-
-    Skips the batch cleanly when no candidate has hero_b tags (`tagged == 0`)
-    so hero B pools that have not been extracted yet do not waste quota.
-    """
-    try:
-        hero = read_hero(data_dir, patch, hero_id)
-    except FileNotFoundError:
-        return HeroResult(
-            hero_id=hero_id,
-            success=False,
-            failure_reason="hero_file_missing",
-        )
-
-    pairs = _select_reason_candidates(hero, max_edges=max_edges)
-    if not pairs:
-        logger.info(
-            "Reason batch skipped hero_id=%s (no med/high candidates)",
-            hero_id,
-        )
-        return HeroResult(hero_id=hero_id, success=True)
-
-    edge_inputs: list[EdgeReasonInput] = []
-    for edge, relation in pairs:
-        hero_b_name, hero_b_tags = _try_load_hero_context(data_dir, patch, edge.hero_id, hero_names)
-        edge_inputs.append(
-            EdgeReasonInput(
-                hero_b_id=edge.hero_id,
-                hero_b_name=hero_b_name,
-                hero_b_tags=hero_b_tags,
-                relation=relation,
-                score=edge.score or 0.0,
-                games=edge.games,
-            )
-        )
-
-    tagged = sum(1 for ei in edge_inputs if ei.hero_b_tags)
-    if tagged == 0:
-        logger.info(
-            "Reason batch skipped hero_id=%s (0/%d hero_b have tags)",
-            hero_id,
-            len(edge_inputs),
-        )
-        return HeroResult(hero_id=hero_id, success=True)
-
-    logger.info(
-        "Reason batch start hero_id=%s synergies=%s counters=%s tagged=%d/%d",
-        hero_id,
-        sum(1 for _, r in pairs if r == "synergy"),
-        sum(1 for _, r in pairs if r == "counter"),
-        tagged,
-        len(edge_inputs),
-    )
-
-    batch_inp = BatchReasonInput(
-        hero_a_name=hero.localized_name,
-        hero_a_tags=hero.functional_tags,
-        edges=edge_inputs,
-    )
-    pending_reason_prompt: Path | None = None
-    try:
-        outputs = generate_reasons_batch(batch_inp, client)
-    except PendingManualResponseError as exc:
-        logger.info(
-            "Reason batch pending manual response hero_id=%s prompt=%s",
-            hero_id,
-            exc.prompt_path,
-        )
-        pending_reason_prompt = exc.prompt_path
-        outputs = []
-    except Exception:
-        logger.exception("Reason batch failed hero_id=%s", hero_id)
-        outputs = []
-
-    reasons: dict[tuple[str, int], tuple[str, dict]] = {}
-    reasons_written = 0
-    reasons_skipped = 0
-    inp_by_id = {ei.hero_b_id: ei for ei in edge_inputs}
-    for out in outputs:
-        ei = inp_by_id.get(out.hero_b_id)
-        if ei is None:
-            continue
-        try:
-            validate_grounding(out.reason, hero.functional_tags, ei.hero_b_tags)
-        except Exception as exc:
-            logger.warning(
-                "Reason skipped relation=%s hero_id=%s other_hero_id=%s error=%s",
-                ei.relation,
-                hero_id,
-                out.hero_b_id,
-                exc,
-            )
-            reasons_skipped += 1
-            continue
-        reasons[(ei.relation, out.hero_b_id)] = (
-            out.reason,
-            {"model": out.model, "prompt_version": out.prompt_version},
-        )
-        reasons_written += 1
-
-    if reasons:
-        updated = _apply_reasons(hero, reasons)
-        write_hero(data_dir, patch, updated)
-        write_summary(data_dir, updated, "pro")
-
-    logger.info(
-        "Reason batch done hero_id=%s reasons_written=%s reasons_skipped=%s",
-        hero_id,
-        reasons_written,
-        reasons_skipped,
-    )
-
-    return HeroResult(
-        hero_id=hero_id,
-        success=True,
-        reasons_written=reasons_written,
-        reasons_skipped=reasons_skipped,
-        pending_manual_paths=[pending_reason_prompt] if pending_reason_prompt else None,
-    )
-
-
-ProgressCallback = Callable[["HeroRawBundle", HeroResult], None]
-
-
-def _merge_pass_results(hero_id: int, extract: HeroResult, reason: HeroResult) -> HeroResult:
-    pending: list[Path] = []
-    if extract.pending_manual_paths:
-        pending.extend(extract.pending_manual_paths)
-    if reason.pending_manual_paths:
-        pending.extend(reason.pending_manual_paths)
-    return HeroResult(
-        hero_id=hero_id,
-        success=reason.success,
-        reasons_written=reason.reasons_written,
-        reasons_skipped=reason.reasons_skipped,
-        failure_reason=reason.failure_reason,
-        pending_manual_paths=pending or None,
-    )
-
-
-def run_bootstrap(
-    data_dir: Path,
-    patch: str,
-    generator_version: str,
-    bundles: list[HeroRawBundle],
-    client: LLMClient,
-    *,
-    max_reason_edges: int = 5,
-    skip_reasons: bool = False,
-    hero_names: dict[int, str] | None = None,
-    on_extract: ProgressCallback | None = None,
-    on_reason: ProgressCallback | None = None,
-) -> list[HeroResult]:
-    """
-    Drive the two-pass bootstrap across a roster. Pass 1 extracts every hero's
-    tags before pass 2 runs so cross-hero reasons can see hero_b tags on disk.
-
-    Returned list preserves `bundles` order. `on_extract` / `on_reason` fire
-    per hero with the bundle and the merged HeroResult for that phase — use
-    them for CLI progress output; neither is required.
-    """
-    extract_results: dict[int, HeroResult] = {}
-    for bundle in bundles:
-        result = extract_hero(data_dir, patch, generator_version, bundle, client)
-        extract_results[bundle.hero_id] = result
-        if on_extract is not None:
-            on_extract(bundle, result)
-
-    if skip_reasons:
-        return [extract_results[b.hero_id] for b in bundles]
-
-    merged_results: list[HeroResult] = []
-    for bundle in bundles:
-        extract = extract_results[bundle.hero_id]
-        if not extract.success:
-            merged_results.append(extract)
-            continue
-        reason = reason_hero(
-            data_dir,
-            patch,
-            bundle.hero_id,
-            client,
-            max_edges=max_reason_edges,
-            hero_names=hero_names,
-        )
-        merged = _merge_pass_results(bundle.hero_id, extract, reason)
-        if on_reason is not None:
-            on_reason(bundle, merged)
-        merged_results.append(merged)
-    return merged_results
+    cohort: str = "pub",
+    heroes: set[str] | None = None,
+) -> list[HeroFactProfile]:
+    return [
+        load_hero_facts(path, source_patch=patch, cohort=cohort)
+        for path in discover_authored_files(data_dir, heroes)
+    ]
 
 
 def finalize_patch(
@@ -418,15 +88,50 @@ def finalize_patch(
     patch: str,
     hero_ids: list[int],
     *,
-    complete: bool = True,
+    complete: bool,
 ) -> None:
-    ctx = ValidationContext(roster_hero_ids=set(hero_ids), partial=not complete)
-    written_ids = [hid for hid in hero_ids if hero_file(data_dir, patch, hid).exists()]
-    for hid in written_ids:
-        validate_hero(read_hero(data_dir, patch, hid), ctx)
+    manifest = build_manifest(data_dir, patch, hero_ids, complete=complete)
+    write_manifest(data_dir, manifest)
+    graph = build_graph(data_dir, patch, hero_ids)
+    cache_graph(data_dir, patch, graph)
 
-    m = build_manifest(data_dir, patch, hero_ids, ["pro"], complete=complete)
-    write_manifest(data_dir, m)
 
-    g = build_graph(data_dir, patch, written_ids)
-    cache_graph(data_dir, patch, g)
+def run_bootstrap(
+    data_dir: Path,
+    patch: str,
+    generator_version: str,
+    *,
+    heroes: set[str] | None = None,
+    cohort: str = "pub",
+) -> list[HeroResult]:
+    profiles = load_profiles(data_dir, patch, cohort=cohort, heroes=heroes)
+    if not profiles:
+        raise FileNotFoundError(f"no authored hero YAML files found under {authored_dir(data_dir)}")
+
+    generated_at = _now_iso()
+    roster_ids = {profile.hero_id for profile in profiles}
+    written_ids: list[int] = []
+    results: list[HeroResult] = []
+
+    for profile in profiles:
+        hero = _to_derived(profile, generator_version=generator_version, generated_at=generated_at)
+        validate_hero(hero, ValidationContext(roster_hero_ids=roster_ids))
+        write_hero(data_dir, patch, hero)
+        written_ids.append(hero.hero_id)
+        results.append(HeroResult(hero_id=hero.hero_id, hero_slug=hero.hero_slug, success=True))
+
+    relations = infer_relations(profiles)
+    write_relations(
+        relations_file(data_dir, patch),
+        relations,
+        source_patch=patch,
+        generated_at=generated_at,
+    )
+
+    reader = RelationsReader(relations)
+    for hero_id in written_ids:
+        hero = HeroDerived.model_validate_json(hero_file(data_dir, patch, hero_id).read_text())
+        write_summary(data_dir, hero, reader)
+
+    finalize_patch(data_dir, patch, written_ids, complete=heroes is None)
+    return results

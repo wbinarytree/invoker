@@ -23,10 +23,16 @@ The repo ships as a framework with **no data**. Authored facts and derived artif
 
 ```bash
 uv sync
-cp .env.example .env                # fill in keys
+cp .env.example .env
 uv run invoker --help
 uv run invoker bootstrap --patch 7.41b
 ```
+
+`bootstrap` reads hand-authored hero facts from `data/authored/*.yaml` and writes:
+
+- `data/derived/<patch>/heroes/<id>.json`
+- `data/derived/<patch>/relations.json`
+- `data/derived/<patch>/summary_<id>.md`
 
 ## Docs
 

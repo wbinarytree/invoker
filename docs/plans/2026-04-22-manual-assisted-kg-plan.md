@@ -204,13 +204,23 @@ provenance:
 
 Prompt *generation* is part of the pipeline. The LLM call itself is performed by the human in whatever chat window they prefer. The helper:
 
-- Fetches ability text from OpenDota for the hero (cached).
+- Resolves hero roster metadata from the same static hero map already used by the framework (hero id, slug, localized name, roles).
+- Fetches ability text from OpenDota for the hero (cached under `data/raw/opendota/<patch>/...`), or reuses the cached payload if present.
 - Renders `src/invoker/prompts/draft_fact_profile.md` into a concrete prompt with hero name, roles, and full ability text substituted in, plus the current vocabulary as an allowed-terms list.
 - Writes the rendered prompt to `data/raw/manual_prompts/draft-facts/<hero_slug>.md` via `ManualClient`.
 - On rerun, reads `data/raw/manual_responses/draft-facts/<hero_slug>.txt`, parses into YAML, writes to `data/authored/<hero_slug>.yaml` **only if the file does not already exist**. Otherwise writes `data/authored/<hero_slug>.yaml.draft` for diff review.
 - If the response is missing, prints the pending prompt path and exits cleanly (no traceback).
 
 Why this split: prompt rendering is deterministic, mechanical, and benefits from versioning — it belongs in the pipeline. Which model runs the prompt, and what prompting ergonomics the user prefers, belong outside the pipeline.
+
+### Source-of-truth note for Stage 3
+
+Stage 2 removes the old fetch-bundle-orchestrator production path, so `draft-facts` must not depend on that deleted surface. Stage 3 should build its prompt context from two explicit inputs only:
+
+- hero roster metadata from the repo's canonical hero map / source adapters;
+- raw ability text cached under `data/raw/`, fetched on demand when missing.
+
+That keeps authoring helpers decoupled from bootstrap and avoids reintroducing the deprecated agentic pipeline by accident.
 
 ### Review loop
 
@@ -279,7 +289,7 @@ Rejected and deferred entries stay in the YAML as a paper trail — useful when 
 
 ### Goal
 
-Move `src/invoker/kg/infer.py` from benchmark-only to the production path, expand its rule set to cover the vocabulary, and wire stats into evidence.
+Move `src/invoker/kg/infer.py` from benchmark-only to the production path and expand its rule set to cover the vocabulary.
 
 ### What the engine does
 
@@ -320,6 +330,7 @@ Exact confidence values tuned against the validation slice, not this table.
 1. Rule engine runs against all authored heroes and produces a relations.json.
 2. The validation slice in `tests/invoker/test_kg_prototype.py` still passes after expansion.
 3. Gold relations from `docs/specs/2026-04-18-benchmark-schema-and-cases.md` are all inferred.
+4. No statistical evidence attachment happens in this stage; relation records may still carry empty `evidence.statistical` arrays until Stage 6 lands.
 
 ---
 
@@ -436,6 +447,28 @@ That distinction — generic pair mechanics vs. team-preferred motif — is the 
 
 `HeroDerived.schema_version` bumps from whatever it is now → next. Old per-patch derived files become unreadable, which is fine — `data/` is not checked in and patches are re-buildable.
 
+### Authored data policy for this plan
+
+For Stages 2–6, use local files first.
+
+- canonical authored facts live under `data/authored/*.yaml` in the local workspace;
+- bootstrap and validation commands read those files directly;
+- derived outputs under `data/derived/` and fetched raw payloads under `data/raw/` remain untracked build artifacts.
+
+This keeps the current implementation simple and avoids blocking Stage 3 on bundle/release design.
+
+### Deferred packaging decision
+
+A separate bundle/install flow is still a plausible future direction, but it is explicitly **out of scope for this plan revision**.
+
+If we later need cleaner distribution, we can add a follow-up plan for:
+
+- moving canonical authored YAML into a secondary source;
+- publishing a versioned authored-data bundle;
+- adding install/fetch commands in this repo.
+
+For now, none of that should shape Stage 3 implementation.
+
 ---
 
 ## Rollout sequence
@@ -480,7 +513,4 @@ These are explicitly out of scope for this plan. Defer to a later plan:
 - **YAML for authored files.** Format isn't critical; YAML wins on multiline evidence + comments.
 - **Delete obsolete pipeline modules.** `pipeline/extract.py`, `pipeline/reason.py`, `llm/gemini.py` deleted in Stage 2 — `archive/agentic-kg` covers rollback. (`GeminiClient` goes with them; `ManualClient` is the only LLM client.)
 - **Motif work fully deferred.** The `cohort` hook on pair relations is the forward-compat contract. Motif schema landing is a separate future plan once team-match data exists.
-
-### Still open
-
-- **Should `data/authored/` be checked into git?** Not decided. The alternative is some form of release process (published bundle, S3, or versioned artifact repo) so the framework can ship with data without committing it. Deferred; treat `data/authored/` as gitignored for now. Revisit before Stage 2 merges — we need to know which branch authoring happens on and whether PRs review fact changes.
+- **Authored facts are local files for now.** `data/authored/` is the working source for this plan; bundle/release mechanics are deferred to a later plan.
