@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from invoker.kg import HeroFactFeature, HeroFactProfile, infer_relation
+from invoker.kg import FactProvenance, HeroFactFeature, HeroFactProfile, infer_relation
 from invoker.kg.vocabulary import (
     CAPABILITIES,
     LIABILITIES,
@@ -21,16 +21,25 @@ def _profile(
     capabilities: list[str],
     requirements: list[str] | None = None,
     liabilities: list[str] | None = None,
+    targets: list[str] | None = None,
+    role_distribution: dict[str, float] | None = None,
 ) -> HeroFactProfile:
     return HeroFactProfile(
         hero_id=hero_id,
+        hero_slug=name.lower(),
         localized_name=name,
         source_patch="7.41b",
         cohort="pro",
         capabilities=[_feature(t) for t in capabilities],
         requirements=[_feature(t) for t in (requirements or [])],
         liabilities=[_feature(t) for t in (liabilities or [])],
-        provenance={"prototype": True},
+        targets=[_feature(t) for t in (targets or [])],
+        role_distribution=role_distribution or {},
+        provenance=FactProvenance(
+            authored_by="human",
+            authored_at="2026-04-22",
+            assist_model=None,
+        ),
     )
 
 
@@ -55,7 +64,7 @@ def test_antimage_counters_medusa_via_resource_punish():
     assert rel.pattern == "resource_punish"
     assert rel.source_feature == "mana_burn"
     assert rel.target_feature == "mana_dependence"
-    assert rel.evidence.statistical is None
+    assert rel.evidence.statistical == []
 
 
 def test_slardar_counters_riki_via_vision_exposure():
@@ -64,7 +73,12 @@ def test_slardar_counters_riki_via_vision_exposure():
         "Slardar",
         capabilities=["armor_reduction", "vision_reveal", "initiation", "reliable_stun"],
     )
-    riki = _profile(48, "Riki", capabilities=["mobility", "silence"], liabilities=["weak_to_reveal"])
+    riki = _profile(
+        48,
+        "Riki",
+        capabilities=["mobility", "silence"],
+        liabilities=["weak_to_reveal"],
+    )
 
     relations = infer_relation(slardar, riki)
 
@@ -120,3 +134,15 @@ def test_oracle_to_nyx_negative_control_is_empty():
     relations = infer_relation(oracle, nyx)
 
     assert relations == []
+
+
+def test_profile_accepts_targets_and_role_distribution():
+    profile = _profile(
+        120,
+        "Pangolier",
+        capabilities=["mobility"],
+        targets=["punishes_immobile_backline"],
+        role_distribution={"mid": 0.6, "offlane": 0.3, "roamer": 0.1},
+    )
+    assert [f.type for f in profile.targets] == ["punishes_immobile_backline"]
+    assert profile.role_distribution["mid"] == 0.6

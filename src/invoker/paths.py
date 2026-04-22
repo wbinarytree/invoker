@@ -3,6 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 
+def authored_dir(data_dir: Path) -> Path:
+    return data_dir / "authored"
+
+
 def raw_dir(data_dir: Path, source: str, patch: str) -> Path:
     return data_dir / "raw" / source / patch
 
@@ -15,8 +19,12 @@ def hero_file(data_dir: Path, patch: str, hero_id: int) -> Path:
     return derived_patch_dir(data_dir, patch) / "heroes" / f"{hero_id}.json"
 
 
-def summary_file(data_dir: Path, patch: str, bracket: str, hero_id: int) -> Path:
-    return derived_patch_dir(data_dir, patch) / "summaries" / bracket / f"{hero_id}.txt"
+def relations_file(data_dir: Path, patch: str) -> Path:
+    return derived_patch_dir(data_dir, patch) / "relations.json"
+
+
+def summary_file(data_dir: Path, patch: str, hero_id: int) -> Path:
+    return derived_patch_dir(data_dir, patch) / f"summary_{hero_id}.md"
 
 
 def manifest_file(data_dir: Path, patch: str) -> Path:
@@ -24,7 +32,7 @@ def manifest_file(data_dir: Path, patch: str) -> Path:
 
 
 def cache_dir(data_dir: Path, patch: str) -> Path:
-    return data_dir / "cache" / patch
+    return data_dir / "cache" / "graph" / patch
 
 
 def graph_file(data_dir: Path, patch: str) -> Path:

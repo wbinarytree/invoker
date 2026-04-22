@@ -15,16 +15,27 @@ class HeroFactFeature(BaseModel):
     evidence: list[FeatureEvidence] = Field(default_factory=list)
 
 
+class FactProvenance(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    authored_by: str
+    authored_at: str
+    reviewed_at: str | None = None
+    assist_model: str | None = None
+
+
 class HeroFactProfile(BaseModel):
     model_config = ConfigDict(extra="forbid")
     hero_id: int
+    hero_slug: str | None = None
     localized_name: str
     source_patch: str
     cohort: str
     capabilities: list[HeroFactFeature] = Field(default_factory=list)
     requirements: list[HeroFactFeature] = Field(default_factory=list)
     liabilities: list[HeroFactFeature] = Field(default_factory=list)
-    provenance: dict = Field(default_factory=dict)
+    targets: list[HeroFactFeature] = Field(default_factory=list)
+    role_distribution: dict[str, float] = Field(default_factory=dict)
+    provenance: FactProvenance
 
 
 class RelationContext(BaseModel):
@@ -53,7 +64,7 @@ class RelationEvidenceStatistical(BaseModel):
 class RelationEvidence(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mechanical: RelationEvidenceMechanical
-    statistical: RelationEvidenceStatistical | None = None
+    statistical: list[RelationEvidenceStatistical] = Field(default_factory=list)
 
 
 class HeroRelation(BaseModel):

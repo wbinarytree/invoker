@@ -2,58 +2,55 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from invoker.kg.reader import RelationsReader
 from invoker.paths import summary_file
 from invoker.schemas.derived import HeroDerived
 
 
-def summarize(hero: HeroDerived, bracket: str) -> str:
-    pos = hero.positions.get(bracket)
-    pos_label = (
-        "-".join(p for p, w in (pos.weights.items() if pos else {}) if w > 0) if pos else "unknown"
+def _format_bucket(name: str, features: list) -> str | None:
+    if not features:
+        return None
+    body = ", ".join(
+        feature.type if feature.score is None else f"{feature.type} ({feature.score:.1f})"
+        for feature in features
     )
-    tags = ", ".join(hero.functional_tags)
-    syns = [e for e in hero.synergies.get(bracket, []) if e.confidence in ("med", "high")][:3]
-    cnts = [e for e in hero.counters.get(bracket, []) if e.confidence in ("med", "high")][:3]
-    meta = hero.meta.get(bracket)
-
-    history_line = ""
-    if hero.meta_history:
-        recent = [m for m in hero.meta_history if m.bracket == bracket][-3:]
-        if len(recent) >= 2 and recent[0].tier != recent[-1].tier:
-            history_line = f" [was {recent[0].tier} in {recent[0].patch}]"
-
-    primary_tag = hero.functional_tags[0] if hero.functional_tags else "n/a"
-    lines = [
-        f"{hero.localized_name} [pos{pos_label} — {primary_tag}]",
-        f"Functions: {tags}",
-    ]
-    if syns:
-        lines.append(
-            f"{bracket.capitalize()} synergies ({hero.source_patch}, med+): "
-            + "; ".join(
-                f"h{e.hero_id} {e.score:+.2f} ({e.games}g)" + (f" — {e.reason}" if e.reason else "")
-                for e in syns
-            )
-        )
-    if cnts:
-        lines.append(
-            f"{bracket.capitalize()} counters ({hero.source_patch}, med+): "
-            + "; ".join(
-                f"h{e.hero_id} {e.score:+.2f} ({e.games}g)" + (f" — {e.reason}" if e.reason else "")
-                for e in cnts
-            )
-        )
-    if meta:
-        lines.append(
-            f"{bracket.capitalize()} meta ({hero.source_patch}): "
-            f"contest {meta.contest_rate:.0%}, win {meta.win_rate:.0%}, "
-            f"tier: {meta.tier}{history_line}"
-        )
-    return "\n".join(lines) + "\n"
+    return f"- {name}: {body}"
 
 
-def write_summary(data_dir: Path, hero: HeroDerived, bracket: str) -> Path:
-    path = summary_file(data_dir, hero.source_patch, bracket, hero.hero_id)
+def summarize(hero: HeroDerived, relations: RelationsReader) -> str:
+    lines = [f"# {hero.localized_name}", ""]
+    for bucket_name in ("capabilities", "requirements", "liabilities", "targets"):
+        line = _format_bucket(bucket_name.capitalize(), getattr(hero, bucket_name))
+        if line:
+            lines.append(line)
+
+    if hero.role_distribution:
+        roles = ", ".join(f"{role}={weight:.2f}" for role, weight in hero.role_distribution.items())
+        lines.append(f"- Role distribution: {roles}")
+
+    lines.append("")
+    synergies = relations.synergies_with(hero.hero_id)[:5]
+    counters = [
+        rel for rel in relations.relations_for(hero.hero_id) if rel.relation_kind == "counter"
+    ][:5]
+
+    if synergies:
+        lines.append("## Synergies")
+        for rel in synergies:
+            lines.append(f"- {rel.relation_id}: {rel.mechanical_rationale}")
+        lines.append("")
+
+    if counters:
+        lines.append("## Counters")
+        for rel in counters:
+            lines.append(f"- {rel.relation_id}: {rel.mechanical_rationale}")
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_summary(data_dir: Path, hero: HeroDerived, relations: RelationsReader) -> Path:
+    path = summary_file(data_dir, hero.source_patch, hero.hero_id)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(summarize(hero, bracket))
+    path.write_text(summarize(hero, relations))
     return path

@@ -13,7 +13,6 @@ from invoker.paths import hero_file, manifest_file
 class HeroManifestEntry:
     hero_id: int
     content_hash: str
-    brackets: list[str]
 
 
 @dataclass
@@ -33,7 +32,6 @@ def build_manifest(
     data_dir: Path,
     patch: str,
     hero_ids: list[int],
-    brackets: list[str],
     complete: bool,
 ) -> Manifest:
     entries: list[HeroManifestEntry] = []
@@ -45,7 +43,6 @@ def build_manifest(
             HeroManifestEntry(
                 hero_id=hid,
                 content_hash=_sha256_file(p),
-                brackets=list(brackets),
             )
         )
     return Manifest(

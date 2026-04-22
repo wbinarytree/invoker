@@ -9,7 +9,7 @@ from ...support.factories import make_hero
 def test_manifest_includes_present_heroes(tmp_path: Path):
     h = make_hero()
     write_hero(tmp_path, "7.41b", h)
-    m = build_manifest(tmp_path, "7.41b", [h.hero_id, 999], ["pro"], complete=False)
+    m = build_manifest(tmp_path, "7.41b", [h.hero_id, 999], complete=False)
     assert len(m.heroes) == 1
     assert m.heroes[0].content_hash.startswith("sha256:")
     assert m.status == "partial"
