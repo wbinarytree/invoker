@@ -1,4 +1,5 @@
 from invoker.kg.infer import infer_relation, infer_relations
+from invoker.kg.reader import RelationsFile, RelationsReader, write_relations
 from invoker.kg.schemas import (
     FeatureEvidence,
     HeroFactFeature,
@@ -20,7 +21,10 @@ __all__ = [
     "RelationEvidence",
     "RelationEvidenceMechanical",
     "RelationEvidenceStatistical",
+    "RelationsFile",
+    "RelationsReader",
     "STATISTICAL_ALIGNMENT",
     "infer_relation",
     "infer_relations",
+    "write_relations",
 ]
