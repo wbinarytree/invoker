@@ -1,7 +1,7 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-18
-Phase: transition after 1.1; the KG-first direction is active on paper and the two-pass infrastructure fix (Stage 1 of the execution plan) is landed. The rest of the code still reflects the hero-KB-first architecture.
+Last updated: 2026-04-22
+Phase: transition after 1.1; the KG-first direction is active on paper, the two-pass infrastructure fix (Stage 1) is landed, and a benchmark-only KG prototype now exists alongside the main pipeline. The production code still reflects the hero-KB-first architecture.
 
 This document describes the actual current implementation. It is updated whenever an architectural decision changes. It is not a design spec — see `docs/specs/` for aspirational design. When the two conflict, this document reflects reality and the spec should be updated.
 
@@ -9,6 +9,10 @@ As of 2026-04-18, there is an important distinction:
 
 - the **implemented system** is still hero-centric and uses STRATZ/OpenDota pair stats plus LLM-generated reasons
 - the **active roadmap** has shifted toward a KG-first, mechanics-first relation model that will be validated on a small benchmark before broader rollout
+
+As of 2026-04-22, there is now also a third layer:
+
+- a **benchmark-only prototype** under `src/invoker/kg/` that exercises the planned KG artifact shapes (`HeroFactProfile`, `HeroRelation`, `RelationEvidence`) and deterministic relation inference on a small validation slice
 
 Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
 
@@ -238,8 +242,31 @@ Landed as of this update:
 
 - two-pass orchestrator split (`extract_hero` + `reason_hero`)
 - `tagged == 0` guard that skips the reason batch when no hero B has tags
+- benchmark-only KG prototype package under `src/invoker/kg/`
+- benchmark spec `docs/specs/2026-04-18-benchmark-schema-and-cases.md`
+- focused prototype tests in `tests/invoker/test_kg_prototype.py`
 
 Remaining Stage 1 deliverables from the execution plan are complete. Broader work on improving the existing STRATZ-first reason pipeline is no longer the preferred roadmap. The next real architectural step is Stage 2 — canonical schema design for hero facts and relation records.
+
+### Benchmark prototype status
+
+The benchmark KG prototype is intentionally isolated from the production pipeline.
+
+It currently:
+
+- defines benchmark-only schema models for typed hero facts and relations
+- uses deterministic relation inference for the validation slice
+- does not yet integrate with `HeroDerived`, bootstrap, graph building, or on-disk derived artifacts
+
+This is intentional.
+
+The prototype exists to validate:
+
+- whether the relation objects are useful
+- whether typed hero fact buckets are useful
+- whether mechanics-first inference is a better substrate than `score + prose reason`
+
+before broader schema or pipeline changes land.
 
 ---
 
@@ -252,6 +279,7 @@ Remaining Stage 1 deliverables from the execution plan are complete. Broader wor
 - The relation layer is still prose-over-stat-selected pairs. This is acceptable as a transitional implementation; the KG execution plan replaces it in Stages 4–6, not now.
 - `HeroDerived` does not yet encode `capabilities` / `requirements` / `liabilities`. The schema redesign is Stage 2 of the execution plan.
 - Relation records are still denormalised inside hero files. Canonical relation artifacts are deferred to Stage 2/5.
+- The benchmark KG prototype is not yet fed by real extracted hero fact profiles. It currently proves the relation shape and rule engine, not end-to-end real-hero generation.
 
 The older Phase 1.2 notion of improving the STRATZ-first candidate path is no longer the active roadmap. See `docs/CURRENT_DIRECTION.md`.
 
