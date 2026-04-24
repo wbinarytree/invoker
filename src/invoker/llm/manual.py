@@ -20,7 +20,7 @@ class PendingManualResponseError(LookupError):
         self.cache_tag = cache_tag
         super().__init__(
             f"Manual response missing for {cache_tag or 'unknown stage'}. "
-            f"Paste the JSON output for {prompt_path} into {response_path}."
+            f"Paste the structured output for {prompt_path} into {response_path}."
         )
 
 
@@ -63,6 +63,9 @@ class ManualClient:
             prompt_path.write_text(header + prompt)
         if not response_path.exists():
             response_path.parent.mkdir(parents=True, exist_ok=True)
+            response_path.write_text("")
+            raise PendingManualResponseError(prompt_path, response_path, cache_tag)
+        if not response_path.read_text().strip():
             raise PendingManualResponseError(prompt_path, response_path, cache_tag)
         return LLMResponse(
             text=response_path.read_text(),

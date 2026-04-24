@@ -1,0 +1,51 @@
+# Authored Hero Facts
+
+This directory is the local working source for hand-authored hero fact YAML during the current manual-assisted KG workflow.
+
+## Workflow
+
+1. Run `invoker draft-facts <hero>` to generate a prompt from cached hero metadata and ability text.
+2. Paste that prompt into your external LLM of choice.
+3. Save the JSON response into the matching manual response file.
+4. Rerun `invoker draft-facts <hero>` to write `<hero>.yaml` or `<hero>.yaml.draft`.
+5. Run `invoker validate-facts <hero>`.
+6. Run `invoker show-relations <hero>` to inspect what the current authored corpus implies.
+
+## Bucket guidance
+
+- `capabilities`: what the hero mechanically does well.
+- `requirements`: what the hero needs from allies or game state to function reliably.
+- `liabilities`: what mechanically punishes or constrains the hero.
+- `targets`: what class of enemy profile the hero naturally punishes.
+
+More specific guidance:
+
+- `capabilities` are positive, self-owned mechanics from the kit.
+- `requirements` are external dependencies, not just "things every hero likes."
+- `liabilities` should be reserved for live-vocabulary punish patterns we actively want the graph to reason about.
+- `targets` should describe enemy profiles the hero can reach, trap, expose, or punish.
+
+Anti-patterns:
+
+- Do not duplicate the same concept across buckets.
+- Do not force every bucket to be populated with many entries.
+- Do not add a plausible concept that the live vocabulary cannot currently express.
+- If a concept feels true but fails validation, that is usually a vocabulary-gap note for later, not a validator bug.
+
+## Scoring
+
+- Scores are advisory and should stay between `0.0` and `1.0`.
+- Use higher scores when the mechanic is central to the hero, not just present.
+- Do not force precision that the source text does not justify.
+
+## Evidence
+
+- `capabilities`, `liabilities`, and `targets` should include short concrete evidence.
+- `requirements` may omit evidence when the judgment is a kit-level inference.
+- Evidence should point to mechanics from ability text, not vibes or matchup anecdotes.
+
+## Style
+
+- Prefer a small number of defensible entries over a broad speculative list.
+- Use only live vocabulary terms.
+- If a term is missing, stop and update the vocabulary in a later stage rather than inventing a new one locally.
