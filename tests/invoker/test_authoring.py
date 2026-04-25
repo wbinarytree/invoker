@@ -10,6 +10,7 @@ from invoker.kg.authoring import (
     HeroPromptContext,
     draft_facts,
     format_relations_for_hero,
+    promote_authored_draft,
     render_draft_facts_prompt,
     resolve_authored_file,
     validate_authored_payload,
@@ -199,6 +200,43 @@ def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
     assert written.authored_path is not None
 
 
+def test_promote_authored_draft_validates_and_backs_up(tmp_path: Path):
+    root = tmp_path / "authored"
+    root.mkdir()
+    current = _pangolier_payload()
+    current["capabilities"][0]["score"] = 0.2
+    draft = _pangolier_payload()
+    draft["capabilities"][0]["score"] = 0.9
+    root.joinpath("pangolier.yaml").write_text(yaml.safe_dump(current, sort_keys=False))
+    root.joinpath("pangolier.draft.yaml").write_text(yaml.safe_dump(draft, sort_keys=False))
+
+    result = promote_authored_draft(tmp_path, "pangolier")
+
+    promoted = yaml.safe_load(root.joinpath("pangolier.yaml").read_text())
+    assert promoted["capabilities"][0]["score"] == 0.9
+    assert result.backup_path is not None
+    assert result.backup_path.exists()
+    backed_up = yaml.safe_load(result.backup_path.read_text())
+    assert backed_up["capabilities"][0]["score"] == 0.2
+    assert root.joinpath("pangolier.draft.yaml").exists()
+
+
+def test_promote_authored_draft_can_delete_draft(tmp_path: Path):
+    root = tmp_path / "authored"
+    root.mkdir()
+    root.joinpath("pangolier.yaml").write_text(
+        yaml.safe_dump(_pangolier_payload(), sort_keys=False)
+    )
+    root.joinpath("pangolier.draft.yaml").write_text(
+        yaml.safe_dump(_pangolier_payload(), sort_keys=False)
+    )
+
+    result = promote_authored_draft(tmp_path, "pangolier", delete_draft=True)
+
+    assert result.draft_deleted is True
+    assert not root.joinpath("pangolier.draft.yaml").exists()
+
+
 def test_resolve_authored_file_matches_name_and_id(tmp_path: Path):
     root = tmp_path / "authored"
     root.mkdir()
@@ -225,7 +263,12 @@ def test_show_relations_formats_inferred_pairs(tmp_path: Path):
                 "type": "armor_reduction",
                 "score": 0.9,
                 "evidence": ["Corrosive Haze reduces armor heavily"],
-            }
+            },
+            {
+                "type": "reliable_stun",
+                "score": 0.8,
+                "evidence": ["Slithereen Crush stuns nearby enemies"],
+            },
         ],
         "requirements": [],
         "liabilities": [],
@@ -242,4 +285,5 @@ def test_show_relations_formats_inferred_pairs(tmp_path: Path):
     text = format_relations_for_hero(tmp_path, "pangolier")
     assert "Relations for Pangolier" in text
     assert "Inbound" in text
-    assert "enabler_payoff" in text
+    assert "Slardar (28) -> synergy" in text
+    assert "setup_followup" in text

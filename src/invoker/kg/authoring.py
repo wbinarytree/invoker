@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import asyncio
 import re
+import shutil
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -56,6 +58,15 @@ class DraftFactsResult:
     gaps_path: Path | None = None
     gap_count: int = 0
     pending: bool = False
+
+
+@dataclass(frozen=True)
+class PromoteDraftResult:
+    hero_slug: str
+    authored_path: Path
+    draft_path: Path
+    backup_path: Path | None = None
+    draft_deleted: bool = False
 
 
 def _normalize_slug(name: str) -> str:
@@ -115,6 +126,8 @@ def resolve_authored_file(data_dir: Path, hero: str) -> Path:
         return path
 
     for candidate in sorted(root.glob("*.yaml")):
+        if _is_draft_path(candidate):
+            continue
         profile = load_hero_facts(candidate, source_patch=AUTHORING_PATCH)
         if token in {
             candidate.stem.lower(),
@@ -309,10 +322,55 @@ def validate_authored_file(path: Path) -> HeroFactProfile:
     return load_hero_facts(path, source_patch=AUTHORING_PATCH)
 
 
+def _backup_path_for(path: Path) -> Path:
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    backup_dir = path.parent / ".backups"
+    return backup_dir / f"{path.stem}.{stamp}{path.suffix}"
+
+
+def _draft_path_for(authored_path: Path) -> Path:
+    return authored_path.with_name(f"{authored_path.stem}.draft{authored_path.suffix}")
+
+
+def _is_draft_path(path: Path) -> bool:
+    return path.name.endswith(".draft.yaml")
+
+
+def promote_authored_draft(
+    data_dir: Path,
+    hero: str,
+    *,
+    delete_draft: bool = False,
+) -> PromoteDraftResult:
+    authored_path = resolve_authored_file(data_dir, hero)
+    draft_path = _draft_path_for(authored_path)
+    if not draft_path.exists():
+        raise FileNotFoundError(f"no draft file found at {draft_path}")
+
+    draft_profile = validate_authored_file(draft_path)
+    backup_path: Path | None = None
+    if authored_path.exists():
+        backup_path = _backup_path_for(authored_path)
+        backup_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(authored_path, backup_path)
+
+    shutil.copy2(draft_path, authored_path)
+    if delete_draft:
+        draft_path.unlink()
+
+    return PromoteDraftResult(
+        hero_slug=draft_profile.hero_slug or authored_path.stem,
+        authored_path=authored_path,
+        draft_path=draft_path,
+        backup_path=backup_path,
+        draft_deleted=delete_draft,
+    )
+
+
 def authored_profiles(data_dir: Path, *, include_drafts: bool = False) -> list[HeroFactProfile]:
     profiles: list[HeroFactProfile] = []
     for path in sorted(authored_dir(data_dir).glob("*.yaml")):
-        if not include_drafts and path.name.endswith(".yaml.draft"):
+        if not include_drafts and _is_draft_path(path):
             continue
         try:
             profiles.append(validate_authored_file(path))
@@ -321,10 +379,18 @@ def authored_profiles(data_dir: Path, *, include_drafts: bool = False) -> list[H
     return profiles
 
 
+def _hero_label(hero_id: int, names_by_id: dict[int, str]) -> str:
+    name = names_by_id.get(hero_id)
+    if name:
+        return f"{name} ({hero_id})"
+    return str(hero_id)
+
+
 def format_relations_for_hero(data_dir: Path, hero: str) -> str:
     target_path = resolve_authored_file(data_dir, hero)
     target = validate_authored_file(target_path)
     profiles = authored_profiles(data_dir)
+    names_by_id = {profile.hero_id: profile.localized_name for profile in profiles}
     relations = infer_relations(profiles)
 
     outbound = [rel for rel in relations if rel.from_hero_id == target.hero_id]
@@ -339,7 +405,7 @@ def format_relations_for_hero(data_dir: Path, hero: str) -> str:
         lines.append("## Outbound")
         for rel in outbound:
             lines.append(
-                f"- {rel.relation_kind} -> {rel.to_hero_id} "
+                f"- {rel.relation_kind} -> {_hero_label(rel.to_hero_id, names_by_id)} "
                 f"[{rel.pattern}] {rel.source_feature} -> {rel.target_feature}: "
                 f"{rel.mechanical_rationale}"
             )
@@ -348,7 +414,7 @@ def format_relations_for_hero(data_dir: Path, hero: str) -> str:
         lines.append("## Inbound")
         for rel in inbound:
             lines.append(
-                f"- {rel.from_hero_id} -> {rel.relation_kind} "
+                f"- {_hero_label(rel.from_hero_id, names_by_id)} -> {rel.relation_kind} "
                 f"[{rel.pattern}] {rel.source_feature} -> {rel.target_feature}: "
                 f"{rel.mechanical_rationale}"
             )
@@ -482,7 +548,7 @@ def draft_facts(
 
     destination = authored_dir(data_dir) / f"{context.hero_slug}.yaml"
     if destination.exists():
-        destination = destination.with_suffix(".yaml.draft")
+        destination = _draft_path_for(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(yaml.safe_dump(raw, sort_keys=False, allow_unicode=False))
     return DraftFactsResult(

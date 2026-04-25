@@ -4,13 +4,18 @@ This directory is the local working source for hand-authored hero fact YAML duri
 
 ## Workflow
 
-1. Run `invoker draft-facts <hero>` to generate a prompt from cached hero metadata and ability text.
+1. Run `invoker draft-facts <hero> [hero ...]` to generate prompts from cached hero metadata and ability text.
 2. Paste that prompt into your external LLM of choice.
 3. Save the JSON response into the matching manual response file.
-4. Rerun `invoker draft-facts <hero>` to write `<hero>.yaml` or `<hero>.yaml.draft`.
+4. Rerun `invoker draft-facts <hero> [hero ...]` to write `<hero>.yaml` or `<hero>.draft.yaml`.
 5. Review any new entries in `vocab-gaps.yaml`; these are not live facts, only Stage 4 input.
 6. Run `invoker validate-facts <hero>`.
 7. Run `invoker show-relations <hero>` to inspect what the current authored corpus implies.
+
+To accept regenerated drafts after review, run `invoker promote-draft <hero> [hero ...]`.
+This validates each `<hero>.draft.yaml`, backs up the current canonical YAML under
+`.backups/`, and copies the draft into `<hero>.yaml`. Add `--delete-draft` if you
+want draft files removed after promotion.
 
 ## Bucket guidance
 
