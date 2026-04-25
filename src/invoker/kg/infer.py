@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from typing import NamedTuple
 
 from invoker.kg.schemas import (
     HeroFactProfile,
@@ -11,7 +12,36 @@ from invoker.kg.schemas import (
 )
 
 
+class RuleFeatureReference(NamedTuple):
+    """Vocabulary terms that one deterministic rule depends on."""
+
+    source_bucket: str
+    source_feature: str
+    target_bucket: str
+    target_feature: str
+    pattern: str
+
+
+RULE_FEATURE_REFERENCES = (
+    RuleFeatureReference(
+        "capabilities", "mana_burn", "liabilities", "mana_dependence", "resource_punish"
+    ),
+    RuleFeatureReference(
+        "capabilities", "vision_reveal", "liabilities", "weak_to_reveal", "vision_exposure"
+    ),
+    RuleFeatureReference(
+        "capabilities", "reliable_stun", "capabilities", "magic_burst", "setup_followup"
+    ),
+    RuleFeatureReference("capabilities", "save", "requirements", "needs_save", "save_protection"),
+    RuleFeatureReference(
+        "capabilities", "reliable_stun", "capabilities", "mobility", "mobility_punish"
+    ),
+)
+
+
 def _feature_types(features: Iterable) -> set[str]:
+    """Collapse profile feature objects to the set of term names used by rules."""
+
     return {f.type for f in features}
 
 
@@ -27,6 +57,8 @@ def _make_relation(
     confidence: str,
     mechanical_confidence: float,
 ) -> HeroRelation:
+    """Build one deterministic relation record for a fired mechanical rule."""
+
     return HeroRelation(
         relation_id=(
             f"{source.hero_id}->{target.hero_id}:{relation_kind}:{pattern}:{source_feature}"
@@ -59,6 +91,8 @@ def _make_relation(
 
 
 def infer_relation(source: HeroFactProfile, target: HeroFactProfile) -> list[HeroRelation]:
+    """Infer all directional relations from one source hero to one target hero."""
+
     relations: list[HeroRelation] = []
     src_caps = _feature_types(source.capabilities)
     tgt_caps = _feature_types(target.capabilities)
@@ -149,6 +183,8 @@ def infer_relation(source: HeroFactProfile, target: HeroFactProfile) -> list[Her
 
 
 def infer_relations(profiles: Iterable[HeroFactProfile]) -> list[HeroRelation]:
+    """Infer pairwise directional relations across an authored hero corpus."""
+
     profiles = list(profiles)
     out: list[HeroRelation] = []
     for source in profiles:

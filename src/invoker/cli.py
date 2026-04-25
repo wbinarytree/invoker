@@ -129,6 +129,173 @@ def show_relations_cmd(
     typer.echo(format_relations_for_hero(cfg.data_dir, hero))
 
 
+@app.command("vocab-audit")
+def vocab_audit_cmd() -> None:
+    from invoker.kg.vocab_audit import format_vocab_audit, run_vocab_audit
+
+    cfg = _load_config()
+    audit = run_vocab_audit(cfg.data_dir)
+    typer.echo(format_vocab_audit(audit))
+    if not audit.passed:
+        raise typer.Exit(code=1)
+
+
+@app.command("review-vocabulary")
+def review_vocabulary_cmd(
+    bucket: str | None = typer.Option(
+        None,
+        help="Only review one vocabulary bucket, e.g. capabilities.",
+    ),
+    term: str | None = typer.Option(
+        None,
+        help="Only review one term within the selected bucket.",
+    ),
+    include_reviewed: bool = typer.Option(
+        False,
+        "--include-reviewed",
+        help="Show terms that already have a recorded review note.",
+    ),
+) -> None:
+    from invoker.kg.vocabulary_review import (
+        REVIEW_ACTIONS,
+        iter_vocabulary_review_contexts,
+        record_vocabulary_review,
+    )
+
+    cfg = _load_config()
+    contexts = iter_vocabulary_review_contexts(
+        cfg.data_dir,
+        bucket=bucket,
+        term=term,
+        include_reviewed=include_reviewed,
+    )
+    if not contexts:
+        typer.echo("No vocabulary terms matched the review filter.")
+        return
+
+    actions = ", ".join(sorted(REVIEW_ACTIONS | {"skip"}))
+    for context in contexts:
+        typer.echo("")
+        typer.echo(f"{context.bucket}.{context.term}")
+        typer.echo(f"status: {context.metadata.get('status', '')}")
+        typer.echo(f"definition: {context.metadata.get('definition', '')}")
+        if context.used_by:
+            typer.echo(f"used by: {', '.join(context.used_by)}")
+        else:
+            typer.echo("used by: none")
+        if context.consumed_by_rules:
+            typer.echo(f"consumed by rules: {', '.join(context.consumed_by_rules)}")
+        else:
+            typer.echo("consumed by rules: none")
+        desired_action = typer.prompt(
+            f"Desired action ({actions})",
+            default="skip",
+        ).strip()
+        if desired_action == "skip":
+            continue
+        if desired_action not in REVIEW_ACTIONS:
+            typer.echo(f"Invalid action: {desired_action}", err=True)
+            raise typer.Exit(code=1)
+        note = typer.prompt("Human suggestion", default="").strip()
+        record = record_vocabulary_review(
+            cfg.data_dir,
+            context,
+            desired_action=desired_action,
+            human_suggestion=note,
+        )
+        typer.echo(f"Recorded review for {record.bucket}.{record.term}")
+
+
+@app.command("review-vocab-gaps")
+def review_vocab_gaps_cmd(
+    bucket: str | None = typer.Option(
+        None,
+        help="Only review vocabulary gaps for one bucket, e.g. capabilities.",
+    ),
+    candidate_term: str | None = typer.Option(
+        None,
+        help="Only review gaps with this candidate term.",
+    ),
+    include_reviewed: bool = typer.Option(
+        False,
+        "--include-reviewed",
+        help="Show gaps that already have a recorded review note.",
+    ),
+) -> None:
+    from invoker.kg.vocabulary_review import (
+        GAP_REVIEW_ACTIONS,
+        iter_vocabulary_gap_contexts,
+        record_vocabulary_gap_review,
+    )
+
+    cfg = _load_config()
+    contexts = iter_vocabulary_gap_contexts(
+        cfg.data_dir,
+        bucket=bucket,
+        candidate_term=candidate_term,
+        include_reviewed=include_reviewed,
+    )
+    if not contexts:
+        typer.echo("No vocabulary gaps matched the review filter.")
+        return
+
+    actions = ", ".join(sorted(GAP_REVIEW_ACTIONS | {"skip"}))
+    for context in contexts:
+        typer.echo("")
+        typer.echo(f"{context.bucket}: {context.concept}")
+        typer.echo(f"hero: {context.localized_name or context.hero_slug}")
+        typer.echo(f"candidate term: {context.candidate_term or '(none)'}")
+        typer.echo(f"why needed: {context.why_needed}")
+        typer.echo(f"evidence: {context.evidence}")
+        desired_action = typer.prompt(
+            f"Desired action ({actions})",
+            default="skip",
+        ).strip()
+        if desired_action == "skip":
+            continue
+        if desired_action not in GAP_REVIEW_ACTIONS:
+            typer.echo(f"Invalid action: {desired_action}", err=True)
+            raise typer.Exit(code=1)
+        note = typer.prompt("Human suggestion", default="").strip()
+        record = record_vocabulary_gap_review(
+            cfg.data_dir,
+            context,
+            desired_action=desired_action,
+            human_suggestion=note,
+        )
+        label = record.candidate_term or record.concept
+        typer.echo(f"Recorded gap review for {record.hero_slug}: {label}")
+
+
+@app.command("compose-vocabulary-prompt")
+def compose_vocabulary_prompt_cmd(
+    bucket: str | None = typer.Option(
+        None,
+        help="Only include one vocabulary bucket in the prompt.",
+    ),
+    term: str | None = typer.Option(
+        None,
+        help="Only include one term within the selected bucket.",
+    ),
+    reviewed_only: bool = typer.Option(
+        False,
+        "--reviewed-only",
+        help="Only include terms with recorded human review notes.",
+    ),
+) -> None:
+    from invoker.kg.vocabulary_review import write_vocabulary_revision_prompt
+
+    cfg = _load_config()
+    result = write_vocabulary_revision_prompt(
+        cfg.data_dir,
+        bucket=bucket,
+        term=term,
+        reviewed_only=reviewed_only,
+    )
+    typer.echo(f"Vocabulary revision prompt: {result.prompt_path}")
+    typer.echo(f"Paste LLM response into: {result.response_path}")
+
+
 @app.command()
 def bootstrap(
     patch: str = typer.Option(..., help="Patch string, e.g. 7.41b"),

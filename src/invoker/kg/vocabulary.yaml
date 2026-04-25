@@ -1,0 +1,281 @@
+schema_version: 1
+capabilities:
+  armor_reduction:
+    definition: Reduces enemy armor through a hero-owned mechanic.
+    include_when:
+      - The hero directly applies armor reduction or armor corruption.
+    exclude_when:
+      - The armor reduction comes primarily from purchased items.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  initiation:
+    definition: Starts fights or forces enemy commitment with hero-owned movement or control.
+    include_when:
+      - The hero can reliably begin an engagement on enemy heroes.
+    exclude_when:
+      - The hero only follows up after another ally starts the fight.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  magic_burst:
+    definition: Deals meaningful spell or magical damage in a short window.
+    include_when:
+      - The hero's own abilities can quickly remove a large portion of enemy health.
+    exclude_when:
+      - Damage is mostly slow attrition or item-dependent.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  mana_burn:
+    definition: Removes, drains, or damages based on enemy mana through a hero-owned mechanic.
+    include_when:
+      - The hero directly burns mana or converts enemy mana state into damage.
+    exclude_when:
+      - The effect is only generic spell damage.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  mobility:
+    definition: Repositions self or crosses distance through hero-owned movement tools.
+    include_when:
+      - The hero has blinks, dashes, leaps, high-speed movement, or similar repositioning.
+    exclude_when:
+      - Movement comes primarily from items or normal movement speed.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  reliable_stun:
+    definition: Applies hard disable that predictably interrupts enemy action.
+    include_when:
+      - The stun or comparable hard disable is reliable enough to plan around.
+    exclude_when:
+      - The disable is delayed, random, or only a soft slow.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  save:
+    definition: Protects an allied hero from death, targeting, or immediate danger.
+    include_when:
+      - The hero can directly shield, heal, displace, hide, or otherwise protect an ally.
+    exclude_when:
+      - The protection is only self-directed.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  silence:
+    definition: Prevents enemy spell casting through a hero-owned mechanic.
+    include_when:
+      - The hero directly silences, mutes spell use, or reliably denies casting.
+    exclude_when:
+      - The hero only stuns or slows.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  vision_reveal:
+    definition: Reveals hidden, invisible, or obscured enemies through hero-owned mechanics.
+    include_when:
+      - The hero directly supplies reveal, detection, or tracking vision.
+    exclude_when:
+      - Vision comes only from wards, dust, or other purchased items.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  wave_clear:
+    definition: Clears creep waves or clustered units efficiently with hero-owned damage.
+    include_when:
+      - The hero can remove waves quickly without relying mainly on items.
+    exclude_when:
+      - The hero only has single-target damage.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+requirements:
+  needs_damage_followup:
+    definition: Needs allied damage after setup or control to convert fights.
+    include_when:
+      - The hero creates openings but lacks enough solo damage to finish targets.
+    exclude_when:
+      - The hero's own kit already supplies reliable kill damage.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  needs_frontline:
+    definition: Needs an ally to absorb attention or hold space before the hero can operate.
+    include_when:
+      - The hero is fragile or backline-oriented and depends on someone else taking contact.
+    exclude_when:
+      - The hero can comfortably front fights themselves.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  needs_lockdown:
+    definition: Needs allied control to keep enemies in the hero's damage or spell window.
+    include_when:
+      - The hero's main damage or setup is easy to dodge without additional control.
+    exclude_when:
+      - The hero already brings sufficient reliable control.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  needs_save:
+    definition: Needs allied protection to survive while delivering core value.
+    include_when:
+      - The hero is vulnerable during a key damage, channel, or positioning window.
+    exclude_when:
+      - The hero has enough built-in survival or disengage for that window.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+liabilities:
+  greedy:
+    definition: Requires substantial farm, time, or resource commitment before impact.
+    include_when:
+      - The hero has delayed payoff or high economy dependence.
+    exclude_when:
+      - The hero is useful early with low resources.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  low_waveclear:
+    definition: Struggles to clear creep waves or clustered units with hero-owned tools.
+    include_when:
+      - The hero lacks efficient area damage against waves.
+    exclude_when:
+      - The hero clears waves reliably with normal ability use.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  mana_dependence:
+    definition: Loses core durability, damage, or uptime when mana is denied.
+    include_when:
+      - The hero's key output or survival depends heavily on available mana.
+    exclude_when:
+      - Mana loss is annoying but does not meaningfully change the hero's function.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  weak_to_gap_close:
+    definition: Loses safety or damage output when enemies can quickly reach them.
+    include_when:
+      - The hero depends on distance and has limited answer to close contact.
+    exclude_when:
+      - The hero welcomes close-range fights.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  weak_to_kiting:
+    definition: Loses value when enemies can avoid or disengage from the hero's threat range.
+    include_when:
+      - The hero needs sustained contact or precise positioning to matter.
+    exclude_when:
+      - The hero can contribute reliably from range or after disengage.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  weak_to_reveal:
+    definition: Loses core value when invisibility or hidden positioning is revealed.
+    include_when:
+      - The hero relies on invisibility, hidden approach, or fog-dependent movement.
+    exclude_when:
+      - Reveal only marginally affects the hero.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+targets:
+  punishes_channeling:
+    definition: Converts strongly against enemies who must channel or stand still to act.
+    include_when:
+      - The hero can interrupt, threaten, or exploit channeled spells.
+    exclude_when:
+      - The hero has no special interaction with channels.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  punishes_immobile_backline:
+    definition: Reaches or pressures fragile backline heroes with poor repositioning.
+    include_when:
+      - The hero's kit naturally accesses or disrupts immobile backline targets.
+    exclude_when:
+      - Target access depends mainly on allied setup or purchased items.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  punishes_invisibility:
+    definition: Converts strongly against enemies that rely on invisibility or hidden approach.
+    include_when:
+      - The hero can reveal, track, trap, or otherwise expose invisible enemies.
+    exclude_when:
+      - The hero has only generic damage after someone else reveals the target.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  punishes_low_armor:
+    definition: Converts strongly against targets with low armor or armor-reduction exposure.
+    include_when:
+      - The hero's damage profile or armor reduction particularly exploits low armor.
+    exclude_when:
+      - The hero primarily deals magic or pure damage with no armor interaction.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  punishes_summons:
+    definition: Converts strongly against summoned units, illusions, or unit swarms.
+    include_when:
+      - The hero clears, controls, or benefits from enemy-controlled extra units.
+    exclude_when:
+      - The hero only has normal single-target attacks.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+  punishes_sustain:
+    definition: Converts strongly against enemies whose value depends on healing or regeneration.
+    include_when:
+      - The hero reduces, overwhelms, or bypasses sustain-heavy game plans.
+    exclude_when:
+      - The hero only deals generic damage into healing.
+    examples: []
+    status: accepted
+    introduced_in: stage2
+relation_patterns:
+  enabler_payoff:
+    definition: One hero enables another hero's payoff condition.
+    status: accepted
+    introduced_in: stage2
+  mobility_punish:
+    definition: One hero constrains or punishes another hero's movement freedom.
+    status: accepted
+    introduced_in: stage2
+  resource_punish:
+    definition: One hero attacks a resource dependency such as mana or casting access.
+    status: accepted
+    introduced_in: stage2
+  save_protection:
+    definition: One hero protects another hero through a known vulnerability window.
+    status: accepted
+    introduced_in: stage2
+  setup_followup:
+    definition: One hero creates a stable window for another hero's damage or control.
+    status: accepted
+    introduced_in: stage2
+  vision_exposure:
+    definition: One hero exposes hidden or invisibility-reliant enemy value.
+    status: accepted
+    introduced_in: stage2
+statistical_alignment:
+  aligned:
+    definition: Statistical evidence supports the inferred relation.
+    status: accepted
+    introduced_in: stage2
+  contradicted:
+    definition: Statistical evidence materially disagrees with the inferred relation.
+    status: accepted
+    introduced_in: stage2
+  unobserved:
+    definition: Statistical evidence is missing or too sparse to classify.
+    status: accepted
+    introduced_in: stage2
+  weakly_aligned:
+    definition: Statistical evidence weakly supports the inferred relation.
+    status: accepted
+    introduced_in: stage2
