@@ -208,7 +208,7 @@ Prompt *generation* is part of the pipeline. The LLM call itself is performed by
 - Fetches ability text from OpenDota for the hero (cached under `data/raw/opendota/<patch>/...`), or reuses the cached payload if present.
 - Renders `src/invoker/prompts/draft_fact_profile.md` into a concrete prompt with hero name, roles, and full ability text substituted in, plus the current vocabulary as an allowed-terms list.
 - Writes the rendered prompt to `data/raw/manual_prompts/draft-facts/<hero_slug>.md` via `ManualClient`.
-- On rerun, reads `data/raw/manual_responses/draft-facts/<hero_slug>.txt`, parses into YAML, writes to `data/authored/<hero_slug>.yaml` **only if the file does not already exist**. Otherwise writes `data/authored/<hero_slug>.yaml.draft` for diff review.
+- On rerun, reads `data/raw/manual_responses/draft-facts/<hero_slug>.txt`, parses into YAML, writes to `data/authored/<hero_slug>.yaml` **only if the file does not already exist**. Otherwise writes `data/authored/<hero_slug>.draft.yaml` for diff review.
 - If the response is missing, prints the pending prompt path and exits cleanly (no traceback).
 
 Why this split: prompt rendering is deterministic, mechanical, and benefits from versioning — it belongs in the pipeline. Which model runs the prompt, and what prompting ergonomics the user prefers, belong outside the pipeline.
@@ -226,12 +226,18 @@ That keeps authoring helpers decoupled from bootstrap and avoids reintroducing t
 
 - `invoker validate-facts <hero>` checks vocabulary membership, score bounds, evidence presence, required buckets.
 - `invoker show-relations <hero>` runs the rule engine against current authored facts and prints inferred relations. Quick sanity-check during authoring.
+- `data/authored/vocab-gaps.yaml` captures important mechanics that could not be represented with the live vocabulary. These entries are **not** facts and do not affect relation inference; they are grounded Stage 4 input.
+
+### Lossiness guardrail
+
+The draft response may include `vocabulary_gaps`, but `draft-facts` must strip that field before writing canonical `<hero>.yaml`. Canonical authored YAML stays strict and validator-owned; unexpressed mechanics go to `vocab-gaps.yaml` as a review inbox with hero, bucket, concept, evidence, candidate term, and status. Regenerated drafts use `<hero>.draft.yaml` so editors still recognize them as YAML.
 
 ### Exit criteria
 
 1. `draft-facts` renders a prompt whose pasted-back response parses into a YAML draft that `validate-facts` accepts unmodified for at least one hero.
 2. A human can author a hero in under 30 minutes following a short README at `data/authored/README.md`.
-3. Pangolier authored, then nine more heroes — picked to exercise at least half the initial capability vocabulary (cover one each of: physical-burst core, magic-burst core, reliable-stun support, save-giver support, mana-burn hero, invisibility hero, sustain tank, high-mobility carry, wave-clear mid).
+3. At least one draft response with a real missing concept writes `data/authored/vocab-gaps.yaml` while keeping the authored hero YAML valid and free of review-only fields.
+4. Pangolier authored, then nine more heroes — picked to exercise at least half the initial capability vocabulary (cover one each of: physical-burst core, magic-burst core, reliable-stun support, save-giver support, mana-burn hero, invisibility hero, sustain tank, high-mobility carry, wave-clear mid).
 
 ---
 
@@ -241,9 +247,43 @@ That keeps authoring helpers decoupled from bootstrap and avoids reintroducing t
 
 The vocabulary is the contract between authors, the rule engine, and the validator. Neither the author nor the plan writer has deep enough Dota 2 expertise to hand-design it perfectly. So vocabulary evolves **LLM-assisted, human-reviewed** — same split as authoring: pipeline renders the prompt, a human runs the LLM, pipeline parses the response.
 
+Stage 3 keeps `src/invoker/kg/vocabulary.py` as the live source of truth because
+the validator and rule engine only need fast typed sets. Stage 4 should promote
+the vocabulary into a reviewable metadata artifact instead of continuing to grow
+plain Python constants.
+
+### Vocabulary source of truth
+
+Introduce `src/invoker/kg/vocabulary.yaml` as the canonical vocabulary artifact.
+`src/invoker/kg/vocabulary.py` becomes a loader/export compatibility layer that
+still exposes `CAPABILITIES`, `REQUIREMENTS`, `LIABILITIES`, `TARGETS`, and
+`RELATION_PATTERNS` to existing code.
+
+Each term entry should carry enough metadata for human review and future tools:
+
+```yaml
+capabilities:
+  attack_speed_reduction:
+    definition: Reduces enemy attack rate through a hero-owned mechanic.
+    include_when:
+      - The hero directly applies attack speed slow or reduction.
+    exclude_when:
+      - The hero only slows movement.
+      - The effect depends primarily on purchased items.
+    examples:
+      - hero_slug: pangolier
+        evidence: Lucky Shot can drastically slow enemy attack speed.
+      - hero_slug: phoenix
+        evidence: Fire Spirits apply heavy attack speed reduction.
+    status: accepted
+    introduced_in: stage4
+```
+
+This keeps vocabulary design reviewable without weakening the runtime contract.
+
 ### Seed vocabulary
 
-The initial set in `src/invoker/kg/vocabulary.py` is a **starting point, not a lockdown**. Extend once with an obvious expansion pass so Stage 5's rule engine has something to reason about:
+The initial set in `src/invoker/kg/vocabulary.py` is a **starting point, not a lockdown**. Use it to seed `vocabulary.yaml`, then extend once with an obvious expansion pass so Stage 5's rule engine has something to reason about:
 
 - **Capabilities (seed ~20):** current 10 + `aoe_lockdown`, `healing_reduction`, `sustain`, `tower_damage`, `physical_burst`, `long_fight_scaling`, `setup`, `disengage`, `dispel`, `pickoff`.
 - **Requirements (seed ~6):** current 4 + `needs_vision`, `needs_lane_stability`.
@@ -262,10 +302,10 @@ Same prompt-in-pipeline / LLM-in-human-loop split as `draft-facts`:
 
 ### Review and promotion
 
-`data/authored/vocab-proposals.yaml` is the author's review queue. Each entry: `{term, bucket, definition, examples, status}` where `status ∈ {proposed, accepted, rejected, defer}`.
+`data/authored/vocab-proposals.yaml` is the author's review queue. Each entry: `{term, bucket, definition, include_when, exclude_when, examples, enabled_rules, status}` where `status ∈ {proposed, accepted, rejected, defer}`.
 
-Accepted entries land in `vocabulary.py` via a small `invoker promote-vocabulary` command that:
-- appends the term to the right `frozenset`,
+Accepted entries land in `vocabulary.yaml` via a small `invoker promote-vocabulary` command that:
+- appends the term metadata to the right bucket,
 - writes a one-line note to `docs/specs/kg-vocabulary-notes.md`,
 - refuses to promote a term that no authored hero uses (forces at least one real consumer).
 
@@ -273,15 +313,17 @@ Rejected and deferred entries stay in the YAML as a paper trail — useful when 
 
 ### Guardrails
 
+- `invoker vocab-audit` should run before promotion and report unknown authored terms, unused live terms, terms with no consuming rule, and rules that reference non-live terms.
 - A new capability/liability without a consuming rule is permitted but flagged in `show-relations` output so it doesn't silently become dead vocabulary.
 - Vocabulary size targets are soft ceilings, not hard limits — but crossing +10 in a single promotion round triggers a mandatory re-read of kg-design-guidelines §"Vocabulary Guidance" before the command succeeds.
 
 ### Exit criteria
 
-1. Seed vocabulary committed to `vocabulary.py`.
+1. Seed vocabulary migrated from `vocabulary.py` into `vocabulary.yaml`, with `vocabulary.py` loading/exporting typed sets for existing code.
 2. `suggest-vocabulary` has been run against ≥10 authored heroes at least once, producing a reviewed `vocab-proposals.yaml`.
-3. At least three terms promoted from the proposal queue into live vocabulary via `promote-vocabulary`, with notes in `kg-vocabulary-notes.md`.
-4. Validator rejects any term outside live vocabulary with a clear error.
+3. `invoker vocab-audit` exists and passes against the live vocabulary/rule set.
+4. At least three terms promoted from the proposal queue into live vocabulary via `promote-vocabulary`, with definitions, include/exclude guidance, examples, and notes in `kg-vocabulary-notes.md`.
+5. Validator rejects any term outside live vocabulary with a clear error.
 
 ---
 

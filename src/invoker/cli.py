@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from typing import Annotated
 
 import typer
 
@@ -11,6 +12,10 @@ from invoker.logging import configure_logging
 from invoker.paths import manifest_file, relations_file
 
 app = typer.Typer(help="Invoker - Dota 2 knowledge framework")
+HeroArgs = Annotated[
+    list[str],
+    typer.Argument(help="One or more hero localized names, slugs, or numeric ids."),
+]
 
 
 def _load_config() -> Config:
@@ -26,7 +31,7 @@ def version() -> None:
 
 @app.command("draft-facts")
 def draft_facts_cmd(
-    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+    heroes: HeroArgs,
     patch: str = typer.Option(
         "authoring",
         help="Cache namespace for OpenDota prompt inputs; does not affect authored YAML format.",
@@ -35,17 +40,31 @@ def draft_facts_cmd(
     from invoker.kg.authoring import draft_facts
 
     cfg = _load_config()
-    result = draft_facts(cfg.data_dir, hero, patch=patch)
-    if result.pending:
-        typer.echo(f"Prompt written: {result.prompt_path}")
-        typer.echo(f"Paste the LLM response into: {result.response_path}")
-        raise typer.Exit(code=0)
-    typer.echo(f"Wrote draft facts: {result.authored_path}")
+    failures = 0
+    for hero in heroes:
+        try:
+            result = draft_facts(cfg.data_dir, hero, patch=patch)
+        except Exception as exc:
+            typer.echo(f"{hero}: {exc}", err=True)
+            failures += 1
+            continue
+        if result.pending:
+            typer.echo(f"{result.hero_slug}: prompt written: {result.prompt_path}")
+            typer.echo(f"{result.hero_slug}: paste response into: {result.response_path}")
+            continue
+        typer.echo(f"{result.hero_slug}: wrote draft facts: {result.authored_path}")
+        if result.gaps_path is not None:
+            typer.echo(
+                f"{result.hero_slug}: recorded {result.gap_count} vocabulary gap(s): "
+                f"{result.gaps_path}"
+            )
+    if failures:
+        raise typer.Exit(code=1)
 
 
 @app.command("validate-facts")
 def validate_facts_cmd(
-    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+    heroes: HeroArgs,
 ) -> None:
     from invoker.kg.authoring import (
         resolve_authored_file,
@@ -53,9 +72,51 @@ def validate_facts_cmd(
     )
 
     cfg = _load_config()
-    path = resolve_authored_file(cfg.data_dir, hero)
-    profile = validate_authored_file(path)
-    typer.echo(f"{path}: valid ({profile.localized_name})")
+    failures = 0
+    for hero in heroes:
+        try:
+            path = resolve_authored_file(cfg.data_dir, hero)
+            profile = validate_authored_file(path)
+        except Exception as exc:
+            typer.echo(f"{hero}: {exc}", err=True)
+            failures += 1
+            continue
+        typer.echo(f"{path}: valid ({profile.localized_name})")
+    if failures:
+        raise typer.Exit(code=1)
+
+
+@app.command("promote-draft")
+def promote_draft_cmd(
+    heroes: HeroArgs,
+    delete_draft: bool = typer.Option(
+        False,
+        "--delete-draft",
+        help="Delete <hero>.draft.yaml after successful promotion.",
+    ),
+) -> None:
+    from invoker.kg.authoring import promote_authored_draft
+
+    cfg = _load_config()
+    failures = 0
+    for hero in heroes:
+        try:
+            result = promote_authored_draft(cfg.data_dir, hero, delete_draft=delete_draft)
+        except Exception as exc:
+            typer.echo(f"{hero}: {exc}", err=True)
+            failures += 1
+            continue
+        typer.echo(
+            f"{result.hero_slug}: promoted draft: {result.draft_path} -> {result.authored_path}"
+        )
+        if result.backup_path is not None:
+            typer.echo(
+                f"{result.hero_slug}: previous authored file backed up: {result.backup_path}"
+            )
+        if result.draft_deleted:
+            typer.echo(f"{result.hero_slug}: deleted draft: {result.draft_path}")
+    if failures:
+        raise typer.Exit(code=1)
 
 
 @app.command("show-relations")

@@ -2,32 +2,37 @@ from __future__ import annotations
 
 import asyncio
 import re
+import shutil
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import yaml
 
 from invoker.kg import HeroFactProfile, infer_relations, load_hero_facts
-from invoker.kg.vocabulary import CAPABILITIES, LIABILITIES, REQUIREMENTS
+from invoker.kg.vocabulary import CAPABILITIES, LIABILITIES, REQUIREMENTS, TARGETS
 from invoker.llm.client import strip_fences
 from invoker.llm.manual import ManualClient, PendingManualResponseError
-from invoker.paths import authored_dir
+from invoker.paths import authored_dir, vocab_gaps_file
 from invoker.prompts import load
 from invoker.sources.opendota import OpenDotaFetcher
 
-TARGETS = frozenset(
+AUTHORING_PATCH = "authoring"
+AUTHORED_FACT_KEYS = frozenset(
     {
-        "punishes_low_armor",
-        "punishes_invisibility",
-        "punishes_summons",
-        "punishes_channeling",
-        "punishes_sustain",
-        "punishes_immobile_backline",
+        "hero_id",
+        "hero_slug",
+        "localized_name",
+        "capabilities",
+        "requirements",
+        "liabilities",
+        "targets",
+        "role_distribution",
+        "provenance",
     }
 )
-
-AUTHORING_PATCH = "authoring"
+GAP_BUCKETS = frozenset({"capabilities", "requirements", "liabilities", "targets"})
 
 
 class AuthoredFactsValidationError(ValueError):
@@ -50,7 +55,18 @@ class DraftFactsResult:
     prompt_path: Path
     response_path: Path
     authored_path: Path | None = None
+    gaps_path: Path | None = None
+    gap_count: int = 0
     pending: bool = False
+
+
+@dataclass(frozen=True)
+class PromoteDraftResult:
+    hero_slug: str
+    authored_path: Path
+    draft_path: Path
+    backup_path: Path | None = None
+    draft_deleted: bool = False
 
 
 def _normalize_slug(name: str) -> str:
@@ -87,9 +103,7 @@ def _coerce_response_payload(text: str) -> dict[str, Any]:
             continue
         if isinstance(payload, dict):
             return payload
-    raise AuthoredFactsValidationError(
-        "manual response must parse to a YAML or JSON mapping"
-    )
+    raise AuthoredFactsValidationError("manual response must parse to a YAML or JSON mapping")
 
 
 def _select_bucket_vocab(bucket: str) -> frozenset[str]:
@@ -112,6 +126,8 @@ def resolve_authored_file(data_dir: Path, hero: str) -> Path:
         return path
 
     for candidate in sorted(root.glob("*.yaml")):
+        if _is_draft_path(candidate):
+            continue
         profile = load_hero_facts(candidate, source_patch=AUTHORING_PATCH)
         if token in {
             candidate.stem.lower(),
@@ -124,6 +140,10 @@ def resolve_authored_file(data_dir: Path, hero: str) -> Path:
 
 
 def validate_authored_payload(raw: dict[str, Any]) -> None:
+    extra = sorted(set(raw) - AUTHORED_FACT_KEYS)
+    if extra:
+        raise AuthoredFactsValidationError(f"unknown top-level keys: {extra}")
+
     required_top_level = {
         "hero_id",
         "hero_slug",
@@ -199,6 +219,101 @@ def validate_authored_payload(raw: dict[str, Any]) -> None:
         raise AuthoredFactsValidationError("role_distribution must sum to at most 1.0")
 
 
+def _coerce_gap_text(gap: dict[str, Any], key: str) -> str:
+    value = gap.get(key)
+    if value is None:
+        return ""
+    if not isinstance(value, str):
+        raise AuthoredFactsValidationError(f"vocabulary_gaps.{key} must be a string")
+    return value.strip()
+
+
+def _coerce_vocabulary_gaps(
+    raw: Any,
+    *,
+    context: HeroPromptContext,
+) -> list[dict[str, Any]]:
+    if raw is None:
+        return []
+    if not isinstance(raw, list):
+        raise AuthoredFactsValidationError("vocabulary_gaps must be a list when present")
+
+    gaps: list[dict[str, Any]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            raise AuthoredFactsValidationError("vocabulary_gaps entries must be mappings")
+        bucket = _coerce_gap_text(item, "bucket")
+        if bucket not in GAP_BUCKETS:
+            raise AuthoredFactsValidationError(
+                f"vocabulary_gaps.bucket must be one of {sorted(GAP_BUCKETS)}"
+            )
+        concept = _coerce_gap_text(item, "concept")
+        why_needed = _coerce_gap_text(item, "why_needed")
+        if not concept or not why_needed:
+            raise AuthoredFactsValidationError(
+                "vocabulary_gaps entries require concept and why_needed"
+            )
+        gaps.append(
+            {
+                "hero_id": context.hero_id,
+                "hero_slug": context.hero_slug,
+                "localized_name": context.localized_name,
+                "bucket": bucket,
+                "concept": concept,
+                "why_needed": why_needed,
+                "evidence": _coerce_gap_text(item, "evidence")
+                or _coerce_gap_text(item, "example_evidence"),
+                "candidate_term": _coerce_gap_text(item, "candidate_term"),
+                "status": "proposed",
+            }
+        )
+    return gaps
+
+
+def record_vocabulary_gaps(data_dir: Path, gaps: list[dict[str, Any]]) -> Path | None:
+    if not gaps:
+        return None
+
+    path = vocab_gaps_file(data_dir)
+    raw = yaml.safe_load(path.read_text()) or {} if path.exists() else {}
+    if isinstance(raw, list):
+        existing = raw
+    elif isinstance(raw, dict):
+        existing = raw.get("gaps", [])
+    else:
+        existing = []
+    if not isinstance(existing, list):
+        existing = []
+
+    by_key: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for item in existing:
+        if not isinstance(item, dict):
+            continue
+        key = (
+            str(item.get("hero_slug", "")),
+            str(item.get("bucket", "")),
+            str(item.get("concept", "")),
+        )
+        by_key[key] = item
+    for gap in gaps:
+        key = (gap["hero_slug"], gap["bucket"], gap["concept"])
+        by_key[key] = gap
+
+    payload = {
+        "gaps": sorted(
+            by_key.values(),
+            key=lambda g: (
+                str(g.get("hero_slug", "")),
+                str(g.get("bucket", "")),
+                str(g.get("concept", "")),
+            ),
+        )
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=False))
+    return path
+
+
 def validate_authored_file(path: Path) -> HeroFactProfile:
     raw = yaml.safe_load(path.read_text()) or {}
     if not isinstance(raw, dict):
@@ -207,10 +322,55 @@ def validate_authored_file(path: Path) -> HeroFactProfile:
     return load_hero_facts(path, source_patch=AUTHORING_PATCH)
 
 
+def _backup_path_for(path: Path) -> Path:
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    backup_dir = path.parent / ".backups"
+    return backup_dir / f"{path.stem}.{stamp}{path.suffix}"
+
+
+def _draft_path_for(authored_path: Path) -> Path:
+    return authored_path.with_name(f"{authored_path.stem}.draft{authored_path.suffix}")
+
+
+def _is_draft_path(path: Path) -> bool:
+    return path.name.endswith(".draft.yaml")
+
+
+def promote_authored_draft(
+    data_dir: Path,
+    hero: str,
+    *,
+    delete_draft: bool = False,
+) -> PromoteDraftResult:
+    authored_path = resolve_authored_file(data_dir, hero)
+    draft_path = _draft_path_for(authored_path)
+    if not draft_path.exists():
+        raise FileNotFoundError(f"no draft file found at {draft_path}")
+
+    draft_profile = validate_authored_file(draft_path)
+    backup_path: Path | None = None
+    if authored_path.exists():
+        backup_path = _backup_path_for(authored_path)
+        backup_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(authored_path, backup_path)
+
+    shutil.copy2(draft_path, authored_path)
+    if delete_draft:
+        draft_path.unlink()
+
+    return PromoteDraftResult(
+        hero_slug=draft_profile.hero_slug or authored_path.stem,
+        authored_path=authored_path,
+        draft_path=draft_path,
+        backup_path=backup_path,
+        draft_deleted=delete_draft,
+    )
+
+
 def authored_profiles(data_dir: Path, *, include_drafts: bool = False) -> list[HeroFactProfile]:
     profiles: list[HeroFactProfile] = []
     for path in sorted(authored_dir(data_dir).glob("*.yaml")):
-        if not include_drafts and path.name.endswith(".yaml.draft"):
+        if not include_drafts and _is_draft_path(path):
             continue
         try:
             profiles.append(validate_authored_file(path))
@@ -219,10 +379,18 @@ def authored_profiles(data_dir: Path, *, include_drafts: bool = False) -> list[H
     return profiles
 
 
+def _hero_label(hero_id: int, names_by_id: dict[int, str]) -> str:
+    name = names_by_id.get(hero_id)
+    if name:
+        return f"{name} ({hero_id})"
+    return str(hero_id)
+
+
 def format_relations_for_hero(data_dir: Path, hero: str) -> str:
     target_path = resolve_authored_file(data_dir, hero)
     target = validate_authored_file(target_path)
     profiles = authored_profiles(data_dir)
+    names_by_id = {profile.hero_id: profile.localized_name for profile in profiles}
     relations = infer_relations(profiles)
 
     outbound = [rel for rel in relations if rel.from_hero_id == target.hero_id]
@@ -237,7 +405,7 @@ def format_relations_for_hero(data_dir: Path, hero: str) -> str:
         lines.append("## Outbound")
         for rel in outbound:
             lines.append(
-                f"- {rel.relation_kind} -> {rel.to_hero_id} "
+                f"- {rel.relation_kind} -> {_hero_label(rel.to_hero_id, names_by_id)} "
                 f"[{rel.pattern}] {rel.source_feature} -> {rel.target_feature}: "
                 f"{rel.mechanical_rationale}"
             )
@@ -246,7 +414,7 @@ def format_relations_for_hero(data_dir: Path, hero: str) -> str:
         lines.append("## Inbound")
         for rel in inbound:
             lines.append(
-                f"- {rel.from_hero_id} -> {rel.relation_kind} "
+                f"- {_hero_label(rel.from_hero_id, names_by_id)} -> {rel.relation_kind} "
                 f"[{rel.pattern}] {rel.source_feature} -> {rel.target_feature}: "
                 f"{rel.mechanical_rationale}"
             )
@@ -374,11 +542,13 @@ def draft_facts(
     raw.setdefault("liabilities", [])
     raw.setdefault("targets", [])
     raw.setdefault("role_distribution", {})
+    gaps = _coerce_vocabulary_gaps(raw.pop("vocabulary_gaps", []), context=context)
     validate_authored_payload(raw)
+    gaps_path = record_vocabulary_gaps(data_dir, gaps)
 
     destination = authored_dir(data_dir) / f"{context.hero_slug}.yaml"
     if destination.exists():
-        destination = destination.with_suffix(".yaml.draft")
+        destination = _draft_path_for(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(yaml.safe_dump(raw, sort_keys=False, allow_unicode=False))
     return DraftFactsResult(
@@ -386,5 +556,7 @@ def draft_facts(
         prompt_path=client._paths(prompt_text, cache_tag)[0],
         response_path=client._paths(prompt_text, cache_tag)[1],
         authored_path=destination,
+        gaps_path=gaps_path,
+        gap_count=len(gaps),
         pending=False,
     )

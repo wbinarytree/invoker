@@ -100,8 +100,9 @@ Built from derived hero views plus `relations.json`. Used for graph-oriented loc
 Implemented CLI commands in [src/invoker/cli.py](/Users/yaoda/Projects/invoker/src/invoker/cli.py):
 
 - `invoker version`
-- `invoker draft-facts HERO`
-- `invoker validate-facts HERO`
+- `invoker draft-facts HERO [HERO ...]`
+- `invoker validate-facts HERO [HERO ...]`
+- `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
 - `invoker bootstrap --patch <patch> [--heroes ...]`
 - `invoker status --patch <patch>`
@@ -119,14 +120,18 @@ Behavior:
 3. writes a manual prompt file under `data/raw/manual_prompts/draft-facts/<hero_slug>/...`
 4. creates the matching empty response placeholder under `data/raw/manual_responses/draft-facts/<hero_slug>/...`
 5. on rerun, parses the saved manual response
-6. writes normalized YAML to `data/authored/<hero_slug>.yaml` or `<hero_slug>.yaml.draft`
+6. writes normalized YAML to `data/authored/<hero_slug>.yaml` or `<hero_slug>.draft.yaml`
+7. records any response-level `vocabulary_gaps` in `data/authored/vocab-gaps.yaml`
 
 Transport format for the LLM response is JSON-only by prompt contract.
-Stored local format remains YAML.
+Stored local format remains YAML. Canonical authored files stay strict;
+vocabulary gaps are review inbox items and do not directly affect relation
+inference.
 
 ### `validate-facts`
 
-Validates one authored YAML file against the current local vocabulary and authoring rules.
+Validates one or more authored YAML files against the current local vocabulary
+and authoring rules.
 
 This is separate from derived-artifact validation.
 
@@ -140,9 +145,27 @@ Checks include:
 - role distribution bounds
 - provenance presence
 
+### `promote-draft`
+
+Promotes reviewed regenerated drafts into canonical authored facts.
+
+Behavior:
+
+1. resolves each requested hero to `data/authored/<hero_slug>.yaml`
+2. validates `data/authored/<hero_slug>.draft.yaml`
+3. backs up the current canonical YAML under `data/authored/.backups/`
+4. copies the draft into the canonical YAML path
+5. optionally deletes the draft when `--delete-draft` is passed
+
+The draft naming is intentionally `<hero_slug>.draft.yaml` so editors keep YAML
+syntax highlighting.
+
 ### `show-relations`
 
-Loads the selected authored hero plus the currently valid authored corpus and prints inferred outbound and inbound relations for review.
+Loads the selected authored hero plus the currently valid authored corpus and
+prints inferred outbound and inbound relations for review. Human output labels
+related heroes as `Localized Name (id)` so relation review does not require
+manually mapping numeric IDs.
 
 This command is meant for authoring-time sanity checking, not for final patch build output.
 
@@ -171,12 +194,14 @@ This command contains no LLM calls.
 
 The current Stage 3 authoring loop is:
 
-1. run `invoker draft-facts HERO`
+1. run `invoker draft-facts HERO [HERO ...]`
 2. copy the generated prompt into an external LLM
 3. save the LLM's JSON reply into the created response file
-4. rerun `invoker draft-facts HERO`
-5. run `invoker validate-facts HERO`
-6. run `invoker show-relations HERO`
+4. rerun `invoker draft-facts HERO [HERO ...]`
+5. review any generated `<hero>.draft.yaml` and `vocab-gaps.yaml`
+6. optionally run `invoker promote-draft HERO [HERO ...]`
+7. run `invoker validate-facts HERO [HERO ...]`
+8. run `invoker show-relations HERO`
 
 Authoring guidance lives in:
 

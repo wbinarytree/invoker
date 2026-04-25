@@ -7,6 +7,7 @@ from invoker.kg.vocabulary import (
     RELATION_PATTERNS,
     REQUIREMENTS,
     STATISTICAL_ALIGNMENT,
+    TARGETS,
 )
 
 
@@ -47,6 +48,7 @@ def test_benchmark_vocab_is_small_and_explicit():
     assert "mana_burn" in CAPABILITIES
     assert "mana_dependence" in LIABILITIES
     assert "needs_save" in REQUIREMENTS
+    assert "punishes_immobile_backline" in TARGETS
     assert "resource_punish" in RELATION_PATTERNS
     assert "aligned" in STATISTICAL_ALIGNMENT
     assert "unobserved" in STATISTICAL_ALIGNMENT
@@ -89,7 +91,7 @@ def test_slardar_counters_riki_via_vision_exposure():
     assert rel.target_feature == "weak_to_reveal"
 
 
-def test_slardar_synergizes_with_pangolier_via_enabler_payoff():
+def test_slardar_synergizes_with_pangolier_via_setup_followup():
     slardar = _profile(
         25,
         "Slardar",
@@ -99,10 +101,10 @@ def test_slardar_synergizes_with_pangolier_via_enabler_payoff():
 
     relations = infer_relation(slardar, pangolier)
 
-    assert any(r.pattern == "enabler_payoff" for r in relations)
-    rel = next(r for r in relations if r.pattern == "enabler_payoff")
+    assert any(r.pattern == "setup_followup" for r in relations)
+    rel = next(r for r in relations if r.pattern == "setup_followup")
     assert rel.relation_kind == "synergy"
-    assert rel.source_feature == "armor_reduction"
+    assert rel.source_feature == "reliable_stun"
     assert rel.target_feature == "magic_burst"
 
 

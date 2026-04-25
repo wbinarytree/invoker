@@ -1,4 +1,4 @@
-<!-- prompt_version: 3 -->
+<!-- prompt_version: 4 -->
 # Draft hero fact profile
 
 You are drafting a Dota 2 hero fact profile for later human review.
@@ -29,7 +29,7 @@ Bucket guardrails:
 - do not put the same idea in multiple buckets
 - do not invent a liability just because it is generally true for many spellcasters
 - prefer omission over a weak or speculative entry
-- if a concept is real but not expressible with the allowed vocabulary, omit it for now
+- if a concept is real but not expressible with the allowed vocabulary, omit it from fact buckets and add it to vocabulary_gaps
 
 Ability text:
 {ABILITIES}
@@ -69,6 +69,15 @@ Output schema:
     }
   ],
   "role_distribution": {},
+  "vocabulary_gaps": [
+    {
+      "bucket": "capabilities",
+      "concept": "short human-readable missing concept",
+      "why_needed": "why the allowed vocabulary cannot express this important mechanic",
+      "evidence": "short concrete evidence from ability text",
+      "candidate_term": "optional_snake_case_term"
+    }
+  ],
   "provenance": {
     "authored_by": "human",
     "authored_at": "YYYY-MM-DD",
@@ -87,6 +96,9 @@ Rules:
 - capabilities, liabilities, and targets should include evidence when present
 - keep requirements sparse; only include ones that materially change how the hero functions
 - only include liabilities that are clearly supported by the current live vocabulary
+- use vocabulary_gaps for important mechanics that are supported by the ability text but cannot be represented with allowed terms
+- keep vocabulary_gaps sparse; do not list vague flavor, item-dependent behavior, or generic Dota properties
+- vocabulary_gaps.bucket must be one of capabilities, requirements, liabilities, targets
 - every top-level key must stay at the top level of the JSON object
 - use JSON arrays with `[]` and objects with `{}`; never use markdown `*` bullets
 - set `provenance.authored_by` to `human`

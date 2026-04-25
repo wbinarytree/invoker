@@ -95,21 +95,20 @@ def infer_relation(source: HeroFactProfile, target: HeroFactProfile) -> list[Her
             )
         )
 
-    if "armor_reduction" in src_caps and "magic_burst" in tgt_caps:
+    if "reliable_stun" in src_caps and "magic_burst" in tgt_caps:
         relations.append(
             _make_relation(
                 source,
                 target,
                 relation_kind="synergy",
-                pattern="enabler_payoff",
-                source_feature="armor_reduction",
+                pattern="setup_followup",
+                source_feature="reliable_stun",
                 target_feature="magic_burst",
                 rationale=(
-                    "damage amplification or setup creates a payoff window "
-                    "for burst follow-up"
+                    "reliable lockdown creates a stable window for magic burst follow-up"
                 ),
                 confidence="med",
-                mechanical_confidence=0.65,
+                mechanical_confidence=0.75,
             )
         )
 
