@@ -35,6 +35,17 @@ LIABILITIES = frozenset(
     }
 )
 
+TARGETS = frozenset(
+    {
+        "punishes_low_armor",
+        "punishes_invisibility",
+        "punishes_summons",
+        "punishes_channeling",
+        "punishes_sustain",
+        "punishes_immobile_backline",
+    }
+)
+
 RELATION_PATTERNS = frozenset(
     {
         "resource_punish",

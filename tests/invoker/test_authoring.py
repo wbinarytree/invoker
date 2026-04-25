@@ -72,6 +72,7 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert "Pangolier" in text
     assert "Swashbuckle" in text
     assert '"capabilities"' in text
+    assert '"vocabulary_gaps"' in text
     assert "Return JSON only." in text
 
 
@@ -79,6 +80,13 @@ def test_validate_authored_payload_rejects_unknown_vocab():
     payload = _pangolier_payload()
     payload["capabilities"][0]["type"] = "not_real"
     with pytest.raises(AuthoredFactsValidationError, match="not in the live vocabulary"):
+        validate_authored_payload(payload)
+
+
+def test_validate_authored_payload_rejects_unknown_top_level_keys():
+    payload = _pangolier_payload()
+    payload["notes"] = "do not silently persist free-form notes"
+    with pytest.raises(AuthoredFactsValidationError, match="unknown top-level keys"):
         validate_authored_payload(payload)
 
 
@@ -115,6 +123,52 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
     assert second.authored_path.exists()
     payload = yaml.safe_load(second.authored_path.read_text())
     assert payload["hero_slug"] == "pangolier"
+    assert "vocabulary_gaps" not in payload
+
+
+def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: Path):
+    context = HeroPromptContext(
+        hero_id=120,
+        hero_slug="pangolier",
+        localized_name="Pangolier",
+        internal_name="npc_dota_hero_pangolier",
+        roles=["Nuker", "Escape"],
+        abilities=[{"name": "Swashbuckle", "text": "Dash and strike enemies in line."}],
+    )
+
+    async def _fake_fetch_prompt_context(data_dir, hero, patch="authoring"):
+        return context
+
+    monkeypatch.setattr(
+        "invoker.kg.authoring.fetch_prompt_context",
+        _fake_fetch_prompt_context,
+    )
+
+    pending = draft_facts(tmp_path, "pangolier")
+    payload = _pangolier_payload()
+    payload["vocabulary_gaps"] = [
+        {
+            "bucket": "capabilities",
+            "concept": "spell immunity piercing movement disruption",
+            "why_needed": (
+                "the current vocabulary has mobility and stun but not immunity-piercing disruption"
+            ),
+            "evidence": "Rolling Thunder can keep disrupting while rolling",
+            "candidate_term": "piercing_disruption",
+        }
+    ]
+    pending.response_path.write_text(yaml.safe_dump(payload, sort_keys=False))
+
+    written = draft_facts(tmp_path, "pangolier")
+
+    assert written.pending is False
+    assert written.gaps_path is not None
+    assert written.gap_count == 1
+    gaps = yaml.safe_load(written.gaps_path.read_text())
+    assert gaps["gaps"][0]["hero_slug"] == "pangolier"
+    assert gaps["gaps"][0]["status"] == "proposed"
+    assert written.authored_path is not None
+    assert "vocabulary_gaps" not in yaml.safe_load(written.authored_path.read_text())
 
 
 def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
@@ -137,9 +191,7 @@ def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
 
     pending = draft_facts(tmp_path, "pangolier")
     pending.response_path.write_text(
-        "Here is the draft:\n```json\n"
-        + json.dumps(_pangolier_payload(), indent=2)
-        + "```"
+        "Here is the draft:\n```json\n" + json.dumps(_pangolier_payload(), indent=2) + "```"
     )
 
     written = draft_facts(tmp_path, "pangolier")

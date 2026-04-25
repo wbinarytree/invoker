@@ -226,12 +226,18 @@ That keeps authoring helpers decoupled from bootstrap and avoids reintroducing t
 
 - `invoker validate-facts <hero>` checks vocabulary membership, score bounds, evidence presence, required buckets.
 - `invoker show-relations <hero>` runs the rule engine against current authored facts and prints inferred relations. Quick sanity-check during authoring.
+- `data/authored/vocab-gaps.yaml` captures important mechanics that could not be represented with the live vocabulary. These entries are **not** facts and do not affect relation inference; they are grounded Stage 4 input.
+
+### Lossiness guardrail
+
+The draft response may include `vocabulary_gaps`, but `draft-facts` must strip that field before writing canonical `<hero>.yaml`. Canonical authored YAML stays strict and validator-owned; unexpressed mechanics go to `vocab-gaps.yaml` as a review inbox with hero, bucket, concept, evidence, candidate term, and status.
 
 ### Exit criteria
 
 1. `draft-facts` renders a prompt whose pasted-back response parses into a YAML draft that `validate-facts` accepts unmodified for at least one hero.
 2. A human can author a hero in under 30 minutes following a short README at `data/authored/README.md`.
-3. Pangolier authored, then nine more heroes — picked to exercise at least half the initial capability vocabulary (cover one each of: physical-burst core, magic-burst core, reliable-stun support, save-giver support, mana-burn hero, invisibility hero, sustain tank, high-mobility carry, wave-clear mid).
+3. At least one draft response with a real missing concept writes `data/authored/vocab-gaps.yaml` while keeping the authored hero YAML valid and free of review-only fields.
+4. Pangolier authored, then nine more heroes — picked to exercise at least half the initial capability vocabulary (cover one each of: physical-burst core, magic-burst core, reliable-stun support, save-giver support, mana-burn hero, invisibility hero, sustain tank, high-mobility carry, wave-clear mid).
 
 ---
 

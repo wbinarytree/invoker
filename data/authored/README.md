@@ -8,8 +8,9 @@ This directory is the local working source for hand-authored hero fact YAML duri
 2. Paste that prompt into your external LLM of choice.
 3. Save the JSON response into the matching manual response file.
 4. Rerun `invoker draft-facts <hero>` to write `<hero>.yaml` or `<hero>.yaml.draft`.
-5. Run `invoker validate-facts <hero>`.
-6. Run `invoker show-relations <hero>` to inspect what the current authored corpus implies.
+5. Review any new entries in `vocab-gaps.yaml`; these are not live facts, only Stage 4 input.
+6. Run `invoker validate-facts <hero>`.
+7. Run `invoker show-relations <hero>` to inspect what the current authored corpus implies.
 
 ## Bucket guidance
 
@@ -31,6 +32,13 @@ Anti-patterns:
 - Do not force every bucket to be populated with many entries.
 - Do not add a plausible concept that the live vocabulary cannot currently express.
 - If a concept feels true but fails validation, that is usually a vocabulary-gap note for later, not a validator bug.
+
+## Vocabulary gaps
+
+- `vocab-gaps.yaml` captures important mechanics that the live vocabulary cannot express yet.
+- Gap entries are review inbox items, not canonical hero facts.
+- Do not work around a missing term by forcing a weak existing term into the authored YAML.
+- Stage 4 should promote only gaps with concrete hero evidence and a clear rule or planner use.
 
 ## Scoring
 

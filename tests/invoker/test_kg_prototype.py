@@ -7,6 +7,7 @@ from invoker.kg.vocabulary import (
     RELATION_PATTERNS,
     REQUIREMENTS,
     STATISTICAL_ALIGNMENT,
+    TARGETS,
 )
 
 
@@ -47,6 +48,7 @@ def test_benchmark_vocab_is_small_and_explicit():
     assert "mana_burn" in CAPABILITIES
     assert "mana_dependence" in LIABILITIES
     assert "needs_save" in REQUIREMENTS
+    assert "punishes_immobile_backline" in TARGETS
     assert "resource_punish" in RELATION_PATTERNS
     assert "aligned" in STATISTICAL_ALIGNMENT
     assert "unobserved" in STATISTICAL_ALIGNMENT

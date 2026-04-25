@@ -7,6 +7,10 @@ def authored_dir(data_dir: Path) -> Path:
     return data_dir / "authored"
 
 
+def vocab_gaps_file(data_dir: Path) -> Path:
+    return authored_dir(data_dir) / "vocab-gaps.yaml"
+
+
 def raw_dir(data_dir: Path, source: str, patch: str) -> Path:
     return data_dir / "raw" / source / patch
 
