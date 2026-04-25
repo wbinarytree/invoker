@@ -1,7 +1,8 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-22
-Current implementation state: Stage 2 is landed and the first Stage 3 authoring loop is implemented.
+Last updated: 2026-04-25
+Current implementation state: Stage 2 is landed, Stage 3 authoring is implemented,
+and the first Stage 4 vocabulary review foundation is implemented.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -104,6 +105,10 @@ Implemented CLI commands in [src/invoker/cli.py](/Users/yaoda/Projects/invoker/s
 - `invoker validate-facts HERO [HERO ...]`
 - `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
+- `invoker vocab-audit`
+- `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
+- `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
+- `invoker compose-vocabulary-prompt [--bucket <bucket>] [--term <term>] [--reviewed-only]`
 - `invoker bootstrap --patch <patch> [--heroes ...]`
 - `invoker status --patch <patch>`
 - `invoker validate --patch <patch>`
@@ -168,6 +173,82 @@ related heroes as `Localized Name (id)` so relation review does not require
 manually mapping numeric IDs.
 
 This command is meant for authoring-time sanity checking, not for final patch build output.
+
+### `vocab-audit`
+
+Audits the current live vocabulary, authored hero files, and rule references.
+
+Behavior:
+
+1. loads live terms from `src/invoker/kg/vocabulary.yaml` through
+   `src/invoker/kg/vocabulary.py`
+2. scans canonical `data/authored/*.yaml` files, excluding drafts and
+   `vocab-*.yaml` review inboxes
+3. reports blocking errors for authored terms outside live vocabulary and rules
+   that reference non-live terms or patterns
+4. reports non-blocking warnings for unused live terms, terms without consuming
+   rules, relation patterns without rules, and open vocabulary gaps
+
+This is the first Stage 4 guardrail. The vocabulary proposal and promotion loop
+is still not implemented.
+
+### `review-vocabulary`
+
+Interactive human vocabulary review.
+
+Behavior:
+
+1. walks current terms from `src/invoker/kg/vocabulary.yaml`
+2. prints each term's status, definition, authored-hero usage, and consuming
+   rules
+3. prompts for a desired action (`keep`, `revise`, `rename`, `merge`, `split`,
+   `remove`, `defer`, or `skip`)
+4. records the human natural-language note in `data/authored/vocab-review.yaml`
+5. appends the same review event to `data/authored/vocab-review-log.jsonl`
+
+The command supports `--bucket` and `--term` filters so review can happen in
+small sessions. Review notes are intentionally kept out of the canonical
+vocabulary file until a later promotion step applies accepted changes.
+
+### `review-vocab-gaps`
+
+Interactive human review for missing concepts captured during hero authoring.
+
+Behavior:
+
+1. walks unresolved entries from `data/authored/vocab-gaps.yaml`
+2. prints each gap's hero, bucket, concept, candidate term, reason, and evidence
+3. prompts for a desired action (`promote`, `merge`, `rename`, `reject`,
+   `defer`, or `skip`)
+4. records the human natural-language note in
+   `data/authored/vocab-gap-review.yaml`
+5. appends the same review event to `data/authored/vocab-gap-review-log.jsonl`
+
+Gap review is intentionally separate from live vocabulary review: a gap is a
+proposal queue item, not an accepted term.
+
+### `compose-vocabulary-prompt`
+
+Writes a manual LLM handoff prompt for vocabulary revision.
+
+Inputs:
+
+- selected current terms from `src/invoker/kg/vocabulary.yaml`
+- compact `invoker vocab-audit` summary
+- reviewed and unreviewed entries from `data/authored/vocab-gaps.yaml`
+- relevant entries from `data/authored/vocab-gap-review.yaml`
+- relevant entries from `data/authored/vocab-review.yaml`
+- authored term usage and current rule consumption for selected terms
+
+Output:
+
+- prompt under `data/raw/manual_prompts/revise-vocabulary/...`
+- matching response placeholder under
+  `data/raw/manual_responses/revise-vocabulary/...`
+
+The prompt asks for JSON output, matching the existing manual hero authoring
+loop. The command does not apply LLM output. It only prepares a grounded prompt
+for an external chat UI.
 
 ### `bootstrap`
 
