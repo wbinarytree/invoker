@@ -15,6 +15,7 @@ The whole point of this project. Claude does not assert Dota-specific facts (her
 - Not a TDD project. Ship the feature with tests for behavior that matters; how tests get written is free.
 - Use the superpowers brainstorming / writing-plans / executing-plans skills when they fit; skip for small edits.
 - Do not invoke `test-driven-development` by default.
+- **Specs go in `docs/specs/` before discussion, not inline in conversation.** Any non-trivial design (new module, changed contract, open questions requiring sign-off) must be written to `docs/specs/YYYY-MM-DD-<topic>.md` first. Present the file path and the open questions — do not substitute a markdown block in chat for the actual spec file.
 
 ## Destructive & External Actions — Ask First
 
