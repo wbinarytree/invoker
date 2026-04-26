@@ -2,6 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def docs_dir() -> Path:
+    return PROJECT_ROOT / "docs"
+
+
+def vocabulary_notes_file() -> Path:
+    return docs_dir() / "specs" / "kg-vocabulary-notes.md"
+
 
 def authored_dir(data_dir: Path) -> Path:
     return data_dir / "authored"

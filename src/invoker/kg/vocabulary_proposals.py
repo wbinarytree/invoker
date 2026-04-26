@@ -11,12 +11,17 @@ import yaml
 
 from invoker.kg.vocabulary import FEATURE_BUCKETS, LIVE_STATUS, VOCABULARY_PATH, load_vocabulary
 from invoker.llm.client import strip_fences
-from invoker.paths import authored_dir, vocab_gap_review_file, vocab_proposals_file
+from invoker.paths import (
+    authored_dir,
+    vocab_gap_review_file,
+    vocab_proposals_file,
+    vocabulary_notes_file,
+)
 
 PROPOSAL_ACTIONS = frozenset({"add", "revise", "rename", "merge", "split", "remove", "defer"})
 REVIEW_STATUSES = frozenset({"pending", "accepted", "rejected", "deferred"})
 PROMOTABLE_ACTIONS = frozenset({"add", "revise", "rename", "split"})
-VOCABULARY_NOTES_PATH = VOCABULARY_PATH.parents[3] / "docs" / "specs" / "kg-vocabulary-notes.md"
+VOCABULARY_NOTES_PATH = vocabulary_notes_file()
 
 
 class VocabularyProposalError(ValueError):
