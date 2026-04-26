@@ -1,8 +1,9 @@
 # Invoker — Architecture (Implementation Artifact)
 
 Last updated: 2026-04-26
-Current implementation state: Stage 2 is landed, Stage 3 authoring is implemented,
-and the first Stage 4 vocabulary review foundation is implemented.
+Current implementation state: Stage 2 is landed, Stage 3 authoring is
+implemented, and Stage 4 vocabulary review now reaches a guarded promotion
+loop (parse → review → promote) backed by a proposal inbox.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -111,6 +112,10 @@ Implemented CLI commands in [src/invoker/cli.py](/Users/yaoda/Projects/invoker/s
 - `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
 - `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
 - `invoker compose-vocabulary-prompt [--bucket <bucket>] [--term <term>] [--reviewed-only]`
+- `invoker parse-vocabulary-response RESPONSE_PATH`
+- `invoker review-vocabulary-proposals [--bucket <bucket>] [--term <term>] [--proposal-id <id>] [--include-reviewed]`
+- `invoker amend-vocabulary-proposal PROPOSAL_ID [--action <action>] [--term <term>] [--review-status <status>] [--human-note <note>]`
+- `invoker promote-vocabulary [--bucket <bucket>] [--term <term>] [--proposal-id <id>] [--max-terms <n>] [--dry-run]`
 - `invoker bootstrap --patch <patch> [--heroes ...]`
 - `invoker status --patch <patch>`
 - `invoker validate --patch <patch>`
@@ -228,6 +233,66 @@ Behavior:
 
 Gap review is intentionally separate from live vocabulary review: a gap is a
 proposal queue item, not an accepted term.
+
+### `parse-vocabulary-response`
+
+Parses a manual LLM response file produced by `compose-vocabulary-prompt`
+into the proposal inbox at `data/authored/vocab-proposals.yaml`.
+
+Implemented in [src/invoker/kg/vocabulary_proposals.py](/Users/yaoda/Projects/invoker/src/invoker/kg/vocabulary_proposals.py).
+
+Behavior:
+
+1. reads the JSON-only response file emitted by the manual workflow
+2. validates each proposal's shape and bucket/action
+3. appends or updates entries in `data/authored/vocab-proposals.yaml`,
+   keyed by deterministic `proposal_id`
+4. reports counts of parsed, added, and updated proposals
+
+Bad LLM output surfaces as a non-zero exit; nothing is silently dropped.
+
+### `review-vocabulary-proposals`
+
+Interactive human review for parsed vocabulary proposals.
+
+Behavior:
+
+1. iterates pending proposals from `data/authored/vocab-proposals.yaml`
+2. prints each proposal's id, bucket, term, action, definition, rationale
+3. prompts for a decision (review status from `REVIEW_STATUSES`) plus a
+   human note
+4. records the decision back onto the proposal in place
+
+`--include-reviewed`, `--bucket`, `--term`, `--proposal-id` filter the
+queue for small focused sessions.
+
+### `amend-vocabulary-proposal`
+
+Edits a single proposal in place. Used when the LLM-suggested action,
+term name, review status, or human note needs correction without
+discarding the proposal.
+
+### `promote-vocabulary`
+
+Promotes accepted proposals from the inbox into the live vocabulary
+file `src/invoker/kg/vocabulary.yaml`.
+
+Behavior:
+
+1. selects accepted proposals matching `--bucket`, `--term`, or
+   `--proposal-id` filters
+2. validates that promotions form a coherent set (no conflicting
+   add/rename/remove on the same term)
+3. warns if a single round adds or renames more than `--max-terms`
+   (default 10) terms
+4. writes the new vocabulary file, appends decision notes to
+   `docs/specs/kg-vocabulary-notes.md`, and clears promoted entries
+   from the inbox
+5. `--dry-run` prints the planned change set without writing
+
+This is the only command that mutates `src/invoker/kg/vocabulary.yaml`.
+Hand-edits to that file are discouraged because they bypass the
+proposal trace.
 
 ### `compose-vocabulary-prompt`
 
