@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from invoker.kg.ability_context import AbilityContext, TalentContext, build_ability_contexts
 from invoker.kg.hero_stats_context import HeroStatsContext, compute_hero_stats_context
 from invoker.sources.opendota import OpenDotaFetcher
 
@@ -24,14 +25,13 @@ class HeroContextPacket:
 
     Separates context assembly from prompt rendering so the same packet
     can be consumed by multiple callers without re-fetching source data.
-    abilities and talents are not yet populated.
     """
 
     patch: str
     hero: HeroIdentityContext
     stats: HeroStatsContext
-    abilities: list[Any] = field(default_factory=list)
-    talents: list[Any] = field(default_factory=list)
+    abilities: list[AbilityContext] = field(default_factory=list)
+    talents: list[TalentContext] = field(default_factory=list)
 
 
 async def build_hero_context(
@@ -48,11 +48,16 @@ async def build_hero_context(
     try:
         heroes_list = await fetcher.heroes()
         raw_stats = await fetcher.hero_stats()
+        raw_abilities = await fetcher.abilities()
+        raw_hero_abilities = await fetcher.hero_abilities_map()
         # /api/constants/heroes is keyed by numeric id; remap to internal name
         hero_stats_map = {v["name"]: v for v in raw_stats.values() if "name" in v}
         hero_record = _find_hero(heroes_list, hero)
         internal_name = hero_record["name"]
         stats = compute_hero_stats_context(internal_name, hero_stats_map)
+        abilities, talents = build_ability_contexts(
+            internal_name, raw_abilities, raw_hero_abilities
+        )
         identity = HeroIdentityContext(
             hero_id=hero_record["id"],
             hero_slug=internal_name.removeprefix("npc_dota_hero_"),
@@ -65,6 +70,8 @@ async def build_hero_context(
             patch=patch,
             hero=identity,
             stats=stats,
+            abilities=abilities,
+            talents=talents,
         )
     finally:
         await fetcher.close()

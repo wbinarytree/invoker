@@ -1,5 +1,6 @@
 import pytest
 
+from invoker.kg.ability_context import AbilityContext, TalentContext
 from invoker.kg.hero_context import (
     HeroContextPacket,
     HeroIdentityContext,
@@ -38,6 +39,28 @@ _HERO_STATS_MAP = {
     }
 }
 
+_ABILITIES_MAP = {
+    "slardar_crush": {
+        "dname": "Slithereen Crush",
+        "behavior": "No Target",
+        "dmg_type": "Physical",
+        "bkbpierce": "No",
+        "dispellable": "Strong Dispels Only",
+        "desc": "Slams the ground.",
+        "attrib": [{"key": "damage", "header": "DAMAGE:", "value": ["75", "150", "225", "300"]}],
+        "mc": "100",
+        "cd": "7",
+    },
+    "special_bonus_hp_250": {"dname": "+250 Health"},
+}
+
+_HERO_ABILITIES_MAP = {
+    "npc_dota_hero_slardar": {
+        "abilities": ["slardar_crush"],
+        "talents": [{"name": "special_bonus_hp_250", "level": 1}],
+    }
+}
+
 
 @pytest.mark.parametrize(
     "token",
@@ -64,6 +87,12 @@ async def test_build_hero_context_returns_packet(monkeypatch, tmp_path):
         async def hero_stats(self):
             return _HERO_STATS_MAP
 
+        async def abilities(self):
+            return _ABILITIES_MAP
+
+        async def hero_abilities_map(self):
+            return _HERO_ABILITIES_MAP
+
         async def close(self):
             pass
 
@@ -79,5 +108,9 @@ async def test_build_hero_context_returns_packet(monkeypatch, tmp_path):
     assert packet.patch == "7.41b"
     assert packet.stats.base_str is not None
     assert packet.stats.primary_attr == "str"
-    assert packet.abilities == []
-    assert packet.talents == []
+    assert len(packet.abilities) == 1
+    assert isinstance(packet.abilities[0], AbilityContext)
+    assert packet.abilities[0].internal_name == "slardar_crush"
+    assert len(packet.talents) == 1
+    assert isinstance(packet.talents[0], TalentContext)
+    assert packet.talents[0].name == "+250 Health"

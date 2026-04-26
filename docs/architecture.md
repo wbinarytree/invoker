@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-26 (add opendota-cache.md as official cache reference)
+Last updated: 2026-04-26 (PR3 — normalized ability/talent context)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox.
