@@ -1,4 +1,10 @@
-from invoker.kg.mechanism_primer import MechanismPrimerContext, load_mechanism_primer
+import pytest
+
+from invoker.kg.mechanism_primer import (
+    MechanismPrimerContext,
+    MechanismPrimerError,
+    load_mechanism_primer,
+)
 
 
 def test_load_mechanism_primer_known_patch():
@@ -16,3 +22,16 @@ def test_load_mechanism_primer_unknown_patch_returns_empty():
     result = load_mechanism_primer("0.00")
     assert result.patch == "0.00"
     assert result.mechanics == []
+
+
+def test_load_mechanism_primer_rejects_invalid_mechanics(tmp_path):
+    bad = tmp_path / "mechanism_primer_test.yaml"
+    bad.write_text("patch: test\nmechanics:\n  - stat: strength\n")
+    import invoker.kg.mechanism_primer as mp
+    original = mp._PRIMER_DIR
+    mp._PRIMER_DIR = tmp_path
+    try:
+        with pytest.raises(MechanismPrimerError, match="contributions"):
+            load_mechanism_primer("test")
+    finally:
+        mp._PRIMER_DIR = original

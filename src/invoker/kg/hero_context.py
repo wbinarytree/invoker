@@ -70,6 +70,10 @@ async def build_hero_context(
         await fetcher.close()
 
 
+class HeroNotFoundError(ValueError):
+    pass
+
+
 def _find_hero(heroes: list[dict[str, Any]], hero: str) -> dict[str, Any]:
     token = hero.strip().lower()
     for h in heroes:
@@ -82,4 +86,4 @@ def _find_hero(heroes: list[dict[str, Any]], hero: str) -> dict[str, Any]:
         }
         if token in candidates:
             return h
-    raise FileNotFoundError(f"hero {hero!r} not found in OpenDota roster")
+    raise HeroNotFoundError(f"hero {hero!r} not found in OpenDota roster")

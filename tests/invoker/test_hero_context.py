@@ -3,6 +3,7 @@ import pytest
 from invoker.kg.hero_context import (
     HeroContextPacket,
     HeroIdentityContext,
+    HeroNotFoundError,
     _find_hero,
     build_hero_context,
 )
@@ -48,7 +49,7 @@ def test_find_hero_matches_multiple_tokens(token):
 
 
 def test_find_hero_raises_for_unknown():
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(HeroNotFoundError):
         _find_hero(_HEROES_LIST, "nonexistent_hero")
 
 
