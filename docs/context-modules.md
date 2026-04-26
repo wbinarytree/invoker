@@ -13,8 +13,8 @@ class HeroContextPacket:
     patch: str
     hero: HeroIdentityContext
     stats: HeroStatsContext
-    abilities: list[Any]   # empty — not yet populated
-    talents: list[Any]     # empty — not yet populated
+    abilities: list[AbilityContext]
+    talents: list[TalentContext]
 ```
 
 `MechanismPrimerContext` is patch-scoped, not hero-scoped. Load it separately
@@ -44,6 +44,38 @@ stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
 Bands are deterministic quintiles: `very_low` / `low` / `average` / `high` / `very_high`.
 
 Source data comes from `/api/constants/heroes` via `OpenDotaFetcher.hero_stats()`.
+
+## `ability_context.py`
+
+[src/invoker/kg/ability_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/ability_context.py)
+
+Builds `AbilityContext` and `TalentContext` lists from cached OpenDota payloads
+(`abilities()` and `hero_abilities_map()`).
+
+```python
+def build_ability_contexts(
+    hero_internal_name: str,
+    abilities_map: dict[str, Any],
+    hero_abilities_map: dict[str, Any],
+) -> tuple[list[AbilityContext], list[TalentContext]]: ...
+```
+
+**`AbilityContext`** — one per base ability or innate:
+
+- `source`: `"base_ability"` or `"innate"` (from `is_innate: true` in raw data)
+- `behavior`: always `list[str]` (normalized from string or list)
+- `pierces_debuff_immunity`: `bool | None` (from `bkbpierce` "Yes"/"No")
+- `attribs`: all `AttribEntry` rows from the raw `attrib` array, included as-is
+- `mana_cost` / `cooldown`: absent on passives
+
+**`TalentContext`** — one per talent entry from `hero_abilities_map`:
+
+- `level`: tier 1–4 (maps to hero levels 10 / 15 / 20 / 25)
+- `name`: display name joined from the abilities map
+
+Filtering: `generic_hidden` entries and abilities absent from the abilities map
+are skipped. Scepter/Shard ability detection is not possible from current data
+and is deferred.
 
 ## `mechanism_primer.py`
 
