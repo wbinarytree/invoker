@@ -153,6 +153,9 @@ uv run invoker promote-vocabulary --bucket capabilities --dry-run
 uv run invoker promote-vocabulary --bucket capabilities
 ```
 
+New manual response placeholders should use `.json`; the `.txt` path above is
+an older local response from before the suffix change.
+
 The first capabilities response has been parsed locally into
 `data/authored/vocab-proposals.yaml` with 53 pending proposals.
 

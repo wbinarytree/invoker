@@ -145,7 +145,7 @@ def _write_grounding_files(tmp_path: Path) -> None:
 
 
 def test_parse_vocabulary_proposals_writes_inbox(tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
 
     result = parse_vocabulary_proposals(tmp_path, response_path)
@@ -158,7 +158,7 @@ def test_parse_vocabulary_proposals_writes_inbox(tmp_path: Path):
 
 
 def test_parse_vocabulary_proposals_preserves_human_review(monkeypatch, tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))
@@ -186,7 +186,7 @@ def test_promote_vocabulary_updates_vocab_notes_and_proposal_status(
     monkeypatch,
     tmp_path: Path,
 ):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     notes_path = tmp_path / "kg-vocabulary-notes.md"
@@ -213,7 +213,7 @@ def test_promote_vocabulary_updates_vocab_notes_and_proposal_status(
 
 
 def test_promote_vocabulary_refuses_ungrounded_terms(monkeypatch, tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))
@@ -234,7 +234,7 @@ def test_promote_vocabulary_refuses_ungrounded_terms(monkeypatch, tmp_path: Path
 
 
 def test_promote_vocabulary_reports_all_preflight_errors(monkeypatch, tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(
         json.dumps(
             {
@@ -290,7 +290,7 @@ def test_promote_vocabulary_reports_all_preflight_errors(monkeypatch, tmp_path: 
 
 
 def test_amend_vocabulary_proposal_updates_action_and_id(tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     parse_result = parse_vocabulary_proposals(tmp_path, response_path)
     old_id = yaml.safe_load(parse_result.proposals_path.read_text())["proposals"][0][
@@ -318,7 +318,7 @@ def test_review_vocabulary_proposal_blocks_impossible_revise_acceptance(
     monkeypatch,
     tmp_path: Path,
 ):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     payload = _response_payload()
     payload["proposals"][0]["action"] = "revise"
     response_path.write_text(json.dumps(payload))
@@ -343,7 +343,7 @@ def test_promote_vocabulary_allows_child_term_from_grounded_split(
     monkeypatch,
     tmp_path: Path,
 ):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_split_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     notes_path = tmp_path / "kg-vocabulary-notes.md"
@@ -370,7 +370,7 @@ def test_promote_vocabulary_allows_child_term_from_grounded_split(
 
 
 def test_promote_vocabulary_dry_run_does_not_write(monkeypatch, tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     notes_path = tmp_path / "kg-vocabulary-notes.md"
@@ -401,7 +401,7 @@ def test_promote_vocabulary_warns_when_new_terms_exceed_max_terms(
     monkeypatch,
     tmp_path: Path,
 ):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(
         json.dumps(
             {
@@ -448,7 +448,7 @@ def test_promote_vocabulary_warns_when_new_terms_exceed_max_terms(
 
 
 def test_promote_vocabulary_no_warning_when_under_max_terms(monkeypatch, tmp_path: Path):
-    response_path = tmp_path / "response.txt"
+    response_path = tmp_path / "response.json"
     response_path.write_text(json.dumps(_response_payload()))
     vocabulary_path = tmp_path / "vocabulary.yaml"
     vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))

@@ -10,6 +10,7 @@ def test_manual_client_writes_prompt_and_raises_pending(tmp_path):
     err = exc_info.value
     assert err.prompt_path.exists()
     assert err.response_path.exists()
+    assert err.response_path.suffix == ".json"
     assert err.response_path.read_text() == ""
     assert "extract/Slardar" in str(err)
     assert err.prompt_path.is_relative_to(tmp_path / "in" / "extract" / "Slardar")

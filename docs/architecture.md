@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-26 (bundle/install roadmap clarification)
+Last updated: 2026-04-26 (manual JSON responses and hero prompt hardening)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox.
@@ -128,14 +128,17 @@ Implemented in [src/invoker/kg/authoring.py](/Users/yaoda/Projects/invoker/src/i
 Behavior:
 
 1. resolves hero metadata and ability text from OpenDota
-2. renders `draft_fact_profile.md`
+2. renders `draft_fact_profile.md` with authoring-relevant metadata for every
+   accepted vocabulary term and cached OpenDota ability text
 3. writes a manual prompt file under `data/raw/manual_prompts/draft-facts/<hero_slug>/...`
-4. creates the matching empty response placeholder under `data/raw/manual_responses/draft-facts/<hero_slug>/...`
+4. creates the matching empty `.json` response placeholder under
+   `data/raw/manual_responses/draft-facts/<hero_slug>/...`
 5. on rerun, parses the saved manual response
 6. writes normalized YAML to `data/authored/<hero_slug>.yaml` or `<hero_slug>.draft.yaml`
 7. records any response-level `vocabulary_gaps` in `data/authored/vocab-gaps.yaml`
 
-Transport format for the LLM response is JSON-only by prompt contract.
+Transport format for the LLM response is JSON-only by prompt contract, and
+manual response placeholders now use a `.json` suffix.
 Stored local format remains YAML. Canonical authored files stay strict;
 vocabulary gaps are review inbox items and do not directly affect relation
 inference.
@@ -312,7 +315,7 @@ Output:
 
 - prompt under `data/raw/manual_prompts/revise-vocabulary/...`
 - matching response placeholder under
-  `data/raw/manual_responses/revise-vocabulary/...`
+  `data/raw/manual_responses/revise-vocabulary/.../*.json`
 
 The prompt asks for JSON output, matching the existing manual hero authoring
 loop. The command does not apply LLM output. It only prepares a grounded prompt
@@ -526,7 +529,7 @@ data/
     manual_prompts/
       draft-facts/<hero_slug>/<hash>.md
     manual_responses/
-      draft-facts/<hero_slug>/<hash>.txt
+      draft-facts/<hero_slug>/<hash>.json
   derived/
     <patch>/
       heroes/<hero_id>.json

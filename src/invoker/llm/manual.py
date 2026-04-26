@@ -30,7 +30,7 @@ class ManualClient:
 
     Writes each prompt to data/raw/manual_prompts/<tag>/<hash>.md (tag from the
     caller's cache_tag, e.g. "extract/Slardar"). Reads the response from
-    data/raw/manual_responses/<tag>/<hash>.txt. Raises PendingManualResponseError
+    data/raw/manual_responses/<tag>/<hash>.json. Raises PendingManualResponseError
     when the response file is missing.
     """
 
@@ -46,7 +46,7 @@ class ManualClient:
         h = hashlib.sha256(prompt.encode()).hexdigest()[:12]
         in_dir = self.inbox / cache_tag if cache_tag else self.inbox
         out_dir = self.outbox / cache_tag if cache_tag else self.outbox
-        return in_dir / f"{h}.md", out_dir / f"{h}.txt"
+        return in_dir / f"{h}.md", out_dir / f"{h}.json"
 
     def generate_json(
         self,

@@ -72,9 +72,16 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert version >= 1
     assert "Pangolier" in text
     assert "Swashbuckle" in text
+    assert "Live vocabulary JSON" in text
+    assert "Ability context JSON" in text
+    assert '"description": "Dash and strike enemies in line."' in text
     assert '"capabilities"' in text
     assert '"vocabulary_gaps"' in text
+    assert '"role_distribution"' not in text
+    assert '"introduced_in"' not in text
+    assert '"status"' not in text
     assert "Return JSON only." in text
+    assert "Use only the live vocabulary terms" in text
 
 
 def test_validate_authored_payload_rejects_unknown_vocab():
@@ -116,7 +123,7 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
     assert first.response_path.exists()
     assert first.response_path.read_text() == ""
 
-    first.response_path.write_text(yaml.safe_dump(_pangolier_payload(), sort_keys=False))
+    first.response_path.write_text(json.dumps(_pangolier_payload(), indent=2))
 
     second = draft_facts(tmp_path, "pangolier")
     assert second.pending is False
@@ -158,7 +165,7 @@ def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: P
             "candidate_term": "piercing_disruption",
         }
     ]
-    pending.response_path.write_text(yaml.safe_dump(payload, sort_keys=False))
+    pending.response_path.write_text(json.dumps(payload, indent=2))
 
     written = draft_facts(tmp_path, "pangolier")
 

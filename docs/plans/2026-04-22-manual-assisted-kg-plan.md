@@ -208,7 +208,7 @@ Prompt *generation* is part of the pipeline. The LLM call itself is performed by
 - Fetches ability text from OpenDota for the hero (cached under `data/raw/opendota/<patch>/...`), or reuses the cached payload if present.
 - Renders `src/invoker/prompts/draft_fact_profile.md` into a concrete prompt with hero name, roles, and full ability text substituted in, plus the current vocabulary as an allowed-terms list.
 - Writes the rendered prompt to `data/raw/manual_prompts/draft-facts/<hero_slug>.md` via `ManualClient`.
-- On rerun, reads `data/raw/manual_responses/draft-facts/<hero_slug>.txt`, parses into YAML, writes to `data/authored/<hero_slug>.yaml` **only if the file does not already exist**. Otherwise writes `data/authored/<hero_slug>.draft.yaml` for diff review.
+- On rerun, reads `data/raw/manual_responses/draft-facts/<hero_slug>.json`, parses into YAML, writes to `data/authored/<hero_slug>.yaml` **only if the file does not already exist**. Otherwise writes `data/authored/<hero_slug>.draft.yaml` for diff review.
 - If the response is missing, prints the pending prompt path and exits cleanly (no traceback).
 
 Why this split: prompt rendering is deterministic, mechanical, and benefits from versioning — it belongs in the pipeline. Which model runs the prompt, and what prompting ergonomics the user prefers, belong outside the pipeline.
@@ -298,7 +298,7 @@ Same prompt-in-pipeline / LLM-in-human-loop split as `draft-facts`:
 - Collects all authored heroes (post-Stage 3, at least 10) and their ability text.
 - Renders `src/invoker/prompts/suggest_vocabulary.md` with: current vocabulary, authored heroes' ability text, and a request to propose missing terms per bucket along with: (a) proposed term, (b) definition, (c) example hero(es) where it applies, (d) proposed rules it would enable.
 - Writes the prompt to `data/raw/manual_prompts/suggest-vocabulary/<timestamp>.md`.
-- On rerun, parses `data/raw/manual_responses/suggest-vocabulary/<timestamp>.txt` into `data/authored/vocab-proposals.yaml` — an inbox, not live vocabulary.
+- On rerun, parses `data/raw/manual_responses/suggest-vocabulary/<timestamp>.json` into `data/authored/vocab-proposals.yaml` — an inbox, not live vocabulary.
 
 ### Review and promotion
 

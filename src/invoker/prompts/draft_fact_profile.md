@@ -1,11 +1,13 @@
-<!-- prompt_version: 4 -->
+<!-- prompt_version: 5 -->
 # Draft hero fact profile
 
 You are drafting a Dota 2 hero fact profile for later human review.
 
 Return JSON only. Do not wrap it in prose. Do not use markdown bullets. Do not add markdown fences unless the chat UI forces you.
 
-Use only the allowed vocabulary terms below.
+Use only the live vocabulary terms below. If an important mechanic is supported
+by the ability context but no live term fits, omit it from fact buckets and add
+it to vocabulary_gaps.
 
 Hero:
 - id: {HERO_ID}
@@ -13,11 +15,10 @@ Hero:
 - localized_name: {HERO_NAME}
 - roles: {ROLES}
 
-Allowed vocabulary:
-- capabilities: {CAPABILITIES}
-- requirements: {REQUIREMENTS}
-- liabilities: {LIABILITIES}
-- targets: {TARGETS}
+Live vocabulary JSON:
+```json
+{VOCABULARY_CONTEXT_JSON}
+```
 
 Bucket definitions:
 - capabilities = things this hero actively does well with their own kit
@@ -31,8 +32,10 @@ Bucket guardrails:
 - prefer omission over a weak or speculative entry
 - if a concept is real but not expressible with the allowed vocabulary, omit it from fact buckets and add it to vocabulary_gaps
 
-Ability text:
-{ABILITIES}
+Ability context JSON:
+```json
+{ABILITIES_JSON}
+```
 
 Output schema:
 
@@ -68,7 +71,6 @@ Output schema:
       "evidence": ["short concrete evidence from ability text"]
     }
   ],
-  "role_distribution": {},
   "vocabulary_gaps": [
     {
       "bucket": "capabilities",
@@ -87,7 +89,7 @@ Output schema:
 ```
 
 Rules:
-- use only allowed vocabulary terms
+- use only live vocabulary terms
 - omit entries you cannot justify from the ability text
 - keep evidence short and concrete
 - paraphrase evidence instead of quoting exact phrases from the source text

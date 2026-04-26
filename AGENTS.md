@@ -41,6 +41,7 @@ Stale docs are worse than missing docs — they mislead. When a spec, plan, hand
 - No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
 - No data committed. `data/` is gitignored.
 - No silent retries on bad LLM extractions — surface failures.
+- Trigger discussion mode before implementation when a change needs design, vision, or plan alignment. Do not jump directly from a strategic concern into code.
 - Ask before destructive or external-facing actions (force-push, rewriting history, full all-hero API fetch, deleting outside the working change).
 
 ## Stack quick-ref
