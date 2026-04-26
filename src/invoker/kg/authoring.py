@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import re
 import shutil
 from dataclasses import dataclass
@@ -11,7 +12,13 @@ from typing import Any
 import yaml
 
 from invoker.kg import HeroFactProfile, infer_relations, load_hero_facts
-from invoker.kg.vocabulary import CAPABILITIES, LIABILITIES, REQUIREMENTS, TARGETS
+from invoker.kg.vocabulary import (
+    CAPABILITIES,
+    LIABILITIES,
+    REQUIREMENTS,
+    TARGETS,
+    load_vocabulary,
+)
 from invoker.llm.client import strip_fences
 from invoker.llm.manual import ManualClient, PendingManualResponseError
 from invoker.paths import authored_dir, vocab_gaps_file
@@ -435,6 +442,28 @@ def _hero_matches(token: str, hero: dict[str, Any]) -> bool:
     }
 
 
+def _prompt_vocabulary_context() -> str:
+    vocabulary = load_vocabulary()
+    packet: dict[str, list[dict[str, Any]]] = {}
+
+    for bucket in ("capabilities", "requirements", "liabilities", "targets"):
+        entries = vocabulary[bucket]
+        packet[bucket] = []
+        for term, metadata in entries.items():
+            if not isinstance(metadata, dict) or metadata.get("status") != "accepted":
+                continue
+            entry = {
+                key: value
+                for key, value in metadata.items()
+                if key not in {"status", "introduced_in"}
+            }
+            entry["term"] = term
+            packet[bucket].append(entry)
+        packet[bucket].sort(key=lambda entry: entry["term"])
+
+    return json.dumps(packet, indent=2, sort_keys=True)
+
+
 def _select_hero(
     heroes: list[dict[str, Any]],
     hero_abilities: dict[str, Any],
@@ -498,10 +527,7 @@ def render_draft_facts_prompt(context: HeroPromptContext) -> tuple[str, int]:
         HERO_SLUG=context.hero_slug,
         ROLES=", ".join(context.roles) or "Unknown",
         ABILITIES=ability_text or "- No ability text found.",
-        CAPABILITIES=", ".join(sorted(CAPABILITIES)),
-        REQUIREMENTS=", ".join(sorted(REQUIREMENTS)),
-        LIABILITIES=", ".join(sorted(LIABILITIES)),
-        TARGETS=", ".join(sorted(TARGETS)),
+        VOCABULARY_CONTEXT_JSON=_prompt_vocabulary_context(),
     )
     return rendered, prompt.version
 
