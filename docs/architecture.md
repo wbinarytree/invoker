@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-26 (reusable static hero context skeleton — PR2)
+Last updated: 2026-04-26 (add opendota-cache.md as official cache reference)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox.
@@ -15,6 +15,7 @@ Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
 
 - [cli.md](cli.md) — CLI command reference and authoring loop
 - [context-modules.md](context-modules.md) — static hero context modules (`HeroContextPacket`, stats, mechanism primer)
+- [opendota-cache.md](opendota-cache.md) — OpenDota HTTP cache: hash function, file → endpoint map, payload shapes
 
 ---
 
@@ -108,16 +109,10 @@ Built from derived hero views plus `relations.json`. Used for graph-oriented loc
 
 ### OpenDota
 
-Used directly by the implemented code for:
-
-- hero roster and roles: `/api/heroes`
-- hero stat constants: `/api/constants/heroes`
-- ability descriptions: `/api/constants/abilities`
-- hero -> ability mapping: `/api/constants/hero_abilities`
-- matchups: `/api/heroes/{id}/matchups`
-- pro matches: `/api/proMatches`
-
 Source adapter: [src/invoker/sources/opendota.py](/Users/yaoda/Projects/invoker/src/invoker/sources/opendota.py)
+
+Cache layer, endpoint list, hash function, and payload shapes:
+[docs/opendota-cache.md](opendota-cache.md)
 
 ### STRATZ
 

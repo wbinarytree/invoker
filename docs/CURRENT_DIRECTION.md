@@ -41,6 +41,8 @@ This file is the shortest path to the active design direction. Anything not list
 
 - Retrospective brainstorm/decision notes:
   [docs/notes/](/Users/yaoda/Projects/invoker/docs/notes:1)
+- **OpenDota constants staleness** (not patch-versioned, silently drifts after patch):
+  [docs/notes/2026-04-26-opendota-constants-not-patch-versioned.md](notes/2026-04-26-opendota-constants-not-patch-versioned.md)
 
 ## External input
 
