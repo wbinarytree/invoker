@@ -1,5 +1,5 @@
-> **Status: superseded by future redesign when bundle/install becomes near-term (2026-04-26).**
-> References removed pipeline shape (`run_for_hero`, `finalize_patch`). Bundle/install is a known roadmap item per `docs/architecture.md` "Known Gaps", but will be redesigned fresh from the manual-assisted-KG architecture, not from this spec. Kept only as historical trace.
+> **Status: superseded by `docs/architecture.md` "Known Gaps" (2026-04-26).**
+> References removed pipeline shape (`run_for_hero`, `finalize_patch`). Bundle/install remains a planned roadmap item — see the bundle/install entry under `docs/architecture.md` "Known Gaps" — but will be redesigned fresh from the manual-assisted-KG architecture, not from this spec. Kept only as historical trace.
 
 # Bundle Assembly + Bootstrap Wiring
 
