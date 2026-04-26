@@ -129,6 +129,21 @@ def show_relations_cmd(
     typer.echo(format_relations_for_hero(cfg.data_dir, hero))
 
 
+@app.command("show-hero-context")
+def show_hero_context_cmd(
+    hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
+    patch: str = typer.Option("authoring", help="Patch for source data and mechanism primer."),
+) -> None:
+    import asyncio
+    import dataclasses
+
+    from invoker.kg.hero_context import build_hero_context
+
+    cfg = _load_config()
+    packet = asyncio.run(build_hero_context(cfg.data_dir, hero, patch=patch))
+    typer.echo(json.dumps(dataclasses.asdict(packet), indent=2))
+
+
 @app.command("vocab-audit")
 def vocab_audit_cmd() -> None:
     from invoker.kg.vocab_audit import format_vocab_audit, run_vocab_audit
