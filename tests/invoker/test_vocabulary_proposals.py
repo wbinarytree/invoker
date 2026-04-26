@@ -367,3 +367,100 @@ def test_promote_vocabulary_allows_child_term_from_grounded_split(
     assert "damage_amp" in vocabulary["capabilities"]
     assert "physical_damage_amp" in vocabulary["capabilities"]
     assert "capabilities.physical_damage_amp" in result.promoted_terms
+
+
+def test_promote_vocabulary_dry_run_does_not_write(monkeypatch, tmp_path: Path):
+    response_path = tmp_path / "response.txt"
+    response_path.write_text(json.dumps(_response_payload()))
+    vocabulary_path = tmp_path / "vocabulary.yaml"
+    notes_path = tmp_path / "kg-vocabulary-notes.md"
+    vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))
+    monkeypatch.setattr(proposals, "VOCABULARY_PATH", vocabulary_path)
+    monkeypatch.setattr(proposals, "VOCABULARY_NOTES_PATH", notes_path)
+    _write_grounding_files(tmp_path)
+
+    parse_result = parse_vocabulary_proposals(tmp_path, response_path)
+    proposal_id = yaml.safe_load(parse_result.proposals_path.read_text())["proposals"][0][
+        "proposal_id"
+    ]
+    review_vocabulary_proposal(tmp_path, proposal_id, review_status="accepted")
+    vocabulary_before = vocabulary_path.read_text()
+
+    result = promote_vocabulary(tmp_path, dry_run=True)
+
+    assert result.promoted_terms == ["capabilities.attack_speed_reduction"]
+    assert result.promoted_ids == [proposal_id]
+    assert vocabulary_path.read_text() == vocabulary_before
+    assert not notes_path.exists()
+    inbox = yaml.safe_load(parse_result.proposals_path.read_text())
+    assert inbox["proposals"][0]["review_status"] == "accepted"
+    assert "promoted_at" not in inbox["proposals"][0]
+
+
+def test_promote_vocabulary_warns_when_new_terms_exceed_max_terms(
+    monkeypatch,
+    tmp_path: Path,
+):
+    response_path = tmp_path / "response.txt"
+    response_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "proposals": [
+                    {
+                        "bucket": "capabilities",
+                        "term": term,
+                        "action": "add",
+                        "definition": f"Definition for {term}.",
+                        "include_when": [],
+                        "exclude_when": [],
+                        "examples": [
+                            {"hero_slug": "pangolier", "evidence": f"Pangolier needs {term}."},
+                        ],
+                        "enabled_rules": [],
+                        "rationale": "",
+                        "status": "proposed",
+                    }
+                    for term in ("term_alpha", "term_beta", "term_gamma")
+                ],
+            }
+        )
+    )
+    vocabulary_path = tmp_path / "vocabulary.yaml"
+    vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))
+    monkeypatch.setattr(proposals, "VOCABULARY_PATH", vocabulary_path)
+    _write_grounding_files(tmp_path)
+
+    parse_result = parse_vocabulary_proposals(tmp_path, response_path)
+    inbox = yaml.safe_load(parse_result.proposals_path.read_text())
+    for proposal in inbox["proposals"]:
+        review_vocabulary_proposal(
+            tmp_path,
+            proposal["proposal_id"],
+            review_status="accepted",
+        )
+
+    result = promote_vocabulary(tmp_path, max_terms=2, dry_run=True)
+
+    assert len(result.warnings) == 1
+    assert "3 new terms selected" in result.warnings[0]
+    assert "more than 2" in result.warnings[0]
+
+
+def test_promote_vocabulary_no_warning_when_under_max_terms(monkeypatch, tmp_path: Path):
+    response_path = tmp_path / "response.txt"
+    response_path.write_text(json.dumps(_response_payload()))
+    vocabulary_path = tmp_path / "vocabulary.yaml"
+    vocabulary_path.write_text(yaml.safe_dump(_vocabulary_payload(), sort_keys=False))
+    monkeypatch.setattr(proposals, "VOCABULARY_PATH", vocabulary_path)
+    _write_grounding_files(tmp_path)
+
+    parse_result = parse_vocabulary_proposals(tmp_path, response_path)
+    proposal_id = yaml.safe_load(parse_result.proposals_path.read_text())["proposals"][0][
+        "proposal_id"
+    ]
+    review_vocabulary_proposal(tmp_path, proposal_id, review_status="accepted")
+
+    result = promote_vocabulary(tmp_path, max_terms=10, dry_run=True)
+
+    assert result.warnings == []
