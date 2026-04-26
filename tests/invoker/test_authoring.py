@@ -73,6 +73,8 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert "Pangolier" in text
     assert "Swashbuckle" in text
     assert "Live vocabulary JSON" in text
+    assert "Ability context JSON" in text
+    assert '"description": "Dash and strike enemies in line."' in text
     assert '"capabilities"' in text
     assert '"vocabulary_gaps"' in text
     assert '"role_distribution"' not in text

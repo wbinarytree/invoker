@@ -518,15 +518,20 @@ async def fetch_prompt_context(
 
 def render_draft_facts_prompt(context: HeroPromptContext) -> tuple[str, int]:
     prompt = load("draft_fact_profile")
-    ability_text = "\n".join(
-        f"- {ability['name']}: {ability['text']}" for ability in context.abilities
+    ability_context = json.dumps(
+        [
+            {"name": ability["name"], "description": ability["text"]}
+            for ability in context.abilities
+        ],
+        indent=2,
+        sort_keys=True,
     )
     rendered = prompt.render(
         HERO_ID=str(context.hero_id),
         HERO_NAME=context.localized_name,
         HERO_SLUG=context.hero_slug,
         ROLES=", ".join(context.roles) or "Unknown",
-        ABILITIES=ability_text or "- No ability text found.",
+        ABILITIES_JSON=ability_context,
         VOCABULARY_CONTEXT_JSON=_prompt_vocabulary_context(),
     )
     return rendered, prompt.version

@@ -1,7 +1,7 @@
 # Hero Authoring Context Hardening
 
 Date: 2026-04-26
-Status: draft — needs user sign-off before implementation
+Status: accepted for PR 1; future context PRs still draft
 Stage: Stage 4 quality hardening before broader hero authoring, oracle use, and
 Stage 5 rules
 

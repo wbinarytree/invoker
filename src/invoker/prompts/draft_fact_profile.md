@@ -32,8 +32,10 @@ Bucket guardrails:
 - prefer omission over a weak or speculative entry
 - if a concept is real but not expressible with the allowed vocabulary, omit it from fact buckets and add it to vocabulary_gaps
 
-Ability text:
-{ABILITIES}
+Ability context JSON:
+```json
+{ABILITIES_JSON}
+```
 
 Output schema:
 
