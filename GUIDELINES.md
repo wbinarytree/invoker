@@ -56,11 +56,16 @@ Pragmatic. Not TDD.
 
 ## Architecture Doc Is Source of Truth
 
-`docs/architecture.md` describes the code that exists today. It is not aspirational.
+`docs/architecture.md` is the root implementation record and links to companion docs
+(`docs/cli.md`, `docs/context-modules.md`, and future additions). Together they
+describe only the code that exists today — not aspirational design.
 
-- A PR that adds or modifies a CLI command, schema, validation layer, pipeline step, or module **must** update `docs/architecture.md` in the same PR. Bump the `Last updated:` line.
+- A PR that adds or modifies a CLI command **must** update `docs/cli.md` in the same PR.
+- A PR that adds or modifies a context module **must** update `docs/context-modules.md` in the same PR.
+- A PR that adds or modifies a schema, validation layer, pipeline step, or any module without a dedicated doc **must** update `docs/architecture.md` in the same PR.
+- Every PR that touches any architecture doc **must** bump `Last updated:` in `docs/architecture.md`.
 - Bug fixes that don't change shape are exempt.
-- When this doc conflicts with a spec or plan, this doc wins. Stale plans are not silent overrides.
+- When these docs conflict with a spec or plan, the architecture docs win. Stale plans are not silent overrides.
 
 ## Doc Lifecycle
 

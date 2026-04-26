@@ -1,0 +1,45 @@
+# Per-patch Dota mechanism primer.
+# This file is reviewed per patch. Fill in conversion values from official
+# Dota documentation and set reviewed_by / reviewed_at after each pass.
+patch: "7.41b"
+reviewed_by: null
+reviewed_at: null
+mechanics:
+  - stat: strength
+    contributions:
+      - description: "HP per point"
+        value: 22
+        unit: HP
+      - description: "HP regeneration per second per point"
+        value: 0.1
+        unit: HP/s
+  - stat: agility
+    contributions:
+      - description: "armor per point"
+        value: 0.167
+        unit: armor
+      - description: "attack speed per point"
+        value: 1
+        unit: attack_speed
+  - stat: intelligence
+    contributions:
+      - description: "mana per point"
+        value: 12
+        unit: mana
+      - description: "mana regeneration per second per point"
+        value: 0.05
+        unit: mana/s
+      - description: "magic resistance per point (diminishing returns)"
+        value: 0.1
+        unit: magic_resistance
+  - stat: primary_attribute
+    contributions:
+      - description: "attack damage per point of primary attribute (str/agi/int heroes)"
+        value: 1
+        unit: attack_damage
+  - stat: universal_attribute
+    note: "universal heroes gain attack damage from all three attributes, not just one"
+    contributions:
+      - description: "attack damage per point of any attribute (str, agi, or int)"
+        value: 0.45
+        unit: attack_damage

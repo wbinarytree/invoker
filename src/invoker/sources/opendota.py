@@ -24,6 +24,10 @@ class OpenDotaFetcher:
         """Maps hero internal name → list of ability internal names."""
         return await self.client.get(f"{BASE}/constants/hero_abilities")
 
+    async def hero_stats(self) -> dict[str, Any]:
+        """Hero stat constants keyed by internal name."""
+        return await self.client.get(f"{BASE}/constants/heroes")
+
     async def matchups(self, hero_id: int) -> list[dict[str, Any]]:
         return await self.client.get(f"{BASE}/heroes/{hero_id}/matchups")
 
