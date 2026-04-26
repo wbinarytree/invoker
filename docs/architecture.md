@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-26
+Last updated: 2026-04-26 (bundle/install roadmap clarification)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox.
@@ -569,7 +569,7 @@ The current implementation is intentionally incomplete in these ways:
 - many reasonable hero facts are not yet expressible without Stage 4 vocabulary expansion
 - relation rules are still broad and sometimes overfire
 - there is no evidence attachment pass yet
-- there is no bundle/install flow for authored data
+- there is no bundle/install flow for authored data — this is a deliberate roadmap item, planned for after the KG substrate stabilizes; it will be redesigned fresh from the manual-assisted-KG architecture, not from the archived `2026-04-16-bundle-assembly.md` spec
 - local authored files are still a workspace convention, not a released data product
 
 These are active roadmap items, not accidental omissions.

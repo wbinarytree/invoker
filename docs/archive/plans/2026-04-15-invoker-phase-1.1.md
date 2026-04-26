@@ -1,3 +1,6 @@
+> **Status: superseded by `docs/plans/2026-04-22-manual-assisted-kg-plan.md` (2026-04-22).**
+> Stabilization plan for the agentic Phase 1 path that the project has since abandoned. Kept as historical context for what operational gaps drove the pivot.
+
 # Invoker Phase 1.1 — Stabilization Plan
 
 Status: In Progress

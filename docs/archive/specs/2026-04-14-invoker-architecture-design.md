@@ -1,3 +1,6 @@
+> **Status: superseded by `docs/architecture.md` (2026-04-26).**
+> Project pivoted away from the agentic LLM-extraction pipeline described here. Read `docs/architecture.md` for what actually exists today; this is kept only as historical trace of the original design intent.
+
 # Invoker — Architecture Design
 
 Status: **Draft — pending user review (revision 2)**
