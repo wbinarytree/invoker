@@ -143,19 +143,25 @@ Those notes should be treated as high-priority constraints in LLM revision.
 
 ## Remaining Work
 
-The implemented workflow stops at composing the LLM prompt. Still needed:
+The implemented workflow now reaches the proposal inbox and guarded promotion.
+Available commands:
 
-1. Parse the LLM JSON response into `data/authored/vocab-proposals.yaml`.
-2. Add a proposal review command, or reuse manual YAML editing.
-3. Add `promote-vocabulary` to apply accepted proposals into
-   `src/invoker/kg/vocabulary.yaml`.
-4. Make promotion update `docs/specs/kg-vocabulary-notes.md`.
-5. Enforce promotion guardrails from the plan:
-   - refuse promotion when no authored hero uses the term
-   - flag more than +10 terms in one round
-   - preserve rejected/deferred proposal history
-6. After vocabulary promotion, update affected authored hero YAML files.
-7. Run:
+```bash
+uv run invoker parse-vocabulary-response data/raw/manual_responses/revise-vocabulary/capabilities/7f6f707397ab.txt
+uv run invoker review-vocabulary-proposals --bucket capabilities
+uv run invoker promote-vocabulary --bucket capabilities --dry-run
+uv run invoker promote-vocabulary --bucket capabilities
+```
+
+The first capabilities response has been parsed locally into
+`data/authored/vocab-proposals.yaml` with 53 pending proposals.
+
+Still needed:
+
+1. Review pending proposals and mark a small first batch accepted/rejected/deferred.
+2. Promote accepted proposals into `src/invoker/kg/vocabulary.yaml`.
+3. After vocabulary promotion, update affected authored hero YAML files.
+4. Run:
 
 ```bash
 uv run invoker vocab-audit

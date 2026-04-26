@@ -1,129 +1,831 @@
 schema_version: 1
 capabilities:
   armor_reduction:
-    definition: Reduces enemy armor through a hero-owned mechanic.
+    definition: Reduces enemy armor through a hero-owned mechanic, increasing physical
+      damage taken from attacks and physical-damage abilities.
     include_when:
-      - The hero directly applies armor reduction or armor corruption.
+    - The hero directly applies armor reduction, armor corruption, or an equivalent
+      armor-lowering debuff.
+    - The reduction meaningfully improves allied or self physical damage, including
+      physical spell damage.
     exclude_when:
-      - The armor reduction comes primarily from purchased items.
-    examples: []
+    - The armor reduction comes primarily from purchased items.
+    - The effect amplifies magical, pure, or all damage without changing armor.
+    examples:
+    - hero_slug: slardar
+      evidence: Corrosive Haze reduces armor and therefore improves physical damage
+        taken.
+    - hero_slug: pangolier
+      evidence: Lucky Shot can reduce armor, improving physical damage from attacks
+        or physical abilities.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   initiation:
-    definition: Starts fights or forces enemy commitment with hero-owned movement or control.
+    definition: Reliably starts an engagement by forcing enemy commitment or creating
+      an immediate fight-opening threat through hero-owned movement, catch, or control.
     include_when:
-      - The hero can reliably begin an engagement on enemy heroes.
+    - The hero can be the first committed action in a fight and force enemies to respond.
+    - The hero has reliable gap close, long-range catch, arena-style commitment, or
+      hard control suitable for opening a fight.
     exclude_when:
-      - The hero only follows up after another ally starts the fight.
-    examples: []
+    - The hero mostly follows up after an ally starts the fight.
+    - The hero only pokes, farms, escapes, or threatens delayed damage without forcing
+      immediate enemy commitment.
+    - The hero has mobility but lacks reliable catch, control, or forced commitment.
+    examples:
+    - hero_slug: mars
+      evidence: Arena and Spear can force enemy commitment and start a fight.
+    - hero_slug: slardar
+      evidence: Sprint plus Slithereen Crush can directly start an engagement.
+    - hero_slug: pangolier
+      evidence: Rolling Thunder can commit into enemies and repeatedly disable them.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   magic_burst:
-    definition: Deals meaningful spell or magical damage in a short window.
+    definition: Deals meaningful magical ability damage in a short window through
+      hero-owned mechanics.
     include_when:
-      - The hero's own abilities can quickly remove a large portion of enemy health.
+    - The hero's own abilities can quickly remove a large portion of enemy health
+      as magical damage.
+    - The burst is available without relying primarily on purchased items.
     exclude_when:
-      - Damage is mostly slow attrition or item-dependent.
-    examples: []
+    - The damage is mostly physical, pure, or attack-based.
+    - The damage is mostly slow attrition.
+    - The burst depends primarily on purchased items.
+    examples:
+    - hero_slug: queenofpain
+      evidence: Queen of Pain has short-window magical spell damage.
+    - hero_slug: phoenix
+      evidence: Phoenix can contribute magical damage through hero-owned spells.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   mana_burn:
-    definition: Removes, drains, or damages based on enemy mana through a hero-owned mechanic.
+    definition: Removes, drains, or damages based on enemy mana through a hero-owned
+      mechanic.
     include_when:
-      - The hero directly burns mana or converts enemy mana state into damage.
+    - The hero directly burns mana or converts enemy mana state into damage.
     exclude_when:
-      - The effect is only generic spell damage.
+    - The effect is only generic spell damage.
     examples: []
     status: accepted
     introduced_in: stage2
   mobility:
     definition: Repositions self or crosses distance through hero-owned movement tools.
     include_when:
-      - The hero has blinks, dashes, leaps, high-speed movement, or similar repositioning.
+    - The hero has blink, dash, leap, forced self-movement, flight-like movement,
+      or temporary high-speed movement that changes fight positioning.
+    - The movement meaningfully affects engage, escape, chase, or spell delivery.
     exclude_when:
-      - Movement comes primarily from items or normal movement speed.
-    examples: []
+    - Movement comes primarily from items.
+    - The hero only has ordinary movement speed with no meaningful repositioning mechanic.
+    - The effect is a teleport to a fixed external unit or structure and is better
+      represented by teleport_mobility if that subtype is adopted.
+    examples:
+    - hero_slug: antimage
+      evidence: Blink is direct hero-owned repositioning.
+    - hero_slug: queenofpain
+      evidence: Blink is direct hero-owned repositioning.
+    - hero_slug: slardar
+      evidence: Sprint gives high-speed movement that changes chase and initiation.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   reliable_stun:
-    definition: Applies hard disable that predictably interrupts enemy action.
+    definition: Applies a predictable hard stun or comparable hard interrupt that
+      can be planned around.
     include_when:
-      - The stun or comparable hard disable is reliable enough to plan around.
+    - The stun is targeted, easy to confirm, or reliably applied from normal gameplay
+      conditions.
+    - The disable interrupts channeling and prevents enemy action for a meaningful
+      duration.
     exclude_when:
-      - The disable is delayed, random, or only a soft slow.
-    examples: []
+    - The control is only a mini-stun or brief interrupt.
+    - The control is delayed and mainly requires allied setup.
+    - The control is random, highly conditional, or only a soft slow.
+    - The disable pierces debuff immunity and should be represented with debuff_immunity_piercing_disable
+      as an additional tag.
+    examples:
+    - hero_slug: slardar
+      evidence: Slithereen Crush is a predictable area stun around Slardar.
+    - hero_slug: mars
+      evidence: Spear can reliably stun when pinned to terrain or Arena.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   save:
-    definition: Protects an allied hero from death, targeting, or immediate danger.
+    definition: Umbrella capability for directly protecting an allied hero from death,
+      targeting, disable, displacement danger, or damage.
     include_when:
-      - The hero can directly shield, heal, displace, hide, or otherwise protect an ally.
+    - The hero can directly protect an ally with heal, shield, untargetability, ally
+      displacement, dispel, damage reduction, or similar mechanics.
     exclude_when:
-      - The protection is only self-directed.
-    examples: []
+    - The protection is only self-directed.
+    - The hero only contributes generic control or damage without directly protecting
+      an ally.
+    examples:
+    - hero_slug: ringmaster
+      evidence: Ringmaster can protect allies by making them untargetable.
+    - hero_slug: largo
+      evidence: Largo can heal, pull allies, and dispel.
+    - hero_slug: phoenix
+      evidence: Phoenix is mainly healing protection unless specific upgrade-based
+        saves are authored separately.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   silence:
     definition: Prevents enemy spell casting through a hero-owned mechanic.
     include_when:
-      - The hero directly silences, mutes spell use, or reliably denies casting.
+    - The hero directly silences, mutes spell use, or reliably denies casting.
     exclude_when:
-      - The hero only stuns or slows.
+    - The hero only stuns or slows.
     examples: []
     status: accepted
     introduced_in: stage2
   vision_reveal:
-    definition: Reveals hidden, invisible, or obscured enemies through hero-owned mechanics.
+    definition: Reveals invisible, hidden, fogged, or otherwise hard-to-track enemies
+      through hero-owned mechanics.
     include_when:
-      - The hero directly supplies reveal, detection, or tracking vision.
+    - The hero directly provides true sight, invisibility reveal, tracking vision,
+      or location exposure that helps allies target or pursue enemies.
+    - The reveal meaningfully affects stealth, fog use, juking, or hidden enemies.
     exclude_when:
-      - Vision comes only from wards, dust, or other purchased items.
-    examples: []
+    - Vision comes only from wards, Dust, Gem, Sentry Ward, or other purchased items.
+    - The effect only gives ordinary daytime or nighttime vision with no enemy exposure
+      mechanic.
+    - The authored evidence only says the enemy is affected by a debuff but does not
+      reveal location, invisibility, or targeting information.
+    examples:
+    - hero_slug: slardar
+      evidence: Slardar's reveal is tracking and anti-invisibility oriented.
+    - hero_slug: ringmaster
+      evidence: Ringmaster authored reveal should be checked for whether it exposes
+        location or only grants area information.
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
   wave_clear:
-    definition: Clears creep waves or clustered units efficiently with hero-owned damage.
+    definition: Clears creep waves or clustered non-hero units efficiently with hero-owned
+      damage.
     include_when:
-      - The hero can remove waves quickly without relying mainly on items.
+    - The hero can remove most of a lane creep wave quickly with abilities or hero-owned
+      attacks.
+    - The wave clear is practical in normal farming, defending, or pushing situations
+      without relying mainly on items.
     exclude_when:
-      - The hero only has single-target damage.
+    - The hero only has single-target damage.
+    - The hero can only chip waves slowly over a long duration.
+    - The wave clear is too cooldown-limited, unsafe, or low-damage to be reliable
+      in normal play.
+    - The wave clear depends primarily on purchased items.
+    examples:
+    - hero_slug: queenofpain
+      evidence: Queen of Pain has practical area spell damage for clearing waves.
+    - hero_slug: pangolier
+      evidence: Pangolier can clear waves with hero-owned physical damage patterns,
+        but effectiveness should be distinguished from low-throughput wave chip.
+    status: accepted
+    introduced_in: '2026-04-25'
+  physical_burst:
+    definition: Deals meaningful physical ability or attack damage in a short window
+      through hero-owned mechanics.
+    include_when:
+    - The hero can quickly remove a large portion of enemy health as physical damage.
+    - The burst comes from hero abilities, attacks enabled by abilities, or physical
+      spell damage.
+    exclude_when:
+    - The damage is mostly magical or pure.
+    - The damage is mostly slow attrition.
+    - The burst depends primarily on purchased items.
+    examples:
+    - hero_slug: pangolier
+      evidence: Pangolier's main damage profile is physical rather than magical.
+    status: accepted
+    introduced_in: '2026-04-25'
+  blink_mobility:
+    definition: Instantly repositions the hero over distance through a hero-owned
+      blink-like mechanic.
+    include_when:
+    - The hero has an innate blink or instant point-to-point repositioning ability.
+    - The blink is a core part of engage, escape, chase, or spell delivery.
+    exclude_when:
+    - The repositioning is only a dash, leap, movement speed boost, or item-granted
+      Blink Dagger.
+    - The movement requires walking or gradual travel.
+    examples:
+    - hero_slug: antimage
+      evidence: Anti-Mage has innate Blink mobility.
+    - hero_slug: queenofpain
+      evidence: Queen of Pain has innate Blink mobility.
+    status: accepted
+    introduced_in: '2026-04-25'
+  haste_mobility:
+    definition: Uses hero-owned movement speed or pathing advantage to reposition,
+      chase, escape, or start fights.
+    include_when:
+    - The hero has a meaningful movement speed boost, terrain/pathing movement, or
+      sustained speed mechanic.
+    - The movement changes combat positioning beyond normal walking.
+    exclude_when:
+    - The hero only has normal base movement speed.
+    - The repositioning is instant blink-style movement.
+    - The mobility comes primarily from purchased items.
+    examples:
+    - hero_slug: slardar
+      evidence: Sprint provides sustained movement speed for chase and initiation.
+    - hero_slug: phoenix
+      evidence: Icarus Dive changes Phoenix's position through a movement path rather
+        than an instant blink.
+    status: accepted
+    introduced_in: '2026-04-25'
+  mini_stun:
+    definition: Briefly interrupts enemy action with a very short stun or stun-like
+      interrupt, but does not provide a long hard-disable window.
+    include_when:
+    - The hero has a short interrupt that can cancel channels, reset actions, or disrupt
+      spell timing.
+    - The duration is too short to count as reliable_stun for planned follow-up damage.
+    exclude_when:
+    - The disable provides a meaningful stun duration suitable for full follow-up.
+    - The effect is only a slow, silence, root, leash, or forced movement.
+    examples:
+    - hero_slug: antimage
+      evidence: Anti-Mage authored usage should be checked for whether the interrupt
+        is a mini-stun rather than reliable_stun.
+    status: accepted
+    introduced_in: '2026-04-25'
+  debuff_immunity_piercing_disable:
+    definition: Disables, interrupts, or forcibly moves enemies through debuff immunity
+      using a hero-owned mechanic.
+    include_when:
+    - The control effect can affect debuff-immune enemies.
+    - The debuff-immunity interaction is important to the hero's matchup or fight
+      role.
+    exclude_when:
+    - The ability only deals damage through debuff immunity without control.
+    - The effect is a normal disable that fails against debuff immunity.
+    - The hero becomes debuff immune themselves but does not control debuff-immune
+      enemies.
+    examples:
+    - hero_slug: queenofpain
+      evidence: Queen of Pain's knockback interaction is noted as piercing debuff
+        immunity.
+    - hero_slug: pangolier
+      evidence: Rolling Thunder disruption should be represented as control plus self
+        debuff immunity, not as one combined term.
+    status: accepted
+    introduced_in: '2026-04-25'
+  ally_heal:
+    definition: Restores allied hero health through a hero-owned mechanic.
+    include_when:
+    - The hero can directly heal allies.
+    - The healing is meaningful enough to affect fight survival, lane sustain, or
+      reset potential.
+    exclude_when:
+    - The healing is only self-directed.
+    - The healing comes primarily from purchased items.
+    - The effect only prevents damage but does not restore health.
+    examples:
+    - hero_slug: largo
+      evidence: Largo has healing as part of the reviewed save discussion.
+    - hero_slug: phoenix
+      evidence: Phoenix is considered save mainly through healing unless upgrade-specific
+        saves are included.
+    status: accepted
+    introduced_in: '2026-04-25'
+  aoe_heal:
+    definition: Restores health to multiple allied heroes or allied units in an area
+      through a hero-owned mechanic.
+    include_when:
+    - The hero can heal multiple allies in an area, aura, pulse, or area-targeted
+      effect.
+    - The area healing is meaningful enough to affect fights, pushes, or resets.
+    exclude_when:
+    - The hero only heals one target at a time.
+    - The healing is only self-directed.
+    - The healing comes primarily from purchased items.
+    examples:
+    - hero_slug: largo
+      evidence: The reviewed gap identifies Largo's area healing aura.
+    status: accepted
+    introduced_in: '2026-04-25'
+  ally_untargetability:
+    definition: Protects an allied hero by making them untargetable, hidden, or otherwise
+      unavailable as a target through a hero-owned mechanic.
+    include_when:
+    - The hero can directly prevent enemies from targeting an ally.
+    - The protection can dodge spells, break focus fire, or buy time against lethal
+      damage.
+    exclude_when:
+    - The untargetability is only self-directed.
+    - The effect is merely invisibility that can still be revealed and targeted normally
+      under detection.
+    - The protection comes primarily from purchased items.
+    examples:
+    - hero_slug: ringmaster
+      evidence: Ringmaster's box can make an ally untargetable.
+    status: accepted
+    introduced_in: '2026-04-25'
+  ally_repositioning:
+    definition: Protects or enables an allied hero by forcibly moving, pulling, pushing,
+      or relocating them through a hero-owned mechanic.
+    include_when:
+    - The hero can move an ally out of danger or into a safer position.
+    - The repositioning is directly applied by the hero and is relevant to save or
+      setup.
+    exclude_when:
+    - The movement only affects enemies.
+    - The movement is only self-mobility.
+    - The repositioning comes primarily from purchased items.
+    examples:
+    - hero_slug: largo
+      evidence: Human review says Largo can pull allies.
+    status: accepted
+    introduced_in: '2026-04-25'
+  basic_dispel:
+    definition: Removes dispellable negative effects from self or allies through a
+      basic dispel.
+    include_when:
+    - The hero can apply a basic dispel to an allied hero or self.
+    - The dispel removes ordinary dispellable debuffs but not hard disables such as
+      stun or hex.
+    exclude_when:
+    - The effect is a strong dispel and should be represented by strong_dispel.
+    - The effect removes enemy buffs and should be represented by offensive_dispel.
+    - The dispel comes primarily from purchased items.
+    examples:
+    - hero_slug: largo
+      evidence: The reviewed gap identifies Largo as having basic dispel.
+    status: accepted
+    introduced_in: '2026-04-25'
+  tracking_reveal:
+    definition: Continuously exposes or tracks an enemy's location through a hero-owned
+      debuff or persistent reveal mechanic.
+    include_when:
+    - The hero applies a debuff or effect that lets allies track the affected enemy.
+    - The reveal persists long enough to affect chase, target selection, or anti-stealth
+      play.
+    exclude_when:
+    - The hero only briefly grants area vision.
+    - The effect only reveals terrain or fog but not enemy location.
+    - The reveal comes primarily from purchased items.
+    examples:
+    - hero_slug: slardar
+      evidence: Corrosive Haze tracks the enemy and exposes them for focus.
+    status: accepted
+    introduced_in: '2026-04-25'
+  wave_clear_pressure:
+    definition: Clears creep waves safely or repeatedly enough to create map pressure,
+      defend towers, or delay pushes.
+    include_when:
+    - The hero can clear waves from meaningful range, safety, or repeatability.
+    - The wave clear affects macro pressure, tower defense, or lane shove.
+    exclude_when:
+    - The hero can clear only by committing dangerously into the wave.
+    - The hero has one-time burst wave clear but poor repeatability.
+    - The hero only chips waves slowly.
+    examples:
+    - hero_slug: queenofpain
+      evidence: Queen of Pain can repeatedly clear waves with area spell damage.
+    - hero_slug: largo
+      evidence: Authored wave clear should be checked for whether it creates repeatable
+        pressure or only incidental area damage.
+    status: accepted
+    introduced_in: '2026-04-25'
+  magic_resistance:
+    definition: Reduces incoming magical damage through a hero-owned mechanic.
+    include_when:
+    - The hero has innate, passive, or active magic resistance.
+    - The resistance meaningfully changes matchups against magical damage.
+    exclude_when:
+    - The resistance comes primarily from purchased items.
+    - The hero only avoids spells through mobility, spell immunity, spell reflection,
+      or untargetability.
+    - The durability is generic and does not specifically reduce magical damage.
+    examples:
+    - hero_slug: antimage
+      evidence: The reviewed gap identifies Anti-Mage's passive magic resistance.
+    status: accepted
+    introduced_in: '2026-04-25'
+  single_target_spell_reflection:
+    definition: Reflects or redirects targeted enemy spells through a hero-owned mechanic,
+      when those spells are eligible for reflection.
+    include_when:
+    - The hero can reflect single-target spells or targeted spell effects.
+    - The reflection creates a meaningful matchup advantage against targeted spellcasters.
+    exclude_when:
+    - The hero only blocks or reduces spell damage without reflecting the spell.
+    - The spell is area-based, ground-targeted, aura-based, or otherwise not reflectable.
+    - The effect comes primarily from purchased items.
+    examples:
+    - hero_slug: antimage
+      evidence: The reviewed gap identifies Anti-Mage's targeted spell reflection
+        and notes that not all spells can be reflected.
+    status: accepted
+    introduced_in: '2026-04-25'
+  damage_amp:
+    definition: Umbrella concept for hero-owned mechanics that increase damage dealt
+      to a target or increase allied damage output.
+    include_when:
+    - The hero increases damage dealt by self or allies.
+    - The hero applies a debuff that makes enemies take more damage.
+    exclude_when:
+    - The effect only reduces armor and should be represented by armor_reduction.
+    - The effect only reduces magic resistance and should be represented by magic_resistance_reduction
+      if adopted.
+    - The damage increase comes primarily from purchased items.
+    examples:
+    - hero_slug: largo
+      evidence: The reviewed gap identifies ally damage amplification but human review
+        says the term is too broad.
+    status: accepted
+    introduced_in: '2026-04-25'
+  physical_damage_amp:
+    definition: Increases physical damage dealt by self or allies through a hero-owned
+      mechanic without directly reducing armor.
+    include_when:
+    - The hero increases physical attack or physical ability damage.
+    - The amplification is damage-type-specific and applies to physical damage.
+    exclude_when:
+    - The effect is armor reduction.
+    - The effect amplifies magical, pure, or all damage instead.
+    - The amplification comes primarily from purchased items.
     examples: []
     status: accepted
-    introduced_in: stage2
+    introduced_in: '2026-04-25'
+  magical_damage_amp:
+    definition: Increases magical damage dealt by self or allies through a hero-owned
+      mechanic without directly reducing magic resistance.
+    include_when:
+    - The hero increases magical spell damage dealt by self or allies.
+    - The amplification is damage-type-specific and applies to magical damage.
+    exclude_when:
+    - The effect only reduces magic resistance.
+    - The effect amplifies physical, pure, or all damage instead.
+    - The amplification comes primarily from purchased items.
+    examples: []
+    status: accepted
+    introduced_in: '2026-04-25'
+  damage_taken_amp:
+    definition: Applies a debuff that causes enemies to take increased damage from
+      one or more damage types.
+    include_when:
+    - The hero makes affected enemies take more damage.
+    - The debuff changes incoming damage taken rather than only increasing the caster's
+      outgoing damage.
+    exclude_when:
+    - The effect only reduces armor.
+    - The effect only reduces magic resistance.
+    - The effect only buffs allied outgoing damage without modifying enemy damage
+      taken.
+    - The amplification comes primarily from purchased items.
+    examples:
+    - hero_slug: largo
+      evidence: Human review identifies damage-taken increase as distinct from simply
+        amplifying allied damage.
+    status: accepted
+    introduced_in: '2026-04-25'
+  damage_redirection:
+    definition: Redirects, intercepts, or absorbs incoming attacks, projectiles, or
+      damage away from the original target through a hero-owned mechanic.
+    include_when:
+    - The hero can redirect damage or projectiles away from allies or protected targets.
+    - The mechanic changes which unit receives damage or whether the incoming projectile
+      reaches the target.
+    exclude_when:
+    - The hero only reduces damage without redirecting or intercepting it.
+    - The hero only blocks damage for self with generic durability.
+    - The effect comes primarily from purchased items.
+    examples:
+    - hero_slug: mars
+      evidence: The reviewed gap identifies Mars damage redirection and projectile
+        interception.
+    status: accepted
+    introduced_in: '2026-04-25'
+  forced_movement:
+    definition: Forcibly moves an enemy, ally, or self through a hero-owned mechanic,
+      including knockback, pull, push, drag, or reposition effects.
+    include_when:
+    - The hero changes another unit's position through a forced movement effect.
+    - The movement has important control, save, setup, or terrain-interaction consequences.
+    exclude_when:
+    - The hero only slows movement.
+    - The hero only roots or leashes without changing position.
+    - The movement is ordinary self-mobility with no forced movement component.
+    examples:
+    - hero_slug: mars
+      evidence: Spear forcibly moves an enemy and can pin them to terrain.
+    - hero_slug: queenofpain
+      evidence: Queen of Pain's knockback is a forced movement effect.
+    status: accepted
+    introduced_in: '2026-04-25'
+  knockback:
+    definition: Forcibly pushes a unit away from a point, caster, direction, or impact
+      source through a hero-owned mechanic.
+    include_when:
+    - The hero applies a knockback or pushback effect.
+    - The knockback affects positioning, interrupts movement, breaks formations, or
+      creates distance.
+    exclude_when:
+    - The forced movement is a pull, drag, spear, teleport, or ally relocation rather
+      than pushback.
+    - The effect only slows movement without changing position.
+    examples:
+    - hero_slug: queenofpain
+      evidence: The reviewed gap identifies Queen of Pain's knockback displacement.
+    status: accepted
+    introduced_in: '2026-04-25'
+  root:
+    definition: Prevents enemy movement and most movement abilities through a hero-owned
+      root effect, without necessarily preventing attacks or spell casting.
+    include_when:
+    - The hero applies a root effect.
+    - The root meaningfully prevents escape, mobility, chase, or repositioning.
+    exclude_when:
+    - The effect is a leash rather than a root.
+    - The effect is only a movement slow.
+    - The effect is a stun, hex, fear, silence, or forced movement instead of root.
+    examples:
+    - hero_slug: medusa
+      evidence: The reviewed gap identifies Medusa's area root and facing restriction.
+    status: accepted
+    introduced_in: '2026-04-25'
+  self_damage_absorption:
+    definition: Absorbs or redirects a large portion of incoming damage into a hero-owned
+      resource or defensive layer before health is lost.
+    include_when:
+    - The hero has a core mechanic that absorbs damage before health.
+    - The absorption is central to the hero's durability profile and matchup behavior.
+    exclude_when:
+    - The hero only has ordinary armor, magic resistance, or health regeneration.
+    - The effect is a small shield or temporary barrier better represented by barrier.
+    - The absorption comes primarily from purchased items.
+    examples:
+    - hero_slug: medusa
+      evidence: The reviewed gap identifies Medusa's large mana-based damage absorption.
+    status: accepted
+    introduced_in: '2026-04-25'
+  attack_speed_reduction:
+    definition: Reduces enemy attack rate through a hero-owned mechanic.
+    include_when:
+    - The hero directly applies attack speed slow or attack speed reduction.
+    - The effect meaningfully reduces enemy right-click damage output or attack-based
+      objective pressure.
+    exclude_when:
+    - The hero only slows movement.
+    - The hero only disarms, blinds, stuns, or reduces damage without reducing attack
+      speed.
+    - The effect depends primarily on purchased items.
+    examples:
+    - hero_slug: pangolier
+      evidence: Lucky Shot can reduce enemy attack speed.
+    - hero_slug: phoenix
+      evidence: The reviewed gap identifies Phoenix attack speed reduction as the
+        same concept.
+    status: accepted
+    introduced_in: '2026-04-25'
+  debuff_immunity:
+    definition: Grants the hero immunity or high resistance to many debuffs through
+      a hero-owned mechanic.
+    include_when:
+    - The hero can become debuff immune or otherwise ignore many incoming debuffs.
+    - The immunity materially changes how enemies can control or punish the hero.
+    exclude_when:
+    - The hero only pierces enemy debuff immunity with control.
+    - The hero only has magic resistance, spell reflection, or damage reduction.
+    - The effect comes primarily from purchased items.
+    examples:
+    - hero_slug: pangolier
+      evidence: Human review says debuff_immune_disruption incorrectly combines the
+        hero becoming debuff immune with disruption.
+    status: accepted
+    introduced_in: '2026-04-25'
+  barrier:
+    definition: Grants a temporary damage shield or barrier through a hero-owned mechanic.
+    include_when:
+    - The hero creates a shield, barrier, or temporary damage absorption layer.
+    - The barrier meaningfully changes survivability in fights or trades.
+    exclude_when:
+    - The hero only has passive armor or magic resistance.
+    - The hero's durability is based on healing, evasion, untargetability, or mana-based
+      absorption.
+    - The barrier comes primarily from purchased items.
+    examples:
+    - hero_slug: pangolier
+      evidence: The reviewed gap describes Pangolier self durability through barrier
+        and resistance.
+    status: accepted
+    introduced_in: '2026-04-25'
+  delayed_aoe_stun:
+    definition: Creates an area stun that triggers after a visible delay and is strongest
+      as follow-up to prior setup.
+    include_when:
+    - The hero has an area stun that enemies can react to before it triggers.
+    - The stun is reliable mainly when combined with allied setup, enemy commitment,
+      terrain, or prior control.
+    exclude_when:
+    - The stun is immediate and reliable enough to count as reliable_stun.
+    - The effect is only a slow, root, fear, silence, or damage zone.
+    - The stun is single-target only.
+    examples:
+    - hero_slug: phoenix
+      evidence: Supernova is a delayed area stun and is often used as a follow-up
+        stun.
+    status: accepted
+    introduced_in: '2026-04-25'
+  movement_slow:
+    definition: Reduces enemy movement speed through a hero-owned mechanic.
+    include_when:
+    - The hero directly applies a movement speed slow.
+    - The slow meaningfully affects chase, escape, kiting, or setup.
+    exclude_when:
+    - The hero only reduces attack speed.
+    - The hero only roots, leashes, stuns, fears, or forcibly moves the enemy.
+    - The slow comes primarily from purchased items.
+    examples:
+    - hero_slug: queenofpain
+      evidence: The reviewed gap identifies Queen of Pain's long-duration movement
+        slow.
+    status: accepted
+    introduced_in: '2026-04-25'
+  self_sustain:
+    definition: Restores or preserves the hero's own health over time through hero-owned
+      healing, lifesteal, spell lifesteal, regeneration, or repeatable recovery.
+    include_when:
+    - The hero can meaningfully recover or maintain their own health during fights,
+      lanes, or farming.
+    - The sustain is not limited to one specific source such as lifesteal.
+    exclude_when:
+    - The hero only has ally healing.
+    - The hero only has damage reduction, armor, magic resistance, barrier, or untargetability
+      with no recovery.
+    - The sustain comes primarily from purchased items.
+    examples:
+    - hero_slug: queenofpain
+      evidence: The reviewed gap identifies spell lifesteal self sustain but human
+        review says self_sustain should not be limited to lifesteal.
+    status: accepted
+    introduced_in: '2026-04-25'
+  spell_lifesteal:
+    definition: Restores the hero's health based on spell damage dealt through a hero-owned
+      mechanic.
+    include_when:
+    - The hero has innate or ability-granted spell lifesteal.
+    - The healing scales from spell damage dealt.
+    exclude_when:
+    - The hero heals through fixed healing, regeneration, attack lifesteal, or item-granted
+      spell lifesteal.
+    - The effect only protects allies.
+    examples:
+    - hero_slug: queenofpain
+      evidence: The reviewed gap identifies Queen of Pain spell lifesteal self sustain.
+    status: accepted
+    introduced_in: '2026-04-25'
+  stealth:
+    definition: Avoids enemy detection or targeting through invisibility or hidden-state
+      mechanics from hero-owned abilities.
+    include_when:
+    - The hero can become invisible, remain invisible, or enter a hidden state that
+      affects enemy targeting and information.
+    - The stealth is central to scouting, initiation, escape, or target access.
+    exclude_when:
+    - The invisibility comes primarily from purchased items.
+    - The hero is only hard to target because of mobility or fog usage.
+    - The effect is ally untargetability save rather than the hero's own stealth pattern.
+    examples:
+    - hero_slug: riki
+      evidence: The reviewed gap identifies Riki's permanent invisibility.
+    status: accepted
+    introduced_in: '2026-04-25'
+  self_hidden_state:
+    definition: Temporarily makes the hero hidden, untargetable, or unavailable to
+      most enemy abilities through a hero-owned mechanic.
+    include_when:
+    - The hero enters a hidden or untargetable state.
+    - The state prevents most direct targeting or interaction for a meaningful window.
+    exclude_when:
+    - The hero only becomes invisible but remains targetable under detection.
+    - The effect protects an ally and should use ally_untargetability.
+    - The effect is only evasion, disjoint, spell immunity, or mobility.
+    examples:
+    - hero_slug: riki
+      evidence: The reviewed gap identifies Riki's untargetable damage window and
+        notes hidden units are not affected by most abilities.
+    status: accepted
+    introduced_in: '2026-04-25'
+  anti_illusion:
+    definition: Efficiently identifies, damages, clears, or punishes illusion-based
+      units through hero-owned mechanics.
+    include_when:
+    - The hero has meaningful area damage, illusion-specific damage, illusion reveal,
+      or mechanics that strongly reduce illusion value.
+    - The anti-illusion effect is strong enough to matter in real game situations.
+    exclude_when:
+    - The hero only has negligible incidental damage to illusions.
+    - The hero only clears normal creep waves but does not meaningfully punish illusions.
+    - The effect depends primarily on purchased items.
+    examples:
+    - hero_slug: ringmaster
+      evidence: Human review says anti_illusion is good, but Ringmaster's spotlight
+        damage may be too weak in real games.
+    status: accepted
+    introduced_in: '2026-04-25'
+  aoe_control:
+    definition: Controls multiple enemies or meaningfully restricts an area through
+      hero-owned disable, forced movement, fear, slow, root, zoning, or similar control.
+    include_when:
+    - The hero can affect multiple enemies with control.
+    - The control changes how enemies can stand, move, cast, chase, or commit in an
+      area.
+    exclude_when:
+    - The hero only damages an area without control.
+    - The control is purely single-target.
+    - The area effect is too weak or avoidable to meaningfully restrict enemy decisions.
+    examples:
+    - hero_slug: ringmaster
+      evidence: The reviewed gap identifies Ringmaster area soft control, and human
+        review prefers aoe control.
+    status: accepted
+    introduced_in: '2026-04-25'
+  fear:
+    definition: Applies fear, causing affected enemies to lose normal control and
+      move away or behave according to fear rules.
+    include_when:
+    - The hero applies a fear-based disable.
+    - The fear meaningfully interrupts actions, controls movement, or sets up follow-up.
+    exclude_when:
+    - The effect is only a stun, silence, root, slow, taunt, or knockback.
+    - The effect merely causes enemies to retreat strategically without a fear debuff.
+    examples:
+    - hero_slug: ringmaster
+      evidence: The reviewed gap identifies Ringmaster fear-based disable.
+    status: accepted
+    introduced_in: '2026-04-25'
+  permanent_stat_steal:
+    definition: Permanently steals or gains a hero stat through a hero-owned mechanic.
+    include_when:
+    - The hero can permanently gain a stat from enemy heroes.
+    - The stat change persists beyond the immediate fight and contributes to scaling.
+    exclude_when:
+    - The stat change is temporary.
+    - The effect only reduces resources such as mana without permanent stat gain.
+    - The stat gain comes primarily from purchased items.
+    examples:
+    - hero_slug: silencer
+      evidence: The reviewed gap identifies Silencer's permanent intelligence steal.
+    status: accepted
+    introduced_in: '2026-04-25'
+  aoe_slow:
+    definition: Reduces movement speed of multiple enemies in an area through a hero-owned
+      mechanic.
+    include_when:
+    - The hero applies a movement slow to multiple enemies or an area.
+    - The slow radius, duration, or repeatability is meaningful enough to affect fight
+      movement.
+    exclude_when:
+    - The hero only slows a single target.
+    - The effect reduces attack speed but not movement speed.
+    - The area is too small or the slow too negligible to matter in normal gameplay.
+    - The slow comes primarily from purchased items.
+    examples:
+    - hero_slug: slardar
+      evidence: The reviewed gap identifies Slardar's area slow after stun and asks
+        to check the AOE range.
+    status: accepted
+    introduced_in: '2026-04-25'
 requirements:
   needs_damage_followup:
     definition: Needs allied damage after setup or control to convert fights.
     include_when:
-      - The hero creates openings but lacks enough solo damage to finish targets.
+    - The hero creates openings but lacks enough solo damage to finish targets.
     exclude_when:
-      - The hero's own kit already supplies reliable kill damage.
+    - The hero's own kit already supplies reliable kill damage.
     examples: []
     status: accepted
     introduced_in: stage2
   needs_frontline:
-    definition: Needs an ally to absorb attention or hold space before the hero can operate.
+    definition: Needs an ally to absorb attention or hold space before the hero can
+      operate.
     include_when:
-      - The hero is fragile or backline-oriented and depends on someone else taking contact.
+    - The hero is fragile or backline-oriented and depends on someone else taking
+      contact.
     exclude_when:
-      - The hero can comfortably front fights themselves.
+    - The hero can comfortably front fights themselves.
     examples: []
     status: accepted
     introduced_in: stage2
   needs_lockdown:
-    definition: Needs allied control to keep enemies in the hero's damage or spell window.
+    definition: Needs allied control to keep enemies in the hero's damage or spell
+      window.
     include_when:
-      - The hero's main damage or setup is easy to dodge without additional control.
+    - The hero's main damage or setup is easy to dodge without additional control.
     exclude_when:
-      - The hero already brings sufficient reliable control.
+    - The hero already brings sufficient reliable control.
     examples: []
     status: accepted
     introduced_in: stage2
   needs_save:
     definition: Needs allied protection to survive while delivering core value.
     include_when:
-      - The hero is vulnerable during a key damage, channel, or positioning window.
+    - The hero is vulnerable during a key damage, channel, or positioning window.
     exclude_when:
-      - The hero has enough built-in survival or disengage for that window.
+    - The hero has enough built-in survival or disengage for that window.
     examples: []
     status: accepted
     introduced_in: stage2
@@ -131,109 +833,115 @@ liabilities:
   greedy:
     definition: Requires substantial farm, time, or resource commitment before impact.
     include_when:
-      - The hero has delayed payoff or high economy dependence.
+    - The hero has delayed payoff or high economy dependence.
     exclude_when:
-      - The hero is useful early with low resources.
+    - The hero is useful early with low resources.
     examples: []
     status: accepted
     introduced_in: stage2
   low_waveclear:
-    definition: Struggles to clear creep waves or clustered units with hero-owned tools.
+    definition: Struggles to clear creep waves or clustered units with hero-owned
+      tools.
     include_when:
-      - The hero lacks efficient area damage against waves.
+    - The hero lacks efficient area damage against waves.
     exclude_when:
-      - The hero clears waves reliably with normal ability use.
+    - The hero clears waves reliably with normal ability use.
     examples: []
     status: accepted
     introduced_in: stage2
   mana_dependence:
     definition: Loses core durability, damage, or uptime when mana is denied.
     include_when:
-      - The hero's key output or survival depends heavily on available mana.
+    - The hero's key output or survival depends heavily on available mana.
     exclude_when:
-      - Mana loss is annoying but does not meaningfully change the hero's function.
+    - Mana loss is annoying but does not meaningfully change the hero's function.
     examples: []
     status: accepted
     introduced_in: stage2
   weak_to_gap_close:
     definition: Loses safety or damage output when enemies can quickly reach them.
     include_when:
-      - The hero depends on distance and has limited answer to close contact.
+    - The hero depends on distance and has limited answer to close contact.
     exclude_when:
-      - The hero welcomes close-range fights.
+    - The hero welcomes close-range fights.
     examples: []
     status: accepted
     introduced_in: stage2
   weak_to_kiting:
-    definition: Loses value when enemies can avoid or disengage from the hero's threat range.
+    definition: Loses value when enemies can avoid or disengage from the hero's threat
+      range.
     include_when:
-      - The hero needs sustained contact or precise positioning to matter.
+    - The hero needs sustained contact or precise positioning to matter.
     exclude_when:
-      - The hero can contribute reliably from range or after disengage.
+    - The hero can contribute reliably from range or after disengage.
     examples: []
     status: accepted
     introduced_in: stage2
   weak_to_reveal:
     definition: Loses core value when invisibility or hidden positioning is revealed.
     include_when:
-      - The hero relies on invisibility, hidden approach, or fog-dependent movement.
+    - The hero relies on invisibility, hidden approach, or fog-dependent movement.
     exclude_when:
-      - Reveal only marginally affects the hero.
+    - Reveal only marginally affects the hero.
     examples: []
     status: accepted
     introduced_in: stage2
 targets:
   punishes_channeling:
-    definition: Converts strongly against enemies who must channel or stand still to act.
+    definition: Converts strongly against enemies who must channel or stand still
+      to act.
     include_when:
-      - The hero can interrupt, threaten, or exploit channeled spells.
+    - The hero can interrupt, threaten, or exploit channeled spells.
     exclude_when:
-      - The hero has no special interaction with channels.
+    - The hero has no special interaction with channels.
     examples: []
     status: accepted
     introduced_in: stage2
   punishes_immobile_backline:
     definition: Reaches or pressures fragile backline heroes with poor repositioning.
     include_when:
-      - The hero's kit naturally accesses or disrupts immobile backline targets.
+    - The hero's kit naturally accesses or disrupts immobile backline targets.
     exclude_when:
-      - Target access depends mainly on allied setup or purchased items.
+    - Target access depends mainly on allied setup or purchased items.
     examples: []
     status: accepted
     introduced_in: stage2
   punishes_invisibility:
-    definition: Converts strongly against enemies that rely on invisibility or hidden approach.
+    definition: Converts strongly against enemies that rely on invisibility or hidden
+      approach.
     include_when:
-      - The hero can reveal, track, trap, or otherwise expose invisible enemies.
+    - The hero can reveal, track, trap, or otherwise expose invisible enemies.
     exclude_when:
-      - The hero has only generic damage after someone else reveals the target.
+    - The hero has only generic damage after someone else reveals the target.
     examples: []
     status: accepted
     introduced_in: stage2
   punishes_low_armor:
-    definition: Converts strongly against targets with low armor or armor-reduction exposure.
+    definition: Converts strongly against targets with low armor or armor-reduction
+      exposure.
     include_when:
-      - The hero's damage profile or armor reduction particularly exploits low armor.
+    - The hero's damage profile or armor reduction particularly exploits low armor.
     exclude_when:
-      - The hero primarily deals magic or pure damage with no armor interaction.
+    - The hero primarily deals magic or pure damage with no armor interaction.
     examples: []
     status: accepted
     introduced_in: stage2
   punishes_summons:
     definition: Converts strongly against summoned units, illusions, or unit swarms.
     include_when:
-      - The hero clears, controls, or benefits from enemy-controlled extra units.
+    - The hero clears, controls, or benefits from enemy-controlled extra units.
     exclude_when:
-      - The hero only has normal single-target attacks.
+    - The hero only has normal single-target attacks.
     examples: []
     status: accepted
     introduced_in: stage2
   punishes_sustain:
-    definition: Converts strongly against enemies whose value depends on healing or regeneration.
+    definition: Converts strongly against enemies whose value depends on healing or
+      regeneration.
     include_when:
-      - The hero reduces, overwhelms, or bypasses sustain-heavy game plans.
+    - The hero reduces, overwhelms, or bypasses sustain-heavy game plans.
     exclude_when:
-      - The hero only deals generic damage into healing.
+    - The hero only deals generic damage into healing.
     examples: []
     status: accepted
     introduced_in: stage2

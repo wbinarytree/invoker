@@ -296,6 +296,159 @@ def compose_vocabulary_prompt_cmd(
     typer.echo(f"Paste LLM response into: {result.response_path}")
 
 
+@app.command("parse-vocabulary-response")
+def parse_vocabulary_response_cmd(
+    response_path: str = typer.Argument(
+        ...,
+        help="Manual LLM response file produced by compose-vocabulary-prompt.",
+    ),
+) -> None:
+    from pathlib import Path
+
+    from invoker.kg.vocabulary_proposals import parse_vocabulary_proposals
+
+    cfg = _load_config()
+    result = parse_vocabulary_proposals(cfg.data_dir, Path(response_path))
+    typer.echo(
+        f"Parsed {result.parsed_count} proposal(s): "
+        f"{result.added_count} added, {result.updated_count} updated"
+    )
+    typer.echo(f"Proposal inbox: {result.proposals_path}")
+
+
+@app.command("review-vocabulary-proposals")
+def review_vocabulary_proposals_cmd(
+    bucket: str | None = typer.Option(None, help="Only review proposals in one bucket."),
+    term: str | None = typer.Option(None, help="Only review proposals for one term."),
+    proposal_id: str | None = typer.Option(None, help="Only review one proposal id."),
+    include_reviewed: bool = typer.Option(
+        False,
+        "--include-reviewed",
+        help="Include proposals that already have a human decision.",
+    ),
+) -> None:
+    from invoker.kg.vocabulary_proposals import (
+        REVIEW_STATUSES,
+        VocabularyProposalError,
+        iter_vocabulary_proposals,
+        review_vocabulary_proposal,
+    )
+
+    cfg = _load_config()
+    status = None if include_reviewed else "pending"
+    proposals = iter_vocabulary_proposals(
+        cfg.data_dir,
+        bucket=bucket,
+        term=term,
+        review_status=status,
+        proposal_id=proposal_id,
+    )
+    if not proposals:
+        typer.echo("No vocabulary proposals matched the review filter.")
+        return
+
+    actions = ", ".join(sorted((REVIEW_STATUSES - {"pending"}) | {"skip"}))
+    for proposal in proposals:
+        typer.echo("")
+        typer.echo(f"{proposal['proposal_id']}")
+        typer.echo(f"{proposal['bucket']}.{proposal['term']} ({proposal['action']})")
+        typer.echo(f"current review status: {proposal.get('review_status', 'pending')}")
+        if proposal.get("definition"):
+            typer.echo(f"definition: {proposal['definition']}")
+        if proposal.get("rationale"):
+            typer.echo(f"rationale: {proposal['rationale']}")
+        decision = typer.prompt(f"Review decision ({actions})", default="skip").strip()
+        if decision == "skip":
+            continue
+        if decision not in REVIEW_STATUSES - {"pending"}:
+            typer.echo(f"Invalid decision: {decision}", err=True)
+            raise typer.Exit(code=1)
+        note = typer.prompt("Human note", default="").strip()
+        try:
+            result = review_vocabulary_proposal(
+                cfg.data_dir,
+                str(proposal["proposal_id"]),
+                review_status=decision,
+                human_note=note,
+            )
+        except VocabularyProposalError as exc:
+            typer.echo(str(exc), err=True)
+            raise typer.Exit(code=1) from exc
+        typer.echo(f"Recorded {result.review_status} for {result.proposal_id}")
+
+
+@app.command("amend-vocabulary-proposal")
+def amend_vocabulary_proposal_cmd(
+    proposal_id: str = typer.Argument(..., help="Proposal id to amend."),
+    action: str | None = typer.Option(None, help="Replacement proposal action."),
+    term: str | None = typer.Option(None, help="Replacement proposal term."),
+    review_status: str | None = typer.Option(None, help="Replacement review status."),
+    human_note: str | None = typer.Option(None, help="Replacement human note."),
+) -> None:
+    from invoker.kg.vocabulary_proposals import (
+        VocabularyProposalError,
+        amend_vocabulary_proposal,
+    )
+
+    cfg = _load_config()
+    try:
+        result = amend_vocabulary_proposal(
+            cfg.data_dir,
+            proposal_id,
+            action=action,
+            term=term,
+            review_status=review_status,
+            human_note=human_note,
+        )
+    except VocabularyProposalError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Amended proposal: {result.old_proposal_id} -> {result.new_proposal_id}")
+    typer.echo(f"Proposal inbox: {result.proposal_path}")
+
+
+@app.command("promote-vocabulary")
+def promote_vocabulary_cmd(
+    bucket: str | None = typer.Option(None, help="Only promote accepted proposals in one bucket."),
+    term: str | None = typer.Option(None, help="Only promote accepted proposals for one term."),
+    proposal_id: str | None = typer.Option(None, help="Only promote one accepted proposal id."),
+    max_terms: int = typer.Option(
+        10,
+        help="Warn when a promotion round adds or renames more than this many terms.",
+    ),
+    dry_run: bool = typer.Option(
+        False,
+        "--dry-run",
+        help="Validate and print what would be promoted without writing files.",
+    ),
+) -> None:
+    from invoker.kg.vocabulary_proposals import VocabularyProposalError, promote_vocabulary
+
+    cfg = _load_config()
+    try:
+        result = promote_vocabulary(
+            cfg.data_dir,
+            bucket=bucket,
+            term=term,
+            proposal_id=proposal_id,
+            max_terms=max_terms,
+            dry_run=dry_run,
+        )
+    except VocabularyProposalError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    prefix = "Would promote" if dry_run else "Promoted"
+    typer.echo(f"{prefix} {len(result.promoted_ids)} vocabulary proposal(s):")
+    for term_name in result.promoted_terms:
+        typer.echo(f"- {term_name}")
+    for warning in result.warnings:
+        typer.echo(f"Warning: {warning}", err=True)
+    if not dry_run:
+        typer.echo(f"Vocabulary: {result.vocabulary_path}")
+        typer.echo(f"Proposal inbox: {result.proposals_path}")
+        typer.echo(f"Notes: {result.notes_path}")
+
+
 @app.command()
 def bootstrap(
     patch: str = typer.Option(..., help="Patch string, e.g. 7.41b"),

@@ -2,6 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def docs_dir() -> Path:
+    return PROJECT_ROOT / "docs"
+
+
+def vocabulary_notes_file() -> Path:
+    return docs_dir() / "specs" / "kg-vocabulary-notes.md"
+
 
 def authored_dir(data_dir: Path) -> Path:
     return data_dir / "authored"
@@ -25,6 +35,10 @@ def vocab_review_file(data_dir: Path) -> Path:
 
 def vocab_review_log_file(data_dir: Path) -> Path:
     return authored_dir(data_dir) / "vocab-review-log.jsonl"
+
+
+def vocab_proposals_file(data_dir: Path) -> Path:
+    return authored_dir(data_dir) / "vocab-proposals.yaml"
 
 
 def raw_dir(data_dir: Path, source: str, patch: str) -> Path:
