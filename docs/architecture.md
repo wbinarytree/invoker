@@ -1,10 +1,12 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-25
+Last updated: 2026-04-26
 Current implementation state: Stage 2 is landed, Stage 3 authoring is implemented,
 and the first Stage 4 vocabulary review foundation is implemented.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
+
+**Update discipline:** any PR that adds or modifies a CLI command, schema, validation layer, pipeline step, or module updates this file in the same PR and bumps `Last updated:`. Bug fixes that don't change shape are exempt. See `GUIDELINES.md` → "Architecture Doc Is Source of Truth".
 
 Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
 
