@@ -196,8 +196,9 @@ Behavior:
 4. reports non-blocking warnings for unused live terms, terms without consuming
    rules, relation patterns without rules, and open vocabulary gaps
 
-This is the first Stage 4 guardrail. The vocabulary proposal and promotion loop
-is still not implemented.
+This is the first Stage 4 guardrail. The vocabulary proposal and promotion
+loop now exists (see `parse-vocabulary-response`, `review-vocabulary-proposals`,
+`amend-vocabulary-proposal`, and `promote-vocabulary` below).
 
 ### `review-vocabulary`
 
