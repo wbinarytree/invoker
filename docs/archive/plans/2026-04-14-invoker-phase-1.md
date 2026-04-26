@@ -1,3 +1,6 @@
+> **Status: superseded by `docs/plans/2026-04-22-manual-assisted-kg-plan.md` (2026-04-22).**
+> Project pivoted away from the agentic LLM-extraction pipeline this plan implemented. See `README.md` "Direction (2026-04-22)" for the rationale. Kept as full history of the original Phase 1 work.
+
 # Invoker Phase 1 — Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

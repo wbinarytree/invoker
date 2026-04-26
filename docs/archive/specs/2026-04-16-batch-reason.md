@@ -1,6 +1,7 @@
-# Batch Reason Generation
+> **Status: superseded by `docs/CURRENT_DIRECTION.md` (2026-04-18).**
+> KG-first direction replaced the stat-selected pair-reasoning approach. Kept as implementation history.
 
-> Superseded on 2026-04-18 by the KG-first direction. Keep only as implementation history for the old stat-selected pair reasoning path. Active docs now start at [docs/CURRENT_DIRECTION.md](/Users/yaoda/Projects/invoker/docs/CURRENT_DIRECTION.md:1).
+# Batch Reason Generation
 
 **Date:** 2026-04-16  
 **Status:** approved  

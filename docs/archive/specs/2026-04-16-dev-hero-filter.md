@@ -1,3 +1,6 @@
+> **Status: superseded by implementation (2026-04-26).**
+> Implemented as `INVOKER_DEV_HEROES` in `src/invoker/config.py` and the `--heroes` flag on `bootstrap`. Spec is no longer pending sign-off.
+
 # Dev Hero Filter
 
 **Date:** 2026-04-16  
