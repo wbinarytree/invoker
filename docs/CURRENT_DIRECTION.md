@@ -14,6 +14,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-18-benchmark-schema-and-cases.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-18-benchmark-schema-and-cases.md:1)
 - Collaboration harness:
   [docs/specs/2026-04-26-collaboration-harness.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-collaboration-harness.md:1)
+- Hero authoring context hardening:
+  [docs/specs/2026-04-26-hero-authoring-context-hardening.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-hero-authoring-context-hardening.md:1)
 - Vocabulary review log (live append):
   [docs/specs/kg-vocabulary-notes.md](/Users/yaoda/Projects/invoker/docs/specs/kg-vocabulary-notes.md:1)
 
