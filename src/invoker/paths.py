@@ -27,6 +27,10 @@ def vocab_review_log_file(data_dir: Path) -> Path:
     return authored_dir(data_dir) / "vocab-review-log.jsonl"
 
 
+def vocab_proposals_file(data_dir: Path) -> Path:
+    return authored_dir(data_dir) / "vocab-proposals.yaml"
+
+
 def raw_dir(data_dir: Path, source: str, patch: str) -> Path:
     return data_dir / "raw" / source / patch
 
