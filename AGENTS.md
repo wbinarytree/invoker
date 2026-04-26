@@ -14,9 +14,10 @@ This file is intentionally short. Read these next:
 1. Never commit on `main`. Create a feature branch first.
 2. Write tests for behavior that changes. Boundaries that matter: validators, query API, schema, CLI surface. Don't unit-test LLM prose.
 3. Run `uv run pytest`, `uv run pyright`, `uv run ruff check` — all must pass.
-4. **Sub-agent review on approval, not mid-flight.** Do not run the review after every commit. When the user says the PR is ready (explicit "open the PR" / "ready to ship" / similar), then run a fresh-context review with Claude Sonnet 4.6 (or equivalent). Use the brief in `docs/specs/2026-04-26-collaboration-harness.md`. Paste the summary into the PR description. If you're unsure whether the user means "ready," ask.
-5. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` and bump its `Last updated:` line. Bug fixes that don't change shape are exempt.
-6. One logical change per commit. Each commit should stand on its own.
+4. **Sub-agent review on approval, not mid-flight.** Do not run the review after every commit. When the user says the PR is ready (explicit "open the PR" / "ready to ship" / similar), then run a fresh-context review with Claude Sonnet 4.6 (or equivalent). Use the brief in `docs/specs/2026-04-26-collaboration-harness.md`. If you're unsure whether the user means "ready," ask.
+5. **Act on the review before pushing.** When the review returns, surface the verdict and findings to the user and ask whether to (a) address findings now, (b) push as-is and capture findings as follow-ups in the PR description, or (c) cherry-pick a subset to fix now. Don't open the PR silently — a review the user never decides on is wasted. Paste the final review summary into the PR description either way.
+6. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` and bump its `Last updated:` line. Bug fixes that don't change shape are exempt.
+7. One logical change per commit. Each commit should stand on its own.
 
 ## Where things go
 

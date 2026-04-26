@@ -54,6 +54,18 @@ Use this brief verbatim (or as close as a non-Claude agent allows). Paste output
 >
 > Keep the whole review under 400 words. Be specific, not generic.
 
+## Acting on the review
+
+When the review returns, the implementing agent does **not** push immediately. The flow is:
+
+1. Surface the verdict and findings to the user verbatim (or close to it — don't paraphrase findings into vagueness).
+2. Ask the user explicitly: address findings now, push as-is and capture findings as follow-ups in the PR description, or fix a subset and defer the rest?
+3. If the user picks "address now," fix, re-run tests, and re-run the review on the new state before pushing. (A second review on a small delta is fine; it does not re-burn the full review cost if scoped to "did the previous findings get addressed?".)
+4. If the user picks "push as-is," ensure every reviewer finding appears as a checklist item in the PR description so it can't get silently dropped.
+5. **Mandatory exception:** any reviewer finding that contradicts a rule this codebase establishes (architecture-doc lockstep, hard lines in `GUIDELINES.md`, etc.) gets fixed before push regardless of the user's "now or later" preference. The harness rules are not negotiable per-PR.
+
+A review the user never decides on is wasted. The decision step is part of the harness, not optional.
+
 ## Task breakdown (this PR)
 
 1. Rewrite `AGENTS.md` as agent-neutral entrypoint.

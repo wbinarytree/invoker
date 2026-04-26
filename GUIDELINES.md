@@ -79,9 +79,10 @@ Every change goes through this loop. No exceptions on `main`.
 1. Branch off `main` for any change.
 2. Write tests for behavior that changes — see Testing.
 3. `uv run pytest`, `uv run pyright`, `uv run ruff check` all pass.
-4. **On user approval to open the PR**, run the sub-agent review pass with Claude Sonnet 4.6 (or equivalent) in a fresh context. The trigger is explicit user approval ("ready to ship", "open the PR", or similar) — not after every commit, not mid-flight. Brief lives in `docs/specs/2026-04-26-collaboration-harness.md`. Paste the summary into the PR description.
-5. Architecture doc updated in the same PR if the change has shape impact.
-6. Open PR. One logical change per commit.
+4. **On user approval to open the PR**, run the sub-agent review pass with Claude Sonnet 4.6 (or equivalent) in a fresh context. The trigger is explicit user approval ("ready to ship", "open the PR", or similar) — not after every commit, not mid-flight. Brief lives in `docs/specs/2026-04-26-collaboration-harness.md`.
+5. **Decide on the review.** Surface the verdict and findings to the user and ask whether to address now, push as-is with follow-ups captured, or fix a subset. Do not push silently — a review the user never decides on is wasted token spend. Paste the final review summary into the PR description regardless of which path is chosen.
+6. Architecture doc updated in the same PR if the change has shape impact.
+7. Open PR. One logical change per commit.
 
 ## Hard Lines (Non-goals)
 
