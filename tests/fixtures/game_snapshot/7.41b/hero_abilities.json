@@ -1,0 +1,20 @@
+{
+  "npc_dota_hero_alchemist": {
+    "abilities": [
+      "alchemist_acid_spray",
+      "alchemist_goblins_greed",
+      "alchemist_chemical_rage",
+      "alchemist_berserk_potion"
+    ],
+    "talents": [
+      {
+        "level": 1,
+        "name": "special_bonus_unique_alchemist"
+      },
+      {
+        "level": 1,
+        "name": "special_bonus_hp_250"
+      }
+    ]
+  }
+}

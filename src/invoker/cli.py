@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Annotated
 
 import typer
@@ -15,6 +16,35 @@ app = typer.Typer(help="Invoker - Dota 2 knowledge framework")
 HeroArgs = Annotated[
     list[str],
     typer.Argument(help="One or more hero localized names, slugs, or numeric ids."),
+]
+SnapshotVpkOption = Annotated[
+    Path,
+    typer.Option(
+        "--vpk",
+        help="Pre-extracted VPK root or npc directory containing npc_heroes.txt.",
+    ),
+]
+SnapshotOutOption = Annotated[
+    Path,
+    typer.Option(
+        "--out",
+        help="Snapshot output root. The command writes <out>/<patch>/...",
+    ),
+]
+SnapshotPatchOption = Annotated[
+    str,
+    typer.Option(help="Patch string for the snapshot directory."),
+]
+SnapshotLocalizationOption = Annotated[
+    Path | None,
+    typer.Option(
+        "--localization",
+        help="Optional KV localization file, for example dota_english.txt.",
+    ),
+]
+SnapshotLocaleOption = Annotated[
+    str,
+    typer.Option(help="Locale name for localization/<locale>.json."),
 ]
 
 
@@ -142,6 +172,29 @@ def show_hero_context_cmd(
     cfg = _load_config()
     packet = asyncio.run(build_hero_context(cfg.data_dir, hero, patch=patch))
     typer.echo(json.dumps(dataclasses.asdict(packet), indent=2))
+
+
+@app.command("snapshot-game-files")
+def snapshot_game_files_cmd(
+    vpk: SnapshotVpkOption,
+    out: SnapshotOutOption,
+    patch: SnapshotPatchOption,
+    localization: SnapshotLocalizationOption = None,
+    locale: SnapshotLocaleOption = "english",
+) -> None:
+    from invoker.snapshot.game_files import SnapshotError, snapshot_game_files
+
+    _load_config()
+    try:
+        result = snapshot_game_files(vpk, out, patch, localization=localization, locale=locale)
+    except SnapshotError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Snapshot: {result.patch_dir}")
+    typer.echo(f"Heroes: {result.hero_count}")
+    typer.echo(f"Abilities: {result.ability_count}")
+    typer.echo(f"Items: {result.item_count}")
+    typer.echo(f"Neutral item sections: {result.neutral_item_count}")
 
 
 @app.command("vocab-audit")

@@ -14,6 +14,7 @@ Implemented in [src/invoker/cli.py](/Users/yaoda/Projects/invoker/src/invoker/cl
 - `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
+- `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name>]`
 - `invoker vocab-audit`
 - `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
 - `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
@@ -121,6 +122,29 @@ inspecting computed stat bands, percentiles, and the loaded mechanism primer
 before PR4 wires context into the authoring prompt.
 
 See [context-modules.md](context-modules.md) for the packet shape.
+
+### `snapshot-game-files`
+
+Bootstrap-only helper for creating a patch-scoped game-file JSON snapshot from
+pre-extracted Valve KV files.
+
+Implemented in [src/invoker/snapshot/game_files.py](/Users/yaoda/Projects/invoker/src/invoker/snapshot/game_files.py).
+
+Behavior:
+
+1. reads a pre-extracted VPK root or `npc/` directory containing `npc_heroes.txt`
+2. parses `npc_heroes.txt`, `npc_abilities.txt`, per-hero ability files under
+   `npc/heroes/`, `items.txt`, and `neutral_items.txt`
+3. writes `<out>/<patch>/heroes.json`, `abilities.json`,
+   `hero_abilities.json`, `items.json`, `neutral_items.json`,
+   `localization/<locale>.json`, and `snapshot.json`
+
+The command does not extract VPKs and is not part of the bootstrap/query hot
+path. When `--localization` is omitted, the command looks for
+`resource/localization/abilities_<locale>.txt`, `items_<locale>.txt`, and
+`dota_<locale>.txt` next to the extracted `npc/` directory and merges any files
+that exist. If no localization files are present, `localization/<locale>.json`
+is written as an empty object and `GameFilesSource` falls back to KV names.
 
 ### `vocab-audit`
 
