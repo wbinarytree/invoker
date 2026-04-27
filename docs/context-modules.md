@@ -65,16 +65,17 @@ def build_ability_contexts(
 - `source`: `"base_ability"` or `"innate"` (from `is_innate: true` in raw data)
 - `behavior`: always `list[str]` (normalized from string or list)
 - `pierces_debuff_immunity`: `bool | None` (from `bkbpierce` "Yes"/"No")
-- `attribs`: all `AttribEntry` rows from the raw `attrib` array, included as-is
+- `attribs`: `AttribEntry` rows from the raw `attrib` array, with Scepter/Shard/tooltip-noisy headers dropped
 - `mana_cost` / `cooldown`: absent on passives
 
 **`TalentContext`** — one per talent entry from `hero_abilities_map`:
 
 - `level`: tier 1–4 (maps to hero levels 10 / 15 / 20 / 25)
-- `name`: display name joined from the abilities map
+- `name`: display name joined from the abilities map; unresolved `{s:bonus_*}` template tokens are substituted with `?` (OpenDota does not ship `LinkedSpecialBonus` resolution; see [docs/specs/2026-04-27-game-file-overlay.md](specs/2026-04-27-game-file-overlay.md))
 
 Filtering: `generic_hidden` entries and abilities absent from the abilities map
-are skipped. Scepter/Shard ability detection is not possible from current data
+are skipped. Non-innate abilities whose behavior contains `Hidden` are also
+dropped. Scepter/Shard ability detection is not possible from current data
 and is deferred.
 
 ## `mechanism_primer.py`
