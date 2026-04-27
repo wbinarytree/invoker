@@ -53,11 +53,6 @@ Stale docs mislead. When a doc is superseded:
 - Not a TDD project. Ship features with tests for behavior that matters; how tests get written is free.
 - No backwards-compatibility shims while pre-1.0.
 
-## Claude Code only
-
-- Use the superpowers brainstorming / writing-plans / executing-plans skills when they fit; skip for small edits.
-- Persistent project memory is for: user preferences / working style, project-specific constraints, pointers to external resources. Do not save code patterns, file paths, or anything a fresh read of the repo reveals.
-
 ## Stack quick-ref
 
 Python 3.11+, `uv` for env/deps, `ruff` for lint+format, `pyright` non-strict. Tests live in `tests/invoker/` mirroring `src/invoker/`.
