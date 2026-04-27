@@ -26,8 +26,9 @@ via `load_mechanism_primer(packet.patch)` when needed alongside a packet.
 
 [src/invoker/kg/hero_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/hero_context.py)
 
-Composition API. `build_hero_context(data_dir, hero, patch=patch)` assembles a
-`HeroContextPacket` from OpenDota source data.
+Composition API. `build_hero_context(game_data_dir, hero, patch=patch)` assembles a
+`HeroContextPacket` from a game-file JSON snapshot. `game_data_dir` is the
+`INVOKER_GAME_DATA_DIR` root, and `patch` selects `<game_data_dir>/<patch>/`.
 
 ## `hero_stats_context.py`
 
@@ -43,14 +44,15 @@ stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
 
 Bands are deterministic quintiles: `very_low` / `low` / `average` / `high` / `very_high`.
 
-Source data comes from `/api/constants/heroes` via `OpenDotaFetcher.hero_stats()`.
+Source data comes from `GameFilesSource.hero_stats()`, backed by the
+patch-scoped `heroes.json` snapshot.
 
 ## `ability_context.py`
 
 [src/invoker/kg/ability_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/ability_context.py)
 
-Builds `AbilityContext` and `TalentContext` lists from cached OpenDota payloads
-(`abilities()` and `hero_abilities_map()`).
+Builds `AbilityContext` and `TalentContext` lists from game-file snapshot
+payloads (`GameFilesSource.abilities()` and `hero_abilities_map()`).
 
 ```python
 def build_ability_contexts(
@@ -71,12 +73,14 @@ def build_ability_contexts(
 **`TalentContext`** — one per talent entry from `hero_abilities_map`:
 
 - `level`: tier 1–4 (maps to hero levels 10 / 15 / 20 / 25)
-- `name`: display name joined from the abilities map; unresolved `{s:bonus_*}` template tokens are substituted with `?` (OpenDota does not ship `LinkedSpecialBonus` resolution; see [docs/specs/2026-04-27-game-file-overlay.md](specs/2026-04-27-game-file-overlay.md))
+- `name`: display name joined from the abilities map. Talent `{s:bonus_*}`
+  templates are resolved upstream in `GameFilesSource` from KV `AbilityValues`;
+  unresolved placeholder substitution with `?` has been retired.
 
 Filtering: `generic_hidden` entries and abilities absent from the abilities map
 are skipped. Non-innate abilities whose behavior contains `Hidden` are also
-dropped. Scepter/Shard ability detection is not possible from current data
-and is deferred.
+dropped. Scepter/Shard flags are exposed by `GameFilesSource` in the raw ability
+records for downstream conditional-fact work.
 
 ## `mechanism_primer.py`
 
@@ -89,6 +93,10 @@ for unknown patches.
 The YAML is human-maintained and reviewed per patch. `reviewed_by` and `reviewed_at`
 must be set after each verification pass against official Dota documentation.
 Current file: `mechanism_primer_7.41b.yaml`.
+
+This primer remains active after Phase 5b because the current game-file snapshot
+does not expose an equivalent source for global stat-conversion constants
+(HP per Strength, armor per Agility, and related mechanics).
 
 ---
 

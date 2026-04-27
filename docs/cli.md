@@ -58,9 +58,10 @@ Implemented in [src/invoker/kg/authoring.py](/Users/yaoda/Projects/invoker/src/i
 
 Behavior:
 
-1. resolves hero metadata and ability text from OpenDota
+1. resolves hero metadata and ability text from the game-file snapshot selected
+   by `INVOKER_GAME_DATA_DIR` and `--patch`
 2. renders `draft_fact_profile.md` with authoring-relevant metadata for every
-   accepted vocabulary term and cached OpenDota ability text
+   accepted vocabulary term and game-file ability context
 3. writes a manual prompt file under `data/raw/manual_prompts/draft-facts/<hero_slug>/...`
 4. creates the matching empty `.json` response placeholder under
    `data/raw/manual_responses/draft-facts/<hero_slug>/...`
@@ -117,9 +118,10 @@ This command is meant for authoring-time sanity checking, not for final patch bu
 
 ### `show-hero-context`
 
-Assembles and prints the `HeroContextPacket` for one hero as JSON. Useful for
-inspecting computed stat bands, percentiles, and the loaded mechanism primer
-before PR4 wires context into the authoring prompt.
+Assembles and prints the `HeroContextPacket` for one hero as JSON from the
+configured game-file snapshot. Useful for inspecting computed stat bands,
+percentiles, abilities, and resolved talents before rendering an authoring
+prompt.
 
 See [context-modules.md](context-modules.md) for the packet shape.
 

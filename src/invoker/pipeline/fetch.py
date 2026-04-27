@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from invoker.config import Config
 from invoker.logging import get_logger
+from invoker.sources.game_files import GameFilesSource
 from invoker.sources.opendota import OpenDotaFetcher
 from invoker.sources.stratz import StratzFetcher
 
@@ -34,6 +35,9 @@ async def fetch_all(
     None means fetch all heroes (production behaviour).
     """
     cache = cfg.data_dir / "raw"
+    if cfg.game_data_dir is None:
+        raise ValueError("INVOKER_GAME_DATA_DIR is required for game-file constants")
+    game = GameFilesSource(cfg.game_data_dir, patch)
     od = OpenDotaFetcher(cache, patch)
     strat = StratzFetcher(cache, patch, cfg.stratz_token)
     try:
@@ -43,9 +47,9 @@ async def fetch_all(
             sorted(hero_filter) if hero_filter else None,
             strat.available,
         )
-        all_heroes = await od.heroes()
-        abilities = await od.abilities()
-        hero_abilities = await od.hero_abilities_map()
+        all_heroes = game.heroes()
+        abilities = game.abilities()
+        hero_abilities = game.hero_abilities_map()
         pro_matches = await od.pro_matches()
 
         heroes = _apply_filter(all_heroes, hero_filter)

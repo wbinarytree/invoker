@@ -6,7 +6,7 @@ from typing import Any
 
 from invoker.kg.ability_context import AbilityContext, TalentContext, build_ability_contexts
 from invoker.kg.hero_stats_context import HeroStatsContext, compute_hero_stats_context
-from invoker.sources.opendota import OpenDotaFetcher
+from invoker.sources.game_files import GameFilesSource
 
 
 @dataclass(frozen=True)
@@ -35,46 +35,42 @@ class HeroContextPacket:
 
 
 async def build_hero_context(
-    data_dir: Path,
+    game_data_dir: Path,
     hero: str,
     *,
     patch: str,
 ) -> HeroContextPacket:
     """
-    Assemble a HeroContextPacket from OpenDota source data.
+    Assemble a HeroContextPacket from game-file snapshot data.
     hero: internal name, slug, localized name, or numeric id.
     """
-    fetcher = OpenDotaFetcher(data_dir / "raw", patch)
-    try:
-        heroes_list = await fetcher.heroes()
-        raw_stats = await fetcher.hero_stats()
-        raw_abilities = await fetcher.abilities()
-        raw_hero_abilities = await fetcher.hero_abilities_map()
-        # /api/constants/heroes is keyed by numeric id; remap to internal name
-        hero_stats_map = {v["name"]: v for v in raw_stats.values() if "name" in v}
-        hero_record = _find_hero(heroes_list, hero)
-        internal_name = hero_record["name"]
-        stats = compute_hero_stats_context(internal_name, hero_stats_map)
-        abilities, talents = build_ability_contexts(
-            internal_name, raw_abilities, raw_hero_abilities
-        )
-        identity = HeroIdentityContext(
-            hero_id=hero_record["id"],
-            hero_slug=internal_name.removeprefix("npc_dota_hero_"),
-            localized_name=hero_record["localized_name"],
-            primary_attr=str(hero_record.get("primary_attr", "")),
-            attack_type=str(hero_record.get("attack_type", "")),
-            roles=list(hero_record.get("roles", [])),
-        )
-        return HeroContextPacket(
-            patch=patch,
-            hero=identity,
-            stats=stats,
-            abilities=abilities,
-            talents=talents,
-        )
-    finally:
-        await fetcher.close()
+    source = GameFilesSource(game_data_dir, patch)
+    heroes_list = source.heroes()
+    raw_stats = source.hero_stats()
+    raw_abilities = source.abilities()
+    raw_hero_abilities = source.hero_abilities_map()
+    hero_stats_map = {v["name"]: v for v in raw_stats.values() if "name" in v}
+    hero_record = _find_hero(heroes_list, hero)
+    internal_name = hero_record["name"]
+    stats = compute_hero_stats_context(internal_name, hero_stats_map)
+    abilities, talents = build_ability_contexts(
+        internal_name, raw_abilities, raw_hero_abilities
+    )
+    identity = HeroIdentityContext(
+        hero_id=hero_record["id"],
+        hero_slug=internal_name.removeprefix("npc_dota_hero_"),
+        localized_name=hero_record["localized_name"],
+        primary_attr=str(hero_record.get("primary_attr", "")),
+        attack_type=str(hero_record.get("attack_type", "")),
+        roles=list(hero_record.get("roles", [])),
+    )
+    return HeroContextPacket(
+        patch=patch,
+        hero=identity,
+        stats=stats,
+        abilities=abilities,
+        talents=talents,
+    )
 
 
 class HeroNotFoundError(ValueError):
@@ -93,4 +89,4 @@ def _find_hero(heroes: list[dict[str, Any]], hero: str) -> dict[str, Any]:
         }
         if token in candidates:
             return h
-    raise HeroNotFoundError(f"hero {hero!r} not found in OpenDota roster")
+    raise HeroNotFoundError(f"hero {hero!r} not found in game-file snapshot roster")

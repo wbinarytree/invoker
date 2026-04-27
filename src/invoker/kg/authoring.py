@@ -552,11 +552,12 @@ def render_draft_facts_prompt(packet: HeroContextPacket) -> tuple[str, int]:
 
 def draft_facts(
     data_dir: Path,
+    game_data_dir: Path,
     hero: str,
     *,
     patch: str = AUTHORING_PATCH,
 ) -> DraftFactsResult:
-    packet = asyncio.run(build_hero_context(data_dir, hero, patch=patch))
+    packet = asyncio.run(build_hero_context(game_data_dir, hero, patch=patch))
     prompt_text, prompt_version = render_draft_facts_prompt(packet)
     client = ManualClient(
         inbox=data_dir / "raw" / "manual_prompts",

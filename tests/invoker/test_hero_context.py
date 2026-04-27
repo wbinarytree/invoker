@@ -80,23 +80,23 @@ def test_find_hero_raises_for_unknown():
 async def test_build_hero_context_returns_packet(monkeypatch, tmp_path):
     import invoker.kg.hero_context as hc
 
-    class FakeFetcher:
-        async def heroes(self):
-            return _HEROES_LIST
-
-        async def hero_stats(self):
-            return _HERO_STATS_MAP
-
-        async def abilities(self):
-            return _ABILITIES_MAP
-
-        async def hero_abilities_map(self):
-            return _HERO_ABILITIES_MAP
-
-        async def close(self):
+    class FakeGameFilesSource:
+        def __init__(self, *args, **kwargs):
             pass
 
-    monkeypatch.setattr(hc, "OpenDotaFetcher", lambda *a, **kw: FakeFetcher())
+        def heroes(self):
+            return _HEROES_LIST
+
+        def hero_stats(self):
+            return _HERO_STATS_MAP
+
+        def abilities(self):
+            return _ABILITIES_MAP
+
+        def hero_abilities_map(self):
+            return _HERO_ABILITIES_MAP
+
+    monkeypatch.setattr(hc, "GameFilesSource", FakeGameFilesSource)
 
     packet = await build_hero_context(tmp_path, "slardar", patch="7.41b")
 
@@ -163,10 +163,10 @@ def test_build_ability_contexts_filters_tooltip_and_scepter_attribs():
     assert "SHARD BONUS DAMAGE:" not in headers
 
 
-def test_build_ability_contexts_strips_talent_template_tokens():
+def test_build_ability_contexts_keeps_precomputed_talent_display_name():
     abilities_map = {
         "special_bonus_unique_x": {
-            "dname": "+{s:bonus_AbilityCooldown}s Foo Cooldown",
+            "dname": "+3s Foo Cooldown",
         },
     }
     hero_abilities_map = {
@@ -176,4 +176,4 @@ def test_build_ability_contexts_strips_talent_template_tokens():
         }
     }
     _, talents = build_ability_contexts("npc_dota_hero_x", abilities_map, hero_abilities_map)
-    assert talents[0].name == "+?s Foo Cooldown"
+    assert talents[0].name == "+3s Foo Cooldown"
