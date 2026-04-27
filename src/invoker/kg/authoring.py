@@ -12,6 +12,10 @@ from typing import Any
 import yaml
 
 from invoker.kg import HeroFactProfile, infer_relations, load_hero_facts
+from invoker.kg.ability_context import AbilityContext, AttribEntry, TalentContext
+from invoker.kg.hero_context import HeroContextPacket, HeroIdentityContext, build_hero_context
+from invoker.kg.hero_stats_context import HeroStatsContext, StatEntry
+from invoker.kg.mechanism_primer import MechanismPrimerContext, load_active_mechanism_primer
 from invoker.kg.vocabulary import (
     CAPABILITIES,
     LIABILITIES,
@@ -23,7 +27,6 @@ from invoker.llm.client import strip_fences
 from invoker.llm.manual import ManualClient, PendingManualResponseError
 from invoker.paths import authored_dir, vocab_gaps_file
 from invoker.prompts import load
-from invoker.sources.opendota import OpenDotaFetcher
 
 AUTHORING_PATCH = "authoring"
 AUTHORED_FACT_KEYS = frozenset(
@@ -44,16 +47,6 @@ GAP_BUCKETS = frozenset({"capabilities", "requirements", "liabilities", "targets
 
 class AuthoredFactsValidationError(ValueError):
     pass
-
-
-@dataclass(frozen=True)
-class HeroPromptContext:
-    hero_id: int
-    hero_slug: str
-    localized_name: str
-    internal_name: str
-    roles: list[str]
-    abilities: list[dict[str, str]]
 
 
 @dataclass(frozen=True)
@@ -238,7 +231,7 @@ def _coerce_gap_text(gap: dict[str, Any], key: str) -> str:
 def _coerce_vocabulary_gaps(
     raw: Any,
     *,
-    context: HeroPromptContext,
+    hero: HeroIdentityContext,
 ) -> list[dict[str, Any]]:
     if raw is None:
         return []
@@ -262,9 +255,9 @@ def _coerce_vocabulary_gaps(
             )
         gaps.append(
             {
-                "hero_id": context.hero_id,
-                "hero_slug": context.hero_slug,
-                "localized_name": context.localized_name,
+                "hero_id": hero.hero_id,
+                "hero_slug": hero.hero_slug,
+                "localized_name": hero.localized_name,
                 "bucket": bucket,
                 "concept": concept,
                 "why_needed": why_needed,
@@ -429,19 +422,6 @@ def format_relations_for_hero(data_dir: Path, hero: str) -> str:
     return "\n".join(lines)
 
 
-def _hero_matches(token: str, hero: dict[str, Any]) -> bool:
-    localized = str(hero.get("localized_name", ""))
-    internal = str(hero.get("name", ""))
-    hero_id = str(hero.get("id", ""))
-    slug = internal.removeprefix("npc_dota_hero_")
-    return token in {
-        localized.lower(),
-        internal.lower(),
-        slug.lower(),
-        hero_id.lower(),
-    }
-
-
 def _prompt_vocabulary_context() -> str:
     vocabulary = load_vocabulary()
     packet: dict[str, list[dict[str, Any]]] = {}
@@ -457,6 +437,8 @@ def _prompt_vocabulary_context() -> str:
                 for key, value in metadata.items()
                 if key not in {"status", "introduced_in"}
             }
+            if "examples" in entry:
+                entry["examples"] = _trim_examples(entry["examples"])
             entry["term"] = term
             packet[bucket].append(entry)
         packet[bucket].sort(key=lambda entry: entry["term"])
@@ -464,75 +446,106 @@ def _prompt_vocabulary_context() -> str:
     return json.dumps(packet, indent=2, sort_keys=True)
 
 
-def _select_hero(
-    heroes: list[dict[str, Any]],
-    hero_abilities: dict[str, Any],
-    abilities: dict[str, Any],
-    hero: str,
-) -> HeroPromptContext:
-    token = hero.strip().lower()
-    selected = next((item for item in heroes if _hero_matches(token, item)), None)
-    if selected is None:
-        raise FileNotFoundError(f"hero {hero!r} not found in OpenDota roster")
+def _trim_examples(raw: Any) -> list[str]:
+    if not isinstance(raw, list):
+        return []
+    slugs: list[str] = []
+    for item in raw:
+        if isinstance(item, dict) and isinstance(item.get("hero_slug"), str):
+            slug = item["hero_slug"].strip()
+            if slug and slug not in slugs:
+                slugs.append(slug)
+    return slugs
 
-    internal_name = selected["name"]
-    hero_slug = internal_name.removeprefix("npc_dota_hero_")
-    mapping = hero_abilities.get(internal_name, {})
-    ability_names = mapping.get("abilities", [])
-    resolved_abilities: list[dict[str, str]] = []
-    for ability_name in ability_names:
-        payload = abilities.get(ability_name)
-        if not payload:
-            continue
-        name = payload.get("dname") or ""
-        desc = payload.get("desc") or ""
-        if not name or not desc:
-            continue
-        resolved_abilities.append({"name": name, "text": desc})
 
-    return HeroPromptContext(
-        hero_id=selected["id"],
-        hero_slug=hero_slug,
-        localized_name=selected["localized_name"],
-        internal_name=internal_name,
-        roles=selected.get("roles", []),
-        abilities=resolved_abilities,
+def _stat_entry_to_dict(entry: StatEntry | None) -> dict[str, Any] | None:
+    if entry is None:
+        return None
+    return {"value": entry.value, "percentile": entry.percentile, "band": entry.band}
+
+
+def _stats_to_json(stats: HeroStatsContext) -> str:
+    payload = {
+        name: _stat_entry_to_dict(getattr(stats, name))
+        for name in (
+            "base_str",
+            "base_agi",
+            "base_int",
+            "str_gain",
+            "agi_gain",
+            "int_gain",
+            "base_armor",
+            "attack_range",
+            "move_speed",
+        )
+        if _stat_entry_to_dict(getattr(stats, name)) is not None
+    }
+    return json.dumps(payload, indent=2, sort_keys=True)
+
+
+def _attrib_to_dict(attrib: AttribEntry) -> dict[str, Any]:
+    return {"header": attrib.header, "value": attrib.value}
+
+
+def _ability_to_dict(ability: AbilityContext) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "name": ability.name,
+        "source": ability.source,
+        "description": ability.description,
+    }
+    if ability.behavior:
+        payload["behavior"] = ability.behavior
+    if ability.damage_type:
+        payload["damage_type"] = ability.damage_type
+    if ability.pierces_debuff_immunity is not None:
+        payload["pierces_debuff_immunity"] = ability.pierces_debuff_immunity
+    if ability.dispellable:
+        payload["dispellable"] = ability.dispellable
+    if ability.attribs:
+        payload["attribs"] = [_attrib_to_dict(a) for a in ability.attribs]
+    if ability.mana_cost is not None:
+        payload["mana_cost"] = ability.mana_cost
+    if ability.cooldown is not None:
+        payload["cooldown"] = ability.cooldown
+    return payload
+
+
+def _abilities_to_json(abilities: list[AbilityContext]) -> str:
+    return json.dumps([_ability_to_dict(a) for a in abilities], indent=2, sort_keys=True)
+
+
+def _talents_to_json(talents: list[TalentContext]) -> str:
+    payload = sorted(
+        ({"name": t.name, "level": t.level} for t in talents),
+        key=lambda t: (t["level"], t["name"]),
     )
+    return json.dumps(payload, indent=2, sort_keys=True)
 
 
-async def fetch_prompt_context(
-    data_dir: Path,
-    hero: str,
-    *,
-    patch: str = AUTHORING_PATCH,
-) -> HeroPromptContext:
-    fetcher = OpenDotaFetcher(data_dir / "raw", patch)
-    try:
-        heroes = await fetcher.heroes()
-        hero_abilities = await fetcher.hero_abilities_map()
-        abilities = await fetcher.abilities()
-        return _select_hero(heroes, hero_abilities, abilities, hero)
-    finally:
-        await fetcher.close()
-
-
-def render_draft_facts_prompt(context: HeroPromptContext) -> tuple[str, int]:
-    prompt = load("draft_fact_profile")
-    ability_context = json.dumps(
-        [
-            {"name": ability["name"], "description": ability["text"]}
-            for ability in context.abilities
-        ],
+def _mechanism_primer_to_json(primer: MechanismPrimerContext) -> str:
+    return json.dumps(
+        {"patch": primer.patch, "mechanics": primer.mechanics},
         indent=2,
         sort_keys=True,
     )
+
+
+def render_draft_facts_prompt(packet: HeroContextPacket) -> tuple[str, int]:
+    prompt = load("draft_fact_profile")
+    primer = load_active_mechanism_primer()
     rendered = prompt.render(
-        HERO_ID=str(context.hero_id),
-        HERO_NAME=context.localized_name,
-        HERO_SLUG=context.hero_slug,
-        ROLES=", ".join(context.roles) or "Unknown",
-        ABILITIES_JSON=ability_context,
+        HERO_ID=str(packet.hero.hero_id),
+        HERO_NAME=packet.hero.localized_name,
+        HERO_SLUG=packet.hero.hero_slug,
+        PRIMARY_ATTR=packet.hero.primary_attr or "unknown",
+        ATTACK_TYPE=packet.hero.attack_type or "unknown",
+        ROLES=", ".join(packet.hero.roles) or "Unknown",
+        PATCH=packet.patch,
         VOCABULARY_CONTEXT_JSON=_prompt_vocabulary_context(),
+        STATS_JSON=_stats_to_json(packet.stats),
+        MECHANISM_PRIMER_JSON=_mechanism_primer_to_json(primer),
+        ABILITIES_JSON=_abilities_to_json(packet.abilities),
+        TALENTS_JSON=_talents_to_json(packet.talents),
     )
     return rendered, prompt.version
 
@@ -543,13 +556,13 @@ def draft_facts(
     *,
     patch: str = AUTHORING_PATCH,
 ) -> DraftFactsResult:
-    context = asyncio.run(fetch_prompt_context(data_dir, hero, patch=patch))
-    prompt_text, prompt_version = render_draft_facts_prompt(context)
+    packet = asyncio.run(build_hero_context(data_dir, hero, patch=patch))
+    prompt_text, prompt_version = render_draft_facts_prompt(packet)
     client = ManualClient(
         inbox=data_dir / "raw" / "manual_prompts",
         outbox=data_dir / "raw" / "manual_responses",
     )
-    cache_tag = f"draft-facts/{context.hero_slug}"
+    cache_tag = f"draft-facts/{packet.hero.hero_slug}"
     try:
         response = client.generate_json(
             prompt_text,
@@ -558,32 +571,32 @@ def draft_facts(
         )
     except PendingManualResponseError as exc:
         return DraftFactsResult(
-            hero_slug=context.hero_slug,
+            hero_slug=packet.hero.hero_slug,
             prompt_path=exc.prompt_path,
             response_path=exc.response_path,
             pending=True,
         )
 
     raw = _coerce_response_payload(response.text)
-    raw.setdefault("hero_id", context.hero_id)
-    raw.setdefault("hero_slug", context.hero_slug)
-    raw.setdefault("localized_name", context.localized_name)
+    raw.setdefault("hero_id", packet.hero.hero_id)
+    raw.setdefault("hero_slug", packet.hero.hero_slug)
+    raw.setdefault("localized_name", packet.hero.localized_name)
     raw.setdefault("capabilities", [])
     raw.setdefault("requirements", [])
     raw.setdefault("liabilities", [])
     raw.setdefault("targets", [])
     raw.setdefault("role_distribution", {})
-    gaps = _coerce_vocabulary_gaps(raw.pop("vocabulary_gaps", []), context=context)
+    gaps = _coerce_vocabulary_gaps(raw.pop("vocabulary_gaps", []), hero=packet.hero)
     validate_authored_payload(raw)
     gaps_path = record_vocabulary_gaps(data_dir, gaps)
 
-    destination = authored_dir(data_dir) / f"{context.hero_slug}.yaml"
+    destination = authored_dir(data_dir) / f"{packet.hero.hero_slug}.yaml"
     if destination.exists():
         destination = _draft_path_for(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(yaml.safe_dump(raw, sort_keys=False, allow_unicode=False))
     return DraftFactsResult(
-        hero_slug=context.hero_slug,
+        hero_slug=packet.hero.hero_slug,
         prompt_path=client._paths(prompt_text, cache_tag)[0],
         response_path=client._paths(prompt_text, cache_tag)[1],
         authored_path=destination,
