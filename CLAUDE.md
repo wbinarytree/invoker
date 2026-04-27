@@ -1,14 +1,23 @@
-# CLAUDE.md — AI Collaboration Rules
+@AGENTS.md
 
-Read `GUIDELINES.md` first. This file covers AI-specific rules only. If anything here conflicts with `GUIDELINES.md`, that doc wins — flag the conflict.
+# Claude-specific addenda
 
-## Dota Knowledge Is Never Asserted From Memory
+`AGENTS.md` (imported above) is the cross-agent source of truth — branch/PR loop, doc lifecycle, hard lines, and stack quick-ref live there. The rules below apply only to Claude Code and supplement, not replace, those.
 
-The whole point of this project. Claude does not assert Dota-specific facts (hero roles, abilities, patch state, synergies, counters) from training memory.
+## Dota Knowledge — Elaboration of the Hard Line
+
+Reinforcing the AGENTS.md hard line ("No Dota facts from training memory"):
 
 - Facts from API responses cite the source file.
 - Facts from LLM extractions cite the prompt and input mechanic.
 - Unknown = say so and add a data source. Never fill plausible-looking placeholders. Null is correct when data is missing.
+
+## Destructive Actions — Project-Specific Additions
+
+Beyond the AGENTS.md "ask before destructive" rule and the Claude defaults, also confirm before:
+
+- publishing a package, creating releases, tagging
+- regenerating large derived artifacts that would wipe hand-edited content
 
 ## Workflow
 
@@ -16,16 +25,6 @@ The whole point of this project. Claude does not assert Dota-specific facts (her
 - Use the superpowers brainstorming / writing-plans / executing-plans skills when they fit; skip for small edits.
 - Do not invoke `test-driven-development` by default.
 - **Specs go in `docs/specs/` before discussion, not inline in conversation.** Any non-trivial design (new module, changed contract, open questions requiring sign-off) must be written to `docs/specs/YYYY-MM-DD-<topic>.md` first. Present the file path and the open questions — do not substitute a markdown block in chat for the actual spec file.
-
-## Destructive & External Actions — Ask First
-
-Beyond the defaults, specifically confirm before:
-
-- `git reset --hard`, force-push, branch/tag deletion, rewriting published history
-- publishing a package, creating releases, tagging
-- a full all-hero API fetch (small single-hero probes are fine)
-- deleting files outside the working change
-- regenerating large derived artifacts that would wipe hand-edited content
 
 ## LLM Artifact Hygiene
 
