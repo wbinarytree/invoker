@@ -1,0 +1,7 @@
+{
+  "item_blink": {
+    "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT",
+    "AbilityCastRange": "1200",
+    "ItemCost": "2250"
+  }
+}

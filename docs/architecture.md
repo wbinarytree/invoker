@@ -1,9 +1,11 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-27 (PR4 — context packet integrated into authoring prompt)
+Last updated: 2026-04-27 (Phase 5a — game-file snapshot contract)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
-loop (parse → review → promote) backed by a proposal inbox.
+loop (parse → review → promote) backed by a proposal inbox. Phase 5a adds a
+bootstrap-only game-file snapshot tool and a JSON-only source adapter; existing
+authoring consumers still read OpenDota constants until the later consumer swap.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -16,6 +18,7 @@ Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
 - [cli.md](cli.md) — CLI command reference and authoring loop
 - [context-modules.md](context-modules.md) — static hero context modules (`HeroContextPacket`, stats, mechanism primer)
 - [opendota-cache.md](opendota-cache.md) — OpenDota HTTP cache: hash function, file → endpoint map, payload shapes
+- [game-files-snapshot.md](game-files-snapshot.md) — local playbook for creating Valve game-file JSON snapshots
 
 ---
 
@@ -107,6 +110,39 @@ Built from derived hero views plus `relations.json`. Used for graph-oriented loc
 ---
 
 ## Data Sources
+
+### Game-file snapshots
+
+Bootstrap parser and snapshot writer:
+[src/invoker/snapshot/](/Users/yaoda/Projects/invoker/src/invoker/snapshot:1)
+
+JSON-only source adapter:
+[src/invoker/sources/game_files.py](/Users/yaoda/Projects/invoker/src/invoker/sources/game_files.py)
+
+The implemented Phase 5a contract writes patch-scoped JSON snapshots under an
+operator-provided root:
+
+```text
+<root>/<patch>/
+  heroes.json
+  abilities.json
+  hero_abilities.json
+  items.json
+  neutral_items.json
+  localization/english.json
+  snapshot.json
+```
+
+`GameFilesSource` reads these JSON files and exposes OpenDota-shaped constants
+for heroes, abilities, hero ability lists, and hero stats, plus raw item and
+neutral item accessors. It must not import from `invoker.snapshot`.
+
+The snapshot command consumes pre-extracted KV files only. It does not extract
+VPKs itself and is not part of bootstrap or query hot paths. When present, it
+auto-discovers Valve localization KV files under `resource/localization/`
+(`abilities_<locale>.txt`, `items_<locale>.txt`, and `dota_<locale>.txt`) so
+ability names/descriptions and talent display templates are available to the
+authoring context.
 
 ### OpenDota
 
@@ -220,6 +256,7 @@ Implemented config fields:
 
 - `STRATZ_API_TOKEN`
 - `INVOKER_DATA_DIR`
+- `INVOKER_GAME_DATA_DIR`
 - `INVOKER_LOG_LEVEL`
 - `INVOKER_DEV_HEROES`
 
@@ -250,6 +287,10 @@ data/
       manifest.json
   cache/
     graph/<patch>/graph.pkl
+
+External game snapshots are expected outside `data/` and are selected with
+`INVOKER_GAME_DATA_DIR`. The current repository does not commit generated
+snapshots or raw Valve data.
 ```
 
 Notes:

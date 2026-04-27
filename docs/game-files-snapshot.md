@@ -1,0 +1,51 @@
+# Game-File Snapshot Playbook
+
+Use this when Valve ships a patch and you have already extracted the VPK files
+to a local directory.
+
+The command expects either a repo/root containing `npc/` or the `npc/` directory
+itself:
+
+```bash
+uv run invoker snapshot-game-files \
+  --vpk /Users/yaoda/Projects/dota2npc \
+  --out /path/to/invoker-game-data \
+  --patch 7.41b
+```
+
+Then point invoker at the snapshot root:
+
+```bash
+export INVOKER_GAME_DATA_DIR=/path/to/invoker-game-data
+```
+
+Expected output:
+
+```text
+<root>/<patch>/
+  heroes.json
+  abilities.json
+  hero_abilities.json
+  items.json
+  neutral_items.json
+  localization/english.json
+  snapshot.json
+```
+
+By default the command auto-discovers and merges these files when they exist:
+
+- `resource/localization/abilities_english.txt`
+- `resource/localization/items_english.txt`
+- `resource/localization/dota_english.txt`
+
+If you want to use one specific localization KV file instead, pass it explicitly:
+
+```bash
+uv run invoker snapshot-game-files \
+  --vpk /Users/yaoda/Projects/dota2npc \
+  --out /path/to/invoker-game-data \
+  --patch 7.41b \
+  --localization /path/to/dota_english.txt
+```
+
+Do not commit generated snapshots or raw extracted Valve files to this repo.

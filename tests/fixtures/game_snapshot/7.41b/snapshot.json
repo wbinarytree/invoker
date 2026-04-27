@@ -1,0 +1,16 @@
+{
+  "files": {
+    "abilities": "abilities.json",
+    "hero_abilities": "hero_abilities.json",
+    "heroes": "heroes.json",
+    "items": "items.json",
+    "localization": "localization/english.json",
+    "neutral_items": "neutral_items.json"
+  },
+  "generated_at": "2026-04-27T00:00:00+00:00",
+  "locale": "english",
+  "patch": "7.41b",
+  "schema_version": 1,
+  "source": "fixture",
+  "source_format": "pre-extracted-vpk-kv1"
+}

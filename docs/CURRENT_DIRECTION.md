@@ -47,6 +47,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/notes/2026-04-26-opendota-constants-not-patch-versioned.md](notes/2026-04-26-opendota-constants-not-patch-versioned.md)
 - **Game-file overlay design exploration** (superseded; retained as design note):
   [docs/notes/2026-04-27-game-file-overlay.md](notes/2026-04-27-game-file-overlay.md)
+- **Localization lookup follow-ups**:
+  [docs/notes/2026-04-27-localization-lookup-followups.md](notes/2026-04-27-localization-lookup-followups.md)
 
 ## External input
 

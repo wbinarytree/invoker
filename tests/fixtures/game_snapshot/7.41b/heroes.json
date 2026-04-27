@@ -1,0 +1,42 @@
+{
+  "npc_dota_hero_alchemist": {
+    "Ability1": "alchemist_acid_spray",
+    "Ability2": "alchemist_unstable_concoction",
+    "Ability5": "alchemist_goblins_greed",
+    "Ability6": "alchemist_chemical_rage",
+    "Ability10": "special_bonus_unique_alchemist",
+    "Ability11": "special_bonus_hp_250",
+    "AbilityTalentStart": "10",
+    "ArmorPhysical": "0",
+    "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
+    "AttackRange": "150",
+    "AttributeAgilityGain": "1.5",
+    "AttributeBaseAgility": "19",
+    "AttributeBaseIntelligence": "25",
+    "AttributeBaseStrength": "23",
+    "AttributeIntelligenceGain": "1.8",
+    "AttributePrimary": "DOTA_ATTRIBUTE_STRENGTH",
+    "AttributeStrengthGain": "2.7",
+    "Enabled": "1",
+    "HeroID": "73",
+    "MovementSpeed": "295",
+    "Role": "Carry,Support,Durable",
+    "workshop_guide_name": "Alchemist"
+  },
+  "npc_dota_hero_test_ranged": {
+    "ArmorPhysical": "5",
+    "AttackCapabilities": "DOTA_UNIT_CAP_RANGED_ATTACK",
+    "AttackRange": "600",
+    "AttributeAgilityGain": "3.0",
+    "AttributeBaseAgility": "30",
+    "AttributeBaseIntelligence": "30",
+    "AttributeBaseStrength": "30",
+    "AttributeIntelligenceGain": "3.0",
+    "AttributePrimary": "DOTA_ATTRIBUTE_AGILITY",
+    "AttributeStrengthGain": "3.0",
+    "Enabled": "1",
+    "HeroID": "999",
+    "MovementSpeed": "320",
+    "Role": "Carry"
+  }
+}
