@@ -2,47 +2,56 @@
 
 Entrypoint for any coding agent on this repo (Claude Code, Codex CLI, Cursor, Aider, others).
 
-This file is intentionally short. Read these next:
+## Read docs before code
 
-- `GUIDELINES.md` — project rules (stack, data discipline, testing, design discipline)
-- `CLAUDE.md` — collaboration rules; applies to any agent, not just Claude
-- `docs/architecture.md` — current implementation; source of truth
+When something is unclear, read the docs first. Only fall back to the source when the docs don't answer it. The docs are the source of truth; the code is the implementation.
+
+- `docs/architecture.md` — current implementation; source of truth for system shape, modules, schemas
 - `docs/CURRENT_DIRECTION.md` — index of active design docs
+- `docs/context-modules.md`, `docs/cli.md`, `docs/opendota-cache.md` — module-level references linked from architecture.md
+- `GUIDELINES.md` — project rules (stack, data discipline, testing, design discipline)
+
+If you find yourself grepping the codebase to answer "what does X do?" before checking these, stop and check them first.
+
+## Hard lines
+
+- No Dota facts from training memory. Cite a source file or mark unknown. Null is correct when data is missing — never fill plausible placeholders.
+- No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
+- No silent retries on bad LLM extractions — surface the failure.
+- `data/` is gitignored. No data committed.
+- Specs go in `docs/specs/YYYY-MM-DD-<topic>.md` *before* discussion. Don't substitute a chat markdown block for the spec file.
+- Trigger discussion mode before implementation when a change needs design, vision, or plan alignment.
+- Ask before destructive or external-facing actions: force-push, rewriting history, branch/tag deletion, full all-hero API fetch, deleting outside the working change, publishing/releases/tagging, regenerating large derived artifacts.
 
 ## Branch & PR loop
 
 1. Never commit on `main`. Create a feature branch first.
-2. Write tests for behavior that changes. Boundaries that matter: validators, query API, schema, CLI surface. Don't unit-test LLM prose.
-3. Run `uv run pytest`, `uv run pyright`, `uv run ruff check` — all must pass.
-4. **Sub-agent review on approval, not mid-flight.** Do not run the review after every commit. When the user says the PR is ready (explicit "open the PR" / "ready to ship" / similar), then run a fresh-context review with Claude Sonnet 4.6 (or equivalent). Use the brief in `docs/specs/2026-04-26-collaboration-harness.md`. If you're unsure whether the user means "ready," ask.
-5. **Act on the review before pushing.** When the review returns, surface the verdict and findings to the user and ask whether to (a) address findings now, (b) push as-is and capture findings as follow-ups in the PR description, or (c) cherry-pick a subset to fix now. Don't open the PR silently — a review the user never decides on is wasted. Paste the final review summary into the PR description either way.
-6. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` and bump its `Last updated:` line. Bug fixes that don't change shape are exempt.
-7. One logical change per commit. Each commit should stand on its own.
+2. Write tests for behavior that changes — validators, query API, schema, CLI surface. Don't unit-test LLM prose.
+3. `uv run pytest`, `uv run pyright`, `uv run ruff check` must pass.
+4. **Sub-agent review on user's "ready to ship" signal, not mid-flight.** Brief in `docs/specs/2026-04-26-collaboration-harness.md`. Surface findings; ask whether to fix-now / push-as-is with follow-ups / cherry-pick. Paste the review summary into the PR body either way.
+5. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` (and any module doc it links to) and bump `Last updated:`. Bug fixes that don't change shape are exempt.
+6. One logical change per commit.
+
+## Doc lifecycle
+
+Stale docs mislead. When a doc is superseded:
+
+- **Confusion-only → delete.**
+- **Historical trace → archive.** Move to `docs/archive/<original-subpath>/` with a `Status: superseded by …` line at the top.
+- Don't read archived docs to derive current behavior — only to investigate *why* a past decision was made.
+- If a doc is not in `docs/CURRENT_DIRECTION.md` or `docs/architecture.md`, treat it as not authoritative.
 
 ## Where things go
 
 - Forward design (sign-off required for non-trivial): `docs/specs/YYYY-MM-DD-<topic>.md`
-- Stage handoffs (long-form context for the next session): `docs/handoff-YYYY-MM-DD-<topic>.md`
-- Retrospective brainstorm notes (one page max): `docs/notes/YYYY-MM-DD-<topic>.md`
+- Stage handoffs: `docs/handoff-YYYY-MM-DD-<topic>.md`
+- Retrospective notes: `docs/notes/YYYY-MM-DD-<topic>.md`
 - Implementation plans: `docs/plans/YYYY-MM-DD-<topic>.md`
 
-## Doc lifecycle
+## Project-specific style
 
-Stale docs are worse than missing docs — they mislead. When a spec, plan, handoff, or note becomes superseded:
-
-- **Confusion-only → delete.** If keeping it around will only confuse a fresh agent, remove it.
-- **Useful as historical trace → archive.** Move to `docs/archive/<original-subpath>/` and add a one-line `Status: superseded by …` at the top.
-- **Don't query archived docs unless absolutely necessary.** They are explicitly out of the active set. Read them only when investigating *why* a decision was made, never to derive current behavior.
-- `docs/CURRENT_DIRECTION.md` lists what's active. If a doc isn't there or in `docs/architecture.md`, treat it as not authoritative.
-
-## Hard lines
-
-- No Dota facts from training memory. Cite a source file or mark unknown.
-- No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
-- No data committed. `data/` is gitignored.
-- No silent retries on bad LLM extractions — surface failures.
-- Trigger discussion mode before implementation when a change needs design, vision, or plan alignment. Do not jump directly from a strategic concern into code.
-- Ask before destructive or external-facing actions (force-push, rewriting history, full all-hero API fetch, deleting outside the working change).
+- Not a TDD project. Ship features with tests for behavior that matters; how tests get written is free.
+- No backwards-compatibility shims while pre-1.0.
 
 ## Stack quick-ref
 

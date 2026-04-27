@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any
+
+_TALENT_TEMPLATE_RE = re.compile(r"\{s:[^}]+\}")
+_NOISY_HEADER_PATTERNS = ("SCEPTER", "SHARD")
 
 
 @dataclass(frozen=True)
@@ -46,7 +50,10 @@ def build_ability_contexts(
         raw = abilities_map.get(ability_name)
         if not isinstance(raw, dict):
             continue
-        abilities.append(_build_ability(ability_name, raw))
+        ability = _build_ability(ability_name, raw)
+        if ability.source != "innate" and "Hidden" in ability.behavior:
+            continue
+        abilities.append(ability)
 
     talents: list[TalentContext] = []
     for entry in hero_data.get("talents", []):
@@ -56,11 +63,22 @@ def build_ability_contexts(
             continue
         talents.append(TalentContext(
             internal_name=talent_name,
-            name=raw.get("dname", talent_name),
+            name=_clean_talent_name(raw.get("dname", talent_name)),
             level=int(entry.get("level", 0)),
         ))
 
     return abilities, talents
+
+
+def _clean_talent_name(name: str) -> str:
+    return _TALENT_TEMPLATE_RE.sub("?", name)
+
+
+def _is_noisy_header(header: str) -> bool:
+    upper = header.upper()
+    if upper.endswith("TOOLTIP:") or "TOOLTIP" in upper:
+        return True
+    return any(pat in upper for pat in _NOISY_HEADER_PATTERNS)
 
 
 def _build_ability(internal_name: str, raw: dict[str, Any]) -> AbilityContext:
@@ -83,7 +101,10 @@ def _build_ability(internal_name: str, raw: dict[str, Any]) -> AbilityContext:
     attribs = [
         AttribEntry(header=str(a["header"]), value=_to_str_or_list(a["value"]))
         for a in raw.get("attrib", [])
-        if isinstance(a, dict) and "header" in a and "value" in a
+        if isinstance(a, dict)
+        and "header" in a
+        and "value" in a
+        and not _is_noisy_header(str(a["header"]))
     ]
 
     return AbilityContext(

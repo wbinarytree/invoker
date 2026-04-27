@@ -4,10 +4,10 @@ from pathlib import Path
 import pytest
 import yaml
 
+from invoker.kg.ability_context import AbilityContext, AttribEntry, TalentContext
 from invoker.kg.authoring import (
     AuthoredFactsValidationError,
     DraftFactsResult,
-    HeroPromptContext,
     draft_facts,
     format_relations_for_hero,
     promote_authored_draft,
@@ -15,6 +15,57 @@ from invoker.kg.authoring import (
     resolve_authored_file,
     validate_authored_payload,
 )
+from invoker.kg.hero_context import HeroContextPacket, HeroIdentityContext
+from invoker.kg.hero_stats_context import HeroStatsContext, StatEntry
+
+
+def _pangolier_packet() -> HeroContextPacket:
+    return HeroContextPacket(
+        patch="authoring",
+        hero=HeroIdentityContext(
+            hero_id=120,
+            hero_slug="pangolier",
+            localized_name="Pangolier",
+            primary_attr="agi",
+            attack_type="Melee",
+            roles=["Nuker", "Escape"],
+        ),
+        stats=HeroStatsContext(
+            base_str=StatEntry(value=22.0, percentile=0.5, band="average"),
+            base_agi=StatEntry(value=24.0, percentile=0.78, band="high"),
+            base_int=StatEntry(value=18.0, percentile=0.4, band="low"),
+            str_gain=StatEntry(value=2.6, percentile=0.5, band="average"),
+            agi_gain=StatEntry(value=3.4, percentile=0.85, band="very_high"),
+            int_gain=StatEntry(value=1.8, percentile=0.3, band="low"),
+            base_armor=StatEntry(value=2.0, percentile=0.5, band="average"),
+            attack_range=StatEntry(value=150.0, percentile=0.2, band="low"),
+            move_speed=StatEntry(value=305.0, percentile=0.7, band="high"),
+            primary_attr="agi",
+            attack_type="Melee",
+        ),
+        abilities=[
+            AbilityContext(
+                internal_name="pangolier_swashbuckle",
+                name="Swashbuckle",
+                source="base_ability",
+                behavior=["Point Target"],
+                damage_type="Physical",
+                pierces_debuff_immunity=False,
+                dispellable=None,
+                description="Dash and strike enemies in line.",
+                attribs=[AttribEntry(header="DAMAGE:", value=["80", "120", "160", "200"])],
+                mana_cost="50",
+                cooldown="14",
+            ),
+        ],
+        talents=[
+            TalentContext(
+                internal_name="special_bonus_unique_pangolier_5",
+                name="Rolling Thunder Disarm",
+                level=4,
+            ),
+        ],
+    )
 
 
 def _pangolier_payload() -> dict:
@@ -59,29 +110,29 @@ def _pangolier_payload() -> dict:
 
 
 def test_render_draft_facts_prompt_includes_hero_context():
-    text, version = render_draft_facts_prompt(
-        HeroPromptContext(
-            hero_id=120,
-            hero_slug="pangolier",
-            localized_name="Pangolier",
-            internal_name="npc_dota_hero_pangolier",
-            roles=["Nuker", "Escape"],
-            abilities=[{"name": "Swashbuckle", "text": "Dash and strike enemies in line."}],
-        )
-    )
-    assert version >= 1
+    text, version = render_draft_facts_prompt(_pangolier_packet())
+    assert version >= 6
     assert "Pangolier" in text
     assert "Swashbuckle" in text
     assert "Live vocabulary JSON" in text
     assert "Ability context JSON" in text
+    assert "Hero stats JSON" in text
+    assert "Dota mechanism primer" in text
+    assert "Talent context JSON" in text
     assert '"description": "Dash and strike enemies in line."' in text
+    assert '"source": "base_ability"' in text
+    assert '"band": "very_high"' in text
+    assert '"percentile":' in text
+    assert "Rolling Thunder Disarm" in text
     assert '"capabilities"' in text
     assert '"vocabulary_gaps"' in text
     assert '"role_distribution"' not in text
-    assert '"introduced_in"' not in text
-    assert '"status"' not in text
     assert "Return JSON only." in text
     assert "Use only the live vocabulary terms" in text
+    assert "talents are conditional" in text
+    assert "Scepter, Shard" in text
+    # Examples in vocab are trimmed to hero_slug strings, not freeform evidence dicts.
+    assert '"reviewed save discussion"' not in text
 
 
 def test_validate_authored_payload_rejects_unknown_vocab():
@@ -99,21 +150,14 @@ def test_validate_authored_payload_rejects_unknown_top_level_keys():
 
 
 def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
-    context = HeroPromptContext(
-        hero_id=120,
-        hero_slug="pangolier",
-        localized_name="Pangolier",
-        internal_name="npc_dota_hero_pangolier",
-        roles=["Nuker", "Escape"],
-        abilities=[{"name": "Swashbuckle", "text": "Dash and strike enemies in line."}],
-    )
+    packet = _pangolier_packet()
 
-    async def _fake_fetch_prompt_context(data_dir, hero, patch="authoring"):
-        return context
+    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+        return packet
 
     monkeypatch.setattr(
-        "invoker.kg.authoring.fetch_prompt_context",
-        _fake_fetch_prompt_context,
+        "invoker.kg.authoring.build_hero_context",
+        _fake_build_hero_context,
     )
 
     first = draft_facts(tmp_path, "pangolier")
@@ -135,21 +179,14 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
 
 
 def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: Path):
-    context = HeroPromptContext(
-        hero_id=120,
-        hero_slug="pangolier",
-        localized_name="Pangolier",
-        internal_name="npc_dota_hero_pangolier",
-        roles=["Nuker", "Escape"],
-        abilities=[{"name": "Swashbuckle", "text": "Dash and strike enemies in line."}],
-    )
+    packet = _pangolier_packet()
 
-    async def _fake_fetch_prompt_context(data_dir, hero, patch="authoring"):
-        return context
+    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+        return packet
 
     monkeypatch.setattr(
-        "invoker.kg.authoring.fetch_prompt_context",
-        _fake_fetch_prompt_context,
+        "invoker.kg.authoring.build_hero_context",
+        _fake_build_hero_context,
     )
 
     pending = draft_facts(tmp_path, "pangolier")
@@ -180,21 +217,14 @@ def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: P
 
 
 def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
-    context = HeroPromptContext(
-        hero_id=120,
-        hero_slug="pangolier",
-        localized_name="Pangolier",
-        internal_name="npc_dota_hero_pangolier",
-        roles=["Nuker", "Escape"],
-        abilities=[{"name": "Swashbuckle", "text": "Dash and strike enemies in line."}],
-    )
+    packet = _pangolier_packet()
 
-    async def _fake_fetch_prompt_context(data_dir, hero, patch="authoring"):
-        return context
+    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+        return packet
 
     monkeypatch.setattr(
-        "invoker.kg.authoring.fetch_prompt_context",
-        _fake_fetch_prompt_context,
+        "invoker.kg.authoring.build_hero_context",
+        _fake_build_hero_context,
     )
 
     pending = draft_facts(tmp_path, "pangolier")

@@ -8,6 +8,8 @@ import yaml
 
 _PRIMER_DIR = Path(__file__).parent
 
+ACTIVE_PATCH = "7.41b"
+
 
 class MechanismPrimerError(ValueError):
     pass
@@ -43,3 +45,7 @@ def load_mechanism_primer(patch: str) -> MechanismPrimerContext:
         patch=str(raw.get("patch", patch)),
         mechanics=mechanics,
     )
+
+
+def load_active_mechanism_primer() -> MechanismPrimerContext:
+    return load_mechanism_primer(ACTIVE_PATCH)

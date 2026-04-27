@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-26 (PR3 — normalized ability/talent context)
+Last updated: 2026-04-27 (PR4 — context packet integrated into authoring prompt)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox.
@@ -34,8 +34,9 @@ LLMs are no longer part of the bootstrap or query path.
 
 LLMs are used only in the Stage 3 authoring helper flow:
 
-- generate a prompt for one hero
-- human runs that prompt in an external chat UI
+- assemble a `HeroContextPacket` (identity, stats, normalized abilities, talents) plus the patch-scoped mechanism primer
+- render that context into `draft_fact_profile.md` (currently prompt version 6) with fenced JSON blocks
+- human runs the prompt in an external chat UI
 - save the structured response locally
 - normalize it into authored YAML
 
