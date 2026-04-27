@@ -1,7 +1,7 @@
-# Game-File Overlay for Hero Constants
+# Game-File Overlay for Hero Constants (design exploration)
 
 Date: 2026-04-27
-Status: deferred follow-up. Not blocking PR 4.
+Status: superseded by [docs/specs/2026-04-27-game-files-as-primary-constants.md](../specs/2026-04-27-game-files-as-primary-constants.md). Retained as a design note — the overlay framing was abandoned in favor of game files as the primary source for constants.
 
 ## Why
 

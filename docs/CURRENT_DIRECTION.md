@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-04-26
+Last updated: 2026-04-27
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -16,8 +16,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-26-collaboration-harness.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-collaboration-harness.md:1)
 - Hero authoring context hardening:
   [docs/specs/2026-04-26-hero-authoring-context-hardening.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-hero-authoring-context-hardening.md:1)
-- Game-file overlay (deferred follow-up; OpenDota/Stratz staleness):
-  [docs/specs/2026-04-27-game-file-overlay.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-27-game-file-overlay.md:1)
+- Game files as primary source for hero/ability/item constants (draft):
+  [docs/specs/2026-04-27-game-files-as-primary-constants.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-27-game-files-as-primary-constants.md:1)
 - Vocabulary review log (live append):
   [docs/specs/kg-vocabulary-notes.md](/Users/yaoda/Projects/invoker/docs/specs/kg-vocabulary-notes.md:1)
 
@@ -45,6 +45,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/notes/](/Users/yaoda/Projects/invoker/docs/notes:1)
 - **OpenDota constants staleness** (not patch-versioned, silently drifts after patch):
   [docs/notes/2026-04-26-opendota-constants-not-patch-versioned.md](notes/2026-04-26-opendota-constants-not-patch-versioned.md)
+- **Game-file overlay design exploration** (superseded; retained as design note):
+  [docs/notes/2026-04-27-game-file-overlay.md](notes/2026-04-27-game-file-overlay.md)
 
 ## External input
 
