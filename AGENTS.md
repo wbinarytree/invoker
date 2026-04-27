@@ -38,11 +38,32 @@ Stale docs are worse than missing docs — they mislead. When a spec, plan, hand
 ## Hard lines
 
 - No Dota facts from training memory. Cite a source file or mark unknown.
+  - Facts from API responses cite the source file.
+  - Facts from LLM extractions cite the prompt and input mechanic.
+  - Unknown = say so and add a data source. Never fill plausible-looking placeholders. Null is correct when data is missing.
 - No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
 - No data committed. `data/` is gitignored.
-- No silent retries on bad LLM extractions — surface failures.
+- No silent retries on bad LLM extractions — surface the failure.
 - Trigger discussion mode before implementation when a change needs design, vision, or plan alignment. Do not jump directly from a strategic concern into code.
-- Ask before destructive or external-facing actions (force-push, rewriting history, full all-hero API fetch, deleting outside the working change).
+- Ask before destructive or external-facing actions: force-push, rewriting history, branch/tag deletion, full all-hero API fetch, deleting outside the working change, publishing a package, creating releases, tagging, regenerating large derived artifacts that would wipe hand-edited content.
+
+## Workflow
+
+- Not a TDD project. Ship the feature with tests for behavior that matters; how tests get written is free.
+- Do not invoke `test-driven-development` by default.
+- **Specs go in `docs/specs/` before discussion, not inline in conversation.** Any non-trivial design (new module, changed contract, open questions requiring sign-off) must be written to `docs/specs/YYYY-MM-DD-<topic>.md` first. Present the file path and the open questions — do not substitute a markdown block in chat for the actual spec file.
+- When stuck, ask. A two-sentence clarification beats an hour of wrong direction.
+
+## Code style
+
+- Default to no comments. Add one only when the *why* is non-obvious.
+- Do not add features, abstractions, or error handling the task does not require.
+- No backwards-compatibility shims while pre-1.0.
+
+## Claude Code only
+
+- Use the superpowers brainstorming / writing-plans / executing-plans skills when they fit; skip for small edits.
+- Persistent project memory is for: user preferences / working style, project-specific constraints ("we decided X because Y"), pointers to external resources. Do not save code patterns, file paths, or anything a fresh read of the repo reveals.
 
 ## Stack quick-ref
 
