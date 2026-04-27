@@ -16,6 +16,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-26-collaboration-harness.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-collaboration-harness.md:1)
 - Hero authoring context hardening:
   [docs/specs/2026-04-26-hero-authoring-context-hardening.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-hero-authoring-context-hardening.md:1)
+- Game-file overlay (deferred follow-up; OpenDota/Stratz staleness):
+  [docs/specs/2026-04-27-game-file-overlay.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-27-game-file-overlay.md:1)
 - Vocabulary review log (live append):
   [docs/specs/kg-vocabulary-notes.md](/Users/yaoda/Projects/invoker/docs/specs/kg-vocabulary-notes.md:1)
 
