@@ -19,6 +19,7 @@ data/*
 !data/authored/
 data/authored/*
 !data/authored/README.md
+dist/
 
 # Local scratch / working notes — not for version control
 docs/tmp/

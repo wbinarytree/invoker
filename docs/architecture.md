@@ -346,7 +346,8 @@ The current implementation is intentionally incomplete in these ways:
 - many reasonable hero facts are not yet expressible without Stage 4 vocabulary expansion
 - relation rules are still broad and sometimes overfire
 - there is no evidence attachment pass yet
-- there is no bundle/install flow for authored data — this is a deliberate roadmap item, planned for after the KG substrate stabilizes; it will be redesigned fresh from the manual-assisted-KG architecture, not from the archived `2026-04-16-bundle-assembly.md` spec
+- there is no concrete release process for authored and derived KG artifacts yet;
+  the active design is `docs/specs/2026-04-28-release-process.md`
 - local authored files are still a workspace convention, not a released data product
 
 These are active roadmap items, not accidental omissions.
