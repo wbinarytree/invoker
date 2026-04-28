@@ -23,7 +23,8 @@ class GameFilesSource:
         self._items_raw = self._read_json("items.json")
         self._neutral_items_raw = self._read_json("neutral_items.json")
         self._localization = self._read_json(f"localization/{locale}.json")
-        self._talent_names = _build_talent_names(self._abilities_raw)
+        self._talent_replacements = _build_talent_replacements(self._abilities_raw)
+        self._talent_names = _build_talent_names(self._abilities_raw, self._talent_replacements)
 
     def heroes(self) -> list[dict[str, Any]]:
         """Full hero list with base metadata in the OpenDota constants shape."""
@@ -36,11 +37,37 @@ class GameFilesSource:
 
     def abilities(self) -> dict[str, Any]:
         """Ability descriptions keyed by internal name in the OpenDota constants shape."""
-        return {
-            name: _ability_record(name, raw, self._localization, self._talent_names)
+        records = {
+            name: _ability_record(
+                name,
+                raw,
+                self._localization,
+                self._talent_names,
+                self._talent_replacements,
+            )
             for name, raw in self._abilities_raw.items()
             if isinstance(raw, dict)
         }
+        for hero_data in self._hero_abilities.values():
+            if not isinstance(hero_data, dict):
+                continue
+            for talent in hero_data.get("talents", []):
+                if not isinstance(talent, dict):
+                    continue
+                name = talent.get("name")
+                if (
+                    isinstance(name, str)
+                    and name.startswith("special_bonus_")
+                    and name not in records
+                ):
+                    records[name] = _ability_record(
+                        name,
+                        {},
+                        self._localization,
+                        self._talent_names,
+                        self._talent_replacements,
+                    )
+        return records
 
     def hero_abilities_map(self) -> dict[str, Any]:
         """Maps hero internal name to ability and talent lists."""
@@ -124,9 +151,10 @@ def _ability_record(
     raw: dict[str, Any],
     localization: dict[str, Any],
     talent_names: dict[str, str],
+    talent_replacements: dict[str, dict[str, str]],
 ) -> dict[str, Any]:
     record: dict[str, Any] = {
-        "dname": _localized_ability_name(name, localization, talent_names),
+        "dname": _localized_ability_name(name, localization, talent_names, talent_replacements),
         "behavior": _behavior(raw.get("AbilityBehavior")),
         "dmg_type": _damage_type(raw.get("AbilityUnitDamageType")),
         "bkbpierce": _spell_immunity(raw.get("SpellImmunityType")),
@@ -153,6 +181,7 @@ def _localized_ability_name(
     name: str,
     localization: dict[str, Any],
     talent_names: dict[str, str],
+    talent_replacements: dict[str, dict[str, str]],
 ) -> str:
     for key in (
         f"DOTA_Tooltip_ability_{name}",
@@ -161,7 +190,7 @@ def _localized_ability_name(
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return value
+            return _resolve_talent_template(value, talent_replacements.get(name, {}))
     if name in talent_names:
         return talent_names[name]
     return _title_from_internal(name)
@@ -179,23 +208,56 @@ def _localized_ability_desc(name: str, localization: dict[str, Any]) -> str | No
     return None
 
 
-def _build_talent_names(abilities: dict[str, Any]) -> dict[str, str]:
-    names: dict[str, str] = {}
-    for raw in abilities.values():
+def _build_talent_replacements(abilities: dict[str, Any]) -> dict[str, dict[str, str]]:
+    replacements: dict[str, dict[str, str]] = {}
+    for ability_name, raw in abilities.items():
         if not isinstance(raw, dict):
             continue
         values = raw.get("AbilityValues")
         if not isinstance(values, dict):
             continue
+        if ability_name.startswith("special_bonus_"):
+            for field_name, field_value in values.items():
+                if isinstance(field_value, dict) and isinstance(field_value.get("value"), str):
+                    replacements.setdefault(ability_name, {})[str(field_name)] = field_value[
+                        "value"
+                    ]
+                elif isinstance(field_value, str):
+                    replacements.setdefault(ability_name, {})[str(field_name)] = field_value
         for field_name, field_value in values.items():
-            if isinstance(field_value, dict):
-                for key, value in field_value.items():
-                    if key.startswith("special_bonus_") and isinstance(value, str):
-                        names.setdefault(key, f"{value} {_label_from_key(str(field_name))}")
+            if not isinstance(field_value, dict):
+                continue
+            placeholder = f"bonus_{field_name}"
+            for key, value in field_value.items():
+                if key.startswith("special_bonus_") and isinstance(value, str):
+                    replacements.setdefault(key, {})[placeholder] = value
+    return replacements
+
+
+def _build_talent_names(
+    abilities: dict[str, Any],
+    talent_replacements: dict[str, dict[str, str]],
+) -> dict[str, str]:
+    names: dict[str, str] = {}
+    for talent_name, replacements in talent_replacements.items():
+        for placeholder, value in replacements.items():
+            field_name = placeholder.removeprefix("bonus_")
+            names.setdefault(talent_name, f"{value} {_label_from_key(field_name)}")
     for ability_name in abilities:
         if ability_name.startswith("special_bonus_"):
             names.setdefault(ability_name, _special_bonus_name(ability_name))
     return names
+
+
+def _resolve_talent_template(template: str, replacements: dict[str, str]) -> str:
+    rendered = template
+    for key, value in replacements.items():
+        token = f"{{s:{key}}}"
+        unsigned = value.lstrip("+-")
+        rendered = rendered.replace(f"+{token}", f"+{unsigned}")
+        rendered = rendered.replace(f"-{token}", f"-{unsigned}")
+        rendered = rendered.replace(token, value)
+    return rendered
 
 
 def _attribs(values: Any) -> list[dict[str, Any]]:

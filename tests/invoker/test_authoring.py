@@ -152,7 +152,7 @@ def test_validate_authored_payload_rejects_unknown_top_level_keys():
 def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
     packet = _pangolier_packet()
 
-    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+    async def _fake_build_hero_context(game_data_dir, hero, *, patch="authoring"):
         return packet
 
     monkeypatch.setattr(
@@ -160,7 +160,7 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
         _fake_build_hero_context,
     )
 
-    first = draft_facts(tmp_path, "pangolier")
+    first = draft_facts(tmp_path, tmp_path / "game", "pangolier")
     assert isinstance(first, DraftFactsResult)
     assert first.pending is True
     assert first.prompt_path.exists()
@@ -169,7 +169,7 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
 
     first.response_path.write_text(json.dumps(_pangolier_payload(), indent=2))
 
-    second = draft_facts(tmp_path, "pangolier")
+    second = draft_facts(tmp_path, tmp_path / "game", "pangolier")
     assert second.pending is False
     assert second.authored_path is not None
     assert second.authored_path.exists()
@@ -181,7 +181,7 @@ def test_draft_facts_writes_prompt_then_yaml(monkeypatch, tmp_path: Path):
 def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: Path):
     packet = _pangolier_packet()
 
-    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+    async def _fake_build_hero_context(game_data_dir, hero, *, patch="authoring"):
         return packet
 
     monkeypatch.setattr(
@@ -189,7 +189,7 @@ def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: P
         _fake_build_hero_context,
     )
 
-    pending = draft_facts(tmp_path, "pangolier")
+    pending = draft_facts(tmp_path, tmp_path / "game", "pangolier")
     payload = _pangolier_payload()
     payload["vocabulary_gaps"] = [
         {
@@ -204,7 +204,7 @@ def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: P
     ]
     pending.response_path.write_text(json.dumps(payload, indent=2))
 
-    written = draft_facts(tmp_path, "pangolier")
+    written = draft_facts(tmp_path, tmp_path / "game", "pangolier")
 
     assert written.pending is False
     assert written.gaps_path is not None
@@ -219,7 +219,7 @@ def test_draft_facts_records_vocabulary_gaps_separately(monkeypatch, tmp_path: P
 def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
     packet = _pangolier_packet()
 
-    async def _fake_build_hero_context(data_dir, hero, *, patch="authoring"):
+    async def _fake_build_hero_context(game_data_dir, hero, *, patch="authoring"):
         return packet
 
     monkeypatch.setattr(
@@ -227,12 +227,12 @@ def test_draft_facts_accepts_json_inside_fences(monkeypatch, tmp_path: Path):
         _fake_build_hero_context,
     )
 
-    pending = draft_facts(tmp_path, "pangolier")
+    pending = draft_facts(tmp_path, tmp_path / "game", "pangolier")
     pending.response_path.write_text(
         "Here is the draft:\n```json\n" + json.dumps(_pangolier_payload(), indent=2) + "```"
     )
 
-    written = draft_facts(tmp_path, "pangolier")
+    written = draft_facts(tmp_path, tmp_path / "game", "pangolier")
     assert written.pending is False
     assert written.authored_path is not None
 

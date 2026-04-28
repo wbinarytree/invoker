@@ -2,5 +2,8 @@
   "DOTA_Tooltip_Hero_npc_dota_hero_alchemist": "Alchemist",
   "DOTA_Tooltip_ability_alchemist_acid_spray": "Acid Spray",
   "DOTA_Tooltip_ability_alchemist_acid_spray_Description": "Sprays high-pressure acid across a target area.",
+  "DOTA_Tooltip_ability_special_bonus_hp_250": "+{s:value} Health",
+  "DOTA_Tooltip_ability_special_bonus_unique_alchemist": "+{s:bonus_armor_reduction} Acid Spray Armor Reduction",
+  "DOTA_Tooltip_ability_special_bonus_unique_missing": "+{s:bonus_radius} Missing Talent Record",
   "npc_dota_hero_test_ranged:n": "Test Ranged"
 }

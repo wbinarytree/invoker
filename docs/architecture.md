@@ -1,11 +1,11 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-27 (Phase 5a — game-file snapshot contract)
+Last updated: 2026-04-28 (Phase 5b — game-file constants consumers)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
-loop (parse → review → promote) backed by a proposal inbox. Phase 5a adds a
-bootstrap-only game-file snapshot tool and a JSON-only source adapter; existing
-authoring consumers still read OpenDota constants until the later consumer swap.
+loop (parse → review → promote) backed by a proposal inbox. Phase 5b routes
+hero, ability, talent, and hero-stat constants through patch-scoped game-file
+snapshots instead of OpenDota constants.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -133,9 +133,9 @@ operator-provided root:
   snapshot.json
 ```
 
-`GameFilesSource` reads these JSON files and exposes OpenDota-shaped constants
-for heroes, abilities, hero ability lists, and hero stats, plus raw item and
-neutral item accessors. It must not import from `invoker.snapshot`.
+`GameFilesSource` reads these JSON files and exposes the constants surface used
+by authoring and fetch code: heroes, abilities, hero ability lists, hero stats,
+items, and neutral items. It must not import from `invoker.snapshot`.
 
 The snapshot command consumes pre-extracted KV files only. It does not extract
 VPKs itself and is not part of bootstrap or query hot paths. When present, it
@@ -144,12 +144,28 @@ auto-discovers Valve localization KV files under `resource/localization/`
 ability names/descriptions and talent display templates are available to the
 authoring context.
 
+Current consumers:
+
+- `hero_context.py` assembles `HeroContextPacket` from `GameFilesSource`
+  through a narrow constants-source protocol used by the packet assembly helper
+- `pipeline/fetch.py` reads roster, ability, and hero ability constants from
+  `GameFilesSource`, while keeping OpenDota for matchups and pro matches
+- `ability_context.py` consumes already-resolved talent names; it no longer
+  substitutes unresolved talent template values with `?`
+
 ### OpenDota
 
 Source adapter: [src/invoker/sources/opendota.py](/Users/yaoda/Projects/invoker/src/invoker/sources/opendota.py)
 
 Cache layer, endpoint list, hash function, and payload shapes:
 [docs/opendota-cache.md](opendota-cache.md)
+
+OpenDota is now used for match data only:
+
+- hero matchups
+- pro matches
+
+OpenDota constants are intentionally no longer exposed by `OpenDotaFetcher`.
 
 ### STRATZ
 
@@ -287,11 +303,11 @@ data/
       manifest.json
   cache/
     graph/<patch>/graph.pkl
+```
 
 External game snapshots are expected outside `data/` and are selected with
 `INVOKER_GAME_DATA_DIR`. The current repository does not commit generated
 snapshots or raw Valve data.
-```
 
 Notes:
 

@@ -131,6 +131,14 @@ Scepter/Shard flags, fully resolved talent values) are additive.
 
 `OpenDotaFetcher` keeps `matchups()` and `pro_matches()` only.
 
+`hero_context.py` uses `GameFilesSource` as the default source because game
+snapshots are the primary constants source. The packet assembly function still
+accepts a narrow constants-source protocol (`heroes`, `hero_stats`,
+`abilities`, `hero_abilities_map`) so a future source swap would be localized
+to adapter construction rather than prompt rendering, stats computation, or
+ability normalization. There is no runtime source selector in Phase 5b because
+the project has no current need for an alternate constants source.
+
 ### Localization
 
 `locale` is a dimension on the adapter from day one (defaults to English) so

@@ -61,9 +61,10 @@ def test_game_files_source_abilities_match_context_input_shape():
     assert shard["dispellable"] == "Yes"
 
     talent_names = [talent.name for talent in talents]
-    assert "+1 armor reduction" in talent_names
+    assert "+1 Acid Spray Armor Reduction" in talent_names
     assert "+250 Health" in talent_names
-    assert all("{s:" not in name for name in talent_names)
+    assert "+100 Missing Talent Record" in talent_names
+    assert all("{s:" not in name and "?" not in name for name in talent_names)
 
 
 def test_game_files_source_exposes_items():

@@ -63,17 +63,20 @@ def version() -> None:
 def draft_facts_cmd(
     heroes: HeroArgs,
     patch: str = typer.Option(
-        "authoring",
-        help="Cache namespace for OpenDota prompt inputs; does not affect authored YAML format.",
+        "7.41b",
+        help="Patch snapshot to use for game-file authoring context.",
     ),
 ) -> None:
     from invoker.kg.authoring import draft_facts
 
     cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for draft-facts.", err=True)
+        raise typer.Exit(code=1)
     failures = 0
     for hero in heroes:
         try:
-            result = draft_facts(cfg.data_dir, hero, patch=patch)
+            result = draft_facts(cfg.data_dir, cfg.game_data_dir, hero, patch=patch)
         except Exception as exc:
             typer.echo(f"{hero}: {exc}", err=True)
             failures += 1
@@ -162,7 +165,7 @@ def show_relations_cmd(
 @app.command("show-hero-context")
 def show_hero_context_cmd(
     hero: str = typer.Argument(..., help="Hero localized name, slug, or numeric id."),
-    patch: str = typer.Option("authoring", help="Patch for source data and mechanism primer."),
+    patch: str = typer.Option("7.41b", help="Patch snapshot for source data."),
 ) -> None:
     import asyncio
     import dataclasses
@@ -170,7 +173,10 @@ def show_hero_context_cmd(
     from invoker.kg.hero_context import build_hero_context
 
     cfg = _load_config()
-    packet = asyncio.run(build_hero_context(cfg.data_dir, hero, patch=patch))
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for show-hero-context.", err=True)
+        raise typer.Exit(code=1)
+    packet = asyncio.run(build_hero_context(cfg.game_data_dir, hero, patch=patch))
     typer.echo(json.dumps(dataclasses.asdict(packet), indent=2))
 
 

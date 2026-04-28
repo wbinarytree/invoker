@@ -45,6 +45,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/notes/](/Users/yaoda/Projects/invoker/docs/notes:1)
 - **OpenDota constants staleness** (not patch-versioned, silently drifts after patch):
   [docs/notes/2026-04-26-opendota-constants-not-patch-versioned.md](notes/2026-04-26-opendota-constants-not-patch-versioned.md)
+- **Legacy OpenDota constants cache payloads**:
+  [docs/notes/2026-04-28-opendota-constants-cache-legacy.md](notes/2026-04-28-opendota-constants-cache-legacy.md)
 - **Game-file overlay design exploration** (superseded; retained as design note):
   [docs/notes/2026-04-27-game-file-overlay.md](notes/2026-04-27-game-file-overlay.md)
 - **Localization lookup follow-ups**:

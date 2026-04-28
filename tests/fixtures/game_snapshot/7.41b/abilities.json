@@ -11,6 +11,7 @@
       },
       "radius": {
         "affected_by_aoe_increase": "1",
+        "special_bonus_unique_missing": "+100",
         "value": "350 400 450 500"
       }
     },
@@ -48,6 +49,12 @@
     "IsGrantedByShard": "1",
     "SpellDispellableType": "SPELL_DISPELLABLE_YES"
   },
-  "special_bonus_hp_250": {},
+  "special_bonus_hp_250": {
+    "AbilityValues": {
+      "value": {
+        "value": "250"
+      }
+    }
+  },
   "special_bonus_unique_alchemist": {}
 }
