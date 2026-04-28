@@ -509,13 +509,16 @@ surfaces grow further.
 
 Active design: `docs/specs/2026-04-28-release-process.md`.
 
-Stage 4.5 should produce a local release directory or archive that ties
+Stage 4.5 should produce a local full release archive that ties
 together:
 
+- vocabulary snapshot;
 - authored YAML;
 - derived patch artifacts;
 - Dota patch;
-- invoker version or git commit;
+- generation timestamp;
+- invoker version;
+- git commit hash;
 - game-file snapshot metadata;
 - validation and vocabulary-audit results.
 
@@ -531,7 +534,7 @@ One stage per PR. Each stage's exit criteria must pass before the next starts. E
 1. **Stage 2 schema + teardown** (~500 lines net delete). Promote prototype schemas, delete extract/reason/GeminiClient. Pangolier authored by hand as smoke test. **Commit boundary.**
 2. **Stage 3 authoring workflow** (~500 lines). Fact loader, YAML parser, `draft-facts` prompt renderer, `validate-facts`, `show-relations`, `data/authored/README.md`. Author Pangolier + 9 more heroes covering a diverse vocabulary slice. **Commit boundary.**
 3. **Stage 4 LLM-assisted vocabulary** (~250 lines). `suggest-vocabulary` prompt renderer, `vocab-proposals.yaml` inbox, `promote-vocabulary` command, `kg-vocabulary-notes.md`. Run one full suggest-review-promote cycle against the 10 authored heroes. **Commit boundary.**
-4. **Stage 4.5 release process** (~250 lines). Implement local `publish --patch --out`, release metadata, file hashes, and release validation. **Commit boundary.**
+4. **Stage 4.5 release process** (~250 lines). Implement local `publish --patch --out`, mandatory full `.tar.gz` bundle, release metadata, file hashes, and release validation. **Commit boundary.**
 5. **Stage 5 rule engine expansion** (~300 lines). Add rules per the table above, port validation slice tests. **Commit boundary.**
 6. **Stage 6 evidence attachment** (~300 lines). New `evidence.py`, cohort-scoped stat classification, `report evidence` CLI, threshold tuning. **Commit boundary.**
 

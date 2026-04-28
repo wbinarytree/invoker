@@ -23,15 +23,17 @@ on an artifact layout that can be packaged, checked, and handed to consumers.
 
 ## Goals
 
-1. Produce a versioned local release directory or archive from current authored
-   facts and derived patch artifacts.
+1. Produce a versioned local release archive from the full current authored
+   facts, vocabulary contract, and derived patch artifacts.
 2. Include release metadata that ties together:
    - Dota patch;
-   - invoker package version or git commit;
+   - generation timestamp;
+   - invoker package version;
+   - git commit hash;
    - source game-file snapshot metadata;
+   - vocabulary manifest;
    - authored corpus manifest;
-   - derived artifact manifest;
-   - generation timestamp.
+   - derived artifact manifest.
 3. Add a verification command or validation mode that checks a release before it
    is considered publishable.
 4. Keep authored local data explicit. A release can include a copy of authored
@@ -48,14 +50,23 @@ on an artifact layout that can be packaged, checked, and handed to consumers.
 - No raw Valve game files or generated game-file snapshots committed to this
   repo.
 - No evidence-attachment or rule-expansion work in this stage.
+- No separate vocabulary-only release yet. Vocabulary remains coupled to the
+  repo for authoring and validation, and each KG release carries the exact
+  vocabulary snapshot it was built with.
 
 ## Release Contents
 
-First release bundle shape:
+Each release is a full bundle. Do not publish partial or delta bundles in the
+first release process.
+
+First release staging directory shape:
 
 ```text
 dist/invoker-kg-<patch>-<timestamp>/
   release.json
+  vocabulary/
+    vocabulary.yaml
+    kg-vocabulary-notes.md
   authored/
     *.yaml
   derived/
@@ -68,19 +79,33 @@ dist/invoker-kg-<patch>-<timestamp>/
     vocab-audit.txt
 ```
 
+The published artifact is the compressed archive of that full staging directory:
+
+```text
+dist/invoker-kg-<patch>-<timestamp>.tar.gz
+```
+
 `release.json` should include:
 
 ```json
 {
   "schema_version": 1,
   "patch": "7.41b",
+  "timestamp": "2026-04-28T00:00:00Z",
   "invoker_version": "0.1.0",
-  "git_commit": "...",
-  "generated_at": "2026-04-28T00:00:00Z",
+  "git_hash": "...",
+  "git_dirty": true,
   "game_snapshot": {
     "patch": "7.41b",
     "source": "...",
     "generated_at": "..."
+  },
+  "vocabulary": {
+    "schema_version": 1,
+    "files": [
+      {"path": "vocabulary/vocabulary.yaml", "sha256": "..."},
+      {"path": "vocabulary/kg-vocabulary-notes.md", "sha256": "..."}
+    ]
   },
   "authored": {
     "hero_count": 11,
@@ -96,10 +121,21 @@ dist/invoker-kg-<patch>-<timestamp>/
   },
   "checks": {
     "validate": "pass",
-    "vocab_audit": "pass"
+    "vocab_audit": {
+      "status": "pass",
+      "warnings_blocking": false
+    }
   }
 }
 ```
+
+Do not require a clean git worktree for local publishing. Record `git_dirty`
+in `release.json`; CI can enforce a clean checkout with a simple shell guard
+when/if automated publication is added.
+
+`vocab-audit` warnings are non-blocking in this stage. Blocking audit errors
+still prevent release creation; warnings are captured in `reports/vocab-audit.txt`
+and reflected as non-blocking metadata.
 
 ## CLI Shape
 
@@ -116,16 +152,14 @@ Expected behavior:
    instruction to run `bootstrap`;
 3. run derived-artifact validation;
 4. run `vocab-audit`;
-5. copy authored and derived artifacts into the release directory;
+5. copy vocabulary, authored, and derived artifacts into the release directory;
 6. write `release.json`;
-7. print the release path and a short checklist.
+7. create the full `.tar.gz` bundle;
+8. print the archive path and a short checklist.
 
 Optional flags can be added only when needed:
 
-- `--archive`: also write `.tar.gz`;
-- `--force`: overwrite an existing local release path;
-- `--include-summaries/--no-include-summaries`: if summary payload size becomes
-  a problem.
+- `--force`: overwrite an existing local release path.
 
 ## Verification
 
@@ -146,13 +180,16 @@ The PR should include tests for:
 - file hashing;
 - missing derived artifact failure;
 - failed validation prevents release creation;
-- successful local release copies authored and derived artifacts.
+- `vocab-audit` warnings do not prevent release creation;
+- successful local release copies vocabulary, authored, and derived artifacts;
+- successful local release writes a full `.tar.gz` bundle.
 
 ## Phasing
 
 ### PR 1 — Local Release Bundle
 
 - Implement concrete `publish --patch --out`.
+- Always create a full `.tar.gz` release bundle.
 - Add `release.json` schema and tests.
 - Update `docs/cli.md` and `docs/architecture.md`.
 - Keep output local under `dist/`, which should remain untracked.
@@ -168,14 +205,13 @@ The PR should include tests for:
 - Decide whether release artifacts live in GitHub Releases, an object store, or
   a separate data repository.
 - Decide whether `invoker` should fetch a release automatically.
+- Revisit whether vocabulary should ever become a separately versioned artifact.
+  The default remains bundled with each KG release until there is a concrete
+  consumer that needs independent vocabulary versioning.
 
 ## Open Questions
 
-- Should authored YAML be included in every release, or should the release only
-  ship derived artifacts plus enough metadata to trace back to the local corpus?
-- Should release naming use invoker version, git commit, timestamp, or all
-  three?
-- Should `publish` require a clean git worktree, or only record dirty state in
-  `release.json`?
-- Should `vocab-audit` warnings be recorded as warnings, or should specific
-  warning categories become release blockers?
+- Should consumer handoff prefer unpacked directories, archives, or both?
+- Should release metadata include a compact authored term/vocabulary usage
+  summary, or is `vocab-audit.txt` enough?
+- What CI job should eventually publish the archive, and where should it put it?
