@@ -101,7 +101,7 @@ Files *not* in this list (team/player/archetype/vector) are explicitly deferred.
 - [ ] **Step 1: Init uv project and deps**
 
 ```bash
-cd /Users/yaoda/Projects/invoker
+cd /path/to/invoker
 uv init --package invoker --python 3.11
 uv add httpx pydantic networkx google-generativeai typer pyyaml "beautifulsoup4>=4.12"
 uv add --dev pytest pytest-asyncio ruff pyright

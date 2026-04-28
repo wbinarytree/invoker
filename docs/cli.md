@@ -2,7 +2,7 @@
 
 Part of the architecture record. See [architecture.md](architecture.md) for system shape and artifacts.
 
-Implemented in [src/invoker/cli.py](/Users/yaoda/Projects/invoker/src/invoker/cli.py).
+Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 
 ---
 
@@ -43,9 +43,9 @@ The current Stage 3 authoring loop is:
 7. run `invoker validate-facts HERO [HERO ...]`
 8. run `invoker show-relations HERO`
 
-Authoring guidance lives in [data/authored/README.md](/Users/yaoda/Projects/invoker/data/authored/README.md).
+Authoring guidance lives in [data/authored/README.md](../data/authored/README.md).
 
-The manual file-loop helper is [src/invoker/llm/manual.py](/Users/yaoda/Projects/invoker/src/invoker/llm/manual.py).
+The manual file-loop helper is [src/invoker/llm/manual.py](../src/invoker/llm/manual.py).
 `ManualClient` is a generic file handoff helper, not a production LLM backend.
 
 ---
@@ -54,7 +54,7 @@ The manual file-loop helper is [src/invoker/llm/manual.py](/Users/yaoda/Projects
 
 ### `draft-facts`
 
-Implemented in [src/invoker/kg/authoring.py](/Users/yaoda/Projects/invoker/src/invoker/kg/authoring.py).
+Implemented in [src/invoker/kg/authoring.py](../src/invoker/kg/authoring.py).
 
 Behavior:
 
@@ -130,7 +130,7 @@ See [context-modules.md](context-modules.md) for the packet shape.
 Bootstrap-only helper for creating a patch-scoped game-file JSON snapshot from
 pre-extracted Valve KV files.
 
-Implemented in [src/invoker/snapshot/game_files.py](/Users/yaoda/Projects/invoker/src/invoker/snapshot/game_files.py).
+Implemented in [src/invoker/snapshot/game_files.py](../src/invoker/snapshot/game_files.py).
 
 Behavior:
 
@@ -207,7 +207,7 @@ proposal queue item, not an accepted term.
 Parses a manual LLM response file produced by `compose-vocabulary-prompt`
 into the proposal inbox at `data/authored/vocab-proposals.yaml`.
 
-Implemented in [src/invoker/kg/vocabulary_proposals.py](/Users/yaoda/Projects/invoker/src/invoker/kg/vocabulary_proposals.py).
+Implemented in [src/invoker/kg/vocabulary_proposals.py](../src/invoker/kg/vocabulary_proposals.py).
 
 Behavior:
 
@@ -289,7 +289,7 @@ for an external chat UI.
 
 Builds patch-scoped derived artifacts from local authored files.
 
-Implemented in [src/invoker/pipeline/orchestrator.py](/Users/yaoda/Projects/invoker/src/invoker/pipeline/orchestrator.py).
+Implemented in [src/invoker/pipeline/orchestrator.py](../src/invoker/pipeline/orchestrator.py).
 
 Behavior:
 

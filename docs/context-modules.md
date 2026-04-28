@@ -24,7 +24,7 @@ via `load_mechanism_primer(packet.patch)` when needed alongside a packet.
 
 ## `hero_context.py`
 
-[src/invoker/kg/hero_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/hero_context.py)
+[src/invoker/kg/hero_context.py](../src/invoker/kg/hero_context.py)
 
 Composition API. `build_hero_context(game_data_dir, hero, patch=patch)` assembles a
 `HeroContextPacket` from a game-file JSON snapshot. `game_data_dir` is the
@@ -39,7 +39,7 @@ a runtime source-selection layer today.
 
 ## `hero_stats_context.py`
 
-[src/invoker/kg/hero_stats_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/hero_stats_context.py)
+[src/invoker/kg/hero_stats_context.py](../src/invoker/kg/hero_stats_context.py)
 
 Computes a `HeroStatsContext` for one hero relative to the full roster. Each tracked
 stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
@@ -56,7 +56,7 @@ patch-scoped `heroes.json` snapshot.
 
 ## `ability_context.py`
 
-[src/invoker/kg/ability_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/ability_context.py)
+[src/invoker/kg/ability_context.py](../src/invoker/kg/ability_context.py)
 
 Builds `AbilityContext` and `TalentContext` lists from game-file snapshot
 payloads (`GameFilesSource.abilities()` and `hero_abilities_map()`).
@@ -91,7 +91,7 @@ records for downstream conditional-fact work.
 
 ## `mechanism_primer.py`
 
-[src/invoker/kg/mechanism_primer.py](/Users/yaoda/Projects/invoker/src/invoker/kg/mechanism_primer.py)
+[src/invoker/kg/mechanism_primer.py](../src/invoker/kg/mechanism_primer.py)
 
 Loads a per-patch YAML file (`mechanism_primer_{patch}.yaml`, co-located in the
 `src/invoker/kg/` package) into a `MechanismPrimerContext`. Returns empty mechanics
