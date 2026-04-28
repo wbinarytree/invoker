@@ -59,7 +59,9 @@ Matchup files (keyed by hero ID in the URL path, so each hero has its own hash):
 
 OpenDota is now used only for match data. Hero, ability, talent, item, and hero
 stat constants come from `GameFilesSource` and the game-file snapshot described
-in [game-files-snapshot.md](game-files-snapshot.md).
+in [game-files-snapshot.md](game-files-snapshot.md). Historical OpenDota
+constants cache mappings and payload examples are retained in
+[2026-04-28-opendota-constants-cache-legacy.md](notes/2026-04-28-opendota-constants-cache-legacy.md).
 
 ## Staleness
 

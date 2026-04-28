@@ -7,6 +7,7 @@ from invoker.kg.hero_context import (
     HeroNotFoundError,
     _find_hero,
     build_hero_context,
+    build_hero_context_from_source,
 )
 from invoker.kg.hero_stats_context import HeroStatsContext
 
@@ -114,6 +115,27 @@ async def test_build_hero_context_returns_packet(monkeypatch, tmp_path):
     assert len(packet.talents) == 1
     assert isinstance(packet.talents[0], TalentContext)
     assert packet.talents[0].name == "+250 Health"
+
+
+def test_build_hero_context_from_source_accepts_constants_source():
+    class FakeConstantsSource:
+        def heroes(self):
+            return _HEROES_LIST
+
+        def hero_stats(self):
+            return _HERO_STATS_MAP
+
+        def abilities(self):
+            return _ABILITIES_MAP
+
+        def hero_abilities_map(self):
+            return _HERO_ABILITIES_MAP
+
+    packet = build_hero_context_from_source(FakeConstantsSource(), "28", patch="7.41b")
+
+    assert isinstance(packet, HeroContextPacket)
+    assert packet.hero.localized_name == "Slardar"
+    assert packet.abilities[0].internal_name == "slardar_crush"
 
 
 def test_build_ability_contexts_drops_hidden_subcommands_keeps_innate():

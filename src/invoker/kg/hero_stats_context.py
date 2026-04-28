@@ -62,7 +62,7 @@ def compute_hero_stats_context(
     """
     Compute a HeroStatsContext for one hero relative to all heroes.
 
-    all_heroes: dict from /api/constants/heroes keyed by internal hero name.
+    all_heroes: constants-shaped hero stats keyed by internal hero name.
     Percentile is computed across the full roster for each stat independently.
     """
     hero = all_heroes.get(hero_internal_name, {})

@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-27 (Phase 5b — game-file constants consumers)
+Last updated: 2026-04-28 (Phase 5b — game-file constants consumers)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, and Stage 4 vocabulary review now reaches a guarded promotion
 loop (parse → review → promote) backed by a proposal inbox. Phase 5b routes
@@ -147,6 +147,7 @@ authoring context.
 Current consumers:
 
 - `hero_context.py` assembles `HeroContextPacket` from `GameFilesSource`
+  through a narrow constants-source protocol used by the packet assembly helper
 - `pipeline/fetch.py` reads roster, ability, and hero ability constants from
   `GameFilesSource`, while keeping OpenDota for matchups and pro matches
 - `ability_context.py` consumes already-resolved talent names; it no longer

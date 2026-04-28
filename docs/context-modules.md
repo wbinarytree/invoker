@@ -30,6 +30,13 @@ Composition API. `build_hero_context(game_data_dir, hero, patch=patch)` assemble
 `HeroContextPacket` from a game-file JSON snapshot. `game_data_dir` is the
 `INVOKER_GAME_DATA_DIR` root, and `patch` selects `<game_data_dir>/<patch>/`.
 
+The default entrypoint intentionally constructs `GameFilesSource` because game
+snapshots are the primary constants source. Packet assembly itself is split into
+`build_hero_context_from_source(source, hero, patch=patch)`, where `source`
+implements the narrow constants surface (`heroes`, `hero_stats`, `abilities`,
+`hero_abilities_map`). That keeps future source swaps mechanical without adding
+a runtime source-selection layer today.
+
 ## `hero_stats_context.py`
 
 [src/invoker/kg/hero_stats_context.py](/Users/yaoda/Projects/invoker/src/invoker/kg/hero_stats_context.py)

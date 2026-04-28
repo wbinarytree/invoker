@@ -2,11 +2,23 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 from invoker.kg.ability_context import AbilityContext, TalentContext, build_ability_contexts
 from invoker.kg.hero_stats_context import HeroStatsContext, compute_hero_stats_context
 from invoker.sources.game_files import GameFilesSource
+
+
+class HeroConstantsSource(Protocol):
+    """Constants surface needed to assemble a hero authoring packet."""
+
+    def heroes(self) -> list[dict[str, Any]]: ...
+
+    def hero_stats(self) -> dict[str, Any]: ...
+
+    def abilities(self) -> dict[str, Any]: ...
+
+    def hero_abilities_map(self) -> dict[str, Any]: ...
 
 
 @dataclass(frozen=True)
@@ -45,6 +57,16 @@ async def build_hero_context(
     hero: internal name, slug, localized name, or numeric id.
     """
     source = GameFilesSource(game_data_dir, patch)
+    return build_hero_context_from_source(source, hero, patch=patch)
+
+
+def build_hero_context_from_source(
+    source: HeroConstantsSource,
+    hero: str,
+    *,
+    patch: str,
+) -> HeroContextPacket:
+    """Assemble a HeroContextPacket from an already-constructed constants source."""
     heroes_list = source.heroes()
     raw_stats = source.hero_stats()
     raw_abilities = source.abilities()
