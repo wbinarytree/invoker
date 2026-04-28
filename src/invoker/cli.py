@@ -46,6 +46,11 @@ SnapshotLocaleOption = Annotated[
     str,
     typer.Option(help="Locale name for localization/<locale>.json."),
 ]
+PublishOutOption = Annotated[
+    Path,
+    typer.Option("--out", help="Release output directory."),
+]
+PUBLISH_OUT_DEFAULT = Path("dist")
 
 
 def _load_config() -> Config:
@@ -588,21 +593,36 @@ def validate(patch: str = typer.Option(..., help="Patch to validate.")) -> None:
 
 
 @app.command()
-def publish(patch: str = typer.Option(..., help="Patch to bundle.")) -> None:
-    import tarfile
-
-    from invoker.paths import derived_patch_dir, dist_file
+def publish(
+    patch: str = typer.Option(..., help="Patch to bundle."),
+    out: PublishOutOption = PUBLISH_OUT_DEFAULT,
+    force: bool = typer.Option(
+        False,
+        "--force",
+        help="Overwrite an existing local release path.",
+    ),
+) -> None:
+    from invoker.pipeline.release import ReleaseError, create_release_bundle
 
     cfg = _load_config()
-    src = derived_patch_dir(cfg.data_dir, patch)
-    if not src.exists():
-        typer.echo(f"No derived data for {patch}.")
-        raise typer.Exit(code=1)
-    dst = dist_file(cfg.data_dir, patch)
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    with tarfile.open(dst, "w:gz") as tar:
-        tar.add(src, arcname=f"invoker-kb-{patch}")
-    typer.echo(f"Wrote {dst}")
+    try:
+        result = create_release_bundle(
+            cfg.data_dir,
+            patch,
+            out,
+            invoker_version=__version__,
+            game_data_dir=cfg.game_data_dir,
+            force=force,
+        )
+    except ReleaseError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Release directory: {result.release_dir}")
+    typer.echo(f"Archive: {result.archive_path}")
+    typer.echo("Checklist:")
+    typer.echo("- review release.json")
+    typer.echo("- review reports/validation.txt")
+    typer.echo("- review reports/vocab-audit.txt")
 
 
 if __name__ == "__main__":

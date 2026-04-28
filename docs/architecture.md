@@ -1,12 +1,14 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-28 (Phase 5b — game-file constants consumers)
+Last updated: 2026-04-28 (Stage 4.5 — local KG release bundle)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
 backed by a proposal inbox. Phase 5a/5b game-file constants work is
 implemented: hero, ability, talent, and hero-stat constants route through
-patch-scoped game-file snapshots instead of OpenDota constants.
+patch-scoped game-file snapshots instead of OpenDota constants. Stage 4.5 adds
+a local release bundle command for authored KG artifacts and derived patch
+outputs.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -37,6 +39,8 @@ The implemented flow is:
 2. `bootstrap` loads those files into typed fact profiles
 3. deterministic rules infer pairwise relations
 4. derived hero views, `relations.json`, summaries, manifest, and graph cache are written per patch
+5. `publish` packages validated authored facts, vocabulary, derived artifacts,
+   reports, and release metadata into a local tarball
 
 LLMs are no longer part of the bootstrap or query path.
 
@@ -111,6 +115,32 @@ The manifest lists present heroes and content hashes for the derived hero files.
 `data/cache/graph/<patch>/graph.pkl`
 
 Built from derived hero views plus `relations.json`. Used for graph-oriented local exploration.
+
+### Local release bundle
+
+`dist/invoker-kg-<patch>-<timestamp>.tar.gz`
+
+Created by [src/invoker/pipeline/release.py](../src/invoker/pipeline/release.py)
+through `invoker publish --patch <patch> --out dist/`.
+
+The staging directory inside `dist/` contains:
+
+- `release.json`
+- `vocabulary/vocabulary.yaml`
+- `vocabulary/kg-vocabulary-notes.md`
+- `authored/*.yaml`
+- `derived/heroes/<hero_id>.json`
+- `derived/relations.json`
+- `derived/summary_<hero_id>.md`
+- `derived/manifest.json`
+- `reports/validation.txt`
+- `reports/vocab-audit.txt`
+
+Publishing validates canonical authored YAML, requires a complete derived
+manifest matching the authored hero IDs, validates derived artifacts, requires
+`INVOKER_GAME_DATA_DIR/<patch>/snapshot.json`, runs `vocab-audit`, records git
+hash and dirty state, and writes a full `.tar.gz` bundle. Local publishing does
+not require a clean worktree; `git_dirty` is recorded in `release.json`.
 
 ---
 
@@ -308,6 +338,9 @@ data/
       manifest.json
   cache/
     graph/<patch>/graph.pkl
+dist/
+  invoker-kg-<patch>-<timestamp>/
+  invoker-kg-<patch>-<timestamp>.tar.gz
 ```
 
 External game snapshots are expected outside `data/` and are selected with
@@ -346,9 +379,8 @@ The current implementation is intentionally incomplete in these ways:
 - many reasonable hero facts are not yet expressible without Stage 4 vocabulary expansion
 - relation rules are still broad and sometimes overfire
 - there is no evidence attachment pass yet
-- there is no concrete release process for authored and derived KG artifacts yet;
-  the active design is `docs/specs/2026-04-28-release-process.md`
-- local authored files are still a workspace convention, not a released data product
+- release publishing is local-only; public hosting, release inspection, and
+  consumer handoff policy are still future work
 
 These are active roadmap items, not accidental omissions.
 

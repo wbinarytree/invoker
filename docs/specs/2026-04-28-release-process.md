@@ -1,7 +1,7 @@
 # Release Process for Authored KG Artifacts
 
 Date: 2026-04-28
-Status: draft
+Status: approved
 Stage: Stage 4.5, between vocabulary review and Stage 5 rule expansion
 
 ## Why

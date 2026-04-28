@@ -54,9 +54,17 @@ def _to_derived(
     )
 
 
+def _is_canonical_authored_file(path: Path) -> bool:
+    return (
+        path.suffix == ".yaml"
+        and not path.name.endswith(".draft.yaml")
+        and not path.name.startswith("vocab-")
+    )
+
+
 def discover_authored_files(data_dir: Path, heroes: set[str] | None = None) -> list[Path]:
     root = authored_dir(data_dir)
-    files = sorted(root.glob("*.yaml"))
+    files = [path for path in sorted(root.glob("*.yaml")) if _is_canonical_authored_file(path)]
     if heroes is None:
         return files
 
