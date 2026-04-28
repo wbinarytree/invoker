@@ -1,7 +1,12 @@
 # PR3 — Normalized Ability/Talent Context
 
+Status: superseded by [docs/architecture.md](../../architecture.md) and
+[docs/context-modules.md](../../context-modules.md). Implemented and then
+reworked to use game-file snapshots instead of OpenDota constants; archived on
+2026-04-28.
+
 Date: 2026-04-26
-Status: accepted
+Original status: accepted
 
 ## Goal
 

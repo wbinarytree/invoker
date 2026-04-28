@@ -1,6 +1,6 @@
 # Legacy OpenDota Constants Cache Payloads
 
-Status: superseded by [docs/specs/2026-04-27-game-files-as-primary-constants.md](../specs/2026-04-27-game-files-as-primary-constants.md). Retained as a historical note for reading old cache directories and old PRs. Do not use this note to derive current Invoker behavior.
+Status: superseded by [docs/archive/specs/2026-04-27-game-files-as-primary-constants.md](../archive/specs/2026-04-27-game-files-as-primary-constants.md). Retained as a historical note for reading old cache directories and old PRs. Do not use this note to derive current Invoker behavior.
 
 OpenDota constants were removed from the active cache documentation when
 Phase 5b moved hero, ability, talent, item, and hero-stat constants to

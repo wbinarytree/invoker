@@ -1,7 +1,13 @@
 # Game Files as Primary Source for Hero / Ability / Item Constants
 
+Status: superseded by [docs/architecture.md](../../architecture.md),
+[docs/context-modules.md](../../context-modules.md), and
+[docs/game-files-snapshot.md](../../game-files-snapshot.md). Phase 5a/5b are
+implemented; Phase 5c item/neutral-item consumers and Phase 6 release bundles
+remain deferred future work. Archived on 2026-04-28.
+
 Date: 2026-04-27
-Status: draft (discussion)
+Original status: draft (discussion)
 Stage: post-PR4 quality / source hardening, before Stage 5 rule expansion
 
 ## Why

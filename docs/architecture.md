@@ -2,16 +2,21 @@
 
 Last updated: 2026-04-28 (Phase 5b — game-file constants consumers)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
-implemented, and Stage 4 vocabulary review now reaches a guarded promotion
-loop (parse → review → promote) backed by a proposal inbox. Phase 5b routes
-hero, ability, talent, and hero-stat constants through patch-scoped game-file
-snapshots instead of OpenDota constants.
+implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
+vocabulary review reaches a guarded promotion loop (parse → review → promote)
+backed by a proposal inbox. Phase 5a/5b game-file constants work is
+implemented: hero, ability, talent, and hero-stat constants route through
+patch-scoped game-file snapshots instead of OpenDota constants.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
 **Update discipline:** see `GUIDELINES.md` → "Architecture Doc Is Source of Truth". Each PR updates the relevant doc (`cli.md`, `context-modules.md`, or this file) and bumps `Last updated:` here.
 
 Current direction entrypoint: `docs/CURRENT_DIRECTION.md`
+
+Completed design specs for the authoring-context and game-file constants work
+now live under `docs/archive/specs/`; use this architecture document and the
+module docs below for current behavior.
 
 ## Further reading
 

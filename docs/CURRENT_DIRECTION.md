@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-04-27
+Last updated: 2026-04-28
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -14,10 +14,6 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-18-benchmark-schema-and-cases.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-18-benchmark-schema-and-cases.md:1)
 - Collaboration harness:
   [docs/specs/2026-04-26-collaboration-harness.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-collaboration-harness.md:1)
-- Hero authoring context hardening:
-  [docs/specs/2026-04-26-hero-authoring-context-hardening.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-26-hero-authoring-context-hardening.md:1)
-- Game files as primary source for hero/ability/item constants (draft):
-  [docs/specs/2026-04-27-game-files-as-primary-constants.md](/Users/yaoda/Projects/invoker/docs/specs/2026-04-27-game-files-as-primary-constants.md:1)
 - Vocabulary review log (live append):
   [docs/specs/kg-vocabulary-notes.md](/Users/yaoda/Projects/invoker/docs/specs/kg-vocabulary-notes.md:1)
 
@@ -38,6 +34,21 @@ This file is the shortest path to the active design direction. Anything not list
 ## Implementation source of truth
 
 - [docs/architecture.md](/Users/yaoda/Projects/invoker/docs/architecture.md:1) — what the code actually does today.
+- [docs/context-modules.md](/Users/yaoda/Projects/invoker/docs/context-modules.md:1) — implemented static hero context packet, stat context, ability/talent context, and mechanism primer.
+- [docs/game-files-snapshot.md](/Users/yaoda/Projects/invoker/docs/game-files-snapshot.md:1) — implemented game-file snapshot refresh playbook and JSON contract.
+
+## Recently completed
+
+The Stage 4 hero-authoring context hardening work and Phase 5a/5b game-file
+constants work are implemented. Current behavior is documented in
+`docs/architecture.md`, `docs/context-modules.md`, `docs/cli.md`,
+`docs/opendota-cache.md`, and `docs/game-files-snapshot.md`.
+
+Historical design specs were archived on 2026-04-28:
+
+- [docs/archive/specs/2026-04-26-hero-authoring-context-hardening.md](/Users/yaoda/Projects/invoker/docs/archive/specs/2026-04-26-hero-authoring-context-hardening.md:1)
+- [docs/archive/specs/2026-04-26-pr3-ability-talent-context.md](/Users/yaoda/Projects/invoker/docs/archive/specs/2026-04-26-pr3-ability-talent-context.md:1)
+- [docs/archive/specs/2026-04-27-game-files-as-primary-constants.md](/Users/yaoda/Projects/invoker/docs/archive/specs/2026-04-27-game-files-as-primary-constants.md:1)
 
 ## Notes
 
