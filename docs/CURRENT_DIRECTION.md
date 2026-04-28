@@ -16,6 +16,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-26-collaboration-harness.md](specs/2026-04-26-collaboration-harness.md)
 - Vocabulary review log (live append):
   [docs/specs/kg-vocabulary-notes.md](specs/kg-vocabulary-notes.md)
+- Release process for authored KG artifacts:
+  [docs/specs/2026-04-28-release-process.md](specs/2026-04-28-release-process.md)
 
 ## Active plans
 

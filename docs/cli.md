@@ -317,4 +317,5 @@ Runs derived-artifact validation for the given patch. See Validation Layers in
 ### `publish`
 
 Bundles derived patch artifacts for distribution. Bundle/install mechanics are
-not fully implemented yet — this is a planned roadmap item.
+not fully implemented yet. The active design is
+[2026-04-28-release-process.md](specs/2026-04-28-release-process.md).

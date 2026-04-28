@@ -497,19 +497,30 @@ For Stages 2–6, use local files first.
 - bootstrap and validation commands read those files directly;
 - derived outputs under `data/derived/` and fetched raw payloads under `data/raw/` remain untracked build artifacts.
 
-This keeps the current implementation simple and avoids blocking Stage 3 on bundle/release design.
+This kept the Stage 3 implementation simple and avoided blocking the initial
+manual authoring loop on bundle/release design.
 
-### Deferred packaging decision
+### Stage 4.5 release process
 
-A separate bundle/install flow is still a plausible future direction, but it is explicitly **out of scope for this plan revision**.
+Release packaging is now pulled forward before Stage 5. The authoring loop,
+game-file-backed context, and derived KG artifacts are useful enough that the
+project needs a repeatable local release checkpoint before rule and evidence
+surfaces grow further.
 
-If we later need cleaner distribution, we can add a follow-up plan for:
+Active design: `docs/specs/2026-04-28-release-process.md`.
 
-- moving canonical authored YAML into a secondary source;
-- publishing a versioned authored-data bundle;
-- adding install/fetch commands in this repo.
+Stage 4.5 should produce a local release directory or archive that ties
+together:
 
-For now, none of that should shape Stage 3 implementation.
+- authored YAML;
+- derived patch artifacts;
+- Dota patch;
+- invoker version or git commit;
+- game-file snapshot metadata;
+- validation and vocabulary-audit results.
+
+This does not imply public hosting, automatic install/fetch, or a separate data
+repository yet. Those remain later distribution policy decisions.
 
 ---
 
@@ -520,10 +531,11 @@ One stage per PR. Each stage's exit criteria must pass before the next starts. E
 1. **Stage 2 schema + teardown** (~500 lines net delete). Promote prototype schemas, delete extract/reason/GeminiClient. Pangolier authored by hand as smoke test. **Commit boundary.**
 2. **Stage 3 authoring workflow** (~500 lines). Fact loader, YAML parser, `draft-facts` prompt renderer, `validate-facts`, `show-relations`, `data/authored/README.md`. Author Pangolier + 9 more heroes covering a diverse vocabulary slice. **Commit boundary.**
 3. **Stage 4 LLM-assisted vocabulary** (~250 lines). `suggest-vocabulary` prompt renderer, `vocab-proposals.yaml` inbox, `promote-vocabulary` command, `kg-vocabulary-notes.md`. Run one full suggest-review-promote cycle against the 10 authored heroes. **Commit boundary.**
-4. **Stage 5 rule engine expansion** (~300 lines). Add rules per the table above, port validation slice tests. **Commit boundary.**
-5. **Stage 6 evidence attachment** (~300 lines). New `evidence.py`, cohort-scoped stat classification, `report evidence` CLI, threshold tuning. **Commit boundary.**
+4. **Stage 4.5 release process** (~250 lines). Implement local `publish --patch --out`, release metadata, file hashes, and release validation. **Commit boundary.**
+5. **Stage 5 rule engine expansion** (~300 lines). Add rules per the table above, port validation slice tests. **Commit boundary.**
+6. **Stage 6 evidence attachment** (~300 lines). New `evidence.py`, cohort-scoped stat classification, `report evidence` CLI, threshold tuning. **Commit boundary.**
 
-Total ceiling ~1850 lines of change, mostly net-deletion in Stage 2. Realistic calendar: one focused week per stage if authoring heroes in parallel; Stage 3's 10-hero authoring is the long pole.
+Total ceiling ~2100 lines of change, mostly net-deletion in Stage 2. Realistic calendar: one focused week per stage if authoring heroes in parallel; Stage 3's 10-hero authoring is the long pole.
 
 ---
 
@@ -555,4 +567,4 @@ These are explicitly out of scope for this plan. Defer to a later plan:
 - **YAML for authored files.** Format isn't critical; YAML wins on multiline evidence + comments.
 - **Delete obsolete pipeline modules.** `pipeline/extract.py`, `pipeline/reason.py`, `llm/gemini.py` deleted in Stage 2 — `archive/agentic-kg` covers rollback. (`GeminiClient` goes with them; `ManualClient` is the only LLM client.)
 - **Motif work fully deferred.** The `cohort` hook on pair relations is the forward-compat contract. Motif schema landing is a separate future plan once team-match data exists.
-- **Authored facts are local files for now.** `data/authored/` is the working source for this plan; bundle/release mechanics are deferred to a later plan.
+- **Authored facts are local files for now.** `data/authored/` is the working source for this plan; Stage 4.5 packages a release from that local corpus without making generated data tracked repo source.
