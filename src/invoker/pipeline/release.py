@@ -49,6 +49,10 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_manifest_value(path: Path) -> str:
+    return f"sha256:{sha256_file(path)}"
+
+
 def _canonical_authored_files(data_dir: Path) -> list[Path]:
     root = authored_dir(data_dir)
     if not root.exists():
@@ -131,13 +135,39 @@ def _validate_authored(data_dir: Path) -> list[AuthoredReleaseFile]:
             f"no canonical authored hero YAML files found under {authored_dir(data_dir)}"
         )
     authored: list[AuthoredReleaseFile] = []
+    paths_by_hero_id: dict[int, list[Path]] = {}
     for path in files:
         try:
             profile = validate_authored_file(path)
         except Exception as exc:
             raise ReleaseError(f"authored facts validation failed for {path}: {exc}") from exc
         authored.append(AuthoredReleaseFile(path=path, hero_id=profile.hero_id))
+        paths_by_hero_id.setdefault(profile.hero_id, []).append(path)
+    duplicates = {hero_id: paths for hero_id, paths in paths_by_hero_id.items() if len(paths) > 1}
+    if duplicates:
+        details = "; ".join(
+            f"{hero_id}: {', '.join(str(path) for path in paths)}"
+            for hero_id, paths in sorted(duplicates.items())
+        )
+        raise ReleaseError(f"duplicate authored hero_id values found: {details}")
     return authored
+
+
+def _manifest_entries_by_id(entries: list[Any]) -> dict[int, dict[str, Any]]:
+    by_id: dict[int, dict[str, Any]] = {}
+    seen: dict[int, int] = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ReleaseError("manifest heroes entries must be JSON objects")
+        if "hero_id" not in entry:
+            raise ReleaseError("manifest heroes entries must include hero_id")
+        hero_id = int(entry["hero_id"])
+        by_id[hero_id] = entry
+        seen[hero_id] = seen.get(hero_id, 0) + 1
+    duplicates = sorted(hero_id for hero_id, count in seen.items() if count > 1)
+    if duplicates:
+        raise ReleaseError(f"manifest contains duplicate hero_id values: {duplicates}")
+    return by_id
 
 
 def _validate_derived(data_dir: Path, patch: str) -> tuple[dict[str, Any], int]:
@@ -171,11 +201,24 @@ def _validate_derived(data_dir: Path, patch: str) -> tuple[dict[str, Any], int]:
             f"{m_path} status is {manifest.get('status')!r}; "
             f"run `uv run invoker bootstrap --patch {patch}` without a hero filter first."
         )
+    entries_by_id = _manifest_entries_by_id(entries)
 
-    ids = {int(entry["hero_id"]) for entry in entries}
+    ids = set(entries_by_id)
     ctx = ValidationContext(roster_hero_ids=ids)
-    for entry in entries:
-        hero_id = int(entry["hero_id"])
+    for hero_id, entry in entries_by_id.items():
+        h_path = derived_patch_dir(data_dir, patch) / "heroes" / f"{hero_id}.json"
+        if not h_path.exists():
+            raise ReleaseError(
+                f"derived hero artifact missing at {h_path}; "
+                f"run `uv run invoker bootstrap --patch {patch}` first."
+            )
+        expected_hash = entry.get("content_hash")
+        actual_hash = _sha256_manifest_value(h_path)
+        if expected_hash != actual_hash:
+            raise ReleaseError(
+                f"manifest content_hash mismatch for hero {hero_id}: "
+                f"expected {expected_hash!r}, actual {actual_hash!r}"
+            )
         try:
             validate_hero(read_hero(data_dir, patch, hero_id), ctx)
         except Exception as exc:
@@ -191,6 +234,12 @@ def _validate_derived(data_dir: Path, patch: str) -> tuple[dict[str, Any], int]:
         relations = RelationsReader.load(r_path)
     except Exception as exc:
         raise ReleaseError(f"relations validation failed for {r_path}: {exc}") from exc
+    for relation in relations.all():
+        if relation.from_hero_id not in ids or relation.to_hero_id not in ids:
+            raise ReleaseError(
+                f"relation {relation.relation_id} references hero outside release roster: "
+                f"{relation.from_hero_id}->{relation.to_hero_id}"
+            )
     return manifest, len(relations.all())
 
 

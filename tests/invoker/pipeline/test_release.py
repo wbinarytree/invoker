@@ -8,22 +8,32 @@ from pathlib import Path
 import pytest
 import yaml
 
-from invoker.paths import hero_file
+from invoker.kg.reader import write_relations
+from invoker.paths import hero_file, manifest_file, relations_file
 from invoker.pipeline.orchestrator import run_bootstrap
 from invoker.pipeline.release import ReleaseError, create_release_bundle, sha256_file
+
+from ...support.factories import make_relation
 
 FIXTURE_SNAPSHOT = Path("tests/fixtures/game_snapshot/7.41b")
 
 
-def _write_authored_hero(data_dir: Path) -> None:
+def _write_authored_hero(
+    data_dir: Path,
+    *,
+    filename: str = "testhero.yaml",
+    hero_id: int = 120,
+    hero_slug: str = "testhero",
+    localized_name: str = "Test Hero",
+) -> None:
     authored = data_dir / "authored"
     authored.mkdir(parents=True, exist_ok=True)
-    authored.joinpath("testhero.yaml").write_text(
+    authored.joinpath(filename).write_text(
         yaml.safe_dump(
             {
-                "hero_id": 120,
-                "hero_slug": "testhero",
-                "localized_name": "Test Hero",
+                "hero_id": hero_id,
+                "hero_slug": hero_slug,
+                "localized_name": localized_name,
                 "capabilities": [
                     {
                         "type": "mobility",
@@ -116,8 +126,96 @@ def test_failed_derived_validation_prevents_release_creation(tmp_path: Path):
     raw = json.loads(hero_path.read_text())
     raw["role_distribution"] = {"mid": 0.8, "offlane": 0.4}
     hero_path.write_text(json.dumps(raw))
+    manifest = json.loads(manifest_file(tmp_path, "7.41b").read_text())
+    manifest["heroes"][0]["content_hash"] = f"sha256:{sha256_file(hero_path)}"
+    manifest_file(tmp_path, "7.41b").write_text(json.dumps(manifest))
 
     with pytest.raises(ReleaseError, match="derived validation failed"):
+        create_release_bundle(
+            tmp_path,
+            "7.41b",
+            out_dir,
+            invoker_version="0.1.test",
+            game_data_dir=game_root,
+        )
+
+    assert not out_dir.exists()
+
+
+def test_stale_manifest_hash_prevents_release_creation(tmp_path: Path):
+    game_root = _build_release_inputs(tmp_path)
+    out_dir = tmp_path / "dist"
+    hero_path = hero_file(tmp_path, "7.41b", 120)
+    raw = json.loads(hero_path.read_text())
+    raw["localized_name"] = "Renamed Test Hero"
+    hero_path.write_text(json.dumps(raw))
+
+    with pytest.raises(ReleaseError, match="content_hash mismatch"):
+        create_release_bundle(
+            tmp_path,
+            "7.41b",
+            out_dir,
+            invoker_version="0.1.test",
+            game_data_dir=game_root,
+        )
+
+    assert not out_dir.exists()
+
+
+def test_duplicate_authored_hero_ids_prevent_release_creation(tmp_path: Path):
+    game_root = _build_release_inputs(tmp_path)
+    _write_authored_hero(
+        tmp_path,
+        filename="duplicate.yaml",
+        hero_id=120,
+        hero_slug="duplicate",
+        localized_name="Duplicate",
+    )
+    out_dir = tmp_path / "dist"
+
+    with pytest.raises(ReleaseError, match="duplicate authored hero_id"):
+        create_release_bundle(
+            tmp_path,
+            "7.41b",
+            out_dir,
+            invoker_version="0.1.test",
+            game_data_dir=game_root,
+        )
+
+    assert not out_dir.exists()
+
+
+def test_duplicate_manifest_hero_ids_prevent_release_creation(tmp_path: Path):
+    game_root = _build_release_inputs(tmp_path)
+    out_dir = tmp_path / "dist"
+    path = manifest_file(tmp_path, "7.41b")
+    raw = json.loads(path.read_text())
+    raw["heroes"].append(dict(raw["heroes"][0]))
+    path.write_text(json.dumps(raw))
+
+    with pytest.raises(ReleaseError, match="duplicate hero_id"):
+        create_release_bundle(
+            tmp_path,
+            "7.41b",
+            out_dir,
+            invoker_version="0.1.test",
+            game_data_dir=game_root,
+        )
+
+    assert not out_dir.exists()
+
+
+def test_relation_endpoints_outside_roster_prevent_release_creation(tmp_path: Path):
+    game_root = _build_release_inputs(tmp_path)
+    out_dir = tmp_path / "dist"
+    write_relations(
+        relations_file(tmp_path, "7.41b"),
+        [make_relation()],
+        source_patch="7.41b",
+        generated_at="2026-04-28T00:00:00Z",
+    )
+
+    with pytest.raises(ReleaseError, match="outside release roster"):
         create_release_bundle(
             tmp_path,
             "7.41b",

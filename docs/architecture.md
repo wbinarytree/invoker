@@ -137,10 +137,12 @@ The staging directory inside `dist/` contains:
 - `reports/vocab-audit.txt`
 
 Publishing validates canonical authored YAML, requires a complete derived
-manifest matching the authored hero IDs, validates derived artifacts, requires
-`INVOKER_GAME_DATA_DIR/<patch>/snapshot.json`, runs `vocab-audit`, records git
-hash and dirty state, and writes a full `.tar.gz` bundle. Local publishing does
-not require a clean worktree; `git_dirty` is recorded in `release.json`.
+manifest matching the authored hero IDs, checks manifest hero content hashes,
+validates derived hero views and relation endpoints, requires per-hero summaries
+to exist, requires `INVOKER_GAME_DATA_DIR/<patch>/snapshot.json`, runs
+`vocab-audit`, records git hash and dirty state, and writes a full `.tar.gz`
+bundle. Local publishing does not require a clean worktree; `git_dirty` is
+recorded in `release.json`.
 
 ---
 

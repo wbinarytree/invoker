@@ -328,15 +328,17 @@ Behavior:
 2. requires patch-scoped derived artifacts under `data/derived/<patch>/`
 3. requires the derived manifest to be `complete` and to match the authored
    hero IDs
-4. validates derived hero views, `relations.json`, and per-hero summaries
-5. requires `INVOKER_GAME_DATA_DIR/<patch>/snapshot.json` so release metadata
+4. validates derived hero views, manifest hero content hashes, and
+   `relations.json` endpoints
+5. requires per-hero summaries to exist
+6. requires `INVOKER_GAME_DATA_DIR/<patch>/snapshot.json` so release metadata
    records the source game-file snapshot
-6. runs `vocab-audit`; blocking errors stop the release, warnings are captured
+7. runs `vocab-audit`; blocking errors stop the release, warnings are captured
    as non-blocking report metadata
-7. stages vocabulary, authored YAML, derived artifacts, and reports under
+8. stages vocabulary, authored YAML, derived artifacts, and reports under
    `<out>/invoker-kg-<patch>-<timestamp>/`
-8. writes `release.json`
-9. writes `<out>/invoker-kg-<patch>-<timestamp>.tar.gz`
+9. writes `release.json`
+10. writes `<out>/invoker-kg-<patch>-<timestamp>.tar.gz`
 
 Default output root is `dist/`. Existing release paths are not overwritten
 unless `--force` is passed.
