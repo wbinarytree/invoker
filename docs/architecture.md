@@ -60,7 +60,7 @@ There is no production Gemini client, no cached LLM runtime path, and no extract
 
 This is the working local source for hero facts in the current implementation.
 
-Shape is validated into `HeroFactProfile` from [src/invoker/kg/schemas.py](/Users/yaoda/Projects/invoker/src/invoker/kg/schemas.py):
+Shape is validated into `HeroFactProfile` from [src/invoker/kg/schemas.py](../src/invoker/kg/schemas.py):
 
 - `hero_id`
 - `hero_slug`
@@ -78,7 +78,7 @@ Shape is validated into `HeroFactProfile` from [src/invoker/kg/schemas.py](/User
 
 This is a facts-only view. It does not embed relations.
 
-Stored shape is `HeroDerived` from [src/invoker/schemas/derived.py](/Users/yaoda/Projects/invoker/src/invoker/schemas/derived.py).
+Stored shape is `HeroDerived` from [src/invoker/schemas/derived.py](../src/invoker/schemas/derived.py).
 
 ### Canonical relation artifact
 
@@ -92,7 +92,7 @@ Relations are:
 - deterministic
 - generated from authored facts, not from pair-stat selection
 
-The in-memory reader is [src/invoker/kg/reader.py](/Users/yaoda/Projects/invoker/src/invoker/kg/reader.py).
+The in-memory reader is [src/invoker/kg/reader.py](../src/invoker/kg/reader.py).
 
 ### Human-readable summary
 
@@ -119,10 +119,10 @@ Built from derived hero views plus `relations.json`. Used for graph-oriented loc
 ### Game-file snapshots
 
 Bootstrap parser and snapshot writer:
-[src/invoker/snapshot/](/Users/yaoda/Projects/invoker/src/invoker/snapshot:1)
+[src/invoker/snapshot/](../src/invoker/snapshot)
 
 JSON-only source adapter:
-[src/invoker/sources/game_files.py](/Users/yaoda/Projects/invoker/src/invoker/sources/game_files.py)
+[src/invoker/sources/game_files.py](../src/invoker/sources/game_files.py)
 
 The implemented Phase 5a contract writes patch-scoped JSON snapshots under an
 operator-provided root:
@@ -160,7 +160,7 @@ Current consumers:
 
 ### OpenDota
 
-Source adapter: [src/invoker/sources/opendota.py](/Users/yaoda/Projects/invoker/src/invoker/sources/opendota.py)
+Source adapter: [src/invoker/sources/opendota.py](../src/invoker/sources/opendota.py)
 
 Cache layer, endpoint list, hash function, and payload shapes:
 [docs/opendota-cache.md](opendota-cache.md)
@@ -176,7 +176,7 @@ OpenDota constants are intentionally no longer exposed by `OpenDotaFetcher`.
 
 Still available as a source adapter and still used for fetching matchup evidence inputs, but no longer drives the primary relation ontology.
 
-Source adapter: [src/invoker/sources/stratz.py](/Users/yaoda/Projects/invoker/src/invoker/sources/stratz.py)
+Source adapter: [src/invoker/sources/stratz.py](../src/invoker/sources/stratz.py)
 
 ### What is no longer used
 
@@ -190,7 +190,7 @@ Source adapter: [src/invoker/sources/stratz.py](/Users/yaoda/Projects/invoker/sr
 
 ### Fact schema
 
-[src/invoker/kg/schemas.py](/Users/yaoda/Projects/invoker/src/invoker/kg/schemas.py)
+[src/invoker/kg/schemas.py](../src/invoker/kg/schemas.py)
 
 Important models:
 
@@ -202,7 +202,7 @@ Important models:
 
 ### Derived schema
 
-[src/invoker/schemas/derived.py](/Users/yaoda/Projects/invoker/src/invoker/schemas/derived.py)
+[src/invoker/schemas/derived.py](../src/invoker/schemas/derived.py)
 
 Current `HeroDerived` is intentionally slim:
 
@@ -216,7 +216,7 @@ It no longer stores `functional_tags`, embedded synergy/counter lists, or reason
 
 ### Reader/query surface
 
-[src/invoker/kg/reader.py](/Users/yaoda/Projects/invoker/src/invoker/kg/reader.py)
+[src/invoker/kg/reader.py](../src/invoker/kg/reader.py)
 
 Implemented relation queries:
 
@@ -233,7 +233,7 @@ Implemented relation queries:
 
 ## Relation Inference
 
-Inference lives in [src/invoker/kg/infer.py](/Users/yaoda/Projects/invoker/src/invoker/kg/infer.py).
+Inference lives in [src/invoker/kg/infer.py](../src/invoker/kg/infer.py).
 
 This is a deterministic rule engine over the current small vocabulary.
 
@@ -253,7 +253,7 @@ The engine is useful now, but still coarse. Stage 5 is where rule coverage and s
 
 ### Authored-facts validation
 
-[src/invoker/kg/authoring.py](/Users/yaoda/Projects/invoker/src/invoker/kg/authoring.py)
+[src/invoker/kg/authoring.py](../src/invoker/kg/authoring.py)
 
 Used by `validate-facts`, `show-relations`, and the `draft-facts` write path.
 
@@ -261,7 +261,7 @@ Keeps local authored YAML inside the current vocabulary and shape constraints.
 
 ### Derived-artifact validation
 
-[src/invoker/pipeline/validators.py](/Users/yaoda/Projects/invoker/src/invoker/pipeline/validators.py)
+[src/invoker/pipeline/validators.py](../src/invoker/pipeline/validators.py)
 
 Used by `validate --patch` and bootstrap during patch build.
 
@@ -271,7 +271,7 @@ Validates facts-only derived hero views, not the old hero-centric relation artif
 
 ## Config and Environment
 
-Current config model: [src/invoker/config.py](/Users/yaoda/Projects/invoker/src/invoker/config.py)
+Current config model: [src/invoker/config.py](../src/invoker/config.py)
 
 Implemented config fields:
 
@@ -324,7 +324,7 @@ Notes:
 
 ## KnowledgeBase Surface
 
-[src/invoker/kb.py](/Users/yaoda/Projects/invoker/src/invoker/kb.py)
+[src/invoker/kb.py](../src/invoker/kb.py)
 
 The local KB now reads:
 

@@ -8,7 +8,7 @@ itself:
 
 ```bash
 uv run invoker snapshot-game-files \
-  --vpk /Users/yaoda/Projects/dota2npc \
+  --vpk /path/to/extracted-dota-files \
   --out /path/to/invoker-game-data \
   --patch 7.41b
 ```
@@ -42,7 +42,7 @@ If you want to use one specific localization KV file instead, pass it explicitly
 
 ```bash
 uv run invoker snapshot-game-files \
-  --vpk /Users/yaoda/Projects/dota2npc \
+  --vpk /path/to/extracted-dota-files \
   --out /path/to/invoker-game-data \
   --patch 7.41b \
   --localization /path/to/dota_english.txt
