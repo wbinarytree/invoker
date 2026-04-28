@@ -1,7 +1,12 @@
 # Hero Authoring Context Hardening
 
+Status: superseded by [docs/architecture.md](../../architecture.md) and
+[docs/context-modules.md](../../context-modules.md). Implemented across the
+Stage 4 authoring-context PRs and archived on 2026-04-28; do not use this as
+the current behavior source.
+
 Date: 2026-04-26
-Status: accepted for PR 1; future context PRs still draft
+Original status: accepted for PR 1; future context PRs still draft
 Stage: Stage 4 quality hardening before broader hero authoring, oracle use, and
 Stage 5 rules
 
