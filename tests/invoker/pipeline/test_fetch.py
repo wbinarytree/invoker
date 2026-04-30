@@ -75,6 +75,7 @@ def _config(tmp_path: Path, *, game_data_dir: Path | None = Path("/game-data")) 
     return Config(
         stratz_token=None,
         data_dir=tmp_path,
+        cache_dir=tmp_path / "shared-cache",
         game_data_dir=game_data_dir,
         log_level="INFO",
         dev_heroes=None,
