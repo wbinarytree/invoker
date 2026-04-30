@@ -42,16 +42,38 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                         "account_id": 10,
                         "hero_id": 1,
                         "personaname": "Yatoro",
+                        "lane_role": 1,
+                        "gold_per_min": 700,
                     },
                     {
                         "player_slot": 1,
                         "account_id": 11,
                         "hero_id": 2,
                         "personaname": "Larl",
+                        "lane_role": 2,
+                        "gold_per_min": 600,
                     },
-                    {"player_slot": 2, "account_id": 12, "hero_id": 3},
-                    {"player_slot": 3, "account_id": 13, "hero_id": 4},
-                    {"player_slot": 4, "account_id": 14, "hero_id": 5},
+                    {
+                        "player_slot": 2,
+                        "account_id": 12,
+                        "hero_id": 3,
+                        "lane_role": 3,
+                        "gold_per_min": 500,
+                    },
+                    {
+                        "player_slot": 3,
+                        "account_id": 13,
+                        "hero_id": 4,
+                        "lane_role": 3,
+                        "gold_per_min": 350,
+                    },
+                    {
+                        "player_slot": 4,
+                        "account_id": 14,
+                        "hero_id": 5,
+                        "lane_role": 1,
+                        "gold_per_min": 300,
+                    },
                     {"player_slot": 128, "account_id": 20, "hero_id": 6},
                 ],
             },
@@ -67,8 +89,16 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                         "account_id": 10,
                         "hero_id": 2,
                         "name": "Yatoro [Pro]",
+                        "lane_role": 1,
+                        "gold_per_min": 800,
                     },
-                    {"player_slot": 129, "account_id": 11, "hero_id": 1},
+                    {
+                        "player_slot": 129,
+                        "account_id": 11,
+                        "hero_id": 1,
+                        "lane_role": 2,
+                        "gold_per_min": 600,
+                    },
                 ],
             },
         },
@@ -95,6 +125,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         "account_id": 10,
         "personaname": "Yatoro [Pro]",
         "games": 2,
+        "primary_position": 1,
     }
     assert profile["roster"]["roster_hash"] != "unknown"
     assert profile["observed_patches"] == [
@@ -106,14 +137,36 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         {"leagueid": None, "league_name": "unknown"},
     ]
     assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
-    assert profile["hero_pool"][0]["games"] == 2
-    assert profile["hero_pool"][0]["wins"] == 1
+    hero_two = next(h for h in profile["hero_pool"] if h["hero_id"] == 2)
+    assert hero_two["games"] == 2
+    assert hero_two["wins"] == 1
+    assert hero_two["positions"] == {"1": 1, "2": 1}
+    assert hero_two["primary_position"] == 1
+    hero_two_players = sorted(hero_two["players"], key=lambda p: p["account_id"])
+    assert hero_two_players == [
+        {
+            "account_id": 10,
+            "personaname": "Yatoro [Pro]",
+            "games": 1,
+            "positions": {"1": 1},
+            "primary_position": 1,
+        },
+        {
+            "account_id": 11,
+            "personaname": "Larl",
+            "games": 1,
+            "positions": {"2": 1},
+            "primary_position": 2,
+        },
+    ]
     assert profile["hero_pool"][-1]["localized_name"] is None
 
     yatoro = next(p for p in profile["players"] if p["account_id"] == 10)
     assert yatoro["personaname"] == "Yatoro [Pro]"
     assert yatoro["games"] == 2
     assert yatoro["wins"] == 1
+    assert yatoro["positions"] == {"1": 2}
+    assert yatoro["primary_position"] == 1
     assert [h["hero_id"] for h in yatoro["hero_pool"]] == [1, 2]
     assert yatoro["hero_pool"][0]["match_ids"] == [1]
 

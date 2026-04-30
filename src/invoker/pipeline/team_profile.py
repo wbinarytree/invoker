@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections import Counter
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -170,6 +170,52 @@ def _roster_hash(account_ids: set[int]) -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:12]
 
 
+def _gpm(player: dict[str, Any]) -> int:
+    value = player.get("gold_per_min")
+    return value if isinstance(value, int) else 0
+
+
+def _infer_positions(team_players: list[dict[str, Any]]) -> dict[int, int]:
+    """Map account_id -> inferred position 1..5.
+
+    Heuristic: lane_role 1 (safe) splits into pos1/pos5 by intra-role GPM rank;
+    lane_role 3 (off) splits into pos3/pos4; lane_role 2 = pos2; lane_role 4
+    (jungle/roamer) = pos4 unless already assigned. Players without lane_role
+    are omitted.
+    """
+    by_lane: dict[int, list[dict[str, Any]]] = defaultdict(list)
+    for player in team_players:
+        account_id = player.get("account_id")
+        lane_role = player.get("lane_role")
+        if isinstance(account_id, int) and isinstance(lane_role, int):
+            by_lane[lane_role].append(player)
+
+    out: dict[int, int] = {}
+    safe_lane = sorted(by_lane.get(1, []), key=lambda p: -_gpm(p))
+    for index, player in enumerate(safe_lane):
+        out[player["account_id"]] = 1 if index == 0 else 5
+    off_lane = sorted(by_lane.get(3, []), key=lambda p: -_gpm(p))
+    for index, player in enumerate(off_lane):
+        out[player["account_id"]] = 3 if index == 0 else 4
+    for player in by_lane.get(2, []):
+        out[player["account_id"]] = 2
+    for player in by_lane.get(4, []):
+        out.setdefault(player["account_id"], 4)
+    return out
+
+
+def _position_dict(counter: Counter[int] | None) -> dict[str, int]:
+    if not counter:
+        return {}
+    return {str(pos): count for pos, count in sorted(counter.items())}
+
+
+def _mode_position(counter: Counter[int] | None) -> int | None:
+    if not counter:
+        return None
+    return min(counter.items(), key=lambda item: (-item[1], item[0]))[0]
+
+
 def _player_label(player: dict[str, Any]) -> str | None:
     for key in ("name", "personaname"):
         value = player.get(key)
@@ -232,12 +278,16 @@ def aggregate_team_profile(
         players = detail.get("players") or []
         if not isinstance(players, list):
             continue
+        team_players = [
+            p for p in players if isinstance(p, dict) and _player_side(p) == side
+        ]
+        if not team_players:
+            continue
         contributing_match_count += 1
+        positions = _infer_positions(team_players)
         seen_heroes: set[int] = set()
         seen_players: set[int] = set()
-        for player in players:
-            if not isinstance(player, dict) or _player_side(player) != side:
-                continue
+        for player in team_players:
             hero_id = player.get("hero_id")
             if not isinstance(hero_id, int):
                 continue
@@ -245,6 +295,9 @@ def aggregate_team_profile(
             persona = _player_label(player)
             if isinstance(account_id, int) and persona is not None:
                 roster_personas[account_id] = persona
+            position = (
+                positions.get(account_id) if isinstance(account_id, int) else None
+            )
 
             entry = hero_pool.setdefault(
                 hero_id,
@@ -254,6 +307,8 @@ def aggregate_team_profile(
                     "games": 0,
                     "wins": 0,
                     "match_ids": [],
+                    "_positions": Counter(),
+                    "_players": {},
                 },
             )
             if hero_id not in seen_heroes:
@@ -262,9 +317,27 @@ def aggregate_team_profile(
                     entry["wins"] += 1
                 entry["match_ids"].append(match_id)
                 seen_heroes.add(hero_id)
+            if position is not None:
+                entry["_positions"][position] += 1
 
             if not isinstance(account_id, int):
                 continue
+
+            hero_player_entry = entry["_players"].setdefault(
+                account_id,
+                {
+                    "account_id": account_id,
+                    "personaname": None,
+                    "games": 0,
+                    "_positions": Counter(),
+                },
+            )
+            if persona is not None:
+                hero_player_entry["personaname"] = persona
+            hero_player_entry["games"] += 1
+            if position is not None:
+                hero_player_entry["_positions"][position] += 1
+
             if account_id not in seen_players:
                 roster_games[account_id] += 1
                 seen_players.add(account_id)
@@ -275,6 +348,7 @@ def aggregate_team_profile(
                     "personaname": None,
                     "games": 0,
                     "wins": 0,
+                    "_positions": Counter(),
                     "_heroes": {},
                 },
             )
@@ -283,6 +357,8 @@ def aggregate_team_profile(
             player_entry["games"] += 1
             if win is True:
                 player_entry["wins"] += 1
+            if position is not None:
+                player_entry["_positions"][position] += 1
             hero_entry = player_entry["_heroes"].setdefault(
                 hero_id,
                 {
@@ -311,21 +387,41 @@ def aggregate_team_profile(
         {"name": n, "count": c}
         for n, c in observed_names.most_common()
     ]
-    heroes = sorted(hero_pool.values(), key=lambda h: (-h["games"], h["hero_id"]))
+    heroes = []
+    for entry in hero_pool.values():
+        position_counts = entry.pop("_positions")
+        entry["positions"] = _position_dict(position_counts)
+        entry["primary_position"] = _mode_position(position_counts)
+        per_hero_players = []
+        for player_entry in entry.pop("_players").values():
+            pos_counts = player_entry.pop("_positions")
+            player_entry["positions"] = _position_dict(pos_counts)
+            player_entry["primary_position"] = _mode_position(pos_counts)
+            per_hero_players.append(player_entry)
+        per_hero_players.sort(key=lambda p: (-p["games"], p["account_id"]))
+        entry["players"] = per_hero_players
+        heroes.append(entry)
+    heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
 
-    roster_players = [
-        {
-            "account_id": account_id,
-            "personaname": roster_personas.get(account_id),
-            "games": games,
-        }
-        for account_id, games in sorted(
-            roster_games.items(), key=lambda item: (-item[1], item[0])
+    roster_players = []
+    for account_id, games in sorted(
+        roster_games.items(), key=lambda item: (-item[1], item[0])
+    ):
+        player_entry = player_pool.get(account_id, {})
+        roster_players.append(
+            {
+                "account_id": account_id,
+                "personaname": roster_personas.get(account_id),
+                "games": games,
+                "primary_position": _mode_position(player_entry.get("_positions")),
+            }
         )
-    ]
 
     players_view = []
     for entry in player_pool.values():
+        position_counts = entry.pop("_positions")
+        entry["positions"] = _position_dict(position_counts)
+        entry["primary_position"] = _mode_position(position_counts)
         per_hero = sorted(
             entry.pop("_heroes").values(),
             key=lambda h: (-h["games"], h["hero_id"]),

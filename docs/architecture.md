@@ -116,11 +116,18 @@ The manifest lists present heroes and content hashes for the derived hero files.
 `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 
 This is an aggregate team view built from OpenDota match history and match
-details. The first implemented profile slice contains a team-wide hero pool, a
-per-player hero pool, the observed roster (account IDs with personanames and
-game counts), patch buckets mapped to OpenDota patch names where available,
-tournament metadata, and match ID evidence. It does not embed raw match
-payloads.
+details. The first implemented profile slice contains a team-wide hero pool
+(with player breakdown and inferred-position distribution per hero), a
+per-player hero pool, the observed roster (account IDs with personanames,
+game counts, and primary inferred position), patch buckets mapped to OpenDota
+patch names where available, tournament metadata, and match ID evidence. It
+does not embed raw match payloads.
+
+Positions (1-5) are inferred from OpenDota's `lane_role` plus intra-role
+gold-per-minute rank: `lane_role 1` splits into pos1/pos5 by GPM, `lane_role 3`
+splits into pos3/pos4, `lane_role 2` is pos2, `lane_role 4` is pos4. Players
+without `lane_role` get no position. Ties on `primary_position` resolve to the
+lower number.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
