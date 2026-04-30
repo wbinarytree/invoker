@@ -18,6 +18,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/kg-vocabulary-notes.md](specs/kg-vocabulary-notes.md)
 - Release process for authored KG artifacts:
   [docs/specs/2026-04-28-release-process.md](specs/2026-04-28-release-process.md)
+- Team profile KG:
+  [docs/specs/2026-04-30-team-profile-kg.md](specs/2026-04-30-team-profile-kg.md)
 
 ## Active plans
 

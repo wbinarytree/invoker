@@ -2,6 +2,10 @@
 
 This directory is the local working source for hand-authored hero fact YAML during the current manual-assisted KG workflow.
 
+`teams.yaml` is a separate team registry for team-profile resolution and display
+metadata. It is not a hero fact file and must not be used as an authoritative
+roster source.
+
 ## Workflow
 
 1. Run `invoker draft-facts <hero> [hero ...]` to generate prompts from cached hero metadata and ability text.
