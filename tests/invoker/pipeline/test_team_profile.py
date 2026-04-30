@@ -17,7 +17,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     profile = aggregate_team_profile(
         team_id=123,
         patch="7.41b",
-        team={"team_id": 123, "name": None, "aliases": []},
+        team={"team_id": 123, "name": None, "aliases": [], "name_source": None},
         match_rows=[
             {
                 "match_id": 1,
@@ -34,6 +34,8 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "dire_team_id": 456,
                 "radiant_win": True,
                 "patch": 60,
+                "radiant_team": {"team_id": 123, "name": "BetBoom Team", "tag": "BB"},
+                "dire_team": {"team_id": 456, "name": "Opponent"},
                 "players": [
                     {
                         "player_slot": 0,
@@ -58,6 +60,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "dire_team_id": 123,
                 "radiant_win": True,
                 "patch": 59,
+                "dire_name": "BetBoom",
                 "players": [
                     {
                         "player_slot": 128,
@@ -77,7 +80,14 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         ],
     )
 
-    assert profile["team"] == {"team_id": 123, "name": None, "aliases": []}
+    assert profile["team"]["team_id"] == 123
+    assert profile["team"]["name"] == "BetBoom Team"
+    assert profile["team"]["name_source"] == "opendota_match_payload"
+    assert profile["team"]["tag"] == "BB"
+    assert profile["team"]["observed_names"] == [
+        {"name": "BetBoom Team", "count": 1},
+        {"name": "BetBoom", "count": 1},
+    ]
     assert profile["scope"]["match_count"] == 2
     assert profile["scope"]["contributing_match_count"] == 2
     assert [p["account_id"] for p in profile["roster"]["players"]] == [10, 11, 12, 13, 14]
@@ -228,3 +238,32 @@ def test_resolve_team_by_id_name_and_alias(tmp_path):
 
 def test_resolve_team_without_registry_returns_none(tmp_path):
     assert resolve_team(tmp_path, "123") is None
+
+
+def test_aggregate_team_profile_registry_name_takes_precedence_over_observed():
+    profile = aggregate_team_profile(
+        team_id=123,
+        patch="7.41b",
+        team={
+            "team_id": 123,
+            "name": "Authored Name",
+            "aliases": ["Auth"],
+            "name_source": "registry",
+        },
+        match_rows=[{"match_id": 1, "radiant": True}],
+        match_details={
+            1: {
+                "radiant_team_id": 123,
+                "radiant_win": True,
+                "radiant_team": {"team_id": 123, "name": "Stale OpenDota Name"},
+                "players": [{"player_slot": 0, "account_id": 10, "hero_id": 1}],
+            }
+        },
+        hero_names={1: "Hero One"},
+        fetched_at="2026-04-30T00:00:00Z",
+    )
+    assert profile["team"]["name"] == "Authored Name"
+    assert profile["team"]["name_source"] == "registry"
+    assert profile["team"]["observed_names"] == [
+        {"name": "Stale OpenDota Name", "count": 1}
+    ]

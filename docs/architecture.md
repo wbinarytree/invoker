@@ -122,6 +122,13 @@ game counts), patch buckets mapped to OpenDota patch names where available,
 tournament metadata, and match ID evidence. It does not embed raw match
 payloads.
 
+`team.name` is taken from `data/authored/teams.yaml` when an entry exists
+(`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
+team name observed in the match payloads
+(`name_source: "opendota_match_payload"`). Authored entries always win over
+observed names. `team.observed_names` records every variant seen so consumers
+can audit drift.
+
 `data/derived/<patch>/teams/index.json` lists available team profile files so
 consumers do not need to scan directories.
 

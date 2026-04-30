@@ -65,14 +65,37 @@ def _team_registry_entry(data_dir: Path, team_id: int) -> dict[str, Any] | None:
 def _team_metadata(data_dir: Path, team_id: int) -> dict[str, Any]:
     entry = _team_registry_entry(data_dir, team_id)
     if entry is None:
-        return {"team_id": team_id, "name": None, "aliases": []}
+        return {
+            "team_id": team_id,
+            "name": None,
+            "aliases": [],
+            "name_source": None,
+        }
     name = entry.get("name") if isinstance(entry.get("name"), str) else None
     aliases = entry.get("aliases")
     return {
         "team_id": team_id,
         "name": name,
         "aliases": [a for a in aliases if isinstance(a, str)] if isinstance(aliases, list) else [],
+        "name_source": "registry" if name else None,
     }
+
+
+def _observed_team_name(
+    team_id: int, side: str | None, detail: dict[str, Any], match_row: dict[str, Any]
+) -> tuple[str | None, str | None]:
+    if side is None:
+        return None, None
+    side_team = detail.get(f"{side}_team")
+    if isinstance(side_team, dict) and side_team.get("team_id") == team_id:
+        name = side_team.get("name") if isinstance(side_team.get("name"), str) else None
+        tag = side_team.get("tag") if isinstance(side_team.get("tag"), str) else None
+        if name:
+            return name, tag
+    fallback = detail.get(f"{side}_name", match_row.get(f"{side}_name"))
+    if isinstance(fallback, str) and fallback.strip():
+        return fallback, None
+    return None, None
 
 
 def _limit_matches(matches: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
@@ -182,6 +205,8 @@ def aggregate_team_profile(
     missing_match_ids: list[int] = []
     contributing_match_count = 0
     patch_id_to_name = _patch_id_to_name(patch_constants)
+    observed_names: Counter[str] = Counter()
+    observed_tags: Counter[str] = Counter()
 
     for match_row in match_rows:
         match_id = _match_id(match_row)
@@ -194,6 +219,11 @@ def aggregate_team_profile(
 
         side = _team_side(team_id, match_row, detail)
         win = _team_win(side, match_row, detail)
+        name, tag = _observed_team_name(team_id, side, detail, match_row)
+        if name:
+            observed_names[name] += 1
+        if tag:
+            observed_tags[tag] += 1
         observed_patches[_observed_patch_id(detail)] += 1
         tournament = _tournament(match_row, detail)
         league_id = tournament["leagueid"]
@@ -280,6 +310,17 @@ def aggregate_team_profile(
 
     account_ids = set(roster_games)
     roster_hash = _roster_hash(account_ids)
+
+    team_view = dict(team)
+    if not team_view.get("name") and observed_names:
+        team_view["name"] = observed_names.most_common(1)[0][0]
+        team_view["name_source"] = "opendota_match_payload"
+    if observed_tags:
+        team_view["tag"] = observed_tags.most_common(1)[0][0]
+    team_view["observed_names"] = [
+        {"name": n, "count": c}
+        for n, c in observed_names.most_common()
+    ]
     heroes = []
     for entry in hero_pool.values():
         players = _sorted_counters(entry.pop("_players"))
@@ -310,7 +351,7 @@ def aggregate_team_profile(
 
     return {
         "schema_version": SCHEMA_VERSION,
-        "team": team,
+        "team": team_view,
         "patch": patch,
         "scope": {
             "requested_patch": patch,
