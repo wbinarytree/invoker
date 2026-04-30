@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import yaml
+
 from invoker.kb import KnowledgeBase
 from invoker.kg.authored import load_hero_facts
 from invoker.pipeline.orchestrator import run_bootstrap
@@ -39,3 +41,35 @@ provenance:
     kb = KnowledgeBase(patch="7.41b", data_dir=tmp_path)
     assert kb.hero(120).localized_name == "Pangolier"
     assert "Pangolier" in kb.summary(120)
+
+
+def test_bootstrap_ignores_drafts_and_vocab_review_files(tmp_path: Path):
+    authored = tmp_path / "authored"
+    authored.mkdir()
+    payload = {
+        "hero_id": 120,
+        "hero_slug": "pangolier",
+        "localized_name": "Pangolier",
+        "capabilities": [
+            {
+                "type": "mobility",
+                "score": 0.9,
+                "evidence": ["Swashbuckle and Shield Crash reposition quickly"],
+            }
+        ],
+        "requirements": [],
+        "liabilities": [],
+        "targets": [],
+        "provenance": {
+            "authored_by": "human",
+            "authored_at": "2026-04-22",
+            "assist_model": None,
+        },
+    }
+    authored.joinpath("pangolier.yaml").write_text(yaml.safe_dump(payload, sort_keys=False))
+    authored.joinpath("pangolier.draft.yaml").write_text("not: a hero\n")
+    authored.joinpath("vocab-gaps.yaml").write_text("gaps: []\n")
+
+    results = run_bootstrap(tmp_path, "7.41b", "invoker@test")
+
+    assert [result.hero_id for result in results] == [120]

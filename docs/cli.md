@@ -26,7 +26,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker bootstrap --patch <patch> [--heroes ...]`
 - `invoker status --patch <patch>`
 - `invoker validate --patch <patch>`
-- `invoker publish --patch <patch>`
+- `invoker publish --patch <patch> [--out <dir>] [--force]`
 
 ---
 
@@ -293,7 +293,8 @@ Implemented in [src/invoker/pipeline/orchestrator.py](../src/invoker/pipeline/or
 
 Behavior:
 
-1. discover authored YAML files
+1. discover canonical authored YAML files, excluding drafts and vocabulary
+   review inboxes
 2. validate and load them into `HeroFactProfile`
 3. write facts-only `HeroDerived` views
 4. infer relations with `infer_relations`
@@ -316,6 +317,28 @@ Runs derived-artifact validation for the given patch. See Validation Layers in
 
 ### `publish`
 
-Bundles derived patch artifacts for distribution. Bundle/install mechanics are
-not fully implemented yet. The active design is
-[2026-04-28-release-process.md](specs/2026-04-28-release-process.md).
+Creates a local full release bundle for authored and derived KG artifacts.
+
+Implemented in [src/invoker/pipeline/release.py](../src/invoker/pipeline/release.py).
+
+Behavior:
+
+1. validates canonical `data/authored/*.yaml`, excluding drafts and vocabulary
+   review inboxes
+2. requires patch-scoped derived artifacts under `data/derived/<patch>/`
+3. requires the derived manifest to be `complete` and to match the authored
+   hero IDs
+4. validates derived hero views, manifest hero content hashes, and
+   `relations.json` endpoints
+5. requires per-hero summaries to exist
+6. requires `INVOKER_GAME_DATA_DIR/<patch>/snapshot.json` so release metadata
+   records the source game-file snapshot
+7. runs `vocab-audit`; blocking errors stop the release, warnings are captured
+   as non-blocking report metadata
+8. stages vocabulary, authored YAML, derived artifacts, and reports under
+   `<out>/invoker-kg-<patch>-<timestamp>/`
+9. writes `release.json`
+10. writes `<out>/invoker-kg-<patch>-<timestamp>.tar.gz`
+
+Default output root is `dist/`. Existing release paths are not overwritten
+unless `--force` is passed.

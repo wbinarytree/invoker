@@ -64,6 +64,8 @@ Historical design specs were archived on 2026-04-28:
   [docs/notes/2026-04-27-game-file-overlay.md](notes/2026-04-27-game-file-overlay.md)
 - **Localization lookup follow-ups**:
   [docs/notes/2026-04-27-localization-lookup-followups.md](notes/2026-04-27-localization-lookup-followups.md)
+- **Bootstrap role revision discussion**:
+  [docs/notes/2026-04-28-bootstrap-role-revision.md](notes/2026-04-28-bootstrap-role-revision.md)
 
 ## External input
 

@@ -28,7 +28,7 @@ If you find yourself grepping the codebase to answer "what does X do?" before ch
 1. Never commit on `main`. Create a feature branch first.
 2. Write tests for behavior that changes — validators, query API, schema, CLI surface. Don't unit-test LLM prose.
 3. `uv run pytest`, `uv run pyright`, `uv run ruff check` must pass.
-4. **Sub-agent review on user's "ready to ship" signal, not mid-flight.** Brief in `docs/specs/2026-04-26-collaboration-harness.md`. Surface findings; ask whether to fix-now / push-as-is with follow-ups / cherry-pick. Paste the review summary into the PR body either way.
+4. **Sub-agent review on user's "ready to ship" signal, not mid-flight.** Brief in `docs/specs/2026-04-26-collaboration-harness.md`. If an agent runtime needs explicit permission before spawning a sub-agent, ask for that permission before opening the PR. Surface findings; ask whether to fix-now / push-as-is with follow-ups / cherry-pick. Paste the review summary into the PR body either way.
 5. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` (and any module doc it links to) and bump `Last updated:`. Bug fixes that don't change shape are exempt.
 6. One logical change per commit.
 
