@@ -123,11 +123,16 @@ game counts, and primary inferred position), patch buckets mapped to OpenDota
 patch names where available, tournament metadata, and match ID evidence. It
 does not embed raw match payloads.
 
-Positions (1-5) are inferred from OpenDota's `lane_role` plus intra-role
-gold-per-minute rank: `lane_role 1` splits into pos1/pos5 by GPM, `lane_role 3`
-splits into pos3/pos4, `lane_role 2` is pos2, `lane_role 4` is pos4. Players
-without `lane_role` get no position. Ties on `primary_position` resolve to the
-lower number.
+Positions (1-5) are inferred from intra-team GPM rank, with OpenDota
+`lane_role` disambiguating among the three cores. The top 3 GPM are cores
+(pos1/2/3 by `lane_role`); the bottom 2 are supports (higher GPM = pos4,
+lower = pos5). Position is only inferred when all five team players are in
+the payload — partial parses skip inference rather than fabricate positions.
+
+GPM rank is the primary signal because OpenDota's parser frequently mis-tags
+roaming pos5 supports as `lane_role=2` (mid) when they spend laning phase
+rotating through mid. Farm priority is the more reliable position signal.
+Ties on `primary_position` resolve to the lower number.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent

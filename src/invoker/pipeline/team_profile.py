@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -178,29 +178,57 @@ def _gpm(player: dict[str, Any]) -> int:
 def _infer_positions(team_players: list[dict[str, Any]]) -> dict[int, int]:
     """Map account_id -> inferred position 1..5.
 
-    Heuristic: lane_role 1 (safe) splits into pos1/pos5 by intra-role GPM rank;
-    lane_role 3 (off) splits into pos3/pos4; lane_role 2 = pos2; lane_role 4
-    (jungle/roamer) = pos4 unless already assigned. Players without lane_role
-    are omitted.
+    Heuristic: rank by intra-team gold-per-minute. Top 3 are cores (pos1/2/3),
+    bottom 2 are supports (higher GPM = pos4, lower = pos5). Among cores,
+    OpenDota `lane_role` (1=safe, 2=mid, 3=off) assigns the position when it
+    is unambiguous; remaining cores fill leftover positions in GPM-desc order.
+
+    GPM rank trumps `lane_role` for distinguishing cores from supports because
+    OpenDota's parser frequently mis-tags roaming pos5 supports as `lane_role=2`
+    (mid) when they spend laning phase rotating through mid. Farm priority is
+    the more reliable position signal.
+
+    Returns an empty dict when the team does not have all five players in the
+    payload (parse incomplete) — partial data would force fabricated positions.
     """
-    by_lane: dict[int, list[dict[str, Any]]] = defaultdict(list)
-    for player in team_players:
-        account_id = player.get("account_id")
-        lane_role = player.get("lane_role")
-        if isinstance(account_id, int) and isinstance(lane_role, int):
-            by_lane[lane_role].append(player)
+    if len(team_players) != 5:
+        return {}
+
+    by_gpm = sorted(
+        team_players, key=lambda p: (-_gpm(p), p.get("player_slot", 0))
+    )
+    cores = by_gpm[:3]
+    supports = by_gpm[3:]
 
     out: dict[int, int] = {}
-    safe_lane = sorted(by_lane.get(1, []), key=lambda p: -_gpm(p))
-    for index, player in enumerate(safe_lane):
-        out[player["account_id"]] = 1 if index == 0 else 5
-    off_lane = sorted(by_lane.get(3, []), key=lambda p: -_gpm(p))
-    for index, player in enumerate(off_lane):
-        out[player["account_id"]] = 3 if index == 0 else 4
-    for player in by_lane.get(2, []):
-        out[player["account_id"]] = 2
-    for player in by_lane.get(4, []):
-        out.setdefault(player["account_id"], 4)
+    for index, player in enumerate(supports):
+        account_id = player.get("account_id")
+        if isinstance(account_id, int):
+            out[account_id] = 4 if index == 0 else 5
+
+    used: set[int] = set()
+    pending: list[dict[str, Any]] = []
+    for player in cores:
+        account_id = player.get("account_id")
+        if not isinstance(account_id, int):
+            continue
+        lane_role = player.get("lane_role")
+        if isinstance(lane_role, int) and lane_role in (1, 2, 3) and lane_role not in used:
+            out[account_id] = lane_role
+            used.add(lane_role)
+        else:
+            pending.append(player)
+
+    for player in pending:
+        account_id = player.get("account_id")
+        if not isinstance(account_id, int):
+            continue
+        for pos in (1, 2, 3):
+            if pos not in used:
+                out[account_id] = pos
+                used.add(pos)
+                break
+
     return out
 
 
