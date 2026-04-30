@@ -95,6 +95,25 @@ class KnowledgeBase:
         hid = self.hero(key).hero_id
         return summary_file(self.data_dir, self.patch, hid).read_text()
 
+    def team_profile(
+        self, team_id: int, *, roster_hash: str | None = None, patch: str | None = None
+    ) -> dict:
+        from invoker.pipeline.team_profile import load_team_profile
+
+        return load_team_profile(
+            self.data_dir, patch or self.patch, team_id, roster_hash=roster_hash
+        )
+
+    def team_hero_pool(
+        self, team_id: int, *, roster_hash: str | None = None, patch: str | None = None
+    ) -> list[dict]:
+        return self.team_profile(team_id, roster_hash=roster_hash, patch=patch)["hero_pool"]
+
+    def resolve_team(self, query: str) -> dict | None:
+        from invoker.pipeline.team_profile import resolve_team
+
+        return resolve_team(self.data_dir, query)
+
     def by_tag(self, tag: str) -> list[HeroDerived]:
         results: list[HeroDerived] = []
         for entry in self._manifest.get("heroes", []):

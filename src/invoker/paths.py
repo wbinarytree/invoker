@@ -41,6 +41,10 @@ def vocab_proposals_file(data_dir: Path) -> Path:
     return authored_dir(data_dir) / "vocab-proposals.yaml"
 
 
+def team_registry_file(data_dir: Path) -> Path:
+    return authored_dir(data_dir) / "teams.yaml"
+
+
 def raw_dir(data_dir: Path, source: str, patch: str) -> Path:
     return data_dir / "raw" / source / patch
 
@@ -63,6 +67,18 @@ def summary_file(data_dir: Path, patch: str, hero_id: int) -> Path:
 
 def manifest_file(data_dir: Path, patch: str) -> Path:
     return derived_patch_dir(data_dir, patch) / "manifest.json"
+
+
+def teams_dir(data_dir: Path, patch: str) -> Path:
+    return derived_patch_dir(data_dir, patch) / "teams"
+
+
+def team_index_file(data_dir: Path, patch: str) -> Path:
+    return teams_dir(data_dir, patch) / "index.json"
+
+
+def team_profile_file(data_dir: Path, patch: str, team_id: int, roster_hash: str) -> Path:
+    return teams_dir(data_dir, patch) / str(team_id) / roster_hash / "profile.json"
 
 
 def cache_dir(data_dir: Path, patch: str) -> Path:

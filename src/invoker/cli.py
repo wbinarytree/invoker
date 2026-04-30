@@ -208,6 +208,52 @@ def snapshot_game_files_cmd(
     typer.echo(f"Neutral item sections: {result.neutral_item_count}")
 
 
+@app.command("build-team-profile")
+def build_team_profile_cmd(
+    team_id: int = typer.Option(..., "--team-id", help="OpenDota team ID to profile."),
+    patch: str = typer.Option(..., help="Patch/output namespace for derived artifacts."),
+    limit: int = typer.Option(
+        50,
+        "--limit",
+        min=1,
+        max=50,
+        help="Recent team matches to inspect.",
+    ),
+    force: bool = typer.Option(
+        False,
+        "--force",
+        help="Refresh OpenDota cache entries used by the profile build.",
+    ),
+) -> None:
+    """Build a derived team hero-pool profile from cached OpenDota match data."""
+    import asyncio
+
+    from invoker.pipeline.team_profile import build_team_profile
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for build-team-profile.", err=True)
+        raise typer.Exit(code=1)
+    result = asyncio.run(
+        build_team_profile(
+            data_dir=cfg.data_dir,
+            game_data_dir=cfg.game_data_dir,
+            cache_dir=cfg.cache_dir,
+            team_id=team_id,
+            patch=patch,
+            limit=limit,
+            force=force,
+        )
+    )
+    typer.echo(f"Team profile: {result.profile_path}")
+    typer.echo(f"Team index: {result.index_path}")
+    typer.echo(f"Roster hash: {result.roster_hash}")
+    typer.echo(f"Matches: {result.match_count}")
+    typer.echo(f"Heroes: {result.hero_count}")
+    if result.missing_match_detail_count:
+        typer.echo(f"Missing match details: {result.missing_match_detail_count}", err=True)
+
+
 @app.command("vocab-audit")
 def vocab_audit_cmd() -> None:
     from invoker.kg.vocab_audit import format_vocab_audit, run_vocab_audit

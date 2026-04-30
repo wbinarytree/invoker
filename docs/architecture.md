@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-30 (shared OpenDota cache)
+Last updated: 2026-04-30 (team profile hero pool)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -8,7 +8,8 @@ backed by a proposal inbox. Phase 5a/5b game-file constants work is
 implemented: hero, ability, talent, and hero-stat constants route through
 patch-scoped game-file snapshots instead of OpenDota constants. Stage 4.5 adds
 a local release bundle command for authored KG artifacts and derived patch
-outputs. Team-profile work has started with shared OpenDota cache support.
+outputs. Team-profile work has started with shared OpenDota cache support and
+a first hero-pool profile builder.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -110,6 +111,23 @@ Summaries are derived from the facts-only hero view plus `relations.json`.
 
 The manifest lists present heroes and content hashes for the derived hero files.
 
+### Team profile view
+
+`data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
+
+This is an aggregate team view built from OpenDota match history and match
+details. The first implemented profile slice contains hero-pool counts,
+observed roster account IDs, observed patch buckets, tournament metadata, and
+match ID evidence. It does not embed raw match payloads.
+
+`data/derived/<patch>/teams/index.json` lists available team profile files so
+consumers do not need to scan directories.
+
+`KnowledgeBase` exposes `team_profile()`, `team_hero_pool()`, and
+`resolve_team()` for offline consumers. The reader does not fetch network data;
+missing profiles raise `TeamProfileNotFoundError` with the build command to
+run.
+
 ### Graph cache
 
 `data/cache/graph/<patch>/graph.pkl`
@@ -189,6 +207,8 @@ Current consumers:
   `GameFilesSource`, while keeping OpenDota for matchups and pro matches
 - `ability_context.py` consumes already-resolved talent names; it no longer
   substitutes unresolved talent template values with `?`
+- `pipeline/team_profile.py` reads team match history and match details from
+  OpenDota while resolving hero names from the game-file snapshot
 
 ### OpenDota
 
@@ -201,6 +221,8 @@ OpenDota is now used for match data only:
 
 - hero matchups
 - pro matches
+- team match history
+- match details
 
 OpenDota constants are intentionally no longer exposed by `OpenDotaFetcher`.
 OpenDota responses are cached in the shared Dota agents cache under
@@ -338,6 +360,9 @@ data/
   derived/
     <patch>/
       heroes/<hero_id>.json
+      teams/
+        index.json
+        <team_id>/<roster_hash>/profile.json
       relations.json
       summary_<hero_id>.md
       manifest.json

@@ -15,6 +15,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name>]`
+- `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force]`
 - `invoker vocab-audit`
 - `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
 - `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
@@ -147,6 +148,27 @@ path. When `--localization` is omitted, the command looks for
 `dota_<locale>.txt` next to the extracted `npc/` directory and merges any files
 that exist. If no localization files are present, `localization/<locale>.json`
 is written as an empty object and `GameFilesSource` falls back to KV names.
+
+### `build-team-profile`
+
+Builds a derived team hero-pool profile for one OpenDota team ID.
+
+Implemented in [src/invoker/pipeline/team_profile.py](../src/invoker/pipeline/team_profile.py).
+
+Behavior:
+
+1. reads team match history from OpenDota through the shared cache
+2. reads selected match details through the shared cache
+3. resolves hero names from `INVOKER_GAME_DATA_DIR/<patch>/`
+4. infers the observed roster hash from player account IDs in match details
+5. aggregates team hero games, wins, player usage, match IDs, observed patches,
+   and tournament metadata
+6. writes `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
+7. updates `data/derived/<patch>/teams/index.json`
+
+The first slice uses a recent-match window with a default limit of 50. Missing
+match-detail payloads are recorded in the profile source metadata instead of
+failing the whole build.
 
 ### `vocab-audit`
 
