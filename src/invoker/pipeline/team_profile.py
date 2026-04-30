@@ -170,13 +170,6 @@ def _roster_hash(account_ids: set[int]) -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:12]
 
 
-def _sorted_counters(counter: Counter[int]) -> list[dict[str, Any]]:
-    return [
-        {"account_id": account_id, "games": games}
-        for account_id, games in sorted(counter.items(), key=lambda item: (-item[1], item[0]))
-    ]
-
-
 def _player_label(player: dict[str, Any]) -> str | None:
     for key in ("name", "personaname"):
         value = player.get(key)
@@ -260,7 +253,6 @@ def aggregate_team_profile(
                     "localized_name": hero_names.get(hero_id),
                     "games": 0,
                     "wins": 0,
-                    "_players": Counter(),
                     "match_ids": [],
                 },
             )
@@ -270,8 +262,6 @@ def aggregate_team_profile(
                     entry["wins"] += 1
                 entry["match_ids"].append(match_id)
                 seen_heroes.add(hero_id)
-            if isinstance(account_id, int):
-                entry["_players"][account_id] += 1
 
             if not isinstance(account_id, int):
                 continue
@@ -321,12 +311,7 @@ def aggregate_team_profile(
         {"name": n, "count": c}
         for n, c in observed_names.most_common()
     ]
-    heroes = []
-    for entry in hero_pool.values():
-        players = _sorted_counters(entry.pop("_players"))
-        entry["players"] = players
-        heroes.append(entry)
-    heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
+    heroes = sorted(hero_pool.values(), key=lambda h: (-h["games"], h["hero_id"]))
 
     roster_players = [
         {
