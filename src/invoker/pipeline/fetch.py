@@ -34,12 +34,12 @@ async def fetch_all(
     hero_filter: set of name or numeric-id strings to restrict per-hero calls.
     None means fetch all heroes (production behaviour).
     """
-    cache = cfg.data_dir / "raw"
+    local_cache = cfg.data_dir / "raw"
     if cfg.game_data_dir is None:
         raise ValueError("INVOKER_GAME_DATA_DIR is required for game-file constants")
     game = GameFilesSource(cfg.game_data_dir, patch)
-    od = OpenDotaFetcher(cache, patch)
-    strat = StratzFetcher(cache, patch, cfg.stratz_token)
+    od = OpenDotaFetcher(cfg.cache_dir, patch)
+    strat = StratzFetcher(local_cache, patch, cfg.stratz_token)
     try:
         logger.info(
             "Fetch start patch=%s hero_filter=%s stratz_available=%s",

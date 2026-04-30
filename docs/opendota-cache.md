@@ -1,26 +1,35 @@
 # OpenDota Cache
 
-Source of truth for the OpenDota HTTP cache layer: directory layout, hash function, file-to-endpoint mapping, and payload shapes.
+Source of truth for the OpenDota HTTP cache layer: directory layout, hash
+function, envelope shape, and payload boundaries.
 
 Part of the architecture record. See [architecture.md](architecture.md) for system shape.
 
 ## Cache directory structure
 
-Raw OpenDota responses are stored under:
+Invoker uses the shared Dota agents cache for OpenDota responses:
 
 ```
-data/raw/opendota/<patch>/
+$CACHE_DIR/opendota/responses/
 ```
 
-where `<patch>` is whatever string was passed to `CachedClient` — typically
-`"7.41b"` for patch-scoped match-data work.
+`CACHE_DIR` defaults to `~/.cache/dota-agents/`. If provided through the
+environment, it must be an absolute path.
 
-Files are named `<16-hex-char>.json`, one response per file.
+Files are named from the endpoint plus sorted params, matching Oracle's current
+shared-cache helper:
 
-## Hash function
+```text
+proMatches.json
+proMatches__less_than_match_id=8792587799.json
+heroes_28_matchups.json
+```
 
-Filename stems are the first 16 hex characters of the SHA-256 of the
-canonicalized request:
+## Hash Function
+
+The legacy local `CachedClient` still uses a 16-character SHA-256 suffix for
+non-shared source caches. The shared OpenDota response cache uses endpoint and
+params only so sibling Dota projects can reuse the same files.
 
 ```python
 blob = json.dumps(
@@ -42,18 +51,46 @@ def cache_key(method, url, params=None, body=None):
     return hashlib.sha256(blob).hexdigest()[:16]
 ```
 
-## Active file → endpoint mappings
+## File Envelope
 
-All GET requests with no query params or body.
+Each shared cache file is a JSON envelope:
+
+```json
+{
+  "meta": {
+    "endpoint": "/proMatches",
+    "params": {},
+    "fetched_at": "2026-04-30T00:00:00Z",
+    "schema_version": 1,
+    "fetched_by": "invoker@0.1.0"
+  },
+  "data": []
+}
+```
+
+`data` is the raw OpenDota API response. Normalization stays inside Invoker
+consumers. `source_patch` is optional and should only be written when the source
+payload is genuinely patch-scoped. Current OpenDota match-data endpoints do not
+write it.
+
+Writes are atomic: the client writes a temporary file and then replaces the
+target path.
+
+## Active Endpoint Mappings
+
+All current OpenDota requests are GET requests with no request body. Matchup
+requests have no params; `proMatches` may include `less_than_match_id` when
+paginating.
 
 Matchup files (keyed by hero ID in the URL path, so each hero has its own hash):
 
-| Filename (stem)      | Endpoint                         | Shape         |
-|----------------------|----------------------------------|---------------|
-| `d8da40b7276a473e`   | `GET /api/heroes/28/matchups`    | `list[dict]`  |
-| `73f917a2a67a4e39`   | `GET /api/heroes/2/matchups`     | `list[dict]`  |
-| `1dbec36fd8fbbff1`   | `GET /api/heroes/120/matchups`   | `list[dict]`  |
-| `eacc1bcd38115288`   | `GET /api/proMatches`            | `list[dict]`  |
+| Filename pattern                         | Endpoint                         | Shape         |
+|------------------------------------------|----------------------------------|---------------|
+| `heroes_28_matchups.json`                | `GET /api/heroes/28/matchups`    | `list[dict]`  |
+| `heroes_2_matchups.json`                 | `GET /api/heroes/2/matchups`     | `list[dict]`  |
+| `heroes_120_matchups.json`               | `GET /api/heroes/120/matchups`   | `list[dict]`  |
+| `proMatches.json`                        | `GET /api/proMatches`            | `list[dict]`  |
+| `proMatches__less_than_match_id=<id>.json` | `GET /api/proMatches?less_than_match_id=<id>` | `list[dict]` |
 
 ## Key payload shapes
 
@@ -70,7 +107,12 @@ and carry no patch parameter. Invoker no longer consumes those OpenDota
 constants because cached constants silently drift after patches. See
 [`2026-04-26-opendota-constants-not-patch-versioned.md`](notes/2026-04-26-opendota-constants-not-patch-versioned.md).
 
+Historical match detail responses can be cached indefinitely. Rolling list
+endpoints such as team match history should be refreshed explicitly when stale
+data matters; the envelope's `fetched_at` field exists to diagnose that.
+
 ## How to force a re-fetch
 
-Pass `force=True` to `CachedClient.get()`, or delete the `.json` file manually.
+Pass `force=True` to `SharedOpenDotaCachedClient.get()`, or delete the `.json`
+file manually.
 There is currently no CLI command to invalidate the cache.

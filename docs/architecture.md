@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-28 (Stage 4.5 — local KG release bundle)
+Last updated: 2026-04-30 (shared OpenDota cache)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -8,7 +8,7 @@ backed by a proposal inbox. Phase 5a/5b game-file constants work is
 implemented: hero, ability, talent, and hero-stat constants route through
 patch-scoped game-file snapshots instead of OpenDota constants. Stage 4.5 adds
 a local release bundle command for authored KG artifacts and derived patch
-outputs.
+outputs. Team-profile work has started with shared OpenDota cache support.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -203,6 +203,9 @@ OpenDota is now used for match data only:
 - pro matches
 
 OpenDota constants are intentionally no longer exposed by `OpenDotaFetcher`.
+OpenDota responses are cached in the shared Dota agents cache under
+`$CACHE_DIR/opendota/responses/` using a JSON envelope; callers receive the
+raw API payload from the envelope's `data` field.
 
 ### STRATZ
 
@@ -309,6 +312,7 @@ Implemented config fields:
 
 - `STRATZ_API_TOKEN`
 - `INVOKER_DATA_DIR`
+- `CACHE_DIR`
 - `INVOKER_GAME_DATA_DIR`
 - `INVOKER_LOG_LEVEL`
 - `INVOKER_DEV_HEROES`
@@ -326,7 +330,6 @@ data/
     *.yaml
     README.md
   raw/
-    opendota/<patch>/*.json
     stratz/<patch>/*.json
     manual_prompts/
       draft-facts/<hero_slug>/<hash>.md
@@ -343,6 +346,10 @@ data/
 dist/
   invoker-kg-<patch>-<timestamp>/
   invoker-kg-<patch>-<timestamp>.tar.gz
+
+$CACHE_DIR/
+  opendota/
+    responses/*.json
 ```
 
 External game snapshots are expected outside `data/` and are selected with
@@ -353,7 +360,9 @@ Notes:
 
 - `data/authored/README.md` is intentionally reviewable
 - local authored hero YAML remains local working data in the current flow
-- bundle/install/release mechanics are not implemented yet
+- local release bundle output under `dist/` is intentionally untracked
+- `CACHE_DIR` defaults to `~/.cache/dota-agents/` and must be absolute when
+  provided through the environment
 
 ---
 
