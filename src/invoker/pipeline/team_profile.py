@@ -306,7 +306,8 @@ def aggregate_team_profile(
                     "localized_name": hero_names.get(hero_id),
                     "games": 0,
                     "wins": 0,
-                    "match_ids": [],
+                    "win_match_ids": [],
+                    "loss_match_ids": [],
                     "_positions": Counter(),
                     "_players": {},
                 },
@@ -315,7 +316,9 @@ def aggregate_team_profile(
                 entry["games"] += 1
                 if win is True:
                     entry["wins"] += 1
-                entry["match_ids"].append(match_id)
+                    entry["win_match_ids"].append(match_id)
+                else:
+                    entry["loss_match_ids"].append(match_id)
                 seen_heroes.add(hero_id)
             if position is not None:
                 entry["_positions"][position] += 1
@@ -366,13 +369,16 @@ def aggregate_team_profile(
                     "localized_name": hero_names.get(hero_id),
                     "games": 0,
                     "wins": 0,
-                    "match_ids": [],
+                    "win_match_ids": [],
+                    "loss_match_ids": [],
                 },
             )
             hero_entry["games"] += 1
             if win is True:
                 hero_entry["wins"] += 1
-            hero_entry["match_ids"].append(match_id)
+                hero_entry["win_match_ids"].append(match_id)
+            else:
+                hero_entry["loss_match_ids"].append(match_id)
 
     account_ids = set(roster_games)
     roster_hash = _roster_hash(account_ids)

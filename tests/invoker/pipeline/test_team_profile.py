@@ -140,6 +140,8 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     hero_two = next(h for h in profile["hero_pool"] if h["hero_id"] == 2)
     assert hero_two["games"] == 2
     assert hero_two["wins"] == 1
+    assert hero_two["win_match_ids"] == [1]
+    assert hero_two["loss_match_ids"] == [2]
     assert hero_two["positions"] == {"1": 1, "2": 1}
     assert hero_two["primary_position"] == 1
     hero_two_players = sorted(hero_two["players"], key=lambda p: p["account_id"])
@@ -168,7 +170,12 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert yatoro["positions"] == {"1": 2}
     assert yatoro["primary_position"] == 1
     assert [h["hero_id"] for h in yatoro["hero_pool"]] == [1, 2]
-    assert yatoro["hero_pool"][0]["match_ids"] == [1]
+    yatoro_hero_one = next(h for h in yatoro["hero_pool"] if h["hero_id"] == 1)
+    assert yatoro_hero_one["win_match_ids"] == [1]
+    assert yatoro_hero_one["loss_match_ids"] == []
+    yatoro_hero_two = next(h for h in yatoro["hero_pool"] if h["hero_id"] == 2)
+    assert yatoro_hero_two["win_match_ids"] == []
+    assert yatoro_hero_two["loss_match_ids"] == [2]
 
 
 class FakeGameFilesSource:
