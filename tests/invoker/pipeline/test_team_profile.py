@@ -25,7 +25,8 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "leagueid": 10,
                 "league_name": "Example League",
                 "version": 22,
-            }
+            },
+            {"match_id": 2, "radiant": False},
         ],
         match_details={
             1: {
@@ -34,35 +35,77 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "radiant_win": True,
                 "patch": 60,
                 "players": [
-                    {"player_slot": 0, "account_id": 10, "hero_id": 1},
-                    {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                    {
+                        "player_slot": 0,
+                        "account_id": 10,
+                        "hero_id": 1,
+                        "personaname": "Yatoro",
+                    },
+                    {
+                        "player_slot": 1,
+                        "account_id": 11,
+                        "hero_id": 2,
+                        "personaname": "Larl",
+                    },
                     {"player_slot": 2, "account_id": 12, "hero_id": 3},
                     {"player_slot": 3, "account_id": 13, "hero_id": 4},
                     {"player_slot": 4, "account_id": 14, "hero_id": 5},
                     {"player_slot": 128, "account_id": 20, "hero_id": 6},
                 ],
-            }
+            },
+            2: {
+                "radiant_team_id": 999,
+                "dire_team_id": 123,
+                "radiant_win": True,
+                "patch": 59,
+                "players": [
+                    {
+                        "player_slot": 128,
+                        "account_id": 10,
+                        "hero_id": 2,
+                        "name": "Yatoro [Pro]",
+                    },
+                    {"player_slot": 129, "account_id": 11, "hero_id": 1},
+                ],
+            },
         },
         hero_names={1: "Hero One", 2: "Hero Two", 3: "Hero Three", 4: "Hero Four"},
         fetched_at="2026-04-30T00:00:00Z",
+        patch_constants=[
+            {"id": 59, "name": "7.40"},
+            {"id": 60, "name": "7.41"},
+        ],
     )
 
     assert profile["team"] == {"team_id": 123, "name": None, "aliases": []}
-    assert profile["scope"]["match_count"] == 1
-    assert profile["roster"]["player_account_ids"] == [10, 11, 12, 13, 14]
-    assert profile["roster"]["roster_hash"] != "unknown"
-    assert profile["observed_patches"] == [{"patch": "60", "match_count": 1}]
-    assert profile["tournaments"] == [{"leagueid": 10, "league_name": "Example League"}]
-    assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
-    assert profile["hero_pool"][0] == {
-        "hero_id": 1,
-        "localized_name": "Hero One",
-        "games": 1,
-        "wins": 1,
-        "match_ids": [1],
-        "players": [{"account_id": 10, "games": 1}],
+    assert profile["scope"]["match_count"] == 2
+    assert profile["scope"]["contributing_match_count"] == 2
+    assert [p["account_id"] for p in profile["roster"]["players"]] == [10, 11, 12, 13, 14]
+    assert profile["roster"]["players"][0] == {
+        "account_id": 10,
+        "personaname": "Yatoro [Pro]",
+        "games": 2,
     }
+    assert profile["roster"]["roster_hash"] != "unknown"
+    assert profile["observed_patches"] == [
+        {"patch_id": 59, "patch_name": "7.40", "match_count": 1},
+        {"patch_id": 60, "patch_name": "7.41", "match_count": 1},
+    ]
+    assert profile["tournaments"] == [
+        {"leagueid": 10, "league_name": "Example League"},
+        {"leagueid": None, "league_name": "unknown"},
+    ]
+    assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
+    assert profile["hero_pool"][0]["games"] == 2
+    assert profile["hero_pool"][0]["wins"] == 1
     assert profile["hero_pool"][-1]["localized_name"] is None
+
+    yatoro = next(p for p in profile["players"] if p["account_id"] == 10)
+    assert yatoro["personaname"] == "Yatoro [Pro]"
+    assert yatoro["games"] == 2
+    assert yatoro["wins"] == 1
+    assert [h["hero_id"] for h in yatoro["hero_pool"]] == [1, 2]
+    assert yatoro["hero_pool"][0]["match_ids"] == [1]
 
 
 class FakeGameFilesSource:
@@ -98,11 +141,15 @@ class FakeOpenDotaFetcher:
         return {
             "radiant_team_id": 123,
             "radiant_win": False,
+            "patch": 60,
             "players": [
-                {"player_slot": 0, "account_id": 10, "hero_id": 1},
-                {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                {"player_slot": 0, "account_id": 10, "hero_id": 1, "personaname": "P1"},
+                {"player_slot": 1, "account_id": 11, "hero_id": 2, "personaname": "P2"},
             ],
         }
+
+    async def constants_patch(self):
+        return [{"id": 60, "name": "7.41"}]
 
     async def close(self):
         pass

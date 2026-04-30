@@ -108,9 +108,27 @@ def _player_side(player: dict[str, Any]) -> str | None:
     return "radiant" if slot < 128 else "dire"
 
 
-def _observed_patch(detail: dict[str, Any], match_row: dict[str, Any]) -> str:
-    value = detail.get("patch", detail.get("version", match_row.get("version")))
-    return str(value) if value is not None else UNKNOWN
+def _observed_patch_id(detail: dict[str, Any]) -> int | None:
+    value = detail.get("patch")
+    return value if isinstance(value, int) else None
+
+
+def _patch_id_to_name(patch_constants: list[dict[str, Any]] | None) -> dict[int, str]:
+    if not patch_constants:
+        return {}
+    out: dict[int, str] = {}
+    for index, entry in enumerate(patch_constants):
+        if not isinstance(entry, dict):
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str):
+            continue
+        patch_id = entry.get("id")
+        if isinstance(patch_id, int):
+            out[patch_id] = name
+        else:
+            out[index] = name
+    return out
 
 
 def _tournament(match_row: dict[str, Any], detail: dict[str, Any]) -> dict[str, Any]:
@@ -136,6 +154,14 @@ def _sorted_counters(counter: Counter[int]) -> list[dict[str, Any]]:
     ]
 
 
+def _player_label(player: dict[str, Any]) -> str | None:
+    for key in ("name", "personaname"):
+        value = player.get(key)
+        if isinstance(value, str) and value.strip():
+            return value
+    return None
+
+
 def aggregate_team_profile(
     *,
     team_id: int,
@@ -145,12 +171,17 @@ def aggregate_team_profile(
     match_details: dict[int, dict[str, Any]],
     hero_names: dict[int, str],
     fetched_at: str,
+    patch_constants: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     hero_pool: dict[int, dict[str, Any]] = {}
-    account_ids: set[int] = set()
-    observed_patches: Counter[str] = Counter()
+    player_pool: dict[int, dict[str, Any]] = {}
+    roster_personas: dict[int, str] = {}
+    roster_games: Counter[int] = Counter()
+    observed_patches: Counter[int | None] = Counter()
     tournaments: dict[str, dict[str, Any]] = {}
     missing_match_ids: list[int] = []
+    contributing_match_count = 0
+    patch_id_to_name = _patch_id_to_name(patch_constants)
 
     for match_row in match_rows:
         match_id = _match_id(match_row)
@@ -163,15 +194,24 @@ def aggregate_team_profile(
 
         side = _team_side(team_id, match_row, detail)
         win = _team_win(side, match_row, detail)
-        observed_patches[_observed_patch(detail, match_row)] += 1
+        observed_patches[_observed_patch_id(detail)] += 1
         tournament = _tournament(match_row, detail)
-        tournament_key = str(tournament["leagueid"] or tournament["league_name"] or UNKNOWN)
+        league_id = tournament["leagueid"]
+        league_name = tournament["league_name"]
+        if league_id is not None:
+            tournament_key = f"id:{league_id}"
+        elif isinstance(league_name, str) and league_name != UNKNOWN:
+            tournament_key = f"name:{league_name}"
+        else:
+            tournament_key = "unknown"
         tournaments.setdefault(tournament_key, tournament)
 
         players = detail.get("players") or []
         if not isinstance(players, list):
             continue
+        contributing_match_count += 1
         seen_heroes: set[int] = set()
+        seen_players: set[int] = set()
         for player in players:
             if not isinstance(player, dict) or _player_side(player) != side:
                 continue
@@ -179,8 +219,10 @@ def aggregate_team_profile(
             if not isinstance(hero_id, int):
                 continue
             account_id = player.get("account_id")
-            if isinstance(account_id, int):
-                account_ids.add(account_id)
+            persona = _player_label(player)
+            if isinstance(account_id, int) and persona is not None:
+                roster_personas[account_id] = persona
+
             entry = hero_pool.setdefault(
                 hero_id,
                 {
@@ -201,6 +243,42 @@ def aggregate_team_profile(
             if isinstance(account_id, int):
                 entry["_players"][account_id] += 1
 
+            if not isinstance(account_id, int):
+                continue
+            if account_id not in seen_players:
+                roster_games[account_id] += 1
+                seen_players.add(account_id)
+            player_entry = player_pool.setdefault(
+                account_id,
+                {
+                    "account_id": account_id,
+                    "personaname": None,
+                    "games": 0,
+                    "wins": 0,
+                    "_heroes": {},
+                },
+            )
+            if persona is not None:
+                player_entry["personaname"] = persona
+            player_entry["games"] += 1
+            if win is True:
+                player_entry["wins"] += 1
+            hero_entry = player_entry["_heroes"].setdefault(
+                hero_id,
+                {
+                    "hero_id": hero_id,
+                    "localized_name": hero_names.get(hero_id),
+                    "games": 0,
+                    "wins": 0,
+                    "match_ids": [],
+                },
+            )
+            hero_entry["games"] += 1
+            if win is True:
+                hero_entry["wins"] += 1
+            hero_entry["match_ids"].append(match_id)
+
+    account_ids = set(roster_games)
     roster_hash = _roster_hash(account_ids)
     heroes = []
     for entry in hero_pool.values():
@@ -208,6 +286,27 @@ def aggregate_team_profile(
         entry["players"] = players
         heroes.append(entry)
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
+
+    roster_players = [
+        {
+            "account_id": account_id,
+            "personaname": roster_personas.get(account_id),
+            "games": games,
+        }
+        for account_id, games in sorted(
+            roster_games.items(), key=lambda item: (-item[1], item[0])
+        )
+    ]
+
+    players_view = []
+    for entry in player_pool.values():
+        per_hero = sorted(
+            entry.pop("_heroes").values(),
+            key=lambda h: (-h["games"], h["hero_id"]),
+        )
+        entry["hero_pool"] = per_hero
+        players_view.append(entry)
+    players_view.sort(key=lambda p: (-p["games"], p["account_id"]))
 
     return {
         "schema_version": SCHEMA_VERSION,
@@ -217,22 +316,31 @@ def aggregate_team_profile(
             "requested_patch": patch,
             "match_window": "recent_limit",
             "match_count": len(match_rows),
+            "contributing_match_count": contributing_match_count,
             "default_limit": 50,
         },
         "roster": {
             "roster_hash": roster_hash,
-            "player_account_ids": sorted(account_ids),
+            "players": roster_players,
             "confidence": "observed_from_matches" if account_ids else "unknown",
         },
         "observed_patches": [
-            {"patch": observed_patch, "match_count": count}
-            for observed_patch, count in sorted(observed_patches.items())
+            {
+                "patch_id": patch_id,
+                "patch_name": patch_id_to_name.get(patch_id) if patch_id is not None else None,
+                "match_count": count,
+            }
+            for patch_id, count in sorted(
+                observed_patches.items(),
+                key=lambda item: (item[0] is None, item[0] or 0),
+            )
         ],
         "tournaments": sorted(
             tournaments.values(),
             key=lambda t: (t["league_name"] or UNKNOWN, t["leagueid"] or 0),
         ),
         "hero_pool": heroes,
+        "players": players_view,
         "source": {
             "primary": "opendota",
             "fetched_at": fetched_at,
@@ -383,11 +491,18 @@ async def build_team_profile(
 ) -> TeamProfileBuildResult:
     od = OpenDotaFetcher(cache_dir, patch)
     fetched_at = _utc_now()
+    patch_constants: list[dict[str, Any]] | None = None
     try:
         raw_matches = await od.team_matches(team_id, force=force)
         if not isinstance(raw_matches, list):
             raise ValueError("OpenDota team matches response must be a list")
         match_rows = _limit_matches(raw_matches, limit)
+        try:
+            raw_constants = await od.constants_patch()
+            if isinstance(raw_constants, list):
+                patch_constants = raw_constants
+        except Exception as exc:
+            logger.warning("Skipping OpenDota patch constants error=%s", exc)
         details: dict[int, dict[str, Any]] = {}
         for match_row in match_rows:
             match_id = _match_id(match_row)
@@ -414,6 +529,7 @@ async def build_team_profile(
         match_details=details,
         hero_names=_hero_names(game_data_dir, patch),
         fetched_at=fetched_at,
+        patch_constants=patch_constants,
     )
     profile_path, index_path = _write_team_profile(data_dir, patch, profile)
     return TeamProfileBuildResult(

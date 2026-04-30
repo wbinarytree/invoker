@@ -116,9 +116,11 @@ The manifest lists present heroes and content hashes for the derived hero files.
 `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 
 This is an aggregate team view built from OpenDota match history and match
-details. The first implemented profile slice contains hero-pool counts,
-observed roster account IDs, observed patch buckets, tournament metadata, and
-match ID evidence. It does not embed raw match payloads.
+details. The first implemented profile slice contains a team-wide hero pool, a
+per-player hero pool, the observed roster (account IDs with personanames and
+game counts), patch buckets mapped to OpenDota patch names where available,
+tournament metadata, and match ID evidence. It does not embed raw match
+payloads.
 
 `data/derived/<patch>/teams/index.json` lists available team profile files so
 consumers do not need to scan directories.
