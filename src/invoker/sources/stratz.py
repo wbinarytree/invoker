@@ -21,31 +21,6 @@ query HeroMatchup($heroId: Short!, $bracket: [RankBracketBasicEnum!]) {
 }
 """
 
-PLAYER_POSITION_QUERY = """
-query PlayerPosition($steamAccountId: Long!) {
-  player(steamAccountId: $steamAccountId) {
-    identity { name }
-    steamAccount {
-      proSteamAccount { id realName name position }
-    }
-  }
-}
-"""
-
-
-def _normalize_position(value: Any) -> int | None:
-    if isinstance(value, bool):
-        return None
-    if isinstance(value, int) and 1 <= value <= 5:
-        return value
-    if isinstance(value, str):
-        digits = "".join(c for c in value if c.isdigit())
-        if digits:
-            number = int(digits)
-            if 1 <= number <= 5:
-                return number
-    return None
-
 
 def flatten_edges(response: dict[str, Any], hero_id: int) -> list[dict[str, Any]]:
     """
@@ -100,29 +75,6 @@ class StratzFetcher:
         }
         response = await self.client.post(ENDPOINT, body=payload)
         return flatten_edges(response, hero_id)
-
-    async def player_position(
-        self, account_id: int, *, force: bool = False
-    ) -> int | None:
-        """Return STRATZ-curated pro position 1..5 for the account, or None.
-
-        Returns None when no token is configured, when the player is not on a
-        pro roster, or when STRATZ has no position recorded for them.
-        """
-        if not self.available:
-            return None
-        payload = {
-            "query": PLAYER_POSITION_QUERY,
-            "variables": {"steamAccountId": account_id},
-        }
-        response = await self.client.post(ENDPOINT, body=payload, force=force)
-        if not isinstance(response, dict):
-            return None
-        data = response.get("data") or {}
-        player = data.get("player") or {}
-        steam_account = player.get("steamAccount") or {}
-        pro = steam_account.get("proSteamAccount") or {}
-        return _normalize_position(pro.get("position"))
 
     async def close(self) -> None:
         await self.client.close()
