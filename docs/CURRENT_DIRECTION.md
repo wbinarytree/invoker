@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-04-28
+Last updated: 2026-05-01
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -20,6 +20,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-04-28-release-process.md](specs/2026-04-28-release-process.md)
 - Team profile KG:
   [docs/specs/2026-04-30-team-profile-kg.md](specs/2026-04-30-team-profile-kg.md)
+- Knowledge service:
+  [docs/specs/2026-05-01-knowledge-service.md](specs/2026-05-01-knowledge-service.md)
 
 ## Active plans
 
