@@ -7,7 +7,9 @@ import yaml
 import invoker.pipeline.team_profile as team_profile_module
 from invoker.paths import team_registry_file
 from invoker.pipeline.team_profile import (
+    CanonicalRoster,
     TeamProfileBuildResult,
+    TeamProfileCurationResult,
     TeamProfileNotFoundError,
     TeamProfileScaffoldResult,
     aggregate_team_profile,
@@ -22,7 +24,20 @@ def _write_minimal_registry(data_dir: Path, team_id: int = 123) -> Path:
     registry.parent.mkdir(parents=True, exist_ok=True)
     registry.write_text(
         "schema_version: 1\n"
-        f"teams:\n  - team_id: {team_id}\n    name: Authored Team\n    players: []\n"
+        "teams:\n"
+        f"  - team_id: {team_id}\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        position: null\n"
+        "      - account_id: 11\n"
+        "        position: null\n"
+        "      - account_id: 12\n"
+        "        position: null\n"
+        "      - account_id: 13\n"
+        "        position: null\n"
+        "      - account_id: 14\n"
+        "        position: null\n"
     )
     return registry
 
@@ -210,6 +225,119 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert yatoro_hero_two["loss_match_ids"] == [2]
 
 
+def test_aggregate_team_profile_hashes_canonical_roster_and_surfaces_standins():
+    profile = aggregate_team_profile(
+        team_id=123,
+        patch="7.41b",
+        team={"team_id": 123, "name": None, "aliases": [], "name_source": None},
+        match_rows=[
+            {"match_id": 1, "radiant": True},
+            {"match_id": 2, "radiant": True},
+        ],
+        match_details={
+            1: {
+                "radiant_team_id": 123,
+                "radiant_win": True,
+                "players": [
+                    {"player_slot": 0, "account_id": 10, "hero_id": 1},
+                    {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                    {"player_slot": 2, "account_id": 12, "hero_id": 3},
+                    {"player_slot": 3, "account_id": 13, "hero_id": 4},
+                    {"player_slot": 4, "account_id": 14, "hero_id": 5},
+                ],
+            },
+            2: {
+                "radiant_team_id": 123,
+                "radiant_win": False,
+                "players": [
+                    {"player_slot": 0, "account_id": 10, "hero_id": 1},
+                    {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                    {"player_slot": 2, "account_id": 12, "hero_id": 3},
+                    {"player_slot": 3, "account_id": 13, "hero_id": 4},
+                    {
+                        "player_slot": 4,
+                        "account_id": 99,
+                        "hero_id": 6,
+                        "personaname": "Standin",
+                    },
+                ],
+            },
+        },
+        hero_names={1: "Hero One", 2: "Hero Two", 3: "Hero Three", 4: "Hero Four"},
+        fetched_at="2026-04-30T00:00:00Z",
+        canonical_roster=CanonicalRoster({10, 11, 12, 13, 14}, "authored_registry"),
+    )
+
+    assert [p["account_id"] for p in profile["roster"]["players"]] == [10, 11, 12, 13, 14]
+    assert profile["roster"]["stand_ins"] == [
+        {
+            "account_id": 99,
+            "personaname": "Standin",
+            "games": 1,
+            "match_ids": [2],
+        }
+    ]
+    assert profile["roster"]["canonical_source"] == "authored_registry"
+    assert [p["account_id"] for p in profile["players"]] == [10, 11, 12, 13, 14]
+    standin_hero = next(h for h in profile["hero_pool"] if h["hero_id"] == 6)
+    assert standin_hero["games"] == 1
+    assert standin_hero["players"] == []
+    assert profile["source"]["match_roster_classifications"] == [
+        {"match_id": 1, "roster_type": "canonical", "stand_in_account_ids": []},
+        {"match_id": 2, "roster_type": "standin", "stand_in_account_ids": [99]},
+    ]
+
+
+def test_aggregate_team_profile_can_exclude_standin_matches():
+    profile = aggregate_team_profile(
+        team_id=123,
+        patch="7.41b",
+        team={"team_id": 123, "name": None, "aliases": [], "name_source": None},
+        match_rows=[
+            {"match_id": 1, "radiant": True},
+            {"match_id": 2, "radiant": True},
+        ],
+        match_details={
+            1: {
+                "radiant_team_id": 123,
+                "radiant_win": True,
+                "players": [
+                    {"player_slot": 0, "account_id": 10, "hero_id": 1},
+                    {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                    {"player_slot": 2, "account_id": 12, "hero_id": 3},
+                    {"player_slot": 3, "account_id": 13, "hero_id": 4},
+                    {"player_slot": 4, "account_id": 14, "hero_id": 5},
+                ],
+            },
+            2: {
+                "radiant_team_id": 123,
+                "radiant_win": False,
+                "players": [
+                    {"player_slot": 0, "account_id": 10, "hero_id": 6},
+                    {"player_slot": 1, "account_id": 11, "hero_id": 2},
+                    {"player_slot": 2, "account_id": 12, "hero_id": 3},
+                    {"player_slot": 3, "account_id": 13, "hero_id": 4},
+                    {"player_slot": 4, "account_id": 99, "hero_id": 7},
+                ],
+            },
+        },
+        hero_names={},
+        fetched_at="2026-04-30T00:00:00Z",
+        canonical_roster=CanonicalRoster({10, 11, 12, 13, 14}, "authored_registry"),
+        include_standin_matches=False,
+    )
+
+    assert profile["scope"]["stand_in_policy"] == "exclude"
+    assert profile["scope"]["contributing_match_count"] == 1
+    assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
+    assert profile["roster"]["stand_ins"] == [
+        {"account_id": 99, "personaname": None, "games": 1, "match_ids": [2]}
+    ]
+    player_ten = next(p for p in profile["players"] if p["account_id"] == 10)
+    assert player_ten["games"] == 1
+    assert [h["hero_id"] for h in player_ten["hero_pool"]] == [1]
+
+
 class FakeGameFilesSource:
     def __init__(self, root: Path, patch: str):
         assert root == Path("/game")
@@ -247,11 +375,51 @@ class FakeOpenDotaFetcher:
             "players": [
                 {"player_slot": 0, "account_id": 10, "hero_id": 1, "personaname": "P1"},
                 {"player_slot": 1, "account_id": 11, "hero_id": 2, "personaname": "P2"},
+                {"player_slot": 2, "account_id": 12, "hero_id": 1, "personaname": "P3"},
+                {"player_slot": 3, "account_id": 13, "hero_id": 2, "personaname": "P4"},
+                {"player_slot": 4, "account_id": 14, "hero_id": 1, "personaname": "P5"},
             ],
         }
 
     async def constants_patch(self):
         return [{"id": 60, "name": "7.41"}]
+
+    async def close(self):
+        pass
+
+
+class FakeOpenDotaFetcherWithStandin:
+    def __init__(self, cache_dir: Path, patch: str):
+        self.cache_dir = cache_dir
+        self.patch = patch
+
+    async def team_matches(self, team_id: int, *, force: bool = False):
+        assert team_id == 123
+        return [{"match_id": 1, "radiant": True}, {"match_id": 2, "radiant": True}]
+
+    async def match_detail(self, match_id: int, *, force: bool = False):
+        if match_id == 1:
+            accounts = [10, 11, 12, 13, 14]
+            heroes = [1, 2, 3, 4, 5]
+        else:
+            accounts = [10, 11, 12, 13, 99]
+            heroes = [6, 2, 3, 4, 7]
+        return {
+            "radiant_team_id": 123,
+            "radiant_win": match_id == 1,
+            "players": [
+                {
+                    "player_slot": index,
+                    "account_id": account_id,
+                    "hero_id": heroes[index],
+                    "personaname": f"P{account_id}",
+                }
+                for index, account_id in enumerate(accounts)
+            ],
+        }
+
+    async def constants_patch(self):
+        return []
 
     async def close(self):
         pass
@@ -305,7 +473,13 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
         p["account_id"]: (p["primary_position"], p["position_source"])
         for p in profile["roster"]["players"]
     }
-    assert by_account == {10: (1, "stratz"), 11: (2, "stratz")}
+    assert by_account == {
+        10: (1, "stratz"),
+        11: (2, "stratz"),
+        12: (None, None),
+        13: (None, None),
+        14: (None, None),
+    }
     yatoro = next(p for p in profile["players"] if p["account_id"] == 10)
     assert yatoro["primary_position"] == 1
     assert yatoro["position_source"] == "stratz"
@@ -326,8 +500,16 @@ async def test_build_team_profile_authored_position_overrides_stratz(monkeypatch
         "  - team_id: 123\n"
         "    name: Authored Team\n"
         "    players:\n"
+        "      - account_id: 10\n"
+        "        position: null\n"
         "      - account_id: 11\n"
         "        position: 5\n"
+        "      - account_id: 12\n"
+        "        position: null\n"
+        "      - account_id: 13\n"
+        "        position: null\n"
+        "      - account_id: 14\n"
+        "        position: null\n"
     )
 
     result = await build_team_profile(
@@ -347,9 +529,15 @@ async def test_build_team_profile_authored_position_overrides_stratz(monkeypatch
         for p in profile["roster"]["players"]
     }
     # 10 stays from STRATZ; 11 was overridden from STRATZ pos2 -> authored pos5
-    assert by_account == {10: (1, "stratz"), 11: (5, "authored")}
+    assert by_account == {
+        10: (1, "stratz"),
+        11: (5, "authored"),
+        12: (None, None),
+        13: (None, None),
+        14: (None, None),
+    }
     # STRATZ should only have been queried for the non-authored account
-    assert FakeStratzFetcher.instances[-1].calls == [10]
+    assert FakeStratzFetcher.instances[-1].calls == [10, 12, 13, 14]
 
 
 @pytest.mark.asyncio
@@ -374,6 +562,12 @@ async def test_build_team_profile_skips_stratz_when_full_roster_authored(monkeyp
         "        position: 1\n"
         "      - account_id: 11\n"
         "        position: 5\n"
+        "      - account_id: 12\n"
+        "        position: 3\n"
+        "      - account_id: 13\n"
+        "        position: 4\n"
+        "      - account_id: 14\n"
+        "        position: 2\n"
     )
 
     result = await build_team_profile(
@@ -418,6 +612,145 @@ async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, t
 
 
 @pytest.mark.asyncio
+async def test_build_team_profile_uses_authored_five_and_can_exclude_standins(
+    monkeypatch, tmp_path
+):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcherWithStandin)
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        position: 1\n"
+        "      - account_id: 11\n"
+        "        position: 2\n"
+        "      - account_id: 12\n"
+        "        position: 3\n"
+        "      - account_id: 13\n"
+        "        position: 4\n"
+        "      - account_id: 14\n"
+        "        position: 5\n"
+    )
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+        include_standin_matches=False,
+    )
+    assert isinstance(result, TeamProfileBuildResult)
+
+    profile = json.loads(result.profile_path.read_text())
+    assert [p["account_id"] for p in profile["roster"]["players"]] == [10, 11, 12, 13, 14]
+    assert profile["roster"]["canonical_source"] == "authored_registry"
+    assert profile["roster"]["stand_ins"] == [
+        {"account_id": 99, "personaname": "P99", "games": 1, "match_ids": [2]}
+    ]
+    assert profile["scope"]["stand_in_policy"] == "exclude"
+    assert profile["scope"]["contributing_match_count"] == 1
+    assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
+    assert [p["account_id"] for p in profile["players"]] == [10, 11, 12, 13, 14]
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_stops_when_registry_has_more_than_five_players(
+    monkeypatch, tmp_path
+):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcherWithStandin)
+
+    def _fail_stratz(*args, **kwargs):
+        raise AssertionError("StratzFetcher should not be constructed before roster curation")
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        position: 1\n"
+        "      - account_id: 11\n"
+        "        position: 2\n"
+        "      - account_id: 12\n"
+        "        position: 3\n"
+        "      - account_id: 13\n"
+        "        position: 4\n"
+        "      - account_id: 14\n"
+        "        position: 5\n"
+        "      - account_id: 99\n"
+        "        position: 4\n"
+    )
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+    )
+
+    assert isinstance(result, TeamProfileCurationResult)
+    assert result.player_count == 6
+    assert result.registry_path == registry
+    profiles_root = tmp_path / "derived" / "7.41b" / "teams"
+    assert not profiles_root.exists() or not any(profiles_root.rglob("profile.json"))
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_stops_when_registry_has_partial_roster(monkeypatch, tmp_path):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcherWithStandin)
+
+    def _fail_stratz(*args, **kwargs):
+        raise AssertionError("StratzFetcher should not be constructed before roster curation")
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        position: 1\n"
+        "      - account_id: 11\n"
+        "        position: 2\n"
+        "      - account_id: 12\n"
+        "        position: 3\n"
+        "      - account_id: 13\n"
+        "        position: 4\n"
+    )
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+    )
+
+    assert isinstance(result, TeamProfileCurationResult)
+    assert result.player_count == 4
+    profiles_root = tmp_path / "derived" / "7.41b" / "teams"
+    assert not profiles_root.exists() or not any(profiles_root.rglob("profile.json"))
+
+
+@pytest.mark.asyncio
 async def test_build_team_profile_scaffolds_when_no_registry_entry(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
@@ -439,7 +772,7 @@ async def test_build_team_profile_scaffolds_when_no_registry_entry(monkeypatch, 
     assert isinstance(result, TeamProfileScaffoldResult)
     assert result.team_id == 123
     assert result.registry_path == team_registry_file(tmp_path)
-    assert [p["account_id"] for p in result.discovered_roster] == [10, 11]
+    assert [p["account_id"] for p in result.discovered_roster] == [10, 11, 12, 13, 14]
 
     raw = yaml.safe_load(result.registry_path.read_text())
     assert raw["schema_version"] == 1
@@ -448,9 +781,9 @@ async def test_build_team_profile_scaffolds_when_no_registry_entry(monkeypatch, 
     entry = entries[0]
     assert entry["team_id"] == 123
     assert entry["aliases"] == []
-    assert [p["account_id"] for p in entry["players"]] == [10, 11]
+    assert [p["account_id"] for p in entry["players"]] == [10, 11, 12, 13, 14]
     assert all(p["position"] is None for p in entry["players"])
-    assert {p["name"] for p in entry["players"]} == {"P1", "P2"}
+    assert {p["name"] for p in entry["players"]} == {"P1", "P2", "P3", "P4", "P5"}
 
     # No profile.json should have been written.
     profiles_root = tmp_path / "derived" / "7.41b" / "teams"
@@ -487,8 +820,8 @@ async def test_build_team_profile_does_not_override_existing_registry_entry(monk
         stratz_token="test-token",
     )
 
-    # Existing entry → real build, not scaffold; registry untouched.
-    assert not isinstance(result, TeamProfileScaffoldResult)
+    # Existing entry is never overwritten; partial entries stop for curation.
+    assert isinstance(result, TeamProfileCurationResult)
     assert registry.read_text() == original_yaml
 
 
@@ -531,9 +864,12 @@ def test_resolve_team_by_id_name_and_alias(tmp_path):
         "    aliases: [Example, ExTeam]\n"
     )
 
-    assert resolve_team(tmp_path, "123")["team_id"] == 123
-    assert resolve_team(tmp_path, "example team")["team_id"] == 123
-    assert resolve_team(tmp_path, "exteam")["team_id"] == 123
+    by_id = resolve_team(tmp_path, "123")
+    by_name = resolve_team(tmp_path, "example team")
+    by_alias = resolve_team(tmp_path, "exteam")
+    assert by_id is not None and by_id["team_id"] == 123
+    assert by_name is not None and by_name["team_id"] == 123
+    assert by_alias is not None and by_alias["team_id"] == 123
     assert resolve_team(tmp_path, "unknown") is None
 
 

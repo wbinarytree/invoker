@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-01 (team profile scaffold flow)
+Last updated: 2026-05-01 (team profile canonical roster and stand-ins)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -117,18 +117,34 @@ The manifest lists present heroes and content hashes for the derived hero files.
 
 This is an aggregate team view built from OpenDota match history and match
 details. The first implemented profile slice contains a team-wide hero pool
-(with per-hero player breakdown), a per-player hero pool, the observed roster
-(account IDs with personanames and game counts), patch buckets mapped to
-OpenDota patch names where available, tournament metadata, and match ID
-evidence. It does not embed raw match payloads.
+(with per-hero player breakdown), a per-player hero pool, the canonical roster
+(account IDs with personanames and game counts), stand-in evidence, patch
+buckets mapped to OpenDota patch names where available, tournament metadata,
+and match ID evidence. It does not embed raw match payloads.
+
+`roster_hash` is derived from the canonical five-player roster, not from every
+account observed across the match window. The canonical roster comes from
+`data/authored/teams.yaml` when it contains exactly five unique accounts. If no
+registry entry exists, the first build scaffolds every observed team-side
+account into `teams.yaml` and stops; the user removes stand-ins until only the
+original roster remains. If an existing registry entry contains anything other
+than exactly five players, the build stops and asks for curation instead of
+guessing.
+Observed accounts outside the curated five are written to `roster.stand_ins`
+and per-match classifications under `source.match_roster_classifications`.
+By default, stand-in matches still contribute to team-level hero-pool counts
+while per-player aggregates only include canonical players. Operators can pass
+`--exclude-standins` to skip stand-in matches from hero and player aggregates
+while still recording which stand-ins were excluded.
 
 `build-team-profile` uses a two-step flow when `data/authored/teams.yaml` has
-no entry for the requested `team_id`. The first call discovers the roster and
-team name from match payloads, appends a stub entry with `position: null` per
-player, and exits before writing `profile.json`. The user fills in positions
-(1-5), then a second call uses the populated entry to generate the profile.
-Existing registry entries are never overwritten; partial entries also skip
-scaffolding and proceed to build.
+no entry for the requested `team_id`. The first call discovers every observed
+team-side account and team name from match payloads, appends a stub entry with
+`position: null` per player, and exits before writing `profile.json`. The user
+removes stand-ins and leaves exactly five original roster players with
+positions (1-5), then a second call uses the curated entry to generate the
+profile. Existing registry entries are never overwritten; entries with more
+than five players stop for manual curation before building.
 
 Position (1-5) per player is sourced in this order:
 

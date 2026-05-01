@@ -15,7 +15,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name>]`
-- `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force]`
+- `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]`
 - `invoker vocab-audit`
 - `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
 - `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
@@ -160,9 +160,10 @@ Behavior:
 1. reads team match history from OpenDota through the shared cache
 2. reads selected match details through the shared cache
 3. resolves hero names from `INVOKER_GAME_DATA_DIR/<patch>/`
-4. infers the observed roster hash from player account IDs in match details
+4. selects a canonical five-player roster and derives `roster_hash` from those
+   account IDs
 5. aggregates team hero games, wins, player usage, match IDs, observed patches,
-   and tournament metadata
+   tournament metadata, and stand-in evidence
 6. writes `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 7. updates `data/derived/<patch>/teams/index.json`
 
@@ -170,20 +171,27 @@ The first slice uses a recent-match window with a default limit of 50. Missing
 match-detail payloads are recorded in the profile source metadata instead of
 failing the whole build.
 
+By default, stand-in matches contribute to team-level hero-pool counts, but
+per-player aggregates include only the canonical roster. Use
+`--exclude-standins` to skip stand-in matches from hero and player aggregates
+while still recording the excluded stand-ins under `roster.stand_ins`.
+
 The command runs as a two-step flow when `data/authored/teams.yaml` has no
 entry for `--team-id`:
 
-1. **First call** discovers the roster (account IDs and personanames) and the
-   most-frequent observed team name from match payloads, appends a stub entry
-   to `data/authored/teams.yaml` with `position: null` for each player, and
-   exits without writing `profile.json`.
-2. The user assigns positions (1-5) by editing the registry file.
+1. **First call** discovers every observed team-side account ID/personaname and
+   the most-frequent observed team name from match payloads, appends a stub
+   entry to `data/authored/teams.yaml` with `position: null` for each player,
+   and exits without writing `profile.json`.
+2. The user removes stand-ins and leaves exactly five original roster players,
+   assigning positions (1-5) by editing the registry file.
 3. **Second call** sees the existing entry, leaves the registry untouched,
    and proceeds to generate `profile.json` using authored positions plus
    STRATZ for any account still missing one.
 
-Existing registry entries are never overwritten — even partial entries (no
-players, missing positions) skip the scaffold step and proceed to build.
+Existing registry entries are never overwritten. Entries with anything other
+than exactly five players stop before profile generation and ask the user to
+curate the registry.
 
 ### `vocab-audit`
 

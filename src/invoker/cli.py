@@ -224,11 +224,17 @@ def build_team_profile_cmd(
         "--force",
         help="Refresh OpenDota cache entries used by the profile build.",
     ),
+    include_standins: bool = typer.Option(
+        True,
+        "--include-standins/--exclude-standins",
+        help="Include or exclude matches where non-canonical stand-ins appeared.",
+    ),
 ) -> None:
     """Build a derived team hero-pool profile from cached OpenDota match data."""
     import asyncio
 
     from invoker.pipeline.team_profile import (
+        TeamProfileCurationResult,
         TeamProfileScaffoldResult,
         build_team_profile,
     )
@@ -247,6 +253,7 @@ def build_team_profile_cmd(
             limit=limit,
             force=force,
             stratz_token=cfg.stratz_token,
+            include_standin_matches=include_standins,
         )
     )
     if isinstance(result, TeamProfileScaffoldResult):
@@ -261,6 +268,15 @@ def build_team_profile_cmd(
             "then re-run build-team-profile to generate profile.json."
         )
         return
+    if isinstance(result, TeamProfileCurationResult):
+        typer.echo(f"Team registry needs roster curation: {result.registry_path}", err=True)
+        typer.echo(
+            f"Found {result.player_count} authored players for team_id={result.team_id}. "
+            "Remove stand-ins so exactly 5 original roster players remain, "
+            "then re-run build-team-profile.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
     typer.echo(f"Team profile: {result.profile_path}")
     typer.echo(f"Team index: {result.index_path}")
     typer.echo(f"Roster hash: {result.roster_hash}")

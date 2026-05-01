@@ -40,6 +40,19 @@ class TeamProfileScaffoldResult:
     discovered_roster: list[dict[str, Any]]
 
 
+@dataclass(frozen=True)
+class TeamProfileCurationResult:
+    team_id: int
+    registry_path: Path
+    player_count: int
+
+
+@dataclass(frozen=True)
+class CanonicalRoster:
+    account_ids: set[int]
+    source: str
+
+
 def _utc_now() -> str:
     return datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
@@ -86,6 +99,27 @@ def _team_roster_overrides(data_dir: Path, team_id: int) -> dict[int, int]:
         position = player.get("position")
         if isinstance(account_id, int) and isinstance(position, int) and 1 <= position <= 5:
             out[account_id] = position
+    return out
+
+
+def _team_registry_player_ids(data_dir: Path, team_id: int) -> list[tuple[int, int | None]]:
+    entry = _team_registry_entry(data_dir, team_id)
+    if entry is None:
+        return []
+    players = entry.get("players")
+    if not isinstance(players, list):
+        return []
+    out: list[tuple[int, int | None]] = []
+    seen: set[int] = set()
+    for player in players:
+        if not isinstance(player, dict):
+            continue
+        account_id = player.get("account_id")
+        if not isinstance(account_id, int) or account_id in seen:
+            continue
+        position = player.get("position")
+        out.append((account_id, position if isinstance(position, int) else None))
+        seen.add(account_id)
     return out
 
 
@@ -197,6 +231,67 @@ def _roster_hash(account_ids: set[int]) -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:12]
 
 
+def _match_team_account_ids(
+    team_id: int,
+    match_rows: list[dict[str, Any]],
+    match_details: dict[int, dict[str, Any]],
+) -> list[tuple[int, set[int]]]:
+    out: list[tuple[int, set[int]]] = []
+    for match_row in match_rows:
+        match_id = _match_id(match_row)
+        if match_id is None:
+            continue
+        detail = match_details.get(match_id)
+        if not detail:
+            continue
+        side = _team_side(team_id, match_row, detail)
+        players = detail.get("players") or []
+        if not isinstance(players, list):
+            continue
+        account_ids: set[int] = set()
+        for player in players:
+            if not isinstance(player, dict) or _player_side(player) != side:
+                continue
+            account_id = player.get("account_id")
+            if isinstance(account_id, int):
+                account_ids.add(account_id)
+        if account_ids:
+            out.append((match_id, account_ids))
+    return out
+
+
+def _canonical_roster(
+    data_dir: Path,
+    team_id: int,
+    match_rows: list[dict[str, Any]],
+    match_details: dict[int, dict[str, Any]],
+) -> CanonicalRoster:
+    authored_players = _team_registry_player_ids(data_dir, team_id)
+    authored_ids = {account_id for account_id, _ in authored_players}
+    if len(authored_ids) == 5:
+        return CanonicalRoster(authored_ids, "authored_registry")
+
+    match_rosters = _match_team_account_ids(team_id, match_rows, match_details)
+    roster_counts: Counter[frozenset[int]] = Counter()
+    account_counts: Counter[int] = Counter()
+    for _, account_ids in match_rosters:
+        account_counts.update(account_ids)
+        if len(account_ids) == 5:
+            roster_counts[frozenset(account_ids)] += 1
+    if roster_counts:
+        account_ids, _ = sorted(
+            roster_counts.items(),
+            key=lambda item: (-item[1], sorted(item[0])),
+        )[0]
+        return CanonicalRoster(set(account_ids), "observed_cooccurrence")
+    if not account_counts:
+        return CanonicalRoster(set(), "unknown")
+    if len(account_counts) <= 5:
+        return CanonicalRoster(set(account_counts), "observed_from_matches")
+    top_five = {account_id for account_id, _ in account_counts.most_common(5)}
+    return CanonicalRoster(top_five, "observed_frequency")
+
+
 def _player_label(player: dict[str, Any]) -> str | None:
     for key in ("name", "personaname"):
         value = player.get(key)
@@ -216,6 +311,8 @@ def aggregate_team_profile(
     fetched_at: str,
     patch_constants: list[dict[str, Any]] | None = None,
     player_positions: dict[int, tuple[int, str]] | None = None,
+    canonical_roster: CanonicalRoster | None = None,
+    include_standin_matches: bool = True,
 ) -> dict[str, Any]:
     hero_pool: dict[int, dict[str, Any]] = {}
     player_pool: dict[int, dict[str, Any]] = {}
@@ -228,6 +325,12 @@ def aggregate_team_profile(
     patch_id_to_name = _patch_id_to_name(patch_constants)
     observed_names: Counter[str] = Counter()
     observed_tags: Counter[str] = Counter()
+    canonical_account_ids = canonical_roster.account_ids if canonical_roster is not None else set()
+    restrict_to_canonical = bool(canonical_account_ids)
+    match_roster_classifications: list[dict[str, Any]] = []
+    standin_personas: dict[int, str] = {}
+    standin_games: Counter[int] = Counter()
+    standin_match_ids: dict[int, set[int]] = {}
 
     for match_row in match_rows:
         match_id = _match_id(match_row)
@@ -263,6 +366,32 @@ def aggregate_team_profile(
         team_players = [p for p in players if isinstance(p, dict) and _player_side(p) == side]
         if not team_players:
             continue
+        match_account_ids = {
+            account_id
+            for account_id in (p.get("account_id") for p in team_players)
+            if isinstance(account_id, int)
+        }
+        match_standins = (
+            sorted(match_account_ids - canonical_account_ids) if restrict_to_canonical else []
+        )
+        match_roster_classifications.append(
+            {
+                "match_id": match_id,
+                "roster_type": "standin" if match_standins else "canonical",
+                "stand_in_account_ids": match_standins,
+            }
+        )
+        for player in team_players:
+            account_id = player.get("account_id")
+            if not isinstance(account_id, int) or account_id not in match_standins:
+                continue
+            persona = _player_label(player)
+            if persona is not None:
+                standin_personas[account_id] = persona
+            standin_games[account_id] += 1
+            standin_match_ids.setdefault(account_id, set()).add(match_id)
+        if match_standins and not include_standin_matches:
+            continue
         contributing_match_count += 1
         seen_heroes: set[int] = set()
         seen_players: set[int] = set()
@@ -297,6 +426,9 @@ def aggregate_team_profile(
                 seen_heroes.add(hero_id)
 
             if not isinstance(account_id, int):
+                continue
+            is_canonical_player = not restrict_to_canonical or account_id in canonical_account_ids
+            if not is_canonical_player:
                 continue
 
             hero_player_entry = entry["_players"].setdefault(
@@ -347,7 +479,7 @@ def aggregate_team_profile(
             else:
                 hero_entry["loss_match_ids"].append(match_id)
 
-    account_ids = set(roster_games)
+    account_ids = canonical_account_ids if restrict_to_canonical else set(roster_games)
     roster_hash = _roster_hash(account_ids)
 
     team_view = dict(team)
@@ -379,15 +511,29 @@ def aggregate_team_profile(
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
 
     roster_players = []
-    for account_id, games in sorted(roster_games.items(), key=lambda item: (-item[1], item[0])):
+    for account_id in sorted(
+        account_ids,
+        key=lambda a: (-roster_games.get(a, 0), a),
+    ):
         pos, source = _pos(account_id)
         roster_players.append(
             {
                 "account_id": account_id,
                 "personaname": roster_personas.get(account_id),
-                "games": games,
+                "games": roster_games.get(account_id, 0),
                 "primary_position": pos,
                 "position_source": source,
+            }
+        )
+
+    stand_ins = []
+    for account_id, games in sorted(standin_games.items(), key=lambda item: (-item[1], item[0])):
+        stand_ins.append(
+            {
+                "account_id": account_id,
+                "personaname": standin_personas.get(account_id),
+                "games": games,
+                "match_ids": sorted(standin_match_ids.get(account_id, set())),
             }
         )
 
@@ -411,6 +557,7 @@ def aggregate_team_profile(
         "scope": {
             "requested_patch": patch,
             "match_window": "recent_limit",
+            "stand_in_policy": "include" if include_standin_matches else "exclude",
             "match_count": len(match_rows),
             "contributing_match_count": contributing_match_count,
             "default_limit": 50,
@@ -418,6 +565,10 @@ def aggregate_team_profile(
         "roster": {
             "roster_hash": roster_hash,
             "players": roster_players,
+            "stand_ins": stand_ins,
+            "canonical_source": (
+                canonical_roster.source if canonical_roster else "observed_from_matches"
+            ),
             "confidence": "observed_from_matches" if account_ids else "unknown",
         },
         "observed_patches": [
@@ -441,6 +592,7 @@ def aggregate_team_profile(
             "primary": "opendota",
             "fetched_at": fetched_at,
             "match_ids": [_match_id(row) for row in match_rows if _match_id(row) is not None],
+            "match_roster_classifications": match_roster_classifications,
             "missing_match_detail_count": len(missing_match_ids),
             "missing_match_ids": missing_match_ids,
             "position_sources": sorted({src for _, src in (positions or {}).values()}) or None,
@@ -567,36 +719,11 @@ def _write_team_profile(data_dir: Path, patch: str, profile: dict[str, Any]) -> 
     return profile_path, index_path
 
 
-def _roster_account_ids(
-    team_id: int,
-    match_rows: list[dict[str, Any]],
-    match_details: dict[int, dict[str, Any]],
-) -> list[int]:
-    seen: set[int] = set()
-    for match_row in match_rows:
-        match_id = _match_id(match_row)
-        if match_id is None:
-            continue
-        detail = match_details.get(match_id)
-        if not detail:
-            continue
-        side = _team_side(team_id, match_row, detail)
-        players = detail.get("players") or []
-        if not isinstance(players, list):
-            continue
-        for player in players:
-            if not isinstance(player, dict) or _player_side(player) != side:
-                continue
-            account_id = player.get("account_id")
-            if isinstance(account_id, int):
-                seen.add(account_id)
-    return sorted(seen)
-
-
 def _discover_roster_personas(
     team_id: int,
     match_rows: list[dict[str, Any]],
     match_details: dict[int, dict[str, Any]],
+    account_ids: set[int] | None = None,
 ) -> list[dict[str, Any]]:
     personas: dict[int, str | None] = {}
     for match_row in match_rows:
@@ -617,6 +744,8 @@ def _discover_roster_personas(
                 continue
             account_id = player.get("account_id")
             if not isinstance(account_id, int):
+                continue
+            if account_ids is not None and account_id not in account_ids:
                 continue
             persona = _player_label(player)
             if persona is not None:
@@ -724,7 +853,8 @@ async def build_team_profile(
     limit: int = 50,
     force: bool = False,
     stratz_token: str | None = None,
-) -> TeamProfileBuildResult | TeamProfileScaffoldResult:
+    include_standin_matches: bool = True,
+) -> TeamProfileBuildResult | TeamProfileScaffoldResult | TeamProfileCurationResult:
     od = OpenDotaFetcher(cache_dir, patch)
     fetched_at = _utc_now()
     patch_constants: list[dict[str, Any]] | None = None
@@ -769,8 +899,20 @@ async def build_team_profile(
                 discovered_roster=roster,
             )
 
-    roster_ids = _roster_account_ids(team_id, match_rows, details)
+    authored_player_ids = {
+        account_id for account_id, _ in _team_registry_player_ids(data_dir, team_id)
+    }
+    if len(authored_player_ids) != 5:
+        return TeamProfileCurationResult(
+            team_id=team_id,
+            registry_path=team_registry_file(data_dir),
+            player_count=len(authored_player_ids),
+        )
+
+    canonical_roster = _canonical_roster(data_dir, team_id, match_rows, details)
+
     authored_positions = _team_roster_overrides(data_dir, team_id)
+    roster_ids = sorted(canonical_roster.account_ids)
     stratz_targets = [a for a in roster_ids if a not in authored_positions]
     if stratz_token is None and stratz_targets:
         logger.info("STRATZ_API_TOKEN not set; skipping per-player position lookup")
@@ -781,7 +923,8 @@ async def build_team_profile(
         account_id: (position, "stratz") for account_id, position in stratz_positions.items()
     }
     for account_id, position in authored_positions.items():
-        merged_positions[account_id] = (position, "authored")
+        if account_id in canonical_roster.account_ids:
+            merged_positions[account_id] = (position, "authored")
 
     profile = aggregate_team_profile(
         team_id=team_id,
@@ -793,6 +936,8 @@ async def build_team_profile(
         fetched_at=fetched_at,
         patch_constants=patch_constants,
         player_positions=merged_positions,
+        canonical_roster=canonical_roster,
+        include_standin_matches=include_standin_matches,
     )
     profile_path, index_path = _write_team_profile(data_dir, patch, profile)
     return TeamProfileBuildResult(

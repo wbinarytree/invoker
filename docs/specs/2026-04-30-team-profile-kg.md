@@ -68,7 +68,7 @@ Add an explicit build command for one team ID.
 Proposed CLI:
 
 ```text
-invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force]
+invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]
 ```
 
 The command should:
@@ -148,9 +148,22 @@ Roster-era identity should use:
 team_id + roster_hash + match_window
 ```
 
-`roster_hash` should be derived from the sorted stable player account IDs seen
-for the team in the relevant matches. This avoids trusting stale OpenDota or
-STRATZ roster endpoints.
+`roster_hash` should be derived from the sorted canonical five-player roster,
+not every account observed across the match window. When
+`data/authored/teams.yaml` has exactly five unique accounts, those accounts
+define the canonical roster. When there is no registry entry, the build should
+scaffold every observed team-side account into `teams.yaml` and stop. The user
+then removes stand-ins from the registry and leaves exactly five original
+roster players. If an existing registry entry has anything other than exactly
+five players, the build should stop for manual curation instead of guessing.
+This keeps one-off tournament stand-ins from changing the roster hash.
+
+Observed accounts outside the canonical five should be surfaced as stand-ins,
+not hidden. By default, stand-in matches may still contribute to team-level
+hero-pool counts, while per-player aggregates stay scoped to the canonical
+five. A quick clean-profile mode should also exist to exclude stand-in matches
+from aggregate counts when an operator wants current-roster signal without
+historical stand-in noise.
 
 Long-term, team and player resolution can move toward:
 
@@ -202,11 +215,29 @@ Sketch:
   "scope": {
     "requested_patch": "7.41b",
     "match_window": "last_three_tournaments_or_recent_limit",
+    "stand_in_policy": "include",
     "match_count": 25
   },
   "roster": {
     "roster_hash": "stable-short-hash",
-    "player_account_ids": [1, 2, 3, 4, 5],
+    "players": [
+      {
+        "account_id": 1,
+        "personaname": "Example Player",
+        "games": 25,
+        "primary_position": 1,
+        "position_source": "authored"
+      }
+    ],
+    "stand_ins": [
+      {
+        "account_id": 6,
+        "personaname": "Example Stand-in",
+        "games": 1,
+        "match_ids": [123]
+      }
+    ],
+    "canonical_source": "authored_registry",
     "confidence": "observed_from_matches"
   },
   "hero_pool": [
@@ -223,7 +254,14 @@ Sketch:
   ],
   "source": {
     "primary": "opendota",
-    "fetched_at": "2026-04-30T00:00:00Z"
+    "fetched_at": "2026-04-30T00:00:00Z",
+    "match_roster_classifications": [
+      {
+        "match_id": 123,
+        "roster_type": "standin",
+        "stand_in_account_ids": [6]
+      }
+    ]
   }
 }
 ```
@@ -377,8 +415,10 @@ Open questions for the STRATZ-backed implementation:
   at fetched_at" timestamp rather than a single field.
 - Should the registry (`data/authored/teams.yaml`) be allowed to override
   STRATZ when a stand-in or recent-role-change makes the curated value stale?
-- Stand-ins on a roster (one match) currently get the same STRATZ lookup as
-  permanent members. Worth distinguishing later.
+- Stand-ins are now distinguished from the canonical five-player roster.
+  STRATZ lookup is scoped to canonical accounts; stand-ins are recorded as
+  evidence and can be excluded from aggregate counts with the clean-profile
+  build flag.
 - Is per-(player, hero) position useful for flex-pick questions, or does
   primary-position-per-player + hero distribution suffice?
 
