@@ -14,7 +14,6 @@ from invoker.logging import get_logger
 from invoker.paths import team_index_file, team_profile_file, team_registry_file
 from invoker.sources.game_files import GameFilesSource
 from invoker.sources.opendota import OpenDotaFetcher
-from invoker.sources.stratz import StratzFetcher
 
 SCHEMA_VERSION = 1
 UNKNOWN = "unknown"
@@ -817,32 +816,6 @@ def _scaffold_team_registry(
     return path
 
 
-async def _fetch_player_positions(
-    cache_dir: Path,
-    patch: str,
-    token: str | None,
-    account_ids: list[int],
-    *,
-    force: bool = False,
-) -> dict[int, int]:
-    if not token or not account_ids:
-        return {}
-    fetcher = StratzFetcher(cache_dir, patch, token)
-    positions: dict[int, int] = {}
-    try:
-        for account_id in account_ids:
-            try:
-                position = await fetcher.player_position(account_id, force=force)
-            except Exception as exc:
-                logger.warning("Skipping STRATZ position account_id=%s error=%s", account_id, exc)
-                continue
-            if position is not None:
-                positions[account_id] = position
-    finally:
-        await fetcher.close()
-    return positions
-
-
 async def build_team_profile(
     *,
     data_dir: Path,
@@ -852,7 +825,6 @@ async def build_team_profile(
     patch: str,
     limit: int = 50,
     force: bool = False,
-    stratz_token: str | None = None,
     include_standin_matches: bool = True,
 ) -> TeamProfileBuildResult | TeamProfileScaffoldResult | TeamProfileCurationResult:
     od = OpenDotaFetcher(cache_dir, patch)
@@ -908,23 +880,21 @@ async def build_team_profile(
             registry_path=team_registry_file(data_dir),
             player_count=len(authored_player_ids),
         )
+    authored_positions = _team_roster_overrides(data_dir, team_id)
+    if len(authored_positions) != 5 or set(authored_positions.values()) != {1, 2, 3, 4, 5}:
+        return TeamProfileCurationResult(
+            team_id=team_id,
+            registry_path=team_registry_file(data_dir),
+            player_count=len(authored_player_ids),
+        )
 
     canonical_roster = _canonical_roster(data_dir, team_id, match_rows, details)
 
-    authored_positions = _team_roster_overrides(data_dir, team_id)
-    roster_ids = sorted(canonical_roster.account_ids)
-    stratz_targets = [a for a in roster_ids if a not in authored_positions]
-    if stratz_token is None and stratz_targets:
-        logger.info("STRATZ_API_TOKEN not set; skipping per-player position lookup")
-    stratz_positions = await _fetch_player_positions(
-        cache_dir, patch, stratz_token, stratz_targets, force=force
-    )
     merged_positions: dict[int, tuple[int, str]] = {
-        account_id: (position, "stratz") for account_id, position in stratz_positions.items()
+        account_id: (position, "authored")
+        for account_id, position in authored_positions.items()
+        if account_id in canonical_roster.account_ids
     }
-    for account_id, position in authored_positions.items():
-        if account_id in canonical_roster.account_ids:
-            merged_positions[account_id] = (position, "authored")
 
     profile = aggregate_team_profile(
         team_id=team_id,

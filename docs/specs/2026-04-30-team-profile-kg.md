@@ -364,25 +364,20 @@ Side-specific breakdowns, phase buckets, own-ban versus opponent-ban splits, and
 full `state_to_next_action` modeling should be deferred until the simple counter
 has proven useful.
 
-### Position Inference (Implemented: STRATZ + authored override)
+### Position Assignment (Implemented: manual registry)
 
-Position is sourced in priority order:
-
-1. Authored override in `data/authored/teams.yaml` under
-   `teams[].players[]` (`account_id`, `position`). Wins over STRATZ.
-2. STRATZ `player.proSteamAccount.position`, one GraphQL call per roster
-   account (5 per pro profile), cached indefinitely.
-3. `null` when neither source has a value.
+Position is sourced only from `data/authored/teams.yaml` under
+`teams[].players[]` (`account_id`, `position`). The profile build requires
+exactly five curated roster players and one valid manual position for each slot
+1-5 before writing `profile.json`.
 
 Each player record carries `primary_position` and `position_source`
-("authored", "stratz", or `null`). Top-level `source.position_sources` is
-the sorted list of distinct sources actually used.
+(`"authored"`). Top-level `source.position_sources` is `["authored"]` for
+generated profiles.
 
-STRATZ's curated position is reasonably reliable for established pro
-players but has been observed to misclassify (e.g. tagging a known pos5
-support as pos4). The authored override is the escape hatch for those
-cases — preferable to silently shipping a wrong value or to inventing a
-new heuristic.
+STRATZ was removed from this position path. The manual curation step is already
+required to choose the original roster, and assigning five numbers is more
+reliable than a second external fallback that can be stale or wrong.
 
 The OpenDota-only heuristics below are kept here as a record of what was
 tried and why it failed — do not reintroduce them.
@@ -406,19 +401,9 @@ detail data:
    classification is still wrong.
 
 Both failed loudly on real BetBoom data. Rather than ship a misleading-by-
-default signal, position fields were removed entirely.
+default signal, generated profiles now require manual position assignment in
+`teams.yaml`.
 
-Open questions for the STRATZ-backed implementation:
-
-- Does STRATZ's `proSteamAccount.position` field stay accurate when a player
-  switches teams or roles mid-patch? If not, we may need a "position observed
-  at fetched_at" timestamp rather than a single field.
-- Should the registry (`data/authored/teams.yaml`) be allowed to override
-  STRATZ when a stand-in or recent-role-change makes the curated value stale?
-- Stand-ins are now distinguished from the canonical five-player roster.
-  STRATZ lookup is scoped to canonical accounts; stand-ins are recorded as
-  evidence and can be excluded from aggregate counts with the clean-profile
-  build flag.
 - Is per-(player, hero) position useful for flex-pick questions, or does
   primary-position-per-player + hero distribution suffice?
 

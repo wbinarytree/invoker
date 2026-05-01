@@ -143,22 +143,14 @@ team-side account and team name from match payloads, appends a stub entry with
 `position: null` per player, and exits before writing `profile.json`. The user
 removes stand-ins and leaves exactly five original roster players with
 positions (1-5), then a second call uses the curated entry to generate the
-profile. Existing registry entries are never overwritten; entries with more
-than five players stop for manual curation before building.
+profile. Existing registry entries are never overwritten; entries with anything
+other than exactly five players and valid positions 1-5 stop for manual
+curation before building.
 
-Position (1-5) per player is sourced in this order:
-
-1. **Authored override** in `data/authored/teams.yaml` under the team's
-   `players: [{account_id, position}]` list. Wins over STRATZ when both
-   disagree. Use this for known-wrong STRATZ classifications.
-2. **STRATZ** `player.proSteamAccount.position` when `STRATZ_API_TOKEN` is
-   configured. One GraphQL call per roster account, cached indefinitely.
-   Skipped per-account when the registry already has an authored position.
-3. **null** otherwise.
-
-Each player carries `primary_position` and `position_source` ("authored",
-"stratz", or `null`). Top-level `source.position_sources` is the sorted
-list of distinct sources actually used in the profile, or `null` if none.
+Position (1-5) per player is manual-only: `data/authored/teams.yaml` must have
+one curated roster player for each position 1-5 before profile generation. Each
+player carries `primary_position` and `position_source` (`"authored"`).
+Top-level `source.position_sources` is `["authored"]` for generated profiles.
 
 Earlier OpenDota-only heuristics (raw `lane_role`; GPM-rank with
 `lane_role` core-disambiguator) are documented in the team-profile spec

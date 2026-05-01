@@ -186,12 +186,11 @@ entry for `--team-id`:
 2. The user removes stand-ins and leaves exactly five original roster players,
    assigning positions (1-5) by editing the registry file.
 3. **Second call** sees the existing entry, leaves the registry untouched,
-   and proceeds to generate `profile.json` using authored positions plus
-   STRATZ for any account still missing one.
+   and proceeds to generate `profile.json` using authored positions.
 
 Existing registry entries are never overwritten. Entries with anything other
-than exactly five players stop before profile generation and ask the user to
-curate the registry.
+than exactly five players, or without one valid manual position for each slot
+1-5, stop before profile generation and ask the user to curate the registry.
 
 ### `vocab-audit`
 

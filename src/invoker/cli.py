@@ -252,7 +252,6 @@ def build_team_profile_cmd(
             patch=patch,
             limit=limit,
             force=force,
-            stratz_token=cfg.stratz_token,
             include_standin_matches=include_standins,
         )
     )
@@ -272,7 +271,7 @@ def build_team_profile_cmd(
         typer.echo(f"Team registry needs roster curation: {result.registry_path}", err=True)
         typer.echo(
             f"Found {result.player_count} authored players for team_id={result.team_id}. "
-            "Remove stand-ins so exactly 5 original roster players remain, "
+            "Remove stand-ins so exactly 5 original roster players remain with positions 1-5, "
             "then re-run build-team-profile.",
             err=True,
         )
