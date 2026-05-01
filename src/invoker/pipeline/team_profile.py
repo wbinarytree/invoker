@@ -678,14 +678,15 @@ async def build_team_profile(
         await od.close()
 
     roster_ids = _roster_account_ids(team_id, match_rows, details)
-    if stratz_token is None:
+    authored_positions = _team_roster_overrides(data_dir, team_id)
+    stratz_targets = [a for a in roster_ids if a not in authored_positions]
+    if stratz_token is None and stratz_targets:
         logger.info(
             "STRATZ_API_TOKEN not set; skipping per-player position lookup"
         )
     stratz_positions = await _fetch_player_positions(
-        cache_dir, patch, stratz_token, roster_ids, force=force
+        cache_dir, patch, stratz_token, stratz_targets, force=force
     )
-    authored_positions = _team_roster_overrides(data_dir, team_id)
     merged_positions: dict[int, tuple[int, str]] = {
         account_id: (position, "stratz")
         for account_id, position in stratz_positions.items()

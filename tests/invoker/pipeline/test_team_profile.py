@@ -245,9 +245,12 @@ class FakeOpenDotaFetcher:
 
 
 class FakeStratzFetcher:
+    instances: list["FakeStratzFetcher"] = []
+
     def __init__(self, cache_dir: Path, patch: str, token: str | None):
         self.token = token
         self.calls: list[int] = []
+        FakeStratzFetcher.instances.append(self)
 
     async def player_position(self, account_id: int, *, force: bool = False):
         self.calls.append(account_id)
@@ -331,6 +334,47 @@ async def test_build_team_profile_authored_position_overrides_stratz(
     }
     # 10 stays from STRATZ; 11 was overridden from STRATZ pos2 -> authored pos5
     assert by_account == {10: (1, "stratz"), 11: (5, "authored")}
+    # STRATZ should only have been queried for the non-authored account
+    assert FakeStratzFetcher.instances[-1].calls == [10]
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_skips_stratz_when_full_roster_authored(
+    monkeypatch, tmp_path
+):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+
+    def _fail_stratz(*args, **kwargs):
+        raise AssertionError("StratzFetcher should not be constructed when fully authored")
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        position: 1\n"
+        "      - account_id: 11\n"
+        "        position: 5\n"
+    )
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+        stratz_token="test-token",
+    )
+
+    profile = json.loads(result.profile_path.read_text())
+    assert profile["source"]["position_sources"] == ["authored"]
 
 
 @pytest.mark.asyncio
