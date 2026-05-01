@@ -292,12 +292,57 @@ def test_team_registry_enriches_alias_and_player_resolution(tmp_path):
 
     roster = service.get_team_roster("RT")
     player = service.get_team_player_hero_pool("Registry Team", "Registry Carry")
+    hero_pool = service.get_team_hero_pool("RT")
+    profile = service.get_team_profile("RT")
 
     assert roster["data"]["team"]["name"] == "Registry Team"
     assert roster["data"]["team"]["aliases"] == ["RT"]
     assert roster["data"]["roster"]["players"][0]["registry_name"] == "Registry Carry"
     assert roster["data"]["roster"]["players"][0]["registry_position"] == 1
     assert player["data"]["player"]["registry_name"] == "Registry Carry"
+    assert hero_pool["data"]["hero_pool"][0]["players"][0]["registry_name"] == "Registry Carry"
+    assert profile["data"]["players"][0]["registry_name"] == "Registry Carry"
+    assert profile["data"]["hero_pool"][0]["players"][0]["registry_position"] == 1
+
+
+def test_team_profile_index_path_cannot_escape_bundle(tmp_path):
+    bundle = _write_bundle(
+        tmp_path,
+        teams=[{"team_id": 123, "name": "Example Team"}],
+    )
+    index_path = bundle / "derived" / "7.41b" / "teams" / "index.json"
+    index = json.loads(index_path.read_text())
+    index["profiles"][0]["path"] = "../../../../outside.json"
+    index_path.write_text(json.dumps(index, indent=2))
+
+    service = KnowledgeService(bundle)
+
+    with pytest.raises(KnowledgeServiceError, match="escapes"):
+        service.get_team_profile(123)
+
+
+def test_team_profile_must_match_index_team_id(tmp_path):
+    bundle = _write_bundle(
+        tmp_path,
+        teams=[{"team_id": 123, "name": "Example Team"}],
+    )
+    profile_path = (
+        bundle
+        / "derived"
+        / "7.41b"
+        / "teams"
+        / "123"
+        / "hash-123"
+        / "profile.json"
+    )
+    profile = json.loads(profile_path.read_text())
+    profile["team"]["team_id"] = 456
+    profile_path.write_text(json.dumps(profile, indent=2))
+
+    service = KnowledgeService(bundle)
+
+    with pytest.raises(KnowledgeServiceError, match="does not match index"):
+        service.get_team_profile(123)
 
 
 def test_missing_team_profile_error_includes_build_command(tmp_path):

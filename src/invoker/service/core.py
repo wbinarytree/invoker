@@ -225,7 +225,7 @@ class KnowledgeService:
             patch=resolved_patch,
             data={
                 "team": self._public_team(profile),
-                "hero_pool": profile.get("hero_pool") or [],
+                "hero_pool": self._public_hero_pool(profile),
             },
             source=self._team_profile_source(profile),
         )
@@ -385,17 +385,43 @@ class KnowledgeService:
                 f"team profile must be a JSON object: {path}",
                 status_code=500,
             )
+        expected_team_id = entry.get("team_id")
+        actual_team_id = _profile_team(raw).get("team_id")
+        if isinstance(expected_team_id, int) and actual_team_id != expected_team_id:
+            raise KnowledgeServiceError(
+                "invalid_team_profile",
+                "team profile team_id does not match index entry: "
+                f"expected {expected_team_id}, found {actual_team_id!r}",
+                status_code=500,
+            )
         return raw
 
     def _profile_path(self, patch: str, entry: dict[str, Any]) -> Path:
+        teams_root = team_index_file(self.bundle_root, patch).parent
         path_value = entry.get("path")
         if isinstance(path_value, str) and path_value:
-            return team_index_file(self.bundle_root, patch).parent / path_value
+            raw_path = Path(path_value)
+            if raw_path.is_absolute():
+                raise KnowledgeServiceError(
+                    "invalid_team_index",
+                    f"team profile index path must be relative: {path_value}",
+                    status_code=500,
+                )
+            profile_path = (teams_root / raw_path).resolve(strict=False)
+            teams_root_resolved = teams_root.resolve(strict=False)
+            if not profile_path.is_relative_to(teams_root_resolved):
+                raise KnowledgeServiceError(
+                    "invalid_team_index",
+                    "team profile index path escapes the resource bundle: "
+                    f"{path_value}",
+                    status_code=500,
+                )
+            return profile_path
         roster_hash = entry.get("roster_hash")
         team_id = entry.get("team_id")
         if isinstance(team_id, int) and isinstance(roster_hash, str):
             return (
-                team_index_file(self.bundle_root, patch).parent
+                teams_root
                 / str(team_id)
                 / roster_hash
                 / "profile.json"
@@ -551,7 +577,33 @@ class KnowledgeService:
             return {}
         raw["team"] = self._public_team(profile)
         raw["roster"] = self._public_roster(profile)
+        raw["hero_pool"] = self._public_hero_pool(profile)
+        raw["players"] = self._public_players(profile)
         return raw
+
+    def _public_hero_pool(self, profile: dict[str, Any]) -> list[Any]:
+        raw_pool = profile.get("hero_pool") or []
+        if not isinstance(raw_pool, list):
+            return []
+        registry = self._team_registry_entry(_profile_team(profile).get("team_id"))
+        return [
+            _enrich_hero_pool_entry(entry, registry)
+            if isinstance(entry, dict)
+            else entry
+            for entry in _strip_internal_storage(raw_pool)
+        ]
+
+    def _public_players(self, profile: dict[str, Any]) -> list[Any]:
+        raw_players = profile.get("players") or []
+        if not isinstance(raw_players, list):
+            return []
+        registry = self._team_registry_entry(_profile_team(profile).get("team_id"))
+        return [
+            _enrich_public_player(player, registry)
+            if isinstance(player, dict)
+            else player
+            for player in _strip_internal_storage(raw_players)
+        ]
 
     def _envelope(
         self,
@@ -689,6 +741,22 @@ def _enrich_public_player(
 ) -> dict[str, Any]:
     enriched = dict(player)
     _merge_registry_player(enriched, registry)
+    return enriched
+
+
+def _enrich_hero_pool_entry(
+    entry: dict[str, Any],
+    registry: dict[str, Any] | None,
+) -> dict[str, Any]:
+    enriched = dict(entry)
+    players = enriched.get("players")
+    if isinstance(players, list):
+        enriched["players"] = [
+            _enrich_public_player(player, registry)
+            if isinstance(player, dict)
+            else player
+            for player in players
+        ]
     return enriched
 
 
