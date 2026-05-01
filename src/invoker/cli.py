@@ -208,6 +208,83 @@ def snapshot_game_files_cmd(
     typer.echo(f"Neutral item sections: {result.neutral_item_count}")
 
 
+@app.command("build-team-profile")
+def build_team_profile_cmd(
+    team_id: int = typer.Option(..., "--team-id", help="OpenDota team ID to profile."),
+    patch: str = typer.Option(..., help="Patch/output namespace for derived artifacts."),
+    limit: int = typer.Option(
+        50,
+        "--limit",
+        min=1,
+        max=50,
+        help="Recent team matches to inspect.",
+    ),
+    force: bool = typer.Option(
+        False,
+        "--force",
+        help="Refresh OpenDota cache entries used by the profile build.",
+    ),
+    include_standins: bool = typer.Option(
+        True,
+        "--include-standins/--exclude-standins",
+        help="Include or exclude matches where non-canonical stand-ins appeared.",
+    ),
+) -> None:
+    """Build a derived team hero-pool profile from cached OpenDota match data."""
+    import asyncio
+
+    from invoker.pipeline.team_profile import (
+        TeamProfileCurationResult,
+        TeamProfileScaffoldResult,
+        build_team_profile,
+    )
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for build-team-profile.", err=True)
+        raise typer.Exit(code=1)
+    result = asyncio.run(
+        build_team_profile(
+            data_dir=cfg.data_dir,
+            game_data_dir=cfg.game_data_dir,
+            cache_dir=cfg.cache_dir,
+            team_id=team_id,
+            patch=patch,
+            limit=limit,
+            force=force,
+            include_standin_matches=include_standins,
+        )
+    )
+    if isinstance(result, TeamProfileScaffoldResult):
+        typer.echo(f"Scaffolded team registry entry: {result.registry_path}")
+        typer.echo(f"Discovered name: {result.discovered_name or '<unknown>'}")
+        typer.echo(f"Discovered roster ({len(result.discovered_roster)} players):")
+        for player in result.discovered_roster:
+            label = player["name"] or "<unknown>"
+            typer.echo(f"  - {player['account_id']}: {label}")
+        typer.echo(
+            "Assign position (1-5) to each player in the registry, "
+            "then re-run build-team-profile to generate profile.json."
+        )
+        return
+    if isinstance(result, TeamProfileCurationResult):
+        typer.echo(f"Team registry needs roster curation: {result.registry_path}", err=True)
+        typer.echo(
+            f"Found {result.player_count} authored players for team_id={result.team_id}. "
+            "Remove stand-ins so exactly 5 original roster players remain with positions 1-5, "
+            "then re-run build-team-profile.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    typer.echo(f"Team profile: {result.profile_path}")
+    typer.echo(f"Team index: {result.index_path}")
+    typer.echo(f"Roster hash: {result.roster_hash}")
+    typer.echo(f"Matches: {result.match_count}")
+    typer.echo(f"Heroes: {result.hero_count}")
+    if result.missing_match_detail_count:
+        typer.echo(f"Missing match details: {result.missing_match_detail_count}", err=True)
+
+
 @app.command("vocab-audit")
 def vocab_audit_cmd() -> None:
     from invoker.kg.vocab_audit import format_vocab_audit, run_vocab_audit

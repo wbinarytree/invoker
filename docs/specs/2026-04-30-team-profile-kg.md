@@ -68,7 +68,7 @@ Add an explicit build command for one team ID.
 Proposed CLI:
 
 ```text
-invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force]
+invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]
 ```
 
 The command should:
@@ -85,6 +85,7 @@ The first implementation should prioritize hero pool:
 
 - heroes picked by the team
 - games and wins per hero
+- manual position counts per hero when the curated roster is available
 - player usage per hero when available
 - role or slot hints only when available from the source payload
 - source match IDs
@@ -148,9 +149,22 @@ Roster-era identity should use:
 team_id + roster_hash + match_window
 ```
 
-`roster_hash` should be derived from the sorted stable player account IDs seen
-for the team in the relevant matches. This avoids trusting stale OpenDota or
-STRATZ roster endpoints.
+`roster_hash` should be derived from the sorted canonical five-player roster,
+not every account observed across the match window. When
+`data/authored/teams.yaml` has exactly five unique accounts, those accounts
+define the canonical roster. When there is no registry entry, the build should
+scaffold every observed team-side account into `teams.yaml` and stop. The user
+then removes stand-ins from the registry and leaves exactly five original
+roster players. If an existing registry entry has anything other than exactly
+five players, the build should stop for manual curation instead of guessing.
+This keeps one-off tournament stand-ins from changing the roster hash.
+
+Observed accounts outside the canonical five should be surfaced as stand-ins,
+not hidden. By default, stand-in matches may still contribute to team-level
+hero-pool counts, while per-player aggregates stay scoped to the canonical
+five. A quick clean-profile mode should also exist to exclude stand-in matches
+from aggregate counts when an operator wants current-roster signal without
+historical stand-in noise.
 
 Long-term, team and player resolution can move toward:
 
@@ -202,11 +216,29 @@ Sketch:
   "scope": {
     "requested_patch": "7.41b",
     "match_window": "last_three_tournaments_or_recent_limit",
+    "stand_in_policy": "include",
     "match_count": 25
   },
   "roster": {
     "roster_hash": "stable-short-hash",
-    "player_account_ids": [1, 2, 3, 4, 5],
+    "players": [
+      {
+        "account_id": 1,
+        "personaname": "Example Player",
+        "games": 25,
+        "primary_position": 1,
+        "position_source": "authored"
+      }
+    ],
+    "stand_ins": [
+      {
+        "account_id": 6,
+        "personaname": "Example Stand-in",
+        "games": 1,
+        "match_ids": [123]
+      }
+    ],
+    "canonical_source": "authored_registry",
     "confidence": "observed_from_matches"
   },
   "hero_pool": [
@@ -215,6 +247,9 @@ Sketch:
       "localized_name": "Example Hero",
       "games": 4,
       "wins": 3,
+      "positions": [
+        {"position": 1, "games": 4}
+      ],
       "players": [
         {"account_id": 1, "games": 4}
       ],
@@ -223,7 +258,14 @@ Sketch:
   ],
   "source": {
     "primary": "opendota",
-    "fetched_at": "2026-04-30T00:00:00Z"
+    "fetched_at": "2026-04-30T00:00:00Z",
+    "match_roster_classifications": [
+      {
+        "match_id": 123,
+        "roster_type": "standin",
+        "stand_in_account_ids": [6]
+      }
+    ]
   }
 }
 ```
@@ -239,6 +281,9 @@ kb.team_profile(team_id, *, roster_hash=None)
 kb.team_hero_pool(team_id, *, roster_hash=None, patch=None)
 kb.resolve_team(query)
 ```
+
+`resolve_team` is exact-ID only. Team names and aliases are display metadata;
+do not use fuzzy matching to pick a team because team IDs are constants.
 
 Later slices:
 
@@ -326,6 +371,49 @@ Side-specific breakdowns, phase buckets, own-ban versus opponent-ban splits, and
 full `state_to_next_action` modeling should be deferred until the simple counter
 has proven useful.
 
+### Position Assignment (Implemented: manual registry)
+
+Position is sourced only from `data/authored/teams.yaml` under
+`teams[].players[]` (`account_id`, `position`). The profile build requires
+exactly five curated roster players and one valid manual position for each slot
+1-5 before writing `profile.json`.
+
+Each player record carries `primary_position` and `position_source`
+(`"authored"`). Top-level `source.position_sources` is `["authored"]` for
+generated profiles.
+
+STRATZ was removed from this position path. The manual curation step is already
+required to choose the original roster, and assigning five numbers is more
+reliable than a second external fallback that can be stale or wrong.
+
+The OpenDota-only heuristics below are kept here as a record of what was
+tried and why it failed — do not reintroduce them.
+
+### Position Inference (Failed Attempts)
+
+Per-player position (pos 1-5) is essential for hero-pool questions like "is
+this hero a flex pick or a dedicated mid?" and "what is MieRo's hero pool as
+pos3?". The first implementation tried two heuristics from OpenDota match
+detail data:
+
+1. **`lane_role` directly** (1=safe → pos1, 2=mid → pos2, 3=off → pos3,
+   4=jungle → pos4, with intra-role GPM rank splitting safe and off into
+   pos1/5 and pos3/4). OpenDota's parser tags roaming pos5 supports with
+   `lane_role=2` (mid) when they spend laning phase rotating through mid, so
+   genuine pos5 players surfaced as "primary_position: 2".
+2. **GPM rank with `lane_role` as core-disambiguator** (top 3 GPM = cores
+   1/2/3 by `lane_role`, bottom 2 = supports pos4/pos5 by GPM). Better, but
+   still depends on `lane_role` to distinguish pos1 vs pos2 vs pos3 among
+   cores. When `lane_role` itself is wrong (which it is, often), the
+   classification is still wrong.
+
+Both failed loudly on real BetBoom data. Rather than ship a misleading-by-
+default signal, generated profiles now require manual position assignment in
+`teams.yaml`.
+
+- Is per-(player, hero) position useful for flex-pick questions, or does
+  primary-position-per-player + hero distribution suffice?
+
 ### Lane Pairings
 
 OpenDota may be enough for player-to-hero assignment and rough role inference.
@@ -342,6 +430,10 @@ First lane-pairing output should carry confidence and source:
 
 - Should `data/authored/teams.yaml` be required before building a team profile,
   or should `--team-id` work without any registry entry?
+  **Resolved:** the build command now runs in two steps. A first call with no
+  registry entry scaffolds one (roster + observed name, `position: null`) and
+  exits; the user fills positions; a second call writes `profile.json`.
+  Existing entries are never overwritten.
 - Should the first profile build require match details for every selected match,
   or tolerate partial match-detail coverage with explicit missing-data counts?
 - Where should tournament metadata come from if OpenDota match payloads do not

@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-30 (shared OpenDota cache)
+Last updated: 2026-05-01 (team profile canonical roster and stand-ins)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -8,7 +8,8 @@ backed by a proposal inbox. Phase 5a/5b game-file constants work is
 implemented: hero, ability, talent, and hero-stat constants route through
 patch-scoped game-file snapshots instead of OpenDota constants. Stage 4.5 adds
 a local release bundle command for authored KG artifacts and derived patch
-outputs. Team-profile work has started with shared OpenDota cache support.
+outputs. Team-profile work has started with shared OpenDota cache support and
+a first hero-pool profile builder.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -110,6 +111,69 @@ Summaries are derived from the facts-only hero view plus `relations.json`.
 
 The manifest lists present heroes and content hashes for the derived hero files.
 
+### Team profile view
+
+`data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
+
+This is an aggregate team view built from OpenDota match history and match
+details. The first implemented profile slice contains a team-wide hero pool
+(with per-hero player breakdown and manual position counts), a per-player hero
+pool, the canonical roster (account IDs with personanames and game counts),
+stand-in evidence, patch buckets mapped to OpenDota patch names where
+available, tournament metadata, and match ID evidence. It does not embed raw
+match payloads.
+
+`roster_hash` is derived from the canonical five-player roster, not from every
+account observed across the match window. The canonical roster comes from
+`data/authored/teams.yaml` when it contains exactly five unique accounts. If no
+registry entry exists, the first build scaffolds every observed team-side
+account into `teams.yaml` and stops; the user removes stand-ins until only the
+original roster remains. If an existing registry entry contains anything other
+than exactly five players, the build stops and asks for curation instead of
+guessing.
+Observed accounts outside the curated five are written to `roster.stand_ins`
+and per-match classifications under `source.match_roster_classifications`.
+By default, stand-in matches still contribute to team-level hero-pool counts
+while per-player aggregates only include canonical players. Operators can pass
+`--exclude-standins` to skip stand-in matches from hero and player aggregates
+while still recording which stand-ins were excluded.
+
+`build-team-profile` uses a two-step flow when `data/authored/teams.yaml` has
+no entry for the requested `team_id`. The first call discovers every observed
+team-side account and team name from match payloads, appends a stub entry with
+`position: null` per player, and exits before writing `profile.json`. The user
+removes stand-ins and leaves exactly five original roster players with
+positions (1-5), then a second call uses the curated entry to generate the
+profile. Existing registry entries are never overwritten; entries with anything
+other than exactly five players and valid positions 1-5 stop for manual
+curation before building.
+
+Position (1-5) per player is manual-only: `data/authored/teams.yaml` must have
+one curated roster player for each position 1-5 before profile generation. Each
+player carries `primary_position` and `position_source` (`"authored"`).
+Top-level `source.position_sources` is `["authored"]` for generated profiles.
+
+Earlier OpenDota-only heuristics (raw `lane_role`; GPM-rank with
+`lane_role` core-disambiguator) are documented in the team-profile spec
+under "Position Inference (Failed Attempts)" and are intentionally not
+used — both produced wrong-by-default classifications on roaming supports.
+
+`team.name` is taken from `data/authored/teams.yaml` when an entry exists
+(`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
+team name observed in the match payloads
+(`name_source: "opendota_match_payload"`). Authored entries always win over
+observed names. `team.observed_names` records every variant seen so consumers
+can audit drift.
+
+`data/derived/<patch>/teams/index.json` lists available team profile files so
+consumers do not need to scan directories.
+
+`KnowledgeBase` exposes `team_profile()`, `team_hero_pool()`, and
+`resolve_team()` for offline consumers. Team resolution is exact-ID only; names
+and aliases are display metadata, not fuzzy lookup keys. The reader does not
+fetch network data; missing profiles raise `TeamProfileNotFoundError` with the
+build command to run.
+
 ### Graph cache
 
 `data/cache/graph/<patch>/graph.pkl`
@@ -189,6 +253,8 @@ Current consumers:
   `GameFilesSource`, while keeping OpenDota for matchups and pro matches
 - `ability_context.py` consumes already-resolved talent names; it no longer
   substitutes unresolved talent template values with `?`
+- `pipeline/team_profile.py` reads team match history and match details from
+  OpenDota while resolving hero names from the game-file snapshot
 
 ### OpenDota
 
@@ -201,6 +267,8 @@ OpenDota is now used for match data only:
 
 - hero matchups
 - pro matches
+- team match history
+- match details
 
 OpenDota constants are intentionally no longer exposed by `OpenDotaFetcher`.
 OpenDota responses are cached in the shared Dota agents cache under
@@ -338,6 +406,9 @@ data/
   derived/
     <patch>/
       heroes/<hero_id>.json
+      teams/
+        index.json
+        <team_id>/<roster_hash>/profile.json
       relations.json
       summary_<hero_id>.md
       manifest.json

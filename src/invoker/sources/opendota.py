@@ -25,5 +25,14 @@ class OpenDotaFetcher:
             params["less_than_match_id"] = less_than_match_id
         return await self.client.get(f"{BASE}/proMatches", params=params or None)
 
+    async def team_matches(self, team_id: int, *, force: bool = False) -> list[dict]:
+        return await self.client.get(f"{BASE}/teams/{team_id}/matches", force=force)
+
+    async def match_detail(self, match_id: int, *, force: bool = False) -> dict:
+        return await self.client.get(f"{BASE}/matches/{match_id}", force=force)
+
+    async def constants_patch(self) -> list[dict]:
+        return await self.client.get(f"{BASE}/constants/patch")
+
     async def close(self) -> None:
         await self.client.close()
