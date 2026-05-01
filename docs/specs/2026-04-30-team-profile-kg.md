@@ -326,6 +326,47 @@ Side-specific breakdowns, phase buckets, own-ban versus opponent-ban splits, and
 full `state_to_next_action` modeling should be deferred until the simple counter
 has proven useful.
 
+### Position Inference (Deferred)
+
+Per-player position (pos 1-5) is essential for hero-pool questions like "is
+this hero a flex pick or a dedicated mid?" and "what is MieRo's hero pool as
+pos3?". The first implementation tried two heuristics from OpenDota match
+detail data:
+
+1. **`lane_role` directly** (1=safe → pos1, 2=mid → pos2, 3=off → pos3,
+   4=jungle → pos4, with intra-role GPM rank splitting safe and off into
+   pos1/5 and pos3/4). OpenDota's parser tags roaming pos5 supports with
+   `lane_role=2` (mid) when they spend laning phase rotating through mid, so
+   genuine pos5 players surfaced as "primary_position: 2".
+2. **GPM rank with `lane_role` as core-disambiguator** (top 3 GPM = cores
+   1/2/3 by `lane_role`, bottom 2 = supports pos4/pos5 by GPM). Better, but
+   still depends on `lane_role` to distinguish pos1 vs pos2 vs pos3 among
+   cores. When `lane_role` itself is wrong (which it is, often), the
+   classification is still wrong.
+
+Both failed loudly on real BetBoom data. Rather than ship a misleading-by-
+default signal, position fields were removed entirely.
+
+A correct position layer needs an authoritative source. Candidates:
+
+- **STRATZ** — exposes a position field per player per match in their GraphQL
+  schema. Requires a token and GraphQL plumbing, but the data is curated
+  rather than parser-derived. Strong candidate.
+- **Authored roster overrides** in `data/authored/teams.yaml` — record each
+  player's main position when known. Cheap, but only as good as the registry
+  and silent when rosters change.
+- **Manual curation per (player, hero) flex pattern** — only useful for the
+  flex-question, not the general position question.
+
+Open questions:
+
+- Does STRATZ's position data agree with public consensus across a sample of
+  pro players, or does it have its own biases?
+- Should the registry encode a default position, and should it override
+  source-derived positions when both disagree?
+- Is the right surface a single `primary_position` per player, a distribution
+  per (player, hero), or both?
+
 ### Lane Pairings
 
 OpenDota may be enough for player-to-hero assignment and rough role inference.

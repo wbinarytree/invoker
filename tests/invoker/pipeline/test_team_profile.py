@@ -146,7 +146,6 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         "account_id": 10,
         "personaname": "Yatoro [Pro]",
         "games": 2,
-        "primary_position": 1,
     }
     assert profile["roster"]["roster_hash"] != "unknown"
     assert profile["observed_patches"] == [
@@ -163,24 +162,10 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert hero_two["wins"] == 1
     assert hero_two["win_match_ids"] == [1]
     assert hero_two["loss_match_ids"] == [2]
-    assert hero_two["positions"] == {"1": 1, "2": 1}
-    assert hero_two["primary_position"] == 1
     hero_two_players = sorted(hero_two["players"], key=lambda p: p["account_id"])
     assert hero_two_players == [
-        {
-            "account_id": 10,
-            "personaname": "Yatoro [Pro]",
-            "games": 1,
-            "positions": {"1": 1},
-            "primary_position": 1,
-        },
-        {
-            "account_id": 11,
-            "personaname": "Larl",
-            "games": 1,
-            "positions": {"2": 1},
-            "primary_position": 2,
-        },
+        {"account_id": 10, "personaname": "Yatoro [Pro]", "games": 1},
+        {"account_id": 11, "personaname": "Larl", "games": 1},
     ]
     assert profile["hero_pool"][-1]["localized_name"] is None
 
@@ -188,8 +173,6 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert yatoro["personaname"] == "Yatoro [Pro]"
     assert yatoro["games"] == 2
     assert yatoro["wins"] == 1
-    assert yatoro["positions"] == {"1": 2}
-    assert yatoro["primary_position"] == 1
     assert [h["hero_id"] for h in yatoro["hero_pool"]] == [1, 2]
     yatoro_hero_one = next(h for h in yatoro["hero_pool"] if h["hero_id"] == 1)
     assert yatoro_hero_one["win_match_ids"] == [1]
@@ -319,50 +302,6 @@ def test_resolve_team_by_id_name_and_alias(tmp_path):
 
 def test_resolve_team_without_registry_returns_none(tmp_path):
     assert resolve_team(tmp_path, "123") is None
-
-
-def _player(slot: int, account_id: int, hero_id: int, *, lane_role: int, gpm: int):
-    return {
-        "player_slot": slot,
-        "account_id": account_id,
-        "hero_id": hero_id,
-        "lane_role": lane_role,
-        "gold_per_min": gpm,
-    }
-
-
-def test_aggregate_team_profile_low_gpm_support_overrides_mid_lane_role():
-    """A pos5 support whose lane_role is mistagged as mid should still become pos5.
-
-    OpenDota's parser regularly tags roaming pos5 supports with lane_role=2
-    when they spend laning phase rotating through mid. Farm priority (GPM
-    rank) is the more reliable position signal.
-    """
-    profile = aggregate_team_profile(
-        team_id=123,
-        patch="7.41b",
-        team={"team_id": 123, "name": None, "aliases": [], "name_source": None},
-        match_rows=[{"match_id": 1, "radiant": True}],
-        match_details={
-            1: {
-                "radiant_team_id": 123,
-                "radiant_win": True,
-                "players": [
-                    _player(0, 1, 101, lane_role=1, gpm=750),
-                    _player(1, 2, 102, lane_role=2, gpm=650),
-                    _player(2, 3, 103, lane_role=3, gpm=500),
-                    _player(3, 4, 104, lane_role=3, gpm=350),
-                    # Mistagged: lane_role=2 but lowest GPM = pos5
-                    _player(4, 5, 105, lane_role=2, gpm=250),
-                ],
-            }
-        },
-        hero_names={},
-        fetched_at="2026-04-30T00:00:00Z",
-    )
-
-    by_account = {p["account_id"]: p["primary_position"] for p in profile["roster"]["players"]}
-    assert by_account == {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
 
 
 def test_aggregate_team_profile_registry_name_takes_precedence_over_observed():

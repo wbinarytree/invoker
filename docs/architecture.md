@@ -117,22 +117,17 @@ The manifest lists present heroes and content hashes for the derived hero files.
 
 This is an aggregate team view built from OpenDota match history and match
 details. The first implemented profile slice contains a team-wide hero pool
-(with player breakdown and inferred-position distribution per hero), a
-per-player hero pool, the observed roster (account IDs with personanames,
-game counts, and primary inferred position), patch buckets mapped to OpenDota
-patch names where available, tournament metadata, and match ID evidence. It
-does not embed raw match payloads.
+(with per-hero player breakdown), a per-player hero pool, the observed roster
+(account IDs with personanames and game counts), patch buckets mapped to
+OpenDota patch names where available, tournament metadata, and match ID
+evidence. It does not embed raw match payloads.
 
-Positions (1-5) are inferred from intra-team GPM rank, with OpenDota
-`lane_role` disambiguating among the three cores. The top 3 GPM are cores
-(pos1/2/3 by `lane_role`); the bottom 2 are supports (higher GPM = pos4,
-lower = pos5). Position is only inferred when all five team players are in
-the payload — partial parses skip inference rather than fabricate positions.
-
-GPM rank is the primary signal because OpenDota's parser frequently mis-tags
-roaming pos5 supports as `lane_role=2` (mid) when they spend laning phase
-rotating through mid. Farm priority is the more reliable position signal.
-Ties on `primary_position` resolve to the lower number.
+Position (1-5) per player is intentionally not surfaced. See
+[docs/specs/2026-04-30-team-profile-kg.md](specs/2026-04-30-team-profile-kg.md)
+under "Position Inference (Deferred)" for the discussion — OpenDota's
+`lane_role` plus GPM rank produced enough mis-tags on roaming supports that we
+removed the field rather than ship a wrong-by-default signal. STRATZ is a
+candidate authoritative source.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
