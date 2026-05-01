@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-04-30 (team profile hero pool)
+Last updated: 2026-05-01 (team profile scaffold flow)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -122,6 +122,14 @@ details. The first implemented profile slice contains a team-wide hero pool
 OpenDota patch names where available, tournament metadata, and match ID
 evidence. It does not embed raw match payloads.
 
+`build-team-profile` uses a two-step flow when `data/authored/teams.yaml` has
+no entry for the requested `team_id`. The first call discovers the roster and
+team name from match payloads, appends a stub entry with `position: null` per
+player, and exits before writing `profile.json`. The user fills in positions
+(1-5), then a second call uses the populated entry to generate the profile.
+Existing registry entries are never overwritten; partial entries also skip
+scaffolding and proceed to build.
+
 Position (1-5) per player is sourced in this order:
 
 1. **Authored override** in `data/authored/teams.yaml` under the team's
@@ -129,6 +137,7 @@ Position (1-5) per player is sourced in this order:
    disagree. Use this for known-wrong STRATZ classifications.
 2. **STRATZ** `player.proSteamAccount.position` when `STRATZ_API_TOKEN` is
    configured. One GraphQL call per roster account, cached indefinitely.
+   Skipped per-account when the registry already has an authored position.
 3. **null** otherwise.
 
 Each player carries `primary_position` and `position_source` ("authored",

@@ -2,16 +2,29 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
 import invoker.pipeline.team_profile as team_profile_module
 from invoker.paths import team_registry_file
 from invoker.pipeline.team_profile import (
+    TeamProfileBuildResult,
     TeamProfileNotFoundError,
+    TeamProfileScaffoldResult,
     aggregate_team_profile,
     build_team_profile,
     load_team_profile,
     resolve_team,
 )
+
+
+def _write_minimal_registry(data_dir: Path, team_id: int = 123) -> Path:
+    registry = team_registry_file(data_dir)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        f"teams:\n  - team_id: {team_id}\n    name: Authored Team\n    players: []\n"
+    )
+    return registry
 
 
 def test_aggregate_team_profile_counts_hero_pool_and_roster():
@@ -265,6 +278,7 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
     monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
+    _write_minimal_registry(tmp_path)
 
     result = await build_team_profile(
         data_dir=tmp_path,
@@ -276,6 +290,7 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
         force=True,
         stratz_token="test-token",
     )
+    assert isinstance(result, TeamProfileBuildResult)
 
     assert result.profile_path.exists()
     assert result.index_path.exists()
@@ -298,9 +313,7 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
 
 
 @pytest.mark.asyncio
-async def test_build_team_profile_authored_position_overrides_stratz(
-    monkeypatch, tmp_path
-):
+async def test_build_team_profile_authored_position_overrides_stratz(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
     monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
@@ -325,6 +338,7 @@ async def test_build_team_profile_authored_position_overrides_stratz(
         patch="7.41b",
         stratz_token="test-token",
     )
+    assert isinstance(result, TeamProfileBuildResult)
 
     profile = json.loads(result.profile_path.read_text())
     assert profile["source"]["position_sources"] == ["authored", "stratz"]
@@ -339,9 +353,7 @@ async def test_build_team_profile_authored_position_overrides_stratz(
 
 
 @pytest.mark.asyncio
-async def test_build_team_profile_skips_stratz_when_full_roster_authored(
-    monkeypatch, tmp_path
-):
+async def test_build_team_profile_skips_stratz_when_full_roster_authored(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
 
@@ -372,6 +384,7 @@ async def test_build_team_profile_skips_stratz_when_full_roster_authored(
         patch="7.41b",
         stratz_token="test-token",
     )
+    assert isinstance(result, TeamProfileBuildResult)
 
     profile = json.loads(result.profile_path.read_text())
     assert profile["source"]["position_sources"] == ["authored"]
@@ -386,6 +399,7 @@ async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, t
         raise AssertionError("StratzFetcher should not be constructed without a token")
 
     monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+    _write_minimal_registry(tmp_path)
 
     result = await build_team_profile(
         data_dir=tmp_path,
@@ -394,6 +408,7 @@ async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, t
         team_id=123,
         patch="7.41b",
     )
+    assert isinstance(result, TeamProfileBuildResult)
 
     profile = json.loads(result.profile_path.read_text())
     assert profile["source"]["position_sources"] is None
@@ -403,9 +418,85 @@ async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, t
 
 
 @pytest.mark.asyncio
+async def test_build_team_profile_scaffolds_when_no_registry_entry(monkeypatch, tmp_path):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+
+    def _fail_stratz(*args, **kwargs):
+        raise AssertionError("StratzFetcher should not be constructed during scaffold")
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+        stratz_token="test-token",
+    )
+
+    assert isinstance(result, TeamProfileScaffoldResult)
+    assert result.team_id == 123
+    assert result.registry_path == team_registry_file(tmp_path)
+    assert [p["account_id"] for p in result.discovered_roster] == [10, 11]
+
+    raw = yaml.safe_load(result.registry_path.read_text())
+    assert raw["schema_version"] == 1
+    entries = raw["teams"]
+    assert len(entries) == 1
+    entry = entries[0]
+    assert entry["team_id"] == 123
+    assert entry["aliases"] == []
+    assert [p["account_id"] for p in entry["players"]] == [10, 11]
+    assert all(p["position"] is None for p in entry["players"])
+    assert {p["name"] for p in entry["players"]} == {"P1", "P2"}
+
+    # No profile.json should have been written.
+    profiles_root = tmp_path / "derived" / "7.41b" / "teams"
+    assert not profiles_root.exists() or not any(profiles_root.rglob("profile.json"))
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_does_not_override_existing_registry_entry(monkeypatch, tmp_path):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
+
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    original_yaml = (
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Pre-existing Name\n"
+        "    aliases: [Pre]\n"
+        "    players:\n"
+        "      - account_id: 10\n"
+        "        name: OldPersona\n"
+        "        position: 1\n"
+    )
+    registry.write_text(original_yaml)
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+        stratz_token="test-token",
+    )
+
+    # Existing entry → real build, not scaffold; registry untouched.
+    assert not isinstance(result, TeamProfileScaffoldResult)
+    assert registry.read_text() == original_yaml
+
+
+@pytest.mark.asyncio
 async def test_load_team_profile_round_trip(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+    _write_minimal_registry(tmp_path)
 
     result = await build_team_profile(
         data_dir=tmp_path,
@@ -414,6 +505,7 @@ async def test_load_team_profile_round_trip(monkeypatch, tmp_path):
         team_id=123,
         patch="7.41b",
     )
+    assert isinstance(result, TeamProfileBuildResult)
 
     profile = load_team_profile(tmp_path, "7.41b", 123)
     assert profile["team"]["team_id"] == 123
@@ -473,6 +565,4 @@ def test_aggregate_team_profile_registry_name_takes_precedence_over_observed():
     )
     assert profile["team"]["name"] == "Authored Name"
     assert profile["team"]["name_source"] == "registry"
-    assert profile["team"]["observed_names"] == [
-        {"name": "Stale OpenDota Name", "count": 1}
-    ]
+    assert profile["team"]["observed_names"] == [{"name": "Stale OpenDota Name", "count": 1}]

@@ -398,6 +398,10 @@ First lane-pairing output should carry confidence and source:
 
 - Should `data/authored/teams.yaml` be required before building a team profile,
   or should `--team-id` work without any registry entry?
+  **Resolved:** the build command now runs in two steps. A first call with no
+  registry entry scaffolds one (roster + observed name, `position: null`) and
+  exits; the user fills positions; a second call writes `profile.json`.
+  Existing entries are never overwritten.
 - Should the first profile build require match details for every selected match,
   or tolerate partial match-detail coverage with explicit missing-data counts?
 - Where should tournament metadata come from if OpenDota match payloads do not

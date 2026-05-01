@@ -32,6 +32,14 @@ class TeamProfileBuildResult:
     missing_match_detail_count: int
 
 
+@dataclass(frozen=True)
+class TeamProfileScaffoldResult:
+    team_id: int
+    registry_path: Path
+    discovered_name: str | None
+    discovered_roster: list[dict[str, Any]]
+
+
 def _utc_now() -> str:
     return datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
@@ -76,11 +84,7 @@ def _team_roster_overrides(data_dir: Path, team_id: int) -> dict[int, int]:
             continue
         account_id = player.get("account_id")
         position = player.get("position")
-        if (
-            isinstance(account_id, int)
-            and isinstance(position, int)
-            and 1 <= position <= 5
-        ):
+        if isinstance(account_id, int) and isinstance(position, int) and 1 <= position <= 5:
             out[account_id] = position
     return out
 
@@ -256,9 +260,7 @@ def aggregate_team_profile(
         players = detail.get("players") or []
         if not isinstance(players, list):
             continue
-        team_players = [
-            p for p in players if isinstance(p, dict) and _player_side(p) == side
-        ]
+        team_players = [p for p in players if isinstance(p, dict) and _player_side(p) == side]
         if not team_players:
             continue
         contributing_match_count += 1
@@ -354,10 +356,7 @@ def aggregate_team_profile(
         team_view["name_source"] = "opendota_match_payload"
     if observed_tags:
         team_view["tag"] = observed_tags.most_common(1)[0][0]
-    team_view["observed_names"] = [
-        {"name": n, "count": c}
-        for n, c in observed_names.most_common()
-    ]
+    team_view["observed_names"] = [{"name": n, "count": c} for n, c in observed_names.most_common()]
     positions = player_positions or {}
 
     def _pos(account_id: int) -> tuple[int | None, str | None]:
@@ -380,9 +379,7 @@ def aggregate_team_profile(
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
 
     roster_players = []
-    for account_id, games in sorted(
-        roster_games.items(), key=lambda item: (-item[1], item[0])
-    ):
+    for account_id, games in sorted(roster_games.items(), key=lambda item: (-item[1], item[0])):
         pos, source = _pos(account_id)
         roster_players.append(
             {
@@ -446,8 +443,7 @@ def aggregate_team_profile(
             "match_ids": [_match_id(row) for row in match_rows if _match_id(row) is not None],
             "missing_match_detail_count": len(missing_match_ids),
             "missing_match_ids": missing_match_ids,
-            "position_sources": sorted({src for _, src in (positions or {}).values()})
-            or None,
+            "position_sources": sorted({src for _, src in (positions or {}).values()}) or None,
         },
     }
 
@@ -462,19 +458,13 @@ class TeamProfileNotFoundError(LookupError):
     pass
 
 
-def _profile_index_entries(
-    data_dir: Path, patch: str, team_id: int
-) -> list[dict[str, Any]]:
+def _profile_index_entries(data_dir: Path, patch: str, team_id: int) -> list[dict[str, Any]]:
     index_path = team_index_file(data_dir, patch)
     if not index_path.exists():
         return []
     index = _load_team_index(index_path)
     profiles = index.get("profiles") or []
-    return [
-        p
-        for p in profiles
-        if isinstance(p, dict) and p.get("team_id") == team_id
-    ]
+    return [p for p in profiles if isinstance(p, dict) and p.get("team_id") == team_id]
 
 
 def load_team_profile(
@@ -494,8 +484,7 @@ def load_team_profile(
         candidates = [p for p in candidates if p.get("roster_hash") == roster_hash]
         if not candidates:
             raise TeamProfileNotFoundError(
-                f"No team profile for team_id={team_id} patch={patch} "
-                f"roster_hash={roster_hash}."
+                f"No team profile for team_id={team_id} patch={patch} roster_hash={roster_hash}."
             )
     if len(candidates) > 1:
         hashes = sorted(str(p.get("roster_hash")) for p in candidates)
@@ -503,9 +492,7 @@ def load_team_profile(
             f"Multiple team profiles for team_id={team_id} patch={patch}: "
             f"roster_hash in {hashes}. Pass roster_hash explicitly."
         )
-    profile_path = team_profile_file(
-        data_dir, patch, team_id, str(candidates[0]["roster_hash"])
-    )
+    profile_path = team_profile_file(data_dir, patch, team_id, str(candidates[0]["roster_hash"]))
     if not profile_path.exists():
         raise TeamProfileNotFoundError(
             f"Team profile index references missing file: {profile_path}"
@@ -606,6 +593,101 @@ def _roster_account_ids(
     return sorted(seen)
 
 
+def _discover_roster_personas(
+    team_id: int,
+    match_rows: list[dict[str, Any]],
+    match_details: dict[int, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    personas: dict[int, str | None] = {}
+    for match_row in match_rows:
+        match_id = _match_id(match_row)
+        if match_id is None:
+            continue
+        detail = match_details.get(match_id)
+        if not detail:
+            continue
+        side = _team_side(team_id, match_row, detail)
+        if side is None:
+            continue
+        players = detail.get("players") or []
+        if not isinstance(players, list):
+            continue
+        for player in players:
+            if not isinstance(player, dict) or _player_side(player) != side:
+                continue
+            account_id = player.get("account_id")
+            if not isinstance(account_id, int):
+                continue
+            persona = _player_label(player)
+            if persona is not None:
+                personas[account_id] = persona
+            else:
+                personas.setdefault(account_id, None)
+    return [
+        {"account_id": account_id, "name": persona}
+        for account_id, persona in sorted(personas.items())
+    ]
+
+
+def _discover_team_name(
+    team_id: int,
+    match_rows: list[dict[str, Any]],
+    match_details: dict[int, dict[str, Any]],
+) -> str | None:
+    counter: Counter[str] = Counter()
+    for match_row in match_rows:
+        match_id = _match_id(match_row)
+        if match_id is None:
+            continue
+        detail = match_details.get(match_id)
+        if not detail:
+            continue
+        side = _team_side(team_id, match_row, detail)
+        name, _ = _observed_team_name(team_id, side, detail, match_row)
+        if name:
+            counter[name] += 1
+    if not counter:
+        return None
+    return counter.most_common(1)[0][0]
+
+
+def _scaffold_team_registry(
+    data_dir: Path,
+    team_id: int,
+    name: str | None,
+    roster: list[dict[str, Any]],
+) -> Path:
+    path = team_registry_file(data_dir)
+    raw: dict[str, Any] = {}
+    if path.exists():
+        loaded = yaml.safe_load(path.read_text()) or {}
+        if isinstance(loaded, dict):
+            raw = loaded
+    raw.setdefault("schema_version", 1)
+    teams = raw.get("teams")
+    if not isinstance(teams, list):
+        teams = []
+    teams.append(
+        {
+            "team_id": team_id,
+            "name": name,
+            "aliases": [],
+            "players": [
+                {
+                    "account_id": player["account_id"],
+                    "name": player["name"],
+                    "position": None,
+                }
+                for player in roster
+            ],
+        }
+    )
+    raw["teams"] = teams
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml.safe_dump(raw, sort_keys=False, allow_unicode=True))
+    return path
+
+
 async def _fetch_player_positions(
     cache_dir: Path,
     patch: str,
@@ -623,9 +705,7 @@ async def _fetch_player_positions(
             try:
                 position = await fetcher.player_position(account_id, force=force)
             except Exception as exc:
-                logger.warning(
-                    "Skipping STRATZ position account_id=%s error=%s", account_id, exc
-                )
+                logger.warning("Skipping STRATZ position account_id=%s error=%s", account_id, exc)
                 continue
             if position is not None:
                 positions[account_id] = position
@@ -644,7 +724,7 @@ async def build_team_profile(
     limit: int = 50,
     force: bool = False,
     stratz_token: str | None = None,
-) -> TeamProfileBuildResult:
+) -> TeamProfileBuildResult | TeamProfileScaffoldResult:
     od = OpenDotaFetcher(cache_dir, patch)
     fetched_at = _utc_now()
     patch_constants: list[dict[str, Any]] | None = None
@@ -677,19 +757,28 @@ async def build_team_profile(
     finally:
         await od.close()
 
+    if _team_registry_entry(data_dir, team_id) is None:
+        roster = _discover_roster_personas(team_id, match_rows, details)
+        if roster:
+            discovered_name = _discover_team_name(team_id, match_rows, details)
+            registry_path = _scaffold_team_registry(data_dir, team_id, discovered_name, roster)
+            return TeamProfileScaffoldResult(
+                team_id=team_id,
+                registry_path=registry_path,
+                discovered_name=discovered_name,
+                discovered_roster=roster,
+            )
+
     roster_ids = _roster_account_ids(team_id, match_rows, details)
     authored_positions = _team_roster_overrides(data_dir, team_id)
     stratz_targets = [a for a in roster_ids if a not in authored_positions]
     if stratz_token is None and stratz_targets:
-        logger.info(
-            "STRATZ_API_TOKEN not set; skipping per-player position lookup"
-        )
+        logger.info("STRATZ_API_TOKEN not set; skipping per-player position lookup")
     stratz_positions = await _fetch_player_positions(
         cache_dir, patch, stratz_token, stratz_targets, force=force
     )
     merged_positions: dict[int, tuple[int, str]] = {
-        account_id: (position, "stratz")
-        for account_id, position in stratz_positions.items()
+        account_id: (position, "stratz") for account_id, position in stratz_positions.items()
     }
     for account_id, position in authored_positions.items():
         merged_positions[account_id] = (position, "authored")

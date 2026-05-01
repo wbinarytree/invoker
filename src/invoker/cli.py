@@ -228,7 +228,10 @@ def build_team_profile_cmd(
     """Build a derived team hero-pool profile from cached OpenDota match data."""
     import asyncio
 
-    from invoker.pipeline.team_profile import build_team_profile
+    from invoker.pipeline.team_profile import (
+        TeamProfileScaffoldResult,
+        build_team_profile,
+    )
 
     cfg = _load_config()
     if cfg.game_data_dir is None:
@@ -246,6 +249,18 @@ def build_team_profile_cmd(
             stratz_token=cfg.stratz_token,
         )
     )
+    if isinstance(result, TeamProfileScaffoldResult):
+        typer.echo(f"Scaffolded team registry entry: {result.registry_path}")
+        typer.echo(f"Discovered name: {result.discovered_name or '<unknown>'}")
+        typer.echo(f"Discovered roster ({len(result.discovered_roster)} players):")
+        for player in result.discovered_roster:
+            label = player["name"] or "<unknown>"
+            typer.echo(f"  - {player['account_id']}: {label}")
+        typer.echo(
+            "Assign position (1-5) to each player in the registry, "
+            "then re-run build-team-profile to generate profile.json."
+        )
+        return
     typer.echo(f"Team profile: {result.profile_path}")
     typer.echo(f"Team index: {result.index_path}")
     typer.echo(f"Roster hash: {result.roster_hash}")

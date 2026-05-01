@@ -170,6 +170,21 @@ The first slice uses a recent-match window with a default limit of 50. Missing
 match-detail payloads are recorded in the profile source metadata instead of
 failing the whole build.
 
+The command runs as a two-step flow when `data/authored/teams.yaml` has no
+entry for `--team-id`:
+
+1. **First call** discovers the roster (account IDs and personanames) and the
+   most-frequent observed team name from match payloads, appends a stub entry
+   to `data/authored/teams.yaml` with `position: null` for each player, and
+   exits without writing `profile.json`.
+2. The user assigns positions (1-5) by editing the registry file.
+3. **Second call** sees the existing entry, leaves the registry untouched,
+   and proceeds to generate `profile.json` using authored positions plus
+   STRATZ for any account still missing one.
+
+Existing registry entries are never overwritten — even partial entries (no
+players, missing positions) skip the scaffold step and proceed to build.
+
 ### `vocab-audit`
 
 Audits the current live vocabulary, authored hero files, and rule references.
