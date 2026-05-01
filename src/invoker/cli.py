@@ -243,6 +243,7 @@ def build_team_profile_cmd(
             patch=patch,
             limit=limit,
             force=force,
+            stratz_token=cfg.stratz_token,
         )
     )
     typer.echo(f"Team profile: {result.profile_path}")

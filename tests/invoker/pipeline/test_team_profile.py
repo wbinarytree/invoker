@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -146,6 +147,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         "account_id": 10,
         "personaname": "Yatoro [Pro]",
         "games": 2,
+        "primary_position": None,
     }
     assert profile["roster"]["roster_hash"] != "unknown"
     assert profile["observed_patches"] == [
@@ -164,8 +166,18 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert hero_two["loss_match_ids"] == [2]
     hero_two_players = sorted(hero_two["players"], key=lambda p: p["account_id"])
     assert hero_two_players == [
-        {"account_id": 10, "personaname": "Yatoro [Pro]", "games": 1},
-        {"account_id": 11, "personaname": "Larl", "games": 1},
+        {
+            "account_id": 10,
+            "personaname": "Yatoro [Pro]",
+            "games": 1,
+            "primary_position": None,
+        },
+        {
+            "account_id": 11,
+            "personaname": "Larl",
+            "games": 1,
+            "primary_position": None,
+        },
     ]
     assert profile["hero_pool"][-1]["localized_name"] is None
 
@@ -229,10 +241,24 @@ class FakeOpenDotaFetcher:
         pass
 
 
+class FakeStratzFetcher:
+    def __init__(self, cache_dir: Path, patch: str, token: str | None):
+        self.token = token
+        self.calls: list[int] = []
+
+    async def player_position(self, account_id: int, *, force: bool = False):
+        self.calls.append(account_id)
+        return {10: 1, 11: 2}.get(account_id)
+
+    async def close(self):
+        pass
+
+
 @pytest.mark.asyncio
 async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
 
     result = await build_team_profile(
         data_dir=tmp_path,
@@ -242,6 +268,7 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
         patch="7.41b",
         limit=50,
         force=True,
+        stratz_token="test-token",
     )
 
     assert result.profile_path.exists()
@@ -251,10 +278,37 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
     assert result.missing_match_detail_count == 1
     assert result.profile_path.parent.name == result.roster_hash
 
-    profile_text = result.profile_path.read_text()
-    assert '"hero_id": 1' in profile_text
-    assert '"missing_match_detail_count": 1' in profile_text
+    profile = json.loads(result.profile_path.read_text())
+    assert profile["source"]["position_source"] == "stratz"
+    by_account = {p["account_id"]: p["primary_position"] for p in profile["roster"]["players"]}
+    assert by_account == {10: 1, 11: 2}
+    yatoro = next(p for p in profile["players"] if p["account_id"] == 10)
+    assert yatoro["primary_position"] == 1
     assert result.index_path.read_text().count('"team_id": 123') == 1
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, tmp_path):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+
+    def _fail_stratz(*args, **kwargs):
+        raise AssertionError("StratzFetcher should not be constructed without a token")
+
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", _fail_stratz)
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+    )
+
+    profile = json.loads(result.profile_path.read_text())
+    assert profile["source"]["position_source"] is None
+    for player in profile["roster"]["players"]:
+        assert player["primary_position"] is None
 
 
 @pytest.mark.asyncio

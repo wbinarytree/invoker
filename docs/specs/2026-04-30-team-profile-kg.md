@@ -326,7 +326,18 @@ Side-specific breakdowns, phase buckets, own-ban versus opponent-ban splits, and
 full `state_to_next_action` modeling should be deferred until the simple counter
 has proven useful.
 
-### Position Inference (Deferred)
+### Position Inference (Implemented via STRATZ)
+
+Position is now sourced from STRATZ's curated `proSteamAccount.position`
+field, one GraphQL call per roster account (5 per profile). Surfaces as
+`primary_position` on every player-keyed structure. When `STRATZ_API_TOKEN`
+is unset the lookup is skipped and the field is `null`.
+
+The OpenDota-only heuristics below are kept here as a record of what was
+tried and why it failed — do not reintroduce them without an authoritative
+override.
+
+### Position Inference (Failed Attempts)
 
 Per-player position (pos 1-5) is essential for hero-pool questions like "is
 this hero a flex pick or a dedicated mid?" and "what is MieRo's hero pool as
@@ -347,25 +358,17 @@ detail data:
 Both failed loudly on real BetBoom data. Rather than ship a misleading-by-
 default signal, position fields were removed entirely.
 
-A correct position layer needs an authoritative source. Candidates:
+Open questions for the STRATZ-backed implementation:
 
-- **STRATZ** — exposes a position field per player per match in their GraphQL
-  schema. Requires a token and GraphQL plumbing, but the data is curated
-  rather than parser-derived. Strong candidate.
-- **Authored roster overrides** in `data/authored/teams.yaml` — record each
-  player's main position when known. Cheap, but only as good as the registry
-  and silent when rosters change.
-- **Manual curation per (player, hero) flex pattern** — only useful for the
-  flex-question, not the general position question.
-
-Open questions:
-
-- Does STRATZ's position data agree with public consensus across a sample of
-  pro players, or does it have its own biases?
-- Should the registry encode a default position, and should it override
-  source-derived positions when both disagree?
-- Is the right surface a single `primary_position` per player, a distribution
-  per (player, hero), or both?
+- Does STRATZ's `proSteamAccount.position` field stay accurate when a player
+  switches teams or roles mid-patch? If not, we may need a "position observed
+  at fetched_at" timestamp rather than a single field.
+- Should the registry (`data/authored/teams.yaml`) be allowed to override
+  STRATZ when a stand-in or recent-role-change makes the curated value stale?
+- Stand-ins on a roster (one match) currently get the same STRATZ lookup as
+  permanent members. Worth distinguishing later.
+- Is per-(player, hero) position useful for flex-pick questions, or does
+  primary-position-per-player + hero distribution suffice?
 
 ### Lane Pairings
 

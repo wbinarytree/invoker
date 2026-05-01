@@ -14,6 +14,7 @@ from invoker.logging import get_logger
 from invoker.paths import team_index_file, team_profile_file, team_registry_file
 from invoker.sources.game_files import GameFilesSource
 from invoker.sources.opendota import OpenDotaFetcher
+from invoker.sources.stratz import StratzFetcher
 
 SCHEMA_VERSION = 1
 UNKNOWN = "unknown"
@@ -188,6 +189,7 @@ def aggregate_team_profile(
     hero_names: dict[int, str],
     fetched_at: str,
     patch_constants: list[dict[str, Any]] | None = None,
+    player_positions: dict[int, int] | None = None,
 ) -> dict[str, Any]:
     hero_pool: dict[int, dict[str, Any]] = {}
     player_pool: dict[int, dict[str, Any]] = {}
@@ -334,12 +336,15 @@ def aggregate_team_profile(
         {"name": n, "count": c}
         for n, c in observed_names.most_common()
     ]
+    positions = player_positions or {}
+
     heroes = []
     for entry in hero_pool.values():
-        per_hero_players = sorted(
-            entry.pop("_players").values(),
-            key=lambda p: (-p["games"], p["account_id"]),
-        )
+        per_hero_players = []
+        for player_entry in entry.pop("_players").values():
+            player_entry["primary_position"] = positions.get(player_entry["account_id"])
+            per_hero_players.append(player_entry)
+        per_hero_players.sort(key=lambda p: (-p["games"], p["account_id"]))
         entry["players"] = per_hero_players
         heroes.append(entry)
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
@@ -349,6 +354,7 @@ def aggregate_team_profile(
             "account_id": account_id,
             "personaname": roster_personas.get(account_id),
             "games": games,
+            "primary_position": positions.get(account_id),
         }
         for account_id, games in sorted(
             roster_games.items(), key=lambda item: (-item[1], item[0])
@@ -362,6 +368,7 @@ def aggregate_team_profile(
             key=lambda h: (-h["games"], h["hero_id"]),
         )
         entry["hero_pool"] = per_hero
+        entry["primary_position"] = positions.get(entry["account_id"])
         players_view.append(entry)
     players_view.sort(key=lambda p: (-p["games"], p["account_id"]))
 
@@ -404,6 +411,7 @@ def aggregate_team_profile(
             "match_ids": [_match_id(row) for row in match_rows if _match_id(row) is not None],
             "missing_match_detail_count": len(missing_match_ids),
             "missing_match_ids": missing_match_ids,
+            "position_source": "stratz" if player_positions else None,
         },
     }
 
@@ -536,6 +544,60 @@ def _write_team_profile(data_dir: Path, patch: str, profile: dict[str, Any]) -> 
     return profile_path, index_path
 
 
+def _roster_account_ids(
+    team_id: int,
+    match_rows: list[dict[str, Any]],
+    match_details: dict[int, dict[str, Any]],
+) -> list[int]:
+    seen: set[int] = set()
+    for match_row in match_rows:
+        match_id = _match_id(match_row)
+        if match_id is None:
+            continue
+        detail = match_details.get(match_id)
+        if not detail:
+            continue
+        side = _team_side(team_id, match_row, detail)
+        players = detail.get("players") or []
+        if not isinstance(players, list):
+            continue
+        for player in players:
+            if not isinstance(player, dict) or _player_side(player) != side:
+                continue
+            account_id = player.get("account_id")
+            if isinstance(account_id, int):
+                seen.add(account_id)
+    return sorted(seen)
+
+
+async def _fetch_player_positions(
+    cache_dir: Path,
+    patch: str,
+    token: str | None,
+    account_ids: list[int],
+    *,
+    force: bool = False,
+) -> dict[int, int]:
+    if not token or not account_ids:
+        return {}
+    fetcher = StratzFetcher(cache_dir, patch, token)
+    positions: dict[int, int] = {}
+    try:
+        for account_id in account_ids:
+            try:
+                position = await fetcher.player_position(account_id, force=force)
+            except Exception as exc:
+                logger.warning(
+                    "Skipping STRATZ position account_id=%s error=%s", account_id, exc
+                )
+                continue
+            if position is not None:
+                positions[account_id] = position
+    finally:
+        await fetcher.close()
+    return positions
+
+
 async def build_team_profile(
     *,
     data_dir: Path,
@@ -545,6 +607,7 @@ async def build_team_profile(
     patch: str,
     limit: int = 50,
     force: bool = False,
+    stratz_token: str | None = None,
 ) -> TeamProfileBuildResult:
     od = OpenDotaFetcher(cache_dir, patch)
     fetched_at = _utc_now()
@@ -578,6 +641,15 @@ async def build_team_profile(
     finally:
         await od.close()
 
+    roster_ids = _roster_account_ids(team_id, match_rows, details)
+    if stratz_token is None:
+        logger.info(
+            "STRATZ_API_TOKEN not set; skipping per-player position lookup"
+        )
+    player_positions = await _fetch_player_positions(
+        cache_dir, patch, stratz_token, roster_ids, force=force
+    )
+
     profile = aggregate_team_profile(
         team_id=team_id,
         patch=patch,
@@ -587,6 +659,7 @@ async def build_team_profile(
         hero_names=_hero_names(game_data_dir, patch),
         fetched_at=fetched_at,
         patch_constants=patch_constants,
+        player_positions=player_positions,
     )
     profile_path, index_path = _write_team_profile(data_dir, patch, profile)
     return TeamProfileBuildResult(

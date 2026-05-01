@@ -122,12 +122,19 @@ details. The first implemented profile slice contains a team-wide hero pool
 OpenDota patch names where available, tournament metadata, and match ID
 evidence. It does not embed raw match payloads.
 
-Position (1-5) per player is intentionally not surfaced. See
-[docs/specs/2026-04-30-team-profile-kg.md](specs/2026-04-30-team-profile-kg.md)
-under "Position Inference (Deferred)" for the discussion — OpenDota's
-`lane_role` plus GPM rank produced enough mis-tags on roaming supports that we
-removed the field rather than ship a wrong-by-default signal. STRATZ is a
-candidate authoritative source.
+Position (1-5) per player comes from STRATZ when `STRATZ_API_TOKEN` is
+configured. The build runs one GraphQL `player.proSteamAccount.position`
+lookup per roster account (5 calls for a full pro roster), caches each
+response under the shared cache, and surfaces `primary_position` on
+`roster.players[]`, `players[]`, and `hero_pool[].players[]`. Without a
+token the lookup is skipped and `primary_position` is `null` everywhere.
+`source.position_source` records `"stratz"` or `null` so consumers can
+tell what they got.
+
+Earlier OpenDota-only heuristics (raw `lane_role`; GPM-rank with
+`lane_role` core-disambiguator) are documented in the team-profile spec
+under "Position Inference (Deferred)" and are intentionally not used —
+both produced wrong-by-default classifications on roaming supports.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
