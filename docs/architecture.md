@@ -122,19 +122,23 @@ details. The first implemented profile slice contains a team-wide hero pool
 OpenDota patch names where available, tournament metadata, and match ID
 evidence. It does not embed raw match payloads.
 
-Position (1-5) per player comes from STRATZ when `STRATZ_API_TOKEN` is
-configured. The build runs one GraphQL `player.proSteamAccount.position`
-lookup per roster account (5 calls for a full pro roster), caches each
-response under the shared cache, and surfaces `primary_position` on
-`roster.players[]`, `players[]`, and `hero_pool[].players[]`. Without a
-token the lookup is skipped and `primary_position` is `null` everywhere.
-`source.position_source` records `"stratz"` or `null` so consumers can
-tell what they got.
+Position (1-5) per player is sourced in this order:
+
+1. **Authored override** in `data/authored/teams.yaml` under the team's
+   `players: [{account_id, position}]` list. Wins over STRATZ when both
+   disagree. Use this for known-wrong STRATZ classifications.
+2. **STRATZ** `player.proSteamAccount.position` when `STRATZ_API_TOKEN` is
+   configured. One GraphQL call per roster account, cached indefinitely.
+3. **null** otherwise.
+
+Each player carries `primary_position` and `position_source` ("authored",
+"stratz", or `null`). Top-level `source.position_sources` is the sorted
+list of distinct sources actually used in the profile, or `null` if none.
 
 Earlier OpenDota-only heuristics (raw `lane_role`; GPM-rank with
 `lane_role` core-disambiguator) are documented in the team-profile spec
-under "Position Inference (Deferred)" and are intentionally not used —
-both produced wrong-by-default classifications on roaming supports.
+under "Position Inference (Failed Attempts)" and are intentionally not
+used — both produced wrong-by-default classifications on roaming supports.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent

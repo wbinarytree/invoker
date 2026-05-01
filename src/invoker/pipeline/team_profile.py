@@ -63,6 +63,28 @@ def _team_registry_entry(data_dir: Path, team_id: int) -> dict[str, Any] | None:
     return None
 
 
+def _team_roster_overrides(data_dir: Path, team_id: int) -> dict[int, int]:
+    entry = _team_registry_entry(data_dir, team_id)
+    if entry is None:
+        return {}
+    players = entry.get("players")
+    if not isinstance(players, list):
+        return {}
+    out: dict[int, int] = {}
+    for player in players:
+        if not isinstance(player, dict):
+            continue
+        account_id = player.get("account_id")
+        position = player.get("position")
+        if (
+            isinstance(account_id, int)
+            and isinstance(position, int)
+            and 1 <= position <= 5
+        ):
+            out[account_id] = position
+    return out
+
+
 def _team_metadata(data_dir: Path, team_id: int) -> dict[str, Any]:
     entry = _team_registry_entry(data_dir, team_id)
     if entry is None:
@@ -189,7 +211,7 @@ def aggregate_team_profile(
     hero_names: dict[int, str],
     fetched_at: str,
     patch_constants: list[dict[str, Any]] | None = None,
-    player_positions: dict[int, int] | None = None,
+    player_positions: dict[int, tuple[int, str]] | None = None,
 ) -> dict[str, Any]:
     hero_pool: dict[int, dict[str, Any]] = {}
     player_pool: dict[int, dict[str, Any]] = {}
@@ -338,28 +360,39 @@ def aggregate_team_profile(
     ]
     positions = player_positions or {}
 
+    def _pos(account_id: int) -> tuple[int | None, str | None]:
+        entry = positions.get(account_id)
+        if entry is None:
+            return None, None
+        return entry[0], entry[1]
+
     heroes = []
     for entry in hero_pool.values():
         per_hero_players = []
         for player_entry in entry.pop("_players").values():
-            player_entry["primary_position"] = positions.get(player_entry["account_id"])
+            pos, source = _pos(player_entry["account_id"])
+            player_entry["primary_position"] = pos
+            player_entry["position_source"] = source
             per_hero_players.append(player_entry)
         per_hero_players.sort(key=lambda p: (-p["games"], p["account_id"]))
         entry["players"] = per_hero_players
         heroes.append(entry)
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
 
-    roster_players = [
-        {
-            "account_id": account_id,
-            "personaname": roster_personas.get(account_id),
-            "games": games,
-            "primary_position": positions.get(account_id),
-        }
-        for account_id, games in sorted(
-            roster_games.items(), key=lambda item: (-item[1], item[0])
+    roster_players = []
+    for account_id, games in sorted(
+        roster_games.items(), key=lambda item: (-item[1], item[0])
+    ):
+        pos, source = _pos(account_id)
+        roster_players.append(
+            {
+                "account_id": account_id,
+                "personaname": roster_personas.get(account_id),
+                "games": games,
+                "primary_position": pos,
+                "position_source": source,
+            }
         )
-    ]
 
     players_view = []
     for entry in player_pool.values():
@@ -368,7 +401,9 @@ def aggregate_team_profile(
             key=lambda h: (-h["games"], h["hero_id"]),
         )
         entry["hero_pool"] = per_hero
-        entry["primary_position"] = positions.get(entry["account_id"])
+        pos, source = _pos(entry["account_id"])
+        entry["primary_position"] = pos
+        entry["position_source"] = source
         players_view.append(entry)
     players_view.sort(key=lambda p: (-p["games"], p["account_id"]))
 
@@ -411,7 +446,8 @@ def aggregate_team_profile(
             "match_ids": [_match_id(row) for row in match_rows if _match_id(row) is not None],
             "missing_match_detail_count": len(missing_match_ids),
             "missing_match_ids": missing_match_ids,
-            "position_source": "stratz" if player_positions else None,
+            "position_sources": sorted({src for _, src in (positions or {}).values()})
+            or None,
         },
     }
 
@@ -646,9 +682,16 @@ async def build_team_profile(
         logger.info(
             "STRATZ_API_TOKEN not set; skipping per-player position lookup"
         )
-    player_positions = await _fetch_player_positions(
+    stratz_positions = await _fetch_player_positions(
         cache_dir, patch, stratz_token, roster_ids, force=force
     )
+    authored_positions = _team_roster_overrides(data_dir, team_id)
+    merged_positions: dict[int, tuple[int, str]] = {
+        account_id: (position, "stratz")
+        for account_id, position in stratz_positions.items()
+    }
+    for account_id, position in authored_positions.items():
+        merged_positions[account_id] = (position, "authored")
 
     profile = aggregate_team_profile(
         team_id=team_id,
@@ -659,7 +702,7 @@ async def build_team_profile(
         hero_names=_hero_names(game_data_dir, patch),
         fetched_at=fetched_at,
         patch_constants=patch_constants,
-        player_positions=player_positions,
+        player_positions=merged_positions,
     )
     profile_path, index_path = _write_team_profile(data_dir, patch, profile)
     return TeamProfileBuildResult(

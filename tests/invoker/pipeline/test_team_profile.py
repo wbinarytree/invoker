@@ -148,6 +148,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         "personaname": "Yatoro [Pro]",
         "games": 2,
         "primary_position": None,
+        "position_source": None,
     }
     assert profile["roster"]["roster_hash"] != "unknown"
     assert profile["observed_patches"] == [
@@ -171,12 +172,14 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
             "personaname": "Yatoro [Pro]",
             "games": 1,
             "primary_position": None,
+            "position_source": None,
         },
         {
             "account_id": 11,
             "personaname": "Larl",
             "games": 1,
             "primary_position": None,
+            "position_source": None,
         },
     ]
     assert profile["hero_pool"][-1]["localized_name"] is None
@@ -279,12 +282,55 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
     assert result.profile_path.parent.name == result.roster_hash
 
     profile = json.loads(result.profile_path.read_text())
-    assert profile["source"]["position_source"] == "stratz"
-    by_account = {p["account_id"]: p["primary_position"] for p in profile["roster"]["players"]}
-    assert by_account == {10: 1, 11: 2}
+    assert profile["source"]["position_sources"] == ["stratz"]
+    by_account = {
+        p["account_id"]: (p["primary_position"], p["position_source"])
+        for p in profile["roster"]["players"]
+    }
+    assert by_account == {10: (1, "stratz"), 11: (2, "stratz")}
     yatoro = next(p for p in profile["players"] if p["account_id"] == 10)
     assert yatoro["primary_position"] == 1
+    assert yatoro["position_source"] == "stratz"
     assert result.index_path.read_text().count('"team_id": 123') == 1
+
+
+@pytest.mark.asyncio
+async def test_build_team_profile_authored_position_overrides_stratz(
+    monkeypatch, tmp_path
+):
+    monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
+    monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
+    monkeypatch.setattr(team_profile_module, "StratzFetcher", FakeStratzFetcher)
+
+    registry = team_registry_file(tmp_path)
+    registry.parent.mkdir(parents=True, exist_ok=True)
+    registry.write_text(
+        "schema_version: 1\n"
+        "teams:\n"
+        "  - team_id: 123\n"
+        "    name: Authored Team\n"
+        "    players:\n"
+        "      - account_id: 11\n"
+        "        position: 5\n"
+    )
+
+    result = await build_team_profile(
+        data_dir=tmp_path,
+        game_data_dir=Path("/game"),
+        cache_dir=tmp_path / "cache",
+        team_id=123,
+        patch="7.41b",
+        stratz_token="test-token",
+    )
+
+    profile = json.loads(result.profile_path.read_text())
+    assert profile["source"]["position_sources"] == ["authored", "stratz"]
+    by_account = {
+        p["account_id"]: (p["primary_position"], p["position_source"])
+        for p in profile["roster"]["players"]
+    }
+    # 10 stays from STRATZ; 11 was overridden from STRATZ pos2 -> authored pos5
+    assert by_account == {10: (1, "stratz"), 11: (5, "authored")}
 
 
 @pytest.mark.asyncio
@@ -306,9 +352,10 @@ async def test_build_team_profile_skips_stratz_when_token_missing(monkeypatch, t
     )
 
     profile = json.loads(result.profile_path.read_text())
-    assert profile["source"]["position_source"] is None
+    assert profile["source"]["position_sources"] is None
     for player in profile["roster"]["players"]:
         assert player["primary_position"] is None
+        assert player["position_source"] is None
 
 
 @pytest.mark.asyncio

@@ -326,16 +326,28 @@ Side-specific breakdowns, phase buckets, own-ban versus opponent-ban splits, and
 full `state_to_next_action` modeling should be deferred until the simple counter
 has proven useful.
 
-### Position Inference (Implemented via STRATZ)
+### Position Inference (Implemented: STRATZ + authored override)
 
-Position is now sourced from STRATZ's curated `proSteamAccount.position`
-field, one GraphQL call per roster account (5 per profile). Surfaces as
-`primary_position` on every player-keyed structure. When `STRATZ_API_TOKEN`
-is unset the lookup is skipped and the field is `null`.
+Position is sourced in priority order:
+
+1. Authored override in `data/authored/teams.yaml` under
+   `teams[].players[]` (`account_id`, `position`). Wins over STRATZ.
+2. STRATZ `player.proSteamAccount.position`, one GraphQL call per roster
+   account (5 per pro profile), cached indefinitely.
+3. `null` when neither source has a value.
+
+Each player record carries `primary_position` and `position_source`
+("authored", "stratz", or `null`). Top-level `source.position_sources` is
+the sorted list of distinct sources actually used.
+
+STRATZ's curated position is reasonably reliable for established pro
+players but has been observed to misclassify (e.g. tagging a known pos5
+support as pos4). The authored override is the escape hatch for those
+cases — preferable to silently shipping a wrong value or to inventing a
+new heuristic.
 
 The OpenDota-only heuristics below are kept here as a record of what was
-tried and why it failed — do not reintroduce them without an authoritative
-override.
+tried and why it failed — do not reintroduce them.
 
 ### Position Inference (Failed Attempts)
 
