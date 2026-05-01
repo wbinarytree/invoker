@@ -11,6 +11,7 @@ from typing import Any
 import yaml
 
 from invoker.logging import get_logger
+from invoker.patches import PatchWindow, load_patch_windows, patch_window_for_timestamp
 from invoker.paths import team_index_file, team_profile_file, team_registry_file
 from invoker.sources.game_files import GameFilesSource
 from invoker.sources.opendota import OpenDotaFetcher
@@ -196,22 +197,9 @@ def _observed_patch_id(detail: dict[str, Any]) -> int | None:
     return value if isinstance(value, int) else None
 
 
-def _patch_id_to_name(patch_constants: list[dict[str, Any]] | None) -> dict[int, str]:
-    if not patch_constants:
-        return {}
-    out: dict[int, str] = {}
-    for index, entry in enumerate(patch_constants):
-        if not isinstance(entry, dict):
-            continue
-        name = entry.get("name")
-        if not isinstance(name, str):
-            continue
-        patch_id = entry.get("id")
-        if isinstance(patch_id, int):
-            out[patch_id] = name
-        else:
-            out[index] = name
-    return out
+def _match_start_time(match_row: dict[str, Any], detail: dict[str, Any]) -> int | float | None:
+    value = detail.get("start_time", match_row.get("start_time"))
+    return value if isinstance(value, int | float) else None
 
 
 def _tournament(match_row: dict[str, Any], detail: dict[str, Any]) -> dict[str, Any]:
@@ -308,7 +296,7 @@ def aggregate_team_profile(
     match_details: dict[int, dict[str, Any]],
     hero_names: dict[int, str],
     fetched_at: str,
-    patch_constants: list[dict[str, Any]] | None = None,
+    patch_windows: list[PatchWindow] | None = None,
     player_positions: dict[int, tuple[int, str]] | None = None,
     canonical_roster: CanonicalRoster | None = None,
     include_standin_matches: bool = True,
@@ -318,10 +306,12 @@ def aggregate_team_profile(
     roster_personas: dict[int, str] = {}
     roster_games: Counter[int] = Counter()
     observed_patches: Counter[int | None] = Counter()
+    observed_patch_windows: Counter[str | None] = Counter()
     tournaments: dict[str, dict[str, Any]] = {}
     missing_match_ids: list[int] = []
     contributing_match_count = 0
-    patch_id_to_name = _patch_id_to_name(patch_constants)
+    windows = patch_windows if patch_windows is not None else load_patch_windows()
+    patch_window_by_name = {window.patch: window for window in windows}
     observed_names: Counter[str] = Counter()
     observed_tags: Counter[str] = Counter()
     canonical_account_ids = canonical_roster.account_ids if canonical_roster is not None else set()
@@ -348,6 +338,8 @@ def aggregate_team_profile(
         if tag:
             observed_tags[tag] += 1
         observed_patches[_observed_patch_id(detail)] += 1
+        observed_window = patch_window_for_timestamp(_match_start_time(match_row, detail), windows)
+        observed_patch_windows[observed_window.patch if observed_window else None] += 1
         tournament = _tournament(match_row, detail)
         league_id = tournament["leagueid"]
         league_name = tournament["league_name"]
@@ -556,6 +548,21 @@ def aggregate_team_profile(
         players_view.append(entry)
     players_view.sort(key=lambda p: (-p["games"], p["account_id"]))
 
+    def _patch_window_view(patch_name: str | None, count: int) -> dict[str, Any]:
+        window = patch_window_by_name.get(patch_name) if patch_name is not None else None
+        end_date = window.end_date_exclusive if window is not None else None
+        return {
+            "patch": patch_name,
+            "start_date": window.start_date.isoformat() if window is not None else None,
+            "end_date_exclusive": end_date.isoformat() if end_date is not None else None,
+            "match_count": count,
+        }
+
+    def _patch_window_sort_key(item: tuple[str | None, int]) -> tuple[bool, str]:
+        patch_name, _ = item
+        window = patch_window_by_name.get(patch_name) if patch_name is not None else None
+        return patch_name is None, window.start_date.isoformat() if window is not None else ""
+
     return {
         "schema_version": SCHEMA_VERSION,
         "team": team_view,
@@ -580,12 +587,19 @@ def aggregate_team_profile(
         "observed_patches": [
             {
                 "patch_id": patch_id,
-                "patch_name": patch_id_to_name.get(patch_id) if patch_id is not None else None,
+                "patch_name": None,
                 "match_count": count,
             }
             for patch_id, count in sorted(
                 observed_patches.items(),
                 key=lambda item: (item[0] is None, item[0] or 0),
+            )
+        ],
+        "observed_patch_windows": [
+            _patch_window_view(patch_name, count)
+            for patch_name, count in sorted(
+                observed_patch_windows.items(),
+                key=_patch_window_sort_key,
             )
         ],
         "tournaments": sorted(
@@ -823,18 +837,11 @@ async def build_team_profile(
 ) -> TeamProfileBuildResult | TeamProfileScaffoldResult | TeamProfileCurationResult:
     od = OpenDotaFetcher(cache_dir, patch)
     fetched_at = _utc_now()
-    patch_constants: list[dict[str, Any]] | None = None
     try:
         raw_matches = await od.team_matches(team_id, force=force)
         if not isinstance(raw_matches, list):
             raise ValueError("OpenDota team matches response must be a list")
         match_rows = _limit_matches(raw_matches, limit)
-        try:
-            raw_constants = await od.constants_patch()
-            if isinstance(raw_constants, list):
-                patch_constants = raw_constants
-        except Exception as exc:
-            logger.warning("Skipping OpenDota patch constants error=%s", exc)
         details: dict[int, dict[str, Any]] = {}
         for match_row in match_rows:
             match_id = _match_id(match_row)
@@ -898,7 +905,7 @@ async def build_team_profile(
         match_details=details,
         hero_names=_hero_names(game_data_dir, patch),
         fetched_at=fetched_at,
-        patch_constants=patch_constants,
+        patch_windows=load_patch_windows(),
         player_positions=merged_positions,
         canonical_roster=canonical_roster,
         include_standin_matches=include_standin_matches,

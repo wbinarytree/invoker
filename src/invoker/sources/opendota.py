@@ -31,8 +31,5 @@ class OpenDotaFetcher:
     async def match_detail(self, match_id: int, *, force: bool = False) -> dict:
         return await self.client.get(f"{BASE}/matches/{match_id}", force=force)
 
-    async def constants_patch(self) -> list[dict]:
-        return await self.client.get(f"{BASE}/constants/patch")
-
     async def close(self) -> None:
         await self.client.close()

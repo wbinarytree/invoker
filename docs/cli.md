@@ -163,14 +163,19 @@ Behavior:
 4. selects a canonical five-player roster and derives `roster_hash` from those
    account IDs
 5. aggregates team hero games, wins, per-hero manual position counts, player
-   usage, match IDs, observed patches, tournament metadata, and stand-in
-   evidence
+   usage, match IDs, patch windows from `src/invoker/patches.json`,
+   tournament metadata, and stand-in evidence
 6. writes `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 7. updates `data/derived/<patch>/teams/index.json`
 
 The first slice uses a recent-match window with a default limit of 50. Missing
 match-detail payloads are recorded in the profile source metadata instead of
 failing the whole build.
+
+Observed match patch names are resolved from each match `start_time` using the
+tracked `src/invoker/patches.json` UTC date windows. OpenDota numeric patch IDs
+are retained as raw evidence when present, but they are not the source of truth
+for patch names.
 
 By default, stand-in matches contribute to team-level hero-pool counts, but
 per-player aggregates include only the canonical roster. Use

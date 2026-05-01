@@ -63,6 +63,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "dire_team_id": 456,
                 "radiant_win": True,
                 "patch": 60,
+                "start_time": 1775606400,
                 "radiant_team": {"team_id": 123, "name": "BetBoom Team", "tag": "BB"},
                 "dire_team": {"team_id": 456, "name": "Opponent"},
                 "players": [
@@ -111,6 +112,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
                 "dire_team_id": 123,
                 "radiant_win": True,
                 "patch": 59,
+                "start_time": 1774483200,
                 "dire_name": "BetBoom",
                 "players": [
                     {
@@ -154,10 +156,6 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         },
         hero_names={1: "Hero One", 2: "Hero Two", 3: "Hero Three", 4: "Hero Four"},
         fetched_at="2026-04-30T00:00:00Z",
-        patch_constants=[
-            {"id": 59, "name": "7.40"},
-            {"id": 60, "name": "7.41"},
-        ],
     )
 
     assert profile["team"]["team_id"] == 123
@@ -180,8 +178,22 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     }
     assert profile["roster"]["roster_hash"] != "unknown"
     assert profile["observed_patches"] == [
-        {"patch_id": 59, "patch_name": "7.40", "match_count": 1},
-        {"patch_id": 60, "patch_name": "7.41", "match_count": 1},
+        {"patch_id": 59, "patch_name": None, "match_count": 1},
+        {"patch_id": 60, "patch_name": None, "match_count": 1},
+    ]
+    assert profile["observed_patch_windows"] == [
+        {
+            "patch": "7.41",
+            "start_date": "2026-03-24",
+            "end_date_exclusive": "2026-03-27",
+            "match_count": 1,
+        },
+        {
+            "patch": "7.41b",
+            "start_date": "2026-04-07",
+            "end_date_exclusive": None,
+            "match_count": 1,
+        },
     ]
     assert profile["tournaments"] == [
         {"leagueid": 10, "league_name": "Example League"},
@@ -374,6 +386,7 @@ class FakeOpenDotaFetcher:
             "radiant_team_id": 123,
             "radiant_win": False,
             "patch": 60,
+            "start_time": 1775606400,
             "players": [
                 {"player_slot": 0, "account_id": 10, "hero_id": 1, "personaname": "P1"},
                 {"player_slot": 1, "account_id": 11, "hero_id": 2, "personaname": "P2"},
@@ -382,9 +395,6 @@ class FakeOpenDotaFetcher:
                 {"player_slot": 4, "account_id": 14, "hero_id": 1, "personaname": "P5"},
             ],
         }
-
-    async def constants_patch(self):
-        return [{"id": 60, "name": "7.41"}]
 
     async def close(self):
         pass
@@ -419,9 +429,6 @@ class FakeOpenDotaFetcherWithStandin:
                 for index, account_id in enumerate(accounts)
             ],
         }
-
-    async def constants_patch(self):
-        return []
 
     async def close(self):
         pass
