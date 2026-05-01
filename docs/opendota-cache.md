@@ -91,6 +91,8 @@ Matchup files (keyed by hero ID in the URL path, so each hero has its own hash):
 | `heroes_120_matchups.json`               | `GET /api/heroes/120/matchups`   | `list[dict]`  |
 | `proMatches.json`                        | `GET /api/proMatches`            | `list[dict]`  |
 | `proMatches__less_than_match_id=<id>.json` | `GET /api/proMatches?less_than_match_id=<id>` | `list[dict]` |
+| `teams_<team_id>_matches.json`           | `GET /api/teams/<team_id>/matches` | `list[dict]` |
+| `matches_<match_id>.json`                | `GET /api/matches/<match_id>`    | `dict`        |
 
 ## Key payload shapes
 
@@ -110,6 +112,8 @@ constants because cached constants silently drift after patches. See
 Historical match detail responses can be cached indefinitely. Rolling list
 endpoints such as team match history should be refreshed explicitly when stale
 data matters; the envelope's `fetched_at` field exists to diagnose that.
+Patch-name assignment for team profiles does not call OpenDota constants. It
+uses the tracked `src/invoker/patches.json` date windows and match `start_time`.
 
 ## How to force a re-fetch
 

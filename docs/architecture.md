@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-01 (team profile canonical roster and stand-ins)
+Last updated: 2026-05-01 (manual patch windows for team profiles)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -119,9 +119,10 @@ This is an aggregate team view built from OpenDota match history and match
 details. The first implemented profile slice contains a team-wide hero pool
 (with per-hero player breakdown and manual position counts), a per-player hero
 pool, the canonical roster (account IDs with personanames and game counts),
-stand-in evidence, patch buckets mapped to OpenDota patch names where
-available, tournament metadata, and match ID evidence. It does not embed raw
-match payloads.
+stand-in evidence, match patch buckets resolved from the local
+`src/invoker/patches.json` date windows, raw OpenDota patch IDs when present,
+tournament metadata, and match ID evidence. It does not embed raw match
+payloads.
 
 `roster_hash` is derived from the canonical five-player roster, not from every
 account observed across the match window. The canonical roster comes from
@@ -157,6 +158,12 @@ Earlier OpenDota-only heuristics (raw `lane_role`; GPM-rank with
 `lane_role` core-disambiguator) are documented in the team-profile spec
 under "Position Inference (Failed Attempts)" and are intentionally not
 used — both produced wrong-by-default classifications on roaming supports.
+
+Match patch names are assigned by `start_time` against the manually maintained
+`src/invoker/patches.json` window list. Windows use inclusive `start_date` and
+exclusive `end_date_exclusive` boundaries on the UTC match start date. Exact
+release time within the day is intentionally not encoded until the source data
+captures it.
 
 `team.name` is taken from `data/authored/teams.yaml` when an entry exists
 (`name_source: "registry"`); otherwise it is auto-filled from the most-frequent
@@ -417,6 +424,9 @@ data/
 dist/
   invoker-kg-<patch>-<timestamp>/
   invoker-kg-<patch>-<timestamp>.tar.gz
+
+src/invoker/
+  patches.json
 
 $CACHE_DIR/
   opendota/

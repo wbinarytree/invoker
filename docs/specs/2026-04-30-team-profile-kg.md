@@ -109,7 +109,9 @@ recent-form data.
 
 Patch changes during a tournament are uncommon but possible. The profile should
 record observed match patch per match and group aggregates by patch rather than
-assuming a tournament is patch-homogeneous.
+assuming a tournament is patch-homogeneous. Patch names should come from the
+manually maintained `src/invoker/patches.json` UTC date windows using match
+`start_time`; OpenDota numeric patch IDs are retained only as source evidence.
 
 Tournament grouping should start from source league or tournament IDs when the
 match payload exposes them. If tournament grouping is unavailable, the command
