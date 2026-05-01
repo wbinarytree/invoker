@@ -16,6 +16,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name>]`
 - `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]`
+- `invoker serve-knowledge --bundle <path> [--host 127.0.0.1] [--port 8765]`
 - `invoker vocab-audit`
 - `invoker review-vocabulary [--bucket <bucket>] [--term <term>]`
 - `invoker review-vocab-gaps [--bucket <bucket>] [--candidate-term <term>]`
@@ -197,6 +198,41 @@ entry for `--team-id`:
 Existing registry entries are never overwritten. Entries with anything other
 than exactly five players, or without one valid manual position for each slot
 1-5, stop before profile generation and ask the user to curate the registry.
+
+### `serve-knowledge`
+
+Runs the local read-only knowledge service over HTTP.
+
+Implemented by [src/invoker/service/core.py](../src/invoker/service/core.py)
+and [src/invoker/service/http.py](../src/invoker/service/http.py).
+
+Required resource bundle layout:
+
+- `bundle.json`
+- `authored/teams.yaml`
+- `game_constants/<patch>/...` with the same JSON files produced by
+  `snapshot-game-files`
+- `derived/<patch>/teams/index.json`
+- `derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
+
+The command does not fetch network data. It serves the bundle as-is and exposes
+routes matching the service method names:
+
+- `/list_bundle_patches`
+- `/lookup_hero`
+- `/get_hero_constants`
+- `/resolve_team`
+- `/resolve_player`
+- `/get_team_profile`
+- `/get_team_roster`
+- `/get_team_hero_pool`
+- `/get_team_player_hero_pool`
+
+Routes accept `GET` query parameters or a `POST` JSON object. Public responses
+use the service envelope with `service_schema_version`, `patch`, `kind`, `data`,
+and `source`. `roster_hash` is not exposed in service payloads.
+When `authored/teams.yaml` is present, team aliases and curated player names
+from the registry are available for exact resolution and roster responses.
 
 ### `vocab-audit`
 
