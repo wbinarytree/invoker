@@ -499,13 +499,20 @@ def aggregate_team_profile(
     heroes = []
     for entry in hero_pool.values():
         per_hero_players = []
+        position_games: Counter[int] = Counter()
         for player_entry in entry.pop("_players").values():
             pos, source = _pos(player_entry["account_id"])
             player_entry["primary_position"] = pos
             player_entry["position_source"] = source
             per_hero_players.append(player_entry)
+            if pos is not None:
+                position_games[pos] += player_entry["games"]
         per_hero_players.sort(key=lambda p: (-p["games"], p["account_id"]))
         entry["players"] = per_hero_players
+        entry["positions"] = [
+            {"position": position, "games": games}
+            for position, games in sorted(position_games.items())
+        ]
         heroes.append(entry)
     heroes.sort(key=lambda h: (-h["games"], h["hero_id"]))
 
@@ -669,19 +676,6 @@ def resolve_team(data_dir: Path, query: str) -> dict[str, Any] | None:
         for team in teams:
             if isinstance(team, dict) and team.get("team_id") == team_id:
                 return team
-        return None
-    lowered = needle.casefold()
-    for team in teams:
-        if not isinstance(team, dict):
-            continue
-        name = team.get("name")
-        if isinstance(name, str) and name.casefold() == lowered:
-            return team
-        aliases = team.get("aliases") or []
-        if isinstance(aliases, list) and any(
-            isinstance(a, str) and a.casefold() == lowered for a in aliases
-        ):
-            return team
     return None
 
 

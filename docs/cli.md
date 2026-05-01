@@ -162,8 +162,9 @@ Behavior:
 3. resolves hero names from `INVOKER_GAME_DATA_DIR/<patch>/`
 4. selects a canonical five-player roster and derives `roster_hash` from those
    account IDs
-5. aggregates team hero games, wins, player usage, match IDs, observed patches,
-   tournament metadata, and stand-in evidence
+5. aggregates team hero games, wins, per-hero manual position counts, player
+   usage, match IDs, observed patches, tournament metadata, and stand-in
+   evidence
 6. writes `data/derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 7. updates `data/derived/<patch>/teams/index.json`
 

@@ -117,10 +117,11 @@ The manifest lists present heroes and content hashes for the derived hero files.
 
 This is an aggregate team view built from OpenDota match history and match
 details. The first implemented profile slice contains a team-wide hero pool
-(with per-hero player breakdown), a per-player hero pool, the canonical roster
-(account IDs with personanames and game counts), stand-in evidence, patch
-buckets mapped to OpenDota patch names where available, tournament metadata,
-and match ID evidence. It does not embed raw match payloads.
+(with per-hero player breakdown and manual position counts), a per-player hero
+pool, the canonical roster (account IDs with personanames and game counts),
+stand-in evidence, patch buckets mapped to OpenDota patch names where
+available, tournament metadata, and match ID evidence. It does not embed raw
+match payloads.
 
 `roster_hash` is derived from the canonical five-player roster, not from every
 account observed across the match window. The canonical roster comes from
@@ -168,9 +169,10 @@ can audit drift.
 consumers do not need to scan directories.
 
 `KnowledgeBase` exposes `team_profile()`, `team_hero_pool()`, and
-`resolve_team()` for offline consumers. The reader does not fetch network data;
-missing profiles raise `TeamProfileNotFoundError` with the build command to
-run.
+`resolve_team()` for offline consumers. Team resolution is exact-ID only; names
+and aliases are display metadata, not fuzzy lookup keys. The reader does not
+fetch network data; missing profiles raise `TeamProfileNotFoundError` with the
+build command to run.
 
 ### Graph cache
 

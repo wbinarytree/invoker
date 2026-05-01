@@ -193,6 +193,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
     assert hero_two["wins"] == 1
     assert hero_two["win_match_ids"] == [1]
     assert hero_two["loss_match_ids"] == [2]
+    assert hero_two["positions"] == []
     hero_two_players = sorted(hero_two["players"], key=lambda p: p["account_id"])
     assert hero_two_players == [
         {
@@ -282,6 +283,7 @@ def test_aggregate_team_profile_hashes_canonical_roster_and_surfaces_standins():
     standin_hero = next(h for h in profile["hero_pool"] if h["hero_id"] == 6)
     assert standin_hero["games"] == 1
     assert standin_hero["players"] == []
+    assert standin_hero["positions"] == []
     assert profile["source"]["match_roster_classifications"] == [
         {"match_id": 1, "roster_type": "canonical", "stand_in_account_ids": []},
         {"match_id": 2, "roster_type": "standin", "stand_in_account_ids": [99]},
@@ -451,6 +453,17 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
 
     profile = json.loads(result.profile_path.read_text())
     assert profile["source"]["position_sources"] == ["authored"]
+    hero_one = next(h for h in profile["hero_pool"] if h["hero_id"] == 1)
+    hero_two = next(h for h in profile["hero_pool"] if h["hero_id"] == 2)
+    assert hero_one["positions"] == [
+        {"position": 1, "games": 1},
+        {"position": 3, "games": 1},
+        {"position": 5, "games": 1},
+    ]
+    assert hero_two["positions"] == [
+        {"position": 2, "games": 1},
+        {"position": 4, "games": 1},
+    ]
     by_account = {
         p["account_id"]: (p["primary_position"], p["position_source"])
         for p in profile["roster"]["players"]
@@ -551,6 +564,8 @@ async def test_build_team_profile_uses_authored_five_and_can_exclude_standins(
     assert profile["scope"]["stand_in_policy"] == "exclude"
     assert profile["scope"]["contributing_match_count"] == 1
     assert [h["hero_id"] for h in profile["hero_pool"]] == [1, 2, 3, 4, 5]
+    hero_one = next(h for h in profile["hero_pool"] if h["hero_id"] == 1)
+    assert hero_one["positions"] == [{"position": 1, "games": 1}]
     assert [p["account_id"] for p in profile["players"]] == [10, 11, 12, 13, 14]
 
 
@@ -728,7 +743,7 @@ def test_load_team_profile_missing_raises(tmp_path):
         load_team_profile(tmp_path, "7.41b", 999)
 
 
-def test_resolve_team_by_id_name_and_alias(tmp_path):
+def test_resolve_team_by_id_only(tmp_path):
     registry = team_registry_file(tmp_path)
     registry.parent.mkdir(parents=True, exist_ok=True)
     registry.write_text(
@@ -743,8 +758,8 @@ def test_resolve_team_by_id_name_and_alias(tmp_path):
     by_name = resolve_team(tmp_path, "example team")
     by_alias = resolve_team(tmp_path, "exteam")
     assert by_id is not None and by_id["team_id"] == 123
-    assert by_name is not None and by_name["team_id"] == 123
-    assert by_alias is not None and by_alias["team_id"] == 123
+    assert by_name is None
+    assert by_alias is None
     assert resolve_team(tmp_path, "unknown") is None
 
 

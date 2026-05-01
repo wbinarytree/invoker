@@ -85,6 +85,7 @@ The first implementation should prioritize hero pool:
 
 - heroes picked by the team
 - games and wins per hero
+- manual position counts per hero when the curated roster is available
 - player usage per hero when available
 - role or slot hints only when available from the source payload
 - source match IDs
@@ -246,6 +247,9 @@ Sketch:
       "localized_name": "Example Hero",
       "games": 4,
       "wins": 3,
+      "positions": [
+        {"position": 1, "games": 4}
+      ],
       "players": [
         {"account_id": 1, "games": 4}
       ],
@@ -277,6 +281,9 @@ kb.team_profile(team_id, *, roster_hash=None)
 kb.team_hero_pool(team_id, *, roster_hash=None, patch=None)
 kb.resolve_team(query)
 ```
+
+`resolve_team` is exact-ID only. Team names and aliases are display metadata;
+do not use fuzzy matching to pick a team because team IDs are constants.
 
 Later slices:
 
