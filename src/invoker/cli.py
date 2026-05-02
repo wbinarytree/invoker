@@ -285,6 +285,32 @@ def build_team_profile_cmd(
         typer.echo(f"Missing match details: {result.missing_match_detail_count}", err=True)
 
 
+@app.command("serve-knowledge")
+def serve_knowledge_cmd(
+    bundle: Annotated[
+        Path,
+        typer.Option(
+            "--bundle",
+            help="Resource bundle root containing bundle.json, game_constants/, and derived/.",
+        ),
+    ],
+    host: Annotated[str, typer.Option(help="HTTP bind host.")] = "127.0.0.1",
+    port: Annotated[int, typer.Option(help="HTTP bind port.")] = 8765,
+) -> None:
+    """Serve the local read-only knowledge service over HTTP."""
+    from invoker.service import KnowledgeService, KnowledgeServiceError
+    from invoker.service.http import serve
+
+    _load_config()
+    try:
+        service = KnowledgeService(bundle)
+        typer.echo(f"Knowledge service: http://{host}:{port}")
+        serve(service, host=host, port=port)
+    except KnowledgeServiceError as exc:
+        typer.echo(exc.message, err=True)
+        raise typer.Exit(code=1) from exc
+
+
 @app.command("vocab-audit")
 def vocab_audit_cmd() -> None:
     from invoker.kg.vocab_audit import format_vocab_audit, run_vocab_audit

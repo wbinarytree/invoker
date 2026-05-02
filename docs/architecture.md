@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-01 (manual patch windows for team profiles)
+Last updated: 2026-05-01 (knowledge service first slice)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -9,7 +9,9 @@ implemented: hero, ability, talent, and hero-stat constants route through
 patch-scoped game-file snapshots instead of OpenDota constants. Stage 4.5 adds
 a local release bundle command for authored KG artifacts and derived patch
 outputs. Team-profile work has started with shared OpenDota cache support and
-a first hero-pool profile builder.
+a first hero-pool profile builder. A first local read-only knowledge service
+now exposes bundled game constants and team-profile aggregates through shared
+service methods with thin HTTP and MCP-style adapters.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -214,6 +216,67 @@ to exist, requires `INVOKER_GAME_DATA_DIR/<patch>/snapshot.json`, runs
 `vocab-audit`, records git hash and dirty state, and writes a full `.tar.gz`
 bundle. Local publishing does not require a clean worktree; `git_dirty` is
 recorded in `release.json`.
+
+### Local knowledge service
+
+`KnowledgeService` in
+[src/invoker/service/core.py](../src/invoker/service/core.py) is the shared
+read-only service core for agent consumers. It loads one explicit resource
+bundle root and does not fetch network data during service reads.
+
+The first bundle layout is:
+
+- `bundle.json`
+- `authored/teams.yaml`
+- `game_constants/<patch>/snapshot.json`
+- `game_constants/<patch>/heroes.json`
+- `game_constants/<patch>/abilities.json`
+- `game_constants/<patch>/hero_abilities.json`
+- `game_constants/<patch>/items.json`
+- `game_constants/<patch>/neutral_items.json`
+- `game_constants/<patch>/localization/<locale>.json`
+- `derived/<patch>/teams/index.json`
+- `derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
+
+`bundle.json` records `schema_version`, `patches`, and optional
+`default_patch`. If a bundle has one patch, service callers do not need to pass
+`patch`. If it has multiple patches and no default, patch-free calls fail with
+a clear ambiguity error listing available patches.
+
+Hero constants are assembled from bundled game-file snapshots through
+`GameFilesSource` and the existing hero context builders. The public
+`hero_constants` envelope includes hero identity, stat context, ability context,
+talents, service schema metadata, and game snapshot source metadata. Missing
+snapshot files or missing heroes fail loudly; the service does not synthesize
+Dota facts from memory.
+
+Team methods read `derived/<patch>/teams/index.json` and the referenced
+`profile.json` files. Public payloads expose roster, stand-ins, team hero pool,
+per-player hero pool, observed patch windows, tournaments, and source metadata.
+`roster_hash` remains an internal storage locator and is stripped from service
+responses. Missing profiles include the operator command:
+`invoker build-team-profile --team-id <id> --patch <patch>`.
+
+When present, `authored/teams.yaml` is loaded as the curated team registry. The
+service uses it for exact team alias resolution, registry team names, curated
+player names, and registry positions in public roster/player payloads.
+`profile.json` remains the aggregate statistics source.
+
+Resolution is deterministic and conservative:
+
+- numeric hero, team, and player IDs match directly;
+- exact normalized hero names, team names, aliases, observed team names, and
+  player persona names match;
+- ambiguous team and player names return candidates from `resolve_team` or
+  `resolve_player`; getter methods fail instead of choosing silently;
+- fuzzy matching is not implemented in this slice.
+
+The HTTP adapter in [src/invoker/service/http.py](../src/invoker/service/http.py)
+uses the Python standard library and exposes route names matching service
+method names. The MCP-style adapter in
+[src/invoker/service/mcp.py](../src/invoker/service/mcp.py) exposes tool
+descriptors and dispatches calls to the same service methods without adding an
+SDK dependency in the first slice.
 
 ---
 
