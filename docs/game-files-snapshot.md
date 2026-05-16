@@ -10,7 +10,9 @@ itself:
 uv run invoker snapshot-game-files \
   --vpk /path/to/extracted-dota-files \
   --out /path/to/invoker-game-data \
-  --patch 7.41b
+  --patch 7.41c \
+  --locale english \
+  --locale schinese
 ```
 
 Then point invoker at the snapshot root:
@@ -29,6 +31,7 @@ Expected output:
   items.json
   neutral_items.json
   localization/english.json
+  localization/schinese.json
   snapshot.json
 ```
 
@@ -46,6 +49,23 @@ uv run invoker snapshot-game-files \
   --out /path/to/invoker-game-data \
   --patch 7.41b \
   --localization /path/to/dota_english.txt
+```
+
+`--localization` is only valid for a single `--locale` value. For normal patch
+refreshes, prefer repeated `--locale` options so the snapshot records every
+locale in one patch directory.
+
+Snapshot metadata records generic source labels and relative source-file
+inventory. It must not be treated as a place to store local absolute paths.
+
+To produce the compact downstream identity/localization artifact:
+
+```bash
+uv run invoker export-identity-localization \
+  --patch 7.41c \
+  --locale english \
+  --locale schinese \
+  --out /tmp/identity_localization_7.41c.json
 ```
 
 Do not commit generated snapshots or raw extracted Valve files to this repo.

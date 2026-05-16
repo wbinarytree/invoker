@@ -43,8 +43,15 @@ SnapshotLocalizationOption = Annotated[
     ),
 ]
 SnapshotLocaleOption = Annotated[
-    str,
-    typer.Option(help="Locale name for localization/<locale>.json."),
+    list[str] | None,
+    typer.Option(
+        "--locale",
+        help="Locale name for localization/<locale>.json. Repeat for multiple locales.",
+    ),
+]
+IdentityOutOption = Annotated[
+    Path,
+    typer.Option("--out", help="Output JSON artifact path."),
 ]
 PublishOutOption = Annotated[
     Path,
@@ -191,13 +198,19 @@ def snapshot_game_files_cmd(
     out: SnapshotOutOption,
     patch: SnapshotPatchOption,
     localization: SnapshotLocalizationOption = None,
-    locale: SnapshotLocaleOption = "english",
+    locale: SnapshotLocaleOption = None,
 ) -> None:
     from invoker.snapshot.game_files import SnapshotError, snapshot_game_files
 
     _load_config()
     try:
-        result = snapshot_game_files(vpk, out, patch, localization=localization, locale=locale)
+        result = snapshot_game_files(
+            vpk,
+            out,
+            patch,
+            localization=localization,
+            locales=locale or ["english"],
+        )
     except SnapshotError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
@@ -206,6 +219,39 @@ def snapshot_game_files_cmd(
     typer.echo(f"Abilities: {result.ability_count}")
     typer.echo(f"Items: {result.item_count}")
     typer.echo(f"Neutral item sections: {result.neutral_item_count}")
+    typer.echo(f"Locales: {', '.join(result.locales)}")
+
+
+@app.command("export-identity-localization")
+def export_identity_localization_cmd(
+    patch: SnapshotPatchOption,
+    out: IdentityOutOption,
+    locale: SnapshotLocaleOption = None,
+) -> None:
+    from invoker.identity import IdentityExportError, export_identity_localization
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo(
+            "INVOKER_GAME_DATA_DIR is required for export-identity-localization.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    try:
+        artifact = export_identity_localization(
+            cfg.game_data_dir,
+            patch,
+            locales=locale,
+        )
+    except IdentityExportError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(artifact, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    typer.echo(f"Identity localization: {out}")
+    typer.echo(f"Heroes: {len(artifact['heroes'])}")
+    typer.echo(f"Items: {len(artifact['items'])}")
+    typer.echo(f"Locales: {', '.join(artifact['locales'])}")
 
 
 @app.command("build-team-profile")

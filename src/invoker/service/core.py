@@ -9,6 +9,7 @@ from typing import Any
 
 import yaml
 
+from invoker.identity import IdentityExportError, available_locales, hero_lookup_candidates
 from invoker.kg.hero_context import (
     HeroNotFoundError,
     build_hero_context_from_source,
@@ -107,12 +108,20 @@ class KnowledgeService:
 
     def lookup_hero(self, query: str | int, patch: str | None = None) -> dict[str, Any]:
         resolved_patch = self._resolve_patch(patch)
-        token = _normalize(str(query))
-        candidates = [
-            _hero_candidate(hero)
-            for hero in self._game_source(resolved_patch).heroes()
-            if token in _hero_tokens(hero)
-        ]
+        try:
+            candidates = hero_lookup_candidates(
+                self.bundle_root / "game_constants",
+                resolved_patch,
+                query,
+                locales=self._game_locales(resolved_patch),
+            )
+        except IdentityExportError as exc:
+            raise KnowledgeServiceError(
+                "hero_lookup_unavailable",
+                "resource bundle does not contain usable hero identity data for "
+                f"patch={resolved_patch}: {exc}",
+                status_code=404,
+            ) from exc
         return self._envelope(
             kind="hero_lookup",
             patch=resolved_patch,
@@ -296,9 +305,24 @@ class KnowledgeService:
             "artifact": "game_constants",
             "schema_version": _int_or_none(snapshot.get("schema_version")),
             "generated_at": snapshot.get("generated_at"),
-            "source": snapshot.get("source"),
+            "source": "dota2npc extraction" if snapshot.get("source") else None,
             "locale": snapshot.get("locale"),
+            "locales": snapshot.get("locales")
+            if isinstance(snapshot.get("locales"), list)
+            else None,
         }
+
+    def _game_locales(self, patch: str) -> tuple[str, ...]:
+        cache_name = f"_game_locales_{_safe_attr(patch)}"
+        cached = self.__dict__.get(cache_name)
+        if cached is not None:
+            return cached
+        try:
+            locales = available_locales(self.bundle_root / "game_constants", patch)
+        except IdentityExportError:
+            locales = ("english",)
+        self.__dict__[cache_name] = locales
+        return locales
 
     def _team_index_source(self, patch: str) -> dict[str, Any]:
         index = self._team_index(patch)
@@ -620,29 +644,6 @@ class KnowledgeService:
             "data": data,
             "source": source,
         }
-
-
-def _hero_candidate(hero: dict[str, Any]) -> dict[str, Any]:
-    internal_name = str(hero.get("name") or "")
-    return {
-        "hero_id": hero.get("id"),
-        "hero_slug": internal_name.removeprefix("npc_dota_hero_"),
-        "internal_name": internal_name,
-        "localized_name": hero.get("localized_name"),
-        "primary_attr": hero.get("primary_attr"),
-        "attack_type": hero.get("attack_type"),
-        "roles": hero.get("roles") or [],
-    }
-
-
-def _hero_tokens(hero: dict[str, Any]) -> set[str]:
-    internal_name = str(hero.get("name") or "")
-    return {
-        _normalize(str(hero.get("id") or "")),
-        _normalize(internal_name),
-        _normalize(internal_name.removeprefix("npc_dota_hero_")),
-        _normalize(str(hero.get("localized_name") or "")),
-    }
 
 
 def _profile_team(profile: dict[str, Any]) -> dict[str, Any]:

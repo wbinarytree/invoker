@@ -9,11 +9,20 @@ from invoker.patches import PatchWindowError, load_patch_windows, patch_window_f
 def test_load_patch_windows_resolves_current_manual_windows():
     windows = load_patch_windows()
 
-    assert [window.patch for window in windows] == ["7.40b", "7.40c", "7.41", "7.41a", "7.41b"]
-    current = patch_window_for_timestamp(1775606400, windows)
+    assert [window.patch for window in windows] == [
+        "7.40b",
+        "7.40c",
+        "7.41",
+        "7.41a",
+        "7.41b",
+        "7.41c",
+    ]
+    current = patch_window_for_timestamp(1778889600, windows)
+    last_patch = patch_window_for_timestamp(1775606400, windows)
     recent_previous = patch_window_for_timestamp(1774656000, windows)
     older_previous = patch_window_for_timestamp(1774483200, windows)
-    assert current is not None and current.patch == "7.41b"
+    assert current is not None and current.patch == "7.41c"
+    assert last_patch is not None and last_patch.patch == "7.41b"
     assert recent_previous is not None and recent_previous.patch == "7.41a"
     assert older_previous is not None and older_previous.patch == "7.41"
 

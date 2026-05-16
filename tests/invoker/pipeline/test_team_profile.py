@@ -191,7 +191,7 @@ def test_aggregate_team_profile_counts_hero_pool_and_roster():
         {
             "patch": "7.41b",
             "start_date": "2026-04-07",
-            "end_date_exclusive": None,
+            "end_date_exclusive": "2026-05-06",
             "match_count": 1,
         },
     ]
@@ -489,9 +489,7 @@ async def test_build_team_profile_writes_profile_and_index(monkeypatch, tmp_path
 
 
 @pytest.mark.asyncio
-async def test_build_team_profile_stops_when_manual_positions_are_incomplete(
-    monkeypatch, tmp_path
-):
+async def test_build_team_profile_stops_when_manual_positions_are_incomplete(monkeypatch, tmp_path):
     monkeypatch.setattr(team_profile_module, "GameFilesSource", FakeGameFilesSource)
     monkeypatch.setattr(team_profile_module, "OpenDotaFetcher", FakeOpenDotaFetcher)
 
