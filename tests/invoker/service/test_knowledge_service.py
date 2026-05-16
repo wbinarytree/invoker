@@ -201,9 +201,41 @@ def test_hero_constants_are_backed_by_bundled_game_files(tmp_path):
     assert response["source"]["schema_version"] == 1
     assert response["data"]["hero"]["localized_name"] == "Alchemist"
     assert response["data"]["stats"]["base_str"]["value"] == 23.0
-    assert any(
-        ability["name"] == "Acid Spray" for ability in response["data"]["abilities"]
+    assert any(ability["name"] == "Acid Spray" for ability in response["data"]["abilities"])
+
+
+def test_hero_lookup_matches_localization_aliases_across_locales(tmp_path):
+    bundle = _write_bundle(tmp_path, teams=[])
+    patch_dir = bundle / "game_constants" / "7.41b"
+    snapshot = json.loads((patch_dir / "snapshot.json").read_text())
+    snapshot["locales"] = ["english", "schinese"]
+    (patch_dir / "snapshot.json").write_text(json.dumps(snapshot, indent=2))
+    english = json.loads((patch_dir / "localization" / "english.json").read_text())
+    english["npc_dota_hero_alchemist__name_alias"] = "alch"
+    (patch_dir / "localization" / "english.json").write_text(json.dumps(english, indent=2))
+    (patch_dir / "localization" / "schinese.json").write_text(
+        json.dumps(
+            {
+                "DOTA_Tooltip_Hero_npc_dota_hero_alchemist": "炼金术士",
+                "npc_dota_hero_alchemist__name_alias": "lianjin; yaojin",
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
     )
+    service = KnowledgeService(bundle)
+
+    response = service.lookup_hero("lianjin")
+
+    assert response["data"]["candidates"][0]["hero_slug"] == "alchemist"
+    assert response["data"]["candidates"][0]["matches"] == [
+        {
+            "field": "alias",
+            "locale": "schinese",
+            "value": "lianjin",
+            "source": "localization",
+        }
+    ]
 
 
 def test_team_queries_match_profile_and_do_not_expose_roster_hash(tmp_path):
@@ -326,15 +358,7 @@ def test_team_profile_must_match_index_team_id(tmp_path):
         tmp_path,
         teams=[{"team_id": 123, "name": "Example Team"}],
     )
-    profile_path = (
-        bundle
-        / "derived"
-        / "7.41b"
-        / "teams"
-        / "123"
-        / "hash-123"
-        / "profile.json"
-    )
+    profile_path = bundle / "derived" / "7.41b" / "teams" / "123" / "hash-123" / "profile.json"
     profile = json.loads(profile_path.read_text())
     profile["team"]["team_id"] = 456
     profile_path.write_text(json.dumps(profile, indent=2))

@@ -26,6 +26,11 @@
     {
       "patch": "7.41b",
       "start_date": "2026-04-07",
+      "end_date_exclusive": "2026-05-06"
+    },
+    {
+      "patch": "7.41c",
+      "start_date": "2026-05-06",
       "end_date_exclusive": null
     }
   ]

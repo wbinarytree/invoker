@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -20,6 +21,7 @@ class SnapshotResult:
     ability_count: int
     item_count: int
     neutral_item_count: int
+    locales: tuple[str, ...]
 
 
 def snapshot_game_files(
@@ -29,18 +31,26 @@ def snapshot_game_files(
     *,
     localization: Path | None = None,
     locale: str = "english",
+    locales: Sequence[str] | None = None,
 ) -> SnapshotResult:
     """Translate pre-extracted Dota NPC KV files into the JSON snapshot contract."""
     npc_dir = _resolve_npc_dir(source)
+    selected_locales = _selected_locales(locale=locale, locales=locales)
+    if localization is not None and len(selected_locales) != 1:
+        raise SnapshotError("--localization can only be used with one --locale value")
     heroes_raw = _root(parse_kv1_file(npc_dir / "npc_heroes.txt"), "DOTAHeroes")
     abilities_raw = _load_abilities(npc_dir)
     items_raw = _load_optional_root(npc_dir / "items.txt", "DOTAAbilities")
     neutral_items_raw = _load_optional_root(npc_dir / "neutral_items.txt", "neutral_items")
-    if localization is not None:
-        localization_files = [localization]
-    else:
-        localization_files = _discover_localization_files(source, npc_dir, locale)
-    localization_raw = _load_localization_files(localization_files)
+    localizations: dict[str, dict[str, str]] = {}
+    localization_sources: dict[str, list[Path]] = {}
+    for selected_locale in selected_locales:
+        if localization is not None:
+            files = [localization]
+        else:
+            files = _discover_localization_files(source, npc_dir, selected_locale)
+        localization_sources[selected_locale] = files
+        localizations[selected_locale] = _load_localization_files(files)
 
     heroes = {
         name: block
@@ -65,24 +75,33 @@ def snapshot_game_files(
     _write_json(patch_dir / "hero_abilities.json", hero_abilities)
     _write_json(patch_dir / "items.json", items)
     _write_json(patch_dir / "neutral_items.json", neutral_items_raw)
-    _write_json(localization_dir / f"{locale}.json", localization_raw)
+    for selected_locale, localization_raw in localizations.items():
+        _write_json(localization_dir / f"{selected_locale}.json", localization_raw)
     _write_json(
         patch_dir / "snapshot.json",
         {
             "schema_version": 1,
             "patch": patch,
-            "source": str(source),
+            "source": "dota2npc extraction",
             "source_format": "pre-extracted-vpk-kv1",
             "generated_at": datetime.now(UTC).isoformat(),
-            "locale": locale,
-            "localization_sources": [str(path) for path in localization_files],
+            "locale": selected_locales[0],
+            "locales": list(selected_locales),
+            "source_files": _source_files(source, npc_dir, localization_sources),
+            "localization_sources": {
+                selected_locale: [_safe_source_path(source, path) for path in files]
+                for selected_locale, files in localization_sources.items()
+            },
             "files": {
                 "heroes": "heroes.json",
                 "abilities": "abilities.json",
                 "hero_abilities": "hero_abilities.json",
                 "items": "items.json",
                 "neutral_items": "neutral_items.json",
-                "localization": f"localization/{locale}.json",
+                "localization": {
+                    selected_locale: f"localization/{selected_locale}.json"
+                    for selected_locale in selected_locales
+                },
             },
         },
     )
@@ -93,7 +112,20 @@ def snapshot_game_files(
         ability_count=len(abilities_raw),
         item_count=len(items),
         neutral_item_count=len(neutral_items_raw),
+        locales=selected_locales,
     )
+
+
+def _selected_locales(*, locale: str, locales: Sequence[str] | None) -> tuple[str, ...]:
+    raw = list(locales) if locales is not None else [locale]
+    selected: list[str] = []
+    for value in raw:
+        cleaned = str(value).strip()
+        if not cleaned:
+            raise SnapshotError("locale names must not be empty")
+        if cleaned not in selected:
+            selected.append(cleaned)
+    return tuple(selected)
 
 
 def _resolve_npc_dir(source: Path) -> Path:
@@ -140,6 +172,43 @@ def _discover_localization_files(source: Path, npc_dir: Path, locale: str) -> li
             if path.exists() and path not in paths:
                 paths.append(path)
     return paths
+
+
+def _source_files(
+    source: Path,
+    npc_dir: Path,
+    localization_sources: dict[str, list[Path]],
+) -> dict[str, Any]:
+    files: dict[str, Any] = {
+        "heroes": _safe_source_path(source, npc_dir / "npc_heroes.txt"),
+        "abilities": [_safe_source_path(source, path) for path in _ability_source_paths(npc_dir)],
+    }
+    for name in ("items.txt", "neutral_items.txt"):
+        path = npc_dir / name
+        if path.exists():
+            files[name.removesuffix(".txt")] = _safe_source_path(source, path)
+    files["localization"] = {
+        locale: [_safe_source_path(source, path) for path in paths]
+        for locale, paths in localization_sources.items()
+    }
+    return files
+
+
+def _ability_source_paths(npc_dir: Path) -> list[Path]:
+    paths = [npc_dir / "npc_abilities.txt"]
+    hero_dir = npc_dir / "heroes"
+    if hero_dir.exists():
+        paths.extend(sorted(hero_dir.glob("npc_dota_hero_*.txt")))
+    return [path for path in paths if path.exists()]
+
+
+def _safe_source_path(source: Path, path: Path) -> str:
+    for root in (source, source / "npc", source.parent):
+        try:
+            return path.relative_to(root).as_posix()
+        except ValueError:
+            continue
+    return path.name
 
 
 def _load_localization_files(paths: list[Path]) -> dict[str, str]:
@@ -205,4 +274,4 @@ def _int_or_default(value: Any, default: int) -> int:
 
 def _write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n")

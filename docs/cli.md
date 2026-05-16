@@ -14,7 +14,8 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
-- `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name>]`
+- `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
+- `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]`
 - `invoker serve-knowledge --bundle <path> [--host 127.0.0.1] [--port 8765]`
 - `invoker vocab-audit`
@@ -141,14 +142,43 @@ Behavior:
    `npc/heroes/`, `items.txt`, and `neutral_items.txt`
 3. writes `<out>/<patch>/heroes.json`, `abilities.json`,
    `hero_abilities.json`, `items.json`, `neutral_items.json`,
-   `localization/<locale>.json`, and `snapshot.json`
+   one `localization/<locale>.json` file for each requested locale, and
+   `snapshot.json`
 
 The command does not extract VPKs and is not part of the bootstrap/query hot
-path. When `--localization` is omitted, the command looks for
+path. `--locale` may be passed more than once, for example `--locale english
+--locale schinese`. When `--localization` is omitted, the command looks for
 `resource/localization/abilities_<locale>.txt`, `items_<locale>.txt`, and
 `dota_<locale>.txt` next to the extracted `npc/` directory and merges any files
 that exist. If no localization files are present, `localization/<locale>.json`
 is written as an empty object and `GameFilesSource` falls back to KV names.
+`--localization` can only be used with one locale.
+
+`snapshot.json` records generic source labels and relative source-file
+inventory. It does not record local absolute extraction paths.
+
+### `export-identity-localization`
+
+Exports a compact patch-scoped identity/localization JSON artifact from the
+configured game-file snapshot root selected by `INVOKER_GAME_DATA_DIR`.
+
+Implemented in [src/invoker/identity.py](../src/invoker/identity.py).
+
+Behavior:
+
+1. reads `INVOKER_GAME_DATA_DIR/<patch>/heroes.json`, `items.json`,
+   `neutral_items.json`, `localization/<locale>.json`, and `snapshot.json`
+2. emits hero ids, internal names, slugs, locale-scoped display names, and
+   locale-scoped aliases from `npc_dota_hero_*__name_alias`
+3. emits item and neutral-item internal names, optional ids, display names, and
+   aliases where the snapshot exposes source-backed values
+4. writes sanitized provenance that identifies the Invoker snapshot and patch
+   without local absolute paths
+5. fails on duplicate hero ids or duplicate internal hero names, and records
+   aliases that normalize to multiple live heroes in `unknowns`
+
+The command is intended for downstream resource packaging. It does not export
+hero mechanics or matchup advice.
 
 ### `build-team-profile`
 
@@ -233,6 +263,10 @@ use the service envelope with `service_schema_version`, `patch`, `kind`, `data`,
 and `source`. `roster_hash` is not exposed in service payloads.
 When `authored/teams.yaml` is present, team aliases and curated player names
 from the registry are available for exact resolution and roster responses.
+`lookup_hero` searches hero id, internal name, slug, localized display names,
+and source aliases across all locales present in the bundled game-file snapshot.
+Each candidate includes matched field evidence so consumers can audit why the
+query resolved.
 
 ### `vocab-audit`
 
