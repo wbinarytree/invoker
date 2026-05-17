@@ -30,9 +30,11 @@ different.
 
 - `heroes.json` from `npc/npc_heroes.txt`
 - `abilities.json` from `npc/npc_abilities.txt` plus per-hero
-  `npc/heroes/npc_dota_hero_*.txt` overlays
+  `npc/heroes/npc_dota_hero_*.txt` overlays, with IDs merged from
+  `npc/npc_ability_ids.txt` when present
 - `hero_abilities.json` from hero ability/talent lists
-- `items.json` from `npc/items.txt`
+- `items.json` from `npc/items.txt`, with IDs merged from
+  `npc/npc_ability_ids.txt` when present
 - `neutral_items.json` from `npc/neutral_items.txt`
 - `localization/<locale>.json` merged from `abilities_<locale>.txt`,
   `items_<locale>.txt`, and `dota_<locale>.txt`

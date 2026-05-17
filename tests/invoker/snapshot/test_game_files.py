@@ -80,6 +80,28 @@ def test_snapshot_game_files_writes_json_contract_with_auto_localization(tmp_pat
         }
         """
     )
+    (npc / "npc_ability_ids.txt").write_text(
+        """
+        "DOTAAbilityIDs"
+        {
+          "Version" "1"
+          "UnitAbilities"
+          {
+            "Locked"
+            {
+              "alchemist_acid_spray" "5365"
+            }
+          }
+          "ItemAbilities"
+          {
+            "Locked"
+            {
+              "item_blink" "1"
+            }
+          }
+        }
+        """
+    )
     (heroes_dir / "npc_dota_hero_alchemist.txt").write_text(
         """
         "DOTAAbilities"
@@ -127,8 +149,11 @@ def test_snapshot_game_files_writes_json_contract_with_auto_localization(tmp_pat
         "talents": [{"name": "special_bonus_unique_alchemist", "level": 1}],
     }
     abilities = json.loads((result.patch_dir / "abilities.json").read_text())
+    assert abilities["alchemist_acid_spray"]["ID"] == "5365"
     acid_values = abilities["alchemist_acid_spray"]["AbilityValues"]
     assert acid_values["armor_reduction"]["value"] == "3 4 5 6"
+    items = json.loads((result.patch_dir / "items.json").read_text())
+    assert items["item_blink"]["ID"] == "1"
     localization = json.loads((result.patch_dir / "localization" / "english.json").read_text())
     assert localization["DOTA_Tooltip_ability_alchemist_acid_spray_Description"] == "Sprays acid."
     schinese = json.loads((result.patch_dir / "localization" / "schinese.json").read_text())
@@ -141,4 +166,5 @@ def test_snapshot_game_files_writes_json_contract_with_auto_localization(tmp_pat
         "english": "localization/english.json",
         "schinese": "localization/schinese.json",
     }
+    assert snapshot["source_files"]["ability_ids"] == "npc/npc_ability_ids.txt"
     assert str(tmp_path) not in json.dumps(snapshot)

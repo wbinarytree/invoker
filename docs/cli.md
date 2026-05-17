@@ -140,8 +140,9 @@ Implemented in [src/invoker/snapshot/game_files.py](../src/invoker/snapshot/game
 Behavior:
 
 1. reads a pre-extracted VPK root or `npc/` directory containing `npc_heroes.txt`
-2. parses `npc_heroes.txt`, `npc_abilities.txt`, per-hero ability files under
-   `npc/heroes/`, `items.txt`, and `neutral_items.txt`
+2. parses `npc_heroes.txt`, `npc_abilities.txt`, optional `npc_ability_ids.txt`,
+   per-hero ability files under `npc/heroes/`, `items.txt`, and
+   `neutral_items.txt`
 3. writes `<out>/<patch>/heroes.json`, `abilities.json`,
    `hero_abilities.json`, `items.json`, `neutral_items.json`,
    one `localization/<locale>.json` file for each requested locale, and

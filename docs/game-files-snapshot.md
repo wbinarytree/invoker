@@ -37,6 +37,7 @@ Expected output:
 
 By default the command auto-discovers and merges these files when they exist:
 
+- `npc/npc_ability_ids.txt` for source-backed ability and item IDs
 - `resource/localization/abilities_english.txt`
 - `resource/localization/items_english.txt`
 - `resource/localization/dota_english.txt`
