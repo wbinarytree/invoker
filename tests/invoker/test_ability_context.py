@@ -24,8 +24,11 @@ _ABILITIES_MAP = {
         "behavior": ["No Target", "Instant Cast"],
         "desc": "Move faster.",
         "attrib": [
-            {"key": "bonus_speed", "header": "BONUS MOVE SPEED:",
-             "value": ["10%", "18%", "26%", "34%"]},
+            {
+                "key": "bonus_speed",
+                "header": "BONUS MOVE SPEED:",
+                "value": ["10%", "18%", "26%", "34%"],
+            },
         ],
         "mc": "25",
         "cd": ["29", "25", "21", "17"],
@@ -77,8 +80,8 @@ def test_base_ability_fields():
     assert crush.mana_cost == "100"
     assert crush.cooldown == "7"
     assert crush.attribs == [
-        AttribEntry(header="DAMAGE:", value=["75", "150", "225", "300"]),
-        AttribEntry(header="STUN DURATION:", value="0.8"),
+        AttribEntry(header="DAMAGE:", value=["75", "150", "225", "300"], key="crush_damage"),
+        AttribEntry(header="STUN DURATION:", value="0.8", key="stun_duration"),
     ]
 
 
@@ -146,9 +149,7 @@ def test_mc_and_cd_list_valued():
             "cd": ["15", "13", "11", "7"],
         }
     }
-    hero_abs = {
-        "npc_dota_hero_test": {"abilities": ["hero_variable"], "talents": []}
-    }
+    hero_abs = {"npc_dota_hero_test": {"abilities": ["hero_variable"], "talents": []}}
     abilities, _ = build_ability_contexts("npc_dota_hero_test", abilities_map, hero_abs)
     ab = abilities[0]
     assert ab.mana_cost == ["100", "95", "90", "80"]

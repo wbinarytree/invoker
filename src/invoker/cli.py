@@ -53,6 +53,20 @@ IdentityOutOption = Annotated[
     Path,
     typer.Option("--out", help="Output JSON artifact path."),
 ]
+LocalizedResourceOutDirOption = Annotated[
+    Path,
+    typer.Option(
+        "--out-dir",
+        help="Output directory for compact hero, item, and ability JSON artifacts.",
+    ),
+]
+GameResourceOutDirOption = Annotated[
+    Path,
+    typer.Option(
+        "--out-dir",
+        help="Output directory for bundled hero, item, index, and metadata JSON artifacts.",
+    ),
+]
 PublishOutOption = Annotated[
     Path,
     typer.Option("--out", help="Release output directory."),
@@ -252,6 +266,79 @@ def export_identity_localization_cmd(
     typer.echo(f"Heroes: {len(artifact['heroes'])}")
     typer.echo(f"Items: {len(artifact['items'])}")
     typer.echo(f"Locales: {', '.join(artifact['locales'])}")
+
+
+@app.command("export-localized-resources")
+def export_localized_resources_cmd(
+    patch: SnapshotPatchOption,
+    out_dir: LocalizedResourceOutDirOption,
+    locale: SnapshotLocaleOption = None,
+) -> None:
+    from invoker.identity import (
+        LOCALIZED_RESOURCE_FILENAMES,
+        IdentityExportError,
+        export_localized_resources,
+    )
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo(
+            "INVOKER_GAME_DATA_DIR is required for export-localized-resources.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    try:
+        artifacts = export_localized_resources(
+            cfg.game_data_dir,
+            patch,
+            locales=locale,
+        )
+    except IdentityExportError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for resource_type, artifact in artifacts.items():
+        path = out_dir / LOCALIZED_RESOURCE_FILENAMES[resource_type]
+        path.write_text(json.dumps(artifact, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        typer.echo(f"{resource_type.capitalize()}: {path}")
+    typer.echo(f"Locales: {', '.join(next(iter(artifacts.values()))['locales'])}")
+
+
+@app.command("export-game-resources")
+def export_game_resources_cmd(
+    patch: SnapshotPatchOption,
+    out_dir: GameResourceOutDirOption,
+    locale: SnapshotLocaleOption = None,
+) -> None:
+    from invoker.identity import (
+        GAME_RESOURCE_FILENAMES,
+        IdentityExportError,
+        export_game_resource_bundle,
+    )
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo(
+            "INVOKER_GAME_DATA_DIR is required for export-game-resources.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    try:
+        artifacts = export_game_resource_bundle(cfg.game_data_dir, patch, locales=locale)
+    except IdentityExportError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for resource_type, filename in GAME_RESOURCE_FILENAMES.items():
+        artifact = artifacts[resource_type]
+        path = out_dir / filename
+        path.write_text(json.dumps(artifact, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        typer.echo(f"{resource_type.capitalize()}: {path}")
+    bundle = artifacts["bundle"]
+    typer.echo(f"Heroes: {bundle['counts']['heroes']}")
+    typer.echo(f"Items: {bundle['counts']['items']}")
+    typer.echo(f"Unknowns: {bundle['counts']['unknowns']}")
+    typer.echo(f"Locales: {', '.join(bundle['locales'])}")
 
 
 @app.command("build-team-profile")

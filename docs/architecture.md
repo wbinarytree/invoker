@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-16 (7.41c identity/localization export)
+Last updated: 2026-05-17 (7.41c game resource bundle export)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -13,7 +13,9 @@ a first hero-pool profile builder. A first local read-only knowledge service
 now exposes bundled game constants and team-profile aggregates through shared
 service methods with thin HTTP and MCP-style adapters. The game-file snapshot
 flow now supports multiple localization files per patch, and Invoker can export
-a compact identity/localization artifact for downstream consumers.
+compact downstream resources as either a legacy combined identity artifact,
+split hero/item/ability identity files, or the preferred game-resource bundle
+with separate hero and item artifacts plus lookup indexes.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -332,6 +334,13 @@ and explicit unknowns for missing display names or ambiguous alias collisions.
 Hero aliases come only from localization keys such as
 `npc_dota_hero_*__name_alias`; alias collisions are recorded instead of being
 resolved silently.
+
+`invoker export-game-resources --patch <patch> --out-dir <dir>` writes the
+preferred downstream bundle shape: `bundle.json`, `heroes.json`, `items.json`,
+and `index.json`. Hero records attach normalized ability and talent context from
+the same `GameFilesSource -> HeroContextPacket` path used by authoring prompts.
+Item records attach localized names/descriptions, aliases, recipe metadata,
+neutral tier metadata, raw item stat rows, and item ability metadata.
 
 Current consumers:
 

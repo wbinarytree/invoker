@@ -68,4 +68,44 @@ uv run invoker export-identity-localization \
   --out /tmp/identity_localization_7.41c.json
 ```
 
+For downstream consumers that want separate resource files, produce split
+localized resources:
+
+```bash
+uv run invoker export-localized-resources \
+  --patch 7.41c \
+  --locale english \
+  --locale schinese \
+  --out-dir /tmp/invoker_741c_resources
+```
+
+This writes:
+
+```text
+/tmp/invoker_741c_resources/
+  hero_identity_localization.json
+  item_identity_localization.json
+  ability_localization.json
+```
+
+For the preferred downstream bundle shape, export game resources:
+
+```bash
+uv run invoker export-game-resources \
+  --patch 7.41c \
+  --locale english \
+  --locale schinese \
+  --out-dir /tmp/invoker_741c_bundle
+```
+
+This writes:
+
+```text
+/tmp/invoker_741c_bundle/
+  bundle.json
+  heroes.json
+  items.json
+  index.json
+```
+
 Do not commit generated snapshots or raw extracted Valve files to this repo.
