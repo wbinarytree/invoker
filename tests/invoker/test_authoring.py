@@ -40,6 +40,10 @@ def _pangolier_packet() -> HeroContextPacket:
             base_armor=StatEntry(value=2.0, percentile=0.5, band="average"),
             base_attack_min=StatEntry(value=26.0, percentile=0.4, band="average"),
             base_attack_max=StatEntry(value=32.0, percentile=0.4, band="average"),
+            base_attack_speed=StatEntry(value=100.0, percentile=0.5, band="average"),
+            base_attack_time=StatEntry(value=1.7, percentile=0.5, band="average"),
+            attack_animation_point=StatEntry(value=0.33, percentile=0.4, band="average"),
+            attack_acquisition_range=StatEntry(value=600.0, percentile=0.5, band="average"),
             attack_range=StatEntry(value=150.0, percentile=0.2, band="low"),
             move_speed=StatEntry(value=305.0, percentile=0.7, band="high"),
             primary_attr="agi",
@@ -132,6 +136,10 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert '"band": "very_high"' in text
     assert '"base_attack_min": {' in text
     assert '"base_attack_max": {' in text
+    assert '"base_attack_speed": {' in text
+    assert '"base_attack_time": {' in text
+    assert '"attack_animation_point": {' in text
+    assert '"attack_acquisition_range": {' in text
     assert '"percentile":' in text
     assert "Rolling Thunder Disarm" in text
     assert '"capabilities"' in text

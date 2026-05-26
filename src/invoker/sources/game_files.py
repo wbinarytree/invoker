@@ -97,6 +97,10 @@ class GameFilesSource:
                 "base_armor": _num(raw.get("ArmorPhysical")),
                 "base_attack_min": _num(raw.get("AttackDamageMin")),
                 "base_attack_max": _num(raw.get("AttackDamageMax")),
+                "base_attack_speed": _num(raw.get("BaseAttackSpeed", 100)),
+                "base_attack_time": _num(raw.get("AttackRate")),
+                "attack_animation_point": _num(raw.get("AttackAnimationPoint")),
+                "attack_acquisition_range": _num(raw.get("AttackAcquisitionRange")),
                 "attack_range": _num(raw.get("AttackRange")),
                 "move_speed": _num(raw.get("MovementSpeed")),
             }

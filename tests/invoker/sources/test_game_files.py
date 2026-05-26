@@ -29,6 +29,10 @@ def test_game_files_source_heroes_and_stats():
     assert stats["str_gain"] == 2.7
     assert stats["base_attack_min"] == 26.0
     assert stats["base_attack_max"] == 32.0
+    assert stats["base_attack_speed"] == 100.0
+    assert stats["base_attack_time"] == 1.7
+    assert stats["attack_animation_point"] == 0.35
+    assert stats["attack_acquisition_range"] == 600.0
     assert stats["attack_range"] == 150.0
     assert stats["move_speed"] == 295.0
 

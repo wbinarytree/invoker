@@ -21,6 +21,10 @@ def _roster(overrides: dict | None = None) -> dict:
             "base_armor": float(i),
             "base_attack_min": float(20 + i),
             "base_attack_max": float(25 + i),
+            "base_attack_speed": float(95 + i),
+            "base_attack_time": float(1.4 + i / 10),
+            "attack_animation_point": float(i / 10),
+            "attack_acquisition_range": float(500 + i * 50),
             "attack_range": float(i * 100),
             "move_speed": float(300 + i * 10),
             "primary_attr": "str",
@@ -62,6 +66,14 @@ def test_compute_hero_stats_context_returns_correct_type():
     assert result.base_attack_min.value == 23.0
     assert result.base_attack_max is not None
     assert result.base_attack_max.value == 28.0
+    assert result.base_attack_speed is not None
+    assert result.base_attack_speed.value == 98.0
+    assert result.base_attack_time is not None
+    assert result.base_attack_time.value == 1.7
+    assert result.attack_animation_point is not None
+    assert result.attack_animation_point.value == 0.3
+    assert result.attack_acquisition_range is not None
+    assert result.attack_acquisition_range.value == 650.0
     assert result.primary_attr == "str"
     assert result.attack_type == "Melee"
 

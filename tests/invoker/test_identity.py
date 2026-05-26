@@ -48,8 +48,11 @@ def _write_snapshot(
                     "AttributePrimary": "DOTA_ATTRIBUTE_AGILITY",
                     "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
                     "ArmorPhysical": "2",
+                    "AttackAcquisitionRange": "600",
+                    "AttackAnimationPoint": "0.33",
                     "AttackDamageMax": "32",
                     "AttackDamageMin": "26",
+                    "AttackRate": "1.7",
                     "AttackRange": "150",
                     "MovementSpeed": "295",
                     "Role": "Carry,Escape",
@@ -67,9 +70,13 @@ def _write_snapshot(
                     "AttributePrimary": "DOTA_ATTRIBUTE_STRENGTH",
                     "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
                     "ArmorPhysical": "1",
+                    "AttackAcquisitionRange": "600",
+                    "AttackAnimationPoint": "0.35",
                     "AttackDamageMax": "40",
                     "AttackDamageMin": "34",
+                    "AttackRate": "1.6",
                     "AttackRange": "150",
+                    "BaseAttackSpeed": "110",
                     "MovementSpeed": "305",
                     "Role": "Carry,Support",
                     "workshop_guide_name": "Alchemist",
@@ -303,6 +310,10 @@ def test_game_resource_bundle_attaches_abilities_talents_items_and_indexes(tmp_p
     assert alchemist["stats"]["base_str"]["value"] == 23.0
     assert alchemist["stats"]["base_attack_min"]["value"] == 34.0
     assert alchemist["stats"]["base_attack_max"]["value"] == 40.0
+    assert alchemist["stats"]["base_attack_speed"]["value"] == 110.0
+    assert alchemist["stats"]["base_attack_time"]["value"] == 1.6
+    assert alchemist["stats"]["attack_animation_point"]["value"] == 0.35
+    assert alchemist["stats"]["attack_acquisition_range"]["value"] == 600.0
     acid = next(
         ability
         for ability in alchemist["abilities"]

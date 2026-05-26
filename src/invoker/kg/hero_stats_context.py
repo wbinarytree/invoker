@@ -14,6 +14,10 @@ _TRACKED_STATS = [
     "base_armor",
     "base_attack_min",
     "base_attack_max",
+    "base_attack_speed",
+    "base_attack_time",
+    "attack_animation_point",
+    "attack_acquisition_range",
     "attack_range",
     "move_speed",
 ]
@@ -53,6 +57,10 @@ class HeroStatsContext:
     base_armor: StatEntry | None
     base_attack_min: StatEntry | None
     base_attack_max: StatEntry | None
+    base_attack_speed: StatEntry | None
+    base_attack_time: StatEntry | None
+    attack_animation_point: StatEntry | None
+    attack_acquisition_range: StatEntry | None
     attack_range: StatEntry | None
     move_speed: StatEntry | None
     primary_attr: str
@@ -105,6 +113,10 @@ def compute_hero_stats_context(
         base_armor=make_entry("base_armor"),
         base_attack_min=make_entry("base_attack_min"),
         base_attack_max=make_entry("base_attack_max"),
+        base_attack_speed=make_entry("base_attack_speed"),
+        base_attack_time=make_entry("base_attack_time"),
+        attack_animation_point=make_entry("attack_animation_point"),
+        attack_acquisition_range=make_entry("attack_acquisition_range"),
         attack_range=make_entry("attack_range"),
         move_speed=make_entry("move_speed"),
         primary_attr=str(hero.get("primary_attr", "")),

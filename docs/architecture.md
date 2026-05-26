@@ -251,8 +251,9 @@ a clear ambiguity error listing available patches.
 Hero constants are assembled from bundled game-file snapshots through
 `GameFilesSource` and the existing hero context builders. The public
 `hero_constants` envelope includes hero identity, stat context (including
-source-backed base attack damage min/max), ability context (including
-source-backed cast range and timing fields such as cast point),
+source-backed base attack damage min/max, base attack speed, base attack time,
+attack acquisition range, and attack animation point), ability context
+(including source-backed cast range and timing fields such as cast point),
 talents, service schema metadata, and game snapshot source metadata. Missing
 snapshot files or missing heroes fail loudly; the service does not synthesize
 Dota facts from memory.
