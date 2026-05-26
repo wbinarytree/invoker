@@ -40,6 +40,8 @@ def snapshot_game_files(
         raise SnapshotError("--localization can only be used with one --locale value")
     heroes_raw = _root(parse_kv1_file(npc_dir / "npc_heroes.txt"), "DOTAHeroes")
     abilities_raw = _load_abilities(npc_dir)
+    ability_ids = _load_ability_ids(npc_dir)
+    _merge_source_ids(abilities_raw, ability_ids)
     items_raw = _load_optional_root(npc_dir / "items.txt", "DOTAAbilities")
     neutral_items_raw = _load_optional_root(npc_dir / "neutral_items.txt", "neutral_items")
     localizations: dict[str, dict[str, str]] = {}
@@ -65,6 +67,7 @@ def snapshot_game_files(
         for name, block in items_raw.items()
         if name.startswith("item_") and isinstance(block, dict)
     }
+    _merge_source_ids(items, ability_ids)
 
     patch_dir = out_dir / patch
     localization_dir = patch_dir / "localization"
@@ -149,6 +152,36 @@ def _load_abilities(npc_dir: Path) -> dict[str, Any]:
     }
 
 
+def _load_ability_ids(npc_dir: Path) -> dict[str, str]:
+    path = npc_dir / "npc_ability_ids.txt"
+    if not path.exists():
+        return {}
+    root = _root(parse_kv1_file(path), "DOTAAbilityIDs")
+    ids: dict[str, str] = {}
+    for section_name in ("UnitAbilities", "ItemAbilities"):
+        section = root.get(section_name)
+        if isinstance(section, dict):
+            _collect_ability_ids(section, ids)
+    return ids
+
+
+def _collect_ability_ids(block: dict[str, Any], ids: dict[str, str]) -> None:
+    for key, value in block.items():
+        if isinstance(value, str):
+            ids[str(key)] = value
+        elif isinstance(value, dict):
+            _collect_ability_ids(value, ids)
+
+
+def _merge_source_ids(records: dict[str, Any], ability_ids: dict[str, str]) -> None:
+    for name, block in records.items():
+        if not isinstance(block, dict) or "ID" in block:
+            continue
+        source_id = ability_ids.get(name)
+        if source_id is not None:
+            block["ID"] = source_id
+
+
 def _load_optional_root(path: Path, root_key: str) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -183,6 +216,9 @@ def _source_files(
         "heroes": _safe_source_path(source, npc_dir / "npc_heroes.txt"),
         "abilities": [_safe_source_path(source, path) for path in _ability_source_paths(npc_dir)],
     }
+    ability_ids_path = npc_dir / "npc_ability_ids.txt"
+    if ability_ids_path.exists():
+        files["ability_ids"] = _safe_source_path(source, ability_ids_path)
     for name in ("items.txt", "neutral_items.txt"):
         path = npc_dir / name
         if path.exists():

@@ -16,6 +16,8 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
+- `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
+- `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]`
 - `invoker serve-knowledge --bundle <path> [--host 127.0.0.1] [--port 8765]`
 - `invoker vocab-audit`
@@ -138,8 +140,9 @@ Implemented in [src/invoker/snapshot/game_files.py](../src/invoker/snapshot/game
 Behavior:
 
 1. reads a pre-extracted VPK root or `npc/` directory containing `npc_heroes.txt`
-2. parses `npc_heroes.txt`, `npc_abilities.txt`, per-hero ability files under
-   `npc/heroes/`, `items.txt`, and `neutral_items.txt`
+2. parses `npc_heroes.txt`, `npc_abilities.txt`, optional `npc_ability_ids.txt`,
+   per-hero ability files under `npc/heroes/`, `items.txt`, and
+   `neutral_items.txt`
 3. writes `<out>/<patch>/heroes.json`, `abilities.json`,
    `hero_abilities.json`, `items.json`, `neutral_items.json`,
    one `localization/<locale>.json` file for each requested locale, and
@@ -170,8 +173,8 @@ Behavior:
    `neutral_items.json`, `localization/<locale>.json`, and `snapshot.json`
 2. emits hero ids, internal names, slugs, locale-scoped display names, and
    locale-scoped aliases from `npc_dota_hero_*__name_alias`
-3. emits item and neutral-item internal names, optional ids, display names, and
-   aliases where the snapshot exposes source-backed values
+3. emits item and neutral-item internal names, optional ids, display names,
+   descriptions, and aliases where the snapshot exposes source-backed values
 4. writes sanitized provenance that identifies the Invoker snapshot and patch
    without local absolute paths
 5. fails on duplicate hero ids or duplicate internal hero names, and records
@@ -179,6 +182,54 @@ Behavior:
 
 The command is intended for downstream resource packaging. It does not export
 hero mechanics or matchup advice.
+
+### `export-localized-resources`
+
+Exports compact patch-scoped localized resource JSON artifacts from the
+configured game-file snapshot root selected by `INVOKER_GAME_DATA_DIR`.
+
+Implemented in [src/invoker/identity.py](../src/invoker/identity.py).
+
+Behavior:
+
+1. reads the same patch-scoped snapshot files as `export-identity-localization`
+2. writes `hero_identity_localization.json` with hero ids, internal names,
+   slugs, display names, aliases, and source-backed unknowns
+3. writes `item_identity_localization.json` with item and neutral-item internal
+   names, optional ids, display names, descriptions, search aliases, neutral
+   flags, and source-backed unknowns
+4. writes `ability_localization.json` with hero-linked ability and talent
+   internal names, display names, descriptions, aliases, owner heroes, and
+   source-backed unknowns
+5. keeps generated provenance sanitized so local extraction paths do not leak
+   into downstream resources
+
+The ability export is intentionally based on `hero_abilities.json`; item
+abilities are handled by the item artifact instead of duplicated there.
+
+### `export-game-resources`
+
+Exports a downstream game-resource bundle from the configured game-file snapshot
+root selected by `INVOKER_GAME_DATA_DIR`.
+
+Implemented in [src/invoker/identity.py](../src/invoker/identity.py).
+
+Behavior:
+
+1. reads the patch-scoped game-file snapshot and requested localization files
+2. writes `bundle.json` with sanitized provenance, locale list, file pointers,
+   counts, and source-backed unknowns
+3. writes `heroes.json` with hero identity, roles, base stats, localized names,
+   aliases, normalized hero-attached abilities, and first-class talents
+4. writes `items.json` with item identity, localized names/descriptions,
+   aliases, costs, recipes, neutral metadata, item stat values, and item ability
+   metadata
+5. writes `index.json` with lightweight hero/item lookup indexes by ids,
+   internal names, slugs, display names, and aliases
+
+Hero abilities and talents use the same normalized context path as
+`show-hero-context`. The exporter does not fill missing values from memory;
+missing source-backed values are recorded in `bundle.json` unknowns.
 
 ### `build-team-profile`
 

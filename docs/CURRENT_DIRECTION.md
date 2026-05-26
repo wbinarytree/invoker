@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-05-16
+Last updated: 2026-05-17
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -24,6 +24,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-05-01-knowledge-service.md](specs/2026-05-01-knowledge-service.md)
 - 7.41c identity/localization export:
   [docs/specs/2026-05-16-741c-identity-localization-export.md](specs/2026-05-16-741c-identity-localization-export.md)
+- Consolidated game resource export:
+  [docs/specs/2026-05-17-consolidated-game-resource-export.md](specs/2026-05-17-consolidated-game-resource-export.md)
 
 ## Active plans
 

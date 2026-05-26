@@ -484,7 +484,10 @@ def _stats_to_json(stats: HeroStatsContext) -> str:
 
 
 def _attrib_to_dict(attrib: AttribEntry) -> dict[str, Any]:
-    return {"header": attrib.header, "value": attrib.value}
+    payload: dict[str, Any] = {"header": attrib.header, "value": attrib.value}
+    if attrib.key is not None:
+        payload["key"] = attrib.key
+    return payload
 
 
 def _ability_to_dict(ability: AbilityContext) -> dict[str, Any]:

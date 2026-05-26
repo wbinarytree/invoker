@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-16 (7.41c identity/localization export)
+Last updated: 2026-05-17 (7.41c game resource bundle export)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -12,8 +12,11 @@ outputs. Team-profile work has started with shared OpenDota cache support and
 a first hero-pool profile builder. A first local read-only knowledge service
 now exposes bundled game constants and team-profile aggregates through shared
 service methods with thin HTTP and MCP-style adapters. The game-file snapshot
-flow now supports multiple localization files per patch, and Invoker can export
-a compact identity/localization artifact for downstream consumers.
+flow now supports source-backed ability/item IDs and multiple localization
+files per patch, and Invoker can export compact downstream resources as either
+a legacy combined identity artifact, split hero/item/ability identity files, or
+the preferred game-resource bundle with separate hero and item artifacts plus
+lookup indexes.
 
 This document describes the code that actually exists in the repository today. It is not an aspirational design doc. When this document conflicts with an older plan or spec, this document reflects the current implementation.
 
@@ -317,12 +320,14 @@ by authoring and fetch code: heroes, abilities, hero ability lists, hero stats,
 items, and neutral items. It must not import from `invoker.snapshot`.
 
 The snapshot command consumes pre-extracted KV files only. It does not extract
-VPKs itself and is not part of bootstrap or query hot paths. When present, it
-auto-discovers Valve localization KV files under `resource/localization/`
-(`abilities_<locale>.txt`, `items_<locale>.txt`, and `dota_<locale>.txt`) so
-ability names/descriptions and talent display templates are available to the
-authoring context. Snapshot metadata records generic source labels and relative
-source-file inventory, not local absolute extraction paths.
+VPKs itself and is not part of bootstrap or query hot paths. When present,
+`npc_ability_ids.txt` is merged into `abilities.json` and `items.json` as
+source-backed `ID` values. The command also auto-discovers Valve localization
+KV files under `resource/localization/` (`abilities_<locale>.txt`,
+`items_<locale>.txt`, and `dota_<locale>.txt`) so ability names/descriptions
+and talent display templates are available to the authoring context. Snapshot
+metadata records generic source labels and relative source-file inventory, not
+local absolute extraction paths.
 
 `invoker export-identity-localization --patch <patch> --out <path>` writes a
 compact downstream artifact from `INVOKER_GAME_DATA_DIR/<patch>/`. The export
@@ -332,6 +337,13 @@ and explicit unknowns for missing display names or ambiguous alias collisions.
 Hero aliases come only from localization keys such as
 `npc_dota_hero_*__name_alias`; alias collisions are recorded instead of being
 resolved silently.
+
+`invoker export-game-resources --patch <patch> --out-dir <dir>` writes the
+preferred downstream bundle shape: `bundle.json`, `heroes.json`, `items.json`,
+and `index.json`. Hero records attach normalized ability and talent context from
+the same `GameFilesSource -> HeroContextPacket` path used by authoring prompts.
+Item records attach localized names/descriptions, aliases, recipe metadata,
+neutral tier metadata, raw item stat rows, item IDs, and item ability metadata.
 
 Current consumers:
 

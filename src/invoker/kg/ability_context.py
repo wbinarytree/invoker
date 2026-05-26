@@ -10,6 +10,7 @@ _NOISY_HEADER_PATTERNS = ("SCEPTER", "SHARD")
 class AttribEntry:
     header: str
     value: str | list[str]
+    key: str | None = None
 
 
 @dataclass(frozen=True)
@@ -59,11 +60,13 @@ def build_ability_contexts(
         raw = abilities_map.get(talent_name)
         if not isinstance(raw, dict):
             continue
-        talents.append(TalentContext(
-            internal_name=talent_name,
-            name=str(raw.get("dname", talent_name)),
-            level=int(entry.get("level", 0)),
-        ))
+        talents.append(
+            TalentContext(
+                internal_name=talent_name,
+                name=str(raw.get("dname", talent_name)),
+                level=int(entry.get("level", 0)),
+            )
+        )
 
     return abilities, talents
 
@@ -93,7 +96,11 @@ def _build_ability(internal_name: str, raw: dict[str, Any]) -> AbilityContext:
         pierces = None
 
     attribs = [
-        AttribEntry(header=str(a["header"]), value=_to_str_or_list(a["value"]))
+        AttribEntry(
+            header=str(a["header"]),
+            value=_to_str_or_list(a["value"]),
+            key=str(a["key"]) if "key" in a else None,
+        )
         for a in raw.get("attrib", [])
         if isinstance(a, dict)
         and "header" in a
