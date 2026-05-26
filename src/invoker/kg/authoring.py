@@ -506,6 +506,10 @@ def _ability_to_dict(ability: AbilityContext) -> dict[str, Any]:
         payload["dispellable"] = ability.dispellable
     if ability.attribs:
         payload["attribs"] = [_attrib_to_dict(a) for a in ability.attribs]
+    if ability.cast_range is not None:
+        payload["cast_range"] = ability.cast_range
+    if ability.timing:
+        payload["timing"] = ability.timing
     if ability.mana_cost is not None:
         payload["mana_cost"] = ability.mana_cost
     if ability.cooldown is not None:

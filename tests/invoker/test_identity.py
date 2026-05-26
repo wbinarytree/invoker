@@ -108,6 +108,8 @@ def _write_snapshot(
             {
                 "alchemist_acid_spray": {
                     "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE",
+                    "AbilityCastPoint": "0.3",
+                    "AbilityCastRange": "450 500 550 600",
                     "AbilityCooldown": "21",
                     "AbilityManaCost": "120",
                     "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
@@ -158,7 +160,10 @@ def _write_snapshot(
                 "DOTA_Tooltip_Ability_item_recipe_phylactery": "Phylactery Recipe",
                 "DOTA_SearchAlias_Ability_item_occult_bracelet": "occult bracelet",
                 "DOTA_Tooltip_ability_alchemist_acid_spray": "Acid Spray",
-                "DOTA_Tooltip_ability_alchemist_acid_spray_Description": "Sprays acid.",
+                "DOTA_Tooltip_ability_alchemist_acid_spray_Description": (
+                    "Sprays acid in a %radius% radius and reduces armor by "
+                    "%armor_reduction%%%."
+                ),
                 "DOTA_Tooltip_ability_special_bonus_unique_alchemist": ("+1 Acid Spray Armor"),
             },
             indent=2,
@@ -247,7 +252,10 @@ def test_ability_export_uses_hero_ability_list_and_localized_text(tmp_path):
         "english": "Acid Spray",
         "schinese": "酸性喷雾",
     }
-    assert acid["descriptions"]["english"] == "Sprays acid."
+    assert (
+        acid["descriptions"]["english"]
+        == "Sprays acid in a 350/400/450/500 radius and reduces armor by 3/4/5/6%."
+    )
     assert acid["heroes"] == ["npc_dota_hero_alchemist"]
     assert all(ability["internal_name"] != "item_blink" for ability in artifact["abilities"])
 
@@ -270,6 +278,10 @@ def test_game_resource_bundle_attaches_abilities_talents_items_and_indexes(tmp_p
 
     assert sorted(artifacts) == ["bundle", "heroes", "index", "items"]
     bundle = artifacts["bundle"]
+    assert bundle["schema_version"] == 2
+    assert artifacts["heroes"]["schema_version"] == 2
+    assert artifacts["items"]["schema_version"] == 2
+    assert artifacts["index"]["schema_version"] == 2
     assert bundle["files"] == {
         "heroes": "heroes.json",
         "items": "items.json",
@@ -294,7 +306,12 @@ def test_game_resource_bundle_attaches_abilities_talents_items_and_indexes(tmp_p
         "english": "Acid Spray",
         "schinese": "酸性喷雾",
     }
-    assert acid["descriptions"]["english"] == "Sprays acid."
+    assert (
+        acid["descriptions"]["english"]
+        == "Sprays acid in a 350/400/450/500 radius and reduces armor by 3/4/5/6%."
+    )
+    assert acid["cast_range"] == ["450", "500", "550", "600"]
+    assert acid["timing"] == {"cast_point": "0.3"}
     assert acid["mana_cost"] == "120"
     assert acid["cooldown"] == "21"
     assert acid["attribs"] == [

@@ -220,7 +220,8 @@ Behavior:
 2. writes `bundle.json` with sanitized provenance, locale list, file pointers,
    counts, and source-backed unknowns
 3. writes `heroes.json` with hero identity, roles, base stats, localized names,
-   aliases, normalized hero-attached abilities, and first-class talents
+   aliases, normalized hero-attached abilities, source-backed cast range and
+   timing fields, and first-class talents
 4. writes `items.json` with item identity, localized names/descriptions,
    aliases, costs, recipes, neutral metadata, item stat values, and item ability
    metadata

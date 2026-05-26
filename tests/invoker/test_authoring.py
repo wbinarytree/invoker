@@ -54,6 +54,8 @@ def _pangolier_packet() -> HeroContextPacket:
                 dispellable=None,
                 description="Dash and strike enemies in line.",
                 attribs=[AttribEntry(header="DAMAGE:", value=["80", "120", "160", "200"])],
+                cast_range=["575", "650", "725", "800"],
+                timing={"cast_point": "0.15"},
                 mana_cost="50",
                 cooldown="14",
             ),
@@ -121,6 +123,10 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert "Talent context JSON" in text
     assert '"description": "Dash and strike enemies in line."' in text
     assert '"source": "base_ability"' in text
+    assert '"cast_range": [' in text
+    assert '"575"' in text
+    assert '"timing": {' in text
+    assert '"cast_point": "0.15"' in text
     assert '"band": "very_high"' in text
     assert '"percentile":' in text
     assert "Rolling Thunder Disarm" in text

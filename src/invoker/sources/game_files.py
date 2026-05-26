@@ -159,9 +159,13 @@ def _ability_record(
         "dmg_type": _damage_type(raw.get("AbilityUnitDamageType")),
         "bkbpierce": _spell_immunity(raw.get("SpellImmunityType")),
         "dispellable": _dispellable(raw.get("SpellDispellableType")),
-        "desc": _localized_ability_desc(name, localization),
+        "desc": _localized_ability_desc(name, raw, localization),
         "attrib": _attribs(raw.get("AbilityValues")),
     }
+    if "AbilityCastRange" in raw:
+        record["cast_range"] = _levels(raw["AbilityCastRange"])
+    if timing := _timing(raw):
+        record["timing"] = timing
     if "AbilityManaCost" in raw:
         record["mc"] = _levels(raw["AbilityManaCost"])
     if "AbilityCooldown" in raw:
@@ -196,7 +200,12 @@ def _localized_ability_name(
     return _title_from_internal(name)
 
 
-def _localized_ability_desc(name: str, localization: dict[str, Any]) -> str | None:
+def _localized_ability_desc(
+    name: str,
+    raw: dict[str, Any],
+    localization: dict[str, Any],
+) -> str | None:
+    replacements = _ability_value_replacements(raw.get("AbilityValues"))
     for key in (
         f"DOTA_Tooltip_ability_{name}_Description",
         f"DOTA_Tooltip_Ability_{name}_Description",
@@ -204,7 +213,7 @@ def _localized_ability_desc(name: str, localization: dict[str, Any]) -> str | No
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return value
+            return _resolve_percent_template(value, replacements)
     return None
 
 
@@ -257,7 +266,53 @@ def _resolve_talent_template(template: str, replacements: dict[str, str]) -> str
         rendered = rendered.replace(f"+{token}", f"+{unsigned}")
         rendered = rendered.replace(f"-{token}", f"-{unsigned}")
         rendered = rendered.replace(token, value)
-    return rendered
+    return _collapse_replaced_percent_escape(rendered)
+
+
+def _ability_value_replacements(values: Any) -> dict[str, str]:
+    if not isinstance(values, dict):
+        return {}
+    replacements: dict[str, str] = {}
+    for field_name, raw in values.items():
+        if isinstance(raw, dict):
+            if "value" not in raw:
+                continue
+            value = raw["value"]
+        else:
+            value = raw
+        replacements[str(field_name)] = _template_value(value)
+    return replacements
+
+
+def _resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
+    rendered = template
+    for key, value in replacements.items():
+        rendered = rendered.replace(f"%{key}%", value)
+    return _collapse_replaced_percent_escape(rendered)
+
+
+def _template_value(value: Any) -> str:
+    if not isinstance(value, str):
+        return str(value)
+    parts = value.split()
+    return "/".join(parts) if len(parts) > 1 else value
+
+
+def _collapse_replaced_percent_escape(value: str) -> str:
+    chars: list[str] = []
+    index = 0
+    while index < len(value):
+        if (
+            value.startswith("%%", index)
+            and chars
+            and (chars[-1].isdigit() or chars[-1] in {"+", "-", "."})
+        ):
+            chars.append("%")
+            index += 2
+            continue
+        chars.append(value[index])
+        index += 1
+    return "".join(chars)
 
 
 def _attribs(values: Any) -> list[dict[str, Any]]:
@@ -280,6 +335,22 @@ def _attribs(values: Any) -> list[dict[str, Any]]:
             }
         )
     return rows
+
+
+def _timing(raw: dict[str, Any]) -> dict[str, Any]:
+    fields = {
+        "cast_point": "AbilityCastPoint",
+        "channel_time": "AbilityChannelTime",
+        "cast_animation": "AbilityCastAnimation",
+        "cast_gesture_slot": "AbilityCastGestureSlot",
+        "animation_playback_rate": "AnimationPlaybackRate",
+    }
+    timing: dict[str, Any] = {}
+    for output_key, raw_key in fields.items():
+        value = raw.get(raw_key)
+        if isinstance(value, str) and value:
+            timing[output_key] = _levels(value)
+    return timing
 
 
 def _behavior(value: Any) -> list[str]:
