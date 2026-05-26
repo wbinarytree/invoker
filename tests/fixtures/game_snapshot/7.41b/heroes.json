@@ -9,6 +9,8 @@
     "AbilityTalentStart": "10",
     "ArmorPhysical": "0",
     "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
+    "AttackDamageMax": "32",
+    "AttackDamageMin": "26",
     "AttackRange": "150",
     "AttributeAgilityGain": "1.5",
     "AttributeBaseAgility": "19",
@@ -26,6 +28,8 @@
   "npc_dota_hero_test_ranged": {
     "ArmorPhysical": "5",
     "AttackCapabilities": "DOTA_UNIT_CAP_RANGED_ATTACK",
+    "AttackDamageMax": "50",
+    "AttackDamageMin": "45",
     "AttackRange": "600",
     "AttributeAgilityGain": "3.0",
     "AttributeBaseAgility": "30",

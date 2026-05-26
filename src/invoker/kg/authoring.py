@@ -475,6 +475,8 @@ def _stats_to_json(stats: HeroStatsContext) -> str:
             "agi_gain",
             "int_gain",
             "base_armor",
+            "base_attack_min",
+            "base_attack_max",
             "attack_range",
             "move_speed",
         )

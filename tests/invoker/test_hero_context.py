@@ -33,6 +33,8 @@ _HERO_STATS_MAP = {
         "agi_gain": 1.5,
         "int_gain": 1.7,
         "base_armor": 3,
+        "base_attack_min": 28,
+        "base_attack_max": 36,
         "attack_range": 150,
         "move_speed": 295,
         "primary_attr": "str",

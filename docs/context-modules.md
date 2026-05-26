@@ -43,7 +43,8 @@ a runtime source-selection layer today.
 
 Computes a `HeroStatsContext` for one hero relative to the full roster. Each tracked
 stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
-`base_armor`, `attack_range`, `move_speed`) is reported with:
+`base_armor`, `base_attack_min`, `base_attack_max`, `attack_range`,
+`move_speed`) is reported with:
 
 ```json
 { "value": 4.0, "percentile": 0.93, "band": "very_high" }

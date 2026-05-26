@@ -738,6 +738,8 @@ def _stats_to_dict(stats: HeroStatsContext) -> dict[str, Any]:
         "agi_gain",
         "int_gain",
         "base_armor",
+        "base_attack_min",
+        "base_attack_max",
         "attack_range",
         "move_speed",
     ):

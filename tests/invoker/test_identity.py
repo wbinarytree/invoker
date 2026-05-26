@@ -48,6 +48,8 @@ def _write_snapshot(
                     "AttributePrimary": "DOTA_ATTRIBUTE_AGILITY",
                     "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
                     "ArmorPhysical": "2",
+                    "AttackDamageMax": "32",
+                    "AttackDamageMin": "26",
                     "AttackRange": "150",
                     "MovementSpeed": "295",
                     "Role": "Carry,Escape",
@@ -65,6 +67,8 @@ def _write_snapshot(
                     "AttributePrimary": "DOTA_ATTRIBUTE_STRENGTH",
                     "AttackCapabilities": "DOTA_UNIT_CAP_MELEE_ATTACK",
                     "ArmorPhysical": "1",
+                    "AttackDamageMax": "40",
+                    "AttackDamageMin": "34",
                     "AttackRange": "150",
                     "MovementSpeed": "305",
                     "Role": "Carry,Support",
@@ -297,6 +301,8 @@ def test_game_resource_bundle_attaches_abilities_talents_items_and_indexes(tmp_p
     assert alchemist["primary_attr"] == "str"
     assert alchemist["roles"] == ["Carry", "Support"]
     assert alchemist["stats"]["base_str"]["value"] == 23.0
+    assert alchemist["stats"]["base_attack_min"]["value"] == 34.0
+    assert alchemist["stats"]["base_attack_max"]["value"] == 40.0
     acid = next(
         ability
         for ability in alchemist["abilities"]

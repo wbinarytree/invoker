@@ -12,6 +12,8 @@ _TRACKED_STATS = [
     "agi_gain",
     "int_gain",
     "base_armor",
+    "base_attack_min",
+    "base_attack_max",
     "attack_range",
     "move_speed",
 ]
@@ -49,6 +51,8 @@ class HeroStatsContext:
     agi_gain: StatEntry | None
     int_gain: StatEntry | None
     base_armor: StatEntry | None
+    base_attack_min: StatEntry | None
+    base_attack_max: StatEntry | None
     attack_range: StatEntry | None
     move_speed: StatEntry | None
     primary_attr: str
@@ -99,6 +103,8 @@ def compute_hero_stats_context(
         agi_gain=make_entry("agi_gain"),
         int_gain=make_entry("int_gain"),
         base_armor=make_entry("base_armor"),
+        base_attack_min=make_entry("base_attack_min"),
+        base_attack_max=make_entry("base_attack_max"),
         attack_range=make_entry("attack_range"),
         move_speed=make_entry("move_speed"),
         primary_attr=str(hero.get("primary_attr", "")),

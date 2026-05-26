@@ -27,6 +27,8 @@ def test_game_files_source_heroes_and_stats():
     stats = source.hero_stats()["73"]
     assert stats["base_str"] == 23.0
     assert stats["str_gain"] == 2.7
+    assert stats["base_attack_min"] == 26.0
+    assert stats["base_attack_max"] == 32.0
     assert stats["attack_range"] == 150.0
     assert stats["move_speed"] == 295.0
 

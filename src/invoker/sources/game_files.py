@@ -95,6 +95,8 @@ class GameFilesSource:
                 "agi_gain": _num(raw.get("AttributeAgilityGain")),
                 "int_gain": _num(raw.get("AttributeIntelligenceGain")),
                 "base_armor": _num(raw.get("ArmorPhysical")),
+                "base_attack_min": _num(raw.get("AttackDamageMin")),
+                "base_attack_max": _num(raw.get("AttackDamageMax")),
                 "attack_range": _num(raw.get("AttackRange")),
                 "move_speed": _num(raw.get("MovementSpeed")),
             }

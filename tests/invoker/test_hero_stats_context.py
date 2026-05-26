@@ -19,6 +19,8 @@ def _roster(overrides: dict | None = None) -> dict:
             "agi_gain": float(i * 0.5),
             "int_gain": float(i * 0.8),
             "base_armor": float(i),
+            "base_attack_min": float(20 + i),
+            "base_attack_max": float(25 + i),
             "attack_range": float(i * 100),
             "move_speed": float(300 + i * 10),
             "primary_attr": "str",
@@ -56,6 +58,10 @@ def test_compute_hero_stats_context_returns_correct_type():
     assert isinstance(result, HeroStatsContext)
     assert isinstance(result.base_str, StatEntry)
     assert result.base_str.value == 30.0
+    assert result.base_attack_min is not None
+    assert result.base_attack_min.value == 23.0
+    assert result.base_attack_max is not None
+    assert result.base_attack_max.value == 28.0
     assert result.primary_attr == "str"
     assert result.attack_type == "Melee"
 
