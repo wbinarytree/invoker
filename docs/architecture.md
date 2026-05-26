@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-17 (7.41c game resource bundle export)
+Last updated: 2026-05-26 (hero ability timing export)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -250,7 +250,10 @@ a clear ambiguity error listing available patches.
 
 Hero constants are assembled from bundled game-file snapshots through
 `GameFilesSource` and the existing hero context builders. The public
-`hero_constants` envelope includes hero identity, stat context, ability context,
+`hero_constants` envelope includes hero identity, stat context (including
+source-backed base attack damage min/max, base attack speed, base attack time,
+attack acquisition range, and attack animation point), ability context
+(including source-backed cast range and timing fields such as cast point),
 talents, service schema metadata, and game snapshot source metadata. Missing
 snapshot files or missing heroes fail loudly; the service does not synthesize
 Dota facts from memory.
@@ -340,8 +343,10 @@ resolved silently.
 
 `invoker export-game-resources --patch <patch> --out-dir <dir>` writes the
 preferred downstream bundle shape: `bundle.json`, `heroes.json`, `items.json`,
-and `index.json`. Hero records attach normalized ability and talent context from
-the same `GameFilesSource -> HeroContextPacket` path used by authoring prompts.
+and `index.json`. Game-resource schema version `2` adds source-backed hero
+ability `cast_range` and `timing` fields. Hero records attach normalized
+ability and talent context from the same `GameFilesSource -> HeroContextPacket`
+path used by authoring prompts.
 Item records attach localized names/descriptions, aliases, recipe metadata,
 neutral tier metadata, raw item stat rows, item IDs, and item ability metadata.
 

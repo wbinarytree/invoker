@@ -38,6 +38,12 @@ def _pangolier_packet() -> HeroContextPacket:
             agi_gain=StatEntry(value=3.4, percentile=0.85, band="very_high"),
             int_gain=StatEntry(value=1.8, percentile=0.3, band="low"),
             base_armor=StatEntry(value=2.0, percentile=0.5, band="average"),
+            base_attack_min=StatEntry(value=26.0, percentile=0.4, band="average"),
+            base_attack_max=StatEntry(value=32.0, percentile=0.4, band="average"),
+            base_attack_speed=StatEntry(value=100.0, percentile=0.5, band="average"),
+            base_attack_time=StatEntry(value=1.7, percentile=0.5, band="average"),
+            attack_animation_point=StatEntry(value=0.33, percentile=0.4, band="average"),
+            attack_acquisition_range=StatEntry(value=600.0, percentile=0.5, band="average"),
             attack_range=StatEntry(value=150.0, percentile=0.2, band="low"),
             move_speed=StatEntry(value=305.0, percentile=0.7, band="high"),
             primary_attr="agi",
@@ -54,6 +60,8 @@ def _pangolier_packet() -> HeroContextPacket:
                 dispellable=None,
                 description="Dash and strike enemies in line.",
                 attribs=[AttribEntry(header="DAMAGE:", value=["80", "120", "160", "200"])],
+                cast_range=["575", "650", "725", "800"],
+                timing={"cast_point": "0.15"},
                 mana_cost="50",
                 cooldown="14",
             ),
@@ -121,7 +129,17 @@ def test_render_draft_facts_prompt_includes_hero_context():
     assert "Talent context JSON" in text
     assert '"description": "Dash and strike enemies in line."' in text
     assert '"source": "base_ability"' in text
+    assert '"cast_range": [' in text
+    assert '"575"' in text
+    assert '"timing": {' in text
+    assert '"cast_point": "0.15"' in text
     assert '"band": "very_high"' in text
+    assert '"base_attack_min": {' in text
+    assert '"base_attack_max": {' in text
+    assert '"base_attack_speed": {' in text
+    assert '"base_attack_time": {' in text
+    assert '"attack_animation_point": {' in text
+    assert '"attack_acquisition_range": {' in text
     assert '"percentile":' in text
     assert "Rolling Thunder Disarm" in text
     assert '"capabilities"' in text

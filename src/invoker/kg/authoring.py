@@ -475,6 +475,12 @@ def _stats_to_json(stats: HeroStatsContext) -> str:
             "agi_gain",
             "int_gain",
             "base_armor",
+            "base_attack_min",
+            "base_attack_max",
+            "base_attack_speed",
+            "base_attack_time",
+            "attack_animation_point",
+            "attack_acquisition_range",
             "attack_range",
             "move_speed",
         )
@@ -506,6 +512,10 @@ def _ability_to_dict(ability: AbilityContext) -> dict[str, Any]:
         payload["dispellable"] = ability.dispellable
     if ability.attribs:
         payload["attribs"] = [_attrib_to_dict(a) for a in ability.attribs]
+    if ability.cast_range is not None:
+        payload["cast_range"] = ability.cast_range
+    if ability.timing:
+        payload["timing"] = ability.timing
     if ability.mana_cost is not None:
         payload["mana_cost"] = ability.mana_cost
     if ability.cooldown is not None:

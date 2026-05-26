@@ -18,6 +18,10 @@
       {
         "level": 2,
         "name": "special_bonus_unique_missing"
+      },
+      {
+        "level": 2,
+        "name": "special_bonus_unique_alchemist_percent"
       }
     ]
   }

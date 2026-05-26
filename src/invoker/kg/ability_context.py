@@ -24,8 +24,10 @@ class AbilityContext:
     dispellable: str | None
     description: str | None
     attribs: list[AttribEntry]
-    mana_cost: str | list[str] | None
-    cooldown: str | list[str] | None
+    cast_range: str | list[str] | None = None
+    timing: dict[str, str | list[str]] | None = None
+    mana_cost: str | list[str] | None = None
+    cooldown: str | list[str] | None = None
 
 
 @dataclass(frozen=True)
@@ -118,6 +120,8 @@ def _build_ability(internal_name: str, raw: dict[str, Any]) -> AbilityContext:
         dispellable=raw.get("dispellable") or None,
         description=raw.get("desc") or None,
         attribs=attribs,
+        cast_range=_to_str_or_list(raw["cast_range"]) if "cast_range" in raw else None,
+        timing=_timing(raw.get("timing")),
         mana_cost=_to_str_or_list(raw["mc"]) if "mc" in raw else None,
         cooldown=_to_str_or_list(raw["cd"]) if "cd" in raw else None,
     )
@@ -127,3 +131,10 @@ def _to_str_or_list(v: Any) -> str | list[str]:
     if isinstance(v, list):
         return [str(x) for x in v]
     return str(v)
+
+
+def _timing(raw: Any) -> dict[str, str | list[str]] | None:
+    if not isinstance(raw, dict):
+        return None
+    timing = {str(key): _to_str_or_list(value) for key, value in raw.items()}
+    return timing or None

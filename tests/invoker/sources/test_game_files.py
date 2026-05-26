@@ -27,6 +27,12 @@ def test_game_files_source_heroes_and_stats():
     stats = source.hero_stats()["73"]
     assert stats["base_str"] == 23.0
     assert stats["str_gain"] == 2.7
+    assert stats["base_attack_min"] == 26.0
+    assert stats["base_attack_max"] == 32.0
+    assert stats["base_attack_speed"] == 100.0
+    assert stats["base_attack_time"] == 1.7
+    assert stats["attack_animation_point"] == 0.35
+    assert stats["attack_acquisition_range"] == 600.0
     assert stats["attack_range"] == 150.0
     assert stats["move_speed"] == 295.0
 
@@ -45,6 +51,12 @@ def test_game_files_source_abilities_match_context_input_shape():
     assert acid.behavior == ["Point Target", "AOE"]
     assert acid.damage_type == "Physical"
     assert acid.pierces_debuff_immunity is False
+    assert (
+        acid.description
+        == "Sprays acid in a 350/400/450/500 radius and reduces armor by 3/4/5/6%."
+    )
+    assert acid.cast_range == ["450", "500", "550", "600"]
+    assert acid.timing == {"cast_point": "0.3"}
     assert acid.mana_cost == "120"
     assert acid.cooldown == ["22", "21", "20", "19"]
     assert acid.attribs[0].header == "ARMOR REDUCTION:"
@@ -64,7 +76,9 @@ def test_game_files_source_abilities_match_context_input_shape():
     assert "+1 Acid Spray Armor Reduction" in talent_names
     assert "+250 Health" in talent_names
     assert "+100 Missing Talent Record" in talent_names
+    assert "-18% Acid Spray Mana Cost" in talent_names
     assert all("{s:" not in name and "?" not in name for name in talent_names)
+    assert all("%%" not in name for name in talent_names)
 
 
 def test_game_files_source_exposes_items():
