@@ -127,6 +127,43 @@ def test_expand_corpus_collects_failures_and_continues(tmp_path):
     assert report.failed[0][0] == "armor"
 
 
+def test_expand_corpus_aborts_on_rate_limit(tmp_path):
+    store = CorpusStore(tmp_path)
+    seed_doc(store, "Armor", 100)
+    seed_doc(store, "Evasion", 200)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429)
+
+    reports = expand_corpus(make_registry(), store, transport=httpx.MockTransport(handler))
+    report = reports[0]
+    assert report.aborted_reason is not None
+    assert "429" in report.aborted_reason
+    # aborted after the first 429 — the second page was never attempted
+    assert len(report.failed) == 1
+
+
+def test_expand_corpus_aborts_after_consecutive_failures(tmp_path):
+    store = CorpusStore(tmp_path)
+    for i in range(8):
+        seed_doc(store, f"Page {i}", 100 + i)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(500)
+
+    events: list[tuple[str, str]] = []
+    reports = expand_corpus(
+        make_registry(),
+        store,
+        transport=httpx.MockTransport(handler),
+        progress=lambda host, slug, event: events.append((slug, event)),
+    )
+    report = reports[0]
+    assert report.aborted_reason is not None
+    assert len(report.failed) == 5
+    assert all(event == "failed" for _, event in events)
+
+
 def test_expand_corpus_respects_limit(tmp_path):
     store = CorpusStore(tmp_path)
     seed_doc(store, "Armor", 100)

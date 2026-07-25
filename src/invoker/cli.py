@@ -992,12 +992,16 @@ def expand_corpus_cmd(
     cfg = _load_config()
     try:
         registry = load_registry()
+        def _progress(host_key: str, slug: str, event: str) -> None:
+            marker = "+" if event == "expanded" else "!"
+            typer.echo(f"  {marker} {event} {host_key}/{slug}", err=event == "failed")
+
         reports = expand_corpus(
             registry,
             CorpusStore(corpus_dir(cfg.data_dir)),
             only_host=host,
             limit=limit,
-            progress=lambda host_key, slug: typer.echo(f"  expanded {host_key}/{slug}"),
+            progress=_progress,
         )
     except (RegistryError, CorpusFetchError) as exc:
         typer.echo(str(exc), err=True)
@@ -1012,6 +1016,8 @@ def expand_corpus_cmd(
         for slug, error in report.failed:
             any_failed = True
             typer.echo(f"  ! {slug}: {error}", err=True)
+        if report.aborted_reason:
+            typer.echo(f"  ABORTED: {report.aborted_reason}", err=True)
     if any_failed:
         raise typer.Exit(code=1)
 
