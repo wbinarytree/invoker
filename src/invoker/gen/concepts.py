@@ -9,7 +9,7 @@ from pydantic import BaseModel
 
 from invoker.corpus.sections import CorpusSection, load_sections
 from invoker.corpus.store import CorpusStore
-from invoker.gen.artifacts import ConceptArtifact, ConceptCard
+from invoker.gen.artifacts import EntityArtifact, EntityCard
 from invoker.gen.client import GenerationError, GenerationResult, StructuredResult
 
 T = TypeVar("T", bound=BaseModel)
@@ -170,12 +170,12 @@ def _check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
         )
 
 
-def load_concept_article(artifact_path: Path) -> tuple[ConceptArtifact, str]:
+def load_entity_article(artifact_path: Path) -> tuple[EntityArtifact, str]:
     """Load an artifact and its article, verifying the sha binding.
 
     A hand-edited or drifted article file fails loudly — artifacts are
     regenerated, never patched in place."""
-    artifact = ConceptArtifact.model_validate_json(artifact_path.read_text())
+    artifact = EntityArtifact.model_validate_json(artifact_path.read_text())
     article = (artifact_path.parent / artifact.article_file).read_text()
     digest = hashlib.sha256(article.encode()).hexdigest()
     if digest != artifact.article_sha256:
@@ -194,7 +194,7 @@ def generate_concept(
     patch: str,
     kb_dir: Path,
     effort: str | None = None,
-) -> tuple[ConceptArtifact, Path]:
+) -> tuple[EntityArtifact, Path]:
     """Generate one concept article + card from the stored corpus and write
     the artifact under <kb_dir>/concepts/<slug>.json."""
     index_page = store.load_index(host_key).pages.get(slug)
@@ -221,7 +221,7 @@ def generate_concept(
     _check_article_numbers(article.text, text_by_key, slug)
 
     card = backend.generate_structured(
-        ConceptCard,
+        EntityCard,
         prompt_name="concept-card",
         prompt_version=CONCEPT_PROMPT_VERSION,
         system=CARD_SYSTEM_PROMPT,
@@ -240,7 +240,8 @@ def generate_concept(
         )
         _check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
 
-    artifact = ConceptArtifact(
+    artifact = EntityArtifact(
+        kind="concept",
         slug=slug,
         title=index_page.resolved_title,
         patch=patch,

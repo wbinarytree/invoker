@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from invoker.gen.artifacts import CardSentence, ConceptCard
+from invoker.gen.artifacts import CardSentence, EntityCard
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
@@ -35,7 +35,7 @@ def provenance(prompt_name: str) -> GenerationProvenance:
 class FakeBackend:
     model = "claude-opus-5"
 
-    def __init__(self, article_text: str, card: ConceptCard):
+    def __init__(self, article_text: str, card: EntityCard):
         self.article_text = article_text
         self.card = card
         self.calls: list[dict] = []
@@ -51,8 +51,8 @@ class FakeBackend:
         return StructuredResult(output=self.card, provenance=provenance(kwargs["prompt_name"]))
 
 
-def good_card(mark: str = f"corpus:{KEY}") -> ConceptCard:
-    return ConceptCard(
+def good_card(mark: str = f"corpus:{KEY}") -> EntityCard:
+    return EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Uphill ranged attacks miss 25% of the time.", marks=[mark])],
     )
@@ -120,17 +120,17 @@ def test_generate_concept_writes_artifact_and_article_file(tmp_path):
     assert "Evasion" in article_call["user_content"]
 
 
-def test_load_concept_article_verifies_sha_binding(tmp_path):
-    from invoker.gen.concepts import load_concept_article
+def test_load_entity_article_verifies_sha_binding(tmp_path):
+    from invoker.gen.concepts import load_entity_article
 
     _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
-    artifact, article = load_concept_article(path)
+    artifact, article = load_entity_article(path)
     assert artifact.slug == "evasion"
     assert article == good_article()
     # a hand-edited article file fails loudly
     (path.parent / "article.md").write_text(article + "\n\nEdited by hand.")
     with pytest.raises(GenerationError, match="drifted"):
-        load_concept_article(path)
+        load_entity_article(path)
 
 
 def test_article_citing_unknown_key_fails_loudly(tmp_path):
@@ -155,7 +155,7 @@ def test_card_with_unknown_mark_fails_loudly(tmp_path):
 
 def test_card_number_absent_from_cited_section_fails_loudly(tmp_path):
     # 25 appears under #Uphill_Miss_Chance; 77 appears nowhere
-    bad = ConceptCard(
+    bad = EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Attacks miss 77% of the time.", marks=[f"corpus:{KEY}"])],
     )
@@ -167,7 +167,7 @@ def test_card_number_absent_from_cited_section_fails_loudly(tmp_path):
 def test_card_number_must_come_from_the_cited_section_not_any_section(tmp_path):
     # 3100 exists nowhere in the evasion fixture; even a resolvable mark
     # cannot vouch for a number its section does not contain
-    bad = ConceptCard(
+    bad = EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Costs 3100 gold.", marks=[f"corpus:{LEAD_KEY}"])],
     )

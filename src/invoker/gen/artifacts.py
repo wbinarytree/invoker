@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from invoker.gen.client import GenerationProvenance
 
-CONCEPT_ARTIFACT_SCHEMA_VERSION = 2
+ENTITY_ARTIFACT_SCHEMA_VERSION = 2
 
 
 class CardSentence(BaseModel):
@@ -17,15 +17,16 @@ class CardSentence(BaseModel):
     marks: list[str] = Field(min_length=1)
 
 
-class ConceptCard(BaseModel):
+class EntityCard(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     entity: str
     sentences: list[CardSentence] = Field(min_length=1)
 
 
-class ConceptArtifact(BaseModel):
-    """One generated concept: article (evidence trail) + card (serving tier).
+class EntityArtifact(BaseModel):
+    """One generated entity (concept, item, hero): article (evidence
+    trail) + card (serving tier).
 
     The article lives in a sibling markdown file (`article_file`) so the
     human-skim gate and archive diffs stay readable; `article_sha256` binds
@@ -36,14 +37,14 @@ class ConceptArtifact(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    schema_version: int = CONCEPT_ARTIFACT_SCHEMA_VERSION
-    kind: str = "concept"
+    schema_version: int = ENTITY_ARTIFACT_SCHEMA_VERSION
+    kind: str
     slug: str
     title: str
     patch: str
     article_file: str
     article_sha256: str
-    card: ConceptCard
+    card: EntityCard
     citations: list[str]
     packet_sha256: str
     article_provenance: GenerationProvenance

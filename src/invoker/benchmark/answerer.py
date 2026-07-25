@@ -8,7 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from invoker.benchmark.marks import Mark, parse_marks
 from invoker.gen.client import GenerationError, GenerationProvenance
-from invoker.gen.concepts import GenerationBackend, load_concept_article
+from invoker.gen.concepts import GenerationBackend, load_entity_article
 from invoker.snapshot.changelog import search_changelog
 
 ANSWERER_PROMPT_VERSION = "2"
@@ -95,7 +95,7 @@ def load_kb_entries(kb_dir: Path) -> list[KbEntry]:
                 "extend load_kb_entries with its artifact shape"
             )
         for entity_dir in sorted(path for path in class_dir.iterdir() if path.is_dir()):
-            artifact, article = load_concept_article(entity_dir / "artifact.json")
+            artifact, article = load_entity_article(entity_dir / "artifact.json")
             entries.append(
                 KbEntry(
                     id=f"concept/{artifact.slug}",

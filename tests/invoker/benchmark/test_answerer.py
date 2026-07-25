@@ -9,7 +9,7 @@ from invoker.benchmark.answerer import (
     load_kb_entries,
 )
 from invoker.benchmark.marks import Mark
-from invoker.gen.artifacts import CardSentence, ConceptArtifact, ConceptCard
+from invoker.gen.artifacts import CardSentence, EntityArtifact, EntityCard
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
@@ -70,13 +70,14 @@ def write_concept(kb_dir, slug: str, article: str) -> None:
     concept_dir = kb_dir / "concepts" / slug
     concept_dir.mkdir(parents=True)
     (concept_dir / "article.md").write_text(article)
-    artifact = ConceptArtifact(
+    artifact = EntityArtifact(
+        kind="concept",
         slug=slug,
         title=slug.replace("-", " ").title(),
         patch="7.41d",
         article_file="article.md",
         article_sha256=hashlib.sha256(article.encode()).hexdigest(),
-        card=ConceptCard(
+        card=EntityCard(
             entity=slug,
             sentences=[CardSentence(text="First card sentence.", marks=[f"corpus:{KEY}"])],
         ),

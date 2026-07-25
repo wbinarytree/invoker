@@ -9,8 +9,8 @@ import markdown
 
 from invoker.corpus.registry import load_registry
 from invoker.corpus.store import page_slug
-from invoker.gen.artifacts import ConceptArtifact
-from invoker.gen.concepts import load_concept_article
+from invoker.gen.artifacts import EntityArtifact
+from invoker.gen.concepts import load_entity_article
 
 _MARK_PATTERN = re.compile(r"\[corpus:([^\]\s]+)\]")
 _KEY_PATTERN = re.compile(r"^(?P<host>[^/]+)/(?P<slug>[^@]+)@(?P<rev>\d+)(?:#(?P<anchor>.+))?$")
@@ -105,10 +105,10 @@ def render_kb_site(kb_dir: Path, patch: str, out_dir: Path) -> SiteReport:
     host_base_urls = {key: host.page_base_url for key, host in registry.hosts.items()}
 
     concepts_dir = kb_dir / "concepts"
-    artifacts: dict[str, tuple[ConceptArtifact, str]] = {}
+    artifacts: dict[str, tuple[EntityArtifact, str]] = {}
     if concepts_dir.exists():
         for artifact_path in sorted(concepts_dir.glob("*/artifact.json")):
-            artifact, article = load_concept_article(artifact_path)
+            artifact, article = load_entity_article(artifact_path)
             artifacts[artifact.slug] = (artifact, article)
 
     curated: dict[str, str] = {}
