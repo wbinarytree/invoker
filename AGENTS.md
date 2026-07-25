@@ -1,58 +1,33 @@
 # AGENTS.md
 
-Entrypoint for any coding agent on this repo (Claude Code, Codex CLI, Cursor, Aider, others).
+Entrypoint for any coding agent on this repo.
 
-## Read docs before code
+## Sources of truth
 
-When something is unclear, read the docs first. Only fall back to the source when the docs don't answer it. The docs are the source of truth; the code is the implementation.
+Docs first, code second. If you're grepping the source to answer "what does X do?", stop and read:
 
-- `docs/architecture.md` — current implementation; source of truth for system shape, modules, schemas
-- `docs/CURRENT_DIRECTION.md` — index of active design docs
-- `docs/context-modules.md`, `docs/cli.md`, `docs/opendota-cache.md` — module-level references linked from architecture.md
-- `GUIDELINES.md` — project rules (stack, data discipline, testing, design discipline)
-
-If you find yourself grepping the codebase to answer "what does X do?" before checking these, stop and check them first.
+- `docs/architecture.md` — what the code does today; update it in the same PR as any shape change (new command, schema, pipeline step, module) and bump `Last updated:`
+- `docs/CURRENT_DIRECTION.md` — index of active design docs; anything not listed there or in architecture.md is not authoritative
+- `GUIDELINES.md` — project rules: stack, data discipline, provenance, testing, design discipline
 
 ## Hard lines
 
-- No Dota facts from training memory. Cite a source file or mark unknown. Null is correct when data is missing — never fill plausible placeholders.
-- LLM generation is pipeline-legal (rethink 2026-07-25) but never a fact source: generated prose cites substrate keys, and faithfulness checks are mechanical.
-- No silent retries on bad LLM extractions — surface the failure.
-- `data/` is gitignored except `data/kb/` (generated encyclopedia artifacts, committed for archival). No raw or fetched data committed.
-- Specs go in `docs/specs/YYYY-MM-DD-<topic>.md` *before* discussion. Don't substitute a chat markdown block for the spec file.
-- Trigger discussion mode before implementation when a change needs design, vision, or plan alignment.
-- Ask before destructive or external-facing actions: force-push, rewriting history, branch/tag deletion, full all-hero API fetch, deleting outside the working change, publishing/releases/tagging, regenerating large derived artifacts.
+- No Dota facts from training memory. Cite a source file or mark unknown; null is correct when data is missing — never a plausible placeholder.
+- LLM generation is pipeline-legal (rethink 2026-07-25) but never a fact source: generated prose cites substrate keys, faithfulness checks are mechanical, and bad LLM output is surfaced, never silently retried or repaired.
+- `data/` is gitignored except `data/kb/` (committed encyclopedia artifacts). No raw or fetched data in git.
+- Design before code: non-trivial changes get a spec in `docs/specs/YYYY-MM-DD-<topic>.md`, discussed and signed off before implementation. A chat message is not a spec.
+- Ask before destructive or external-facing actions: force-push, history rewrites, branch/tag deletion, deleting outside the working change, full all-hero API fetches, publishing/releases, regenerating large derived artifacts.
 
-## Branch & PR loop
+## The loop
 
-1. Never commit on `main`. Create a feature branch first.
-2. Write tests for behavior that changes — validators, query API, schema, CLI surface. Don't unit-test LLM prose.
-3. `uv run pytest`, `uv run pyright`, `uv run ruff check` must pass.
-4. **Sub-agent review on user's "ready to ship" signal, not mid-flight.** Brief in `docs/specs/2026-04-26-collaboration-harness.md`. The reviewer runs on Claude Opus 5 (`claude-opus-5`; user decision 2026-07-25) with fresh context — not the implementing agent's conversation. If an agent runtime needs explicit permission before spawning a sub-agent, ask for that permission before opening the PR. Surface findings; ask whether to fix-now / push-as-is with follow-ups / cherry-pick. Paste the review summary into the PR body either way.
-5. **Architecture-doc update, same PR.** If the change adds/modifies a CLI command, schema, validation layer, pipeline step, or new module, update `docs/architecture.md` (and any module doc it links to) and bump `Last updated:`. Bug fixes that don't change shape are exempt.
-6. One logical change per commit.
+1. Feature branch — never commit on `main`. One logical change per commit.
+2. Tests for behavior that changes; don't unit-test LLM prose. `uv run pytest`, `uv run pyright`, `uv run ruff check` must pass.
+3. On the user's "ready to ship" signal (not mid-flight): fresh-context sub-agent review on Claude Opus 5 (`claude-opus-5`) per the brief in `docs/specs/2026-04-26-collaboration-harness.md`. Surface findings verbatim, get the user's fix-now / follow-up decision, paste the review into the PR body.
 
-## Doc lifecycle
+## Repo gotchas
 
-Stale docs mislead. When a doc is superseded:
-
-- **Confusion-only → delete.**
-- **Historical trace → archive.** Move to `docs/archive/<original-subpath>/` with a `Status: superseded by …` line at the top.
-- Don't read archived docs to derive current behavior — only to investigate *why* a past decision was made.
-- If a doc is not in `docs/CURRENT_DIRECTION.md` or `docs/architecture.md`, treat it as not authoritative.
-
-## Where things go
-
-- Forward design (sign-off required for non-trivial): `docs/specs/YYYY-MM-DD-<topic>.md`
-- Stage handoffs: `docs/handoff-YYYY-MM-DD-<topic>.md`
-- Retrospective notes: `docs/notes/YYYY-MM-DD-<topic>.md`
-- Implementation plans: `docs/plans/YYYY-MM-DD-<topic>.md`
-
-## Project-specific style
-
-- Not a TDD project. Ship features with tests for behavior that matters; how tests get written is free.
-- No backwards-compatibility shims while pre-1.0.
-
-## Stack quick-ref
-
-Python 3.11+, `uv` for env/deps, `ruff` for lint+format, `pyright` non-strict. Tests live in `tests/invoker/` mirroring `src/invoker/`.
+- Game files assert removed mechanics (7.41d still ships `Facets` blocks though facets were removed in 7.41) — presence-in-files ≠ presence-in-game; the in-game changelog is the detector.
+- Some effects exist only as display string + engine code (code-only talents) — ability questions need the full kit joined with localization, not ad-hoc lookups.
+- Superseded docs mislead: delete (if confusing) or archive to `docs/archive/` with a `Status: superseded by …` header. Archived docs explain *why* past decisions happened, never current behavior.
+- File homes: specs `docs/specs/`, plans `docs/plans/`, stage handoffs `docs/handoff-*.md`, retro notes `docs/notes/`.
+- Pre-1.0: no backwards-compat shims. Not a TDD project — ship features with tests for behavior that matters.
