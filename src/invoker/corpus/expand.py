@@ -6,8 +6,9 @@ from dataclasses import dataclass, field
 
 import httpx
 
-from invoker.corpus.fetch import USER_AGENT, CorpusFetchError
+from invoker.corpus.fetch import USER_AGENT
 from invoker.corpus.mediawiki import MediaWikiClient, MediaWikiError
+from invoker.corpus.registry import select_host_keys
 from invoker.corpus.schemas import CorpusHost, CorpusRegistry
 from invoker.corpus.store import CorpusStore
 
@@ -99,13 +100,7 @@ def expand_corpus(
     transport: httpx.AsyncBaseTransport | None = None,
     progress: ProgressCallback | None = None,
 ) -> list[HostExpandReport]:
-    host_keys = list(registry.hosts)
-    if only_host is not None:
-        if only_host not in registry.hosts:
-            raise CorpusFetchError(
-                f"unknown corpus host {only_host!r}; registry has: {', '.join(host_keys)}"
-            )
-        host_keys = [only_host]
+    host_keys = select_host_keys(registry, only_host)
 
     async def _run() -> list[HostExpandReport]:
         reports = []

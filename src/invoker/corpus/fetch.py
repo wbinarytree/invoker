@@ -9,16 +9,13 @@ import httpx
 
 from invoker import __version__
 from invoker.corpus.mediawiki import MediaWikiClient
+from invoker.corpus.registry import select_host_keys
 from invoker.corpus.schemas import CorpusDoc, CorpusHost, CorpusRegistry
 from invoker.corpus.store import CorpusStore, page_slug
 
 USER_AGENT = (
     f"invoker-kb/{__version__} (+https://github.com/wbinarytree/invoker; awangyaoda@gmail.com)"
 )
-
-
-class CorpusFetchError(RuntimeError):
-    pass
 
 
 @dataclass
@@ -88,13 +85,7 @@ def fetch_corpus(
     patch_context: str | None = None,
     transport: httpx.AsyncBaseTransport | None = None,
 ) -> list[HostFetchReport]:
-    host_keys = list(registry.hosts)
-    if only_host is not None:
-        if only_host not in registry.hosts:
-            raise CorpusFetchError(
-                f"unknown corpus host {only_host!r}; registry has: {', '.join(host_keys)}"
-            )
-        host_keys = [only_host]
+    host_keys = select_host_keys(registry, only_host)
 
     async def _run() -> list[HostFetchReport]:
         reports = []

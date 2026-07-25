@@ -14,6 +14,18 @@ class RegistryError(RuntimeError):
     pass
 
 
+def select_host_keys(registry: CorpusRegistry, only_host: str | None) -> list[str]:
+    """Host keys to operate on, validating an explicit --host selection."""
+    host_keys = list(registry.hosts)
+    if only_host is None:
+        return host_keys
+    if only_host not in registry.hosts:
+        raise RegistryError(
+            f"unknown corpus host {only_host!r}; registry has: {', '.join(host_keys)}"
+        )
+    return [only_host]
+
+
 def load_registry(path: Path | None = None) -> CorpusRegistry:
     registry_path = path or PACKAGED_REGISTRY
     if not registry_path.exists():

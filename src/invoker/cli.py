@@ -878,7 +878,7 @@ def fetch_corpus_cmd(
     ] = None,
 ) -> None:
     """Fetch curated MediaWiki corpus pages into revision-pinned local documents."""
-    from invoker.corpus.fetch import CorpusFetchError, fetch_corpus
+    from invoker.corpus.fetch import fetch_corpus
     from invoker.corpus.registry import RegistryError, load_registry
     from invoker.corpus.store import CorpusStore
     from invoker.paths import corpus_dir
@@ -892,7 +892,7 @@ def fetch_corpus_cmd(
             only_host=host,
             patch_context=patch,
         )
-    except (RegistryError, CorpusFetchError) as exc:
+    except RegistryError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
 
@@ -984,7 +984,6 @@ def expand_corpus_cmd(
     (~1 per 30s on Liquipedia). Incremental — already-expanded revisions
     are skipped, so re-runs only cost what changed."""
     from invoker.corpus.expand import expand_corpus
-    from invoker.corpus.fetch import CorpusFetchError
     from invoker.corpus.registry import RegistryError, load_registry
     from invoker.corpus.store import CorpusStore
     from invoker.paths import corpus_dir
@@ -1003,7 +1002,7 @@ def expand_corpus_cmd(
             limit=limit,
             progress=_progress,
         )
-    except (RegistryError, CorpusFetchError) as exc:
+    except RegistryError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
 
@@ -1034,7 +1033,6 @@ def corpus_coverage_cmd(
     Shows what is fetched, what is deliberately omitted (with the recorded
     reason), and what is still unreviewed."""
     from invoker.corpus.coverage import corpus_coverage
-    from invoker.corpus.fetch import CorpusFetchError
     from invoker.corpus.registry import RegistryError, load_registry
     from invoker.corpus.store import CorpusStore
     from invoker.paths import corpus_dir
@@ -1047,7 +1045,7 @@ def corpus_coverage_cmd(
             CorpusStore(corpus_dir(cfg.data_dir)),
             only_host=host,
         )
-    except (RegistryError, CorpusFetchError) as exc:
+    except RegistryError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
 

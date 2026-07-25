@@ -1,8 +1,8 @@
 import httpx
 import pytest
 
-from invoker.corpus.fetch import CorpusFetchError, fetch_corpus, source_page_url
-from invoker.corpus.registry import load_registry
+from invoker.corpus.fetch import fetch_corpus, source_page_url
+from invoker.corpus.registry import RegistryError, load_registry
 from invoker.corpus.schemas import CorpusDoc, CorpusHost, CorpusRegistry
 from invoker.corpus.store import CorpusStore
 
@@ -90,7 +90,7 @@ def test_fetch_corpus_skips_known_revisions_and_writes_new_ones(tmp_path):
 
 
 def test_fetch_corpus_unknown_host_fails_loudly(tmp_path):
-    with pytest.raises(CorpusFetchError, match="unknown corpus host"):
+    with pytest.raises(RegistryError, match="unknown corpus host"):
         fetch_corpus(make_registry(), CorpusStore(tmp_path), only_host="nope")
 
 
