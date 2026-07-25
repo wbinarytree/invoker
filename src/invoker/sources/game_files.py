@@ -211,7 +211,7 @@ def _localized_ability_desc(
     raw: dict[str, Any],
     localization: dict[str, Any],
 ) -> str | None:
-    replacements = _ability_value_replacements(raw.get("AbilityValues"))
+    replacements = ability_value_replacements(raw.get("AbilityValues"))
     for key in (
         f"DOTA_Tooltip_ability_{name}_Description",
         f"DOTA_Tooltip_Ability_{name}_Description",
@@ -219,7 +219,7 @@ def _localized_ability_desc(
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return _resolve_percent_template(value, replacements)
+            return resolve_percent_template(value, replacements)
     return None
 
 
@@ -275,7 +275,7 @@ def _resolve_talent_template(template: str, replacements: dict[str, str]) -> str
     return _collapse_replaced_percent_escape(rendered)
 
 
-def _ability_value_replacements(values: Any) -> dict[str, str]:
+def ability_value_replacements(values: Any) -> dict[str, str]:
     if not isinstance(values, dict):
         return {}
     replacements: dict[str, str] = {}
@@ -290,7 +290,7 @@ def _ability_value_replacements(values: Any) -> dict[str, str]:
     return replacements
 
 
-def _resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
+def resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
     rendered = template
     for key, value in replacements.items():
         rendered = rendered.replace(f"%{key}%", value)
@@ -305,6 +305,11 @@ def _template_value(value: Any) -> str:
 
 
 def _collapse_replaced_percent_escape(value: str) -> str:
+    # KV tooltips escape a literal percent sign as "%%" ("%damage%%%" renders
+    # as "40%"). Collapse only when the escape directly follows a substituted
+    # numeric value: elsewhere a "%" run may straddle an unreplaced "%key%"
+    # token boundary, and folding it would corrupt the token that later
+    # passes (or a reader) still need to see intact.
     chars: list[str] = []
     index = 0
     while index < len(value):
@@ -377,11 +382,14 @@ def _behavior(value: Any) -> list[str]:
 
 
 def _damage_type(value: Any) -> str | None:
-    return _enum_suffix(value, {
-        "DAMAGE_TYPE_PHYSICAL": "Physical",
-        "DAMAGE_TYPE_MAGICAL": "Magical",
-        "DAMAGE_TYPE_PURE": "Pure",
-    })
+    return _enum_suffix(
+        value,
+        {
+            "DAMAGE_TYPE_PHYSICAL": "Physical",
+            "DAMAGE_TYPE_MAGICAL": "Magical",
+            "DAMAGE_TYPE_PURE": "Pure",
+        },
+    )
 
 
 def _spell_immunity(value: Any) -> str | None:
@@ -395,11 +403,14 @@ def _spell_immunity(value: Any) -> str | None:
 
 
 def _dispellable(value: Any) -> str | None:
-    return _enum_suffix(value, {
-        "SPELL_DISPELLABLE_YES": "Yes",
-        "SPELL_DISPELLABLE_NO": "No",
-        "SPELL_DISPELLABLE_YES_STRONG": "Strong Dispels Only",
-    })
+    return _enum_suffix(
+        value,
+        {
+            "SPELL_DISPELLABLE_YES": "Yes",
+            "SPELL_DISPELLABLE_NO": "No",
+            "SPELL_DISPELLABLE_YES_STRONG": "Strong Dispels Only",
+        },
+    )
 
 
 def _enum_suffix(value: Any, mapping: dict[str, str]) -> str | None:

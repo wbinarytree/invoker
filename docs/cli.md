@@ -15,6 +15,10 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
+- `invoker fetch-corpus [--host <key>] [--patch <patch>]`
+- `invoker corpus-coverage [--host <key>]`
+- `invoker expand-corpus [--host <key>] [--limit <n>]`
+- `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -159,6 +163,87 @@ is written as an empty object and `GameFilesSource` falls back to KV names.
 
 `snapshot.json` records generic source labels and relative source-file
 inventory. It does not record local absolute extraction paths.
+
+### `fetch-corpus`
+
+Fetch curated MediaWiki corpus pages into revision-pinned local documents
+under `data/corpus/<host_key>/`.
+
+```bash
+uv run invoker fetch-corpus
+uv run invoker fetch-corpus --host liquipedia_dota2 --patch 7.41d
+```
+
+- The page registry is `src/invoker/corpus/pages.yaml` (hosts, licenses,
+  rate limits, curated page titles).
+- A page whose latest wiki revision is already stored is reported as
+  `unchanged` and not rewritten; a new revision writes a new file and keeps
+  the old one.
+- `--patch` records an optional patch context on newly fetched documents.
+- Registry titles that fail to resolve are printed and the command exits 1;
+  fix `pages.yaml`.
+
+### `corpus-coverage`
+
+Diff each host's `coverage_categories` (wiki category universe) against the
+curated registry, so omissions stay visible and reasoned.
+
+```bash
+uv run invoker corpus-coverage
+```
+
+Buckets per host:
+
+- `covered` — in the universe and fetched (redirects resolve via the fetch
+  index)
+- `omitted` — excluded one-by-one in `pages.yaml` `omit`, each with a reason
+- `omitted by rule` — excluded as a class via `omit_prefixes` (e.g.
+  Liquipedia's `Archive:` namespace), reported as a count per rule
+- `unreviewed` — in the universe but neither fetched nor omitted; the
+  actionable triage list
+- `registry pages outside coverage categories` — informational; fetched pages
+  that live outside the configured categories.
+
+### `expand-corpus`
+
+Fetch template-expanded HTML for every fetched corpus revision that does not
+have it yet, stored as `<revision_id>.expanded.html` next to the raw
+document. Raw wikitext leaves `{{G|...}}` wiki variables unresolved; only the
+expanded text materializes their values.
+
+```bash
+uv run invoker expand-corpus
+uv run invoker expand-corpus --host liquipedia_dota2 --limit 10
+```
+
+- Iterates the fetch index, so run `fetch-corpus` first.
+- Slow by design: `action=parse` calls run at the host's strict parse rate
+  limit (`max_parse_requests_per_minute` in `pages.yaml`; 1/min on
+  Liquipedia).
+- Incremental — already-expanded revisions are skipped, so re-runs only cost
+  what changed.
+- Aborts on HTTP 429 or 5 consecutive failures instead of burning the rate
+  budget; re-run later to resume. Any failure exits 1.
+
+### `changelog`
+
+Search the in-game changelog captured in a game-file snapshot
+(`changelog.json`, built by `snapshot-game-files` when patch-note files are
+present in the extraction — 123 patches of history, 7.06d onward, as shipped
+by the 7.41d client).
+
+```bash
+uv run invoker changelog --patch 7.41d --grep "facets removed"
+uv run invoker changelog --patch 7.41d --for mage_slayer
+uv run invoker changelog --patch 7.41d --for slardar --note-patch 7.41
+uv run invoker changelog --patch 7.41d --grep 移除 --locale schinese
+```
+
+- `--patch` selects which snapshot's changelog to read (the client ships the
+  full history, so newest is usually right).
+- `--grep` matches note text (in `--locale`) or the note token.
+- `--for` matches the entity: hero, ability, item, or generic section name.
+- `--note-patch` restricts to notes from one patch version.
 
 ### `export-identity-localization`
 

@@ -1,0 +1,29 @@
+schema_version: 1
+id: uphill-miss
+question: What is uphill miss?
+patch: 7.41d
+category: mechanics
+expected_facts:
+  - fact: >-
+      Ranged attack projectiles have a 25% chance to miss when the attacker
+      is on lower terrain than the target
+  - fact: Only affects ranged projectiles of units without flying movement
+  - fact: Applies regardless of vision of the target
+    required: false
+  - fact: Stacks diminishingly with other evasion sources
+    required: false
+  - fact: Resolved upon projectile impact
+    required: false
+forbidden_assertions:
+  - assertion: Melee attacks suffer uphill miss chance
+    why: >-
+      The Evasion page scopes it to ranged projectiles of non-flying units;
+      melee is unaffected.
+expected_marks:
+  - kind: corpus
+    pattern: "liquipedia_dota2:evasion"
+max_answer_words: 120
+notes: >-
+  The 25% value exists only in template-expanded text ({{G|uphill miss
+  chance}} wiki variable); raw wikitext cannot answer it. See trial
+  finding 1 in docs/specs/2026-07-25-grounded-reasoner-rethink.md.

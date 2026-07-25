@@ -1,0 +1,34 @@
+schema_version: 1
+id: pseudo-random-distribution
+question: What is pseudo-random distribution?
+patch: 7.41d
+category: mechanics
+expected_facts:
+  - fact: >-
+      Many chance-based effects use pseudo-random distribution instead of
+      true (independent) randomness
+  - fact: >-
+      The proc chance starts below the nominal value and increases with
+      each attempt that fails to proc
+  - fact: The chance resets to its base value after a proc
+  - fact: >-
+      Over time the effective proc rate averages out to the listed nominal
+      percentage
+    required: false
+  - fact: >-
+      This makes long dry streaks and repeated back-to-back procs rarer,
+      adding consistency
+    required: false
+forbidden_assertions:
+  - assertion: Every attempt has the same independent probability to proc
+    why: >-
+      That describes true random distribution — the exact misconception PRD
+      exists to avoid; the corpus page contrasts the two directly.
+expected_marks:
+  - kind: corpus
+    pattern: "liquipedia_dota2:random_distribution"
+max_answer_words: 130
+notes: >-
+  The wiki page is titled "Random Distribution" (our registry entry
+  redirects from "Pseudo-random Distribution"); an example on the page
+  walks Skull Basher's 25% bash starting at ~8.5% per attempt.

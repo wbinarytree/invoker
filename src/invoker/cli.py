@@ -234,6 +234,11 @@ def snapshot_game_files_cmd(
     typer.echo(f"Items: {result.item_count}")
     typer.echo(f"Neutral item sections: {result.neutral_item_count}")
     typer.echo(f"Locales: {', '.join(result.locales)}")
+    if result.changelog_patch_count:
+        typer.echo(
+            f"Changelog: {result.changelog_patch_count} patches, "
+            f"{result.changelog_note_count} notes"
+        )
 
 
 @app.command("export-identity-localization")
@@ -859,6 +864,218 @@ def publish(
     typer.echo("- review release.json")
     typer.echo("- review reports/validation.txt")
     typer.echo("- review reports/vocab-audit.txt")
+
+
+@app.command("fetch-corpus")
+def fetch_corpus_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only fetch this host key from the corpus registry."),
+    ] = None,
+    patch: Annotated[
+        str | None,
+        typer.Option(help="Optional patch context recorded on newly fetched documents."),
+    ] = None,
+) -> None:
+    """Fetch curated MediaWiki corpus pages into revision-pinned local documents."""
+    from invoker.corpus.fetch import fetch_corpus
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        reports = fetch_corpus(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+            patch_context=patch,
+        )
+    except RegistryError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    any_missing = False
+    for report in reports:
+        typer.echo(f"Host: {report.host_key}")
+        typer.echo(f"  fetched: {len(report.fetched)}")
+        for slug in report.fetched:
+            typer.echo(f"    + {slug}")
+        typer.echo(f"  unchanged: {len(report.unchanged)}")
+        if report.missing:
+            any_missing = True
+            typer.echo(f"  MISSING ({len(report.missing)}):", err=True)
+            for title in report.missing:
+                typer.echo(f"    ! {title}", err=True)
+    if any_missing:
+        typer.echo("Some registry pages did not resolve; fix pages.yaml.", err=True)
+        raise typer.Exit(code=1)
+
+
+@app.command("changelog")
+def changelog_cmd(
+    patch: Annotated[
+        str,
+        typer.Option(help="Snapshot patch directory to read changelog.json from."),
+    ],
+    grep: Annotated[
+        str | None,
+        typer.Option(help="Substring match against note text or token."),
+    ] = None,
+    entity: Annotated[
+        str | None,
+        typer.Option("--for", help="Filter by entity: hero, ability, item, or section name."),
+    ] = None,
+    note_patch: Annotated[
+        str | None,
+        typer.Option(help="Only notes from this patch version, e.g. 7.41."),
+    ] = None,
+    locale: Annotated[str, typer.Option(help="Locale for note text.")] = "english",
+    limit: Annotated[int, typer.Option(help="Maximum entries to print.")] = 20,
+) -> None:
+    """Search the in-game changelog captured in a game-file snapshot."""
+    from invoker.snapshot.changelog import search_changelog
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is not configured", err=True)
+        raise typer.Exit(code=1)
+    changelog_path = cfg.game_data_dir / patch / "changelog.json"
+    if not changelog_path.exists():
+        typer.echo(
+            f"{changelog_path} not found; re-run snapshot-game-files with "
+            "patchnotes files present in the extraction",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+
+    changelog = json.loads(changelog_path.read_text())
+    results = search_changelog(
+        changelog,
+        grep=grep,
+        entity=entity,
+        note_patch=note_patch,
+        locale=locale,
+    )
+    typer.echo(f"Matches: {len(results)}")
+    for entry in results[:limit]:
+        date = f" ({entry['date']})" if entry.get("date") else ""
+        typer.echo(f"[{entry['patch']}]{date} {entry['scope']}/{entry['entity']}")
+        typer.echo(f"  {entry['text'] or '(no text for locale)'}")
+    if len(results) > limit:
+        typer.echo(f"... {len(results) - limit} more (raise --limit)")
+
+
+@app.command("expand-corpus")
+def expand_corpus_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only expand this host key from the corpus registry."),
+    ] = None,
+    limit: Annotated[
+        int | None,
+        typer.Option(help="Stop after expanding this many pages (for partial runs)."),
+    ] = None,
+) -> None:
+    """Fetch template-expanded HTML for fetched corpus revisions.
+
+    Slow by design: parse calls run at the host's strict rate limit
+    (~1 per 30s on Liquipedia). Incremental — already-expanded revisions
+    are skipped, so re-runs only cost what changed."""
+    from invoker.corpus.expand import expand_corpus
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        def _progress(host_key: str, slug: str, event: str) -> None:
+            marker = "+" if event == "expanded" else "!"
+            typer.echo(f"  {marker} {event} {host_key}/{slug}", err=event == "failed")
+
+        reports = expand_corpus(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+            limit=limit,
+            progress=_progress,
+        )
+    except RegistryError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    any_failed = False
+    for report in reports:
+        typer.echo(
+            f"Host: {report.host_key} — expanded {len(report.expanded)}, "
+            f"already current {len(report.skipped)}, failed {len(report.failed)}"
+        )
+        for slug, error in report.failed:
+            any_failed = True
+            typer.echo(f"  ! {slug}: {error}", err=True)
+        if report.aborted_reason:
+            typer.echo(f"  ABORTED: {report.aborted_reason}", err=True)
+    if any_failed:
+        raise typer.Exit(code=1)
+
+
+@app.command("corpus-coverage")
+def corpus_coverage_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only report this host key from the corpus registry."),
+    ] = None,
+) -> None:
+    """Diff each host's coverage categories against the curated registry.
+
+    Shows what is fetched, what is deliberately omitted (with the recorded
+    reason), and what is still unreviewed."""
+    from invoker.corpus.coverage import corpus_coverage
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        reports = corpus_coverage(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+        )
+    except RegistryError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    for report in reports:
+        typer.echo(f"Host: {report.host_key}")
+        if report.universe_size == 0:
+            typer.echo("  no coverage_categories configured; nothing to diff against")
+            continue
+        typer.echo(f"  category universe: {report.universe_size} pages")
+        typer.echo(f"  covered: {len(report.covered)}")
+        typer.echo(f"  omitted: {len(report.omitted)}")
+        for title, reason in report.omitted:
+            typer.echo(f"    - {title}: {reason}")
+        for prefix, reason, count in report.omitted_by_rule:
+            typer.echo(f"  omitted by rule '{prefix}*': {count} pages ({reason})")
+        typer.echo(f"  unreviewed: {len(report.unreviewed)}")
+        for title in report.unreviewed:
+            typer.echo(f"    ? {title}")
+        if report.outside_categories:
+            typer.echo(
+                f"  registry pages outside coverage categories: "
+                f"{len(report.outside_categories)}"
+            )
+            for title in report.outside_categories:
+                typer.echo(f"    ~ {title}")
+        if report.unreviewed:
+            typer.echo(
+                "  unreviewed pages need triage: add to pages or omit (with reason) "
+                "in src/invoker/corpus/pages.yaml"
+            )
 
 
 if __name__ == "__main__":

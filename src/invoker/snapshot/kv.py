@@ -17,11 +17,24 @@ class _Token:
 
 
 class KV1Parser:
-    """Narrow KV1 parser for Valve text files used by the snapshot command."""
+    """Narrow KV1 parser for Valve text files used by the snapshot command.
 
-    def __init__(self, text: str, *, source: str = "<string>") -> None:
+    With `collect_duplicates`, repeated keys inside a block accumulate into a
+    list instead of overwriting (the patch-notes manifest repeats both its
+    patch-block key and `note` keys). Default behavior is unchanged:
+    last-write-wins, matching the constants files.
+    """
+
+    def __init__(
+        self,
+        text: str,
+        *,
+        source: str = "<string>",
+        collect_duplicates: bool = False,
+    ) -> None:
         self._text = text
         self._source = source
+        self._collect_duplicates = collect_duplicates
         self._tokens = self._tokenize()
         self._pos = 0
 
@@ -30,8 +43,18 @@ class KV1Parser:
         while not self._at_end():
             key = self._read_token()
             value = self._read_value()
-            parsed[key.value] = value
+            self._store(parsed, key.value, value)
         return parsed
+
+    def _store(self, block: dict[str, Any], key: str, value: Any) -> None:
+        if not self._collect_duplicates or key not in block:
+            block[key] = value
+            return
+        existing = block[key]
+        if isinstance(existing, list):
+            existing.append(value)
+        else:
+            block[key] = [existing, value]
 
     def _read_value(self) -> Any:
         if self._peek_value("{"):
@@ -47,7 +70,7 @@ class KV1Parser:
                 return block
             key = self._read_token()
             value = self._read_value()
-            block[key.value] = value
+            self._store(block, key.value, value)
         raise self._error("unterminated block")
 
     def _tokenize(self) -> list[_Token]:
@@ -159,9 +182,18 @@ class KV1Parser:
         return KVParseError(f"{self._source}:{line}:{col}: {message}")
 
 
-def parse_kv1(text: str, *, source: str = "<string>") -> dict[str, Any]:
-    return KV1Parser(text, source=source).parse()
+def parse_kv1(
+    text: str,
+    *,
+    source: str = "<string>",
+    collect_duplicates: bool = False,
+) -> dict[str, Any]:
+    return KV1Parser(text, source=source, collect_duplicates=collect_duplicates).parse()
 
 
-def parse_kv1_file(path: Path) -> dict[str, Any]:
-    return parse_kv1(path.read_text(), source=str(path))
+def parse_kv1_file(path: Path, *, collect_duplicates: bool = False) -> dict[str, Any]:
+    return parse_kv1(
+        path.read_text(),
+        source=str(path),
+        collect_duplicates=collect_duplicates,
+    )

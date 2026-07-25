@@ -7,6 +7,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from invoker.snapshot.changelog import (
+    LOCALIZATION_RELATIVE_DIR,
+    MANIFEST_RELATIVE_PATH,
+    build_changelog,
+    search_changelog,
+)
 from invoker.snapshot.kv import parse_kv1_file
 
 
@@ -22,6 +28,8 @@ class SnapshotResult:
     item_count: int
     neutral_item_count: int
     locales: tuple[str, ...]
+    changelog_patch_count: int = 0
+    changelog_note_count: int = 0
 
 
 def snapshot_game_files(
@@ -54,6 +62,18 @@ def snapshot_game_files(
         localization_sources[selected_locale] = files
         localizations[selected_locale] = _load_localization_files(files)
 
+    changelog_manifest = _discover_changelog_manifest(source, npc_dir)
+    changelog: dict[str, Any] | None = None
+    changelog_localization_sources: dict[str, Path] = {}
+    if changelog_manifest is not None:
+        patchnote_localizations: dict[str, dict[str, str]] = {}
+        for selected_locale in selected_locales:
+            path = _discover_changelog_localization(source, npc_dir, selected_locale)
+            if path is not None:
+                changelog_localization_sources[selected_locale] = path
+                patchnote_localizations[selected_locale] = _load_localization(path)
+        changelog = build_changelog(changelog_manifest, patchnote_localizations)
+
     heroes = {
         name: block
         for name, block in heroes_raw.items()
@@ -80,6 +100,30 @@ def snapshot_game_files(
     _write_json(patch_dir / "neutral_items.json", neutral_items_raw)
     for selected_locale, localization_raw in localizations.items():
         _write_json(localization_dir / f"{selected_locale}.json", localization_raw)
+
+    source_files = _source_files(source, npc_dir, localization_sources)
+    snapshot_files: dict[str, Any] = {
+        "heroes": "heroes.json",
+        "abilities": "abilities.json",
+        "hero_abilities": "hero_abilities.json",
+        "items": "items.json",
+        "neutral_items": "neutral_items.json",
+        "localization": {
+            selected_locale: f"localization/{selected_locale}.json"
+            for selected_locale in selected_locales
+        },
+    }
+    changelog_note_count = 0
+    if changelog is not None and changelog_manifest is not None:
+        _write_json(patch_dir / "changelog.json", changelog)
+        snapshot_files["changelog"] = "changelog.json"
+        source_files["changelog_manifest"] = _safe_source_path(source, changelog_manifest)
+        source_files["changelog_localization"] = {
+            selected_locale: _safe_source_path(source, path)
+            for selected_locale, path in changelog_localization_sources.items()
+        }
+        changelog_note_count = len(search_changelog(changelog))
+
     _write_json(
         patch_dir / "snapshot.json",
         {
@@ -90,22 +134,12 @@ def snapshot_game_files(
             "generated_at": datetime.now(UTC).isoformat(),
             "locale": selected_locales[0],
             "locales": list(selected_locales),
-            "source_files": _source_files(source, npc_dir, localization_sources),
+            "source_files": source_files,
             "localization_sources": {
-                selected_locale: [_safe_source_path(source, path) for path in files]
-                for selected_locale, files in localization_sources.items()
+                selected_locale: [_safe_source_path(source, path) for path in paths]
+                for selected_locale, paths in localization_sources.items()
             },
-            "files": {
-                "heroes": "heroes.json",
-                "abilities": "abilities.json",
-                "hero_abilities": "hero_abilities.json",
-                "items": "items.json",
-                "neutral_items": "neutral_items.json",
-                "localization": {
-                    selected_locale: f"localization/{selected_locale}.json"
-                    for selected_locale in selected_locales
-                },
-            },
+            "files": snapshot_files,
         },
     )
 
@@ -116,6 +150,8 @@ def snapshot_game_files(
         item_count=len(items),
         neutral_item_count=len(neutral_items_raw),
         locales=selected_locales,
+        changelog_patch_count=len(changelog["patches"]) if changelog is not None else 0,
+        changelog_note_count=changelog_note_count,
     )
 
 
@@ -186,6 +222,22 @@ def _load_optional_root(path: Path, root_key: str) -> dict[str, Any]:
     if not path.exists():
         return {}
     return _root(parse_kv1_file(path), root_key)
+
+
+def _discover_changelog_manifest(source: Path, npc_dir: Path) -> Path | None:
+    for root in dict.fromkeys((source, npc_dir.parent)):
+        path = root / MANIFEST_RELATIVE_PATH
+        if path.exists():
+            return path
+    return None
+
+
+def _discover_changelog_localization(source: Path, npc_dir: Path, locale: str) -> Path | None:
+    for root in dict.fromkeys((source, npc_dir.parent)):
+        path = root / LOCALIZATION_RELATIVE_DIR / f"patchnotes_{locale}.txt"
+        if path.exists():
+            return path
+    return None
 
 
 def _discover_localization_files(source: Path, npc_dir: Path, locale: str) -> list[Path]:

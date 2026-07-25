@@ -1,0 +1,136 @@
+# Curated corpus page registry.
+#
+# Page titles are requests, not facts: a title that no longer resolves is
+# reported loudly by `invoker fetch-corpus` and should be fixed here.
+# `invoker corpus-coverage` diffs coverage_categories against pages + omit +
+# omit_prefixes so every exclusion stays visible and reasoned.
+# Licensing: Liquipedia content is CC-BY-SA; corpus documents are cited
+# evidence for generated articles, never copied into published output.
+schema_version: 1
+hosts:
+  liquipedia_dota2:
+    api_url: https://liquipedia.net/dota2/api.php
+    page_base_url: https://liquipedia.net/dota2/
+    license: CC-BY-SA 3.0
+    max_requests_per_minute: 20
+    # Live enforcement proved stricter than the documented 1 parse / 30s:
+    # a sustained pass got HTTP 429 after ~30 calls at that rate (2026-07-25).
+    max_parse_requests_per_minute: 1
+    coverage_categories:
+      - Category:Mechanics
+      - Category:Gameplay
+    omit_prefixes:
+      - prefix: "Archive:"
+        reason: >-
+          Liquipedia's own archived snapshots of superseded hero/item pages;
+          we pin live-page revisions ourselves, so archived copies add no
+          evidence.
+    omit:
+      - title: Armor/Old Mechanics
+        reason: superseded mechanics writeup kept by the wiki for history
+      - title: Attack Damage/Heroes
+        reason: per-hero stat table; the game-file snapshot is the direct source
+    pages:
+      # mechanics: combat and damage
+      - Mechanics
+      - Armor
+      - Attack Speed
+      - Attack Damage
+      - Attack Range
+      - Attack Animation
+      - Attack Modifier
+      - Attack Immunity
+      - Cast Animation
+      - Cast Range
+      - Cleave
+      - Critical Strike
+      - Bash
+      - Damage Types
+      - Spell Damage
+      - Damage Barrier
+      - Damage Block
+      - Damage Manipulation
+      - Damage Over Time
+      - Magic Resistance
+      - Evasion
+      - Spell Immunity
+      - Spell Immunity/Enemy Interactions
+      - Debuff Immunity
+      - Status Resistance
+      - Slow Resistance
+      - Lifesteal
+      - Spell Lifesteal
+      - Restoration Manipulation
+      # mechanics: statuses and control
+      - Disable
+      - Stun
+      - Root
+      - Silence
+      - Hex
+      - Fear (Game Mechanic)
+      - Taunt
+      - Sleep
+      - Disarm
+      - Break
+      - Leash
+      - Cyclone
+      - Forced Movement
+      - Hide
+      - Trap
+      - Invulnerability
+      - Non-targetable
+      - Ethereal
+      - Invisibility
+      - Illusions
+      - Spell Block
+      - Spell Redirection
+      - Spell Reflection
+      - Disjoint
+      - Aura
+      - Channeling
+      - Cooldown
+      # mechanics: attributes and resources
+      - Attributes
+      - Strength
+      - Agility
+      - Intelligence
+      - Universal
+      - Health
+      - Health Regeneration
+      - Mana
+      - Mana Regeneration
+      - Mana Break
+      - Movement Speed
+      - Turn Rate
+      - Projectile Speed
+      - Area of Effect
+      - Vision
+      - Gold
+      - Experience
+      - Talents
+      - Abilities
+      - Heroes/Mechanics
+      - Hero Animations
+      - Random Distribution
+      # game systems
+      - Map
+      - Minimap
+      - Buildings
+      - Buildings/Neutral Buildings
+      - Runes
+      - Trees
+      - Time of Day
+      - Scan
+      - Pause
+      - Item Sharing
+      - Teleport
+      # strategy concepts
+      - Hero Roles
+      - Lanes
+      - Denying
+      - Creep Stacking
+      - Creep control techniques
+      - Ganking
+      - Initiating
+      - Pushing
+      - Snowballing

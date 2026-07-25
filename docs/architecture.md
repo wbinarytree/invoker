@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-26 (hero ability timing export)
+Last updated: 2026-07-25 (expanded-text corpus pass)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -315,8 +315,22 @@ operator-provided root:
   neutral_items.json
   localization/english.json
   localization/<other-locale>.json
+  changelog.json        (when patch-note files are present in the extraction)
   snapshot.json
 ```
+
+`changelog.json` is built from the client's own patch-notes manifest
+(`patchnotes/patchnotes.vdpn`, decompiled during extraction) joined with
+`resource/localization/patchnotes/patchnotes_<locale>.txt`. It contains the
+full per-patch change history shipped by the client (123 patches, 7.06d
+onward, in the 7.41d client), structured per patch → generic sections /
+items / neutral items / heroes → notes with per-locale text. Builder:
+[src/invoker/snapshot/changelog.py](../src/invoker/snapshot/changelog.py)
+(the manifest repeats KV keys, parsed with the KV parser's
+`collect_duplicates` mode). Query CLI: `invoker changelog`. The changelog is
+knowledge ("when did X change/get removed") and the detector for mechanics
+the current files still describe but the game removed (e.g. facets: removed
+in 7.41 per the changelog, yet 7.41d files still ship `Facets` blocks).
 
 `GameFilesSource` reads these JSON files and exposes the constants surface used
 by authoring and fetch code: heroes, abilities, hero ability lists, hero stats,
@@ -360,6 +374,55 @@ Current consumers:
   substitutes unresolved talent template values with `?`
 - `pipeline/team_profile.py` reads team match history and match details from
   OpenDota while resolving hero names from the game-file snapshot
+
+### Mechanics corpus (MediaWiki)
+
+Module: [src/invoker/corpus/](../src/invoker/corpus)
+
+Curated observational sources for behavior game files do not encode (bugs,
+in-game-only mechanics such as uphill miss chance). Direction:
+`docs/specs/2026-07-25-grounded-reasoner-rethink.md` (L1b substrate).
+
+- `pages.yaml` — checked-in registry of MediaWiki hosts, curated page titles,
+  coverage categories, and reasoned omissions (`omit` per page,
+  `omit_prefixes` per class such as Liquipedia's `Archive:` namespace)
+- `mediawiki.py` — rate-limited `action=query`/`action=parse` client
+  (batched titles, redirect/normalization resolution, paginated category
+  member listing, strict per-endpoint request spacing — parse has its own
+  stricter budget — identifying User-Agent with contact details)
+- `store.py` — revision-pinned documents under
+  `data/corpus/<host_key>/<page_slug>/<revision_id>.json` plus a per-host
+  `index.json`; template-expanded HTML is stored alongside as
+  `<revision_id>.expanded.html`; old revisions are kept so citations stay
+  resolvable
+- `fetch.py` — orchestration; re-fetching an unchanged revision is a no-op,
+  unresolved registry titles are reported loudly
+- `expand.py` — expanded-text pass over the fetch index (raw wikitext leaves
+  `{{G|...}}` variables unresolved; expanded HTML materializes them);
+  incremental, aborts on HTTP 429 or 5 consecutive failures
+- `coverage.py` — diffs the wiki category universe against the registry into
+  covered / omitted (with reason) / omitted-by-rule / unreviewed buckets
+
+CLI: `invoker fetch-corpus [--host <key>] [--patch <patch>]` (exit 1 when any
+registry page fails to resolve), `invoker expand-corpus [--host <key>]
+[--limit <n>]`, and `invoker corpus-coverage [--host <key>]`.
+Corpus documents are source marks for generated knowledge, not ground truth;
+wiki content is CC-BY-SA and is cited as evidence, never copied into
+published output.
+
+### Basic-QA benchmark
+
+Module: [src/invoker/benchmark/](../src/invoker/benchmark) — cases in
+`benchmarks/basic-qa/*.yaml`.
+
+Gold cases gating the foundation tier of the generated encyclopedia
+(direction: `docs/specs/2026-07-25-grounded-reasoner-rethink.md`). Each case
+carries a question, expected facts (required/optional), forbidden assertions
+(traps, each with a mandatory why — e.g. vestigial facet data, code-only
+talents), expected source-mark patterns, and an optional concision bound.
+Five seed cases encode the first trial plus its human corrections. The
+loader validates shape, unique ids, and id-matches-filename; the scoring
+runner arrives with the generation milestone.
 
 ### OpenDota
 
