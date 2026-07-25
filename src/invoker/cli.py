@@ -908,5 +908,63 @@ def fetch_corpus_cmd(
         raise typer.Exit(code=1)
 
 
+@app.command("corpus-coverage")
+def corpus_coverage_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only report this host key from the corpus registry."),
+    ] = None,
+) -> None:
+    """Diff each host's coverage categories against the curated registry.
+
+    Shows what is fetched, what is deliberately omitted (with the recorded
+    reason), and what is still unreviewed."""
+    from invoker.corpus.coverage import corpus_coverage
+    from invoker.corpus.fetch import CorpusFetchError
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        reports = corpus_coverage(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+        )
+    except (RegistryError, CorpusFetchError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    for report in reports:
+        typer.echo(f"Host: {report.host_key}")
+        if report.universe_size == 0:
+            typer.echo("  no coverage_categories configured; nothing to diff against")
+            continue
+        typer.echo(f"  category universe: {report.universe_size} pages")
+        typer.echo(f"  covered: {len(report.covered)}")
+        typer.echo(f"  omitted: {len(report.omitted)}")
+        for title, reason in report.omitted:
+            typer.echo(f"    - {title}: {reason}")
+        for prefix, reason, count in report.omitted_by_rule:
+            typer.echo(f"  omitted by rule '{prefix}*': {count} pages ({reason})")
+        typer.echo(f"  unreviewed: {len(report.unreviewed)}")
+        for title in report.unreviewed:
+            typer.echo(f"    ? {title}")
+        if report.outside_categories:
+            typer.echo(
+                f"  registry pages outside coverage categories: "
+                f"{len(report.outside_categories)}"
+            )
+            for title in report.outside_categories:
+                typer.echo(f"    ~ {title}")
+        if report.unreviewed:
+            typer.echo(
+                "  unreviewed pages need triage: add to pages or omit (with reason) "
+                "in src/invoker/corpus/pages.yaml"
+            )
+
+
 if __name__ == "__main__":
     app()

@@ -369,21 +369,25 @@ Curated observational sources for behavior game files do not encode (bugs,
 in-game-only mechanics such as uphill miss chance). Direction:
 `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (L1b substrate).
 
-- `pages.yaml` — checked-in registry of MediaWiki hosts and curated page
-  titles (first host: Liquipedia Dota 2)
+- `pages.yaml` — checked-in registry of MediaWiki hosts, curated page titles,
+  coverage categories, and reasoned omissions (`omit` per page,
+  `omit_prefixes` per class such as Liquipedia's `Archive:` namespace)
 - `mediawiki.py` — rate-limited `action=query` client (batched titles,
-  redirect/normalization resolution, strict request spacing, identifying
-  User-Agent)
+  redirect/normalization resolution, paginated category member listing,
+  strict request spacing, identifying User-Agent)
 - `store.py` — revision-pinned documents under
   `data/corpus/<host_key>/<page_slug>/<revision_id>.json` plus a per-host
   `index.json`; old revisions are kept so citations stay resolvable
 - `fetch.py` — orchestration; re-fetching an unchanged revision is a no-op,
   unresolved registry titles are reported loudly
+- `coverage.py` — diffs the wiki category universe against the registry into
+  covered / omitted (with reason) / omitted-by-rule / unreviewed buckets
 
 CLI: `invoker fetch-corpus [--host <key>] [--patch <patch>]` (exit 1 when any
-registry page fails to resolve). Corpus documents are source marks for
-generated knowledge, not ground truth; wiki content is CC-BY-SA and is cited
-as evidence, never copied into published output.
+registry page fails to resolve) and `invoker corpus-coverage [--host <key>]`.
+Corpus documents are source marks for generated knowledge, not ground truth;
+wiki content is CC-BY-SA and is cited as evidence, never copied into
+published output.
 
 ### OpenDota
 

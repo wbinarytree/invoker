@@ -72,6 +72,29 @@ class MediaWikiClient:
             missing.extend(chunk_missing)
         return revisions, missing
 
+    async def list_category_members(self, category: str) -> list[str]:
+        """Return all page titles in a category (pages only, paginated)."""
+        titles: list[str] = []
+        continue_token: str | None = None
+        while True:
+            params = {
+                "action": "query",
+                "format": "json",
+                "formatversion": "2",
+                "list": "categorymembers",
+                "cmtitle": category,
+                "cmtype": "page",
+                "cmlimit": "500",
+            }
+            if continue_token is not None:
+                params["cmcontinue"] = continue_token
+            payload = await self._get(params, log_context=f"category={category}")
+            members = payload["query"].get("categorymembers", [])
+            titles.extend(member["title"] for member in members)
+            continue_token = payload.get("continue", {}).get("cmcontinue")
+            if continue_token is None:
+                return titles
+
     async def _query(self, titles: list[str]) -> dict:
         params = {
             "action": "query",
@@ -83,8 +106,11 @@ class MediaWikiClient:
             "redirects": "1",
             "titles": "|".join(titles),
         }
+        return await self._get(params, log_context=f"titles={len(titles)}")
+
+    async def _get(self, params: dict[str, str], *, log_context: str) -> dict:
         await self.bucket.acquire()
-        logger.info("MediaWiki query api=%s titles=%d", self.api_url, len(titles))
+        logger.info("MediaWiki query api=%s %s", self.api_url, log_context)
         response = await self._client.get(self.api_url, params=params)
         response.raise_for_status()
         payload = response.json()

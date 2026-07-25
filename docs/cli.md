@@ -16,6 +16,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
+- `invoker corpus-coverage [--host <key>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -179,6 +180,27 @@ uv run invoker fetch-corpus --host liquipedia_dota2 --patch 7.41d
 - `--patch` records an optional patch context on newly fetched documents.
 - Registry titles that fail to resolve are printed and the command exits 1;
   fix `pages.yaml`.
+
+### `corpus-coverage`
+
+Diff each host's `coverage_categories` (wiki category universe) against the
+curated registry, so omissions stay visible and reasoned.
+
+```bash
+uv run invoker corpus-coverage
+```
+
+Buckets per host:
+
+- `covered` — in the universe and fetched (redirects resolve via the fetch
+  index)
+- `omitted` — excluded one-by-one in `pages.yaml` `omit`, each with a reason
+- `omitted by rule` — excluded as a class via `omit_prefixes` (e.g.
+  Liquipedia's `Archive:` namespace), reported as a count per rule
+- `unreviewed` — in the universe but neither fetched nor omitted; the
+  actionable triage list
+- `registry pages outside coverage categories` — informational; fetched pages
+  that live outside the configured categories.
 
 ### `export-identity-localization`
 
