@@ -3,5 +3,43 @@
     "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT",
     "AbilityCastRange": "1200",
     "ItemCost": "2250"
+  },
+  "item_mage_slayer": {
+    "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE",
+    "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
+    "AbilityValues": {
+      "dps": "35",
+      "duration": "3",
+      "spell_amp_debuff": "40",
+      "bonus_magical_armor": "18"
+    },
+    "ItemCost": "3100",
+    "ItemQuality": "rare",
+    "SpellDispellableType": "SPELL_DISPELLABLE_YES"
+  },
+  "item_recipe_mage_slayer": {
+    "ItemRecipe": "1",
+    "ItemCost": "0",
+    "ItemRequirements": {
+      "01": "item_pers;item_cloak"
+    },
+    "ItemResult": "item_mage_slayer"
+  },
+  "item_pers": {
+    "ItemCost": "1300"
+  },
+  "item_cloak": {
+    "ItemCost": "500"
+  },
+  "item_costed_recipe_thing": {
+    "ItemCost": "1000"
+  },
+  "item_recipe_costed_recipe_thing": {
+    "ItemRecipe": "1",
+    "ItemCost": "250",
+    "ItemRequirements": {
+      "01": "item_cloak*"
+    },
+    "ItemResult": "item_costed_recipe_thing"
   }
 }

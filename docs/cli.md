@@ -14,6 +14,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
+- `invoker show-item-context ITEM [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
@@ -133,6 +134,19 @@ percentiles, abilities, and resolved talents before rendering an authoring
 prompt.
 
 See [context-modules.md](context-modules.md) for the packet shape.
+
+### `show-item-context`
+
+Assembles and prints the `ItemContext` for one item as JSON from the
+configured game-file snapshot: localized name/description (templates
+resolved), cost, recipe components, and `AbilityValues` rows.
+
+```bash
+uv run invoker show-item-context "mage slayer" --patch 7.41d
+```
+
+See [context-modules.md](context-modules.md) → `item_context.py` for the
+shape.
 
 ### `snapshot-game-files`
 

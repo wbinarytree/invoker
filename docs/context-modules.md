@@ -116,6 +116,33 @@ Ability descriptions resolve source-backed `%field%` localization templates from
 KV `AbilityValues`; unresolved placeholders remain visible rather than being
 filled from memory.
 
+## `item_context.py`
+
+[src/invoker/kg/item_context.py](../src/invoker/kg/item_context.py)
+
+`build_item_context(game_data_dir, item, patch=patch)` assembles an
+`ItemContext` from the snapshot's `items.json` + localization
+(`GameFilesSource.item_records()`). `item` resolves by internal name (with or
+without the `item_` prefix) or localized name — resolution keys off the item
+record, so cosmetic localization tokens (e.g. "Glaive of the Mage Slayer")
+can't pollute the join.
+
+- `name` / `description` / `lore`: localized; descriptions resolve `%field%`
+  templates from `AbilityValues` and strip tooltip HTML (`<h1>`, `<br>`
+  become line breaks)
+- `cost` / `recipe_cost`: `ItemCost` as int; `recipe_cost` present only when
+  the recipe itself costs gold
+- `components` / `component_names`: from the recipe's `ItemRequirements`
+  (first variant, optional-`*` markers stripped); internal names plus
+  localized display names
+- `attribs`: `AttribEntry` rows from `AbilityValues` (same shape as ability
+  packets, including scepter/shard bonuses)
+- `behavior` / `damage_type` / `dispellable` / `cast_range` / `mana_cost` /
+  `cooldown`: as in ability contexts; recipes are folded into their result
+  item and never appear as records
+
+Inspection: `invoker show-item-context ITEM [--patch <patch>]`.
+
 ## `mechanism_primer.py`
 
 [src/invoker/kg/mechanism_primer.py](../src/invoker/kg/mechanism_primer.py)

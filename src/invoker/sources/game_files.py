@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -109,6 +110,40 @@ class GameFilesSource:
     def items(self) -> dict[str, Any]:
         return self._items_raw
 
+    def item_records(self) -> dict[str, Any]:
+        """Item records with localization joins, keyed by internal name.
+
+        Recipes are folded into their result item (`components`,
+        `recipe_cost`) rather than emitted as records of their own.
+        """
+        records: dict[str, Any] = {}
+        recipes: dict[str, tuple[list[str], int]] = {}
+        for name, raw in self._items_raw.items():
+            if not isinstance(raw, dict):
+                continue
+            if raw.get("ItemRecipe") == "1":
+                result = raw.get("ItemResult")
+                requirements = raw.get("ItemRequirements")
+                if isinstance(result, str) and isinstance(requirements, dict) and requirements:
+                    first_variant = requirements[min(requirements)]
+                    components = [
+                        part.rstrip("*") for part in str(first_variant).split(";") if part.strip()
+                    ]
+                    recipes[result] = (components, _int_or_zero(raw.get("ItemCost")))
+                continue
+            records[name] = _item_record(name, raw, self._localization)
+        for result, (components, recipe_cost) in recipes.items():
+            record = records.get(result)
+            if record is None:
+                continue
+            record["components"] = components
+            record["component_names"] = [
+                records[c]["dname"] if c in records else c for c in components
+            ]
+            if recipe_cost:
+                record["recipe_cost"] = recipe_cost
+        return records
+
     def neutral_items(self) -> dict[str, Any]:
         return self._neutral_items_raw
 
@@ -191,6 +226,76 @@ def _ability_record(
     if shard_desc := _localized_upgrade_desc(name, raw, localization, "shard"):
         record["shard_desc"] = shard_desc
     return record
+
+
+def _item_record(name: str, raw: dict[str, Any], localization: dict[str, Any]) -> dict[str, Any]:
+    record: dict[str, Any] = {
+        "dname": _localized_item_name(name, localization),
+        "desc": _localized_item_desc(name, raw, localization),
+        "behavior": _behavior(raw.get("AbilityBehavior")),
+        "dmg_type": _damage_type(raw.get("AbilityUnitDamageType")),
+        "dispellable": _dispellable(raw.get("SpellDispellableType")),
+        "attrib": _attribs(raw.get("AbilityValues")),
+    }
+    if "ItemCost" in raw:
+        record["cost"] = _int_or_zero(raw["ItemCost"])
+    if quality := raw.get("ItemQuality"):
+        record["quality"] = str(quality)
+    lore = localization.get(f"DOTA_Tooltip_ability_{name}_Lore")
+    if isinstance(lore, str) and lore:
+        record["lore"] = lore
+    if "AbilityCastRange" in raw:
+        record["cast_range"] = _levels(raw["AbilityCastRange"])
+    if "AbilityManaCost" in raw:
+        record["mc"] = _levels(raw["AbilityManaCost"])
+    if "AbilityCooldown" in raw:
+        record["cd"] = _levels(raw["AbilityCooldown"])
+    return record
+
+
+def _int_or_zero(value: Any) -> int:
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return 0
+
+
+def _localized_item_name(name: str, localization: dict[str, Any]) -> str:
+    for key in (
+        f"DOTA_Tooltip_Ability_{name}",
+        f"DOTA_Tooltip_ability_{name}",
+    ):
+        value = localization.get(key)
+        if isinstance(value, str) and value:
+            return value
+    return _title_from_internal(name.removeprefix("item_"))
+
+
+def _localized_item_desc(
+    name: str,
+    raw: dict[str, Any],
+    localization: dict[str, Any],
+) -> str | None:
+    replacements = ability_value_replacements(raw.get("AbilityValues"))
+    for key in (
+        f"DOTA_Tooltip_ability_{name}_Description",
+        f"DOTA_Tooltip_Ability_{name}_Description",
+    ):
+        value = localization.get(key)
+        if isinstance(value, str) and value:
+            return _strip_tooltip_html(resolve_percent_template(value, replacements))
+    return None
+
+
+_TAG_BREAK_PATTERN = re.compile(r"</h\d>|<br\s*/?>", re.IGNORECASE)
+_TAG_PATTERN = re.compile(r"<[^>]+>")
+
+
+def _strip_tooltip_html(text: str) -> str:
+    text = _TAG_BREAK_PATTERN.sub("\n", text)
+    text = _TAG_PATTERN.sub("", text)
+    lines = [" ".join(line.split()) for line in text.split("\n")]
+    return "\n".join(line for line in lines if line)
 
 
 def _localized_upgrade_desc(

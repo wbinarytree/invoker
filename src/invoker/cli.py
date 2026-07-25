@@ -206,6 +206,29 @@ def show_hero_context_cmd(
     typer.echo(json.dumps(dataclasses.asdict(packet), indent=2))
 
 
+@app.command("show-item-context")
+def show_item_context_cmd(
+    item: str = typer.Argument(
+        ..., help="Item internal name (item_ prefix optional) or localized name."
+    ),
+    patch: str = typer.Option("7.41b", help="Patch snapshot for source data."),
+) -> None:
+    import dataclasses
+
+    from invoker.kg.item_context import ItemNotFoundError, build_item_context
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for show-item-context.", err=True)
+        raise typer.Exit(code=1)
+    try:
+        context = build_item_context(cfg.game_data_dir, item, patch=patch)
+    except ItemNotFoundError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(dataclasses.asdict(context), indent=2))
+
+
 @app.command("snapshot-game-files")
 def snapshot_game_files_cmd(
     vpk: SnapshotVpkOption,
@@ -991,6 +1014,7 @@ def expand_corpus_cmd(
     cfg = _load_config()
     try:
         registry = load_registry()
+
         def _progress(host_key: str, slug: str, event: str) -> None:
             marker = "+" if event == "expanded" else "!"
             typer.echo(f"  {marker} {event} {host_key}/{slug}", err=event == "failed")
@@ -1066,8 +1090,7 @@ def corpus_coverage_cmd(
             typer.echo(f"    ? {title}")
         if report.outside_categories:
             typer.echo(
-                f"  registry pages outside coverage categories: "
-                f"{len(report.outside_categories)}"
+                f"  registry pages outside coverage categories: {len(report.outside_categories)}"
             )
             for title in report.outside_categories:
                 typer.echo(f"    ~ {title}")
