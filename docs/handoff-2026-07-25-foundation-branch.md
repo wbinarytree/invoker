@@ -30,9 +30,17 @@ first; it carries every decision made during the rethink.
 State when this doc was written: **30 of 98 pages expanded**
 (`find data/corpus -name "*.expanded.html" | wc -l`). Liquipedia
 rate-limited the first pass (HTTP 429 ~30 parse calls in at 2/min); the
-registry now encodes 1/min. A background job was scheduled to sleep 90
-minutes (cooldown) then re-run `invoker expand-corpus`; if that session
-died, just run:
+registry now encodes 1/min. A detached (`nohup`) process waits out the
+cooldown until ~16:05 on 2026-07-25, then resumes the backfill,
+logging to `data/logs/expand-corpus-20260725.log`. It survives session
+close and notifies no one. To check on it:
+
+```bash
+tail data/logs/expand-corpus-20260725.log
+find data/corpus -name "*.expanded.html" | wc -l   # target: 98
+```
+
+If it died or got rate-limited again, just re-run (incremental, polite):
 
 ```bash
 uv run invoker expand-corpus
