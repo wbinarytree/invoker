@@ -92,7 +92,7 @@ def render_kb_site(kb_dir: Path, patch: str, out_dir: Path) -> SiteReport:
     concepts_dir = kb_dir / "concepts"
     artifacts: dict[str, tuple[ConceptArtifact, str]] = {}
     if concepts_dir.exists():
-        for artifact_path in sorted(concepts_dir.glob("*.json")):
+        for artifact_path in sorted(concepts_dir.glob("*/artifact.json")):
             artifact, article = load_concept_article(artifact_path)
             artifacts[artifact.slug] = (artifact, article)
 

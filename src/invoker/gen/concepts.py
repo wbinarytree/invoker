@@ -197,7 +197,7 @@ def generate_concept(
         slug=slug,
         title=index_page.resolved_title,
         patch=patch,
-        article_file=f"{slug}.md",
+        article_file="article.md",
         article_sha256=hashlib.sha256(article.text.encode()).hexdigest(),
         card=card.output,
         citations=[f"corpus:{key}" for key in citations],
@@ -205,9 +205,9 @@ def generate_concept(
         article_provenance=article.provenance,
         card_provenance=card.provenance,
     )
-    concepts_dir = kb_dir / "concepts"
-    concepts_dir.mkdir(parents=True, exist_ok=True)
-    (concepts_dir / artifact.article_file).write_text(article.text)
-    path = concepts_dir / f"{slug}.json"
+    concept_dir = kb_dir / "concepts" / slug
+    concept_dir.mkdir(parents=True, exist_ok=True)
+    (concept_dir / artifact.article_file).write_text(article.text)
+    path = concept_dir / "artifact.json"
     path.write_text(artifact.model_dump_json(indent=2))
     return artifact, path

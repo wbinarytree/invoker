@@ -46,7 +46,7 @@ def test_mark_link_builds_pinned_revision_url():
 
 def test_render_fails_on_drifted_artifact(tmp_path):
     kb = build_kb(tmp_path)
-    md = kb / "concepts" / "evasion.md"
+    md = kb / "concepts" / "evasion" / "article.md"
     md.write_text(md.read_text() + "\nEdited by hand.")
     with pytest.raises(GenerationError, match="drifted"):
         render_kb_site(kb, "7.41d", tmp_path / "site")

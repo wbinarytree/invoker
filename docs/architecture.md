@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (KB static site renderer, S5 slice)
+Last updated: 2026-07-25 (KB layout: one folder per entity)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -446,11 +446,20 @@ concept: article (markdown, every factual sentence ends in
 its marks — compression with pointers back). Mechanical faithfulness
 check: every mark in article and card must resolve against the packet
 or generation aborts; marks are never checked against live sources.
-Artifacts: `data/kb/<patch>/concepts/<slug>.md` (the article — human-skim
-surface, diffable in the archive) + `<slug>.json` (card, citations,
+Artifacts: one folder per entity — `data/kb/<patch>/concepts/<slug>/`
+holding `article.md` (the article — human-skim surface, diffable in the
+archive) + `artifact.json` (card, citations,
 packet hash, per-call provenance, `article_sha256` binding the pair;
 consumers verify it via `load_concept_article` and refuse a drifted
 article). CLI: `invoker generate-concept <slug> --patch <patch>`.
+
+KB layout grammar: entity classes are sibling directories —
+`concepts/<slug>/`, and (planned) `heroes/<slug>/`, `items/<slug>/`,
+`pairs/<a>__<b>/` — each entity folder holding `article.md` +
+`artifact.json`, later joined by `claims.json` (S4). Hero/item
+generators reuse the same artifact/card/mark shapes; only the packet
+builder differs (kit-wide hero packets, ItemContext), adding
+`gamefile:`/`loc:` mark kinds alongside `corpus:`.
 
 ### KB site renderer (S5 slice)
 

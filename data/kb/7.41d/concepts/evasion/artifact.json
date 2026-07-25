@@ -4,7 +4,7 @@
   "slug": "evasion",
   "title": "Evasion",
   "patch": "7.41d",
-  "article_file": "evasion.md",
+  "article_file": "article.md",
   "article_sha256": "82f19ad40bd5f0136c10b7d43699d170bd521cd4068897e577eac266ec5f779d",
   "card": {
     "entity": "evasion",
@@ -16,7 +16,7 @@
         ]
       },
       {
-        "text": "When an attack is evaded, effects relying on attacks hitting — most attack modifiers and on-hit effects — do not trigger unless explicitly specified.",
+        "text": "When an attack is evaded, effects relying on attacks hitting \u2014 most attack modifiers and on-hit effects \u2014 do not trigger unless explicitly specified.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969"
         ]
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "text": "Effective Evade Chance = (1 − (1 − Total Evasion) × (1 − Total Blind)) × (1 − Melee Buffer Range Miss), and Final Hit Chance = 1 − Effective Evade Chance × (1 − Total Accuracy).",
+        "text": "Effective Evade Chance = (1 \u2212 (1 \u2212 Total Evasion) \u00d7 (1 \u2212 Total Blind)) \u00d7 (1 \u2212 Melee Buffer Range Miss), and Final Hit Chance = 1 \u2212 Effective Evade Chance \u00d7 (1 \u2212 Total Accuracy).",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Equations"
         ]
