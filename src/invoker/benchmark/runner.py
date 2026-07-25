@@ -50,6 +50,7 @@ def run_benchmark(
     answer_backend: GenerationBackend,
     judge_backend: GenerationBackend,
     out_dir: Path,
+    game_data_dir: Path | None = None,
     on_result: Callable[[CaseResult], None] | None = None,
 ) -> tuple[RunReport, Path]:
     """Answer and score every case targeting `patch`; cases pinned to other
@@ -61,7 +62,12 @@ def run_benchmark(
     kb_sha256, artifact_count = kb_fingerprint(kb_dir)
     answerer = Answerer(answer_backend, entries, changelog)
     judge = Judge(judge_backend)
-    resolver = MarkResolver(corpus_store=corpus_store, changelog=changelog)
+    resolver = MarkResolver(
+        corpus_store=corpus_store,
+        changelog=changelog,
+        game_data_dir=game_data_dir,
+        patch=patch,
+    )
 
     results: list[CaseResult] = []
     skipped: list[SkippedCase] = []

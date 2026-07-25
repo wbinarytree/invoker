@@ -102,6 +102,45 @@ def test_load_kb_entries_missing_dir_is_empty(tmp_path):
     assert load_kb_entries(tmp_path / "absent") == []
 
 
+def test_load_kb_entries_reads_items_class(tmp_path):
+    item_dir = tmp_path / "items" / "mage_slayer"
+    item_dir.mkdir(parents=True)
+    article = "Item article. [gamefile:items/item_mage_slayer#cost]"
+    (item_dir / "article.md").write_text(article)
+    artifact = EntityArtifact(
+        kind="item",
+        slug="mage_slayer",
+        title="Mage Slayer",
+        patch="7.41d",
+        article_file="article.md",
+        article_sha256=hashlib.sha256(article.encode()).hexdigest(),
+        card=EntityCard(
+            entity="mage_slayer",
+            sentences=[
+                CardSentence(
+                    text="Rare item.", marks=["gamefile:items/item_mage_slayer#cost"]
+                )
+            ],
+        ),
+        citations=["gamefile:items/item_mage_slayer#cost"],
+        packet_sha256="0" * 64,
+        article_provenance=provenance("item-article"),
+        card_provenance=provenance("item-card"),
+    )
+    (item_dir / "artifact.json").write_text(artifact.model_dump_json())
+    entries = load_kb_entries(tmp_path)
+    assert [e.id for e in entries] == ["item/mage_slayer"]
+    assert entries[0].title == "Mage Slayer"
+
+
+def test_load_kb_entries_kind_class_mismatch_fails_loudly(tmp_path):
+    # a concept-kind artifact filed under items/ is a mis-filed archive
+    write_concept(tmp_path, "evasion", "Article. [corpus:x]")
+    (tmp_path / "concepts").rename(tmp_path / "items")
+    with pytest.raises(GenerationError, match="does not match"):
+        load_kb_entries(tmp_path)
+
+
 def test_load_kb_entries_unknown_entity_class_fails_loudly(tmp_path):
     (tmp_path / "heroes" / "slardar").mkdir(parents=True)
     with pytest.raises(GenerationError, match="no index loader"):

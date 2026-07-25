@@ -412,6 +412,7 @@ def run_benchmark_cmd(
             answer_backend=ClaudeCliClient(model=answer_model_id),
             judge_backend=ClaudeCliClient(model=judge_model or answer_model_id),
             out_dir=benchmark_runs_dir(cfg.data_dir, patch),
+            game_data_dir=cfg.game_data_dir,
             on_result=_print,
         )
     except GenerationError as exc:
