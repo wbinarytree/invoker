@@ -13,6 +13,9 @@ hosts:
     page_base_url: https://liquipedia.net/dota2/
     license: CC-BY-SA 3.0
     max_requests_per_minute: 20
+    # Live enforcement proved stricter than the documented 1 parse / 30s:
+    # a sustained pass got HTTP 429 after ~30 calls at that rate (2026-07-25).
+    max_parse_requests_per_minute: 1
     coverage_categories:
       - Category:Mechanics
       - Category:Gameplay
