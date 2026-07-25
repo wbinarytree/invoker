@@ -176,6 +176,63 @@ def test_compose_receives_articles_and_changelog_hits_and_answer_carries_marks()
     assert len(answer.provenance) == 2
 
 
+def test_changelog_hits_keep_the_newest_patch_when_capped():
+    """First live battery: a broad query matched dozens of 7.36
+    facet-introduction notes and the head-of-list cap dropped the 7.41
+    removal note the question was about. Newest patch must survive the
+    cap, with intra-patch note order preserved."""
+    old_notes = [
+        {"token": f"OLD_NOTE_{i}", "text": {"english": f"Facets introduction detail {i}"}}
+        for i in range(20)
+    ]
+    changelog = {
+        "schema_version": 1,
+        "locales": ["english"],
+        "patches": [
+            {
+                "name": "7.36",
+                "date": "2024-05-22",
+                "generic": [{"section": "general", "notes": old_notes}],
+                "items": {},
+                "neutral_items": {},
+                "heroes": {},
+                "neutral_creeps": {},
+            },
+            {
+                "name": "7.41",
+                "date": "2026-03-24",
+                "generic": [
+                    {
+                        "section": "global_changes",
+                        "notes": [
+                            {
+                                "token": "REMOVAL_NOTE",
+                                "text": {"english": "Facets removed from the game"},
+                            }
+                        ],
+                    }
+                ],
+                "items": {},
+                "neutral_items": {},
+                "heroes": {},
+                "neutral_creeps": {},
+            },
+        ],
+    }
+    backend = FakeBackend(
+        selections=[AnswerSelection(changelog_queries=["facets"])],
+        texts=["Facets were removed in 7.41. [changelog:REMOVAL_NOTE]"],
+    )
+    Answerer(backend, [], changelog=changelog).answer("When were facets removed?")
+    content = backend.calls[1][1]["user_content"]
+    assert "[changelog:REMOVAL_NOTE] patch 7.41" in content
+    assert "(9 older matches omitted)" in content  # 21 matches, cap 12
+    # intra-patch order preserved: the oldest surviving 7.36 notes read in sequence
+    first_old = content.index("OLD_NOTE_0")
+    second_old = content.index("OLD_NOTE_1")
+    assert content.index("REMOVAL_NOTE") < first_old < second_old
+
+
 def test_select_index_lists_entries_and_changelog_availability():
     backend = FakeBackend(selections=[AnswerSelection()])
     Answerer(backend, [entry()], changelog=None).answer("What is evasion?")

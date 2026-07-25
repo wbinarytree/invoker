@@ -11,7 +11,7 @@ from invoker.gen.client import GenerationError, GenerationProvenance
 from invoker.gen.concepts import GenerationBackend, load_concept_article
 from invoker.snapshot.changelog import search_changelog
 
-ANSWERER_PROMPT_VERSION = "1"
+ANSWERER_PROMPT_VERSION = "2"
 MAX_SELECTED_ARTIFACTS = 4
 MAX_CHANGELOG_QUERIES = 3
 _CHANGELOG_HITS_PER_QUERY = 12
@@ -40,8 +40,11 @@ marks inline, and changelog evidence lines begin with their \
 [changelog:...] mark. A mark covers the sentences before it drawn from \
 that source.
 - Numbers must match the material exactly.
-- Answer directly and concisely in reference-entry register — typically \
-40-120 words of prose. No preamble, no meta-commentary about sources.
+- Answer only what is asked, in the fewest words that answer it \
+completely: one or two sentences for a when/what-changed question, a short \
+reference entry (rarely over 120 words) for a what-is question. Do not add \
+related context the question did not ask for. No preamble, no \
+meta-commentary about sources.
 - If the material does not cover part of the question, omit that part \
 rather than filling the gap; if it covers none of it, say the knowledge \
 base does not cover the question."""
@@ -197,19 +200,31 @@ class Answerer:
         return "\n".join(parts)
 
     def _changelog_hits(self, query: str) -> str:
+        """Newest matches first. search_changelog returns manifest order
+        (oldest first); a broad query like "facets" can match dozens of
+        introduction-era notes, and taking the head buried the 7.41 removal
+        note the question was actually about (first live battery). Recency
+        is the right relevance prior for a changelog, so the cap keeps the
+        newest hits and says how many older ones it dropped."""
         changelog = self._changelog
         if changelog is None:  # guarded in _select; defensive here
             raise GenerationError("changelog queried but unavailable")
         hits = search_changelog(changelog, grep=query)
         if not hits:
             return "(no matches)"
+        by_patch: dict[str, list[dict[str, Any]]] = {}
+        for hit in hits:
+            by_patch.setdefault(hit["patch"], []).append(hit)
+        newest_first = [
+            hit for patch_hits in reversed(list(by_patch.values())) for hit in patch_hits
+        ]
         lines = []
-        for hit in hits[:_CHANGELOG_HITS_PER_QUERY]:
+        for hit in newest_first[:_CHANGELOG_HITS_PER_QUERY]:
             date = f" ({hit['date']})" if hit.get("date") else ""
             lines.append(
                 f"[changelog:{hit['token']}] patch {hit['patch']}{date} "
                 f"{hit['scope']}/{hit['entity']}: {hit['text']}"
             )
         if len(hits) > _CHANGELOG_HITS_PER_QUERY:
-            lines.append(f"({len(hits) - _CHANGELOG_HITS_PER_QUERY} more matches omitted)")
+            lines.append(f"({len(hits) - _CHANGELOG_HITS_PER_QUERY} older matches omitted)")
         return "\n".join(lines)
