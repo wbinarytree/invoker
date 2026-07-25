@@ -1,42 +1,21 @@
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from typing import Any
 
 from invoker.corpus.sections import CorpusSectionError, load_sections
 from invoker.corpus.store import CorpusStore
+from invoker.marks import MARK_KINDS, Mark, count_words, parse_marks, strip_marks
 
-MARK_KINDS = ("gamefile", "loc", "corpus", "changelog", "stats", "human")
-
-_MARK_PATTERN = re.compile(rf"\[({'|'.join(MARK_KINDS)}):([^\]\s]+)\]")
-
-
-@dataclass(frozen=True)
-class Mark:
-    kind: str
-    key: str
-
-    def __str__(self) -> str:
-        return f"{self.kind}:{self.key}"
-
-
-def parse_marks(text: str) -> list[Mark]:
-    """Distinct inline source marks, in first-use order."""
-    seen: dict[Mark, None] = {}
-    for match in _MARK_PATTERN.finditer(text):
-        seen.setdefault(Mark(kind=match.group(1), key=match.group(2)))
-    return list(seen)
-
-
-def strip_marks(text: str) -> str:
-    return _MARK_PATTERN.sub("", text)
-
-
-def count_words(text: str) -> int:
-    """Prose word count with mark tokens excluded — the concision bound
-    targets prose, and mark density must not penalize citation discipline."""
-    return len(strip_marks(text).split())
+__all__ = [
+    "MARK_KINDS",
+    "Mark",
+    "MarkResolution",
+    "MarkResolver",
+    "count_words",
+    "parse_marks",
+    "strip_marks",
+]
 
 
 @dataclass(frozen=True)
