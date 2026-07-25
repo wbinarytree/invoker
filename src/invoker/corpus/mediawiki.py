@@ -45,11 +45,13 @@ class MediaWikiClient:
         *,
         user_agent: str,
         requests_per_minute: int = 20,
+        parse_requests_per_minute: int = 2,
         timeout: float = 30.0,
         transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         self.api_url = api_url
         self.bucket = TokenBucket(rate=requests_per_minute / 60.0, capacity=1)
+        self.parse_bucket = TokenBucket(rate=parse_requests_per_minute / 60.0, capacity=1)
         self._client = httpx.AsyncClient(
             headers={"User-Agent": user_agent},
             timeout=timeout,
@@ -94,6 +96,36 @@ class MediaWikiClient:
             continue_token = payload.get("continue", {}).get("cmcontinue")
             if continue_token is None:
                 return titles
+
+    async def fetch_expanded_html(self, revision_id: int) -> str:
+        """Template-expanded HTML for an exact pinned revision (action=parse).
+
+        Values computed by wiki templates (e.g. {{G|...}} globals) only exist
+        in expanded output, not in raw wikitext. Parse calls use their own,
+        much stricter rate bucket."""
+        params = {
+            "action": "parse",
+            "format": "json",
+            "formatversion": "2",
+            "oldid": str(revision_id),
+            "prop": "text",
+        }
+        await self.parse_bucket.acquire()
+        logger.info("MediaWiki parse api=%s oldid=%d", self.api_url, revision_id)
+        response = await self._client.get(self.api_url, params=params)
+        response.raise_for_status()
+        payload = response.json()
+        if not isinstance(payload, dict):
+            raise MediaWikiError(f"unexpected MediaWiki parse response from {self.api_url}")
+        parse = payload.get("parse")
+        if not isinstance(parse, dict) or not isinstance(parse.get("text"), str):
+            error = payload.get("error", {})
+            detail = error.get("info") if isinstance(error, dict) else None
+            raise MediaWikiError(
+                f"parse failed for oldid={revision_id} on {self.api_url}"
+                + (f": {detail}" if detail else "")
+            )
+        return parse["text"]
 
     async def _query(self, titles: list[str]) -> dict:
         params = {

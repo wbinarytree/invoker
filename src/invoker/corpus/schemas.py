@@ -57,6 +57,8 @@ class CorpusHost(BaseModel):
     page_base_url: str
     license: str
     max_requests_per_minute: int = Field(default=20, gt=0)
+    # action=parse is the expensive API mode; Liquipedia asks ~1 call / 30s.
+    max_parse_requests_per_minute: int = Field(default=2, gt=0)
     pages: list[str] = Field(min_length=1)
     coverage_categories: list[str] = Field(default_factory=list)
     omit: list[OmittedPage] = Field(default_factory=list)

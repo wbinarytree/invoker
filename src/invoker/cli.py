@@ -967,6 +967,55 @@ def changelog_cmd(
         typer.echo(f"... {len(results) - limit} more (raise --limit)")
 
 
+@app.command("expand-corpus")
+def expand_corpus_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only expand this host key from the corpus registry."),
+    ] = None,
+    limit: Annotated[
+        int | None,
+        typer.Option(help="Stop after expanding this many pages (for partial runs)."),
+    ] = None,
+) -> None:
+    """Fetch template-expanded HTML for fetched corpus revisions.
+
+    Slow by design: parse calls run at the host's strict rate limit
+    (~1 per 30s on Liquipedia). Incremental — already-expanded revisions
+    are skipped, so re-runs only cost what changed."""
+    from invoker.corpus.expand import expand_corpus
+    from invoker.corpus.fetch import CorpusFetchError
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        reports = expand_corpus(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+            limit=limit,
+            progress=lambda host_key, slug: typer.echo(f"  expanded {host_key}/{slug}"),
+        )
+    except (RegistryError, CorpusFetchError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    any_failed = False
+    for report in reports:
+        typer.echo(
+            f"Host: {report.host_key} — expanded {len(report.expanded)}, "
+            f"already current {len(report.skipped)}, failed {len(report.failed)}"
+        )
+        for slug, error in report.failed:
+            any_failed = True
+            typer.echo(f"  ! {slug}: {error}", err=True)
+    if any_failed:
+        raise typer.Exit(code=1)
+
+
 @app.command("corpus-coverage")
 def corpus_coverage_cmd(
     host: Annotated[

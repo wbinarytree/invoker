@@ -43,6 +43,18 @@ class CorpusStore:
     def doc_path(self, host_key: str, slug: str, revision_id: int) -> Path:
         return self.host_dir(host_key) / slug / f"{revision_id}.json"
 
+    def expanded_path(self, host_key: str, slug: str, revision_id: int) -> Path:
+        return self.host_dir(host_key) / slug / f"{revision_id}.expanded.html"
+
+    def has_expanded(self, host_key: str, slug: str, revision_id: int) -> bool:
+        return self.expanded_path(host_key, slug, revision_id).exists()
+
+    def write_expanded(self, host_key: str, slug: str, revision_id: int, html: str) -> Path:
+        path = self.expanded_path(host_key, slug, revision_id)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(html)
+        return path
+
     def load_index(self, host_key: str) -> CorpusIndex:
         path = self.index_path(host_key)
         if not path.exists():
