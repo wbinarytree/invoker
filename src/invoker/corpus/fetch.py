@@ -12,7 +12,9 @@ from invoker.corpus.mediawiki import MediaWikiClient
 from invoker.corpus.schemas import CorpusDoc, CorpusHost, CorpusRegistry
 from invoker.corpus.store import CorpusStore, page_slug
 
-USER_AGENT = f"invoker-kb/{__version__} (+https://github.com/wbinarytree/invoker)"
+USER_AGENT = (
+    f"invoker-kb/{__version__} (+https://github.com/wbinarytree/invoker; awangyaoda@gmail.com)"
+)
 
 
 class CorpusFetchError(RuntimeError):
