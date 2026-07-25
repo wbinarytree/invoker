@@ -9,7 +9,11 @@ from typing import Any
 from invoker.kg.ability_context import AttribEntry, TalentContext
 from invoker.kg.hero_context import HeroContextPacket, build_hero_context_from_source
 from invoker.kg.hero_stats_context import HeroStatsContext, StatEntry
-from invoker.sources.game_files import GameFilesSource
+from invoker.sources.game_files import (
+    GameFilesSource,
+    ability_value_replacements,
+    resolve_percent_template,
+)
 
 IDENTITY_SCHEMA_VERSION = 1
 GAME_RESOURCE_SCHEMA_VERSION = 2
@@ -792,52 +796,6 @@ def _ability_values_to_resource(values: Any) -> list[dict[str, Any]]:
     return rows
 
 
-def _ability_value_replacements(values: Any) -> dict[str, str]:
-    if not isinstance(values, dict):
-        return {}
-    replacements: dict[str, str] = {}
-    for field_name, raw in values.items():
-        if isinstance(raw, dict):
-            if "value" not in raw:
-                continue
-            value = raw["value"]
-        else:
-            value = raw
-        replacements[str(field_name)] = _template_value(value)
-    return replacements
-
-
-def _resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
-    rendered = template
-    for key, value in replacements.items():
-        rendered = rendered.replace(f"%{key}%", value)
-    return _collapse_replaced_percent_escape(rendered)
-
-
-def _template_value(value: Any) -> str:
-    if not isinstance(value, str):
-        return str(value)
-    parts = value.split()
-    return "/".join(parts) if len(parts) > 1 else value
-
-
-def _collapse_replaced_percent_escape(value: str) -> str:
-    chars: list[str] = []
-    index = 0
-    while index < len(value):
-        if (
-            value.startswith("%%", index)
-            and chars
-            and (chars[-1].isdigit() or chars[-1] in {"+", "-", "."})
-        ):
-            chars.append("%")
-            index += 2
-            continue
-        chars.append(value[index])
-        index += 1
-    return "".join(chars)
-
-
 def _item_ability_to_resource(raw: dict[str, Any]) -> dict[str, Any]:
     ability = {
         "behavior": _raw_behavior(raw.get("AbilityBehavior")),
@@ -1251,14 +1209,14 @@ def _localized_ability_description(
     raw: dict[str, Any],
     localization: dict[str, Any],
 ) -> str | None:
-    replacements = _ability_value_replacements(raw.get("AbilityValues"))
+    replacements = ability_value_replacements(raw.get("AbilityValues"))
     for key in (
         f"DOTA_Tooltip_ability_{internal_name}_Description",
         f"DOTA_Tooltip_Ability_{internal_name}_Description",
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return _resolve_percent_template(value, replacements)
+            return resolve_percent_template(value, replacements)
     return None
 
 

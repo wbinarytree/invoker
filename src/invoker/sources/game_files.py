@@ -211,7 +211,7 @@ def _localized_ability_desc(
     raw: dict[str, Any],
     localization: dict[str, Any],
 ) -> str | None:
-    replacements = _ability_value_replacements(raw.get("AbilityValues"))
+    replacements = ability_value_replacements(raw.get("AbilityValues"))
     for key in (
         f"DOTA_Tooltip_ability_{name}_Description",
         f"DOTA_Tooltip_Ability_{name}_Description",
@@ -219,7 +219,7 @@ def _localized_ability_desc(
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return _resolve_percent_template(value, replacements)
+            return resolve_percent_template(value, replacements)
     return None
 
 
@@ -275,7 +275,7 @@ def _resolve_talent_template(template: str, replacements: dict[str, str]) -> str
     return _collapse_replaced_percent_escape(rendered)
 
 
-def _ability_value_replacements(values: Any) -> dict[str, str]:
+def ability_value_replacements(values: Any) -> dict[str, str]:
     if not isinstance(values, dict):
         return {}
     replacements: dict[str, str] = {}
@@ -290,7 +290,7 @@ def _ability_value_replacements(values: Any) -> dict[str, str]:
     return replacements
 
 
-def _resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
+def resolve_percent_template(template: str, replacements: dict[str, str]) -> str:
     rendered = template
     for key, value in replacements.items():
         rendered = rendered.replace(f"%{key}%", value)
