@@ -57,11 +57,26 @@ traceability, not truth.
 ### Vestigial mechanics
 
 7.41d files still carry `Facets` blocks though facets were removed in 7.41
-(trial finding 2). Packet builders **drop facet-conditional values** and
-hero packets carry a standing removal note cited to
-`changelog:DOTA_Patch_7_41_General_Global_Changes`, so generators describe
-the mechanic as removed instead of describing vestigial data. The
-changelog is the detector; nothing is inferred from file presence.
+(trial finding 2). Packet builders **drop facet-conditional values
+silently** — the generator never sees them, so articles never mention
+facets at all. Removed-mechanic questions resolve at ask time through the
+changelog (the `facet-removal` case already passes that way); a
+historical concept page can own the mechanic's story later. Decided
+against a standing removal note in hero articles (mock review
+2026-07-26): a global game fact disclaimed on 126 hero pages is noise —
+suppression belongs in the packet, not the output. The changelog is the
+detector; nothing is inferred from file presence.
+
+### Article register (mock review 2026-07-26)
+
+Numbers live in **compact stat lines/tables per section** — mechanically
+checkable cell-by-cell against the cited source — and prose is reserved
+for behavior semantics (interactions, dispellability, immunity piercing,
+what the mechanic *does*). Never restate table values in sentences. Stat
+context uses the band or the raw value, not both (they double-encode).
+Density stays high — over-compression is the named failure mode — but no
+value appears twice. Cards unchanged (~300 tokens, every sentence
+marked).
 
 ### Artifacts
 
