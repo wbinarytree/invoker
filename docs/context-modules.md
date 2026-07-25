@@ -43,7 +43,9 @@ a runtime source-selection layer today.
 
 Computes a `HeroStatsContext` for one hero relative to the full roster. Each tracked
 stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
-`base_armor`, `attack_range`, `move_speed`) is reported with:
+`base_armor`, `base_attack_min`, `base_attack_max`, `base_attack_speed`,
+`base_attack_time`, `attack_animation_point`, `attack_acquisition_range`,
+`attack_range`, `move_speed`) is reported with:
 
 ```json
 { "value": 4.0, "percentile": 0.93, "band": "very_high" }
@@ -52,7 +54,10 @@ stat (`base_str`, `base_agi`, `base_int`, `str_gain`, `agi_gain`, `int_gain`,
 Bands are deterministic quintiles: `very_low` / `low` / `average` / `high` / `very_high`.
 
 Source data comes from `GameFilesSource.hero_stats()`, backed by the
-patch-scoped `heroes.json` snapshot.
+patch-scoped `heroes.json` snapshot. `base_attack_time` maps Valve's
+`AttackRate` key. `base_attack_speed` maps `BaseAttackSpeed`; when a hero row
+omits it, the adapter uses the inherited `npc_dota_hero_base` default of `100`
+from the extracted npc files.
 
 ## `ability_context.py`
 
@@ -75,6 +80,10 @@ def build_ability_contexts(
 - `behavior`: always `list[str]` (normalized from string or list)
 - `pierces_debuff_immunity`: `bool | None` (from `bkbpierce` "Yes"/"No")
 - `attribs`: `AttribEntry` rows from the raw `attrib` array, with Scepter/Shard/tooltip-noisy headers dropped
+- `cast_range`: source-backed `AbilityCastRange`, absent when not present in the snapshot
+- `timing`: source-backed low-level timing fields from the snapshot, currently
+  `cast_point`, `channel_time`, `cast_animation`, `cast_gesture_slot`, and
+  `animation_playback_rate` when present
 - `mana_cost` / `cooldown`: absent on passives
 
 **`TalentContext`** — one per talent entry from `hero_abilities_map`:
@@ -88,6 +97,10 @@ Filtering: `generic_hidden` entries and abilities absent from the abilities map
 are skipped. Non-innate abilities whose behavior contains `Hidden` are also
 dropped. Scepter/Shard flags are exposed by `GameFilesSource` in the raw ability
 records for downstream conditional-fact work.
+
+Ability descriptions resolve source-backed `%field%` localization templates from
+KV `AbilityValues`; unresolved placeholders remain visible rather than being
+filled from memory.
 
 ## `mechanism_primer.py`
 

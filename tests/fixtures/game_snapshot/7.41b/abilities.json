@@ -1,6 +1,8 @@
 {
   "alchemist_acid_spray": {
     "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE",
+    "AbilityCastPoint": "0.3",
+    "AbilityCastRange": "450 500 550 600",
     "AbilityCooldown": "22 21 20 19",
     "AbilityManaCost": "120",
     "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL",
@@ -56,5 +58,10 @@
       }
     }
   },
-  "special_bonus_unique_alchemist": {}
+  "special_bonus_unique_alchemist": {},
+  "special_bonus_unique_alchemist_percent": {
+    "AbilityValues": {
+      "value": "-18%"
+    }
+  }
 }
