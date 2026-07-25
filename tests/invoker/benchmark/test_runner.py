@@ -90,7 +90,10 @@ def test_run_benchmark_end_to_end(tmp_path):
     assert report.judge_prompt_version == JUDGE_PROMPT_VERSION
     assert report.kb_artifact_count == 1
     assert len(report.kb_sha256) == 64
+    assert len(report.cases_sha256) == 64
     assert not report.changelog_available
+    # judge calls carry provenance into the report (1 fact judged)
+    assert [p.prompt_name for p in by_id["uphill-miss"].judge_provenance] == ["qa-judge-fact"]
 
     saved = json.loads(report_path.read_text())
     assert saved["run_id"] == report.run_id

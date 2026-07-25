@@ -50,6 +50,11 @@ _MARK_PATTERN = re.compile(r"\[corpus:([^\]\s]+)\]")
 
 
 class GenerationBackend(Protocol):
+    model: str
+    """Requested model id — consumers record it in run-level provenance,
+    so the protocol enforces it rather than callers falling back to
+    getattr defaults that silently degrade the record."""
+
     def generate(
         self,
         *,

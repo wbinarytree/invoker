@@ -1,10 +1,9 @@
-import pytest
-
 from invoker.benchmark.answerer import BenchmarkAnswer
 from invoker.benchmark.marks import MarkResolver, parse_marks
 from invoker.benchmark.schemas import QACase
 from invoker.benchmark.scorer import FactVerdict, TrapVerdict, score_case
 from invoker.gen.client import GenerationError
+from tests.invoker.benchmark.test_answerer import provenance
 from tests.invoker.benchmark.test_marks import CHANGELOG, KEY
 from tests.invoker.corpus.test_sections import make_store
 
@@ -22,20 +21,22 @@ class FakeJudge:
         self.traps = traps or {}
         self.calls = 0
 
-    def fact(self, answer_text: str, fact: str) -> FactVerdict:
+    def fact(self, answer_text: str, fact: str):
         self.calls += 1
-        return FactVerdict(verdict=self.facts[fact], rationale="canned")
+        verdict = FactVerdict(verdict=self.facts[fact], rationale="canned")
+        return verdict, provenance("qa-judge-fact")
 
-    def trap(self, answer_text: str, assertion: str) -> TrapVerdict:
+    def trap(self, answer_text: str, assertion: str):
         self.calls += 1
-        return TrapVerdict(asserted=self.traps[assertion], rationale="canned")
+        verdict = TrapVerdict(asserted=self.traps[assertion], rationale="canned")
+        return verdict, provenance("qa-judge-trap")
 
 
 class BoomJudge:
-    def fact(self, answer_text: str, fact: str) -> FactVerdict:
+    def fact(self, answer_text: str, fact: str):
         raise GenerationError("judge transport failed")
 
-    def trap(self, answer_text: str, assertion: str) -> TrapVerdict:
+    def trap(self, answer_text: str, assertion: str):
         raise GenerationError("judge transport failed")
 
 
@@ -89,6 +90,12 @@ def test_passing_case(tmp_path):
     # the optional fact's absence is reported as coverage, not a failure
     assert [fact.verdict for fact in result.facts] == ["present", "absent"]
     assert result.expected_marks[0].resolved == f"corpus:{KEY}"
+    # every judge call's provenance is on the record (2 facts + 1 trap)
+    assert [p.prompt_name for p in result.judge_provenance] == [
+        "qa-judge-fact",
+        "qa-judge-fact",
+        "qa-judge-trap",
+    ]
 
 
 def test_required_fact_absent_fails(tmp_path):
@@ -195,8 +202,3 @@ def test_judge_never_sees_gold_fields():
     judge = RecordingJudge(facts={FACT_25: "present", FACT_OPTIONAL: "absent"}, traps={TRAP: False})
     score_case(make_case(), make_answer(GOOD_ANSWER), judge, MarkResolver())
     assert seen == [GOOD_ANSWER, GOOD_ANSWER]
-
-
-def test_fake_judge_unlisted_fact_raises():
-    with pytest.raises(KeyError):
-        FakeJudge().fact("answer", "unlisted")

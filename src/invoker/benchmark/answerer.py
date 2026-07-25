@@ -200,12 +200,15 @@ class Answerer:
         return "\n".join(parts)
 
     def _changelog_hits(self, query: str) -> str:
-        """Newest matches first. search_changelog returns manifest order
-        (oldest first); a broad query like "facets" can match dozens of
-        introduction-era notes, and taking the head buried the 7.41 removal
-        note the question was actually about (first live battery). Recency
-        is the right relevance prior for a changelog, so the cap keeps the
-        newest hits and says how many older ones it dropped."""
+        """Newest matches first, by patch date. A broad query like "facets"
+        can match dozens of introduction-era notes, and taking the head of
+        the oldest-first search buried the 7.41 removal note the question
+        was actually about (first live battery). Recency is the right
+        relevance prior for a changelog, so the cap keeps the newest
+        patches' hits (intra-patch note order preserved) and says how many
+        older ones it dropped. Sorting on the hit's own date rather than
+        manifest position keeps this true if a manifest ever ships
+        newest-first."""
         changelog = self._changelog
         if changelog is None:  # guarded in _select; defensive here
             raise GenerationError("changelog queried but unavailable")
@@ -216,7 +219,11 @@ class Answerer:
         for hit in hits:
             by_patch.setdefault(hit["patch"], []).append(hit)
         newest_first = [
-            hit for patch_hits in reversed(list(by_patch.values())) for hit in patch_hits
+            hit
+            for patch_hits in sorted(
+                by_patch.values(), key=lambda group: group[0].get("date") or "", reverse=True
+            )
+            for hit in patch_hits
         ]
         lines = []
         for hit in newest_first[:_CHANGELOG_HITS_PER_QUERY]:

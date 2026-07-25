@@ -348,6 +348,13 @@ def run_benchmark_cmd(
         changelog_path = cfg.game_data_dir / patch / "changelog.json"
         if changelog_path.exists():
             changelog = json.loads(changelog_path.read_text())
+    if changelog is None:
+        typer.echo(
+            "warning: changelog unavailable (INVOKER_GAME_DATA_DIR unset or "
+            f"no changelog.json for {patch}); temporal cases will fail against "
+            "the environment, not the KB",
+            err=True,
+        )
 
     def _print(result: CaseResult) -> None:
         status = "PASS" if result.passed else f"FAIL  [{', '.join(result.failures)}]"

@@ -16,6 +16,15 @@ from invoker.gen.client import GenerationError
 from invoker.gen.concepts import GenerationBackend
 
 
+def cases_fingerprint(cases: list[QACase]) -> str:
+    """Content hash of the case set as run, id-sorted — lets two reports
+    reveal that a case itself changed between them."""
+    digest = hashlib.sha256()
+    for case in sorted(cases, key=lambda c: c.id):
+        digest.update(case.model_dump_json().encode())
+    return digest.hexdigest()
+
+
 def kb_fingerprint(kb_dir: Path) -> tuple[str, int]:
     """Content hash over every file in the KB archive plus the artifact
     count — the run report's record of exactly which KB state was measured."""
@@ -82,7 +91,8 @@ def run_benchmark(
             on_result(result)
 
     finished = datetime.now(UTC)
-    run_id = started.strftime("%Y%m%d-%H%M%S")
+    # microseconds keep two back-to-back runs from sharing a report dir
+    run_id = started.strftime("%Y%m%d-%H%M%S-%f")
     report = RunReport(
         run_id=run_id,
         patch=patch,
@@ -90,9 +100,10 @@ def run_benchmark(
         finished_at=finished.isoformat(),
         kb_sha256=kb_sha256,
         kb_artifact_count=artifact_count,
+        cases_sha256=cases_fingerprint(cases),
         changelog_available=changelog is not None,
-        answerer_model=getattr(answer_backend, "model", "unknown"),
-        judge_model=getattr(judge_backend, "model", "unknown"),
+        answerer_model=answer_backend.model,
+        judge_model=judge_backend.model,
         answerer_prompt_version=ANSWERER_PROMPT_VERSION,
         judge_prompt_version=JUDGE_PROMPT_VERSION,
         cases=results,

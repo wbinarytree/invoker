@@ -14,7 +14,7 @@ from invoker.benchmark.report import (
     TrapResult,
 )
 from invoker.benchmark.schemas import QACase
-from invoker.gen.client import GenerationError
+from invoker.gen.client import GenerationError, GenerationProvenance
 from invoker.gen.concepts import GenerationBackend
 
 JUDGE_PROMPT_VERSION = "1"
@@ -61,9 +61,15 @@ class TrapVerdict(BaseModel):
 
 
 class JudgeProtocol(Protocol):
-    def fact(self, answer_text: str, fact: str) -> FactVerdict: ...
+    """Judgments return their provenance alongside the verdict so the
+    report records which model actually served every judge call — a
+    served-by substitution must never go unrecorded."""
 
-    def trap(self, answer_text: str, assertion: str) -> TrapVerdict: ...
+    def fact(self, answer_text: str, fact: str) -> tuple[FactVerdict, GenerationProvenance]: ...
+
+    def trap(
+        self, answer_text: str, assertion: str
+    ) -> tuple[TrapVerdict, GenerationProvenance]: ...
 
 
 class Judge:
@@ -75,23 +81,25 @@ class Judge:
     def __init__(self, backend: GenerationBackend) -> None:
         self._backend = backend
 
-    def fact(self, answer_text: str, fact: str) -> FactVerdict:
-        return self._backend.generate_structured(
+    def fact(self, answer_text: str, fact: str) -> tuple[FactVerdict, GenerationProvenance]:
+        result = self._backend.generate_structured(
             FactVerdict,
             prompt_name="qa-judge-fact",
             prompt_version=JUDGE_PROMPT_VERSION,
             system=FACT_JUDGE_SYSTEM_PROMPT,
             user_content=f"Answer:\n{answer_text}\n\nExpected fact: {fact}",
-        ).output
+        )
+        return result.output, result.provenance
 
-    def trap(self, answer_text: str, assertion: str) -> TrapVerdict:
-        return self._backend.generate_structured(
+    def trap(self, answer_text: str, assertion: str) -> tuple[TrapVerdict, GenerationProvenance]:
+        result = self._backend.generate_structured(
             TrapVerdict,
             prompt_name="qa-judge-trap",
             prompt_version=JUDGE_PROMPT_VERSION,
             system=TRAP_JUDGE_SYSTEM_PROMPT,
             user_content=f"Answer:\n{answer_text}\n\nClaim: {assertion}",
-        ).output
+        )
+        return result.output, result.provenance
 
 
 def score_case(
@@ -114,7 +122,7 @@ def score_case(
         )
 
     failures: list[FailureCode] = []
-    facts, traps, judge_error = _judge_answer(case, answer.text, judge)
+    facts, traps, judge_provenance, judge_error = _judge_answer(case, answer.text, judge)
     if judge_error is not None:
         failures.append("judge-error")
     if any(fact.required and fact.verdict == "absent" for fact in facts):
@@ -147,6 +155,7 @@ def score_case(
         unresolvable_extra_marks=extra_unresolvable,
         error=judge_error,
         answer_provenance=answer.provenance,
+        judge_provenance=judge_provenance,
     )
 
 
@@ -154,14 +163,16 @@ def _judge_answer(
     case: QACase,
     answer_text: str,
     judge: JudgeProtocol,
-) -> tuple[list[FactResult], list[TrapResult], str | None]:
+) -> tuple[list[FactResult], list[TrapResult], list[GenerationProvenance], str | None]:
     """Judge every fact and trap. A judge failure stops further judging and
     is surfaced as-is — partial verdicts are kept, nothing is retried."""
     facts: list[FactResult] = []
     traps: list[TrapResult] = []
+    provenance: list[GenerationProvenance] = []
     try:
         for expected in case.expected_facts:
-            verdict = judge.fact(answer_text, expected.fact)
+            verdict, call_provenance = judge.fact(answer_text, expected.fact)
+            provenance.append(call_provenance)
             facts.append(
                 FactResult(
                     fact=expected.fact,
@@ -171,7 +182,8 @@ def _judge_answer(
                 )
             )
         for forbidden in case.forbidden_assertions:
-            verdict = judge.trap(answer_text, forbidden.assertion)
+            verdict, call_provenance = judge.trap(answer_text, forbidden.assertion)
+            provenance.append(call_provenance)
             traps.append(
                 TrapResult(
                     assertion=forbidden.assertion,
@@ -180,8 +192,8 @@ def _judge_answer(
                 )
             )
     except GenerationError as exc:
-        return facts, traps, str(exc)
-    return facts, traps, None
+        return facts, traps, provenance, str(exc)
+    return facts, traps, provenance, None
 
 
 def _check_marks(

@@ -113,8 +113,8 @@ answerer, KB content, or the case itself:
 
 ## Report and provenance
 
-- **Console:** per-case table (verdict, facts hit/missed, traps, marks,
-  words) + summary line. Exit 0/1.
+- **Console:** one verdict line per case (failure codes on FAIL) + a
+  summary line; the full detail lives in the report JSON. Exit 0/1.
 - **Run report JSON** under `data/benchmark-runs/<patch>/<run-id>/`
   (gitignored, disposable): full answers, per-fact judge verdicts with
   rationales, selected artifacts, resolved marks, and provenance —

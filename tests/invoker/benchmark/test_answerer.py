@@ -178,9 +178,11 @@ def test_compose_receives_articles_and_changelog_hits_and_answer_carries_marks()
 
 def test_changelog_hits_keep_the_newest_patch_when_capped():
     """First live battery: a broad query matched dozens of 7.36
-    facet-introduction notes and the head-of-list cap dropped the 7.41
-    removal note the question was about. Newest patch must survive the
-    cap, with intra-patch note order preserved."""
+    facet-introduction notes and the cap dropped the 7.41 removal note
+    the question was about. The newest patch *by date* must survive the
+    cap regardless of manifest order (this fixture lists newest first, so
+    position-based reversal would get it wrong), with intra-patch note
+    order preserved."""
     old_notes = [
         {"token": f"OLD_NOTE_{i}", "text": {"english": f"Facets introduction detail {i}"}}
         for i in range(20)
@@ -189,15 +191,6 @@ def test_changelog_hits_keep_the_newest_patch_when_capped():
         "schema_version": 1,
         "locales": ["english"],
         "patches": [
-            {
-                "name": "7.36",
-                "date": "2024-05-22",
-                "generic": [{"section": "general", "notes": old_notes}],
-                "items": {},
-                "neutral_items": {},
-                "heroes": {},
-                "neutral_creeps": {},
-            },
             {
                 "name": "7.41",
                 "date": "2026-03-24",
@@ -217,6 +210,15 @@ def test_changelog_hits_keep_the_newest_patch_when_capped():
                 "heroes": {},
                 "neutral_creeps": {},
             },
+            {
+                "name": "7.36",
+                "date": "2024-05-22",
+                "generic": [{"section": "general", "notes": old_notes}],
+                "items": {},
+                "neutral_items": {},
+                "heroes": {},
+                "neutral_creeps": {},
+            },
         ],
     }
     backend = FakeBackend(
@@ -226,11 +228,30 @@ def test_changelog_hits_keep_the_newest_patch_when_capped():
     Answerer(backend, [], changelog=changelog).answer("When were facets removed?")
     content = backend.calls[1][1]["user_content"]
     assert "[changelog:REMOVAL_NOTE] patch 7.41" in content
-    assert "(9 older matches omitted)" in content  # 21 matches, cap 12
-    # intra-patch order preserved: the oldest surviving 7.36 notes read in sequence
+    # 21 matches, cap 12: the dropped 9 are the oldest, and the material says so
+    omitted_line = content.splitlines()[-1]
+    assert "9" in omitted_line and "older" in omitted_line and "omitted" in omitted_line
+    # intra-patch order preserved: the surviving 7.36 notes read in sequence
     first_old = content.index("OLD_NOTE_0")
     second_old = content.index("OLD_NOTE_1")
     assert content.index("REMOVAL_NOTE") < first_old < second_old
+
+
+def test_selection_exactly_at_caps_succeeds():
+    entries = [entry(f"concept/e{i}") for i in range(4)]
+    backend = FakeBackend(
+        selections=[
+            AnswerSelection(
+                artifacts=[e.id for e in entries],
+                changelog_queries=["a", "b", "c"],
+            )
+        ],
+        texts=["Answer. [corpus:x]"],
+    )
+    answer = Answerer(backend, entries, changelog=CHANGELOG).answer("Question?")
+    assert answer.text == "Answer. [corpus:x]"
+    assert len(answer.selected_artifacts) == 4
+    assert len(answer.changelog_queries) == 3
 
 
 def test_select_index_lists_entries_and_changelog_availability():

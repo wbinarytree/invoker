@@ -74,6 +74,7 @@ class CaseResult(BaseModel):
     Informational — the pass gate covers expected marks only (spec)."""
     error: str | None = None
     answer_provenance: list[GenerationProvenance] = Field(default_factory=list)
+    judge_provenance: list[GenerationProvenance] = Field(default_factory=list)
 
 
 class SkippedCase(BaseModel):
@@ -97,6 +98,9 @@ class RunReport(BaseModel):
     finished_at: str
     kb_sha256: str
     kb_artifact_count: int
+    cases_sha256: str
+    """Hash of the case set as run — two reports differing here measured
+    different questions, not a different KB."""
     changelog_available: bool
     answerer_model: str
     judge_model: str

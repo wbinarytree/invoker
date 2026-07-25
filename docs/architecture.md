@@ -518,9 +518,19 @@ eval for the KB and the M1 gate. Two halves with a hard boundary:
   answerer-error / judge-error`.
 - **Run report** (`report.py`, `runner.py`): JSON under
   `data/benchmark-runs/<patch>/<run-id>/` (gitignored) with full answers,
-  judge rationales, provenance (answerer/judge models, prompt versions)
-  and a KB content fingerprint; cases pinned to another patch are
-  recorded as skipped. Any failing case exits 1.
+  judge rationales, per-call provenance for both answerer and judge, and
+  content fingerprints of the KB *and* the case set (so two reports can
+  distinguish "KB changed" from "questions changed"); cases pinned to
+  another patch are recorded as skipped. Any failing case exits 1.
+
+**Known limit (accepted 2026-07-25):** mark resolution proves
+traceability, not content faithfulness — the scorer never checks that
+the answer's prose matches the cited material, so a PASS means the
+ask-path produced an answer the judge found correct, cited with
+resolvable keys, within bounds; it does not mechanically prove the KB
+carried every fact. Content-vs-source checking is the `verify()`
+primitive planned in the rethink spec's agent-exposure model and will
+reuse this scorer's machinery when it lands.
 
 ### OpenDota
 
