@@ -861,5 +861,52 @@ def publish(
     typer.echo("- review reports/vocab-audit.txt")
 
 
+@app.command("fetch-corpus")
+def fetch_corpus_cmd(
+    host: Annotated[
+        str | None,
+        typer.Option(help="Only fetch this host key from the corpus registry."),
+    ] = None,
+    patch: Annotated[
+        str | None,
+        typer.Option(help="Optional patch context recorded on newly fetched documents."),
+    ] = None,
+) -> None:
+    """Fetch curated MediaWiki corpus pages into revision-pinned local documents."""
+    from invoker.corpus.fetch import CorpusFetchError, fetch_corpus
+    from invoker.corpus.registry import RegistryError, load_registry
+    from invoker.corpus.store import CorpusStore
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    try:
+        registry = load_registry()
+        reports = fetch_corpus(
+            registry,
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            only_host=host,
+            patch_context=patch,
+        )
+    except (RegistryError, CorpusFetchError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+
+    any_missing = False
+    for report in reports:
+        typer.echo(f"Host: {report.host_key}")
+        typer.echo(f"  fetched: {len(report.fetched)}")
+        for slug in report.fetched:
+            typer.echo(f"    + {slug}")
+        typer.echo(f"  unchanged: {len(report.unchanged)}")
+        if report.missing:
+            any_missing = True
+            typer.echo(f"  MISSING ({len(report.missing)}):", err=True)
+            for title in report.missing:
+                typer.echo(f"    ! {title}", err=True)
+    if any_missing:
+        typer.echo("Some registry pages did not resolve; fix pages.yaml.", err=True)
+        raise typer.Exit(code=1)
+
+
 if __name__ == "__main__":
     app()

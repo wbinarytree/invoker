@@ -1,0 +1,26 @@
+# Curated corpus page registry.
+#
+# Page titles are requests, not facts: a title that no longer resolves is
+# reported loudly by `invoker fetch-corpus` and should be fixed here.
+# Licensing: Liquipedia content is CC-BY-SA; corpus documents are cited
+# evidence for generated articles, never copied into published output.
+schema_version: 1
+hosts:
+  liquipedia_dota2:
+    api_url: https://liquipedia.net/dota2/api.php
+    page_base_url: https://liquipedia.net/dota2/
+    license: CC-BY-SA 3.0
+    max_requests_per_minute: 20
+    pages:
+      - Mechanics
+      - Armor
+      - Attack Speed
+      - Magic Resistance
+      - Evasion
+      - Spell Immunity
+      - Illusions
+      - Status Resistance
+      - Vision
+      - Disjoint
+      - Damage Types
+      - Pseudo-random Distribution

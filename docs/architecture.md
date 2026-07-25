@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-05-26 (hero ability timing export)
+Last updated: 2026-07-25 (mechanics corpus fetcher)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -360,6 +360,30 @@ Current consumers:
   substitutes unresolved talent template values with `?`
 - `pipeline/team_profile.py` reads team match history and match details from
   OpenDota while resolving hero names from the game-file snapshot
+
+### Mechanics corpus (MediaWiki)
+
+Module: [src/invoker/corpus/](../src/invoker/corpus)
+
+Curated observational sources for behavior game files do not encode (bugs,
+in-game-only mechanics such as uphill miss chance). Direction:
+`docs/specs/2026-07-25-grounded-reasoner-rethink.md` (L1b substrate).
+
+- `pages.yaml` — checked-in registry of MediaWiki hosts and curated page
+  titles (first host: Liquipedia Dota 2)
+- `mediawiki.py` — rate-limited `action=query` client (batched titles,
+  redirect/normalization resolution, strict request spacing, identifying
+  User-Agent)
+- `store.py` — revision-pinned documents under
+  `data/corpus/<host_key>/<page_slug>/<revision_id>.json` plus a per-host
+  `index.json`; old revisions are kept so citations stay resolvable
+- `fetch.py` — orchestration; re-fetching an unchanged revision is a no-op,
+  unresolved registry titles are reported loudly
+
+CLI: `invoker fetch-corpus [--host <key>] [--patch <patch>]` (exit 1 when any
+registry page fails to resolve). Corpus documents are source marks for
+generated knowledge, not ground truth; wiki content is CC-BY-SA and is cited
+as evidence, never copied into published output.
 
 ### OpenDota
 

@@ -15,6 +15,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
+- `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -159,6 +160,25 @@ is written as an empty object and `GameFilesSource` falls back to KV names.
 
 `snapshot.json` records generic source labels and relative source-file
 inventory. It does not record local absolute extraction paths.
+
+### `fetch-corpus`
+
+Fetch curated MediaWiki corpus pages into revision-pinned local documents
+under `data/corpus/<host_key>/`.
+
+```bash
+uv run invoker fetch-corpus
+uv run invoker fetch-corpus --host liquipedia_dota2 --patch 7.41d
+```
+
+- The page registry is `src/invoker/corpus/pages.yaml` (hosts, licenses,
+  rate limits, curated page titles).
+- A page whose latest wiki revision is already stored is reported as
+  `unchanged` and not rewritten; a new revision writes a new file and keeps
+  the old one.
+- `--patch` records an optional patch context on newly fetched documents.
+- Registry titles that fail to resolve are printed and the command exits 1;
+  fix `pages.yaml`.
 
 ### `export-identity-localization`
 
