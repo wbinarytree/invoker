@@ -13,11 +13,12 @@ Living doc. Rewrite any rule that stops being useful. v0.
 
 ## Data Discipline
 
-Repo ships as a framework with **no data**. Fresh clone = zero heroes until bootstrap runs. Everything under `data/` is gitignored.
+Repo ships as a framework with **no fetched data**. Fresh clone = zero heroes until bootstrap runs. Everything under `data/` is gitignored, with one exception: `data/kb/` — generated encyclopedia artifacts — is committed for archival (decision 2026-07-25; see `data/kb/README.md` for licensing).
 
 - `data/raw/` — verbatim API responses. Never hand-edited.
 - `data/derived/` — deterministic transform of raw + code (and, going forward, hand-authored fact profiles).
 - `data/cache/` — regeneratable indexes (graph, vector, LLM cache).
+- `data/kb/` — generated, provenance-pinned encyclopedia artifacts. Committed.
 
 Every derived file carries a header with `schema_version`, `generator_version`, `source_patch`, `generated_at`. Schema changes bump `schema_version`; consumers may refuse mismatched versions.
 

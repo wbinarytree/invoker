@@ -13,12 +13,15 @@ venv/
 .pyright/
 
 # Invoker ships as a framework with no data. All knowledge is bootstrapped.
+# Exception: data/kb/ — generated encyclopedia artifacts are committed
+# for archival (decision 2026-07-25).
 data/
 !data/
 data/*
 !data/authored/
 data/authored/*
 !data/authored/README.md
+!data/kb/
 dist/
 
 # Local scratch / working notes — not for version control
