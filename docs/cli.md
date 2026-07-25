@@ -21,6 +21,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
 - `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>]`
 - `invoker render-kb --patch <patch> [--out <dir>]`
+- `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -270,6 +271,34 @@ verifies every artifact's article sha binding and fails on drift.
 uv run invoker render-kb --patch 7.41d
 open dist/kb-site/7.41d/index.html
 ```
+
+### `run-benchmark`
+
+Run the basic-QA benchmark against the generated KB — the end-to-end eval
+and Milestone 1 gate (spec:
+`docs/specs/2026-07-25-basic-qa-benchmark-runner.md`).
+
+```bash
+uv run invoker run-benchmark --patch 7.41d
+uv run invoker run-benchmark --patch 7.41d --case uphill-miss --case facet-removal
+```
+
+- Two-call answerer over `claude -p` (select artifacts, then compose an
+  answer with inline marks) consulting KB artifacts + the snapshot
+  changelog only — never raw substrate; a case whose facts are in no
+  artifact fails `resolution-miss`, the demand signal for the next
+  generator slice.
+- Scoring: mechanical checks (expected-mark patterns resolve against
+  corpus/changelog stores, word bound with marks excluded) plus an LLM
+  judge for fact presence and traps, one binary judgment per call with
+  rationale recorded.
+- `--answerer-model` / `--judge-model` override the pinned model; both are
+  recorded in the run report with prompt versions and the KB content hash.
+- Report JSON lands under `data/benchmark-runs/<patch>/<run-id>/`
+  (gitignored, disposable); per-case failures use the taxonomy
+  `resolution-miss / fact-missing / fact-contradicted / trap-triggered /
+  mark-pattern-missing / mark-unresolvable / over-length / answerer-error /
+  judge-error`. Any failing case exits 1.
 
 ### `changelog`
 

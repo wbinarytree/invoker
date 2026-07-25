@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (KB layout: one folder per entity)
+Last updated: 2026-07-25 (basic-QA benchmark runner)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -486,8 +486,51 @@ carries a question, expected facts (required/optional), forbidden assertions
 (traps, each with a mandatory why — e.g. vestigial facet data, code-only
 talents), expected source-mark patterns, and an optional concision bound.
 Five seed cases encode the first trial plus its human corrections. The
-loader validates shape, unique ids, and id-matches-filename; the scoring
-runner arrives with the generation milestone.
+loader validates shape, unique ids, and id-matches-filename.
+
+**Runner** (`invoker run-benchmark --patch <patch>`, spec:
+`docs/specs/2026-07-25-basic-qa-benchmark-runner.md`) — the end-to-end
+eval for the KB and the M1 gate. Two halves with a hard boundary:
+
+- **Answerer** (`answerer.py`): two pinned-model calls over the
+  `GenerationBackend` protocol — select (question + artifact index +
+  changelog availability → which surfaces to open, fan-out capped at 4
+  artifacts / 3 changelog queries) then compose (selected articles +
+  changelog evidence lines → concise answer, every factual statement
+  carrying inline `[kind:KEY]` marks). Consults KB artifacts and the
+  snapshot changelog only — never raw substrate — so the benchmark
+  measures the KB; an empty selection is the `resolution-miss` outcome
+  and skips compose. Contract violations (unknown ids, over-cap,
+  changelog-when-unavailable) raise instead of being silently repaired.
+- **Scorer** (`scorer.py`, `marks.py`): mechanical checks in code —
+  expected-mark patterns must be matched by ≥1 answer mark that resolves
+  (`corpus:` against the stored expanded revision's section keys,
+  `changelog:` against snapshot changelog tokens; `gamefile`/`loc`
+  resolvers arrive with the item/hero generators), word bound with mark
+  tokens excluded — plus an LLM judge (`Judge`) for fact presence
+  (present/absent/contradicted) and traps, one binary judgment per call,
+  rationale recorded, seeing only the answer and the single fact.
+- **Pass semantics**: required facts present, nothing contradicted
+  (optional included), no trap asserted, every expected mark resolvable,
+  word bound respected. Failure taxonomy implicates the right layer:
+  `resolution-miss / fact-missing / fact-contradicted / trap-triggered /
+  mark-pattern-missing / mark-unresolvable / over-length /
+  answerer-error / judge-error`.
+- **Run report** (`report.py`, `runner.py`): JSON under
+  `data/benchmark-runs/<patch>/<run-id>/` (gitignored) with full answers,
+  judge rationales, per-call provenance for both answerer and judge, and
+  content fingerprints of the KB *and* the case set (so two reports can
+  distinguish "KB changed" from "questions changed"); cases pinned to
+  another patch are recorded as skipped. Any failing case exits 1.
+
+**Known limit (accepted 2026-07-25):** mark resolution proves
+traceability, not content faithfulness — the scorer never checks that
+the answer's prose matches the cited material, so a PASS means the
+ask-path produced an answer the judge found correct, cited with
+resolvable keys, within bounds; it does not mechanically prove the KB
+carried every fact. Content-vs-source checking is the `verify()`
+primitive planned in the rethink spec's agent-exposure model and will
+reuse this scorer's machinery when it lands.
 
 ### OpenDota
 

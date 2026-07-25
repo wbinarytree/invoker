@@ -26,7 +26,7 @@ forbidden_assertions:
       exists to avoid; the corpus page contrasts the two directly.
 expected_marks:
   - kind: corpus
-    pattern: "liquipedia_dota2:random_distribution"
+    pattern: "liquipedia_dota2/random_distribution"
 max_answer_words: 130
 notes: >-
   The wiki page is titled "Random Distribution" (our registry entry

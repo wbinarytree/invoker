@@ -33,6 +33,8 @@ def provenance(prompt_name: str) -> GenerationProvenance:
 
 
 class FakeBackend:
+    model = "claude-opus-5"
+
     def __init__(self, article_text: str, card: ConceptCard):
         self.article_text = article_text
         self.card = card

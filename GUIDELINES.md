@@ -6,7 +6,7 @@ Living doc. Rewrite any rule that stops being useful. v0.
 
 - Python 3.11+, `uv` for env/deps, `ruff` for lint+format, `pyright` non-strict. Formatter decides style.
 - `src/invoker/` — source
-- `src/invoker/prompts/` — versioned prompt files (never inline strings)
+- `src/invoker/prompts/` — prompt files (legacy authoring pipeline); newer generation code may use versioned inline prompt constants instead (see LLM-Generated Content)
 - `data/` — see Data Discipline
 - `docs/specs/` — design docs, `docs/plans/` — implementation plans
 - `tests/` mirrors `src/invoker/` under `tests/invoker/`; shared helpers in `tests/support/`, recorded payloads in `tests/fixtures/`
@@ -30,7 +30,7 @@ JSON files are the source of truth. Derived access layers (NetworkX graph, local
 
 ## LLM-Generated Content
 
-Any artifact our code produces via an LLM records model, prompt file + hash, input hash, timestamp. A deterministic validator gates writes to `data/derived/` — validator failure blocks the write. Prompts live in `src/invoker/prompts/` as `.md` files; bump prompt version on behavior-changing edits.
+Any artifact our code produces via an LLM records the served model, prompt name + version, and a hash of the exact rendered request, plus timestamp. A deterministic validator gates writes to `data/derived/` — validator failure blocks the write. Prompts are either `.md` files in `src/invoker/prompts/` or versioned inline constants kept next to the code that parses their output (amended 2026-07-25: the old never-inline rule served a file-hash provenance scheme; the generation client's `request_sha256` now fingerprints the exact prompt bytes per call, which is stronger). Bump the version constant on behavior-changing edits — the request hash catches unbumped drift after the fact.
 
 Missing knowledge is explicit: null + zero sample size, never plausible-looking placeholders.
 
@@ -92,7 +92,7 @@ Every change goes through this loop. No exceptions on `main`.
 
 ## Hard Lines (Non-goals)
 
-- No LLMs in `bootstrap` or the query path. LLMs are interactive only (authoring helper).
+- LLMs generate and synthesize (articles, cards, benchmark answering/judging) but are never a fact source: generated prose must cite substrate keys, and faithfulness checks are mechanical (see `docs/specs/2026-07-25-grounded-reasoner-rethink.md`, which dropped the earlier no-LLM-in-pipeline line).
 - No Dota facts asserted from training memory anywhere in code, data, or docs.
 - No silent retries to "fix" a bad LLM extraction — surface the failure.
 - No backwards-compat shims while pre-1.0.
