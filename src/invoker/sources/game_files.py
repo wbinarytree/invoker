@@ -184,7 +184,30 @@ def _ability_record(
         record["has_scepter_upgrade"] = True
     if raw.get("IsGrantedByShard") == "1":
         record["is_granted_by_shard"] = True
+    if raw.get("IsGrantedByScepter") == "1":
+        record["is_granted_by_scepter"] = True
+    if scepter_desc := _localized_upgrade_desc(name, raw, localization, "scepter"):
+        record["scepter_desc"] = scepter_desc
+    if shard_desc := _localized_upgrade_desc(name, raw, localization, "shard"):
+        record["shard_desc"] = shard_desc
     return record
+
+
+def _localized_upgrade_desc(
+    name: str,
+    raw: dict[str, Any],
+    localization: dict[str, Any],
+    upgrade: str,
+) -> str | None:
+    replacements = ability_value_replacements(raw.get("AbilityValues"))
+    for key in (
+        f"DOTA_Tooltip_ability_{name}_{upgrade}_description",
+        f"DOTA_Tooltip_Ability_{name}_{upgrade}_description",
+    ):
+        value = localization.get(key)
+        if isinstance(value, str) and value:
+            return resolve_percent_template(value, replacements)
+    return None
 
 
 def _localized_ability_name(
@@ -332,19 +355,29 @@ def _attribs(values: Any) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for key, raw in values.items():
         value: Any
+        scepter_bonus: Any = None
+        shard_bonus: Any = None
         if isinstance(raw, dict):
-            if "value" not in raw:
-                continue
-            value = raw["value"]
+            value = raw.get("value")
+            scepter_bonus = raw.get("special_bonus_scepter")
+            shard_bonus = raw.get("special_bonus_shard")
         else:
             value = raw
-        rows.append(
-            {
-                "key": str(key),
-                "header": _label_from_key(str(key)).upper() + ":",
-                "value": _levels(value),
-            }
-        )
+        # A row with no base value can still exist purely as a Scepter/Shard
+        # upgrade (e.g. shard_amp_duration: {special_bonus_shard: "5.0"}).
+        if value is None and scepter_bonus is None and shard_bonus is None:
+            continue
+        row: dict[str, Any] = {
+            "key": str(key),
+            "header": _label_from_key(str(key)).upper() + ":",
+        }
+        if value is not None:
+            row["value"] = _levels(value)
+        if scepter_bonus is not None:
+            row["scepter_bonus"] = str(scepter_bonus)
+        if shard_bonus is not None:
+            row["shard_bonus"] = str(shard_bonus)
+        rows.append(row)
     return rows
 
 

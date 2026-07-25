@@ -167,28 +167,62 @@ def test_build_ability_contexts_drops_hidden_subcommands_keeps_innate():
     assert "Stop Rolling" not in names
 
 
-def test_build_ability_contexts_filters_tooltip_and_scepter_attribs():
+def test_build_ability_contexts_filters_tooltip_attribs_keeps_upgrades():
     abilities_map = {
         "hero_main": {
             "dname": "Main",
             "behavior": "No Target",
             "attrib": [
-                {"key": "damage", "header": "DAMAGE:", "value": "100"},
+                {"key": "damage", "header": "DAMAGE:", "value": "100", "scepter_bonus": "+50"},
                 {"key": "cast_point", "header": "CAST POINT:", "value": "0"},
                 {"key": "tooltip", "header": "DAMAGE TOOLTIP:", "value": "100"},
-                {"key": "scepter_radius", "header": "SCEPTER RADIUS:", "value": "300"},
-                {"key": "shard_bonus", "header": "SHARD BONUS DAMAGE:", "value": "50"},
+                {"key": "shard_slow", "header": "SHARD SLOW:", "shard_bonus": "20%"},
             ],
         },
     }
     hero_abilities_map = {"npc_dota_hero_x": {"abilities": ["hero_main"], "talents": []}}
     abilities, _ = build_ability_contexts("npc_dota_hero_x", abilities_map, hero_abilities_map)
-    headers = [a.header for a in abilities[0].attribs]
-    assert "DAMAGE:" in headers
-    assert "CAST POINT:" in headers  # zero values kept — instant cast is real mechanic
-    assert "DAMAGE TOOLTIP:" not in headers
-    assert "SCEPTER RADIUS:" not in headers
-    assert "SHARD BONUS DAMAGE:" not in headers
+    entries = {a.header: a for a in abilities[0].attribs}
+    assert entries["DAMAGE:"].scepter_bonus == "+50"
+    assert "CAST POINT:" in entries  # zero values kept — instant cast is real mechanic
+    assert "DAMAGE TOOLTIP:" not in entries
+    # upgrade-only rows survive with no base value
+    assert entries["SHARD SLOW:"].value is None
+    assert entries["SHARD SLOW:"].shard_bonus == "20%"
+
+
+def test_build_ability_contexts_keeps_upgrade_granted_hidden_abilities():
+    abilities_map = {
+        "hero_shard_active": {
+            "dname": "Shard Active",
+            "behavior": ["Hidden", "Unit Target"],
+            "is_granted_by_shard": True,
+        },
+        "hero_scepter_active": {
+            "dname": "Scepter Active",
+            "behavior": ["Hidden", "No Target"],
+            "is_granted_by_scepter": True,
+        },
+        "hero_upgraded": {
+            "dname": "Upgraded",
+            "behavior": "No Target",
+            "scepter_desc": "Also roots the target.",
+            "shard_desc": "Radius doubled.",
+        },
+    }
+    hero_abilities_map = {
+        "npc_dota_hero_x": {
+            "abilities": ["hero_shard_active", "hero_scepter_active", "hero_upgraded"],
+            "talents": [],
+        }
+    }
+    abilities, _ = build_ability_contexts("npc_dota_hero_x", abilities_map, hero_abilities_map)
+    by_name = {a.internal_name: a for a in abilities}
+    assert by_name["hero_shard_active"].granted_by == "shard"
+    assert by_name["hero_scepter_active"].granted_by == "scepter"
+    assert by_name["hero_upgraded"].granted_by is None
+    assert by_name["hero_upgraded"].scepter_upgrade == "Also roots the target."
+    assert by_name["hero_upgraded"].shard_upgrade == "Radius doubled."
 
 
 def test_build_ability_contexts_keeps_precomputed_talent_display_name():

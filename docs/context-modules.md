@@ -79,12 +79,26 @@ def build_ability_contexts(
 - `source`: `"base_ability"` or `"innate"` (from `is_innate: true` in raw data)
 - `behavior`: always `list[str]` (normalized from string or list)
 - `pierces_debuff_immunity`: `bool | None` (from `bkbpierce` "Yes"/"No")
-- `attribs`: `AttribEntry` rows from the raw `attrib` array, with Scepter/Shard/tooltip-noisy headers dropped
+- `attribs`: `AttribEntry` rows from the raw `attrib` array (tooltip-noisy
+  headers dropped). Rows carry `scepter_bonus` / `shard_bonus` when the KV
+  value has `special_bonus_scepter` / `special_bonus_shard` modifiers;
+  upgrade-only rows (no base value in KV) have `value: None`
 - `cast_range`: source-backed `AbilityCastRange`, absent when not present in the snapshot
 - `timing`: source-backed low-level timing fields from the snapshot, currently
   `cast_point`, `channel_time`, `cast_animation`, `cast_gesture_slot`, and
   `animation_playback_rate` when present
 - `mana_cost` / `cooldown`: absent on passives
+- `scepter_upgrade` / `shard_upgrade`: localized upgrade description
+  (`..._scepter_description` / `..._shard_description` tokens,
+  `%field%`-resolved), absent when the snapshot carries none
+- `granted_by`: `"scepter"` / `"shard"` for abilities granted by the upgrade
+  item; these are kept even when behavior contains `Hidden`
+
+Known gap: a granted ability appears in the packet only when it is listed in
+the hero's ability slots. ~30 scepter/shard-granted abilities (e.g.
+`slardar_scepter`) are defined only in per-hero KV files and are in no
+hero's list; joining them needs the snapshot builder to record each
+ability's defining file (tracked follow-up).
 
 **`TalentContext`** — one per talent entry from `hero_abilities_map`:
 

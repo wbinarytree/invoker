@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (corpus section slicer)
+Last updated: 2026-07-25 (kit-wide ability upgrades in hero packets)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
