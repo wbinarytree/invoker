@@ -17,6 +17,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
+- `invoker expand-corpus [--host <key>] [--limit <n>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -202,6 +203,27 @@ Buckets per host:
   actionable triage list
 - `registry pages outside coverage categories` — informational; fetched pages
   that live outside the configured categories.
+
+### `expand-corpus`
+
+Fetch template-expanded HTML for every fetched corpus revision that does not
+have it yet, stored as `<revision_id>.expanded.html` next to the raw
+document. Raw wikitext leaves `{{G|...}}` wiki variables unresolved; only the
+expanded text materializes their values.
+
+```bash
+uv run invoker expand-corpus
+uv run invoker expand-corpus --host liquipedia_dota2 --limit 10
+```
+
+- Iterates the fetch index, so run `fetch-corpus` first.
+- Slow by design: `action=parse` calls run at the host's strict parse rate
+  limit (`max_parse_requests_per_minute` in `pages.yaml`; 1/min on
+  Liquipedia).
+- Incremental — already-expanded revisions are skipped, so re-runs only cost
+  what changed.
+- Aborts on HTTP 429 or 5 consecutive failures instead of burning the rate
+  budget; re-run later to resume. Any failure exits 1.
 
 ### `changelog`
 
