@@ -1,7 +1,7 @@
 # Basic-QA Benchmark Runner
 
 **Date:** 2026-07-25
-**Status:** draft — awaiting sign-off
+**Status:** accepted (user sign-off 2026-07-25, recommendations adopted as-is; implemented same day)
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (Milestone 1
 gate). Cases and loader exist (`benchmarks/basic-qa/*.yaml`,
 `src/invoker/benchmark/`); this spec adds the scoring runner.
@@ -154,15 +154,15 @@ provenance.
   — the runner enables it; policy decided when a model swap is actually
   proposed.
 
-## Decisions needing sign-off
+## Decisions (signed off 2026-07-25)
 
-1. **Answerer source scope:** KB artifacts + changelog only (recommended,
-   above) vs also allowing direct substrate value lookup. Direct substrate
-   would let `mage-slayer` pass before the item generator exists, but then
-   the benchmark measures ad-hoc context assembly, not the KB.
-2. **Judge model:** pinned same as generator vs deliberately different.
-   Recommendation: same pinned model to start (fewer moving parts); the
-   provenance field keeps them independently swappable.
-3. **Word-count rule:** marks excluded from the count (recommended — the
-   bound targets prose concision, and mark density shouldn't penalize
-   citation discipline).
+1. **Answerer source scope: KB artifacts + changelog only.** Direct
+   substrate value lookup would let `mage-slayer` pass before the item
+   generator exists, but then the benchmark measures ad-hoc context
+   assembly, not the KB.
+2. **Judge model: same pinned model as the generator** to start (fewer
+   moving parts); the separate provenance field keeps them independently
+   swappable.
+3. **Word-count rule: marks excluded from the count** — the bound targets
+   prose concision, and mark density shouldn't penalize citation
+   discipline.

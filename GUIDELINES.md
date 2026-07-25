@@ -92,7 +92,7 @@ Every change goes through this loop. No exceptions on `main`.
 
 ## Hard Lines (Non-goals)
 
-- No LLMs in `bootstrap` or the query path. LLMs are interactive only (authoring helper).
+- LLMs generate and synthesize (articles, cards, benchmark answering/judging) but are never a fact source: generated prose must cite substrate keys, and faithfulness checks are mechanical (see `docs/specs/2026-07-25-grounded-reasoner-rethink.md`, which dropped the earlier no-LLM-in-pipeline line).
 - No Dota facts asserted from training memory anywhere in code, data, or docs.
 - No silent retries to "fix" a bad LLM extraction — surface the failure.
 - No backwards-compat shims while pre-1.0.

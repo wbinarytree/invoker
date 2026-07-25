@@ -16,7 +16,7 @@ If you find yourself grepping the codebase to answer "what does X do?" before ch
 ## Hard lines
 
 - No Dota facts from training memory. Cite a source file or mark unknown. Null is correct when data is missing — never fill plausible placeholders.
-- No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
+- LLM generation is pipeline-legal (rethink 2026-07-25) but never a fact source: generated prose cites substrate keys, and faithfulness checks are mechanical.
 - No silent retries on bad LLM extractions — surface the failure.
 - `data/` is gitignored except `data/kb/` (generated encyclopedia artifacts, committed for archival). No raw or fetched data committed.
 - Specs go in `docs/specs/YYYY-MM-DD-<topic>.md` *before* discussion. Don't substitute a chat markdown block for the spec file.
