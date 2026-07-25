@@ -53,6 +53,10 @@ def corpus_dir(data_dir: Path) -> Path:
     return data_dir / "corpus"
 
 
+def basic_qa_benchmark_dir() -> Path:
+    return PROJECT_ROOT / "benchmarks" / "basic-qa"
+
+
 def derived_patch_dir(data_dir: Path, patch: str) -> Path:
     return data_dir / "derived" / patch
 

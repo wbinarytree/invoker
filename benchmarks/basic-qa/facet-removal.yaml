@@ -1,0 +1,24 @@
+schema_version: 1
+id: facet-removal
+question: When were facets removed from Dota 2?
+patch: 7.41d
+category: changelog
+expected_facts:
+  - fact: Facets were removed from the game in patch 7.41
+  - fact: Patch 7.41 is dated 2026-03-24 in the in-game changelog
+    required: false
+  - fact: Facets were introduced in patch 7.36
+    required: false
+forbidden_assertions:
+  - assertion: Facets are a current hero customization mechanic
+    why: >-
+      Game files still describe facets (Facets blocks on all heroes in
+      7.41d), but the changelog records their removal; presence-in-files
+      must not be read as presence-in-game.
+expected_marks:
+  - kind: changelog
+    pattern: DOTA_Patch_7_41_General_Global_Changes
+max_answer_words: 60
+notes: >-
+  Temporal questions are a base-tier question class answered by the
+  ingested in-game changelog (invoker changelog --grep "facets removed").

@@ -1,0 +1,45 @@
+schema_version: 1
+id: corrosive-haze
+question: What does Slardar's Corrosive Haze do?
+patch: 7.41d
+category: ability
+expected_facts:
+  - fact: >-
+      Slardar's ultimate: a unit-target enemy debuff reducing armor by
+      8/14/20 for 18 seconds
+  - fact: Grants True Sight and vision of the target, revealing invisibility
+  - fact: >-
+      A level-25-tier talent (special_bonus_unique_slardar_3) makes the
+      debuff undispellable
+  - fact: The debuff is dispellable by default, before that talent
+    required: false
+  - fact: Can target spell-immune enemies
+    required: false
+  - fact: 900 cast range, 5 second cooldown, 25 mana
+    required: false
+  - fact: A level-15-tier talent adds 3 more armor reduction
+    required: false
+forbidden_assertions:
+  - assertion: >-
+      Presents Brineguard facet behavior (self armor from reduced armor) as
+      current
+    why: >-
+      Facets were removed from the game in 7.41 (changelog:
+      DOTA_Patch_7_41_General_Global_Changes) but 7.41d game files still
+      carry Facets blocks and facet-conditional ability values. Vestigial
+      data trap — user-caught in the first trial.
+  - assertion: The debuff cannot be dispelled at all levels without qualification
+    why: >-
+      Undispellability comes only from the level-25-tier talent; base is
+      SPELL_DISPELLABLE_YES.
+expected_marks:
+  - kind: gamefile
+    pattern: slardar_amplify_damage
+  - kind: loc
+    pattern: special_bonus_unique_slardar_3
+max_answer_words: 150
+notes: >-
+  Second trap class: the undispellable talent has no machine-readable
+  effect in AbilityValues — it is only discoverable by joining the hero's
+  talent list with localization. Ability answers must assemble the full
+  kit. Trial findings 2 and 3 in the rethink spec.

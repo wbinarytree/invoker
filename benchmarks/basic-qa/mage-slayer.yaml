@@ -1,0 +1,37 @@
+schema_version: 1
+id: mage-slayer
+question: What is Mage Slayer?
+patch: 7.41d
+category: item
+expected_facts:
+  - fact: An item costing 3100 gold
+  - fact: >-
+      Passive: attacking enemies applies a 3-second debuff dealing 35
+      physical damage per second and reducing the target's spell damage
+      output by 40%
+  - fact: Grants +18% magic resistance
+  - fact: Grants +12 attack damage
+    required: false
+  - fact: Grants +5.5 HP regeneration and +2.5 mana regeneration
+    required: false
+  - fact: Built from Perseverance, Cloak, Blades of Attack, and Orb of Venom
+    required: false
+  - fact: The debuff is dispellable
+    required: false
+forbidden_assertions:
+  - assertion: >-
+      Describes Anti-Mage cosmetic set pieces (e.g. Glaive of the Mage
+      Slayer) as the item
+    why: >-
+      Naive localization search surfaces cosmetic tokens named "... of the
+      Mage Slayer" before the item's DOTA_Tooltip_ability_item_mage_slayer
+      tokens.
+expected_marks:
+  - kind: gamefile
+    pattern: item_mage_slayer
+  - kind: loc
+    pattern: DOTA_Tooltip_ability_item_mage_slayer
+max_answer_words: 120
+notes: >-
+  The item's wiki page sits in Liquipedia's Archive namespace (omitted by
+  rule), so game files plus localization must fully answer this.

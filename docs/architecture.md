@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (in-game changelog ingestion)
+Last updated: 2026-07-25 (basic-QA benchmark seed)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -402,6 +402,20 @@ registry page fails to resolve) and `invoker corpus-coverage [--host <key>]`.
 Corpus documents are source marks for generated knowledge, not ground truth;
 wiki content is CC-BY-SA and is cited as evidence, never copied into
 published output.
+
+### Basic-QA benchmark
+
+Module: [src/invoker/benchmark/](../src/invoker/benchmark) — cases in
+`benchmarks/basic-qa/*.yaml`.
+
+Gold cases gating the foundation tier of the generated encyclopedia
+(direction: `docs/specs/2026-07-25-grounded-reasoner-rethink.md`). Each case
+carries a question, expected facts (required/optional), forbidden assertions
+(traps, each with a mandatory why — e.g. vestigial facet data, code-only
+talents), expected source-mark patterns, and an optional concision bound.
+Five seed cases encode the first trial plus its human corrections. The
+loader validates shape, unique ids, and id-matches-filename; the scoring
+runner arrives with the generation milestone.
 
 ### OpenDota
 
