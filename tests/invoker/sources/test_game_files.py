@@ -109,6 +109,22 @@ def test_game_files_source_exposes_items():
     assert "neutral_tiers" in source.neutral_items()
 
 
+def test_attrib_headers_resolve_tooltip_label_macros():
+    """'%+$spell_resist' must resolve to the label players see (Magic
+    Resistance, percent-formatted) — not a prettified KV key ('bonus
+    magical armor'), which misnames the stat."""
+    source = GameFilesSource(FIXTURE_ROOT, "7.41b")
+    record = source.item_records()["item_mage_slayer"]
+    by_key = {row["key"]: row for row in record["attrib"]}
+    resist = by_key["bonus_magical_armor"]
+    assert resist["header"] == "MAGIC RESISTANCE:"
+    assert resist["percent"] is True
+    assert resist["value"] == "18"
+    # keys without a label token keep the prettified-key fallback
+    assert by_key["dps"]["header"] == "DPS:"
+    assert "percent" not in by_key["dps"]
+
+
 def test_game_files_source_fails_loudly_when_patch_missing():
     with pytest.raises(GameFilesSourceError):
         GameFilesSource(FIXTURE_ROOT, "missing")

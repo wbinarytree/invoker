@@ -201,7 +201,7 @@ def _ability_record(
         "bkbpierce": _spell_immunity(raw.get("SpellImmunityType")),
         "dispellable": _dispellable(raw.get("SpellDispellableType")),
         "desc": _localized_ability_desc(name, raw, localization),
-        "attrib": _attribs(raw.get("AbilityValues")),
+        "attrib": _attribs(name, raw.get("AbilityValues"), localization),
     }
     if "AbilityCastRange" in raw:
         record["cast_range"] = _levels(raw["AbilityCastRange"])
@@ -235,7 +235,7 @@ def _item_record(name: str, raw: dict[str, Any], localization: dict[str, Any]) -
         "behavior": _behavior(raw.get("AbilityBehavior")),
         "dmg_type": _damage_type(raw.get("AbilityUnitDamageType")),
         "dispellable": _dispellable(raw.get("SpellDispellableType")),
-        "attrib": _attribs(raw.get("AbilityValues")),
+        "attrib": _attribs(name, raw.get("AbilityValues"), localization),
     }
     if "ItemCost" in raw:
         record["cost"] = _int_or_zero(raw["ItemCost"])
@@ -454,7 +454,33 @@ def _collapse_replaced_percent_escape(value: str) -> str:
     return "".join(chars)
 
 
-def _attribs(values: Any) -> list[dict[str, Any]]:
+_VARIABLE_LABEL_TEMPLATE = re.compile(r"^([%+\-\s]*)\$(\w+)$")
+
+
+def _attrib_label(name: str, key: str, localization: dict[str, Any]) -> tuple[str, bool]:
+    """Tooltip label for one AbilityValues key, plus whether the value
+    renders as a percentage.
+
+    Tooltip tokens like '%+$spell_resist' reference shared label variables
+    (dota_ability_variable_spell_resist = "Magic Resistance") — the label
+    players actually see. A key-derived fallback like "bonus magical armor"
+    misnames the stat, which the mage-slayer cross-reference caught."""
+    for token in (
+        f"DOTA_Tooltip_ability_{name}_{key}",
+        f"DOTA_Tooltip_Ability_{name}_{key}",
+    ):
+        text = localization.get(token)
+        if isinstance(text, str) and text:
+            match = _VARIABLE_LABEL_TEMPLATE.match(text.strip())
+            if match:
+                label = localization.get(f"dota_ability_variable_{match.group(2)}")
+                if isinstance(label, str) and label:
+                    return label, "%" in match.group(1)
+            break
+    return _label_from_key(key), False
+
+
+def _attribs(name: str, values: Any, localization: dict[str, Any]) -> list[dict[str, Any]]:
     if not isinstance(values, dict):
         return []
     rows: list[dict[str, Any]] = []
@@ -472,10 +498,13 @@ def _attribs(values: Any) -> list[dict[str, Any]]:
         # upgrade (e.g. shard_amp_duration: {special_bonus_shard: "5.0"}).
         if value is None and scepter_bonus is None and shard_bonus is None:
             continue
+        label, percent = _attrib_label(name, str(key), localization)
         row: dict[str, Any] = {
             "key": str(key),
-            "header": _label_from_key(str(key)).upper() + ":",
+            "header": label.upper() + ":",
         }
+        if percent:
+            row["percent"] = True
         if value is not None:
             row["value"] = _levels(value)
         if scepter_bonus is not None:

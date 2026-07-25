@@ -65,6 +65,7 @@ def build_item_context_from_source(
             key=str(a["key"]) if "key" in a else None,
             scepter_bonus=a.get("scepter_bonus"),
             shard_bonus=a.get("shard_bonus"),
+            percent=bool(a.get("percent")),
         )
         for a in record.get("attrib", [])
         if isinstance(a, dict) and "header" in a

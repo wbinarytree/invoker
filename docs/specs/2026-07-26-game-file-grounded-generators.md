@@ -1,7 +1,7 @@
 # Game-File-Grounded Generators (Items + Heroes)
 
 **Date:** 2026-07-26
-**Status:** draft — awaiting sign-off
+**Status:** accepted (user sign-off 2026-07-26 after two mock-review rounds + Liquipedia cross-reference; recommendations adopted)
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (Milestone 1,
 generation order `concepts → items → heroes`). One spec, two implementation
 slices/PRs: items first (acceptance: `mage-slayer` benchmark case), then

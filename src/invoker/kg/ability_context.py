@@ -11,6 +11,9 @@ class AttribEntry:
     key: str | None = None
     scepter_bonus: str | None = None
     shard_bonus: str | None = None
+    percent: bool = False
+    """The tooltip renders this value as a percentage (label template
+    carried a '%' format prefix)."""
 
 
 @dataclass(frozen=True)
@@ -105,6 +108,7 @@ def _build_ability(internal_name: str, raw: dict[str, Any]) -> AbilityContext:
             key=str(a["key"]) if "key" in a else None,
             scepter_bonus=str(a["scepter_bonus"]) if "scepter_bonus" in a else None,
             shard_bonus=str(a["shard_bonus"]) if "shard_bonus" in a else None,
+            percent=bool(a.get("percent")),
         )
         for a in raw.get("attrib", [])
         if isinstance(a, dict)
