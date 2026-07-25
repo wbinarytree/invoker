@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (generation client with pinned provenance)
+Last updated: 2026-07-25 (concept generator S1)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -437,6 +437,18 @@ Refusal, truncation, empty output, unknown served model, and schema
 mismatch all raise `GenerationError` — never silently retried (hard
 line). Nothing under `gen/` may be imported from the bootstrap or query
 path; generation is a separate, rebuildable batch stage.
+
+**Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
+packet = the concept's corpus sections rendered with citation keys
+inline (`build_packet`, sha256 recorded on the artifact). Two calls per
+concept: article (markdown, every factual sentence ends in
+`[corpus:<key>]` marks) then card (≤12 sentences, every sentence keeps
+its marks — compression with pointers back). Mechanical faithfulness
+check: every mark in article and card must resolve against the packet
+or generation aborts; marks are never checked against live sources.
+Artifact: `data/kb/<patch>/concepts/<slug>.json` (article + card +
+citations + packet hash + per-call provenance). CLI:
+`invoker generate-concept <slug> --patch <patch>`.
 
 ### Basic-QA benchmark
 

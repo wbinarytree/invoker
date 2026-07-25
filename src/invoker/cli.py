@@ -229,6 +229,48 @@ def show_item_context_cmd(
     typer.echo(json.dumps(dataclasses.asdict(context), indent=2))
 
 
+@app.command("generate-concept")
+def generate_concept_cmd(
+    slug: str = typer.Argument(..., help="Corpus page slug, e.g. evasion."),
+    patch: str = typer.Option(..., help="Patch context recorded on the artifact."),
+    host: str = typer.Option("liquipedia_dota2", help="Corpus host key."),
+    effort: str | None = typer.Option(None, help="Generation effort level override."),
+) -> None:
+    """Generate one concept article + card into data/kb/<patch>/concepts/.
+
+    Uses the claude -p transport (subscription-billed). Citation marks that
+    do not resolve against the context packet abort the run.
+    """
+    from invoker.corpus.store import CorpusStore
+    from invoker.gen.claude_cli import ClaudeCliClient
+    from invoker.gen.client import GenerationError
+    from invoker.gen.concepts import generate_concept
+    from invoker.paths import corpus_dir, kb_dir
+
+    cfg = _load_config()
+    try:
+        artifact, path = generate_concept(
+            CorpusStore(corpus_dir(cfg.data_dir)),
+            ClaudeCliClient(),
+            host_key=host,
+            slug=slug,
+            patch=patch,
+            kb_dir=kb_dir(cfg.data_dir, patch),
+            effort=effort,
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Wrote {path}")
+    typer.echo(
+        f"article: {len(artifact.article_markdown)} chars, "
+        f"{len(artifact.citations)} distinct citations, "
+        f"card: {len(artifact.card.sentences)} sentences "
+        f"(model {artifact.article_provenance.model}, "
+        f"transport {artifact.article_provenance.transport})"
+    )
+
+
 @app.command("snapshot-game-files")
 def snapshot_game_files_cmd(
     vpk: SnapshotVpkOption,

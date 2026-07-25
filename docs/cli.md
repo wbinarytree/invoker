@@ -19,6 +19,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
+- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -238,6 +239,22 @@ uv run invoker expand-corpus --host liquipedia_dota2 --limit 10
   what changed.
 - Aborts on HTTP 429 or 5 consecutive failures instead of burning the rate
   budget; re-run later to resume. Any failure exits 1.
+
+### `generate-concept`
+
+Generate one concept article + card into `data/kb/<patch>/concepts/<slug>.json`
+from the stored corpus (S1 of the generation pipeline).
+
+```bash
+uv run invoker generate-concept evasion --patch 7.41d
+```
+
+- Transport is `claude -p` (subscription-billed, tools disabled, pinned
+  system prompt); provenance (model, transport, prompt version, request
+  hash, packet hash) is recorded on the artifact.
+- Every citation mark in the article and card must resolve against the
+  concept's own corpus sections; an unresolvable mark aborts with exit 1.
+- Slow by design: two full generation calls per concept.
 
 ### `changelog`
 
