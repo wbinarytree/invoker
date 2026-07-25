@@ -18,7 +18,7 @@ Status: accepted
 ## Constraints
 
 - `AGENTS.md` stays short — agents read it as system prompt.
-- Sub-agent review uses Claude Sonnet 4.6 (or equivalent), not the same model running the implementation, so the review has fresh context and a different angle.
+- Sub-agent review uses Claude Opus 5 (`claude-opus-5`; user decision 2026-07-25 — originally Claude Sonnet 4.6), not the same conversation running the implementation, so the review has fresh context and a different angle.
 - Sub-agent review fires on **explicit user approval to open the PR**, not after every commit. Mid-flight reviews waste tokens reviewing churn that's about to change.
 - Architecture-doc updates are strict same-PR. No follow-ups, no "I'll do it later" — keeps doc and code in lockstep.
 - Notes (`docs/notes/`) are retrospective and short (one page). Specs (`docs/specs/`) are forward-looking and may be longer.
