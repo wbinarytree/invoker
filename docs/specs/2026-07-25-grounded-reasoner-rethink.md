@@ -261,6 +261,30 @@ be *in* context. Resolution:
   agent-with-tools and scores mark coverage alongside correctness and
   concision — unresolvable or missing pointers fail the case.
 
+## Complex questions (laning / teamfight / roaming analysis)
+
+Complex analysis composes pre-synthesized middle layers, not raw facts:
+concept articles (laning, trading, rune control — corpus already holds the
+sources) and pair/matchup articles are synthesized once offline with
+citations; answer time pulls cards for the entities involved plus the
+relevant concept/pair artifacts (~4–8k tokens) and composes. Three further
+rules:
+
+- **Demand-driven deepening.** Shallow (Tier B/C) pairs get their article
+  generated on first ask and cached into the ledger, patch-stamped. Depth
+  accrues where questions land.
+- **Epistemic grades stay visible.** Mechanical claims carry `gamefile:`
+  marks; tendency claims carry `stats:` marks with evidence attached;
+  strategic inferences carry `synthesis:` marks citing the mechanical
+  inputs they derive from. verify() returns grade-appropriate verdicts
+  (mechanically supported / stat-consistent / synthesis-from-cited-inputs /
+  unknown) — no flattening into one confidence string.
+- **The ceiling is stated.** Tacit micro (wave manipulation, positioning
+  feel) exists in no source we hold; the correct output is a visible
+  unknown. Team-specific teamfight/roaming analysis needs replay-level L2
+  extension — real, but out of foundation scope. The bar is AI Liquipedia,
+  not AlphaGo (ambition calibration above).
+
 ## The recurring choice: manual vs generated vs agentic
 
 Every knowledge surface forces the same decision, and choosing wrong is how
