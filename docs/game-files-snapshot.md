@@ -93,6 +93,7 @@ Expected output:
   neutral_items.json
   localization/english.json
   localization/schinese.json
+  changelog.json        (when the patchnotes files from Step 0 are present)
   snapshot.json
 ```
 

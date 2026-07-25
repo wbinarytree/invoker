@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (mechanics corpus fetcher)
+Last updated: 2026-07-25 (in-game changelog ingestion)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -315,8 +315,22 @@ operator-provided root:
   neutral_items.json
   localization/english.json
   localization/<other-locale>.json
+  changelog.json        (when patch-note files are present in the extraction)
   snapshot.json
 ```
+
+`changelog.json` is built from the client's own patch-notes manifest
+(`patchnotes/patchnotes.vdpn`, decompiled during extraction) joined with
+`resource/localization/patchnotes/patchnotes_<locale>.txt`. It contains the
+full per-patch change history shipped by the client (123 patches, 7.06d
+onward, in the 7.41d client), structured per patch → generic sections /
+items / neutral items / heroes → notes with per-locale text. Builder:
+[src/invoker/snapshot/changelog.py](../src/invoker/snapshot/changelog.py)
+(the manifest repeats KV keys, parsed with the KV parser's
+`collect_duplicates` mode). Query CLI: `invoker changelog`. The changelog is
+knowledge ("when did X change/get removed") and the detector for mechanics
+the current files still describe but the game removed (e.g. facets: removed
+in 7.41 per the changelog, yet 7.41d files still ship `Facets` blocks).
 
 `GameFilesSource` reads these JSON files and exposes the constants surface used
 by authoring and fetch code: heroes, abilities, hero ability lists, hero stats,

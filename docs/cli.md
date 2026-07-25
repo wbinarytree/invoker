@@ -17,6 +17,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
+- `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -201,6 +202,26 @@ Buckets per host:
   actionable triage list
 - `registry pages outside coverage categories` — informational; fetched pages
   that live outside the configured categories.
+
+### `changelog`
+
+Search the in-game changelog captured in a game-file snapshot
+(`changelog.json`, built by `snapshot-game-files` when patch-note files are
+present in the extraction — 123 patches of history, 7.06d onward, as shipped
+by the 7.41d client).
+
+```bash
+uv run invoker changelog --patch 7.41d --grep "facets removed"
+uv run invoker changelog --patch 7.41d --for mage_slayer
+uv run invoker changelog --patch 7.41d --for slardar --note-patch 7.41
+uv run invoker changelog --patch 7.41d --grep 移除 --locale schinese
+```
+
+- `--patch` selects which snapshot's changelog to read (the client ships the
+  full history, so newest is usually right).
+- `--grep` matches note text (in `--locale`) or the note token.
+- `--for` matches the entity: hero, ability, item, or generic section name.
+- `--note-patch` restricts to notes from one patch version.
 
 ### `export-identity-localization`
 

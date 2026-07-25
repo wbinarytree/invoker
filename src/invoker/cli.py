@@ -234,6 +234,11 @@ def snapshot_game_files_cmd(
     typer.echo(f"Items: {result.item_count}")
     typer.echo(f"Neutral item sections: {result.neutral_item_count}")
     typer.echo(f"Locales: {', '.join(result.locales)}")
+    if result.changelog_patch_count:
+        typer.echo(
+            f"Changelog: {result.changelog_patch_count} patches, "
+            f"{result.changelog_note_count} notes"
+        )
 
 
 @app.command("export-identity-localization")
@@ -906,6 +911,60 @@ def fetch_corpus_cmd(
     if any_missing:
         typer.echo("Some registry pages did not resolve; fix pages.yaml.", err=True)
         raise typer.Exit(code=1)
+
+
+@app.command("changelog")
+def changelog_cmd(
+    patch: Annotated[
+        str,
+        typer.Option(help="Snapshot patch directory to read changelog.json from."),
+    ],
+    grep: Annotated[
+        str | None,
+        typer.Option(help="Substring match against note text or token."),
+    ] = None,
+    entity: Annotated[
+        str | None,
+        typer.Option("--for", help="Filter by entity: hero, ability, item, or section name."),
+    ] = None,
+    note_patch: Annotated[
+        str | None,
+        typer.Option(help="Only notes from this patch version, e.g. 7.41."),
+    ] = None,
+    locale: Annotated[str, typer.Option(help="Locale for note text.")] = "english",
+    limit: Annotated[int, typer.Option(help="Maximum entries to print.")] = 20,
+) -> None:
+    """Search the in-game changelog captured in a game-file snapshot."""
+    from invoker.snapshot.changelog import search_changelog
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is not configured", err=True)
+        raise typer.Exit(code=1)
+    changelog_path = cfg.game_data_dir / patch / "changelog.json"
+    if not changelog_path.exists():
+        typer.echo(
+            f"{changelog_path} not found; re-run snapshot-game-files with "
+            "patchnotes files present in the extraction",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+
+    changelog = json.loads(changelog_path.read_text())
+    results = search_changelog(
+        changelog,
+        grep=grep,
+        entity=entity,
+        note_patch=note_patch,
+        locale=locale,
+    )
+    typer.echo(f"Matches: {len(results)}")
+    for entry in results[:limit]:
+        date = f" ({entry['date']})" if entry.get("date") else ""
+        typer.echo(f"[{entry['patch']}]{date} {entry['scope']}/{entry['entity']}")
+        typer.echo(f"  {entry['text'] or '(no text for locale)'}")
+    if len(results) > limit:
+        typer.echo(f"... {len(results) - limit} more (raise --limit)")
 
 
 @app.command("corpus-coverage")

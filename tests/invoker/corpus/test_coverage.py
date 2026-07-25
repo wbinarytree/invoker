@@ -6,8 +6,8 @@ from invoker.corpus.schemas import CorpusDoc, CorpusHost, CorpusRegistry, Omitte
 from invoker.corpus.store import CorpusStore
 
 
-def make_registry(**host_kwargs) -> CorpusRegistry:
-    defaults = dict(
+def make_registry(**host_overrides) -> CorpusRegistry:
+    host = CorpusHost(
         api_url="https://example.test/api.php",
         page_base_url="https://example.test/",
         license="CC-BY-SA 3.0",
@@ -16,8 +16,9 @@ def make_registry(**host_kwargs) -> CorpusRegistry:
         coverage_categories=["Category:Mechanics"],
         omit=[OmittedPage(title="Esports Page", reason="esports meta, not game mechanics")],
     )
-    defaults.update(host_kwargs)
-    return CorpusRegistry(schema_version=1, hosts={"testwiki": CorpusHost(**defaults)})
+    if host_overrides:
+        host = CorpusHost.model_validate({**host.model_dump(), **host_overrides})
+    return CorpusRegistry(schema_version=1, hosts={"testwiki": host})
 
 
 def category_transport(members: list[str], *, pages: int = 1) -> httpx.MockTransport:
