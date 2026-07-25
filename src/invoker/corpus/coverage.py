@@ -30,10 +30,18 @@ class HostCoverageReport:
 
 def _resolved_registry_titles(host: CorpusHost, store: CorpusStore, host_key: str) -> set[str]:
     """Registry titles plus their canonical resolutions from the fetch index,
-    so redirected pages count as covered under their canonical name."""
+    so redirected pages count as covered under their canonical name.
+
+    Only index entries whose requested title is still in the registry count:
+    a page dropped from pages.yaml must resurface as unreviewed, not stay
+    silently covered by its stale index entry."""
     titles = set(host.pages)
     index = store.load_index(host_key)
-    titles.update(page.resolved_title for page in index.pages.values())
+    titles.update(
+        page.resolved_title
+        for page in index.pages.values()
+        if page.requested_title in titles
+    )
     return titles
 
 

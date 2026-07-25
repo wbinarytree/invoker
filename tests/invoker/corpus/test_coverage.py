@@ -108,6 +108,21 @@ def test_host_without_categories_reports_empty_universe(tmp_path):
     assert reports[0].unreviewed == []
 
 
+def test_page_dropped_from_registry_resurfaces_as_unreviewed(tmp_path):
+    # The doc was fetched under "Pseudo-random Distribution" (resolving to
+    # "Random Distribution"), but that title is no longer in pages: the stale
+    # index entry must not keep counting it as covered.
+    store = store_with_redirect_doc(tmp_path)
+    reports = corpus_coverage(
+        make_registry(pages=["Armor"], omit=[]),
+        store,
+        transport=category_transport(["Armor", "Random Distribution"]),
+    )
+    report = reports[0]
+    assert report.covered == ["Armor"]
+    assert report.unreviewed == ["Random Distribution"]
+
+
 def test_omit_prefix_rules_bucket_by_class(tmp_path):
     from invoker.corpus.schemas import OmitRule
 
