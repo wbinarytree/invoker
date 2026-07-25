@@ -25,55 +25,31 @@ first; it carries every decision made during the rethink.
   pinned revision; incremental; aborts on HTTP 429 or 5 consecutive
   failures).
 
-## In flight: expanded-text backfill (the only pending item)
+## Expanded-text backfill: complete (2026-07-25 17:39)
 
-State when this doc was written: **30 of 98 pages expanded**
-(`find data/corpus -name "*.expanded.html" | wc -l`). Liquipedia
-rate-limited the first pass (HTTP 429 ~30 parse calls in at 2/min); the
-registry now encodes 1/min. A detached (`nohup`) process waits out the
-cooldown until ~16:05 on 2026-07-25, then resumes the backfill,
-logging to `data/logs/expand-corpus-20260725.log`. It survives session
-close and notifies no one. To check on it:
+**98 of 98 pages expanded, 0 failures** (log:
+`data/logs/expand-corpus-20260725.log`). The closing verification
+passed: the uphill-miss 25% figure is present in the *stored* expanded
+corpus for `evasion` (raw wikitext only had the
+`{{G|uphill miss chance}}` template — benchmark case `uphill-miss`,
+trial finding 1 in the spec).
 
-```bash
-tail data/logs/expand-corpus-20260725.log
-find data/corpus -name "*.expanded.html" | wc -l   # target: 98
-```
-
-If it died or got rate-limited again, just re-run (incremental, polite):
-
-```bash
-uv run invoker expand-corpus
-```
-
-It resumes where it stopped (already-expanded revisions are skipped) and
-aborts politely if the server is still rate-limiting — wait longer and
-re-run. ~68 pages at 1/min ≈ ~70 minutes.
-
-**Verification that closes this item** (task #1 in the session task list):
-after the backfill, confirm the uphill-miss value is answerable from
-*stored* corpus (not live calls):
-
-```bash
-python3 -c "
-import pathlib, re
-p = list(pathlib.Path('data/corpus/liquipedia_dota2/evasion').glob('*.expanded.html'))[0]
-text = re.sub(r'<[^>]+>', ' ', p.read_text())
-i = text.find('Uphill Miss Chance', 2000)
-print(re.sub(r'\s+', ' ', text[i:i+400]))
-"
-```
-
-Expect the 25% figure in the section text (raw wikitext only has the
-`{{G|uphill miss chance}}` template — that gap is benchmark case
-`uphill-miss` and trial finding 1 in the spec).
+Rate-limit history, for future refreshes: the first pass got HTTP 429
+~30 parse calls in at 2/min despite the documented 1-per-30s limit
+(live enforcement appears to have an hourly-budget component); the
+registry now encodes 1 parse/min, a browser CAPTCHA self-unblock lifted
+the temp IP ban, the User-Agent carries a contact email per Liquipedia's
+API terms, and the repo is public so the User-Agent URL resolves. At
+that pace a full 98-page expand is ~100 minutes; `expand-corpus` is
+incremental (already-expanded revisions skip) and aborts politely on
+429 — just re-run later.
 
 ## Next steps (in order)
 
 1. **Ship this branch** (task #3): on the user's "ready to ship" signal —
    sub-agent review per `docs/specs/2026-04-26-collaboration-harness.md`,
    surface findings, paste review summary into the PR body, PR to `main`.
-   The pending backfill does NOT gate the PR (`data/` is local/gitignored).
+   Nothing gates the PR (backfill complete; `data/` is local/gitignored).
 2. **Milestone 1** (task #4, fresh branch): deterministic context assembler
    (kit-wide hero packets via the existing `HeroContextPacket` path — the
    code-only-talent trap is why; item packets with AbilityValues→tooltip
