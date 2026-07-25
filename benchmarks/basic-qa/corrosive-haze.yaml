@@ -39,7 +39,10 @@ expected_marks:
     pattern: special_bonus_unique_slardar_3
 max_answer_words: 150
 notes: >-
-  Second trap class: the undispellable talent has no machine-readable
-  effect in AbilityValues — it is only discoverable by joining the hero's
-  talent list with localization. Ability answers must assemble the full
-  kit. Trial findings 2 and 3 in the rethink spec.
+  Second trap class: the undispellable talent is invisible in a
+  single-ability tooltip view — it surfaces only through the hero's
+  talent list (localization join), or via the AbilityValues modifier
+  (undispellable carries special_bonus_unique_slardar_3 "+1"; KV
+  cross-check 2026-07-26, correcting trial finding 3's "no
+  machine-readable effect" claim). Either way, ability answers must
+  assemble the full kit. Trial findings 2 and 3 in the rethink spec.

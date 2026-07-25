@@ -80,18 +80,37 @@ including scepter/shard bonus columns — the generator never trims
 values** (mock review caught silent trimming immediately). Cards
 unchanged (~300 tokens, every sentence marked).
 
-### Packet gaps to close (found 2026-07-26, raw-KV comparison)
+### Packet gaps to close (found 2026-07-26, raw-KV + Liquipedia cross-reference)
 
-- **`hero_levelup` modifiers are absent from `AttribEntry`** (e.g.
-  Seaborn Sentinel `puddle_armor +0.2`/level, `puddle_regen
-  +0.25`/level): innate values would read as flat when they scale.
-  Fix in the hero slice — `AttribEntry` gains a `levelup_bonus` field
-  and the table renders it.
-- **Talent→value joins** (`special_bonus_unique_slardar_6: "+16"`
-  directly on `river_damage_pct` in KV) reach packets only through
-  talent display strings. Tolerable for M1 (the display string carries
-  the fact); a structured `talent_bonus` column becomes worthwhile with
-  claim extraction (S4). Recorded, not scheduled.
+- **Attrib header macros are not resolved** (item slice): the packet
+  renders `BONUS MAGICAL ARMOR: 18` from the KV key, but the tooltip
+  token is `'%+$spell_resist'` — in game it reads "+18% Magic
+  Resistance". Header derivation must resolve `$variable` label macros
+  (and `%` formatting) so articles use the terms players actually see.
+  The mage-slayer gold case needed no relaxation — the mock's apparent
+  vocabulary gap was this rendering bug.
+- **`hero_levelup` modifiers are absent from `AttribEntry`** (hero
+  slice): e.g. Seaborn Sentinel `puddle_armor +0.2`/level — innate
+  values would read as flat when they scale. Liquipedia lists these;
+  KV carries them. `AttribEntry` gains a `levelup_bonus` field.
+- **Talent→value joins** (hero slice — promoted from
+  recorded-for-S4): KV binds talent modifiers directly to values
+  (`river_damage_pct: {special_bonus_unique_slardar_6: "+16"}`,
+  `undispellable: {special_bonus_unique_slardar_3: "+1"}`). The latter
+  disproves trial finding 3's "no machine-readable effect" claim — the
+  undispellable talent IS in AbilityValues, so a `talent_bonus` column
+  gives hero articles real `gamefile:` grounding for talent effects
+  instead of leaning on display strings alone.
+
+### Cross-reference note (2026-07-26)
+
+Liquipedia's Mage Slayer page still lists 40 DPS; our files and
+changelog agree on 35 (`7.41c: "damage per second decreased from 40 to
+35"`, 2026-05-06) while the page's own recent-changes section already
+documents 7.41d — a live instance of volunteer staleness that
+mechanical invalidation is built to beat. When generated, our item
+article will disagree with the wiki and carry the changelog mark as the
+receipt.
 
 ### Artifacts
 
