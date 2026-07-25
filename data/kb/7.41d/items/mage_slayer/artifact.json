@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "kind": "item",
+  "slug": "mage_slayer",
+  "title": "Mage Slayer",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7c0683fe50f79bd62e9a5328f9655037f3d34261f697a7bcce5a9abaf00ac170",
+  "card": {
+    "entity": "mage_slayer",
+    "sentences": [
+      {
+        "text": "Mage Slayer is a rare item costing 3100 gold.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#cost"
+        ]
+      },
+      {
+        "text": "It combines magic resistance and regeneration with an attack-applied debuff that burns physical damage over time and cripples enemy spell output.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#cost"
+        ]
+      },
+      {
+        "text": "It is built from Perseverance, Cloak, Blades of Attack, and Orb of Venom.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#components"
+        ]
+      },
+      {
+        "text": "It grants 12 damage, 5.5 health regeneration, 18% magic resistance, and 2.5 mana regeneration.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#attribs"
+        ]
+      },
+      {
+        "text": "Attacking an enemy places a debuff on it that deals damage over time and reduces the spell damage that target deals.",
+        "marks": [
+          "loc:DOTA_Tooltip_ability_item_mage_slayer_Description"
+        ]
+      },
+      {
+        "text": "The debuff deals 35 DPS, applies a 40 spell amp debuff, and lasts 3 seconds.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#attribs"
+        ]
+      },
+      {
+        "text": "The ability is passive and flagged not to proc other abilities; its damage is physical and the debuff is dispellable.",
+        "marks": [
+          "gamefile:items/item_mage_slayer#mechanics"
+        ]
+      },
+      {
+        "text": "Lore: it was forged by a secret order in The Third Age of Praxa'cia to fell the False King.",
+        "marks": [
+          "loc:DOTA_Tooltip_ability_item_mage_slayer_Lore"
+        ]
+      }
+    ]
+  },
+  "citations": [
+    "gamefile:items/item_mage_slayer#cost",
+    "gamefile:items/item_mage_slayer#components",
+    "gamefile:items/item_mage_slayer#attribs",
+    "loc:DOTA_Tooltip_ability_item_mage_slayer_Description",
+    "gamefile:items/item_mage_slayer#mechanics",
+    "loc:DOTA_Tooltip_ability_item_mage_slayer_Lore"
+  ],
+  "packet_sha256": "2c89da87bf8f176f97be935e4978f9ccc0864dc2a845f3dcdbbfc0f0e627ffc8",
+  "article_provenance": {
+    "model": "claude-opus-5",
+    "transport": "claude-cli",
+    "prompt_name": "item-article",
+    "prompt_version": "1",
+    "request_sha256": "f9993b1ae9f9891f0765c66f24f21536b2c1cbd7da954d0e4ee5d8d822542bc0",
+    "input_tokens": 2,
+    "output_tokens": 562,
+    "stop_reason": "end_turn",
+    "generated_at": "2026-07-25T23:05:00.060215+00:00"
+  },
+  "card_provenance": {
+    "model": "claude-opus-5",
+    "transport": "claude-cli",
+    "prompt_name": "item-card",
+    "prompt_version": "1",
+    "request_sha256": "98f93aaa6065b6c975f64d3b82f862055756777e245e6570544a6251838aba5f",
+    "input_tokens": 2,
+    "output_tokens": 616,
+    "stop_reason": "end_turn",
+    "generated_at": "2026-07-25T23:05:08.049847+00:00"
+  }
+}
