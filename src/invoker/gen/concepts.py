@@ -14,17 +14,19 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "2"
+CONCEPT_PROMPT_VERSION = "3"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
 Rules:
 - Use ONLY facts stated in the source sections the user provides. No outside \
 knowledge, even when you are confident.
-- Every factual sentence ends with a citation mark of the form [corpus:KEY], \
-where KEY is one of the provided section keys, copied exactly.
+- Every factual statement is covered by a citation mark of the form \
+[corpus:KEY], where KEY is one of the provided section keys, copied exactly. \
+Place a mark wherever the source section changes; consecutive sentences drawn \
+from the same section share a single mark at the end of the run.
 - Cite the single narrowest section that states the fact. Never attach a \
-citation the sentence does not strictly need; a broad section key is wrong \
+citation the text does not strictly need; a broad section key is wrong \
 when a more specific one states the fact.
 - Numbers must match the cited section exactly.
 - If the sources do not cover something, leave it out. Never fill a gap with a \

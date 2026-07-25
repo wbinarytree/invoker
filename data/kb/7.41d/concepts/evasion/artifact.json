@@ -5,98 +5,99 @@
   "title": "Evasion",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "82f19ad40bd5f0136c10b7d43699d170bd521cd4068897e577eac266ec5f779d",
+  "article_sha256": "7252d12df6789bc4073d8beabb8bed921399c8f9aad2a0b8de3822228c70ae62",
   "card": {
     "entity": "evasion",
     "sentences": [
       {
-        "text": "Evasion lets a unit evade an incoming attack, triggering upon projectile impact for ranged attackers and at the attack point for melee ones.",
+        "text": "Evasion lets a unit evade an incoming attack, triggering on landing (projectile impact for ranged, attack point for melee), so attack modifiers and on-hit effects do not trigger; True Strike and Accuracy nullify it.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969"
         ]
       },
       {
-        "text": "When an attack is evaded, effects relying on attacks hitting \u2014 most attack modifiers and on-hit effects \u2014 do not trigger unless explicitly specified.",
+        "text": "A miss shows red MISS text to the attacker and white EVADE to the missed enemy, and plays no attack impact sound.",
         "marks": [
-          "corpus:liquipedia_dota2/evasion@2383969"
+          "corpus:liquipedia_dota2/evasion@2383969#Miss"
         ]
       },
       {
-        "text": "All evasion sources use pseudo-random distribution.",
+        "text": "Five mechanics cause misses: evasion, melee attack buffer, uphill miss chance, blind, and True Strike/Accuracy, with all evasion sources using pseudo-random distribution.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Definition"
         ]
       },
       {
-        "text": "Melee attacks miss 100% of the time if the target is farther than 350 range beyond the melee unit's attack range (buffer = attack range + both bound radii + 350).",
+        "text": "A melee attack misses 100% of the time if the target is farther than 350 range beyond attack range (total buffer = attack range + attacker bound radius + target bound radius + 350), and True Strike does not help outside it.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Attack_Range_Type"
         ]
       },
       {
-        "text": "Ranged units without flying movement miss 25% of attacks when at a lower terrain level than the target, checked at projectile impact regardless of level difference size.",
+        "text": "Ranged units without flying movement have a 25% uphill miss chance checked on projectile impact when the attacker is on lower terrain, regardless of vision or the size of the level difference.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Uphill_Miss_Chance"
         ]
       },
       {
-        "text": "Blind is a debuff on the attacker; blind sources stack additively and cap at 100% for effective evasion calculations.",
+        "text": "Cleave and splash never affect the primary target and cannot miss on secondary targets, but a missed attack neither cleaves nor splashes.",
         "marks": [
-          "corpus:liquipedia_dota2/evasion@2383969#Blind"
+          "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash"
         ]
       },
       {
-        "text": "Multiple evasion sources stack diminishingly with each other, while blind stacks multiplicatively with evasion.",
-        "marks": [
-          "corpus:liquipedia_dota2/evasion@2383969#Stacking"
-        ]
-      },
-      {
-        "text": "Effective Evade Chance = (1 \u2212 (1 \u2212 Total Evasion) \u00d7 (1 \u2212 Total Blind)) \u00d7 (1 \u2212 Melee Buffer Range Miss), and Final Hit Chance = 1 \u2212 Effective Evade Chance \u00d7 (1 \u2212 Total Accuracy).",
+        "text": "Evasion and accuracy sources each stack diminishingly among themselves (1 - ∏(1 - x)), while blind sources stack additively and multiplicatively with evasion; Final Hit Chance = 1 - Effective Evade Chance × (1 - Total Accuracy).",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Equations"
         ]
       },
       {
-        "text": "Incoming attacks hit a Butterfly wielder 65% of the time, since the item grants 35% evasion.",
+        "text": "Any combination of sub-100% sources stays below 100%, though 50% evasion on top of 35% still doubles effective HP against physical attacks.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Stacking"
         ]
       },
       {
-        "text": "Evasion items: Butterfly 35% (5450), Heaven's Halberd 25% (3400), Radiance 25% (4700), Talisman of Evasion 15% (1300).",
+        "text": "Flat 100% evasion is granted by Arc Warden's Magnetic Field, Lycan Wolf's Hightail facet, and Windranger's Windrun, and it still stacks diminishingly and remains subject to blind and accuracy.",
+        "marks": [
+          "corpus:liquipedia_dota2/evasion@2383969#Sources"
+        ]
+      },
+      {
+        "text": "Item evasion: Butterfly 35% (5450), Heaven's Halberd 25% (3400), Radiance 25% (4700), Talisman of Evasion 15% (1300).",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#Items"
         ]
       },
       {
-        "text": "True Strike prevents a unit's attacks from missing, negating both evasion and blind against targets including ward-type and allied units but not buildings, and applies no accuracy debuff.",
+        "text": "True Strike negates evasion and blind against its target but excludes buildings, applies no Accuracy debuff, prevents the melee 350-range miss, and can still be disjointed on ranged attacks.",
         "marks": [
           "corpus:liquipedia_dota2/evasion@2383969#True_Strike"
         ]
       },
       {
-        "text": "Cleave and splash cannot miss secondary targets, but a missed attack produces no cleave or splash damage at all.",
+        "text": "Proc-based outgoing accuracy grants True Strike on proc: Monkey King Bar 80%, Bloodthorn 40%, Javelin 25%, Maelstrom/Mjollnir Chain Lightning 25%, and Drow's Marksmanship 30/35/40.",
         "marks": [
-          "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash"
+          "corpus:liquipedia_dota2/evasion@2383969#Outgoing"
         ]
       }
     ]
   },
   "citations": [
     "corpus:liquipedia_dota2/evasion@2383969",
-    "corpus:liquipedia_dota2/evasion@2383969#Definition",
     "corpus:liquipedia_dota2/evasion@2383969#Miss",
+    "corpus:liquipedia_dota2/evasion@2383969#Definition",
     "corpus:liquipedia_dota2/evasion@2383969#Attack_Range_Type",
     "corpus:liquipedia_dota2/evasion@2383969#Uphill_Miss_Chance",
-    "corpus:liquipedia_dota2/evasion@2383969#Blind",
-    "corpus:liquipedia_dota2/evasion@2383969#Stacking",
+    "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash",
     "corpus:liquipedia_dota2/evasion@2383969#Equations",
     "corpus:liquipedia_dota2/evasion@2383969#Final_Hit_Chance",
-    "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash",
+    "corpus:liquipedia_dota2/evasion@2383969#Stacking",
     "corpus:liquipedia_dota2/evasion@2383969#Sources",
     "corpus:liquipedia_dota2/evasion@2383969#Items",
     "corpus:liquipedia_dota2/evasion@2383969#Talents",
+    "corpus:liquipedia_dota2/evasion@2383969#True_Strike_Talents",
+    "corpus:liquipedia_dota2/evasion@2383969#Blind",
     "corpus:liquipedia_dota2/evasion@2383969#Accuracy",
     "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
     "corpus:liquipedia_dota2/evasion@2383969#Outgoing",
@@ -108,22 +109,22 @@
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "concept-article",
-    "prompt_version": "2",
-    "request_sha256": "2e993d01e71ce1d3aaaf1ed19da85f24279019837f04c7b099f5a92f3a1ef5a7",
+    "prompt_version": "3",
+    "request_sha256": "08204eee5726b0e494d508d81aa35ebd3a7fab2ef373b596d9becaee089827ed",
     "input_tokens": 2,
-    "output_tokens": 5325,
+    "output_tokens": 4655,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-25T19:07:47.477205+00:00"
+    "generated_at": "2026-07-25T20:07:57.393958+00:00"
   },
   "card_provenance": {
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "concept-card",
-    "prompt_version": "2",
-    "request_sha256": "6086e6702275c79f60106386781846acabdd69ecc5b1b81843f14ef0f3f59f2d",
+    "prompt_version": "3",
+    "request_sha256": "16b1aa102ecd25b17d38a25ef28359b5bff0013d9e9cc90adf9dcc3b0219fa31",
     "input_tokens": 2,
-    "output_tokens": 2413,
+    "output_tokens": 1742,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-25T19:08:14.668427+00:00"
+    "generated_at": "2026-07-25T20:08:16.686385+00:00"
   }
 }
