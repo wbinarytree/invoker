@@ -210,6 +210,42 @@ checks.
 **Milestone 3 (optional, later) — draft reasoning.** Only if foundation +
 synergy prove quality. Explicitly not the goal the architecture serves.
 
+## The recurring choice: manual vs generated vs agentic
+
+Every knowledge surface forces the same decision, and choosing wrong is how
+projects die (the old system chose manual for everything). The framework:
+
+- **Automatic (deterministic)** — default whenever a source encodes the fact:
+  game files, stats, wiki revisions, changelog entries. Cheap, rebuildable,
+  citable.
+- **Agentic (LLM)** — for synthesis over sources: articles, summaries,
+  relation reasoning. Never as a fact source; always citing.
+- **Manual** — reserved for judgment the sources cannot give. Kept tiny.
+- **Human-directed agentic (the usual right answer for corrections):** the
+  human states the fact in one sentence ("facets are removed"); the agent
+  does all bookkeeping — finds the citable source if one exists, writes the
+  structured record, applies the filter, adds the benchmark case. Human
+  effort stays one sentence per correction; nothing depends on the human
+  remembering to maintain a ledger by hand.
+
+## Changelog as knowledge (decided 2026-07-25)
+
+The game ships its own changelog: `patchnotes/patchnotes.vdpn_c` (patch
+manifest, structured per patch → hero/item/ability → note token) plus
+`resource/localization/patchnotes/patchnotes_<locale>.txt` — 120 patches of
+history, 7.06d through 7.41d, in the 7.41d client. Decisions:
+
+- Patch-note files join the game-file snapshot extraction (playbook + skill
+  updated); a later slice ingests them as a queryable changelog layer.
+- The changelog is knowledge, not just an invalidation signal: "when did X
+  change/get removed" is a base-tier question class.
+- It resolved the facet question from in-game data alone:
+  introduced 7.36 (`DOTA_Patch_7_36_General_11`), removed 7.41
+  (`DOTA_Patch_7_41_General_Global_Changes`: "Facets removed from the
+  game") — while 7.41d files still ship `Facets` blocks on 127 heroes.
+  Changelog-vs-current-files disagreement is exactly the vestigial-data
+  detector the trial findings called for.
+
 ## First trial findings (2026-07-25)
 
 Three basic QA answers were composed manually from the substrate (uphill

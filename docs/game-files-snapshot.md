@@ -29,7 +29,18 @@ mkdir -p "$RAW"
 
 # localization files per locale (abilities_, items_, dota_)
 "$S2V" -i "$VPK" -f "resource/localization/abilities_english.txt,resource/localization/items_english.txt,resource/localization/dota_english.txt,resource/localization/abilities_schinese.txt,resource/localization/items_schinese.txt,resource/localization/dota_schinese.txt" -o "$RAW"
+
+# in-game changelog: note text per locale, plus the patch manifest
+# (structured per patch -> hero/item/ability -> note token; needs -d to
+# decompile the compiled .vdpn_c resource)
+"$S2V" -i "$VPK" -f "resource/localization/patchnotes/patchnotes_english.txt,resource/localization/patchnotes/patchnotes_schinese.txt" -o "$RAW"
+"$S2V" -i "$VPK" -f "patchnotes/patchnotes.vdpn_c" -d -o "$RAW"
 ```
+
+The changelog covers the full patch history shipped in the client (7.06d
+through 7.41d as of the first extraction) and is itself knowledge — it is
+the source for "when did X change/get removed" questions and for detecting
+mechanics the current files still describe but the game removed.
 
 The extractor preserves VPK paths (`scripts/npc/...`), but the snapshot
 command expects `npc/` at the source root and discovers localization at

@@ -30,6 +30,8 @@ where they moved it — do not guess or download anything.
 2. **Extract** (only KV text files, never the full VPK):
    - `"$S2V" -i "$VPK" -f "scripts/npc/" -o "$RAW"`
    - `"$S2V" -i "$VPK" -f "resource/localization/abilities_english.txt,resource/localization/items_english.txt,resource/localization/dota_english.txt,resource/localization/abilities_schinese.txt,resource/localization/items_schinese.txt,resource/localization/dota_schinese.txt" -o "$RAW"`
+   - `"$S2V" -i "$VPK" -f "resource/localization/patchnotes/patchnotes_english.txt,resource/localization/patchnotes/patchnotes_schinese.txt" -o "$RAW"` (in-game changelog text)
+   - `"$S2V" -i "$VPK" -f "patchnotes/patchnotes.vdpn_c" -d -o "$RAW"` (changelog manifest; `-d` decompiles it)
 3. **Reshape** to the layout the snapshot command expects:
    `mv "$RAW/scripts/npc" "$RAW/npc" && rmdir "$RAW/scripts"`
 4. **Snapshot:**
