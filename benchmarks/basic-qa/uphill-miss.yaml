@@ -21,7 +21,7 @@ forbidden_assertions:
       melee is unaffected.
 expected_marks:
   - kind: corpus
-    pattern: "liquipedia_dota2:evasion"
+    pattern: "liquipedia_dota2/evasion"
 max_answer_words: 120
 notes: >-
   The 25% value exists only in template-expanded text ({{G|uphill miss
