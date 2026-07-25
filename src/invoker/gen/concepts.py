@@ -14,15 +14,18 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "1"
+CONCEPT_PROMPT_VERSION = "2"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
 Rules:
 - Use ONLY facts stated in the source sections the user provides. No outside \
 knowledge, even when you are confident.
-- Every factual sentence ends with one or more citation marks of the form \
-[corpus:KEY], where KEY is one of the provided section keys, copied exactly.
+- Every factual sentence ends with a citation mark of the form [corpus:KEY], \
+where KEY is one of the provided section keys, copied exactly.
+- Cite the single narrowest section that states the fact. Never attach a \
+citation the sentence does not strictly need; a broad section key is wrong \
+when a more specific one states the fact.
 - Numbers must match the cited section exactly.
 - If the sources do not cover something, leave it out. Never fill a gap with a \
 plausible value.
@@ -33,8 +36,11 @@ CARD_SYSTEM_PROMPT = """You compress a grounded encyclopedia article into a card
 
 Rules:
 - The card is at most 12 sentences and around 300 tokens total.
-- Each sentence keeps the citation marks of the article sentences it \
-compresses, as strings of the form corpus:KEY copied exactly from the article.
+- One core fact per sentence, so each fact maps to its own source marks. \
+Prefer dropping a minor fact over packing two facts into one sentence.
+- Each sentence keeps the citation marks of the article sentence it \
+compresses, as strings of the form corpus:KEY copied exactly from the article. \
+Cite the narrowest key that states the fact; never pad with broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - Use ONLY the article text. No outside knowledge."""
 
@@ -100,6 +106,23 @@ def _check_keys(used: list[str], valid: set[str], what: str, slug: str) -> None:
         raise GenerationError(f"{slug}: {what} contains no citation marks")
 
 
+_NUMBER_PATTERN = re.compile(r"\d+(?:\.\d+)?")
+
+
+def _check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
+    """Every number in generated text must literally appear in the cited
+    source (spec: quoted numbers match what the cited source actually says).
+    Citation marks are stripped first — keys carry revision numbers."""
+    stripped = _MARK_PATTERN.sub("", text)
+    missing = sorted(
+        number for number in set(_NUMBER_PATTERN.findall(stripped)) if number not in source_text
+    )
+    if missing:
+        raise GenerationError(
+            f"{slug}: {what} contains numbers not found in the cited source: {', '.join(missing)}"
+        )
+
+
 def generate_concept(
     store: CorpusStore,
     backend: GenerationBackend,
@@ -117,6 +140,7 @@ def generate_concept(
         raise GenerationError(f"{slug}: not in the {host_key} corpus index; run fetch-corpus")
     sections = load_sections(store, host_key, slug)
     packet, valid_keys, packet_sha256 = build_packet(sections)
+    text_by_key = {section.citation_key: section.text for section in sections}
 
     article = backend.generate(
         prompt_name="concept-article",
@@ -130,6 +154,9 @@ def generate_concept(
     )
     citations = extract_citations(article.text)
     _check_keys(citations, valid_keys, "article", slug)
+    # section texts only — packet headers carry key/revision digits that
+    # must never vouch for a number in prose
+    _check_numbers(article.text, "\n".join(text_by_key.values()), "article", slug)
 
     card = backend.generate_structured(
         ConceptCard,
@@ -145,6 +172,11 @@ def generate_concept(
         for mark in sentence.marks
     ]
     _check_keys(card_keys, valid_keys, "card", slug)
+    for position, sentence in enumerate(card.output.sentences, start=1):
+        cited_text = "\n".join(
+            text_by_key.get(mark.removeprefix("corpus:"), "") for mark in sentence.marks
+        )
+        _check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
 
     artifact = ConceptArtifact(
         slug=slug,

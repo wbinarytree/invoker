@@ -133,6 +133,44 @@ def test_card_with_unknown_mark_fails_loudly(tmp_path):
         run_generate(tmp_path, backend)
 
 
+def test_card_number_absent_from_cited_section_fails_loudly(tmp_path):
+    # 25 appears under #Uphill_Miss_Chance; 77 appears nowhere
+    bad = ConceptCard(
+        entity="evasion",
+        sentences=[CardSentence(text="Attacks miss 77% of the time.", marks=[f"corpus:{KEY}"])],
+    )
+    backend = FakeBackend(good_article(), bad)
+    with pytest.raises(GenerationError, match=r"card sentence 1.*77"):
+        run_generate(tmp_path, backend)
+
+
+def test_card_number_must_come_from_the_cited_section_not_any_section(tmp_path):
+    # 3100 exists nowhere in the evasion fixture; even a resolvable mark
+    # cannot vouch for a number its section does not contain
+    bad = ConceptCard(
+        entity="evasion",
+        sentences=[CardSentence(text="Costs 3100 gold.", marks=[f"corpus:{LEAD_KEY}"])],
+    )
+    backend = FakeBackend(good_article(), bad)
+    with pytest.raises(GenerationError, match="3100"):
+        run_generate(tmp_path, backend)
+
+
+def test_article_number_absent_from_packet_fails_loudly(tmp_path):
+    article = f"Ranged attacks miss 42% of the time. [corpus:{KEY}]"
+    backend = FakeBackend(article, good_card())
+    with pytest.raises(GenerationError, match=r"article.*42"):
+        run_generate(tmp_path, backend)
+
+
+def test_numbers_inside_citation_marks_are_ignored(tmp_path):
+    # the revision id 42 in the mark key must not be counted as a claim
+    article = f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+    backend = FakeBackend(article, good_card())
+    artifact, _ = run_generate(tmp_path, backend)
+    assert artifact.citations == [f"corpus:{KEY}"]
+
+
 def test_unknown_slug_fails_loudly(tmp_path):
     from invoker.corpus.store import CorpusStore
 
