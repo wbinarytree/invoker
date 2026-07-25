@@ -210,6 +210,35 @@ checks.
 **Milestone 3 (optional, later) — draft reasoning.** Only if foundation +
 synergy prove quality. Explicitly not the goal the architecture serves.
 
+## First trial findings (2026-07-25)
+
+Three basic QA answers were composed manually from the substrate (uphill
+miss, Mage Slayer, Corrosive Haze) to see what the ask-pipeline needs. Two
+mistakes were caught by the user; all findings below are design inputs.
+
+1. **Raw wikitext hides template-computed values.** The uphill-miss
+   percentage is a `{{G|...}}` wiki variable; only `action=parse` expanded
+   text materializes it. The fetcher needs an expanded-text pass stored per
+   revision (Liquipedia limits parse calls hard — fetch once per changed
+   revision only). Keep raw + expanded; expanded HTML has its own artifacts.
+2. **Game files assert removed mechanics (user correction).** Facets were
+   removed from the game, yet all 127 hero records in the 7.41d snapshot
+   still carry full `Facets` blocks and facet-conditional ability values.
+   Presence-in-files must never be read as presence-in-game. Needed: a
+   patch-note/version corpus source and a patch-scoped removed-concepts
+   record consulted at generation time; until then, facet-keyed values are
+   marked vestigial by user testimony (a valid human source mark).
+3. **Some effects exist only as display string + engine code (user
+   correction).** Slardar's "Corrosive Haze Undispellable" talent
+   (`special_bonus_unique_slardar_3`) has no machine-readable effect in
+   `AbilityValues` — it is only discoverable by joining the hero's talent
+   list with localization. Ability questions must assemble the full kit
+   (ability + hero talents + facet/talent conditionals), reusing the
+   existing `HeroContextPacket` path instead of ad-hoc ability lookup.
+4. **Human corrections are gold cases.** The three trial questions plus the
+   user's corrections seed the basic-QA benchmark: expected facts, expected
+   source marks, and known traps (vestigial facets, code-only talents).
+
 ## Open questions
 
 1. Delivery surface priority: browsable site vs service/MCP first? (Milestone
