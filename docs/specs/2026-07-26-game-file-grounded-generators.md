@@ -75,8 +75,23 @@ for behavior semantics (interactions, dispellability, immunity piercing,
 what the mechanic *does*). Never restate table values in sentences. Stat
 context uses the band or the raw value, not both (they double-encode).
 Density stays high — over-compression is the named failure mode — but no
-value appears twice. Cards unchanged (~300 tokens, every sentence
-marked).
+value appears twice. **Tables carry every attrib row the packet has,
+including scepter/shard bonus columns — the generator never trims
+values** (mock review caught silent trimming immediately). Cards
+unchanged (~300 tokens, every sentence marked).
+
+### Packet gaps to close (found 2026-07-26, raw-KV comparison)
+
+- **`hero_levelup` modifiers are absent from `AttribEntry`** (e.g.
+  Seaborn Sentinel `puddle_armor +0.2`/level, `puddle_regen
+  +0.25`/level): innate values would read as flat when they scale.
+  Fix in the hero slice — `AttribEntry` gains a `levelup_bonus` field
+  and the table renders it.
+- **Talent→value joins** (`special_bonus_unique_slardar_6: "+16"`
+  directly on `river_damage_pct` in KV) reach packets only through
+  talent display strings. Tolerable for M1 (the display string carries
+  the fact); a structured `talent_bonus` column becomes worthwhile with
+  claim extraction (S4). Recorded, not scheduled.
 
 ### Artifacts
 
