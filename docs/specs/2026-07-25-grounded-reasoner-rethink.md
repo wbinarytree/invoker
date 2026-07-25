@@ -235,6 +235,32 @@ queries ever materialize.
 - Delivery: the existing read-only KnowledgeService (HTTP + MCP adapters)
   over these files.
 
+## Agent exposure model (discussed 2026-07-25)
+
+The novel constraint: for Dota, model weights are confidently wrong, so
+consuming agents need every fact to have a provider — but the KB can never
+be *in* context. Resolution:
+
+- **Progressive disclosure via MCP tools** (KnowledgeService methods), a
+  granularity ladder: `resolve` (~20 tok) → `card` (~300 tok, pre-generated
+  marked summary) → `claims` (structured records) → `article` (full
+  markdown) → `value` (exact substrate key) → `changelog`. Typical question
+  costs 1–4k pulled tokens; the KB itself never enters context.
+- **Cards are the load-bearing compressed tier**: derived from articles,
+  every sentence keeps source marks and claim IDs. Compression with
+  pointers back — the fix for the old system's terse-tags-as-only-truth
+  failure, applied to serving.
+- **Citations are pointers, not payloads.** The discipline is "every fact
+  carries a resolvable ~15-token key," not "every fact ships its evidence."
+  Verification is O(1) on demand by resolving the key.
+- **`verify(assertions[]) → supported/contradicted/unknown + citations`**
+  is a first-class tool: agents may draft cheaply (even from weights) but
+  audit the draft before answering. Same validation machinery as
+  generation-side checking, exposed as a service primitive.
+- **Enforcement is contractual**: the basic-QA benchmark eventually runs as
+  agent-with-tools and scores mark coverage alongside correctness and
+  concision — unresolvable or missing pointers fail the case.
+
 ## The recurring choice: manual vs generated vs agentic
 
 Every knowledge surface forces the same decision, and choosing wrong is how
