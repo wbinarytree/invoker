@@ -44,6 +44,27 @@ def test_mark_link_builds_pinned_revision_url():
     assert 'href="https://liquipedia.net/dota2/index.php?oldid=2383969#Uphill_Miss_Chance"' in link
 
 
+def test_article_mark_with_ampersand_anchor_renders_clean_link(tmp_path):
+    import hashlib
+    import json
+
+    kb = build_kb(tmp_path)
+    concept_dir = kb / "concepts" / "evasion"
+    article = "Cleave never misses targets. [corpus:testwiki/evasion@42#Cleave_&_Splash]"
+    (concept_dir / "article.md").write_text(article)
+    artifact = json.loads((concept_dir / "artifact.json").read_text())
+    artifact["article_sha256"] = hashlib.sha256(article.encode()).hexdigest()
+    (concept_dir / "artifact.json").write_text(json.dumps(artifact))
+
+    render_kb_site(kb, "7.41d", tmp_path / "site")
+    page = (tmp_path / "site" / "concepts" / "evasion.html").read_text()
+    # single-escaped ampersand in the tooltip, no emphasis mangling, no
+    # double escaping anywhere in the rendered mark
+    assert 'title="testwiki/evasion@42#Cleave_&amp;_Splash"' in page
+    assert "amp;amp;" not in page
+    assert "<em>Splash" not in page and "&lt;em&gt;" not in page
+
+
 def test_render_fails_on_drifted_artifact(tmp_path):
     kb = build_kb(tmp_path)
     md = kb / "concepts" / "evasion" / "article.md"

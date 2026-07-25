@@ -109,6 +109,46 @@ def _check_keys(used: list[str], valid: set[str], what: str, slug: str) -> None:
 _NUMBER_PATTERN = re.compile(r"\d+(?:\.\d+)?")
 
 
+def _article_segments(article_text: str) -> list[tuple[str, list[str]]]:
+    """Split the article at citation marks: the text preceding a run of
+    consecutive marks is attributed to those marks' sections. An uncited
+    tail (if any) carries an empty key list."""
+    segments: list[tuple[str, list[str]]] = []
+    matches = list(_MARK_PATTERN.finditer(article_text))
+    position = 0
+    index = 0
+    while index < len(matches):
+        match = matches[index]
+        keys = [match.group(1)]
+        end = match.end()
+        follower = index + 1
+        while follower < len(matches) and not article_text[end : matches[follower].start()].strip():
+            keys.append(matches[follower].group(1))
+            end = matches[follower].end()
+            follower += 1
+        segments.append((article_text[position : match.start()], keys))
+        position = end
+        index = follower
+    tail = article_text[position:]
+    if tail.strip():
+        segments.append((tail, []))
+    return segments
+
+
+def _check_article_numbers(article_text: str, text_by_key: dict[str, str], slug: str) -> None:
+    """Article counterpart of the per-sentence card check: numbers in each
+    cited segment must appear in that segment's own cited sections."""
+    all_sections = "\n".join(text_by_key.values())
+    for segment_text, keys in _article_segments(article_text):
+        if keys:
+            source = "\n".join(text_by_key.get(key, "") for key in keys)
+            what = f"article segment citing {', '.join(keys)}"
+        else:
+            source = all_sections
+            what = "uncited article text"
+        _check_numbers(segment_text, source, what, slug)
+
+
 def _check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
     """Every number in generated text must literally appear in the cited
     source (spec: quoted numbers match what the cited source actually says).
@@ -169,9 +209,9 @@ def generate_concept(
     )
     citations = extract_citations(article.text)
     _check_keys(citations, valid_keys, "article", slug)
-    # section texts only — packet headers carry key/revision digits that
-    # must never vouch for a number in prose
-    _check_numbers(article.text, "\n".join(text_by_key.values()), "article", slug)
+    # scoped per citation, over section texts only — packet headers carry
+    # key/revision digits that must never vouch for a number in prose
+    _check_article_numbers(article.text, text_by_key, slug)
 
     card = backend.generate_structured(
         ConceptCard,

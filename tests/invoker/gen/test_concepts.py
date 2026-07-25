@@ -181,6 +181,14 @@ def test_article_number_absent_from_packet_fails_loudly(tmp_path):
         run_generate(tmp_path, backend)
 
 
+def test_article_number_must_come_from_the_cited_section(tmp_path):
+    # 25 lives in the Uphill/table sections; the lead never states it
+    article = f"Attacks miss 25% of the time. [corpus:{LEAD_KEY}]"
+    backend = FakeBackend(article, good_card())
+    with pytest.raises(GenerationError, match=r"segment citing.*25"):
+        run_generate(tmp_path, backend)
+
+
 def test_numbers_inside_citation_marks_are_ignored(tmp_path):
     # the revision id 42 in the mark key must not be counted as a claim
     article = f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"

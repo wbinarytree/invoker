@@ -243,8 +243,9 @@ uv run invoker expand-corpus --host liquipedia_dota2 --limit 10
 
 ### `generate-concept`
 
-Generate one concept article + card into `data/kb/<patch>/concepts/<slug>.json`
-from the stored corpus (S1 of the generation pipeline).
+Generate one concept article + card into `data/kb/<patch>/concepts/<slug>/`
+(`article.md` + `artifact.json`) from the stored corpus (S1 of the
+generation pipeline).
 
 ```bash
 uv run invoker generate-concept evasion --patch 7.41d

@@ -67,8 +67,23 @@ def _mark_link(host_base_urls: dict[str, str], key: str) -> str:
     return f'<a class="mark" href="{html.escape(url)}" title="{label}">[src]</a>'
 
 
-def _render_marks(text_html: str, host_base_urls: dict[str, str]) -> str:
-    return _MARK_PATTERN.sub(lambda m: _mark_link(host_base_urls, m.group(1)), text_html)
+def _render_article_html(article: str, host_base_urls: dict[str, str]) -> str:
+    """Escape + markdown the article with marks stashed as placeholders.
+
+    Marks must never pass through html.escape or markdown: keys carry `&`
+    and `_`, which the pipeline mangles into double-escaped anchors and
+    spurious <em> spans."""
+    stashed_keys: list[str] = []
+
+    def stash(match: re.Match[str]) -> str:
+        stashed_keys.append(match.group(1))
+        return f"MARKREF{len(stashed_keys) - 1}ENDMARKREF"
+
+    stashed = _MARK_PATTERN.sub(stash, article)
+    body = markdown.markdown(html.escape(stashed))
+    for index, key in enumerate(stashed_keys):
+        body = body.replace(f"MARKREF{index}ENDMARKREF", _mark_link(host_base_urls, key))
+    return body
 
 
 def _page(title: str, nav_html: str, body: str) -> str:
@@ -117,7 +132,7 @@ def render_kb_site(kb_dir: Path, patch: str, out_dir: Path) -> SiteReport:
     out_concepts.mkdir(parents=True, exist_ok=True)
 
     for slug, (artifact, article) in artifacts.items():
-        article_html = _render_marks(markdown.markdown(html.escape(article)), host_base_urls)
+        article_html = _render_article_html(article, host_base_urls)
         card_items = "".join(
             f"<li>{html.escape(s.text)} "
             + " ".join(_mark_link(host_base_urls, m.removeprefix("corpus:")) for m in s.marks)
