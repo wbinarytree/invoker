@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (expanded-text corpus pass)
+Last updated: 2026-07-25 (corpus section slicer)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -400,6 +400,11 @@ in-game-only mechanics such as uphill miss chance). Direction:
 - `expand.py` — expanded-text pass over the fetch index (raw wikitext leaves
   `{{G|...}}` variables unresolved; expanded HTML materializes them);
   incremental, aborts on HTTP 429 or 5 consecutive failures
+- `sections.py` — deterministic slicer over stored expanded HTML:
+  heading-anchored sections with breadcrumbs and citation keys
+  (`<host>/<slug>@<revision>#<anchor>`, anchors identical to the live wiki's
+  fragments); strips TOC/edit-link/icon noise, flattens tables to rows;
+  feeds generation context packets and claim marks
 - `coverage.py` — diffs the wiki category universe against the registry into
   covered / omitted (with reason) / omitted-by-rule / unreviewed buckets
 
