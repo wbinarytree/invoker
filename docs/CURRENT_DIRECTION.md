@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-07-25
+Last updated: 2026-07-26
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -30,6 +30,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-07-25-grounded-reasoner-rethink.md](specs/2026-07-25-grounded-reasoner-rethink.md)
 - Basic-QA benchmark runner:
   [docs/specs/2026-07-25-basic-qa-benchmark-runner.md](specs/2026-07-25-basic-qa-benchmark-runner.md)
+- Game-file-grounded generators (items + heroes):
+  [docs/specs/2026-07-26-game-file-grounded-generators.md](specs/2026-07-26-game-file-grounded-generators.md)
 
 ## Active plans
 
