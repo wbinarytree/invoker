@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from invoker.gen.client import GenerationProvenance
 
-CONCEPT_ARTIFACT_SCHEMA_VERSION = 1
+CONCEPT_ARTIFACT_SCHEMA_VERSION = 2
 
 
 class CardSentence(BaseModel):
@@ -27,6 +27,9 @@ class ConceptCard(BaseModel):
 class ConceptArtifact(BaseModel):
     """One generated concept: article (evidence trail) + card (serving tier).
 
+    The article lives in a sibling markdown file (`article_file`) so the
+    human-skim gate and archive diffs stay readable; `article_sha256` binds
+    the two — consumers must verify it and refuse a drifted article.
     `citations` lists every distinct mark used; all of them resolve against
     the context packet or generation fails — never against live sources.
     """
@@ -38,7 +41,8 @@ class ConceptArtifact(BaseModel):
     slug: str
     title: str
     patch: str
-    article_markdown: str
+    article_file: str
+    article_sha256: str
     card: ConceptCard
     citations: list[str]
     packet_sha256: str

@@ -123,6 +123,21 @@ def _check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
         )
 
 
+def load_concept_article(artifact_path: Path) -> tuple[ConceptArtifact, str]:
+    """Load an artifact and its article, verifying the sha binding.
+
+    A hand-edited or drifted article file fails loudly — artifacts are
+    regenerated, never patched in place."""
+    artifact = ConceptArtifact.model_validate_json(artifact_path.read_text())
+    article = (artifact_path.parent / artifact.article_file).read_text()
+    digest = hashlib.sha256(article.encode()).hexdigest()
+    if digest != artifact.article_sha256:
+        raise GenerationError(
+            f"{artifact.slug}: article file drifted from its artifact (sha mismatch); regenerate"
+        )
+    return artifact, article
+
+
 def generate_concept(
     store: CorpusStore,
     backend: GenerationBackend,
@@ -182,14 +197,17 @@ def generate_concept(
         slug=slug,
         title=index_page.resolved_title,
         patch=patch,
-        article_markdown=article.text,
+        article_file=f"{slug}.md",
+        article_sha256=hashlib.sha256(article.text.encode()).hexdigest(),
         card=card.output,
         citations=[f"corpus:{key}" for key in citations],
         packet_sha256=packet_sha256,
         article_provenance=article.provenance,
         card_provenance=card.provenance,
     )
-    path = kb_dir / "concepts" / f"{slug}.json"
-    path.parent.mkdir(parents=True, exist_ok=True)
+    concepts_dir = kb_dir / "concepts"
+    concepts_dir.mkdir(parents=True, exist_ok=True)
+    (concepts_dir / artifact.article_file).write_text(article.text)
+    path = concepts_dir / f"{slug}.json"
     path.write_text(artifact.model_dump_json(indent=2))
     return artifact, path

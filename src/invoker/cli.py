@@ -261,9 +261,8 @@ def generate_concept_cmd(
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
-    typer.echo(f"Wrote {path}")
+    typer.echo(f"Wrote {path} + {artifact.article_file}")
     typer.echo(
-        f"article: {len(artifact.article_markdown)} chars, "
         f"{len(artifact.citations)} distinct citations, "
         f"card: {len(artifact.card.sentences)} sentences "
         f"(model {artifact.article_provenance.model}, "

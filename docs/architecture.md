@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (concept generator S1)
+Last updated: 2026-07-25 (concept artifacts split: md + json sidecar)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -446,9 +446,11 @@ concept: article (markdown, every factual sentence ends in
 its marks — compression with pointers back). Mechanical faithfulness
 check: every mark in article and card must resolve against the packet
 or generation aborts; marks are never checked against live sources.
-Artifact: `data/kb/<patch>/concepts/<slug>.json` (article + card +
-citations + packet hash + per-call provenance). CLI:
-`invoker generate-concept <slug> --patch <patch>`.
+Artifacts: `data/kb/<patch>/concepts/<slug>.md` (the article — human-skim
+surface, diffable in the archive) + `<slug>.json` (card, citations,
+packet hash, per-call provenance, `article_sha256` binding the pair;
+consumers verify it via `load_concept_article` and refuse a drifted
+article). CLI: `invoker generate-concept <slug> --patch <patch>`.
 
 ### Basic-QA benchmark
 

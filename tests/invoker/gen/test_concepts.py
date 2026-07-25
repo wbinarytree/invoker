@@ -95,7 +95,7 @@ def run_generate(tmp_path, backend):
     )
 
 
-def test_generate_concept_writes_artifact(tmp_path):
+def test_generate_concept_writes_artifact_and_article_file(tmp_path):
     backend = FakeBackend(good_article(), good_card())
     artifact, path = run_generate(tmp_path, backend)
     assert path.name == "evasion.json"
@@ -103,14 +103,31 @@ def test_generate_concept_writes_artifact(tmp_path):
     assert saved["slug"] == "evasion"
     assert saved["title"] == "Evasion"
     assert saved["patch"] == "7.41d"
+    assert saved["schema_version"] == 2
     assert saved["citations"] == [f"corpus:{KEY}"]
     assert saved["article_provenance"]["prompt_name"] == "concept-article"
     assert saved["card_provenance"]["prompt_name"] == "concept-card"
     assert len(saved["packet_sha256"]) == 64
+    # article lives in the sibling markdown file, bound by sha
+    assert saved["article_file"] == "evasion.md"
+    assert (path.parent / "evasion.md").read_text() == good_article()
     # the packet reached the model with keys inline
     article_call = backend.calls[0]
     assert f"[{KEY}]" in article_call["user_content"]
     assert "Evasion" in article_call["user_content"]
+
+
+def test_load_concept_article_verifies_sha_binding(tmp_path):
+    from invoker.gen.concepts import load_concept_article
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    artifact, article = load_concept_article(path)
+    assert artifact.slug == "evasion"
+    assert article == good_article()
+    # a hand-edited article file fails loudly
+    (path.parent / "evasion.md").write_text(article + "\n\nEdited by hand.")
+    with pytest.raises(GenerationError, match="drifted"):
+        load_concept_article(path)
 
 
 def test_article_citing_unknown_key_fails_loudly(tmp_path):
