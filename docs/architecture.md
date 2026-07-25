@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (basic-QA benchmark runner)
+Last updated: 2026-07-26 (item generator + gamefile/loc mark resolvers)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -450,16 +450,32 @@ Artifacts: one folder per entity — `data/kb/<patch>/concepts/<slug>/`
 holding `article.md` (the article — human-skim surface, diffable in the
 archive) + `artifact.json` (card, citations,
 packet hash, per-call provenance, `article_sha256` binding the pair;
-consumers verify it via `load_concept_article` and refuse a drifted
+consumers verify it via `load_entity_article` and refuse a drifted
 article). CLI: `invoker generate-concept <slug> --patch <patch>`.
 
+**Item generator (S-items slice)** — `items.py` + shared `checks.py`
+(spec: `docs/specs/2026-07-26-game-file-grounded-generators.md`).
+Context packet = the `ItemContext` rendered into keyed sections under
+the `gamefile:items/<name>#<section>` (`cost`, `components`, `attribs`,
+`mechanics`) and `loc:<token>` (description, lore) mark grammar; attrib
+lines carry resolved tooltip labels (`$spell_resist` → "MAGIC
+RESISTANCE", percent-flagged) and Scepter/Shard bonus columns. The
+article prompt enforces the stat-table register: every value the cited
+section carries goes in a table (no trimming, no value restated in
+prose); prose is behavior semantics only. Same faithfulness discipline
+as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
+resolve against the packet, numbers per cited section. The shared mark
+grammar itself lives in `invoker.marks` (used by both generation and
+benchmark). CLI: `invoker generate-item <item> --patch <patch>`.
+
 KB layout grammar: entity classes are sibling directories —
-`concepts/<slug>/`, and (planned) `heroes/<slug>/`, `items/<slug>/`,
+`concepts/<slug>/`, `items/<slug>/`, and (planned) `heroes/<slug>/`,
 `pairs/<a>__<b>/` — each entity folder holding `article.md` +
-`artifact.json`, later joined by `claims.json` (S4). Hero/item
-generators reuse the same artifact/card/mark shapes; only the packet
-builder differs (kit-wide hero packets, ItemContext), adding
-`gamefile:`/`loc:` mark kinds alongside `corpus:`.
+`artifact.json` (`EntityArtifact`, `kind` concept|item|hero), later
+joined by `claims.json` (S4). The hero generator reuses the same
+shapes; only the packet builder differs (kit-wide hero packets, plus
+the `levelup_bonus`/`talent_bonus` attrib columns per the spec's
+packet-gap list).
 
 ### KB site renderer (S5 slice)
 
@@ -472,7 +488,7 @@ page vs generated artifacts, with citation/card/prompt-version columns.
 Concept pages render the article with `[corpus:...]` marks as superscript
 links to the pinned source revision (`index.php?oldid=<rev>#<anchor>`),
 the card with per-sentence marks, and a provenance footer. Rendering
-loads artifacts via `load_concept_article`, so a drifted article fails
+loads artifacts via `load_entity_article`, so a drifted article fails
 the build. CLI: `invoker render-kb --patch <patch>`.
 
 ### Basic-QA benchmark
@@ -505,9 +521,11 @@ eval for the KB and the M1 gate. Two halves with a hard boundary:
 - **Scorer** (`scorer.py`, `marks.py`): mechanical checks in code —
   expected-mark patterns must be matched by ≥1 answer mark that resolves
   (`corpus:` against the stored expanded revision's section keys,
-  `changelog:` against snapshot changelog tokens; `gamefile`/`loc`
-  resolvers arrive with the item/hero generators), word bound with mark
-  tokens excluded — plus an LLM judge (`Judge`) for fact presence
+  `changelog:` against snapshot changelog tokens, `gamefile:` against
+  patch-snapshot records with a fixed per-class section vocabulary,
+  `loc:` against localization tokens incl. `ability`/`Ability` casing
+  variants; `stats:`/`human:` arrive with their slices), word bound with
+  mark tokens excluded — plus an LLM judge (`Judge`) for fact presence
   (present/absent/contradicted) and traps, one binary judgment per call,
   rationale recorded, seeing only the answer and the single fact.
 - **Pass semantics**: required facts present, nothing contradicted

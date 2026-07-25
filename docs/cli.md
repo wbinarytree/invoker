@@ -20,6 +20,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
 - `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>]`
+- `invoker generate-item ITEM --patch <patch> [--effort <level>]`
 - `invoker render-kb --patch <patch> [--out <dir>]`
 - `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
@@ -258,6 +259,26 @@ uv run invoker generate-concept evasion --patch 7.41d
 - Every citation mark in the article and card must resolve against the
   concept's own corpus sections; an unresolvable mark aborts with exit 1.
 - Slow by design: two full generation calls per concept.
+
+### `generate-item`
+
+Generate one item article + card into `data/kb/<patch>/items/<slug>/`
+from the game-file snapshot (S-items slice; spec:
+`docs/specs/2026-07-26-game-file-grounded-generators.md`).
+
+```bash
+uv run invoker generate-item mage_slayer --patch 7.41d
+```
+
+- Grounded in `gamefile:items/<name>#<section>` and `loc:<token>` marks;
+  the packet renders resolved tooltip labels (e.g. "MAGIC RESISTANCE",
+  not the KV key name) with Scepter/Shard bonus columns.
+- Articles put numbers in stat tables (every row the section carries)
+  and keep prose for behavior; marks that don't resolve against the
+  packet abort with exit 1, and numbers must appear in the cited
+  section.
+- Requires `INVOKER_GAME_DATA_DIR`; transport is `claude -p`, same
+  provenance recording as `generate-concept`.
 
 ### `render-kb`
 
