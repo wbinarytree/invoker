@@ -29,6 +29,22 @@ correctly and concisely — "what is Mage Slayer", "what is uphill miss",
 that are only observable in game, not present in game files. Synergy work
 does not start until this bar is met.
 
+**Feasibility bounds (discussed 2026-07-25):** everything in this domain
+reduces to where a verifier exists. RL is reasonable only where
+verification is cheap — which for us means rejection sampling at generation
+time (best-of-N against verify(), no training) and, at most, later
+RLVR-tuning a small model on our own benchmark for cheap bulk generation.
+RL against match outcomes (diluted, confounded signal) or against the game
+itself (OpenAI-Five-scale compute, implicit skill, no explanations) is out.
+Coaching ambition ladder: encyclopedia (now) → prep-analyst briefs
+(achievable; tier-2 analyst bar) → replay-grounded hypothesis generator
+(partial; non-LLM analytics compute evidence, LLM narrates with citations)
+→ autonomous pro-level coach (blocked: tacit knowledge exists in no corpus,
+counterfactuals lack a world model, and fluent-but-wrong destroys pro
+trust). The only route that gains ground on the last rung is the
+human-directed correction loop accumulating human-marked claims through
+use.
+
 ## Diagnosis carried over from v1 (still true)
 
 1. Human authoring throughput is fatal: 11/126 heroes in ~3 months.
