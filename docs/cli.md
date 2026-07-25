@@ -20,6 +20,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
 - `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>]`
+- `invoker render-kb --patch <patch> [--out <dir>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -255,6 +256,19 @@ uv run invoker generate-concept evasion --patch 7.41d
 - Every citation mark in the article and card must resolve against the
   concept's own corpus sections; an unresolvable mark aborts with exit 1.
 - Slow by design: two full generation calls per concept.
+
+### `render-kb`
+
+Render the committed KB archive for one patch into a browsable static site
+under `dist/kb-site/<patch>/` (disposable derived output, S5). The index
+page is the coverage audit: every curated corpus page vs generated
+artifacts. Citation marks link to the pinned source revision; rendering
+verifies every artifact's article sha binding and fails on drift.
+
+```bash
+uv run invoker render-kb --patch 7.41d
+open dist/kb-site/7.41d/index.html
+```
 
 ### `changelog`
 

@@ -72,6 +72,11 @@ PublishOutOption = Annotated[
     typer.Option("--out", help="Release output directory."),
 ]
 PUBLISH_OUT_DEFAULT = Path("dist")
+KB_SITE_OUT_DEFAULT = Path("dist/kb-site")
+KbSiteOutOption = Annotated[
+    Path,
+    typer.Option("--out", help="Output root; site lands in <out>/<patch>/."),
+]
 
 
 def _load_config() -> Config:
@@ -267,6 +272,32 @@ def generate_concept_cmd(
         f"card: {len(artifact.card.sentences)} sentences "
         f"(model {artifact.article_provenance.model}, "
         f"transport {artifact.article_provenance.transport})"
+    )
+
+
+@app.command("render-kb")
+def render_kb_cmd(
+    patch: str = typer.Option(..., help="Patch whose KB artifacts to render."),
+    out: KbSiteOutOption = KB_SITE_OUT_DEFAULT,
+) -> None:
+    """Render the committed KB archive into a browsable static site (S5).
+
+    Disposable derived output — never committed. Rendering verifies every
+    artifact's article binding and fails on drift.
+    """
+    from invoker.gen.client import GenerationError
+    from invoker.paths import kb_dir
+    from invoker.site.render import render_kb_site
+
+    cfg = _load_config()
+    try:
+        report = render_kb_site(kb_dir(cfg.data_dir, patch), patch, out / patch)
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(
+        f"Rendered {report.out_dir}/index.html "
+        f"({report.generated} generated, {report.missing} missing)"
     )
 
 

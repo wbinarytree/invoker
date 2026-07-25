@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (concept artifacts split: md + json sidecar)
+Last updated: 2026-07-25 (KB static site renderer, S5 slice)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -451,6 +451,20 @@ surface, diffable in the archive) + `<slug>.json` (card, citations,
 packet hash, per-call provenance, `article_sha256` binding the pair;
 consumers verify it via `load_concept_article` and refuse a drifted
 article). CLI: `invoker generate-concept <slug> --patch <patch>`.
+
+### KB site renderer (S5 slice)
+
+Module: [src/invoker/site/](../src/invoker/site)
+
+`render_kb_site` renders the committed `data/kb/<patch>/` archive into a
+browsable static site under `dist/kb-site/<patch>/` (derived, disposable,
+never committed). The index is the coverage audit — every curated corpus
+page vs generated artifacts, with citation/card/prompt-version columns.
+Concept pages render the article with `[corpus:...]` marks as superscript
+links to the pinned source revision (`index.php?oldid=<rev>#<anchor>`),
+the card with per-sentence marks, and a provenance footer. Rendering
+loads artifacts via `load_concept_article`, so a drifted article fails
+the build. CLI: `invoker render-kb --patch <patch>`.
 
 ### Basic-QA benchmark
 
