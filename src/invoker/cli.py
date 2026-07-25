@@ -301,6 +301,84 @@ def render_kb_cmd(
     )
 
 
+@app.command("run-benchmark")
+def run_benchmark_cmd(
+    patch: Annotated[str, typer.Option(help="Patch whose KB to answer from.")],
+    case: Annotated[
+        list[str] | None,
+        typer.Option("--case", help="Run only these case ids (repeatable)."),
+    ] = None,
+    answerer_model: Annotated[
+        str | None, typer.Option(help="Answerer model override.")
+    ] = None,
+    judge_model: Annotated[
+        str | None,
+        typer.Option(help="Judge model override (defaults to the answerer model)."),
+    ] = None,
+) -> None:
+    """Run the basic-QA benchmark against the generated KB (Milestone 1 gate).
+
+    Answers each gold case from KB artifacts + changelog only, judges facts
+    and traps, checks that cited source marks resolve, and writes a run
+    report under data/benchmark-runs/. Exits nonzero if any case fails.
+    """
+    from invoker.benchmark.loader import BenchmarkError, load_cases
+    from invoker.benchmark.report import CaseResult
+    from invoker.benchmark.runner import run_benchmark
+    from invoker.corpus.store import CorpusStore
+    from invoker.gen.claude_cli import CLI_GENERATION_MODEL, ClaudeCliClient
+    from invoker.gen.client import GenerationError
+    from invoker.paths import benchmark_runs_dir, corpus_dir, kb_dir
+
+    cfg = _load_config()
+    try:
+        cases = load_cases()
+    except BenchmarkError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    if case:
+        unknown = sorted(set(case) - {c.id for c in cases})
+        if unknown:
+            typer.echo(f"unknown case ids: {', '.join(unknown)}", err=True)
+            raise typer.Exit(code=1)
+        cases = [c for c in cases if c.id in set(case)]
+
+    changelog = None
+    if cfg.game_data_dir is not None:
+        changelog_path = cfg.game_data_dir / patch / "changelog.json"
+        if changelog_path.exists():
+            changelog = json.loads(changelog_path.read_text())
+
+    def _print(result: CaseResult) -> None:
+        status = "PASS" if result.passed else f"FAIL  [{', '.join(result.failures)}]"
+        typer.echo(f"{result.case_id}: {status}")
+
+    answer_model_id = answerer_model or CLI_GENERATION_MODEL
+    try:
+        report, report_path = run_benchmark(
+            cases=cases,
+            patch=patch,
+            kb_dir=kb_dir(cfg.data_dir, patch),
+            corpus_store=CorpusStore(corpus_dir(cfg.data_dir)),
+            changelog=changelog,
+            answer_backend=ClaudeCliClient(model=answer_model_id),
+            judge_backend=ClaudeCliClient(model=judge_model or answer_model_id),
+            out_dir=benchmark_runs_dir(cfg.data_dir, patch),
+            on_result=_print,
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    failed = sum(1 for result in report.cases if not result.passed)
+    summary = f"{len(report.cases) - failed}/{len(report.cases)} cases passed"
+    if report.skipped:
+        summary += f", {len(report.skipped)} skipped (patch mismatch)"
+    typer.echo(summary)
+    typer.echo(f"Report: {report_path}")
+    if failed:
+        raise typer.Exit(code=1)
+
+
 @app.command("snapshot-game-files")
 def snapshot_game_files_cmd(
     vpk: SnapshotVpkOption,

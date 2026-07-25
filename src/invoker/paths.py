@@ -61,6 +61,10 @@ def basic_qa_benchmark_dir() -> Path:
     return PROJECT_ROOT / "benchmarks" / "basic-qa"
 
 
+def benchmark_runs_dir(data_dir: Path, patch: str) -> Path:
+    return data_dir / "benchmark-runs" / patch
+
+
 def derived_patch_dir(data_dir: Path, patch: str) -> Path:
     return data_dir / "derived" / patch
 
