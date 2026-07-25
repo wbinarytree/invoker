@@ -210,6 +210,31 @@ checks.
 **Milestone 3 (optional, later) — draft reasoning.** Only if foundation +
 synergy prove quality. Explicitly not the goal the architecture serves.
 
+## Artifact shapes (working decision 2026-07-25)
+
+Canonical truth is flat, patch-scoped, diffable files; databases appear only
+as derived, rebuildable indexes. No graph database — at this scale (~126
+heroes, ~8k pairs, ~10^5 claims) everything fits in memory, the needed
+queries are lookup/search/citation-resolution/staleness-diff (not
+traversal), and claims can be projected into networkx on demand if graph
+queries ever materialize.
+
+- Substrate (exists): game-constant JSON per patch (+ changelog.json),
+  revision-pinned corpus docs + expanded HTML, benchmark YAML in-repo.
+- Encyclopedia (generation output): `data/kb/<patch>/` with
+  `concepts|items|heroes|pairs/<slug>.md` — rich markdown articles whose
+  frontmatter carries generator provenance (model, prompt version, context
+  hash) and source marks — plus `claims.jsonl` (one claim per line:
+  subject, predicate, objects, marks, citations, disagreement flags) and
+  `manifest.json` (content hashes).
+- Markdown because rich-first knowledge must be human-reviewable, diffable,
+  LLM-consumable, and site-renderable; JSONL because the hot operations are
+  scan-and-filter (patch-diff invalidation) and append.
+- Derived and always disposable: SQLite FTS search index, rendered static
+  site, service caches.
+- Delivery: the existing read-only KnowledgeService (HTTP + MCP adapters)
+  over these files.
+
 ## The recurring choice: manual vs generated vs agentic
 
 Every knowledge surface forces the same decision, and choosing wrong is how
