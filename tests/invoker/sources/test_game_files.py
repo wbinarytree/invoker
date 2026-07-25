@@ -3,7 +3,11 @@ from pathlib import Path
 import pytest
 
 from invoker.kg.ability_context import build_ability_contexts
-from invoker.sources.game_files import GameFilesSource, GameFilesSourceError
+from invoker.sources.game_files import (
+    GameFilesSource,
+    GameFilesSourceError,
+    resolve_percent_template,
+)
 
 FIXTURE_ROOT = Path(__file__).resolve().parents[2] / "fixtures" / "game_snapshot"
 
@@ -52,8 +56,7 @@ def test_game_files_source_abilities_match_context_input_shape():
     assert acid.damage_type == "Physical"
     assert acid.pierces_debuff_immunity is False
     assert (
-        acid.description
-        == "Sprays acid in a 350/400/450/500 radius and reduces armor by 3/4/5/6%."
+        acid.description == "Sprays acid in a 350/400/450/500 radius and reduces armor by 3/4/5/6%."
     )
     assert acid.cast_range == ["450", "500", "550", "600"]
     assert acid.timing == {"cast_point": "0.3"}
@@ -90,3 +93,24 @@ def test_game_files_source_exposes_items():
 def test_game_files_source_fails_loudly_when_patch_missing():
     with pytest.raises(GameFilesSourceError):
         GameFilesSource(FIXTURE_ROOT, "missing")
+
+
+def test_resolve_percent_template_collapses_escape_after_value():
+    assert resolve_percent_template("Deals %damage%%% damage", {"damage": "40"}) == (
+        "Deals 40% damage"
+    )
+    assert resolve_percent_template("%bonus%%%", {"bonus": "+5"}) == "+5%"
+    assert resolve_percent_template("%rate%%%", {"rate": "2.5"}) == "2.5%"
+    assert resolve_percent_template("%steps%%%", {"steps": "10/20/30"}) == "10/20/30%"
+
+
+def test_resolve_percent_template_preserves_unreplaced_tokens():
+    # An unresolved %key% must survive verbatim, including its trailing "%%"
+    # escape — collapsing would corrupt the token boundary.
+    assert resolve_percent_template("%missing%%% extra", {}) == "%missing%%% extra"
+    assert resolve_percent_template("gain %a%%b%", {"b": "5"}) == "gain %a%5"
+
+
+def test_resolve_percent_template_leaves_escape_after_non_numeric_text():
+    assert resolve_percent_template("abc%%def", {}) == "abc%%def"
+    assert resolve_percent_template("%%40", {}) == "%%40"
