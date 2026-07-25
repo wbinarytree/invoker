@@ -69,6 +69,25 @@ def test_game_files_source_abilities_match_context_input_shape():
         ability for ability in abilities if ability.internal_name == "alchemist_goblins_greed"
     )
     assert innate.source == "innate"
+    assert innate.scepter_upgrade == "Also grants 20 bonus gold per kill."
+    scepter_only = next(a for a in innate.attribs if a.key == "scepter_gold_bonus")
+    assert scepter_only.value is None
+    assert scepter_only.scepter_bonus == "20"
+
+    rage = next(
+        ability for ability in abilities if ability.internal_name == "alchemist_chemical_rage"
+    )
+    regen = next(a for a in rage.attribs if a.key == "bonus_health_regen")
+    assert regen.value == ["60", "90", "120"]
+    assert regen.scepter_bonus == "+30"
+    assert rage.scepter_upgrade == "Increases health regeneration further."
+
+    granted = next(
+        ability for ability in abilities if ability.internal_name == "alchemist_berserk_potion"
+    )
+    assert granted.granted_by == "shard"
+    assert granted.name == "Berserk Potion"
+    assert granted.description == "Chug a potion granting 15 seconds of frenzy."
 
     shard = source.abilities()["alchemist_berserk_potion"]
     assert shard["is_granted_by_shard"] is True

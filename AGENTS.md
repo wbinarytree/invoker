@@ -18,7 +18,7 @@ If you find yourself grepping the codebase to answer "what does X do?" before ch
 - No Dota facts from training memory. Cite a source file or mark unknown. Null is correct when data is missing — never fill plausible placeholders.
 - No LLM in the bootstrap or query path. LLMs are interactive only (authoring helper).
 - No silent retries on bad LLM extractions — surface the failure.
-- `data/` is gitignored. No data committed.
+- `data/` is gitignored except `data/kb/` (generated encyclopedia artifacts, committed for archival). No raw or fetched data committed.
 - Specs go in `docs/specs/YYYY-MM-DD-<topic>.md` *before* discussion. Don't substitute a chat markdown block for the spec file.
 - Trigger discussion mode before implementation when a change needs design, vision, or plan alignment.
 - Ask before destructive or external-facing actions: force-push, rewriting history, branch/tag deletion, full all-hero API fetch, deleting outside the working change, publishing/releases/tagging, regenerating large derived artifacts.

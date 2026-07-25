@@ -22,7 +22,11 @@
   "alchemist_goblins_greed": {
     "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE",
     "AbilityValues": {
-      "bonus_gold": "2"
+      "bonus_gold": "2",
+      "scepter_gold_bonus": {
+        "special_bonus_scepter": "20"
+      },
+      "scepter_gold_bonus_tooltip": "20"
     },
     "HasScepterUpgrade": "1",
     "Innate": "1"
@@ -33,7 +37,8 @@
     "AbilityManaCost": "50 75 100",
     "AbilityValues": {
       "bonus_health_regen": {
-        "value": "60 90 120"
+        "value": "60 90 120",
+        "special_bonus_scepter": "+30"
       }
     },
     "AbilityDraftExtraAbilities": {

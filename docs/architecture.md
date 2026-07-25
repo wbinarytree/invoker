@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (expanded-text corpus pass)
+Last updated: 2026-07-25 (KB layout: one folder per entity)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -400,6 +400,11 @@ in-game-only mechanics such as uphill miss chance). Direction:
 - `expand.py` — expanded-text pass over the fetch index (raw wikitext leaves
   `{{G|...}}` variables unresolved; expanded HTML materializes them);
   incremental, aborts on HTTP 429 or 5 consecutive failures
+- `sections.py` — deterministic slicer over stored expanded HTML:
+  heading-anchored sections with breadcrumbs and citation keys
+  (`<host>/<slug>@<revision>#<anchor>`, anchors identical to the live wiki's
+  fragments); strips TOC/edit-link/icon noise, flattens tables to rows;
+  feeds generation context packets and claim marks
 - `coverage.py` — diffs the wiki category universe against the registry into
   covered / omitted (with reason) / omitted-by-rule / unreviewed buckets
 
@@ -409,6 +414,66 @@ registry page fails to resolve), `invoker expand-corpus [--host <key>]
 Corpus documents are source marks for generated knowledge, not ground truth;
 wiki content is CC-BY-SA and is cited as evidence, never copied into
 published output.
+
+### Generation client (batch pipeline)
+
+Module: [src/invoker/gen/](../src/invoker/gen)
+
+LLM access for the S1-S5 generation stages, behind one result surface:
+`GenerationResult` / `StructuredResult` carry `GenerationProvenance`
+(served model — read from the response, never assumed — transport,
+prompt name + version, request sha256, token usage, stop reason,
+timestamp). Two transports:
+
+- `claude_cli.py` — `ClaudeCliClient` over `claude -p` (subscription-billed;
+  **the default transport**): headless JSON output, tools disabled, the
+  harness system prompt fully replaced so prompts stay byte-controlled;
+  structured outputs are schema-instructed and validated client-side
+- `client.py` — `GenerationClient` over the Anthropic SDK (API-billed;
+  kept behind the same interface as the scale-up path, e.g. Batches at
+  50% rates for full patch rebuilds)
+
+Refusal, truncation, empty output, unknown served model, and schema
+mismatch all raise `GenerationError` — never silently retried (hard
+line). Nothing under `gen/` may be imported from the bootstrap or query
+path; generation is a separate, rebuildable batch stage.
+
+**Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
+packet = the concept's corpus sections rendered with citation keys
+inline (`build_packet`, sha256 recorded on the artifact). Two calls per
+concept: article (markdown, every factual sentence ends in
+`[corpus:<key>]` marks) then card (≤12 sentences, every sentence keeps
+its marks — compression with pointers back). Mechanical faithfulness
+check: every mark in article and card must resolve against the packet
+or generation aborts; marks are never checked against live sources.
+Artifacts: one folder per entity — `data/kb/<patch>/concepts/<slug>/`
+holding `article.md` (the article — human-skim surface, diffable in the
+archive) + `artifact.json` (card, citations,
+packet hash, per-call provenance, `article_sha256` binding the pair;
+consumers verify it via `load_concept_article` and refuse a drifted
+article). CLI: `invoker generate-concept <slug> --patch <patch>`.
+
+KB layout grammar: entity classes are sibling directories —
+`concepts/<slug>/`, and (planned) `heroes/<slug>/`, `items/<slug>/`,
+`pairs/<a>__<b>/` — each entity folder holding `article.md` +
+`artifact.json`, later joined by `claims.json` (S4). Hero/item
+generators reuse the same artifact/card/mark shapes; only the packet
+builder differs (kit-wide hero packets, ItemContext), adding
+`gamefile:`/`loc:` mark kinds alongside `corpus:`.
+
+### KB site renderer (S5 slice)
+
+Module: [src/invoker/site/](../src/invoker/site)
+
+`render_kb_site` renders the committed `data/kb/<patch>/` archive into a
+browsable static site under `dist/kb-site/<patch>/` (derived, disposable,
+never committed). The index is the coverage audit — every curated corpus
+page vs generated artifacts, with citation/card/prompt-version columns.
+Concept pages render the article with `[corpus:...]` marks as superscript
+links to the pinned source revision (`index.php?oldid=<rev>#<anchor>`),
+the card with per-sentence marks, and a provenance footer. Rendering
+loads artifacts via `load_concept_article`, so a drifted article fails
+the build. CLI: `invoker render-kb --patch <patch>`.
 
 ### Basic-QA benchmark
 

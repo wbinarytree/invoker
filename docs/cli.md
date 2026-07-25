@@ -14,10 +14,13 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker promote-draft HERO [HERO ...] [--delete-draft]`
 - `invoker show-relations HERO`
 - `invoker show-hero-context HERO [--patch <patch>]`
+- `invoker show-item-context ITEM [--patch <patch>]`
 - `invoker snapshot-game-files --vpk <path> --out <dir> --patch <patch> [--localization <path>] [--locale <name> ...]`
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
+- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>]`
+- `invoker render-kb --patch <patch> [--out <dir>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -134,6 +137,19 @@ prompt.
 
 See [context-modules.md](context-modules.md) for the packet shape.
 
+### `show-item-context`
+
+Assembles and prints the `ItemContext` for one item as JSON from the
+configured game-file snapshot: localized name/description (templates
+resolved), cost, recipe components, and `AbilityValues` rows.
+
+```bash
+uv run invoker show-item-context "mage slayer" --patch 7.41d
+```
+
+See [context-modules.md](context-modules.md) → `item_context.py` for the
+shape.
+
 ### `snapshot-game-files`
 
 Bootstrap-only helper for creating a patch-scoped game-file JSON snapshot from
@@ -224,6 +240,36 @@ uv run invoker expand-corpus --host liquipedia_dota2 --limit 10
   what changed.
 - Aborts on HTTP 429 or 5 consecutive failures instead of burning the rate
   budget; re-run later to resume. Any failure exits 1.
+
+### `generate-concept`
+
+Generate one concept article + card into `data/kb/<patch>/concepts/<slug>/`
+(`article.md` + `artifact.json`) from the stored corpus (S1 of the
+generation pipeline).
+
+```bash
+uv run invoker generate-concept evasion --patch 7.41d
+```
+
+- Transport is `claude -p` (subscription-billed, tools disabled, pinned
+  system prompt); provenance (model, transport, prompt version, request
+  hash, packet hash) is recorded on the artifact.
+- Every citation mark in the article and card must resolve against the
+  concept's own corpus sections; an unresolvable mark aborts with exit 1.
+- Slow by design: two full generation calls per concept.
+
+### `render-kb`
+
+Render the committed KB archive for one patch into a browsable static site
+under `dist/kb-site/<patch>/` (disposable derived output, S5). The index
+page is the coverage audit: every curated corpus page vs generated
+artifacts. Citation marks link to the pinned source revision; rendering
+verifies every artifact's article sha binding and fails on drift.
+
+```bash
+uv run invoker render-kb --patch 7.41d
+open dist/kb-site/7.41d/index.html
+```
 
 ### `changelog`
 
