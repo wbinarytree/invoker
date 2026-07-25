@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-25 (item context packets)
+Last updated: 2026-07-25 (generation client with pinned provenance)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -414,6 +414,29 @@ registry page fails to resolve), `invoker expand-corpus [--host <key>]
 Corpus documents are source marks for generated knowledge, not ground truth;
 wiki content is CC-BY-SA and is cited as evidence, never copied into
 published output.
+
+### Generation client (batch pipeline)
+
+Module: [src/invoker/gen/](../src/invoker/gen)
+
+LLM access for the S1-S5 generation stages, behind one result surface:
+`GenerationResult` / `StructuredResult` carry `GenerationProvenance`
+(served model — read from the response, never assumed — transport,
+prompt name + version, request sha256, token usage, stop reason,
+timestamp). Two transports:
+
+- `claude_cli.py` — `ClaudeCliClient` over `claude -p` (subscription-billed;
+  **the default transport**): headless JSON output, tools disabled, the
+  harness system prompt fully replaced so prompts stay byte-controlled;
+  structured outputs are schema-instructed and validated client-side
+- `client.py` — `GenerationClient` over the Anthropic SDK (API-billed;
+  kept behind the same interface as the scale-up path, e.g. Batches at
+  50% rates for full patch rebuilds)
+
+Refusal, truncation, empty output, unknown served model, and schema
+mismatch all raise `GenerationError` — never silently retried (hard
+line). Nothing under `gen/` may be imported from the bootstrap or query
+path; generation is a separate, rebuildable batch stage.
 
 ### Basic-QA benchmark
 
