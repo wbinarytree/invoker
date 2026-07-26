@@ -32,7 +32,9 @@ class ItemContext:
     damage_type: str | None
     dispellable: str | None
     description: str | None
+    description_token: str | None
     lore: str | None
+    lore_token: str | None
     attribs: list[AttribEntry]
     components: list[str] | None
     component_names: list[str] | None
@@ -81,7 +83,9 @@ def build_item_context_from_source(
         damage_type=record.get("dmg_type") or None,
         dispellable=record.get("dispellable") or None,
         description=record.get("desc") or None,
+        description_token=record.get("desc_token") or None,
         lore=record.get("lore") or None,
+        lore_token=record.get("lore_token") or None,
         attribs=attribs,
         components=record.get("components"),
         component_names=record.get("component_names"),

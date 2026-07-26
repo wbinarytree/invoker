@@ -229,21 +229,30 @@ def _ability_record(
 
 
 def _item_record(name: str, raw: dict[str, Any], localization: dict[str, Any]) -> dict[str, Any]:
+    desc, desc_token = _localized_item_desc(name, raw, localization)
     record: dict[str, Any] = {
         "dname": _localized_item_name(name, localization),
-        "desc": _localized_item_desc(name, raw, localization),
+        "desc": desc,
         "behavior": _behavior(raw.get("AbilityBehavior")),
         "dmg_type": _damage_type(raw.get("AbilityUnitDamageType")),
         "dispellable": _dispellable(raw.get("SpellDispellableType")),
         "attrib": _attribs(name, raw.get("AbilityValues"), localization),
     }
+    if desc_token:
+        record["desc_token"] = desc_token
     if "ItemCost" in raw:
         record["cost"] = _int_or_zero(raw["ItemCost"])
     if quality := raw.get("ItemQuality"):
         record["quality"] = str(quality)
-    lore = localization.get(f"DOTA_Tooltip_ability_{name}_Lore")
-    if isinstance(lore, str) and lore:
-        record["lore"] = lore
+    for lore_token in (
+        f"DOTA_Tooltip_ability_{name}_Lore",
+        f"DOTA_Tooltip_Ability_{name}_Lore",
+    ):
+        lore = localization.get(lore_token)
+        if isinstance(lore, str) and lore:
+            record["lore"] = lore
+            record["lore_token"] = lore_token
+            break
     if "AbilityCastRange" in raw:
         record["cast_range"] = _levels(raw["AbilityCastRange"])
     if "AbilityManaCost" in raw:
@@ -275,7 +284,9 @@ def _localized_item_desc(
     name: str,
     raw: dict[str, Any],
     localization: dict[str, Any],
-) -> str | None:
+) -> tuple[str | None, str | None]:
+    """Resolved description text plus the token that actually resolved —
+    packets cite the real token, never a synthesized casing."""
     replacements = ability_value_replacements(raw.get("AbilityValues"))
     for key in (
         f"DOTA_Tooltip_ability_{name}_Description",
@@ -283,8 +294,8 @@ def _localized_item_desc(
     ):
         value = localization.get(key)
         if isinstance(value, str) and value:
-            return _strip_tooltip_html(resolve_percent_template(value, replacements))
-    return None
+            return _strip_tooltip_html(resolve_percent_template(value, replacements)), key
+    return None, None
 
 
 _TAG_BREAK_PATTERN = re.compile(r"</h\d>|<br\s*/?>", re.IGNORECASE)
@@ -480,10 +491,26 @@ def _attrib_label(name: str, key: str, localization: dict[str, Any]) -> tuple[st
     return _label_from_key(key), False
 
 
+def _raw_desc_template(name: str, localization: dict[str, Any]) -> str:
+    """Unresolved description template — the source of the percent flag for
+    keys with no tooltip label token: `%key%%%` renders as a literal % after
+    the substituted value (e.g. mage_slayer's `%spell_amp_debuff%%%`)."""
+    for token in (
+        f"DOTA_Tooltip_ability_{name}_Description",
+        f"DOTA_Tooltip_Ability_{name}_Description",
+        f"dota_tooltip_ability_{name}_description",
+    ):
+        value = localization.get(token)
+        if isinstance(value, str) and value:
+            return value
+    return ""
+
+
 def _attribs(name: str, values: Any, localization: dict[str, Any]) -> list[dict[str, Any]]:
     if not isinstance(values, dict):
         return []
     rows: list[dict[str, Any]] = []
+    desc_template = _raw_desc_template(name, localization)
     for key, raw in values.items():
         value: Any
         scepter_bonus: Any = None
@@ -499,6 +526,8 @@ def _attribs(name: str, values: Any, localization: dict[str, Any]) -> list[dict[
         if value is None and scepter_bonus is None and shard_bonus is None:
             continue
         label, percent = _attrib_label(name, str(key), localization)
+        if not percent and f"%{key}%%%" in desc_template:
+            percent = True
         row: dict[str, Any] = {
             "key": str(key),
             "header": label.upper() + ":",
