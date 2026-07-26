@@ -161,6 +161,8 @@ class ClaudeCliClient:
         )
         entry = self._model_usage_entry(payload, prompt_name)
         return GenerationProvenance(
+            # _model_usage_entry already refused payloads that don't
+            # confirm the requested model served this call
             model=self.model,
             transport="claude-cli",
             prompt_name=prompt_name,
