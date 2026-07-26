@@ -81,9 +81,7 @@ def test_packet_sections_match_resolver_vocabulary():
 
     _, vocabulary = _GAMEFILE_CLASSES["items"]
     _, text_by_mark, _ = build_item_packet(context())
-    emitted = {
-        mark.partition("#")[2] for mark in text_by_mark if mark.startswith("gamefile:")
-    }
+    emitted = {mark.partition("#")[2] for mark in text_by_mark if mark.startswith("gamefile:")}
     assert emitted == vocabulary
 
 

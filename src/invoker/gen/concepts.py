@@ -46,6 +46,7 @@ Cite the narrowest key that states the fact; never pad with broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - Use ONLY the article text. No outside knowledge."""
 
+
 class GenerationBackend(Protocol):
     model: str
     """Requested model id — consumers record it in run-level provenance,

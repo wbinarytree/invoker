@@ -113,9 +113,7 @@ class MarkResolver:
             return MarkResolution(ok=False, reason=tokens)
         if token in tokens or _swap_ability_case(token) in tokens:
             return MarkResolution(ok=True)
-        return MarkResolution(
-            ok=False, reason=f"{token} is not in the {self._patch} localization"
-        )
+        return MarkResolution(ok=False, reason=f"{token} is not in the {self._patch} localization")
 
     def _load_loc_tokens(self) -> set[str] | str:
         assert self._game_data_dir is not None and self._patch is not None

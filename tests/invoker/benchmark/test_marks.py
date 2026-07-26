@@ -154,9 +154,7 @@ def test_gamefile_marks_reject_unknown_record_section_and_class():
 
 def test_loc_marks_resolve_with_ability_case_swap():
     resolver = snapshot_resolver()
-    assert resolver.resolve(
-        Mark("loc", "DOTA_Tooltip_ability_item_mage_slayer_Description")
-    ).ok
+    assert resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_mage_slayer_Description")).ok
     # stored token uses capital-A Ability; the lowercase query still resolves
     assert resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_blink")).ok
     made_up = resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_invented"))
