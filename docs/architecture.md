@@ -429,7 +429,12 @@ transports:
 - `claude_cli.py` — `ClaudeCliClient` over `claude -p` (subscription-billed;
   **the default transport**): headless JSON output, tools disabled, the
   harness system prompt fully replaced so prompts stay byte-controlled;
-  structured outputs are schema-instructed and validated client-side
+  structured outputs are schema-instructed and validated client-side.
+  Token counts come from the requested model's `modelUsage` entry, never
+  the top-level `usage` (which mixes background harness models and whose
+  `input_tokens` is only the uncached slice): input is recorded as the
+  sum of uncached + cache-read + cache-write components, null when any
+  component is unreported — a partial sum is an estimate
 - `codex.py` — `CodexClient` over the `codex app-server` JSON-RPC daemon
   (user's Codex/ChatGPT budget; protocol pinned against codex-cli
   0.145.0, default model `gpt-5.6-sol`): one daemon reused across calls,
@@ -523,7 +528,9 @@ their percent flag from the raw description template (`%key%%%` = a
 literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
-the formula with its prices, and prose is behavior semantics only —
+the formula with its prices, prose is behavior semantics, and the
+article closes with the lore as a flavor line (prompt v5 — lore is
+required coverage, never allowlisted; user direction 2026-07-26) —
 each tier (identity line, card, article) adds information over the one
 above. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
