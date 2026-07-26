@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "f0c81e0bcd162d8f9de6dbbe71773ddbbca3b221dd0b6517947ef840067874d7",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/abilities@2354873#Autocast",
+      "fact": "The listed active attack modifiers are the only auto-castable active attack modifiers."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "b2c8f159afb868bcba9ca773bc655e5f6c436a09c57205451b74437fa54de743",
+    "input_tokens": 28425,
+    "output_tokens": 3955,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:16:45.981103+00:00"
+  }
+}

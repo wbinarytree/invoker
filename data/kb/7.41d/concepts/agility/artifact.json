@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "agility",
+  "title": "Agility",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "642482c15cb5e3bc8530e559fa0cad448aa3d64c2968ae211a132c550caa26d8",
+  "citations": [
+    "corpus:liquipedia_dota2/agility@2370050",
+    "corpus:liquipedia_dota2/agility@2370050#Bonuses",
+    "corpus:liquipedia_dota2/agility@2370050#Agility_Heroes",
+    "corpus:liquipedia_dota2/agility@2370050#Agility_Granting_Sources",
+    "corpus:liquipedia_dota2/agility@2370050#Agility_Granting_Talents",
+    "corpus:liquipedia_dota2/agility@2370050#Agility_Granting_Items",
+    "corpus:liquipedia_dota2/agility@2370050#Attack_Damage_Items",
+    "corpus:liquipedia_dota2/agility@2370050#Recent_Changes",
+    "corpus:liquipedia_dota2/agility@2370050#See_Also"
+  ],
+  "packet_sha256": "dc9a35a18dcce2a9abf7667e6cc4098d0c539099f2ac8b0c030a4676ab8c7c0c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "69cd0d6e718e5f9d38721a6e9bb4ea1b831890cc8329801d1853a6d0cd132196",
+    "input_tokens": 18465,
+    "output_tokens": 7920,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:11:41.001600+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "ffdc142ce963ccb7be3a1d825289adf031ef1409b06d5fd2ae5dcbf0bd63a87e",
+    "input_tokens": 19788,
+    "output_tokens": 1956,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:12:40.869044+00:00"
+  }
+}

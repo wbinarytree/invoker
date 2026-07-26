@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "9402dd4842ac6c718574e30b1bc8bc9012f2a9fb58d27d4f962a63db67dd5a68",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/critical_strike@2353356#Mechanics",
+      "fact": "The red number displays the resulting physical damage before reductions."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "1c07bdd544976b06775377b5ddb82463d358af0559e1366fa667c37ed002d01b",
+    "input_tokens": 18729,
+    "output_tokens": 1085,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:46:12.041347+00:00"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "23b9d7427c1ccebcf4c580c3b7648c01dc0e90c967ca401a7ee818a53f169003",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/spell_reflection@2383953#Not-reflected_Unit_Target_Abilities",
+      "fact": "The Creep Abilities category carries marker 4, indicating that it is missing from the in-game extended ability description."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "3ee3428279f20870d607fc2c8468ea1ae44dabd702eefe27ccd690c0cf2124da",
+    "input_tokens": 23945,
+    "output_tokens": 1104,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:45:25.961241+00:00"
+  }
+}

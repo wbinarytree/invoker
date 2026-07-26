@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "dc9a35a18dcce2a9abf7667e6cc4098d0c539099f2ac8b0c030a4676ab8c7c0c",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/agility@2370050#Agility_Heroes",
+      "fact": "Agility heroes are the only class of heroes to gain both damage and attack speed as their primary attribute increases."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "5a509f20000b288dc960fd47032e6c91ba3231a42f6d93c12f7cff2a1155c831",
+    "input_tokens": 24315,
+    "output_tokens": 1615,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:13:25.587002+00:00"
+  }
+}

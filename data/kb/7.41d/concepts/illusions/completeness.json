@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "07d81d6fc458c6d3850fc1d21f04e5833fa2feafb3d347be74d725bba9cd963a",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/illusions@2376496#Visual_Appearance",
+      "fact": "The table’s ability-group and camouflage associations are absent: Default — “-”; Fiend's Grip, Phantasm, Chaos Bolt, Decoy, Illusionist's Cape, Manta Style, Illusion Rune, Mirror Image, Disruption, Shadow Step, Haunt, and Blink Fragment (Old) — Yes; Wall of Replica and Vengeance Aura — No; Reflection and Conjure Image — No; Doppelganger — Yes; Spirit Lance, Doppelganger, and Juxtapose — Yes; Dark Portrait — No; Normal Punch — No."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "0f273fa51a1f0a3c9b1f9980c09c15fcd5ba4b08faf9f62a1e6c5b15e30d3379",
+    "input_tokens": 34691,
+    "output_tokens": 2226,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:15:36.804853+00:00"
+  }
+}

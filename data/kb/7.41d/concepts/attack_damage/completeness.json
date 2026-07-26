@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "fabbdd6a608eb1fd0adc32361b47fddd3e18520d07981cd4cbd0434c2959bae8",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/attack_damage@2401047#Main_Attack_Damage",
+      "fact": "The detailed Main Attack Damage table covers all 128 heroes."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "3920bba6df608d21ff8ee5cc96b9bfd54670c735465b207333a3673d2e7e7dc2",
+    "input_tokens": 31734,
+    "output_tokens": 2124,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:47:58.972734+00:00"
+  }
+}

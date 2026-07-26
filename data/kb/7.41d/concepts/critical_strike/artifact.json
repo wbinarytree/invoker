@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "critical_strike",
+  "title": "Critical Strike",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "34df6d0c616ec226fe28a76deea8cd2521332dcb89ec162a331a13fd1dcf6578",
+  "citations": [
+    "corpus:liquipedia_dota2/critical_strike@2353356",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Mechanics",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Visual_Feedback",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Multiplier",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Stacking",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Attack_Modifier_Interactions",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Sources_Affected",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Sources_Not_Affected",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Critical_Strike_Sources",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Chance-based_Sources",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Ensured_Critical_Strike_Sources",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Unique_Critical_Strike_Sources",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Instant_Attack",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Talents",
+    "corpus:liquipedia_dota2/critical_strike@2353356#Version_History"
+  ],
+  "packet_sha256": "9402dd4842ac6c718574e30b1bc8bc9012f2a9fb58d27d4f962a63db67dd5a68",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "6043527f86f2428a3f4d1a2fa59ee4aca46f313eb53d3f769dc5494ae0006492",
+    "input_tokens": 16676,
+    "output_tokens": 6990,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:45:01.023105+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "0d0caf5f38eb19e5fd829c3a8e593991906420a245aba5800048db6eeafc40af",
+    "input_tokens": 16118,
+    "output_tokens": 1652,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:45:41.944549+00:00"
+  }
+}
