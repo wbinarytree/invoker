@@ -489,7 +489,10 @@ Concept pages render the article with `[corpus:...]` marks as superscript
 links to the pinned source revision (`index.php?oldid=<rev>#<anchor>`),
 the card with per-sentence marks, and a provenance footer. Rendering
 loads artifacts via `load_entity_article`, so a drifted article fails
-the build. CLI: `invoker render-kb --patch <patch>`.
+the build. The renderer walks `concepts/` only — item artifacts
+(`items/<slug>/`) are in the KB archive and benchmark index but not yet
+on the site; that extension rides a later item slice. CLI:
+`invoker render-kb --patch <patch>`.
 
 ### Basic-QA benchmark
 
