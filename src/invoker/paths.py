@@ -57,6 +57,10 @@ def kb_dir(data_dir: Path, patch: str) -> Path:
     return data_dir / "kb" / patch
 
 
+def rejected_dir(data_dir: Path, patch: str) -> Path:
+    return data_dir / "logs" / "rejected" / patch
+
+
 def basic_qa_benchmark_dir() -> Path:
     return PROJECT_ROOT / "benchmarks" / "basic-qa"
 

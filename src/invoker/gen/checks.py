@@ -16,9 +16,13 @@ from invoker.marks import MARK_PATTERN, Mark, strip_marks
 
 NUMBER_PATTERN = re.compile(r"\d+(?:\.\d+)?")
 
-COVERAGE_ALLOWLIST = frozenset({"References"})
-"""Section anchors exempt from coverage: wiki reference/footnote lists
-carry no load-bearing facts (spec: generation completeness gates)."""
+COVERAGE_ALLOWLIST = frozenset({"References", "Gallery", "See_Also", "See_also"})
+"""Section anchors exempt from coverage: wiki reference/footnote lists,
+image galleries (captions whose charts never survive corpus extraction),
+and navigation link lists carry no load-bearing facts (specs: generation
+completeness gates; batch KB generation — anchors enumerated across all
+98 corpus pages 2026-07-26, both observed case variants of See_also).
+Trivia is deliberately absent: like item lore, it is content."""
 
 
 def extract_marks(text: str) -> list[str]:

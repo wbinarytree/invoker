@@ -371,7 +371,7 @@ def generate_concept_cmd(
     from invoker.corpus.store import CorpusStore
     from invoker.gen.client import GenerationError
     from invoker.gen.concepts import generate_concept
-    from invoker.paths import corpus_dir, kb_dir
+    from invoker.paths import corpus_dir, kb_dir, rejected_dir
 
     cfg = _load_config()
     store = CorpusStore(corpus_dir(cfg.data_dir))
@@ -386,6 +386,7 @@ def generate_concept_cmd(
             patch=patch,
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
+            rejected_dir=rejected_dir(cfg.data_dir, patch),
         )
         typer.echo(f"Wrote {path} + {artifact.article_file}")
         typer.echo(
