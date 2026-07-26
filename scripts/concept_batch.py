@@ -154,12 +154,11 @@ def run_entity(
     return slug, "transport" if transport_class else bucket
 
 
-def run_pool(
-    slugs: list[str], *, concurrency: int, breaker: Breaker, **entity_kwargs
-) -> list[str]:
+def run_pool(slugs: list[str], *, concurrency: int, **entity_kwargs) -> list[str]:
     """Run slugs through the pool with bounded submission (the breaker
     must be able to stop entities that have not been submitted yet);
     returns transport-class failures."""
+    breaker: Breaker = entity_kwargs["breaker"]
     transport: list[str] = []
     queue = list(slugs)
     with ThreadPoolExecutor(max_workers=concurrency) as pool:
@@ -232,14 +231,12 @@ def main() -> int:
         breaker=breaker,
     )
     transport = run_pool(
-        pending, concurrency=args.concurrency, breaker=breaker,
-        requeued=False, **entity_kwargs,
+        pending, concurrency=args.concurrency, requeued=False, **entity_kwargs
     )
     if transport and not breaker.tripped:
         print(f"re-queueing {len(transport)} transport-class failures once")
         run_pool(
-            transport, concurrency=args.concurrency, breaker=breaker,
-            requeued=True, **entity_kwargs,
+            transport, concurrency=args.concurrency, requeued=True, **entity_kwargs
         )
 
     if breaker.tripped:
