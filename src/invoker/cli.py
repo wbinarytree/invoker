@@ -253,6 +253,57 @@ KbDirOption = Annotated[
         "e.g. data/kb-variants/<name>/<patch> (gitignored).",
     ),
 ]
+GuardBackendOption = Annotated[
+    str,
+    typer.Option(
+        "--guard-backend",
+        help="Backend for the compression guard (always a fresh session): "
+        "codex (default, larger token budget) or claude-cli.",
+    ),
+]
+GuardModelOption = Annotated[
+    str | None,
+    typer.Option("--guard-model", help="Guard model override."),
+]
+SkipGuardOption = Annotated[
+    bool,
+    typer.Option("--skip-guard", help="Skip the compression guard (experiments, cost control)."),
+]
+
+
+def _run_guard_gate(
+    artifact_path: Path,
+    guard_client: GenerationBackend,
+    *,
+    store,
+    game_data_dir: Path | None,
+    host_key: str,
+) -> None:
+    """Shared guard step: nonempty report prints the path and exits 1;
+    the artifact stays on disk for the human to read against the report."""
+    from invoker.gen.guard import guard_entity
+
+    outcome = guard_entity(
+        artifact_path,
+        guard_client,
+        store=store,
+        game_data_dir=game_data_dir,
+        host_key=host_key,
+    )
+    if not outcome.packet_matches_artifact:
+        typer.echo(
+            "warning: rebuilt packet differs from the artifact's recorded packet "
+            "hash — the verdict is about today's substrate",
+            err=True,
+        )
+    if outcome.missing_count:
+        typer.echo(
+            f"completeness guard: {outcome.missing_count} missing facts — "
+            f"{outcome.report_path}",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    typer.echo(f"completeness guard: clean ({outcome.report_path})")
 GenModelOption = Annotated[
     str | None,
     typer.Option(help="Model override; defaults to the backend's pinned model."),
@@ -282,6 +333,21 @@ def _close_backends(*backends: GenerationBackend) -> None:
             backend.close()
 
 
+def _guard_client_for(
+    client: GenerationBackend,
+    backend: str,
+    guard_backend: str,
+    guard_model: str | None,
+) -> GenerationBackend:
+    """Reuse the generation client when the guard wants the same backend
+    and model — both backends give every call a fresh session (fresh
+    subprocess / ephemeral thread), so the fresh-session requirement
+    holds either way and one daemon serves both steps."""
+    if guard_backend == backend and (guard_model is None or guard_model == client.model):
+        return client
+    return _make_backend(guard_backend, guard_model)
+
+
 @app.command("generate-concept")
 def generate_concept_cmd(
     slug: str = typer.Argument(..., help="Corpus page slug, e.g. evasion."),
@@ -291,11 +357,15 @@ def generate_concept_cmd(
     backend: GenBackendOption = "claude-cli",
     model: GenModelOption = None,
     kb_dir_override: KbDirOption = None,
+    guard_backend: GuardBackendOption = "codex",
+    guard_model: GuardModelOption = None,
+    skip_guard: SkipGuardOption = False,
 ) -> None:
     """Generate one concept article + card into data/kb/<patch>/concepts/.
 
     Citation marks that do not resolve against the context packet abort
-    the run.
+    the run. A nonempty compression-guard report exits 1 with the report
+    path; the artifact stays on disk for review.
     """
     from invoker.corpus.store import CorpusStore
     from invoker.gen.client import GenerationError
@@ -303,10 +373,12 @@ def generate_concept_cmd(
     from invoker.paths import corpus_dir, kb_dir
 
     cfg = _load_config()
+    store = CorpusStore(corpus_dir(cfg.data_dir))
     client = _make_backend(backend, model)
+    guard_client: GenerationBackend | None = None
     try:
         artifact, path = generate_concept(
-            CorpusStore(corpus_dir(cfg.data_dir)),
+            store,
             client,
             host_key=host,
             slug=slug,
@@ -314,18 +386,21 @@ def generate_concept_cmd(
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
         )
+        typer.echo(f"Wrote {path} + {artifact.article_file}")
+        typer.echo(
+            f"{len(artifact.citations)} distinct citations, "
+            f"card: {len(artifact.card.sentences)} sentences "
+            f"(model {artifact.article_provenance.model}, "
+            f"transport {artifact.article_provenance.transport})"
+        )
+        if not skip_guard:
+            guard_client = _guard_client_for(client, backend, guard_backend, guard_model)
+            _run_guard_gate(path, guard_client, store=store, game_data_dir=None, host_key=host)
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
     finally:
-        _close_backends(client)
-    typer.echo(f"Wrote {path} + {artifact.article_file}")
-    typer.echo(
-        f"{len(artifact.citations)} distinct citations, "
-        f"card: {len(artifact.card.sentences)} sentences "
-        f"(model {artifact.article_provenance.model}, "
-        f"transport {artifact.article_provenance.transport})"
-    )
+        _close_backends(client, guard_client or client)
 
 
 @app.command("generate-item")
@@ -336,11 +411,16 @@ def generate_item_cmd(
     backend: GenBackendOption = "claude-cli",
     model: GenModelOption = None,
     kb_dir_override: KbDirOption = None,
+    guard_backend: GuardBackendOption = "codex",
+    guard_model: GuardModelOption = None,
+    skip_guard: SkipGuardOption = False,
 ) -> None:
     """Generate one item article + card into data/kb/<patch>/items/.
 
     Grounded in the game-file snapshot (gamefile:/loc: marks); citation
     marks that do not resolve against the context packet abort the run.
+    A nonempty compression-guard report exits 1 with the report path;
+    the artifact stays on disk for review.
     """
     from invoker.gen.client import GenerationError
     from invoker.gen.items import generate_item
@@ -351,6 +431,7 @@ def generate_item_cmd(
         typer.echo("INVOKER_GAME_DATA_DIR is not configured", err=True)
         raise typer.Exit(code=1)
     client = _make_backend(backend, model)
+    guard_client: GenerationBackend | None = None
     try:
         artifact, path = generate_item(
             cfg.game_data_dir,
@@ -360,18 +441,62 @@ def generate_item_cmd(
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
         )
+        typer.echo(f"Wrote {path} + {artifact.article_file}")
+        typer.echo(
+            f"{len(artifact.citations)} distinct citations, "
+            f"card: {len(artifact.card.sentences)} sentences "
+            f"(model {artifact.article_provenance.model}, "
+            f"transport {artifact.article_provenance.transport})"
+        )
+        if not skip_guard:
+            guard_client = _guard_client_for(client, backend, guard_backend, guard_model)
+            _run_guard_gate(
+                path,
+                guard_client,
+                store=None,
+                game_data_dir=cfg.game_data_dir,
+                host_key="liquipedia_dota2",
+            )
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
     finally:
-        _close_backends(client)
-    typer.echo(f"Wrote {path} + {artifact.article_file}")
-    typer.echo(
-        f"{len(artifact.citations)} distinct citations, "
-        f"card: {len(artifact.card.sentences)} sentences "
-        f"(model {artifact.article_provenance.model}, "
-        f"transport {artifact.article_provenance.transport})"
-    )
+        _close_backends(client, guard_client or client)
+
+
+@app.command("guard-artifact")
+def guard_artifact_cmd(
+    artifact: Annotated[Path, typer.Argument(help="Path to an entity artifact.json.")],
+    host: str = typer.Option("liquipedia_dota2", help="Corpus host key (concepts only)."),
+    guard_backend: GuardBackendOption = "codex",
+    guard_model: GuardModelOption = None,
+) -> None:
+    """Run the compression guard on an existing artifact (fresh session).
+
+    Rebuilds the packet from today's substrate, writes completeness.json
+    next to the artifact, and exits 1 when any packet fact is missing
+    from the article. Flags are descriptive, never ranked — reading the
+    report is the human's job (completeness-gates spec).
+    """
+    from invoker.corpus.store import CorpusStore
+    from invoker.gen.client import GenerationError
+    from invoker.paths import corpus_dir
+
+    cfg = _load_config()
+    guard_client = _make_backend(guard_backend, guard_model)
+    try:
+        _run_guard_gate(
+            artifact,
+            guard_client,
+            store=CorpusStore(corpus_dir(cfg.data_dir)),
+            game_data_dir=cfg.game_data_dir,
+            host_key=host,
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(guard_client)
 
 
 @app.command("render-kb")

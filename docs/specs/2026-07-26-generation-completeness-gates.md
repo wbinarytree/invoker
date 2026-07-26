@@ -47,8 +47,10 @@ faithfulness (nothing invented) is gated; compression losslessness
    set of packet section keys minus cited keys must be empty, minus a
    boilerplate allowlist (`References`). Runs for concepts and items.
 2. **Compression guard** (`gen/guard.py`): one `generate_structured`
-   call on a configurable backend (default `claude-cli`/opus; must be a
-   fresh session, never the generating conversation). Input: the exact
+   call on a configurable backend (default `codex`/gpt-5.6-sol — the
+   larger token budget, user direction 2026-07-26; must be a fresh
+   session, never the generating conversation — fresh-session is the
+   hard requirement, model choice is a budget call). Input: the exact
    packet the generator saw + the finished article. Output schema: flat
    `missing: [{section, fact}]`, validated; the report and its own
    `GenerationProvenance` are written as `completeness.json` next to the
