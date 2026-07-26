@@ -32,6 +32,8 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-07-25-basic-qa-benchmark-runner.md](specs/2026-07-25-basic-qa-benchmark-runner.md)
 - Game-file-grounded generators (items + heroes):
   [docs/specs/2026-07-26-game-file-grounded-generators.md](specs/2026-07-26-game-file-grounded-generators.md)
+- Serving-format measurement harness + Codex backend (proposed):
+  [docs/specs/2026-07-26-serving-format-measurement.md](specs/2026-07-26-serving-format-measurement.md)
 
 ## Active plans
 
