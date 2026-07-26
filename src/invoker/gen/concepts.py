@@ -19,13 +19,21 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "4"
+CONCEPT_PROMPT_VERSION = "5"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
 Rules:
 - Use ONLY facts stated in the source sections the user provides. No outside \
 knowledge, even when you are confident.
+- The article is a lossless compression of the sources: every load-bearing \
+fact in every provided section appears in it — exact values, enumerations, \
+interaction rules, conditions and exceptions. Cover every section; omit only \
+prose style, wiki housekeeping, and reference boilerplate.
+- Carry enumerations in full: lists of sources, items, abilities, or talents \
+with their values, and tables of constants, are reproduced as markdown \
+tables with every row — never summarized by examples or "such as" \
+selections.
 - Every factual statement is covered by a citation mark of the form \
 [corpus:KEY], where KEY is one of the provided section keys, copied exactly. \
 Place a mark wherever the source section changes; consecutive sentences drawn \
@@ -36,8 +44,9 @@ when a more specific one states the fact.
 - Numbers must match the cited section exactly.
 - If the sources do not cover something, leave it out. Never fill a gap with a \
 plausible value.
-- Write concise reference prose in markdown with a few short sections. No \
-preamble, no meta-commentary about sources or citations."""
+- Concise wording, complete content: brevity comes from tight sentences and \
+tables, never from dropping facts. Markdown, sections mirroring the source \
+topics. No preamble, no meta-commentary about sources or citations."""
 
 CARD_SYSTEM_PROMPT = """You compress a grounded encyclopedia article into a card.
 
