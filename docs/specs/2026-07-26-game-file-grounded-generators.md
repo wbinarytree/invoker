@@ -196,12 +196,15 @@ into the slice-1 PR:
    directions — the build formula with each component's gold cost
    (looked up from the same snapshot records), the recipe row (moved
    here from `#cost`; it is part of the formula), and a builds-into
-   line scanned from every recipe requiring this item. Tier discipline
-   in the prompts: the card names components and build targets but
-   their prices stay in the article's formula table — each tier must
-   add information over the one above it. Absences stay silent (a
-   zero-cost recipe or an empty builds-into renders nothing — null
-   over placeholder).
+   line scanned from every recipe requiring this item. The card carries
+   the priced build formula in one sentence (iteration decision: the
+   card is the serving tier, and the formula is a top-tier item fact —
+   answering "what builds this and at what cost" must not require
+   opening the article); build targets are named without prices, which
+   belong to the target's own page. The article still adds the full
+   tables, mechanics prose, and lore — each tier adds information over
+   the one above it. Absences stay silent (a zero-cost recipe or an
+   empty builds-into renders nothing — null over placeholder).
 
 ## Decisions needing sign-off
 

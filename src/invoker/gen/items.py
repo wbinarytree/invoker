@@ -25,7 +25,7 @@ from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "3"
+ITEM_PROMPT_VERSION = "4"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -74,10 +74,10 @@ sentence.
 - State facts plainly with exact values. No flavor language: verbs like \
 "burns" or "cripples" and summaries like "combines X with Y" say nothing \
 checkable — write the stat names and numbers instead.
-- The card is the summary tier, not a copy of the article: it names the \
-build components and what the item builds into, but their prices stay in \
-the article's formula table. The card carries only the item's own \
-headline numbers.
+- One sentence carries the build formula: every component with its gold \
+cost, and the recipe cost when the formula has one, exactly as the \
+components section states them. What the item builds into is named \
+without prices — those numbers belong to the target item's own page.
 - Each sentence keeps the citation marks of the article text it compresses, \
 as strings of the form kind:KEY (e.g. gamefile:items/item_x#attribs) copied \
 exactly from the article's marks. A mark vouches only for facts its own \
