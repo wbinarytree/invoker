@@ -5,50 +5,40 @@ patch: 7.41d
 card:
   entity: mage_slayer
   sentences:
-  - text: Mage Slayer is a rare 3100-gold item that grants 12 damage, 5.5 health regeneration,
-      18% magic resistance, and 2.5 mana regeneration, and carries the passive Mage
-      Slayer, which debuffs attacked enemies for 35 damage per second and 40% reduced
-      spell damage over 3 seconds.
+  - text: Mage Slayer is a rare item costing 3100 gold that grants 12 damage, 5.5
+      health regeneration, 18% magic resistance, and 2.5 mana regeneration, and whose
+      holder's attacks apply a debuff dealing 35 damage per second and reducing the
+      target's spell damage by 40% for 3 seconds.
     marks:
     - gamefile:items/item_mage_slayer#cost
     - gamefile:items/item_mage_slayer#attribs
     - loc:DOTA_Tooltip_ability_item_mage_slayer_Description
+  - text: The debuff is placed on enemies the holder attacks.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_mage_slayer_Description
+  - text: The debuff's damage is physical.
+    marks:
+    - gamefile:items/item_mage_slayer#mechanics
+  - text: The ability is passive and is flagged not to proc other abilities.
+    marks:
+    - gamefile:items/item_mage_slayer#mechanics
+  - text: The debuff is dispellable.
+    marks:
+    - gamefile:items/item_mage_slayer#mechanics
   - text: It is built from Perseverance, Cloak, Blades of Attack, and Orb of Venom.
     marks:
     - gamefile:items/item_mage_slayer#components
-  - text: The passive applies its debuff when the holder attacks an enemy.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_mage_slayer_Description
-  - text: The debuff's damage over time is physical damage.
-    marks:
-    - gamefile:items/item_mage_slayer#mechanics
-  - text: The debuff can be removed by a dispel.
-    marks:
-    - gamefile:items/item_mage_slayer#mechanics
-  - text: The ability is flagged DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES,
-      so it does not trigger other on-hit effects.
-    marks:
-    - gamefile:items/item_mage_slayer#mechanics
-  - text: 'Lore: it was forged by a secret order in The Third Age of Praxa''cia to
-      fell the False King.'
+  - text: Its lore says it was forged by a secret order in The Third Age of Praxa'cia
+      to fell the False King.
     marks:
     - loc:DOTA_Tooltip_ability_item_mage_slayer_Lore
 ---
 
 # Mage Slayer
 
-Mage Slayer is a rare item that grants bonus damage, health regeneration, magic resistance, and mana regeneration, and carries the passive Mage Slayer, which places a debuff on attacked enemies that deals physical damage per second and reduces their spell damage [gamefile:items/item_mage_slayer#cost][gamefile:items/item_mage_slayer#attribs][loc:DOTA_Tooltip_ability_item_mage_slayer_Description].
+Mage Slayer is a rare item costing 3100 gold that grants damage, health regeneration, magic resistance, and mana regeneration, and applies a debuff when its holder attacks that deals damage per second and reduces the target's spell damage [gamefile:items/item_mage_slayer#cost] [gamefile:items/item_mage_slayer#attribs] [loc:DOTA_Tooltip_ability_item_mage_slayer_Description].
 
-## Cost and components
-
-| | |
-|---|---|
-| Cost | 3100 gold |
-| Components | Perseverance, Cloak, Blades of Attack, Orb of Venom |
-
-[gamefile:items/item_mage_slayer#cost][gamefile:items/item_mage_slayer#components]
-
-## Bonuses
+## Stats
 
 | Stat | Value |
 |---|---|
@@ -61,17 +51,28 @@ Mage Slayer is a rare item that grants bonus damage, health regeneration, magic 
 
 ## Passive: Mage Slayer
 
-| | |
+| Property | Value |
 |---|---|
 | DPS | 35 |
-| Spell amp debuff | 40% |
 | Duration | 3 |
+| Spell amp debuff | 40% |
 
 [gamefile:items/item_mage_slayer#attribs]
 
-The passive applies its debuff when the holder attacks an enemy; the debuff deals damage over time and lowers the affected unit's spell damage output for its duration [loc:DOTA_Tooltip_ability_item_mage_slayer_Description]. The damage it deals is physical, and the debuff can be removed by a dispel [gamefile:items/item_mage_slayer#mechanics].
+The debuff is placed on enemies the holder attacks, dealing damage per second and making them do less spell damage for its duration [loc:DOTA_Tooltip_ability_item_mage_slayer_Description]. Its damage is physical, and the ability is passive and flagged not to proc other abilities. The debuff is dispellable [gamefile:items/item_mage_slayer#mechanics].
 
-The ability is flagged `DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES`, so it does not trigger other on-hit effects [gamefile:items/item_mage_slayer#mechanics].
+## Components
+
+| Component | Gold |
+|---|---|
+| Perseverance | 1400 |
+| Cloak | 900 |
+| Blades of Attack | 450 |
+| Orb of Venom | 350 |
+
+[gamefile:items/item_mage_slayer#components]
+
+Total: 3100 gold [gamefile:items/item_mage_slayer#cost].
 
 ## Lore
 
