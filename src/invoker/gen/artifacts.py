@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from typing import Literal
+import hashlib
+import json
+from pathlib import Path
+from typing import Any, Literal
 
+import yaml
 from pydantic import BaseModel, ConfigDict, Field
 
-from invoker.gen.client import GenerationProvenance
+from invoker.gen.client import GenerationError, GenerationProvenance
 
-ENTITY_ARTIFACT_SCHEMA_VERSION = 2
+ENTITY_ARTIFACT_SCHEMA_VERSION = 3
 
 
 class CardSentence(BaseModel):
@@ -30,11 +34,15 @@ class EntityArtifact(BaseModel):
     """One generated entity (concept, item, hero): article (evidence
     trail) + card (serving tier).
 
-    The article lives in a sibling markdown file (`article_file`) so the
-    human-skim gate and archive diffs stay readable; `article_sha256` binds
-    the two — consumers must verify it and refuse a drifted article.
-    `citations` lists every distinct mark used; all of them resolve against
-    the context packet or generation fails — never against live sources.
+    On disk the entity is a SKILL.md-style markdown file (`article_file`):
+    YAML frontmatter carrying title/kind/patch and the card, then the
+    article body — the card is readable and distinguishable at a glance.
+    `artifact.json` holds everything else (citations, hashes, provenance)
+    and deliberately not the card, so each fact has one home.
+    `article_sha256` binds the whole markdown file (frontmatter included) —
+    consumers must verify it and refuse a drifted file. `citations` lists
+    every distinct article mark; all marks resolve against the context
+    packet or generation fails — never against live sources.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -51,3 +59,71 @@ class EntityArtifact(BaseModel):
     packet_sha256: str
     article_provenance: GenerationProvenance
     card_provenance: GenerationProvenance
+
+
+def article_file_text(*, title: str, kind: str, patch: str, card: EntityCard, body: str) -> str:
+    """Compose the on-disk markdown: frontmatter (identity + card) + body."""
+    front = yaml.safe_dump(
+        {
+            "title": title,
+            "kind": kind,
+            "patch": patch,
+            "card": card.model_dump(),
+        },
+        sort_keys=False,
+        allow_unicode=True,
+    )
+    return f"---\n{front}---\n\n{body}"
+
+
+def _parse_article_file(text: str, slug: str) -> tuple[dict[str, Any], EntityCard, str]:
+    if not text.startswith("---\n"):
+        raise GenerationError(f"{slug}: article file has no frontmatter; regenerate")
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        raise GenerationError(f"{slug}: article frontmatter is unterminated; regenerate")
+    meta = yaml.safe_load(text[4 : end + 1])
+    if not isinstance(meta, dict) or "card" not in meta:
+        raise GenerationError(f"{slug}: article frontmatter carries no card; regenerate")
+    card = EntityCard.model_validate(meta["card"])
+    body = text[end + len("\n---\n") :].lstrip("\n")
+    return meta, card, body
+
+
+def write_entity_artifact(entity_dir: Path, artifact: EntityArtifact, file_text: str) -> Path:
+    """Write the artifact pair: article_file (frontmatter + body, the text
+    `article_sha256` was computed over) and artifact.json without the card."""
+    entity_dir.mkdir(parents=True, exist_ok=True)
+    (entity_dir / artifact.article_file).write_text(file_text)
+    path = entity_dir / "artifact.json"
+    path.write_text(artifact.model_dump_json(indent=2, exclude={"card"}))
+    return path
+
+
+def load_entity_article(artifact_path: Path) -> tuple[EntityArtifact, str]:
+    """Load an artifact and its article body, verifying the sha binding.
+
+    A hand-edited or drifted article file fails loudly — artifacts are
+    regenerated, never patched in place."""
+    payload = json.loads(artifact_path.read_text())
+    slug = str(payload.get("slug", artifact_path.parent.name))
+    if payload.get("schema_version") != ENTITY_ARTIFACT_SCHEMA_VERSION:
+        raise GenerationError(
+            f"{slug}: artifact schema {payload.get('schema_version')} != "
+            f"{ENTITY_ARTIFACT_SCHEMA_VERSION}; regenerate"
+        )
+    file_text = (artifact_path.parent / str(payload["article_file"])).read_text()
+    digest = hashlib.sha256(file_text.encode()).hexdigest()
+    if digest != payload["article_sha256"]:
+        raise GenerationError(
+            f"{slug}: article file drifted from its artifact (sha mismatch); regenerate"
+        )
+    meta, card, body = _parse_article_file(file_text, slug)
+    for field in ("title", "kind", "patch"):
+        if meta.get(field) != payload.get(field):
+            raise GenerationError(
+                f"{slug}: frontmatter {field} {meta.get(field)!r} does not match "
+                f"artifact.json {payload.get(field)!r}; regenerate"
+            )
+    artifact = EntityArtifact.model_validate({**payload, "card": card})
+    return artifact, body

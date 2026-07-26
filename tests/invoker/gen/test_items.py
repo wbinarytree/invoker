@@ -95,7 +95,11 @@ def test_generate_item_writes_artifact(tmp_path):
     assert saved["title"] == "Mage Slayer"
     assert set(saved["citations"]) == {COST, COMPONENTS, ATTRIBS, DESC, MECHANICS}
     assert saved["article_provenance"]["prompt_name"] == "item-article"
-    assert (path.parent / "article.md").read_text() == good_article()
+    assert "card" not in saved  # the card's one home is the frontmatter
+    file_text = (path.parent / "article.md").read_text()
+    assert file_text.startswith("---\n")
+    assert "Rare item, 3100 gold." in file_text  # card in frontmatter
+    assert file_text.endswith(good_article())
     # the packet reached the model with keyed sections inline
     article_call = backend.calls[0]
     assert f"## [{ATTRIBS}]" in article_call["user_content"]

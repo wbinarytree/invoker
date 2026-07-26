@@ -9,8 +9,7 @@ import markdown
 
 from invoker.corpus.registry import load_registry
 from invoker.corpus.store import page_slug
-from invoker.gen.artifacts import EntityArtifact
-from invoker.gen.concepts import load_entity_article
+from invoker.gen.artifacts import EntityArtifact, load_entity_article
 
 _MARK_PATTERN = re.compile(r"\[corpus:([^\]\s]+)\]")
 _KEY_PATTERN = re.compile(r"^(?P<host>[^/]+)/(?P<slug>[^@]+)@(?P<rev>\d+)(?:#(?P<anchor>.+))?$")

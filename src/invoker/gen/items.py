@@ -13,14 +13,19 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
-from invoker.gen.artifacts import EntityArtifact, EntityCard
+from invoker.gen.artifacts import (
+    EntityArtifact,
+    EntityCard,
+    article_file_text,
+    write_entity_artifact,
+)
 from invoker.gen.checks import check_article_numbers, check_marks, check_numbers, extract_marks
 from invoker.gen.client import GenerationError
 from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, build_item_context
 
-ITEM_PROMPT_VERSION = "1"
+ITEM_PROMPT_VERSION = "2"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -33,6 +38,11 @@ knowledge, even when you are confident.
 copied exactly. A table block or run of sentences drawn from one section \
 shares a single mark at the end of the run.
 - Cite the single narrowest section that states the fact.
+- Open with a single sentence stating what the item is — name, quality, \
+and its effects by their real stat names — citing the sections that state \
+those facts. Concrete and plain: no flavor verbs ("burns", "cripples"), \
+no vague summaries ("combines X with Y"). Its numbers live in the tables \
+below, not the opener.
 - Numbers live in compact markdown stat tables. Include every value row the \
 cited section carries — Scepter/Shard columns too, when present — and never \
 restate a table value in prose. Values shown with a % sign keep it.
@@ -48,12 +58,24 @@ ITEM_CARD_SYSTEM_PROMPT = """You compress a grounded encyclopedia article into a
 
 Rules:
 - The card is at most 12 sentences and around 300 tokens total.
-- One core fact per sentence, so each fact maps to its own source marks. \
-Prefer dropping a minor fact over packing two facts into one sentence.
+- The first sentence is the identity line: it is shown alone as the item's \
+summary in an index, so it must state concretely what the item is and \
+does — name, quality, cost, and its core effect with its defining \
+numbers. A reader who sees only this sentence must be able to tell what \
+the item is. It is the one exception to one-fact-per-sentence and carries \
+the marks of every section it draws on.
+- Every other sentence states one core fact, so each fact maps to its own \
+source marks. Prefer dropping a minor fact over packing two facts into one \
+sentence.
+- State facts plainly with exact values. No flavor language: verbs like \
+"burns" or "cripples" and summaries like "combines X with Y" say nothing \
+checkable — write the stat names and numbers instead.
 - Each sentence keeps the citation marks of the article text it compresses, \
 as strings of the form kind:KEY (e.g. gamefile:items/item_x#attribs) copied \
-exactly from the article's marks. Cite the narrowest key that states the \
-fact; never pad with broader keys.
+exactly from the article's marks. A mark vouches only for facts its own \
+section states — never attach a mark to a sentence whose facts come from \
+elsewhere. Cite the narrowest key that states the fact; never pad with \
+broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - Use ONLY the article text. No outside knowledge."""
 
@@ -121,12 +143,13 @@ def build_item_packet(context: ItemContext) -> tuple[str, dict[str, str], str]:
     if mechanics_lines:
         sections.append((f"{base}#mechanics", "\n".join(mechanics_lines)))
 
-    if context.description:
-        sections.append(
-            (f"loc:DOTA_Tooltip_ability_{context.internal_name}_Description", context.description)
-        )
-    if context.lore:
-        sections.append((f"loc:DOTA_Tooltip_ability_{context.internal_name}_Lore", context.lore))
+    # loc marks cite the token that actually resolved, never a synthesized
+    # casing — a description without its token is a substrate inconsistency
+    # and gets no section rather than a fabricated citation
+    if context.description and context.description_token:
+        sections.append((f"loc:{context.description_token}", context.description))
+    if context.lore and context.lore_token:
+        sections.append((f"loc:{context.lore_token}", context.lore))
 
     packet = "\n\n".join(f"## [{mark}]\n{text}" for mark, text in sections)
     text_by_mark = dict(sections)
@@ -177,22 +200,25 @@ def generate_item(
         cited_text = "\n".join(text_by_mark.get(mark, "") for mark in sentence.marks)
         check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
 
+    file_text = article_file_text(
+        title=context.name,
+        kind="item",
+        patch=patch,
+        card=card.output,
+        body=article.text,
+    )
     artifact = EntityArtifact(
         kind="item",
         slug=slug,
         title=context.name,
         patch=patch,
         article_file="article.md",
-        article_sha256=hashlib.sha256(article.text.encode()).hexdigest(),
+        article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
         card=card.output,
         citations=citations,
         packet_sha256=packet_sha256,
         article_provenance=article.provenance,
         card_provenance=card.provenance,
     )
-    item_dir = kb_dir / "items" / slug
-    item_dir.mkdir(parents=True, exist_ok=True)
-    (item_dir / artifact.article_file).write_text(article.text)
-    path = item_dir / "artifact.json"
-    path.write_text(artifact.model_dump_json(indent=2))
+    path = write_entity_artifact(kb_dir / "items" / slug, artifact, file_text)
     return artifact, path

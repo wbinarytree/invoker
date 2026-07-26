@@ -8,7 +8,13 @@ from invoker.benchmark.answerer import (
     KbEntry,
     load_kb_entries,
 )
-from invoker.gen.artifacts import CardSentence, EntityArtifact, EntityCard
+from invoker.gen.artifacts import (
+    CardSentence,
+    EntityArtifact,
+    EntityCard,
+    article_file_text,
+    write_entity_artifact,
+)
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
@@ -67,26 +73,28 @@ def entry(entry_id: str = "concept/evasion") -> KbEntry:
 
 
 def write_concept(kb_dir, slug: str, article: str) -> None:
-    concept_dir = kb_dir / "concepts" / slug
-    concept_dir.mkdir(parents=True)
-    (concept_dir / "article.md").write_text(article)
+    title = slug.replace("-", " ").title()
+    card = EntityCard(
+        entity=slug,
+        sentences=[CardSentence(text="First card sentence.", marks=[f"corpus:{KEY}"])],
+    )
+    file_text = article_file_text(
+        title=title, kind="concept", patch="7.41d", card=card, body=article
+    )
     artifact = EntityArtifact(
         kind="concept",
         slug=slug,
-        title=slug.replace("-", " ").title(),
+        title=title,
         patch="7.41d",
         article_file="article.md",
-        article_sha256=hashlib.sha256(article.encode()).hexdigest(),
-        card=EntityCard(
-            entity=slug,
-            sentences=[CardSentence(text="First card sentence.", marks=[f"corpus:{KEY}"])],
-        ),
+        article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
+        card=card,
         citations=[f"corpus:{KEY}"],
         packet_sha256="0" * 64,
         article_provenance=provenance("concept-article"),
         card_provenance=provenance("concept-card"),
     )
-    (concept_dir / "artifact.json").write_text(artifact.model_dump_json())
+    write_entity_artifact(kb_dir / "concepts" / slug, artifact, file_text)
 
 
 def test_load_kb_entries_reads_concepts(tmp_path):
@@ -103,31 +111,28 @@ def test_load_kb_entries_missing_dir_is_empty(tmp_path):
 
 
 def test_load_kb_entries_reads_items_class(tmp_path):
-    item_dir = tmp_path / "items" / "mage_slayer"
-    item_dir.mkdir(parents=True)
     article = "Item article. [gamefile:items/item_mage_slayer#cost]"
-    (item_dir / "article.md").write_text(article)
+    card = EntityCard(
+        entity="mage_slayer",
+        sentences=[CardSentence(text="Rare item.", marks=["gamefile:items/item_mage_slayer#cost"])],
+    )
+    file_text = article_file_text(
+        title="Mage Slayer", kind="item", patch="7.41d", card=card, body=article
+    )
     artifact = EntityArtifact(
         kind="item",
         slug="mage_slayer",
         title="Mage Slayer",
         patch="7.41d",
         article_file="article.md",
-        article_sha256=hashlib.sha256(article.encode()).hexdigest(),
-        card=EntityCard(
-            entity="mage_slayer",
-            sentences=[
-                CardSentence(
-                    text="Rare item.", marks=["gamefile:items/item_mage_slayer#cost"]
-                )
-            ],
-        ),
+        article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
+        card=card,
         citations=["gamefile:items/item_mage_slayer#cost"],
         packet_sha256="0" * 64,
         article_provenance=provenance("item-article"),
         card_provenance=provenance("item-card"),
     )
-    (item_dir / "artifact.json").write_text(artifact.model_dump_json())
+    write_entity_artifact(tmp_path / "items" / "mage_slayer", artifact, file_text)
     entries = load_kb_entries(tmp_path)
     assert [e.id for e in entries] == ["item/mage_slayer"]
     assert entries[0].title == "Mage Slayer"

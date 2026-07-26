@@ -8,13 +8,18 @@ from pydantic import BaseModel
 
 from invoker.corpus.sections import CorpusSection, load_sections
 from invoker.corpus.store import CorpusStore
-from invoker.gen.artifacts import EntityArtifact, EntityCard
+from invoker.gen.artifacts import (
+    EntityArtifact,
+    EntityCard,
+    article_file_text,
+    write_entity_artifact,
+)
 from invoker.gen.checks import check_article_numbers, check_marks, check_numbers, extract_marks
 from invoker.gen.client import GenerationError, GenerationResult, StructuredResult
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "3"
+CONCEPT_PROMPT_VERSION = "4"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -38,11 +43,22 @@ CARD_SYSTEM_PROMPT = """You compress a grounded encyclopedia article into a card
 
 Rules:
 - The card is at most 12 sentences and around 300 tokens total.
-- One core fact per sentence, so each fact maps to its own source marks. \
-Prefer dropping a minor fact over packing two facts into one sentence.
-- Each sentence keeps the citation marks of the article sentence it \
-compresses, as strings of the form corpus:KEY copied exactly from the article. \
-Cite the narrowest key that states the fact; never pad with broader keys.
+- The first sentence is the identity line: it is shown alone as the \
+entity's summary in an index, so it must state concretely what the entity \
+is and does, with its defining numbers. A reader who sees only this \
+sentence must be able to tell what the entity is. It is the one exception \
+to one-fact-per-sentence and carries the marks of every section it draws on.
+- Every other sentence states one core fact, so each fact maps to its own \
+source marks. Prefer dropping a minor fact over packing two facts into one \
+sentence.
+- State facts plainly with exact values. No flavor language: verbs like \
+"burns" or "cripples" and summaries like "combines X with Y" say nothing \
+checkable — write the stat names and numbers instead.
+- Each sentence keeps the citation marks of the article text it \
+compresses, as strings of the form corpus:KEY copied exactly from the \
+article. A mark vouches only for facts its own section states — never \
+attach a mark to a sentence whose facts come from elsewhere. Cite the \
+narrowest key that states the fact; never pad with broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - Use ONLY the article text. No outside knowledge."""
 
@@ -95,21 +111,6 @@ def build_packet(sections: list[CorpusSection]) -> tuple[str, dict[str, str], st
     return packet, text_by_mark, hashlib.sha256(packet.encode()).hexdigest()
 
 
-def load_entity_article(artifact_path: Path) -> tuple[EntityArtifact, str]:
-    """Load an artifact and its article, verifying the sha binding.
-
-    A hand-edited or drifted article file fails loudly — artifacts are
-    regenerated, never patched in place."""
-    artifact = EntityArtifact.model_validate_json(artifact_path.read_text())
-    article = (artifact_path.parent / artifact.article_file).read_text()
-    digest = hashlib.sha256(article.encode()).hexdigest()
-    if digest != artifact.article_sha256:
-        raise GenerationError(
-            f"{artifact.slug}: article file drifted from its artifact (sha mismatch); regenerate"
-        )
-    return artifact, article
-
-
 def generate_concept(
     store: CorpusStore,
     backend: GenerationBackend,
@@ -159,22 +160,25 @@ def generate_concept(
         cited_text = "\n".join(text_by_mark.get(mark, "") for mark in sentence.marks)
         check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
 
+    file_text = article_file_text(
+        title=index_page.resolved_title,
+        kind="concept",
+        patch=patch,
+        card=card.output,
+        body=article.text,
+    )
     artifact = EntityArtifact(
         kind="concept",
         slug=slug,
         title=index_page.resolved_title,
         patch=patch,
         article_file="article.md",
-        article_sha256=hashlib.sha256(article.text.encode()).hexdigest(),
+        article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
         card=card.output,
         citations=citations,
         packet_sha256=packet_sha256,
         article_provenance=article.provenance,
         card_provenance=card.provenance,
     )
-    concept_dir = kb_dir / "concepts" / slug
-    concept_dir.mkdir(parents=True, exist_ok=True)
-    (concept_dir / artifact.article_file).write_text(article.text)
-    path = concept_dir / "artifact.json"
-    path.write_text(artifact.model_dump_json(indent=2))
+    path = write_entity_artifact(kb_dir / "concepts" / slug, artifact, file_text)
     return artifact, path

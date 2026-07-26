@@ -107,14 +107,18 @@ def test_generate_concept_writes_artifact_and_article_file(tmp_path):
     assert saved["slug"] == "evasion"
     assert saved["title"] == "Evasion"
     assert saved["patch"] == "7.41d"
-    assert saved["schema_version"] == 2
+    assert saved["schema_version"] == 3
     assert saved["citations"] == [f"corpus:{KEY}"]
     assert saved["article_provenance"]["prompt_name"] == "concept-article"
     assert saved["card_provenance"]["prompt_name"] == "concept-card"
     assert len(saved["packet_sha256"]) == 64
-    # article lives in the sibling markdown file, bound by sha
+    # the card's one home is the markdown frontmatter, not artifact.json
+    assert "card" not in saved
     assert saved["article_file"] == "article.md"
-    assert (path.parent / "article.md").read_text() == good_article()
+    file_text = (path.parent / "article.md").read_text()
+    assert file_text.startswith("---\n")
+    assert "Uphill ranged attacks miss 25% of the time." in file_text  # card in frontmatter
+    assert file_text.endswith(good_article())
     # the packet reached the model with keys inline
     article_call = backend.calls[0]
     assert f"[{KEY}]" in article_call["user_content"]
@@ -122,15 +126,46 @@ def test_generate_concept_writes_artifact_and_article_file(tmp_path):
 
 
 def test_load_entity_article_verifies_sha_binding(tmp_path):
-    from invoker.gen.concepts import load_entity_article
+    from invoker.gen.artifacts import load_entity_article
 
     _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
     artifact, article = load_entity_article(path)
     assert artifact.slug == "evasion"
+    # the card round-trips through the frontmatter; the body excludes it
+    assert artifact.card.sentences[0].text == good_card().sentences[0].text
     assert article == good_article()
     # a hand-edited article file fails loudly
-    (path.parent / "article.md").write_text(article + "\n\nEdited by hand.")
+    original = (path.parent / "article.md").read_text()
+    (path.parent / "article.md").write_text(original + "\n\nEdited by hand.")
     with pytest.raises(GenerationError, match="drifted"):
+        load_entity_article(path)
+
+
+def test_load_entity_article_rejects_stale_schema(tmp_path):
+    import json as json_module
+
+    from invoker.gen.artifacts import load_entity_article
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    payload = json_module.loads(path.read_text())
+    payload["schema_version"] = 2
+    path.write_text(json_module.dumps(payload))
+    with pytest.raises(GenerationError, match="schema 2"):
+        load_entity_article(path)
+
+
+def test_load_entity_article_rejects_frontmatter_json_mismatch(tmp_path):
+    # only reachable via json-side drift — an md-side edit trips the sha
+    # first — which is exactly the migration safety net this check is
+    import json as json_module
+
+    from invoker.gen.artifacts import load_entity_article
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    payload = json_module.loads(path.read_text())
+    payload["patch"] = "7.42"
+    path.write_text(json_module.dumps(payload))
+    with pytest.raises(GenerationError, match="frontmatter patch"):
         load_entity_article(path)
 
 

@@ -1,88 +1,11 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "kind": "concept",
   "slug": "random_distribution",
   "title": "Random Distribution",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "9c3f4f9293c7ea97c42f874d4fc0300862cb1dda239ba7ac7befac9b246d709b",
-  "card": {
-    "entity": "random_distribution",
-    "sentences": [
-      {
-        "text": "Dota 2 includes random events to keep the game unpredictable, but pseudo-random distribution (PRD) replaces true random distribution where developers wanted to limit huge streaks.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760"
-        ]
-      },
-      {
-        "text": "Under PRD the event's chance increases each time it fails to occur but starts lower than the listed chance as compensation, giving lower variance and a concave distribution.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Definition"
-        ]
-      },
-      {
-        "text": "The probability on the N-th test since the last proc is P(N) = C · N, where the constant increment C is also the initial probability and the counter resets once the effect occurs.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Definition"
-        ]
-      },
-      {
-        "text": "The event is guaranteed on the first trial where C · N ≥ 1, i.e. N ≥ 1/C.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Definition"
-        ]
-      },
-      {
-        "text": "For melee Skull Basher's 25% Bash, C = 8.47%: the first attack has ~8.5%, the second ~17%, the third ~25.5%, and the 12th attempt is the ensured proc, averaging out to nearly 25%.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Example"
-        ]
-      },
-      {
-        "text": "Instances that could not trigger the effect do not increase the counter (critical strike attacking buildings), and the chance is neither reset nor increased while the ability is on cooldown.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Example"
-        ]
-      },
-      {
-        "text": "Approximate C values include 0.38% for a nominal 5%, 1.5% for 10%, 8.5% for 25%, 30% for 50%, 67% for 75% and 95% for 95%.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#C_Values"
-        ]
-      },
-      {
-        "text": "All evasion sources and the drop chance of neutral items use pseudo-random distribution.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Pseudo_random_events"
-        ]
-      },
-      {
-        "text": "PRD-based effects include Chaos Strike, Time Lock, Backtrack, Blade Dance, Moment of Courage, Coup de Grace, Juxtapose, Headshot, Greater Bash, Crystalys/Daedalus crits, Maelstrom-family Chain Lightning, Radiance Burn and Vanguard/Crimson Guard/Abyssal Blade damage block.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Hero_and_Unit_Abilities"
-        ]
-      },
-      {
-        "text": "True random flat distribution rolls a value between 0 and 1 along a min–max gradient, covering attack damage ranges, last hit gold bounty, Roshan's respawn timer, Chaos Bolt, Doppelganger's 325 reappear radius and Freezing Field's 195–785 explosion distance.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Flat_distribution"
-        ]
-      },
-      {
-        "text": "Discrete random events include powerup runes over 6 types and 2 locations, neutral camp spawns, illusion formation positions, and target selection for effects like Chain Frost and Paralyzing Cask.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Discrete_distribution"
-        ]
-      },
-      {
-        "text": "Legacy WC3 DotA data for a nominal 25% chance gives actual probability 24.9%, C = 0.08475, Max N 12, average N 4.02 and SD 1.90 versus 3.49 under true random.",
-        "marks": [
-          "corpus:liquipedia_dota2/random_distribution@2376760#Legacy_data"
-        ]
-      }
-    ]
-  },
+  "article_sha256": "2fdd4c5dca319f8a4aa94958ef18250fb6c0300641041f4543f0147cdd62be0a",
   "citations": [
     "corpus:liquipedia_dota2/random_distribution@2376760",
     "corpus:liquipedia_dota2/random_distribution@2376760#Definition",

@@ -6,8 +6,9 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from invoker.gen.artifacts import load_entity_article
 from invoker.gen.client import GenerationError, GenerationProvenance
-from invoker.gen.concepts import GenerationBackend, load_entity_article
+from invoker.gen.concepts import GenerationBackend
 from invoker.marks import Mark, parse_marks
 from invoker.snapshot.changelog import search_changelog
 
