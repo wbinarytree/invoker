@@ -40,8 +40,15 @@ would add noise. Substrate-side chart/image extraction is the real fix,
 out of scope here. Acceptance is the user's per-artifact call
 (commit = acceptance).
 
-## Open
+## Behavioral gate (battery, same day)
 
-- Battery over the regenerated canonical KB, answerer/judge held
-  constant against the 2026-07-26 baseline (behavioral gate) — after
-  the user's skim of the v5 articles.
+Two runs on the v5 canonical KB, answerer/judge claude-cli/claude-opus-5
+— identical config to the 2026-07-26 baseline claude arm (3/5 both
+runs): **4/5 then 3/5** (runs `20260726-184504-502535`,
+`20260726-184738-611754`). corrosive-haze resolution-missed every run
+(no ability artifacts — the standing demand signal, unchanged).
+uphill-miss composed 102/120 words (pass) then 131/120 (over-length) vs
+the baseline's 126/135 — the known compose-length variance of the
+answerer prompt, not a v5 effect. No fact verdict regressed; the ~2×
+article growth did not measurably hurt retrieval or compose at N=2
+(large effects only). Completeness-gates loop closed.
