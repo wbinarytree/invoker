@@ -26,7 +26,7 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "6"
+CONCEPT_PROMPT_VERSION = "7"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -50,7 +50,9 @@ citation the text does not strictly need; a broad section key is wrong \
 when a more specific one states the fact.
 - Numbers must match the cited section exactly: reproduce values as the \
 source states them. Never derive, sum, convert, count, or round numbers — \
-a value the source does not literally contain must not appear.
+a value the source does not literally contain must not appear. Reproduce \
+ranges and series exactly as written; never expand a range into the \
+individual values it covers.
 - The patch named in the request is context, not source material: never \
 state the patch or its version anywhere in the article, including the title.
 - If the sources do not cover something, leave it out. Never fill a gap with a \
@@ -80,6 +82,9 @@ article. A mark vouches only for facts its own section states — never \
 attach a mark to a sentence whose facts come from elsewhere. Cite the \
 narrowest key that states the fact; never pad with broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
+- Every number must appear literally in the article text a sentence's marks \
+cover: never count list entries or table rows yourself, and never derive, \
+sum, convert, or round a value.
 - Use ONLY the article text. No outside knowledge."""
 
 
