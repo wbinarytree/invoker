@@ -195,6 +195,27 @@ recorded, none silently retried (v5/v6 rejects stay in
   long background runs, so the fleet runs as bounded chunks; resume
   is the existing skip-existing behavior.
 
+## Amendment 2 (2026-07-27): degenerate sections; v9 table marks
+
+Post-fleet forensics on the 7 parked pages found two non-model causes
+and one prompt gap:
+
+- **Degenerate packet sections dropped at build**: MediaWiki template
+  error strings ("Error no text specified!" — the whole
+  `creep_control_techniques` lead) and bare "Main Article: X"
+  cross-reference stubs (`cast_animation#Spell_Steal`, 20 chars) carry
+  no citable facts; forcing coverage of them invites fabrication.
+  `build_packet` now drops them (`is_degenerate_section`). Corpus scan:
+  6 pages affected; 4 already-generated artifacts cite such stubs and
+  are queued for regeneration before acceptance.
+- **Prompt v9**: "cite the single narrowest section" fought
+  consolidated stat tables drawing values from several sections (the
+  intelligence/strength/universal signature — every failing number was
+  present in the packet, only misattributed). v9: a consolidating
+  table's trailing marks must cover every contributing section.
+- `cyclone` was parked before the v8 rule written for its failure
+  existed; retried under the current prompt.
+
 ## Acceptance (user decision 2026-07-26)
 
 Nothing auto-commits. Morning report groups entities into the three

@@ -88,6 +88,31 @@ def test_build_packet_keys_and_stable_hash(tmp_path):
     assert f"corpus:{LEAD_KEY}#Cleave_&_Splash" not in text_by_mark
 
 
+def test_degenerate_sections_dropped_from_packet():
+    from invoker.corpus.sections import CorpusSection
+    from invoker.gen.concepts import is_degenerate_section
+
+    # observed in the corpus: template error leads and bare cross-ref stubs
+    assert is_degenerate_section("Error no text specified!")
+    assert is_degenerate_section("Main Article: Rubick")
+    assert is_degenerate_section("Main Article: Rubick\nError no text specified!")
+    # content survives even alongside a stub line
+    assert not is_degenerate_section("Main Article: Spell Steal\nRange\n800")
+    assert not is_degenerate_section("Attacks miss 25% of the time.")
+
+    def section(anchor: str, text: str) -> CorpusSection:
+        return CorpusSection(
+            host_key="w", slug="p", revision_id=1, anchor=anchor,
+            heading=anchor, level=2, breadcrumbs=(anchor,), text=text,
+        )
+
+    sections = [section("Real", "Facts here."), section("Stub", "Main Article: Rubick")]
+    _, text_by_mark, _ = build_packet(sections)
+    keys = list(text_by_mark)
+    assert any("Real" in k for k in keys)
+    assert not any("Stub" in k for k in keys)
+
+
 def test_extract_marks_dedupes_in_order():
     text = f"A. [corpus:{KEY}] B. [corpus:{LEAD_KEY}] C. [corpus:{KEY}]"
     assert extract_marks(text) == [f"corpus:{KEY}", f"corpus:{LEAD_KEY}"]

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Protocol, TypeVar
@@ -26,7 +27,7 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "8"
+CONCEPT_PROMPT_VERSION = "9"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -50,7 +51,9 @@ the source section changes; consecutive sentences drawn from the same \
 section share a single mark at the end of the run.
 - Cite the single narrowest section that states the fact. Never attach a \
 citation the text does not strictly need; a broad section key is wrong \
-when a more specific one states the fact.
+when a more specific one states the fact. The one exception is a table or \
+sentence that consolidates values from several sections: its trailing marks \
+must cover every section whose values appear in it.
 - Numbers must match the cited section exactly: reproduce values as the \
 source states them. Never derive, sum, convert, count, or round numbers — \
 a value the source does not literally contain must not appear. Reproduce \
@@ -119,18 +122,32 @@ class GenerationBackend(Protocol):
     ) -> StructuredResult[T]: ...
 
 
+WIKI_ERROR_TEXT = "Error no text specified!"
+MAIN_ARTICLE_LINE = re.compile(r"^Main Article:.*$", re.MULTILINE)
+
+
+def is_degenerate_section(text: str) -> bool:
+    """True for sections that carry no citable facts: MediaWiki template
+    error strings leaked through extraction, and bare "Main Article: X"
+    cross-reference stubs. Forcing coverage of these invites fabrication
+    (batch KB generation spec, amendment 2)."""
+    residue = MAIN_ARTICLE_LINE.sub("", text.replace(WIKI_ERROR_TEXT, ""))
+    return not residue.strip()
+
+
 def build_packet(sections: list[CorpusSection]) -> tuple[str, dict[str, str], str]:
     """Render sections into the generation context packet.
 
     Returns (packet_text, section text by mark string, packet sha256) —
     the dict doubles as the valid-mark set and the number-check source,
     same contract as build_item_packet. The hash goes into artifact
-    provenance so a regenerated packet is detectable.
+    provenance so a regenerated packet is detectable. Degenerate sections
+    (error strings, contentless cross-reference stubs) are dropped.
     """
     parts: list[str] = []
     text_by_mark: dict[str, str] = {}
     for section in sections:
-        if not section.text:
+        if not section.text or is_degenerate_section(section.text):
             continue
         text_by_mark[f"corpus:{section.citation_key}"] = section.text
         crumb = " > ".join(section.breadcrumbs) or "(lead)"
