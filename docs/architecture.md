@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (item generator + gamefile/loc mark resolvers)
+Last updated: 2026-07-26 (item generator, gamefile/loc resolvers, v3 frontmatter artifacts)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -447,20 +447,31 @@ its marks — compression with pointers back). Mechanical faithfulness
 check (shared `gen/checks.py`, same code path as items): every mark in
 article and card must resolve against the packet or generation aborts;
 marks are never checked against live sources.
-Artifacts: one folder per entity — `data/kb/<patch>/concepts/<slug>/`
-holding `article.md` (the article — human-skim surface, diffable in the
-archive) + `artifact.json` (card, citations,
-packet hash, per-call provenance, `article_sha256` binding the pair;
-consumers verify it via `load_entity_article` and refuse a drifted
-article). CLI: `invoker generate-concept <slug> --patch <patch>`.
+Artifacts (schema v3): one folder per entity —
+`data/kb/<patch>/concepts/<slug>/` holding `article.md` in SKILL.md
+style (YAML frontmatter: title/kind/patch + the card with per-sentence
+marks, then the article body — card and full content distinguishable at
+a glance, the human-skim surface) + `artifact.json` (citations, packet
+hash, per-call provenance — deliberately not the card, whose one home
+is the frontmatter). `article_sha256` binds the whole markdown file;
+consumers load via `load_entity_article`/`write_entity_artifact` in
+`artifacts.py` and refuse a drifted file or a stale schema version. The
+card's first sentence is the identity line — it doubles as the entity's
+summary in the answerer index, so the card prompts require it to
+identify the entity concretely with its defining numbers (no flavor
+prose). CLI: `invoker generate-concept <slug> --patch <patch>`.
 
 **Item generator (S-items slice)** — `items.py` + shared `checks.py`
 (spec: `docs/specs/2026-07-26-game-file-grounded-generators.md`).
 Context packet = the `ItemContext` rendered into keyed sections under
 the `gamefile:items/<name>#<section>` (`cost`, `components`, `attribs`,
-`mechanics`) and `loc:<token>` (description, lore) mark grammar; attrib
-lines carry resolved tooltip labels (`$spell_resist` → "MAGIC
-RESISTANCE", percent-flagged) and Scepter/Shard bonus columns. The
+`mechanics`) and `loc:<token>` (description, lore — the token that
+actually resolved, carried on `ItemContext`, never a synthesized
+casing) mark grammar; attrib lines carry resolved tooltip labels
+(`$spell_resist` → "MAGIC RESISTANCE", percent-flagged) and
+Scepter/Shard bonus columns, and keys without a label token derive
+their percent flag from the raw description template (`%key%%%` = a
+literal % after the value). The
 article prompt enforces the stat-table register: every value the cited
 section carries goes in a table (no trimming, no value restated in
 prose); prose is behavior semantics only. Same faithfulness discipline

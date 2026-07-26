@@ -160,6 +160,36 @@ unknown classes today by design).
 - Claims sidecars (S4), pair tier, batch/roster build orchestration and
   its cost ceiling (estimate before scaling — rethink open question 4).
 
+## Amendment — slice-1 skim findings (2026-07-26, user decision)
+
+The human skim of the first item artifact drove three changes, folded
+into the slice-1 PR:
+
+1. **SKILL.md-style artifact files (schema v3).** Reading the archive,
+   the card and the article were indistinguishable (card buried in
+   `artifact.json`, article a plain file). `article.md` now carries YAML
+   frontmatter — title/kind/patch + the card with per-sentence marks —
+   above the article body, like a skill's description-then-content.
+   `artifact.json` keeps citations/hashes/provenance and deliberately
+   not the card (one home per fact). `article_sha256` binds the whole
+   file. Committed v2 artifacts were migrated mechanically (no content
+   change, provenance untouched); the loader rejects stale schemas.
+2. **Identity-line card register.** The generated card opened with
+   flavor prose ("combines magic resistance and regeneration … cripples
+   enemy spell output") — unusable as an index summary. Card prompts now
+   require sentence 1 to identify the entity concretely with its
+   defining numbers (it is the one exception to one-fact-per-sentence
+   and carries all contributing marks), ban flavor verbs and "combines
+   X with Y" summaries, and forbid attaching a mark to facts its section
+   does not state. The item article prompt gets the same concrete-opener
+   rule (numberless — its numbers live in the tables).
+3. **Percent for label-token-less keys.** `spell_amp_debuff` has no
+   tooltip label token, so the packet rendered a unit-less "40". The raw
+   description template is the mechanical percent source: `%key%%%`
+   renders a literal % after the substituted value. Packets also cite
+   the `loc:` token that actually resolved (carried on `ItemContext`)
+   instead of synthesizing a casing.
+
 ## Decisions needing sign-off
 
 1. **Item scope rule** as above (localized name + cost/recipe presence;
