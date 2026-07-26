@@ -19,10 +19,10 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
-- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>] [--backend <name>] [--model <id>]`
-- `invoker generate-item ITEM --patch <patch> [--effort <level>] [--backend <name>] [--model <id>]`
+- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>]`
+- `invoker generate-item ITEM --patch <patch> [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>]`
 - `invoker render-kb --patch <patch> [--out <dir>]`
-- `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>] [--answerer-backend <name>] [--judge-backend <name>]`
+- `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>] [--answerer-backend <name>] [--judge-backend <name>] [--kb-dir <dir>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -258,7 +258,10 @@ uv run invoker generate-concept evasion --patch 7.41d
   (`codex app-server` daemon on the user's Codex budget, default model
   `gpt-5.6-sol`); `--model` overrides the backend's pinned model.
   Provenance (model, transport, prompt version, request hash, packet
-  hash) is recorded on the artifact.
+  hash) is recorded on the artifact. `--kb-dir` redirects output away
+  from the canonical committed archive — required for backend/format
+  experiment variants (e.g. data/kb-variants/codex/7.41d, gitignored);
+  `run-benchmark --kb-dir` answers from such a variant.
 - Every citation mark in the article and card must resolve against the
   concept's own corpus sections; an unresolvable mark aborts with exit 1.
 - Slow by design: two full generation calls per concept.

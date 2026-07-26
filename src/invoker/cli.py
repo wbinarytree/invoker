@@ -244,6 +244,15 @@ GenBackendOption = Annotated[
         help="Generation backend: claude-cli (subscription) or codex (app-server daemon).",
     ),
 ]
+KbDirOption = Annotated[
+    Path | None,
+    typer.Option(
+        "--kb-dir",
+        help="KB directory override (default: data/kb/<patch>, the canonical "
+        "committed archive). Point experiment variants at a separate dir, "
+        "e.g. data/kb-variants/<name>/<patch> (gitignored).",
+    ),
+]
 GenModelOption = Annotated[
     str | None,
     typer.Option(help="Model override; defaults to the backend's pinned model."),
@@ -281,6 +290,7 @@ def generate_concept_cmd(
     effort: str | None = typer.Option(None, help="Generation effort level override."),
     backend: GenBackendOption = "claude-cli",
     model: GenModelOption = None,
+    kb_dir_override: KbDirOption = None,
 ) -> None:
     """Generate one concept article + card into data/kb/<patch>/concepts/.
 
@@ -301,7 +311,7 @@ def generate_concept_cmd(
             host_key=host,
             slug=slug,
             patch=patch,
-            kb_dir=kb_dir(cfg.data_dir, patch),
+            kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
         )
     except GenerationError as exc:
@@ -325,6 +335,7 @@ def generate_item_cmd(
     effort: str | None = typer.Option(None, help="Generation effort level override."),
     backend: GenBackendOption = "claude-cli",
     model: GenModelOption = None,
+    kb_dir_override: KbDirOption = None,
 ) -> None:
     """Generate one item article + card into data/kb/<patch>/items/.
 
@@ -346,7 +357,7 @@ def generate_item_cmd(
             client,
             item=item,
             patch=patch,
-            kb_dir=kb_dir(cfg.data_dir, patch),
+            kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
         )
     except GenerationError as exc:
@@ -415,6 +426,7 @@ def run_benchmark_cmd(
             "under test."
         ),
     ] = None,
+    kb_dir_override: KbDirOption = None,
 ) -> None:
     """Run the basic-QA benchmark against the generated KB (Milestone 1 gate).
 
@@ -472,7 +484,7 @@ def run_benchmark_cmd(
         report, report_path = run_benchmark(
             cases=cases,
             patch=patch,
-            kb_dir=kb_dir(cfg.data_dir, patch),
+            kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             corpus_store=CorpusStore(corpus_dir(cfg.data_dir)),
             changelog=changelog,
             answer_backend=answer_client,
