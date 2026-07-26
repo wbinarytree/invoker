@@ -283,7 +283,8 @@ uv run invoker generate-item mage_slayer --patch 7.41d
 ### `render-kb`
 
 Render the committed KB archive for one patch into a browsable static site
-under `dist/kb-site/<patch>/` (disposable derived output, S5). The index
+under `dist/kb-site/<patch>/` (disposable derived output, S5). Renders
+`concepts/` only for now — item artifacts are not yet on the site. The index
 page is the coverage audit: every curated corpus page vs generated
 artifacts. Citation marks link to the pinned source revision; rendering
 verifies every artifact's article sha binding and fails on drift.
