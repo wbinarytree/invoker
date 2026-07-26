@@ -26,7 +26,7 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "7"
+CONCEPT_PROMPT_VERSION = "8"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -35,16 +35,19 @@ Rules:
 knowledge, even when you are confident.
 - The article is a lossless compression of the sources: every load-bearing \
 fact in every provided section appears in it — exact values, enumerations, \
-interaction rules, conditions and exceptions. Cover every section; omit only \
-prose style, wiki housekeeping, and reference boilerplate.
+interaction rules, conditions and exceptions. Cover every section — a \
+one-line or footnote section is still a section and must be cited at least \
+once; omit only prose style, wiki housekeeping, and reference boilerplate.
 - Carry enumerations in full: lists of sources, items, abilities, or talents \
 with their values, and tables of constants, are reproduced as markdown \
 tables with every row — never summarized by examples or "such as" \
 selections.
 - Every factual statement is covered by a citation mark of the form \
 [corpus:KEY], where KEY is one of the provided section keys, copied exactly. \
-Place a mark wherever the source section changes; consecutive sentences drawn \
-from the same section share a single mark at the end of the run.
+The source headers display the bare key in brackets; your marks must always \
+add the corpus: prefix — [corpus:KEY], never [KEY]. Place a mark wherever \
+the source section changes; consecutive sentences drawn from the same \
+section share a single mark at the end of the run.
 - Cite the single narrowest section that states the fact. Never attach a \
 citation the text does not strictly need; a broad section key is wrong \
 when a more specific one states the fact.
