@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
 import typer
+
+if TYPE_CHECKING:
+    from invoker.gen.concepts import GenerationBackend
 
 from invoker import __version__
 from invoker.config import Config
@@ -234,29 +237,67 @@ def show_item_context_cmd(
     typer.echo(json.dumps(dataclasses.asdict(context), indent=2))
 
 
+GenBackendOption = Annotated[
+    str,
+    typer.Option(
+        "--backend",
+        help="Generation backend: claude-cli (subscription) or codex (app-server daemon).",
+    ),
+]
+GenModelOption = Annotated[
+    str | None,
+    typer.Option(help="Model override; defaults to the backend's pinned model."),
+]
+
+
+def _make_backend(name: str, model: str | None) -> GenerationBackend:
+    """Per-role backend factory (serving-format measurement spec). Each
+    backend carries its own default model so a role switched to codex does
+    not inherit a Claude model id."""
+    if name == "claude-cli":
+        from invoker.gen.claude_cli import ClaudeCliClient
+
+        return ClaudeCliClient() if model is None else ClaudeCliClient(model=model)
+    if name == "codex":
+        from invoker.gen.codex import CodexClient
+
+        return CodexClient() if model is None else CodexClient(model=model)
+    raise typer.BadParameter(f"unknown backend {name!r}; choose claude-cli or codex")
+
+
+def _close_backends(*backends: GenerationBackend) -> None:
+    from invoker.gen.codex import CodexClient
+
+    for backend in {id(backend): backend for backend in backends}.values():
+        if isinstance(backend, CodexClient):
+            backend.close()
+
+
 @app.command("generate-concept")
 def generate_concept_cmd(
     slug: str = typer.Argument(..., help="Corpus page slug, e.g. evasion."),
     patch: str = typer.Option(..., help="Patch context recorded on the artifact."),
     host: str = typer.Option("liquipedia_dota2", help="Corpus host key."),
     effort: str | None = typer.Option(None, help="Generation effort level override."),
+    backend: GenBackendOption = "claude-cli",
+    model: GenModelOption = None,
 ) -> None:
     """Generate one concept article + card into data/kb/<patch>/concepts/.
 
-    Uses the claude -p transport (subscription-billed). Citation marks that
-    do not resolve against the context packet abort the run.
+    Citation marks that do not resolve against the context packet abort
+    the run.
     """
     from invoker.corpus.store import CorpusStore
-    from invoker.gen.claude_cli import ClaudeCliClient
     from invoker.gen.client import GenerationError
     from invoker.gen.concepts import generate_concept
     from invoker.paths import corpus_dir, kb_dir
 
     cfg = _load_config()
+    client = _make_backend(backend, model)
     try:
         artifact, path = generate_concept(
             CorpusStore(corpus_dir(cfg.data_dir)),
-            ClaudeCliClient(),
+            client,
             host_key=host,
             slug=slug,
             patch=patch,
@@ -266,6 +307,8 @@ def generate_concept_cmd(
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(client)
     typer.echo(f"Wrote {path} + {artifact.article_file}")
     typer.echo(
         f"{len(artifact.citations)} distinct citations, "
@@ -280,13 +323,14 @@ def generate_item_cmd(
     item: str = typer.Argument(..., help="Item internal or localized name, e.g. mage_slayer."),
     patch: str = typer.Option(..., help="Game-file snapshot patch to ground in."),
     effort: str | None = typer.Option(None, help="Generation effort level override."),
+    backend: GenBackendOption = "claude-cli",
+    model: GenModelOption = None,
 ) -> None:
     """Generate one item article + card into data/kb/<patch>/items/.
 
     Grounded in the game-file snapshot (gamefile:/loc: marks); citation
     marks that do not resolve against the context packet abort the run.
     """
-    from invoker.gen.claude_cli import ClaudeCliClient
     from invoker.gen.client import GenerationError
     from invoker.gen.items import generate_item
     from invoker.paths import kb_dir
@@ -295,10 +339,11 @@ def generate_item_cmd(
     if cfg.game_data_dir is None:
         typer.echo("INVOKER_GAME_DATA_DIR is not configured", err=True)
         raise typer.Exit(code=1)
+    client = _make_backend(backend, model)
     try:
         artifact, path = generate_item(
             cfg.game_data_dir,
-            ClaudeCliClient(),
+            client,
             item=item,
             patch=patch,
             kb_dir=kb_dir(cfg.data_dir, patch),
@@ -307,6 +352,8 @@ def generate_item_cmd(
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(client)
     typer.echo(f"Wrote {path} + {artifact.article_file}")
     typer.echo(
         f"{len(artifact.citations)} distinct citations, "
@@ -356,6 +403,18 @@ def run_benchmark_cmd(
         str | None,
         typer.Option(help="Judge model override (defaults to the answerer model)."),
     ] = None,
+    answerer_backend: Annotated[
+        str,
+        typer.Option(help="Answerer backend: claude-cli or codex."),
+    ] = "claude-cli",
+    judge_backend: Annotated[
+        str | None,
+        typer.Option(
+            help="Judge backend (defaults to the answerer backend). Hold the "
+            "judge constant within an experiment; vary only the condition "
+            "under test."
+        ),
+    ] = None,
 ) -> None:
     """Run the basic-QA benchmark against the generated KB (Milestone 1 gate).
 
@@ -367,7 +426,6 @@ def run_benchmark_cmd(
     from invoker.benchmark.report import CaseResult
     from invoker.benchmark.runner import run_benchmark
     from invoker.corpus.store import CorpusStore
-    from invoker.gen.claude_cli import CLI_GENERATION_MODEL, ClaudeCliClient
     from invoker.gen.client import GenerationError
     from invoker.paths import benchmark_runs_dir, corpus_dir, kb_dir
 
@@ -401,7 +459,15 @@ def run_benchmark_cmd(
         status = "PASS" if result.passed else f"FAIL  [{', '.join(result.failures)}]"
         typer.echo(f"{result.case_id}: {status}")
 
-    answer_model_id = answerer_model or CLI_GENERATION_MODEL
+    answer_client = _make_backend(answerer_backend, answerer_model)
+    judge_backend_name = judge_backend or answerer_backend
+    judge_model_id = judge_model
+    if judge_model_id is None and judge_backend_name == answerer_backend:
+        judge_model_id = answer_client.model
+    if judge_backend_name == answerer_backend and judge_model_id == answer_client.model:
+        judge_client = answer_client
+    else:
+        judge_client = _make_backend(judge_backend_name, judge_model_id)
     try:
         report, report_path = run_benchmark(
             cases=cases,
@@ -409,8 +475,8 @@ def run_benchmark_cmd(
             kb_dir=kb_dir(cfg.data_dir, patch),
             corpus_store=CorpusStore(corpus_dir(cfg.data_dir)),
             changelog=changelog,
-            answer_backend=ClaudeCliClient(model=answer_model_id),
-            judge_backend=ClaudeCliClient(model=judge_model or answer_model_id),
+            answer_backend=answer_client,
+            judge_backend=judge_client,
             out_dir=benchmark_runs_dir(cfg.data_dir, patch),
             game_data_dir=cfg.game_data_dir,
             on_result=_print,
@@ -418,6 +484,8 @@ def run_benchmark_cmd(
     except GenerationError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(answer_client, judge_client)
     failed = sum(1 for result in report.cases if not result.passed)
     summary = f"{len(report.cases) - failed}/{len(report.cases)} cases passed"
     if report.skipped:
