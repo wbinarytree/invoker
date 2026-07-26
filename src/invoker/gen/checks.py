@@ -16,6 +16,17 @@ from invoker.marks import MARK_PATTERN, Mark, strip_marks
 
 NUMBER_PATTERN = re.compile(r"\d+(?:\.\d+)?")
 
+HEADING_LINE = re.compile(r"^\s*#+\s.*$", re.MULTILINE)
+ORDERED_LIST_MARKER = re.compile(r"^(\s*)\d+\.\s", re.MULTILINE)
+
+
+def strip_structural_digits(text: str) -> str:
+    """Remove markdown structure whose digits are not factual claims:
+    heading lines (they mirror source section *titles* — e.g. "Example 3"
+    — which are not part of any section's checkable text) and ordered-list
+    markers (the numbering is the model's, the content stays checked)."""
+    return ORDERED_LIST_MARKER.sub(r"\1", HEADING_LINE.sub("", text))
+
 COVERAGE_ALLOWLIST = frozenset({"References", "Gallery", "See_Also", "See_also"})
 """Section anchors exempt from coverage: wiki reference/footnote lists,
 image galleries (captions whose charts never survive corpus extraction),
@@ -87,8 +98,9 @@ def article_segments(text: str) -> list[tuple[str, list[str]]]:
 
 def check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
     """Every number in generated text must literally appear in the cited
-    source. Marks are stripped first — keys carry digits of their own."""
-    stripped = strip_marks(text)
+    source. Marks are stripped first — keys carry digits of their own —
+    and so is markdown structure (headings, list numbering)."""
+    stripped = strip_structural_digits(strip_marks(text))
     missing = sorted(
         number for number in set(NUMBER_PATTERN.findall(stripped)) if number not in source_text
     )

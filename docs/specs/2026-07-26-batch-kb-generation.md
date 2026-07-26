@@ -168,6 +168,33 @@ circuit breaker rather than being pre-hedged. Estimates are estimates
 — the manifest records real durations, provenance records real token
 counts.
 
+## Amendment 1 (2026-07-26, during the concept fleet)
+
+Three fleet rounds surfaced systematic failure patterns; each fix is
+recorded, none silently retried (v5/v6 rejects stay in
+`data/logs/rejected/`, every attempt in the manifests):
+
+- **Concept prompt v6:** the model sometimes titled articles
+  "X (7.41d)" — the patch string from the request line is not vouchable
+  by any packet section. Rule added: the patch is context, never stated
+  in the article. Also: never derive, sum, convert, count, or round
+  numbers.
+- **Concept prompt v7:** card sentences counted table rows (the
+  never-derive rule was article-only — now in the card prompt), and
+  articles expanded "3 to 9"-style ranges into integer lists (ranges
+  stay ranges).
+- **Structural digits are not claims (check refinement):**
+  `check_numbers` now strips markdown heading lines and ordered-list
+  markers before extracting numbers. Headings mirror source section
+  *titles* ("Example 3: …"), which are not part of any section's
+  checkable text, and list numbering is the model's own — both were
+  false-positive aborts (5 of 9 failures in round 3). List/table
+  *content* stays fully checked; prompt-mandated topic mirroring and
+  the strict number check are no longer in conflict.
+- Driver `--limit N` for chunked launches: the session harness kills
+  long background runs, so the fleet runs as bounded chunks; resume
+  is the existing skip-existing behavior.
+
 ## Acceptance (user decision 2026-07-26)
 
 Nothing auto-commits. Morning report groups entities into the three

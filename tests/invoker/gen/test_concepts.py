@@ -327,6 +327,34 @@ def test_no_rejected_dir_means_no_persistence(tmp_path):
     assert not (tmp_path / "rejected").exists()
 
 
+def test_structural_digits_are_not_number_claims(tmp_path):
+    # headings mirror source section titles ("Example 3") and ordered
+    # lists carry the model's own numbering — neither is a factual claim
+    article = good_article() + (
+        f"\n\n## Example 99: Miss Streaks\n\n"
+        f"1. Attacks can miss.\n"
+        f"2. Consecutive misses happen. [corpus:{DEF_KEY}]"
+    )
+    artifact, _ = run_generate(tmp_path, FakeBackend(article, good_card()))
+    assert artifact.slug == "evasion"
+
+
+def test_inline_numbers_still_checked_after_structural_strip(tmp_path):
+    # the same digit in prose (not structure) must still be vouched for
+    article = good_article() + f"\n\nMisses stack 99 times. [corpus:{DEF_KEY}]"
+    with pytest.raises(GenerationError, match="99"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
+
+
+def test_ordered_list_content_numbers_still_checked(tmp_path):
+    # only the list marker is structural; the content stays checked
+    article = good_article() + (
+        f"\n\n1. Misses stack 99 times. [corpus:{DEF_KEY}]"
+    )
+    with pytest.raises(GenerationError, match="99"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
+
+
 def test_numbers_inside_citation_marks_are_ignored(tmp_path):
     # the revision id 42 in the mark keys must not be counted as a claim
     backend = FakeBackend(good_article(), good_card())

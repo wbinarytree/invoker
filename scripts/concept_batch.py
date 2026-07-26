@@ -187,6 +187,8 @@ def main() -> int:
     parser.add_argument("--host", default="liquipedia_dota2")
     parser.add_argument("--concurrency", type=int, default=8)
     parser.add_argument("--slugs", help="comma-separated explicit list (pilot mode)")
+    parser.add_argument("--limit", type=int,
+                        help="attempt at most N pending entities this invocation")
     parser.add_argument("--emit-only", action="store_true")
     args = parser.parse_args()
 
@@ -206,6 +208,8 @@ def main() -> int:
             print(f"skipping existing: {', '.join(skipped)}")
     else:
         pending = discover(store, args.host, kb)
+    if args.limit:
+        pending = pending[: args.limit]
 
     if args.emit_only:
         for slug in pending:
