@@ -466,15 +466,19 @@ prose). CLI: `invoker generate-concept <slug> --patch <patch>`.
 Context packet = the `ItemContext` rendered into keyed sections under
 the `gamefile:items/<name>#<section>` (`cost`, `components`, `attribs`,
 `mechanics`) and `loc:<token>` (description, lore — the token that
-actually resolved, carried on `ItemContext`, never a synthesized
-casing) mark grammar; attrib lines carry resolved tooltip labels
-(`$spell_resist` → "MAGIC RESISTANCE", percent-flagged) and
+actually resolved) mark grammar. `#components` is the recipe graph both
+ways: the build formula with per-component gold costs and the recipe
+row, plus a builds-into line scanned from every recipe requiring the
+item (`ItemRef` on `ItemContext`). Attrib lines carry resolved tooltip
+labels (`$spell_resist` → "MAGIC RESISTANCE", percent-flagged) and
 Scepter/Shard bonus columns, and keys without a label token derive
 their percent flag from the raw description template (`%key%%%` = a
-literal % after the value). The
-article prompt enforces the stat-table register: every value the cited
-section carries goes in a table (no trimming, no value restated in
-prose); prose is behavior semantics only. Same faithfulness discipline
+literal % after the value). The article prompt enforces the stat-table
+register: every value the cited section carries goes in a table (no
+trimming, no value restated in prose), the components section renders
+the formula with its prices, and prose is behavior semantics only —
+each tier (identity line, card, article) adds information over the one
+above. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
 resolve against the packet, numbers per cited section. The shared mark
 grammar itself lives in `invoker.marks` (used by both generation and

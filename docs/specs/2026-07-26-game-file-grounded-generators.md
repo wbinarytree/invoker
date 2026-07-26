@@ -189,6 +189,19 @@ into the slice-1 PR:
    renders a literal % after the substituted value. Packets also cite
    the `loc:` token that actually resolved (carried on `ItemContext`)
    instead of synthesizing a casing.
+4. **The recipe graph, and tiers that add information.** Second skim
+   finding: the card and article carried the same ~10 facts (browsing
+   deeper yielded nothing), and the item's build relationships were
+   missing entirely. `#components` is now the recipe graph in both
+   directions — the build formula with each component's gold cost
+   (looked up from the same snapshot records), the recipe row (moved
+   here from `#cost`; it is part of the formula), and a builds-into
+   line scanned from every recipe requiring this item. Tier discipline
+   in the prompts: the card names components and build targets but
+   their prices stay in the article's formula table — each tier must
+   add information over the one above it. Absences stay silent (a
+   zero-cost recipe or an empty builds-into renders nothing — null
+   over placeholder).
 
 ## Decisions needing sign-off
 
