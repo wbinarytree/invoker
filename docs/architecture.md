@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (item generator, gamefile/loc resolvers, v3 frontmatter artifacts)
+Last updated: 2026-07-26 (Codex app-server backend, per-role backend selection, compression guard)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -422,21 +422,64 @@ Module: [src/invoker/gen/](../src/invoker/gen)
 LLM access for the S1-S5 generation stages, behind one result surface:
 `GenerationResult` / `StructuredResult` carry `GenerationProvenance`
 (served model — read from the response, never assumed — transport,
-prompt name + version, request sha256, token usage, stop reason,
-timestamp). Two transports:
+prompt name + version, request sha256, token usage — as reported by the
+transport or null, never an estimate — stop reason, timestamp). Three
+transports:
 
 - `claude_cli.py` — `ClaudeCliClient` over `claude -p` (subscription-billed;
   **the default transport**): headless JSON output, tools disabled, the
   harness system prompt fully replaced so prompts stay byte-controlled;
   structured outputs are schema-instructed and validated client-side
+- `codex.py` — `CodexClient` over the `codex app-server` JSON-RPC daemon
+  (user's Codex/ChatGPT budget; protocol pinned against codex-cli
+  0.145.0, default model `gpt-5.6-sol`): one daemon reused across calls,
+  each call an ephemeral thread with `baseInstructions` replacing the
+  harness prompt, read-only sandbox, approvals never, empty cwd and MCP
+  servers disabled so no tool runs and no AGENTS.md leaks in; structured
+  outputs use the server-native `outputSchema` (adapted to its strict
+  subset: objects closed, all properties required) and are still
+  validated client-side; real per-turn token counts from
+  `thread/tokenUsage/updated`; model substitutions (thread echo
+  mismatch, mid-turn reroute) refused loudly. Note the ~13-14k
+  input-token harness floor codex injects per call — constant within an
+  experiment, subtract for absolute serving-cost numbers.
 - `client.py` — `GenerationClient` over the Anthropic SDK (API-billed;
   kept behind the same interface as the scale-up path, e.g. Batches at
   50% rates for full patch rebuilds)
+
+Per-role backend selection (serving-format measurement spec): the CLI
+builds backends via `--backend`/`--model` on the generators and
+`--answerer-backend`/`--judge-backend` (+ existing model overrides) on
+`run-benchmark`; the judge defaults to the answerer's backend + model
+and is held constant within an experiment.
 
 Refusal, truncation, empty output, unknown served model, and schema
 mismatch all raise `GenerationError` — never silently retried (hard
 line). Nothing under `gen/` may be imported from the bootstrap or query
 path; generation is a separate, rebuildable batch stage.
+
+**Compression guard** — `gen/guard.py` (spec:
+`docs/specs/2026-07-26-generation-completeness-gates.md`). A
+fresh-session LLM audit that the article is a lossless compression of
+its packet: one structured call over (packet, article) returning a flat
+`missing: [{section, fact}]` list — deliberately unranked; absence is a
+checkable claim (every flag must cite a real packet section key or the
+report itself is refused), importance is not. The report plus its own
+`GenerationProvenance` land in `completeness.json` (schema v1:
+`packet_sha256`, `packet_matches_artifact`, `missing`,
+`guard_provenance`) next to the artifact. `guard_entity` rebuilds the
+packet from today's substrate by artifact kind (concept: corpus
+sections; item: `ItemContext`), so old artifacts can be re-guarded — a
+drifted packet is recorded, never hidden. Both generator commands run
+the guard inline after a successful write (default backend `codex`,
+`--guard-backend`/`--guard-model`/`--skip-guard` to override) and exit 1
+on a nonempty report, leaving the artifact on disk for review — flags
+never edit articles and never trigger regeneration; committing the
+artifact is the acceptance act. `invoker guard-artifact <artifact.json>`
+re-guards any existing artifact. Prompt v5 of the concept article
+prompt (lossless compression, enumerations in full) is the
+guard-driven counterpart: measured 2026-07-26, codex concept artifacts
+went from 44/122 flags to clean.
 
 **Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
 packet = the concept's corpus sections rendered with citation keys

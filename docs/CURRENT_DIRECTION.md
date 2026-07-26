@@ -32,8 +32,12 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-07-25-basic-qa-benchmark-runner.md](specs/2026-07-25-basic-qa-benchmark-runner.md)
 - Game-file-grounded generators (items + heroes):
   [docs/specs/2026-07-26-game-file-grounded-generators.md](specs/2026-07-26-game-file-grounded-generators.md)
-- Serving-format measurement harness + Codex backend (proposed):
+- Serving-format measurement harness + Codex backend (accepted; Codex
+  backend landed):
   [docs/specs/2026-07-26-serving-format-measurement.md](specs/2026-07-26-serving-format-measurement.md)
+- Generation completeness gates — coverage check + compression guard
+  (proposed):
+  [docs/specs/2026-07-26-generation-completeness-gates.md](specs/2026-07-26-generation-completeness-gates.md)
 
 ## Active plans
 

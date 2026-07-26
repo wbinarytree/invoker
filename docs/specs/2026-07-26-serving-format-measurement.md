@@ -1,7 +1,8 @@
 # Serving-Format Measurement Harness (+ Codex backend)
 
 **Date:** 2026-07-26
-**Status:** proposed — captures the 2026-07-26 discussion; sign-off pending
+**Status:** accepted 2026-07-26 (user direction: build the Codex backend
+first); task 2 landed — see amendment 1
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (the
 benchmark is the detector; validate before scaling)
 
@@ -124,3 +125,32 @@ as statistics (below).
   provenance records the transport and reported token counts.
 - Experiment note in `docs/notes/` states the decision-rule outcome, not
   just raw numbers.
+
+## Amendment 1 (2026-07-26): Codex backend landed
+
+Task 2 built as `CodexClient` (`src/invoker/gen/codex.py`) over
+`codex app-server`, protocol pinned against codex-cli **0.145.0**
+(upgraded from the 0.139.0 observed at spec time — the target model
+`gpt-5.6-sol`, now the backend default, needs ≥0.145). No `exec`
+fallback was needed; `transport: "codex-app-server"` is recorded per
+call. Findings from pinning live:
+
+- The daemon reports real per-turn token counts
+  (`thread/tokenUsage/updated`), including cached input — the counts the
+  `claude-cli` transport cannot see. Prerequisite 1's provenance side
+  landed as `input_tokens`/`output_tokens` becoming nullable; the
+  `claude-cli` recording fix itself is still open.
+- Codex injects a ~13-14k input-token harness floor per call even with
+  `baseInstructions` replaced, MCP servers disabled, and an empty cwd.
+  Constant within an experiment, so A/B comparisons hold; subtract it
+  from absolute serving-cost numbers.
+- The native `outputSchema` constraint runs OpenAI strict mode; schemas
+  are mechanically adapted (objects closed, all properties required) at
+  the transport boundary, with client-side pydantic validation unchanged.
+- The user's `~/.codex/config.toml` default model must never be
+  inherited: the backend pins `model` explicitly and refuses thread-echo
+  mismatches and mid-turn reroutes.
+- Verified end-to-end 2026-07-26: uphill-miss ran twice with both roles
+  on codex — identical qa-select `request_sha256` across runs, one
+  resolution-miss and one pass, confirming sampling variance separated
+  from input identity exactly as the small-N honesty constraint expects.

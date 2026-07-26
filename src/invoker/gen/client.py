@@ -25,16 +25,18 @@ class GenerationProvenance(BaseModel):
     `model` is taken from the response, not the request, so a served-by
     substitution can never go unrecorded. `request_sha256` fingerprints the
     exact prompt bytes; the generator layer adds patch + context packet
-    hash + citations on top (spec: artifact shapes).
+    hash + citations on top (spec: artifact shapes). Token counts are as
+    reported by the transport; None when it reports none — never an
+    estimate stored as a count.
     """
 
     model: str
-    transport: str  # "api" | "claude-cli"
+    transport: str  # "api" | "claude-cli" | "codex-app-server"
     prompt_name: str
     prompt_version: str
     request_sha256: str
-    input_tokens: int
-    output_tokens: int
+    input_tokens: int | None
+    output_tokens: int | None
     stop_reason: str
     generated_at: str
 
