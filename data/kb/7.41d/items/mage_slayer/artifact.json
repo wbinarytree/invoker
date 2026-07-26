@@ -5,13 +5,13 @@
   "title": "Mage Slayer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "fdcc9301b31870afe21a8e26753c3e57aecb5b682c26897b07da5d71814da791",
+  "article_sha256": "b70597dec8eea4416413944dd568e9875f851651c3d76d5e0e9f69d450264ea7",
   "citations": [
     "gamefile:items/item_mage_slayer#cost",
     "gamefile:items/item_mage_slayer#attribs",
     "loc:DOTA_Tooltip_ability_item_mage_slayer_Description",
-    "gamefile:items/item_mage_slayer#mechanics",
     "gamefile:items/item_mage_slayer#components",
+    "gamefile:items/item_mage_slayer#mechanics",
     "loc:DOTA_Tooltip_ability_item_mage_slayer_Lore"
   ],
   "packet_sha256": "5736bc4331f86c9fe27fda7483424b065f863971cd22191e36eb45cc3d725250",
@@ -19,22 +19,22 @@
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "item-article",
-    "prompt_version": "3",
-    "request_sha256": "e4e226bb62af2ae0bfa861a9750efb1cf3d051c93b96de22867612e825266908",
+    "prompt_version": "4",
+    "request_sha256": "d289a22e7692369ba2405835e51081d6a0a91f603a04a13d2063ed9fd1b5b4b6",
     "input_tokens": 2,
-    "output_tokens": 894,
+    "output_tokens": 676,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-26T13:09:31.811948+00:00"
+    "generated_at": "2026-07-26T13:33:11.131556+00:00"
   },
   "card_provenance": {
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "item-card",
-    "prompt_version": "3",
-    "request_sha256": "b1ba4d73c369aa00714f603525e7c2529c251417887c766a87e7069bc9202a1d",
+    "prompt_version": "4",
+    "request_sha256": "259afbd2c6ae3b149f16881d13be71864c29ab2b29850a490e326f659f432e43",
     "input_tokens": 2,
-    "output_tokens": 1010,
+    "output_tokens": 911,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-26T13:09:44.193170+00:00"
+    "generated_at": "2026-07-26T13:33:22.744694+00:00"
   }
 }
