@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-26
 **Status:** accepted 2026-07-26 (user direction: build the Codex backend
-first); task 2 landed — see amendment 1
+first); task 2 landed — see amendment 1; task 1 landed — see amendment 2
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (the
 benchmark is the detector; validate before scaling)
 
@@ -154,3 +154,17 @@ call. Findings from pinning live:
   on codex — identical qa-select `request_sha256` across runs, one
   resolution-miss and one pass, confirming sampling variance separated
   from input identity exactly as the small-N honesty constraint expects.
+
+## Amendment 2 (2026-07-26): claude-cli input-token recording landed
+
+Task 1 root cause, pinned live against the installed CLI: the payload's
+top-level `usage.input_tokens` is only the *uncached* slice (2 of 1652
+on the probe call — prompt caching absorbs the rest), and top-level
+`usage` mixes every model's traffic including background harness models.
+The transport now reads the requested model's `modelUsage` entry and
+records input as uncached + cache reads + cache writes; any missing
+component records `null`, never a partial sum (a partial sum is an
+estimate, and estimates never land in count fields). Live smoke:
+1652/4 recorded for the probe call. Battery-scale claude-arm serving
+costs become real from the next run onward; old runs' 2-digit counts
+stay wrong in place, flagged by their `generated_at`.

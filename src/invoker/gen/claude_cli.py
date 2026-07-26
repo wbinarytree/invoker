@@ -159,29 +159,53 @@ class ClaudeCliClient:
             },
             sort_keys=True,
         )
-        usage = payload.get("usage") or {}
+        entry = self._model_usage_entry(payload, prompt_name)
         return GenerationProvenance(
-            model=self._served_model(payload, prompt_name),
+            model=self.model,
             transport="claude-cli",
             prompt_name=prompt_name,
             prompt_version=prompt_version,
             request_sha256=hashlib.sha256(fingerprint.encode()).hexdigest(),
-            input_tokens=int(usage.get("input_tokens", 0)),
-            output_tokens=int(usage.get("output_tokens", 0)),
+            input_tokens=_total_input_tokens(entry),
+            output_tokens=_reported_count(entry, "outputTokens"),
             stop_reason=str(payload.get("stop_reason")),
             generated_at=datetime.now(UTC).isoformat(),
         )
 
-    def _served_model(self, payload: dict, prompt_name: str) -> str:
+    def _model_usage_entry(self, payload: dict, prompt_name: str) -> dict:
         """The requested model's entry in modelUsage confirms what served the
         request. Background harness models (e.g. haiku) also appear there,
-        so match on the requested id rather than guessing by usage."""
+        so match on the requested id rather than guessing by usage — and
+        token counts come from this entry, never the top-level `usage`,
+        which mixes all models' traffic together."""
         model_usage = payload.get("modelUsage") or {}
         for key, value in model_usage.items():
-            canonical = value.get("canonicalModel") if isinstance(value, dict) else None
-            if key == self.model or canonical == self.model:
-                return self.model
+            if not isinstance(value, dict):
+                continue
+            if key == self.model or value.get("canonicalModel") == self.model:
+                return value
         raise GenerationError(
             f"{prompt_name}: requested model {self.model!r} not in modelUsage "
             f"({', '.join(model_usage) or 'empty'}); refusing to record unknown provenance"
         )
+
+
+def _total_input_tokens(entry: dict) -> int | None:
+    """Real input = uncached + cache reads + cache writes — everything the
+    model actually processed (payload shape pinned live against
+    claude-cli 2026-07-26: `input_tokens` alone is only the uncached
+    slice, 2 of 1652 on the probe call). Null unless every component is
+    reported — a partial sum is an estimate, and estimates never land in
+    count fields."""
+    total = 0
+    for key in ("inputTokens", "cacheReadInputTokens", "cacheCreationInputTokens"):
+        value = entry.get(key)
+        if not isinstance(value, int):
+            return None
+        total += value
+    return total
+
+
+def _reported_count(entry: dict, key: str) -> int | None:
+    value = entry.get(key)
+    return value if isinstance(value, int) else None
