@@ -27,7 +27,7 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "9"
+CONCEPT_PROMPT_VERSION = "10"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -48,7 +48,9 @@ selections.
 The source headers display the bare key in brackets; your marks must always \
 add the corpus: prefix — [corpus:KEY], never [KEY]. Place a mark wherever \
 the source section changes; consecutive sentences drawn from the same \
-section share a single mark at the end of the run.
+section share a single mark at the end of the run. A mark always FOLLOWS \
+the text it vouches for: a table's marks go on their own line immediately \
+after the table — never on the sentence introducing it.
 - Cite the single narrowest section that states the fact. Never attach a \
 citation the text does not strictly need; a broad section key is wrong \
 when a more specific one states the fact. The one exception is a table or \
