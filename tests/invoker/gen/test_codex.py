@@ -4,7 +4,7 @@ import pytest
 from pydantic import BaseModel
 
 from invoker.gen.client import GenerationError
-from invoker.gen.codex import CodexClient
+from invoker.gen.codex import CodexClient, strict_output_schema
 
 THREAD_ID = "thread-1"
 TURN_ID = "turn-1"
@@ -261,9 +261,25 @@ def test_generate_structured_sends_output_schema_and_validates():
     result = structured(make_client(server))
     assert result.output == CardStub(entity="evasion", summary="Attacks can miss.")
     turn = sent_by_method(server, "turn/start")["params"]
-    assert turn["outputSchema"] == CardStub.model_json_schema()
+    assert turn["outputSchema"] == strict_output_schema(CardStub.model_json_schema())
     # the schema constrains server-side; the system prompt stays byte-identical
     assert sent_by_method(server, "thread/start")["params"]["baseInstructions"] == "Emit a card."
+
+
+def test_strict_output_schema_closes_objects_and_requires_all_fields():
+    class Inner(BaseModel):
+        note: str = "n/a"
+
+    class Outer(BaseModel):
+        name: str
+        inner: Inner
+
+    schema = strict_output_schema(Outer.model_json_schema())
+    assert schema["additionalProperties"] is False
+    assert schema["required"] == ["inner", "name"]
+    inner = schema["$defs"]["Inner"]
+    assert inner["additionalProperties"] is False
+    assert inner["required"] == ["note"]  # defaulted field still demanded of the model
 
 
 def test_generate_structured_bad_payload_raises_generation_error():

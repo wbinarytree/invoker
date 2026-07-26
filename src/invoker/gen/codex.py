@@ -24,6 +24,31 @@ CODEX_GENERATION_MODEL = "gpt-5.6-sol"
 CODEX_TRANSPORT = "codex-app-server"
 _RECEIVE_TIMEOUT = 900.0
 
+
+def strict_output_schema(schema: dict) -> dict:
+    """Adapt a pydantic JSON schema to the strict subset codex's
+    outputSchema enforces (observed live: every object node must carry
+    `additionalProperties: false` and list all properties as required).
+    Requiring defaulted fields only forces the model to emit them
+    explicitly; client-side validation still runs the original model.
+    Dict-valued additionalProperties is left alone — if strict mode
+    rejects it, the turn fails loudly."""
+
+    def adapt(node: object) -> object:
+        if isinstance(node, dict):
+            adapted = {key: adapt(value) for key, value in node.items()}
+            if adapted.get("type") == "object" and "properties" in adapted:
+                adapted.setdefault("additionalProperties", False)
+                adapted["required"] = sorted(adapted["properties"])
+            return adapted
+        if isinstance(node, list):
+            return [adapt(item) for item in node]
+        return node
+
+    result = adapt(schema)
+    assert isinstance(result, dict)
+    return result
+
 T = TypeVar("T", bound=BaseModel)
 
 
@@ -149,7 +174,7 @@ class CodexClient:
         user_content: str,
         effort: str | None = None,
     ) -> StructuredResult[T]:
-        schema = output_type.model_json_schema()
+        schema = strict_output_schema(output_type.model_json_schema())
         text, served_model, usage, status = self._run_turn(
             prompt_name, system, user_content, effort, output_schema=schema
         )
