@@ -1,16 +1,23 @@
-"""Sharded concept-generation driver (batch KB generation spec).
+"""Sharded KB-generation driver (batch KB generation spec) — concepts
+and items.
 
-Shell-level orchestration: one `invoker generate-concept --backend codex`
-subprocess per entity (fresh codex daemon each), a worker pool for
-concurrency, a JSONL manifest per run, and a circuit breaker so an
-unattended systematic breakage stops spending instead of running to the
-end of the list. Never retries bad output; a transport-class failure
-(no article was ever produced — nothing paid) is re-queued exactly once.
+Shell-level orchestration: one `invoker generate-concept|generate-item
+--backend codex` subprocess per entity (fresh codex daemon each), a
+worker pool for concurrency, a JSONL manifest per run, and a circuit
+breaker so an unattended systematic breakage stops spending instead of
+running to the end of the list. Never retries bad output; a
+transport-class failure (no article was ever produced — nothing paid)
+is re-queued exactly once.
+
+Item scope (generators spec rule, realized from file-native flags):
+non-recipe records with a localized name, not IsObsolete; neutral drops
+in unconditionally; otherwise purchasable with nonzero cost, a recipe
+that builds them, or shop stock.
 
 Usage:
   uv run python scripts/concept_batch.py --emit-only
-  uv run python scripts/concept_batch.py --slugs map,turn_rate,lifesteal
-  uv run python scripts/concept_batch.py --concurrency 8
+  uv run python scripts/concept_batch.py --slugs map,turn_rate
+  uv run python scripts/concept_batch.py --kind item --concurrency 8
 """
 
 from __future__ import annotations
@@ -42,6 +49,47 @@ def discover(store: CorpusStore, host: str, kb: Path) -> list[str]:
         for slug in sorted(index.pages)
         if not (kb / "concepts" / slug / "artifact.json").exists()
     ]
+
+
+def item_slug(name: str) -> str:
+    return name.removeprefix("item_")
+
+
+def discover_items(game_data_dir: Path, patch: str, kb: Path) -> list[str]:
+    """Item scope per the generators spec rule, from file-native flags."""
+    records = json.loads((game_data_dir / patch / "items.json").read_text())
+    loc = json.loads(
+        (game_data_dir / patch / "localization" / "english.json").read_text()
+    )
+    loc_lower = {k.lower() for k in loc}
+    built = {
+        rec.get("ItemResult")
+        for rec in records.values()
+        if isinstance(rec, dict) and rec.get("ItemRecipe") == "1"
+    }
+    pending = []
+    for name in sorted(records):
+        rec = records[name]
+        if not isinstance(rec, dict):
+            continue
+        if rec.get("ItemRecipe") == "1" or name.startswith("item_recipe_"):
+            continue
+        if f"dota_tooltip_ability_{name}".lower() not in loc_lower:
+            continue
+        if rec.get("IsObsolete") == "1":
+            continue
+        neutral = (
+            rec.get("ItemIsNeutralActiveDrop") == "1"
+            or rec.get("ItemIsNeutralPassiveDrop") == "1"
+        )
+        purchasable = rec.get("ItemPurchasable", "1") != "0"
+        cost = int(rec.get("ItemCost", "0") or "0")
+        in_scope = neutral or (
+            purchasable and (cost > 0 or name in built or "ItemStockMax" in rec)
+        )
+        if in_scope and not (kb / "items" / item_slug(name) / "artifact.json").exists():
+            pending.append(name)
+    return pending
 
 
 def bucket_for(entity_dir: Path) -> str:
@@ -90,6 +138,7 @@ class Breaker:
 def run_entity(
     slug: str,
     *,
+    kind: str,
     patch: str,
     host: str,
     kb: Path,
@@ -99,9 +148,10 @@ def run_entity(
     manifest_lock: threading.Lock,
     breaker: Breaker,
 ) -> tuple[str, str]:
-    """Run one generate-concept subprocess; returns (slug, bucket)."""
-    entity_dir = kb / "concepts" / slug
-    rejected_entity = rejected / "concepts" / slug
+    """Run one generate subprocess; returns (slug, bucket)."""
+    folder = item_slug(slug) if kind == "item" else slug
+    entity_dir = kb / f"{kind}s" / folder
+    rejected_entity = rejected / f"{kind}s" / folder
     started = time.monotonic()
     wall_start = time.time()
     started_at = datetime.now(UTC).isoformat()
@@ -109,15 +159,15 @@ def run_entity(
         "uv",
         "run",
         "invoker",
-        "generate-concept",
+        f"generate-{kind}",
         slug,
         "--patch",
         patch,
-        "--host",
-        host,
         "--backend",
         "codex",
     ]
+    if kind == "concept":
+        cmd += ["--host", host]
     try:
         proc = subprocess.run(
             cmd, capture_output=True, text=True, timeout=ENTITY_TIMEOUT_S
@@ -183,6 +233,7 @@ def run_pool(slugs: list[str], *, concurrency: int, **entity_kwargs) -> list[str
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--kind", choices=("concept", "item"), default="concept")
     parser.add_argument("--patch", default="7.41d")
     parser.add_argument("--host", default="liquipedia_dota2")
     parser.add_argument("--concurrency", type=int, default=8)
@@ -202,13 +253,19 @@ def main() -> int:
 
     if args.slugs:
         slugs = [s.strip() for s in args.slugs.split(",") if s.strip()]
+        folder = item_slug if args.kind == "item" else (lambda s: s)
         pending = [
             s for s in slugs
-            if not (kb / "concepts" / s / "artifact.json").exists()
+            if not (kb / f"{args.kind}s" / folder(s) / "artifact.json").exists()
         ]
         skipped = sorted(set(slugs) - set(pending))
         if skipped:
             print(f"skipping existing: {', '.join(skipped)}")
+    elif args.kind == "item":
+        if cfg.game_data_dir is None:
+            print("INVOKER_GAME_DATA_DIR is not configured", file=sys.stderr)
+            return 1
+        pending = discover_items(cfg.game_data_dir, args.patch, kb)
     else:
         pending = discover(store, args.host, kb)
     if args.exclude:
@@ -226,12 +283,13 @@ def main() -> int:
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     batch_dir = cfg.data_dir / "logs" / "batch"
     batch_dir.mkdir(parents=True, exist_ok=True)
-    manifest = batch_dir / f"concepts-{stamp}.jsonl"
+    manifest = batch_dir / f"{args.kind}s-{stamp}.jsonl"
     print(f"{len(pending)} entities, concurrency {args.concurrency}, "
           f"manifest {manifest}")
 
     breaker = Breaker(consecutive=3, rate=0.3, min_attempts=10)
     entity_kwargs = dict(
+        kind=args.kind,
         patch=args.patch,
         host=args.host,
         kb=kb,
