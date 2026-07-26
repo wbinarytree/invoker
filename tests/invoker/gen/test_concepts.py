@@ -3,7 +3,7 @@ import json
 import pytest
 
 from invoker.gen.artifacts import CardSentence, EntityCard
-from invoker.gen.checks import extract_marks
+from invoker.gen.checks import check_coverage, extract_marks
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
@@ -16,7 +16,9 @@ from invoker.gen.concepts import build_packet, generate_concept
 from tests.invoker.corpus.test_sections import make_store
 
 KEY = "testwiki/evasion@42#Uphill_Miss_Chance"
+DEF_KEY = "testwiki/evasion@42#Definition"
 LEAD_KEY = "testwiki/evasion@42"
+ALL_KEYS = [f"corpus:{LEAD_KEY}", f"corpus:{DEF_KEY}", f"corpus:{KEY}"]
 
 
 def provenance(prompt_name: str) -> GenerationProvenance:
@@ -60,7 +62,14 @@ def good_card(mark: str = f"corpus:{KEY}") -> EntityCard:
 
 
 def good_article() -> str:
-    return f"# Evasion\n\nRanged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+    # cites every packet section — the coverage check demands lossless
+    # compression, so a fixture article must cover the whole packet
+    return (
+        "# Evasion\n\n"
+        f"Evasion is a mechanic that causes attacks to miss. [corpus:{LEAD_KEY}]\n\n"
+        f"Attacks have a chance to miss, rounded down. [corpus:{DEF_KEY}]\n\n"
+        f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+    )
 
 
 def test_build_packet_keys_and_stable_hash(tmp_path):
@@ -108,7 +117,7 @@ def test_generate_concept_writes_artifact_and_article_file(tmp_path):
     assert saved["title"] == "Evasion"
     assert saved["patch"] == "7.41d"
     assert saved["schema_version"] == 3
-    assert saved["citations"] == [f"corpus:{KEY}"]
+    assert saved["citations"] == ALL_KEYS
     assert saved["article_provenance"]["prompt_name"] == "concept-article"
     assert saved["card_provenance"]["prompt_name"] == "concept-card"
     assert len(saved["packet_sha256"]) == 64
@@ -213,26 +222,53 @@ def test_card_number_must_come_from_the_cited_section_not_any_section(tmp_path):
 
 
 def test_article_number_absent_from_packet_fails_loudly(tmp_path):
-    article = f"Ranged attacks miss 42% of the time. [corpus:{KEY}]"
+    article = good_article().replace("25%", "42%")
     backend = FakeBackend(article, good_card())
-    with pytest.raises(GenerationError, match=r"article.*42"):
+    with pytest.raises(GenerationError, match=r"not found in the cited source: 42"):
         run_generate(tmp_path, backend)
 
 
 def test_article_number_must_come_from_the_cited_section(tmp_path):
     # 25 lives in the Uphill/table sections; the lead never states it
-    article = f"Attacks miss 25% of the time. [corpus:{LEAD_KEY}]"
+    article = (
+        f"Attacks miss 25% of the time. [corpus:{LEAD_KEY}]\n\n"
+        f"Attacks have a chance to miss, rounded down. [corpus:{DEF_KEY}]\n\n"
+        f"Ranged attacks from low ground miss uphill. [corpus:{KEY}]"
+    )
     backend = FakeBackend(article, good_card())
     with pytest.raises(GenerationError, match=r"segment citing.*25"):
         run_generate(tmp_path, backend)
 
 
-def test_numbers_inside_citation_marks_are_ignored(tmp_path):
-    # the revision id 42 in the mark key must not be counted as a claim
-    article = f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+def test_article_dropping_a_packet_section_fails_loudly(tmp_path):
+    # cites the lead and Uphill but drops #Definition — an uncited packet
+    # section is dropped content, and generation aborts naming it
+    article = (
+        f"Evasion is a mechanic that causes attacks to miss. [corpus:{LEAD_KEY}]\n\n"
+        f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+    )
     backend = FakeBackend(article, good_card())
+    with pytest.raises(GenerationError, match=r"does not cite packet sections.*#Definition"):
+        run_generate(tmp_path, backend)
+
+
+def test_check_coverage_requires_anchorless_sections_and_exempts_references():
+    valid = {"corpus:w/p@1", "corpus:w/p@1#Facts", "corpus:w/p@1#References"}
+    # an uncited References section is boilerplate, not dropped content
+    check_coverage(["corpus:w/p@1", "corpus:w/p@1#Facts"], valid, "article", "p")
+    # the anchorless lead section is still required
+    with pytest.raises(GenerationError, match=r"does not cite packet sections: corpus:w/p@1$"):
+        check_coverage(["corpus:w/p@1#Facts", "corpus:w/p@1#References"], valid, "article", "p")
+    # citing References does not excuse a dropped real section
+    with pytest.raises(GenerationError, match=r"w/p@1#Facts"):
+        check_coverage(["corpus:w/p@1", "corpus:w/p@1#References"], valid, "article", "p")
+
+
+def test_numbers_inside_citation_marks_are_ignored(tmp_path):
+    # the revision id 42 in the mark keys must not be counted as a claim
+    backend = FakeBackend(good_article(), good_card())
     artifact, _ = run_generate(tmp_path, backend)
-    assert artifact.citations == [f"corpus:{KEY}"]
+    assert artifact.citations == ALL_KEYS
 
 
 def test_unknown_slug_fails_loudly(tmp_path):

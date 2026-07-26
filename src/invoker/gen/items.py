@@ -19,7 +19,13 @@ from invoker.gen.artifacts import (
     article_file_text,
     write_entity_artifact,
 )
-from invoker.gen.checks import check_article_numbers, check_marks, check_numbers, extract_marks
+from invoker.gen.checks import (
+    check_article_numbers,
+    check_coverage,
+    check_marks,
+    check_numbers,
+    extract_marks,
+)
 from invoker.gen.client import GenerationError
 from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
@@ -203,6 +209,7 @@ def generate_item(
     )
     citations = extract_marks(article.text)
     check_marks(citations, valid_marks, "article", slug)
+    check_coverage(citations, valid_marks, "article", slug)
     check_article_numbers(article.text, text_by_mark, slug)
 
     card = backend.generate_structured(

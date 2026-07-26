@@ -4,8 +4,12 @@
 **Status:** accepted 2026-07-26 (user sign-off; guard-first order).
 Tasks 2-4 landed the same day — guard, CLI wiring, prompt v5 with both
 codex concepts regenerating to guard-clean. Task 1 (mechanical
-citation-coverage check in `gen/checks.py`) and task 5 (guard the full
-canonical KB) remain open.
+citation-coverage check in `gen/checks.py`) landed 2026-07-26: verified
+against the stored artifacts — codex v4 evasion fails with exactly its
+8 missing sections, all three canonical artifacts pass (References
+allowlisted), and both codex mage_slayer variants fail on the uncited
+lore section (a drop the guard's load-bearing definition ignores).
+Task 5 (guard the full canonical KB) remains open.
 **Direction:** articles are lossless compressions of their packets.
 Related: `2026-07-26-game-file-grounded-generators.md` (marks, packets),
 `2026-07-26-serving-format-measurement.md` (backend experiments that
