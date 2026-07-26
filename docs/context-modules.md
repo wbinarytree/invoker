@@ -129,12 +129,17 @@ can't pollute the join.
 
 - `name` / `description` / `lore`: localized; descriptions resolve `%field%`
   templates from `AbilityValues` and strip tooltip HTML (`<h1>`, `<br>`
-  become line breaks)
+  become line breaks); `description_token` / `lore_token` record which
+  localization token actually resolved (packets cite them, never a
+  synthesized casing)
 - `cost` / `recipe_cost`: `ItemCost` as int; `recipe_cost` present only when
   the recipe itself costs gold
-- `components` / `component_names`: from the recipe's `ItemRequirements`
-  (first variant, optional-`*` markers stripped); internal names plus
-  localized display names
+- `components`: `ItemRef` rows (internal name, localized name, gold cost)
+  from the recipe's `ItemRequirements` (first variant, optional-`*` markers
+  stripped); costs looked up from the same item records — `None` when a
+  component record is missing, never an invented price
+- `builds_into`: `ItemRef` rows for every item whose recipe requires this
+  one (deterministic order); empty for items nothing builds from
 - `attribs`: `AttribEntry` rows from `AbilityValues` (same shape as ability
   packets, including scepter/shard bonuses)
 - `behavior` / `damage_type` / `dispellable` / `cast_range` / `mana_cost` /

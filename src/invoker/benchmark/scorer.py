@@ -5,7 +5,7 @@ from typing import Literal, Protocol
 from pydantic import BaseModel, ConfigDict
 
 from invoker.benchmark.answerer import BenchmarkAnswer
-from invoker.benchmark.marks import Mark, MarkResolver, count_words
+from invoker.benchmark.marks import MarkResolver
 from invoker.benchmark.report import (
     CaseResult,
     ExpectedMarkResult,
@@ -16,6 +16,7 @@ from invoker.benchmark.report import (
 from invoker.benchmark.schemas import QACase
 from invoker.gen.client import GenerationError, GenerationProvenance
 from invoker.gen.concepts import GenerationBackend
+from invoker.marks import Mark, count_words
 
 JUDGE_PROMPT_VERSION = "1"
 

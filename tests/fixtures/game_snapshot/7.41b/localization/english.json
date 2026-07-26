@@ -11,6 +11,8 @@
   "DOTA_Tooltip_ability_alchemist_chemical_rage_scepter_description": "Increases health regeneration further.",
   "DOTA_Tooltip_ability_alchemist_goblins_greed_scepter_description": "Also grants %scepter_gold_bonus_tooltip% bonus gold per kill.",
   "DOTA_Tooltip_ability_item_mage_slayer_Description": "<h1>Passive: Mage Slayer</h1>Places a debuff when you attack enemies, dealing %dps% physical damage per second and causing them to do %spell_amp_debuff%%% less spell damage for %duration% seconds.",
+  "DOTA_Tooltip_ability_item_mage_slayer_bonus_magical_armor": "%+$spell_resist",
+  "dota_ability_variable_spell_resist": "Magic Resistance",
   "DOTA_Tooltip_ability_item_mage_slayer_Lore": "Forged to fell the False King.",
   "DOTA_Tooltip_ability_special_bonus_hp_250": "+{s:value} Health",
   "DOTA_Tooltip_ability_special_bonus_unique_alchemist": "+{s:bonus_armor_reduction} Acid Spray Armor Reduction",

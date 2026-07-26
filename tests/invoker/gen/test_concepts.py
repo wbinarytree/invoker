@@ -2,14 +2,15 @@ import json
 
 import pytest
 
-from invoker.gen.artifacts import CardSentence, ConceptCard
+from invoker.gen.artifacts import CardSentence, EntityCard
+from invoker.gen.checks import extract_marks
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
     GenerationResult,
     StructuredResult,
 )
-from invoker.gen.concepts import build_packet, extract_citations, generate_concept
+from invoker.gen.concepts import build_packet, generate_concept
 
 # reuse the corpus store fixture helpers from the sections tests
 from tests.invoker.corpus.test_sections import make_store
@@ -35,7 +36,7 @@ def provenance(prompt_name: str) -> GenerationProvenance:
 class FakeBackend:
     model = "claude-opus-5"
 
-    def __init__(self, article_text: str, card: ConceptCard):
+    def __init__(self, article_text: str, card: EntityCard):
         self.article_text = article_text
         self.card = card
         self.calls: list[dict] = []
@@ -51,8 +52,8 @@ class FakeBackend:
         return StructuredResult(output=self.card, provenance=provenance(kwargs["prompt_name"]))
 
 
-def good_card(mark: str = f"corpus:{KEY}") -> ConceptCard:
-    return ConceptCard(
+def good_card(mark: str = f"corpus:{KEY}") -> EntityCard:
+    return EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Uphill ranged attacks miss 25% of the time.", marks=[mark])],
     )
@@ -68,19 +69,19 @@ def test_build_packet_keys_and_stable_hash(tmp_path):
 
     make_store(tmp_path)
     sections = load_sections(CorpusStore(tmp_path), "testwiki", "evasion")
-    packet, keys, digest = build_packet(sections)
-    assert KEY in keys
-    assert LEAD_KEY in keys  # lead section is citable
+    packet, text_by_mark, digest = build_packet(sections)
+    assert f"corpus:{KEY}" in text_by_mark
+    assert f"corpus:{LEAD_KEY}" in text_by_mark  # lead section is citable
     assert f"[{KEY}]" in packet
     _, _, digest2 = build_packet(sections)
     assert digest == digest2
     # heading-only sections (no body text) are not packet targets
-    assert f"{LEAD_KEY}#Cleave_&_Splash" not in keys
+    assert f"corpus:{LEAD_KEY}#Cleave_&_Splash" not in text_by_mark
 
 
-def test_extract_citations_dedupes_in_order():
+def test_extract_marks_dedupes_in_order():
     text = f"A. [corpus:{KEY}] B. [corpus:{LEAD_KEY}] C. [corpus:{KEY}]"
-    assert extract_citations(text) == [KEY, LEAD_KEY]
+    assert extract_marks(text) == [f"corpus:{KEY}", f"corpus:{LEAD_KEY}"]
 
 
 def run_generate(tmp_path, backend):
@@ -106,31 +107,66 @@ def test_generate_concept_writes_artifact_and_article_file(tmp_path):
     assert saved["slug"] == "evasion"
     assert saved["title"] == "Evasion"
     assert saved["patch"] == "7.41d"
-    assert saved["schema_version"] == 2
+    assert saved["schema_version"] == 3
     assert saved["citations"] == [f"corpus:{KEY}"]
     assert saved["article_provenance"]["prompt_name"] == "concept-article"
     assert saved["card_provenance"]["prompt_name"] == "concept-card"
     assert len(saved["packet_sha256"]) == 64
-    # article lives in the sibling markdown file, bound by sha
+    # the card's one home is the markdown frontmatter, not artifact.json
+    assert "card" not in saved
     assert saved["article_file"] == "article.md"
-    assert (path.parent / "article.md").read_text() == good_article()
+    file_text = (path.parent / "article.md").read_text()
+    assert file_text.startswith("---\n")
+    assert "Uphill ranged attacks miss 25% of the time." in file_text  # card in frontmatter
+    assert file_text.endswith(good_article())
     # the packet reached the model with keys inline
     article_call = backend.calls[0]
     assert f"[{KEY}]" in article_call["user_content"]
     assert "Evasion" in article_call["user_content"]
 
 
-def test_load_concept_article_verifies_sha_binding(tmp_path):
-    from invoker.gen.concepts import load_concept_article
+def test_load_entity_article_verifies_sha_binding(tmp_path):
+    from invoker.gen.artifacts import load_entity_article
 
     _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
-    artifact, article = load_concept_article(path)
+    artifact, article = load_entity_article(path)
     assert artifact.slug == "evasion"
+    # the card round-trips through the frontmatter; the body excludes it
+    assert artifact.card.sentences[0].text == good_card().sentences[0].text
     assert article == good_article()
     # a hand-edited article file fails loudly
-    (path.parent / "article.md").write_text(article + "\n\nEdited by hand.")
+    original = (path.parent / "article.md").read_text()
+    (path.parent / "article.md").write_text(original + "\n\nEdited by hand.")
     with pytest.raises(GenerationError, match="drifted"):
-        load_concept_article(path)
+        load_entity_article(path)
+
+
+def test_load_entity_article_rejects_stale_schema(tmp_path):
+    import json as json_module
+
+    from invoker.gen.artifacts import load_entity_article
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    payload = json_module.loads(path.read_text())
+    payload["schema_version"] = 2
+    path.write_text(json_module.dumps(payload))
+    with pytest.raises(GenerationError, match="schema 2"):
+        load_entity_article(path)
+
+
+def test_load_entity_article_rejects_frontmatter_json_mismatch(tmp_path):
+    # only reachable via json-side drift — an md-side edit trips the sha
+    # first — which is exactly the migration safety net this check is
+    import json as json_module
+
+    from invoker.gen.artifacts import load_entity_article
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    payload = json_module.loads(path.read_text())
+    payload["patch"] = "7.42"
+    path.write_text(json_module.dumps(payload))
+    with pytest.raises(GenerationError, match="frontmatter patch"):
+        load_entity_article(path)
 
 
 def test_article_citing_unknown_key_fails_loudly(tmp_path):
@@ -155,7 +191,7 @@ def test_card_with_unknown_mark_fails_loudly(tmp_path):
 
 def test_card_number_absent_from_cited_section_fails_loudly(tmp_path):
     # 25 appears under #Uphill_Miss_Chance; 77 appears nowhere
-    bad = ConceptCard(
+    bad = EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Attacks miss 77% of the time.", marks=[f"corpus:{KEY}"])],
     )
@@ -167,7 +203,7 @@ def test_card_number_absent_from_cited_section_fails_loudly(tmp_path):
 def test_card_number_must_come_from_the_cited_section_not_any_section(tmp_path):
     # 3100 exists nowhere in the evasion fixture; even a resolvable mark
     # cannot vouch for a number its section does not contain
-    bad = ConceptCard(
+    bad = EntityCard(
         entity="evasion",
         sentences=[CardSentence(text="Costs 3100 gold.", marks=[f"corpus:{LEAD_KEY}"])],
     )

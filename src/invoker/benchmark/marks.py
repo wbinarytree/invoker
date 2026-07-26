@@ -1,42 +1,13 @@
 from __future__ import annotations
 
-import re
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from invoker.corpus.sections import CorpusSectionError, load_sections
 from invoker.corpus.store import CorpusStore
-
-MARK_KINDS = ("gamefile", "loc", "corpus", "changelog", "stats", "human")
-
-_MARK_PATTERN = re.compile(rf"\[({'|'.join(MARK_KINDS)}):([^\]\s]+)\]")
-
-
-@dataclass(frozen=True)
-class Mark:
-    kind: str
-    key: str
-
-    def __str__(self) -> str:
-        return f"{self.kind}:{self.key}"
-
-
-def parse_marks(text: str) -> list[Mark]:
-    """Distinct inline source marks, in first-use order."""
-    seen: dict[Mark, None] = {}
-    for match in _MARK_PATTERN.finditer(text):
-        seen.setdefault(Mark(kind=match.group(1), key=match.group(2)))
-    return list(seen)
-
-
-def strip_marks(text: str) -> str:
-    return _MARK_PATTERN.sub("", text)
-
-
-def count_words(text: str) -> int:
-    """Prose word count with mark tokens excluded — the concision bound
-    targets prose, and mark density must not penalize citation discipline."""
-    return len(strip_marks(text).split())
+from invoker.marks import Mark
 
 
 @dataclass(frozen=True)
@@ -45,15 +16,25 @@ class MarkResolution:
     reason: str | None = None
 
 
+_GAMEFILE_CLASSES: dict[str, tuple[str, frozenset[str]]] = {
+    # class → (snapshot file, fixed section vocabulary — extended by code
+    # change when a generator slice adds sections; spec decision 3)
+    "items": ("items.json", frozenset({"cost", "components", "attribs", "mechanics"})),
+    "abilities": ("abilities.json", frozenset()),
+}
+
+
 class MarkResolver:
     """Resolves marks for traceability, not truth (marks-not-verdicts).
 
     `corpus:` keys must be section citation keys of the stored expanded
-    revision — the same key space generation validated against. `changelog:`
-    keys must be tokens in the snapshot changelog. The remaining kinds gain
-    resolvers with the generator slices that introduce them (item/hero:
-    `gamefile`/`loc`); until then they report as unresolvable with a reason
-    saying so.
+    revision — the same key space generation validated against.
+    `changelog:` keys must be tokens in the snapshot changelog.
+    `gamefile:` keys (`<class>/<record>[#<section>]`) must name a record in
+    the patch snapshot with a section from that class's fixed vocabulary;
+    `loc:` keys must be localization tokens (the `ability`/`Ability` token
+    casing variants both count — Valve mixes them). `stats:`/`human:` gain
+    resolvers with the slices that introduce them.
     """
 
     def __init__(
@@ -61,22 +42,88 @@ class MarkResolver:
         *,
         corpus_store: CorpusStore | None = None,
         changelog: dict[str, Any] | None = None,
+        game_data_dir: Path | None = None,
+        patch: str | None = None,
     ) -> None:
         self._store = corpus_store
         self._section_keys: dict[tuple[str, str], set[str] | str] = {}
         self._changelog_tokens = _changelog_tokens(changelog) if changelog is not None else None
+        self._game_data_dir = game_data_dir
+        self._patch = patch
+        self._gamefile_records: dict[str, set[str] | str] = {}
+        self._loc_tokens: set[str] | str | None = None
 
     def resolve(self, mark: Mark) -> MarkResolution:
         if mark.kind == "corpus":
             return self._resolve_corpus(mark.key)
         if mark.kind == "changelog":
             return self._resolve_changelog(mark.key)
+        if mark.kind == "gamefile":
+            return self._resolve_gamefile(mark.key)
+        if mark.kind == "loc":
+            return self._resolve_loc(mark.key)
         return MarkResolution(
             ok=False,
             reason=(
                 f"no resolver for mark kind {mark.kind!r} yet (arrives with its generator slice)"
             ),
         )
+
+    def _resolve_gamefile(self, key: str) -> MarkResolution:
+        if self._game_data_dir is None or self._patch is None:
+            return MarkResolution(ok=False, reason="game-file snapshot not available this run")
+        klass, slash, rest = key.partition("/")
+        record, _, section = rest.partition("#")
+        if not slash or not record or klass not in _GAMEFILE_CLASSES:
+            known = ", ".join(sorted(_GAMEFILE_CLASSES))
+            return MarkResolution(
+                ok=False, reason=f"malformed gamefile key {key!r} (known classes: {known})"
+            )
+        filename, sections = _GAMEFILE_CLASSES[klass]
+        records = self._load_gamefile_records(klass, filename)
+        if isinstance(records, str):
+            return MarkResolution(ok=False, reason=records)
+        if record not in records:
+            return MarkResolution(
+                ok=False, reason=f"{record} is not in the {self._patch} {klass} snapshot"
+            )
+        if section and section not in sections:
+            return MarkResolution(
+                ok=False, reason=f"unknown section {section!r} for gamefile class {klass!r}"
+            )
+        return MarkResolution(ok=True)
+
+    def _load_gamefile_records(self, klass: str, filename: str) -> set[str] | str:
+        assert self._game_data_dir is not None and self._patch is not None
+        cached = self._gamefile_records.get(klass)
+        if cached is None:
+            path = self._game_data_dir / self._patch / filename
+            try:
+                cached = set(json.loads(path.read_text()))
+            except (OSError, json.JSONDecodeError) as exc:
+                cached = f"cannot read {path}: {exc}"
+            self._gamefile_records[klass] = cached
+        return cached
+
+    def _resolve_loc(self, token: str) -> MarkResolution:
+        if self._game_data_dir is None or self._patch is None:
+            return MarkResolution(ok=False, reason="game-file snapshot not available this run")
+        tokens = self._load_loc_tokens()
+        if isinstance(tokens, str):
+            return MarkResolution(ok=False, reason=tokens)
+        if token in tokens or _swap_ability_case(token) in tokens:
+            return MarkResolution(ok=True)
+        return MarkResolution(ok=False, reason=f"{token} is not in the {self._patch} localization")
+
+    def _load_loc_tokens(self) -> set[str] | str:
+        assert self._game_data_dir is not None and self._patch is not None
+        if self._loc_tokens is None:
+            path = self._game_data_dir / self._patch / "localization" / "english.json"
+            try:
+                self._loc_tokens = set(json.loads(path.read_text()))
+            except (OSError, json.JSONDecodeError) as exc:
+                self._loc_tokens = f"cannot read {path}: {exc}"
+        return self._loc_tokens
 
     def _resolve_corpus(self, key: str) -> MarkResolution:
         if self._store is None:
@@ -119,6 +166,12 @@ class MarkResolver:
                 ok=False, reason=f"{key} is not a token in the snapshot changelog"
             )
         return MarkResolution(ok=True)
+
+
+def _swap_ability_case(token: str) -> str:
+    if "DOTA_Tooltip_ability_" in token:
+        return token.replace("DOTA_Tooltip_ability_", "DOTA_Tooltip_Ability_", 1)
+    return token.replace("DOTA_Tooltip_Ability_", "DOTA_Tooltip_ability_", 1)
 
 
 def _changelog_tokens(changelog: dict[str, Any]) -> set[str]:

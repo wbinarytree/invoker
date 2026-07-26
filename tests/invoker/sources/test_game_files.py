@@ -109,6 +109,42 @@ def test_game_files_source_exposes_items():
     assert "neutral_tiers" in source.neutral_items()
 
 
+def test_attrib_headers_resolve_tooltip_label_macros():
+    """'%+$spell_resist' must resolve to the label players see (Magic
+    Resistance, percent-formatted) — not a prettified KV key ('bonus
+    magical armor'), which misnames the stat."""
+    source = GameFilesSource(FIXTURE_ROOT, "7.41b")
+    record = source.item_records()["item_mage_slayer"]
+    by_key = {row["key"]: row for row in record["attrib"]}
+    resist = by_key["bonus_magical_armor"]
+    assert resist["header"] == "MAGIC RESISTANCE:"
+    assert resist["percent"] is True
+    assert resist["value"] == "18"
+    # keys without a label token keep the prettified-key fallback
+    assert by_key["dps"]["header"] == "DPS:"
+    assert "percent" not in by_key["dps"]
+
+
+def test_attrib_percent_derived_from_description_template():
+    """A key with no label token still gets its percent flag when the raw
+    description template renders it with a literal % (`%key%%%`) — the
+    mage-slayer spell_amp_debuff reads 40%, not a unit-less 40."""
+    source = GameFilesSource(FIXTURE_ROOT, "7.41b")
+    by_key = {row["key"]: row for row in source.item_records()["item_mage_slayer"]["attrib"]}
+    assert by_key["spell_amp_debuff"]["percent"] is True
+    # %dps% and %duration% have no escape suffix — still unit-less
+    assert "percent" not in by_key["dps"]
+    assert "percent" not in by_key["duration"]
+
+
+def test_item_record_carries_resolved_loc_tokens():
+    """The record names the Description/Lore tokens that actually resolved
+    so packets cite real tokens, never a synthesized casing."""
+    record = GameFilesSource(FIXTURE_ROOT, "7.41b").item_records()["item_mage_slayer"]
+    assert record["desc_token"] == "DOTA_Tooltip_ability_item_mage_slayer_Description"
+    assert record["lore_token"] == "DOTA_Tooltip_ability_item_mage_slayer_Lore"
+
+
 def test_game_files_source_fails_loudly_when_patch_missing():
     with pytest.raises(GameFilesSourceError):
         GameFilesSource(FIXTURE_ROOT, "missing")

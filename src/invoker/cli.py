@@ -275,6 +275,47 @@ def generate_concept_cmd(
     )
 
 
+@app.command("generate-item")
+def generate_item_cmd(
+    item: str = typer.Argument(..., help="Item internal or localized name, e.g. mage_slayer."),
+    patch: str = typer.Option(..., help="Game-file snapshot patch to ground in."),
+    effort: str | None = typer.Option(None, help="Generation effort level override."),
+) -> None:
+    """Generate one item article + card into data/kb/<patch>/items/.
+
+    Grounded in the game-file snapshot (gamefile:/loc: marks); citation
+    marks that do not resolve against the context packet abort the run.
+    """
+    from invoker.gen.claude_cli import ClaudeCliClient
+    from invoker.gen.client import GenerationError
+    from invoker.gen.items import generate_item
+    from invoker.paths import kb_dir
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is not configured", err=True)
+        raise typer.Exit(code=1)
+    try:
+        artifact, path = generate_item(
+            cfg.game_data_dir,
+            ClaudeCliClient(),
+            item=item,
+            patch=patch,
+            kb_dir=kb_dir(cfg.data_dir, patch),
+            effort=effort,
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Wrote {path} + {artifact.article_file}")
+    typer.echo(
+        f"{len(artifact.citations)} distinct citations, "
+        f"card: {len(artifact.card.sentences)} sentences "
+        f"(model {artifact.article_provenance.model}, "
+        f"transport {artifact.article_provenance.transport})"
+    )
+
+
 @app.command("render-kb")
 def render_kb_cmd(
     patch: str = typer.Option(..., help="Patch whose KB artifacts to render."),
@@ -371,6 +412,7 @@ def run_benchmark_cmd(
             answer_backend=ClaudeCliClient(model=answer_model_id),
             judge_backend=ClaudeCliClient(model=judge_model or answer_model_id),
             out_dir=benchmark_runs_dir(cfg.data_dir, patch),
+            game_data_dir=cfg.game_data_dir,
             on_result=_print,
         )
     except GenerationError as exc:

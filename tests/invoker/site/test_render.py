@@ -48,12 +48,17 @@ def test_article_mark_with_ampersand_anchor_renders_clean_link(tmp_path):
     import hashlib
     import json
 
+    from invoker.gen.artifacts import article_file_text
+
     kb = build_kb(tmp_path)
     concept_dir = kb / "concepts" / "evasion"
     article = "Cleave never misses targets. [corpus:testwiki/evasion@42#Cleave_&_Splash]"
-    (concept_dir / "article.md").write_text(article)
+    file_text = article_file_text(
+        title="Evasion", kind="concept", patch="7.41d", card=good_card(), body=article
+    )
+    (concept_dir / "article.md").write_text(file_text)
     artifact = json.loads((concept_dir / "artifact.json").read_text())
-    artifact["article_sha256"] = hashlib.sha256(article.encode()).hexdigest()
+    artifact["article_sha256"] = hashlib.sha256(file_text.encode()).hexdigest()
     (concept_dir / "artifact.json").write_text(json.dumps(artifact))
 
     render_kb_site(kb, "7.41d", tmp_path / "site")

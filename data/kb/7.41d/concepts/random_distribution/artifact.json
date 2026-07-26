@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "random_distribution",
+  "title": "Random Distribution",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2fdd4c5dca319f8a4aa94958ef18250fb6c0300641041f4543f0147cdd62be0a",
+  "citations": [
+    "corpus:liquipedia_dota2/random_distribution@2376760",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Definition",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Example",
+    "corpus:liquipedia_dota2/random_distribution@2376760#C_Values",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Pseudo_random_events",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Evasion_Sources",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Hero_and_Unit_Abilities",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Flat_distribution",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Discrete_distribution",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Other",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Legacy_data",
+    "corpus:liquipedia_dota2/random_distribution@2376760#Version_history"
+  ],
+  "packet_sha256": "e442b33b5b37dd4109a3610532200eb3bc0470ea508ad7f6004422c2c2e82b4a",
+  "article_provenance": {
+    "model": "claude-opus-5",
+    "transport": "claude-cli",
+    "prompt_name": "concept-article",
+    "prompt_version": "3",
+    "request_sha256": "31845cbbd8283e0d9ee96485ddda25359ea38efe6aa462368b8f18f388c0a659",
+    "input_tokens": 2,
+    "output_tokens": 4231,
+    "stop_reason": "end_turn",
+    "generated_at": "2026-07-25T22:05:19.059057+00:00"
+  },
+  "card_provenance": {
+    "model": "claude-opus-5",
+    "transport": "claude-cli",
+    "prompt_name": "concept-card",
+    "prompt_version": "3",
+    "request_sha256": "2345774913e9a7a76f660ad521d281b99ed6aa892b87f8a02920dbb8c94a9a56",
+    "input_tokens": 2,
+    "output_tokens": 1845,
+    "stop_reason": "end_turn",
+    "generated_at": "2026-07-25T22:05:41.643733+00:00"
+  }
+}

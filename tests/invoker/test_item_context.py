@@ -4,6 +4,7 @@ import pytest
 
 from invoker.kg.item_context import (
     ItemNotFoundError,
+    ItemRef,
     build_item_context,
     build_item_context_from_source,
 )
@@ -38,15 +39,29 @@ def test_item_context_localization_and_template_join():
 
 def test_item_context_components_from_recipe():
     context = mage_slayer_context()
-    assert context.components == ["item_pers", "item_cloak"]
-    assert context.component_names == ["Perseverance", "Cloak"]
+    assert context.components == [
+        ItemRef(internal_name="item_pers", name="Perseverance", cost=1300),
+        ItemRef(internal_name="item_cloak", name="Cloak", cost=500),
+    ]
     assert context.recipe_cost is None  # zero-cost recipe not reported
+    assert context.builds_into == []  # nothing in the fixture builds from it
 
 
 def test_item_context_costed_recipe_and_optional_component_marker():
     context = build_item_context(FIXTURE_ROOT, "item_costed_recipe_thing", patch="7.41b")
     assert context.recipe_cost == 250
-    assert context.components == ["item_cloak"]  # trailing * stripped
+    # trailing * stripped
+    assert context.components == [ItemRef(internal_name="item_cloak", name="Cloak", cost=500)]
+
+
+def test_item_context_builds_into_scans_the_recipe_graph():
+    context = build_item_context(FIXTURE_ROOT, "item_cloak", patch="7.41b")
+    assert context.components is None
+    assert [ref.internal_name for ref in context.builds_into] == [
+        "item_costed_recipe_thing",
+        "item_mage_slayer",
+    ]
+    assert context.builds_into[1].cost == 3100
 
 
 def test_item_context_resolves_by_internal_name_and_prefixless():

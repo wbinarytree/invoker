@@ -19,6 +19,15 @@ class ItemNotFoundError(ValueError):
 
 
 @dataclass(frozen=True)
+class ItemRef:
+    """A recipe-graph neighbor: what an item is built from or builds into."""
+
+    internal_name: str
+    name: str
+    cost: int | None
+
+
+@dataclass(frozen=True)
 class ItemContext:
     """Source-grounded static context for one item at a given patch."""
 
@@ -32,10 +41,12 @@ class ItemContext:
     damage_type: str | None
     dispellable: str | None
     description: str | None
+    description_token: str | None
     lore: str | None
+    lore_token: str | None
     attribs: list[AttribEntry]
-    components: list[str] | None
-    component_names: list[str] | None
+    components: list[ItemRef] | None
+    builds_into: list[ItemRef]
     cast_range: str | list[str] | None = None
     mana_cost: str | list[str] | None = None
     cooldown: str | list[str] | None = None
@@ -65,6 +76,7 @@ def build_item_context_from_source(
             key=str(a["key"]) if "key" in a else None,
             scepter_bonus=a.get("scepter_bonus"),
             shard_bonus=a.get("shard_bonus"),
+            percent=bool(a.get("percent")),
         )
         for a in record.get("attrib", [])
         if isinstance(a, dict) and "header" in a
@@ -80,13 +92,32 @@ def build_item_context_from_source(
         damage_type=record.get("dmg_type") or None,
         dispellable=record.get("dispellable") or None,
         description=record.get("desc") or None,
+        description_token=record.get("desc_token") or None,
         lore=record.get("lore") or None,
+        lore_token=record.get("lore_token") or None,
         attribs=attribs,
-        components=record.get("components"),
-        component_names=record.get("component_names"),
+        components=(
+            [_item_ref(records, c) for c in record["components"]]
+            if record.get("components")
+            else None
+        ),
+        builds_into=[
+            _item_ref(records, result)
+            for result in sorted(records)
+            if internal_name in (records[result].get("components") or [])
+        ],
         cast_range=record.get("cast_range"),
         mana_cost=record.get("mc"),
         cooldown=record.get("cd"),
+    )
+
+
+def _item_ref(records: dict[str, Any], internal_name: str) -> ItemRef:
+    record = records.get(internal_name, {})
+    return ItemRef(
+        internal_name=internal_name,
+        name=str(record.get("dname", internal_name)),
+        cost=record.get("cost"),
     )
 
 

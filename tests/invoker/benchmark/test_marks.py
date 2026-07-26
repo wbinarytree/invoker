@@ -1,10 +1,7 @@
-from invoker.benchmark.marks import (
-    Mark,
-    MarkResolver,
-    count_words,
-    parse_marks,
-    strip_marks,
-)
+from pathlib import Path
+
+from invoker.benchmark.marks import MarkResolver
+from invoker.marks import Mark, count_words, parse_marks, strip_marks
 
 # reuse the corpus store fixture helpers from the sections tests
 from tests.invoker.corpus.test_sections import make_store
@@ -122,7 +119,51 @@ def test_unavailable_stores_report_why():
 
 def test_kinds_without_resolvers_yet_are_unresolvable_with_reason():
     resolver = MarkResolver()
-    for kind in ("gamefile", "loc", "stats", "human"):
+    for kind in ("stats", "human"):
         resolution = resolver.resolve(Mark(kind, "item_mage_slayer"))
         assert not resolution.ok
         assert "no resolver" in (resolution.reason or "")
+
+
+GAME_FIXTURE = Path(__file__).resolve().parents[2] / "fixtures" / "game_snapshot"
+
+
+def snapshot_resolver() -> MarkResolver:
+    return MarkResolver(game_data_dir=GAME_FIXTURE, patch="7.41b")
+
+
+def test_gamefile_marks_resolve_records_and_sections():
+    resolver = snapshot_resolver()
+    assert resolver.resolve(Mark("gamefile", "items/item_mage_slayer")).ok
+    assert resolver.resolve(Mark("gamefile", "items/item_mage_slayer#attribs")).ok
+    assert resolver.resolve(Mark("gamefile", "abilities/alchemist_acid_spray")).ok
+
+
+def test_gamefile_marks_reject_unknown_record_section_and_class():
+    resolver = snapshot_resolver()
+    missing = resolver.resolve(Mark("gamefile", "items/item_invented"))
+    assert not missing.ok
+    assert "not in the 7.41b items snapshot" in (missing.reason or "")
+    section = resolver.resolve(Mark("gamefile", "items/item_mage_slayer#invented"))
+    assert not section.ok
+    assert "unknown section" in (section.reason or "")
+    klass = resolver.resolve(Mark("gamefile", "cosmetics/item_mage_slayer"))
+    assert not klass.ok
+    assert "known classes" in (klass.reason or "")
+
+
+def test_loc_marks_resolve_with_ability_case_swap():
+    resolver = snapshot_resolver()
+    assert resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_mage_slayer_Description")).ok
+    # stored token uses capital-A Ability; the lowercase query still resolves
+    assert resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_blink")).ok
+    made_up = resolver.resolve(Mark("loc", "DOTA_Tooltip_ability_item_invented"))
+    assert not made_up.ok
+
+
+def test_gamefile_and_loc_unavailable_without_snapshot():
+    resolver = MarkResolver()
+    for kind, key in (("gamefile", "items/item_mage_slayer"), ("loc", "TOKEN")):
+        resolution = resolver.resolve(Mark(kind, key))
+        assert not resolution.ok
+        assert "not available" in (resolution.reason or "")

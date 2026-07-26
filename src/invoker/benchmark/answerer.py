@@ -6,9 +6,10 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from invoker.benchmark.marks import Mark, parse_marks
+from invoker.gen.artifacts import load_entity_article
 from invoker.gen.client import GenerationError, GenerationProvenance
-from invoker.gen.concepts import GenerationBackend, load_concept_article
+from invoker.gen.concepts import GenerationBackend
+from invoker.marks import Mark, parse_marks
 from invoker.snapshot.changelog import search_changelog
 
 ANSWERER_PROMPT_VERSION = "2"
@@ -80,6 +81,9 @@ class BenchmarkAnswer:
     provenance: list[GenerationProvenance]
 
 
+_CLASS_KINDS = {"concepts": "concept", "items": "item"}
+
+
 def load_kb_entries(kb_dir: Path) -> list[KbEntry]:
     """Scan the KB archive into the answerer's index. Loading verifies each
     artifact's article binding, so a drifted article fails the run. An
@@ -89,16 +93,22 @@ def load_kb_entries(kb_dir: Path) -> list[KbEntry]:
         return []
     entries: list[KbEntry] = []
     for class_dir in sorted(path for path in kb_dir.iterdir() if path.is_dir()):
-        if class_dir.name != "concepts":
+        kind = _CLASS_KINDS.get(class_dir.name)
+        if kind is None:
             raise GenerationError(
                 f"KB entity class {class_dir.name!r} has no index loader yet; "
                 "extend load_kb_entries with its artifact shape"
             )
         for entity_dir in sorted(path for path in class_dir.iterdir() if path.is_dir()):
-            artifact, article = load_concept_article(entity_dir / "artifact.json")
+            artifact, article = load_entity_article(entity_dir / "artifact.json")
+            if artifact.kind != kind:
+                raise GenerationError(
+                    f"{entity_dir}: artifact kind {artifact.kind!r} does not match "
+                    f"its class directory {class_dir.name!r}"
+                )
             entries.append(
                 KbEntry(
-                    id=f"concept/{artifact.slug}",
+                    id=f"{kind}/{artifact.slug}",
                     title=artifact.title,
                     summary=artifact.card.sentences[0].text,
                     article=article,
