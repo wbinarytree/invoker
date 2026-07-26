@@ -36,7 +36,7 @@ This file is the shortest path to the active design direction. Anything not list
   backend landed):
   [docs/specs/2026-07-26-serving-format-measurement.md](specs/2026-07-26-serving-format-measurement.md)
 - Generation completeness gates — coverage check + compression guard
-  (proposed):
+  (accepted; all gates landed, canonical KB regenerated under v5):
   [docs/specs/2026-07-26-generation-completeness-gates.md](specs/2026-07-26-generation-completeness-gates.md)
 
 ## Active plans
