@@ -8,7 +8,6 @@ from invoker.benchmark.answerer import (
     KbEntry,
     load_kb_entries,
 )
-from invoker.benchmark.marks import Mark
 from invoker.gen.artifacts import CardSentence, EntityArtifact, EntityCard
 from invoker.gen.client import (
     GenerationError,
@@ -16,6 +15,7 @@ from invoker.gen.client import (
     GenerationResult,
     StructuredResult,
 )
+from invoker.marks import Mark
 from tests.invoker.benchmark.test_marks import CHANGELOG, KEY
 
 

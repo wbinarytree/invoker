@@ -1,8 +1,9 @@
 from invoker.benchmark.answerer import BenchmarkAnswer
-from invoker.benchmark.marks import MarkResolver, parse_marks
+from invoker.benchmark.marks import MarkResolver
 from invoker.benchmark.schemas import QACase
 from invoker.benchmark.scorer import FactVerdict, TrapVerdict, score_case
 from invoker.gen.client import GenerationError
+from invoker.marks import parse_marks
 from tests.invoker.benchmark.test_answerer import provenance
 from tests.invoker.benchmark.test_marks import CHANGELOG, KEY
 from tests.invoker.corpus.test_sections import make_store

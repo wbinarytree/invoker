@@ -1,12 +1,7 @@
 from pathlib import Path
 
-from invoker.benchmark.marks import (
-    Mark,
-    MarkResolver,
-    count_words,
-    parse_marks,
-    strip_marks,
-)
+from invoker.benchmark.marks import MarkResolver
+from invoker.marks import Mark, count_words, parse_marks, strip_marks
 
 # reuse the corpus store fixture helpers from the sections tests
 from tests.invoker.corpus.test_sections import make_store

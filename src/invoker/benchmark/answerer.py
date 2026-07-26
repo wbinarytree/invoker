@@ -6,9 +6,9 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from invoker.benchmark.marks import Mark, parse_marks
 from invoker.gen.client import GenerationError, GenerationProvenance
 from invoker.gen.concepts import GenerationBackend, load_entity_article
+from invoker.marks import Mark, parse_marks
 from invoker.snapshot.changelog import search_changelog
 
 ANSWERER_PROMPT_VERSION = "2"
