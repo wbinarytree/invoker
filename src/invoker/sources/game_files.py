@@ -137,9 +137,6 @@ class GameFilesSource:
             if record is None:
                 continue
             record["components"] = components
-            record["component_names"] = [
-                records[c]["dname"] if c in records else c for c in components
-            ]
             if recipe_cost:
                 record["recipe_cost"] = recipe_cost
         return records
