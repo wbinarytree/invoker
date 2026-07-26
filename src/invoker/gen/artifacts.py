@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field
 
 from invoker.gen.client import GenerationProvenance
@@ -38,7 +40,7 @@ class EntityArtifact(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     schema_version: int = ENTITY_ARTIFACT_SCHEMA_VERSION
-    kind: str
+    kind: Literal["concept", "item", "hero"]
     slug: str
     title: str
     patch: str

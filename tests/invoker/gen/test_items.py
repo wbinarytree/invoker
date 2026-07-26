@@ -61,9 +61,10 @@ def run_generate(tmp_path, backend):
 def test_packet_sections_and_marks():
     packet, text_by_mark, digest = build_item_packet(context())
     assert set(text_by_mark) == {COST, COMPONENTS, ATTRIBS, MECHANICS, DESC, LORE}
-    # resolved percent-flagged header, not the KV key name
+    # resolved percent-flagged header, not the KV key name — and the key
+    # itself never leaks into the packet
     assert "MAGIC RESISTANCE: 18%" in text_by_mark[ATTRIBS]
-    assert "(key bonus_magical_armor)" in text_by_mark[ATTRIBS]
+    assert "bonus_magical_armor" not in text_by_mark[ATTRIBS]
     assert "Cost: 3100 gold" in text_by_mark[COST]
     assert "Perseverance (item_pers)" in text_by_mark[COMPONENTS]
     assert "Dispellable: Yes" in text_by_mark[MECHANICS]
@@ -72,23 +73,34 @@ def test_packet_sections_and_marks():
     assert digest == digest2
 
 
-def test_generate_item_writes_artifact():
-    import tempfile
+def test_packet_sections_match_resolver_vocabulary():
+    # cross-module contract: every gamefile section the packet can emit
+    # must be in the resolver's fixed vocabulary, and vice versa — a
+    # section added on one side only silently breaks mark resolution
+    from invoker.benchmark.marks import _GAMEFILE_CLASSES
 
-    with tempfile.TemporaryDirectory() as tmp:
-        backend = FakeBackend(good_article(), good_card())
-        artifact, path = run_generate(Path(tmp), backend)
-        assert path.parent.name == "mage_slayer"
-        saved = json.loads(path.read_text())
-        assert saved["kind"] == "item"
-        assert saved["slug"] == "mage_slayer"
-        assert saved["title"] == "Mage Slayer"
-        assert set(saved["citations"]) == {COST, COMPONENTS, ATTRIBS, DESC, MECHANICS}
-        assert saved["article_provenance"]["prompt_name"] == "item-article"
-        assert (path.parent / "article.md").read_text() == good_article()
-        # the packet reached the model with keyed sections inline
-        article_call = backend.calls[0]
-        assert f"## [{ATTRIBS}]" in article_call["user_content"]
+    _, vocabulary = _GAMEFILE_CLASSES["items"]
+    _, text_by_mark, _ = build_item_packet(context())
+    emitted = {
+        mark.partition("#")[2] for mark in text_by_mark if mark.startswith("gamefile:")
+    }
+    assert emitted == vocabulary
+
+
+def test_generate_item_writes_artifact(tmp_path):
+    backend = FakeBackend(good_article(), good_card())
+    artifact, path = run_generate(tmp_path, backend)
+    assert path.parent.name == "mage_slayer"
+    saved = json.loads(path.read_text())
+    assert saved["kind"] == "item"
+    assert saved["slug"] == "mage_slayer"
+    assert saved["title"] == "Mage Slayer"
+    assert set(saved["citations"]) == {COST, COMPONENTS, ATTRIBS, DESC, MECHANICS}
+    assert saved["article_provenance"]["prompt_name"] == "item-article"
+    assert (path.parent / "article.md").read_text() == good_article()
+    # the packet reached the model with keyed sections inline
+    article_call = backend.calls[0]
+    assert f"## [{ATTRIBS}]" in article_call["user_content"]
 
 
 def test_unknown_mark_fails_loudly(tmp_path):

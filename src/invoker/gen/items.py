@@ -73,8 +73,7 @@ def _attrib_line(attrib: AttribEntry) -> str:
         parts.append(f"Scepter: {attrib.scepter_bonus}")
     if attrib.shard_bonus is not None:
         parts.append(f"Shard: {attrib.shard_bonus}")
-    suffix = f" (key {attrib.key})" if attrib.key else ""
-    return " | ".join(parts) + suffix
+    return " | ".join(parts)
 
 
 def build_item_packet(context: ItemContext) -> tuple[str, dict[str, str], str]:
@@ -97,7 +96,7 @@ def build_item_packet(context: ItemContext) -> tuple[str, dict[str, str], str]:
     if context.components and context.component_names:
         pairs = ", ".join(
             f"{display} ({internal})"
-            for internal, display in zip(context.components, context.component_names, strict=False)
+            for internal, display in zip(context.components, context.component_names, strict=True)
         )
         sections.append((f"{base}#components", f"Components: {pairs}"))
 
