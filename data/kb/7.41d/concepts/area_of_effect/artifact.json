@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "area_of_effect",
+  "title": "Area of Effect",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7e67679878e005cc0186d7a05690b8a9140cab0ec809e514cf4f1129bd5e68a4",
+  "citations": [
+    "corpus:liquipedia_dota2/area_of_effect@2377200",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Sources",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#AoE_bonus_mechanics",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Unchanged_Effect_Radius",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Ability_is_not_affected_by_AoE_Bonus",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Item_ability_AoE_Radius",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Hero_ability_AoE_Radius",
+    "corpus:liquipedia_dota2/area_of_effect@2377200#Recent_Changes"
+  ],
+  "packet_sha256": "d15eb0ee685dc9b955ea2d1cab158a1953522d8c9bb984a2e75bd5e729ba3b52",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "8b48ba4fc4ba024e2047ddefe2dfa1e6a1a50614c8f443959e0ea304595d3519",
+    "input_tokens": 18444,
+    "output_tokens": 6337,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:33:04.552739+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "ac8391c323307979567443fe0086b5afd2b3684ea023580bd40d27acfa620373",
+    "input_tokens": 18497,
+    "output_tokens": 2603,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:34:07.898174+00:00"
+  }
+}

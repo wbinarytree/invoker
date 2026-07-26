@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "channeling",
+  "title": "Channeling",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "135d78f8cb663bfb2f129b0188c40b9a0aa2afd9c46471f06b901816bf467dda",
+  "citations": [
+    "corpus:liquipedia_dota2/channeling@2378740",
+    "corpus:liquipedia_dota2/channeling@2378740#Interrupting_Channeled_Abilities",
+    "corpus:liquipedia_dota2/channeling@2378740#Usable_Unit_Abilities_While_Channeling",
+    "corpus:liquipedia_dota2/channeling@2378740#Usable_Items_While_Channeling",
+    "corpus:liquipedia_dota2/channeling@2378740#Requires_hold/stop_to_cancel",
+    "corpus:liquipedia_dota2/channeling@2378740#Channeled_Abilities",
+    "corpus:liquipedia_dota2/channeling@2378740#Version_History",
+    "corpus:liquipedia_dota2/channeling@2378740#Patch_History"
+  ],
+  "packet_sha256": "6885a3f76a8784d1ef409b037bdb7679a282ba96cf942e7d703762673d52db7e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "149f73f2863fb996640e3fd46efa82ab59cd9553988981989723a97c20910045",
+    "input_tokens": 16907,
+    "output_tokens": 4705,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:32:56.654104+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "f0d6b1c1c805092a4aa2ccca780c948300407a8a613a7e7c8dc6f93aba61e57a",
+    "input_tokens": 16939,
+    "output_tokens": 1672,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:33:44.960035+00:00"
+  }
+}

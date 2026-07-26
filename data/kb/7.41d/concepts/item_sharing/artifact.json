@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "item_sharing",
+  "title": "Item Sharing",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "98017c7165775798ff9c387cda9645e515b1bee4f409687cfcb3f567271e60c3",
+  "citations": [
+    "corpus:liquipedia_dota2/item_sharing@2222655",
+    "corpus:liquipedia_dota2/item_sharing@2222655#Completely_Shareable",
+    "corpus:liquipedia_dota2/item_sharing@2222655#Roshan_Items",
+    "corpus:liquipedia_dota2/item_sharing@2222655#Partially_Shareable",
+    "corpus:liquipedia_dota2/item_sharing@2222655#Cooldown_interactions"
+  ],
+  "packet_sha256": "1fc4a31029b0013da360015fa57de594d82ce66db104170783ebd943076a233b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "3ae32ecc0844c44d5f4278c59353349eea02522121a4cc33d56c79f967c480c1",
+    "input_tokens": 15497,
+    "output_tokens": 2576,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:17:03.027925+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "ea0e871486192b07dec5ab22bf54e8b0628651ebd2f7335af4d580c257b7c6e5",
+    "input_tokens": 15496,
+    "output_tokens": 2630,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:18:14.900669+00:00"
+  }
+}

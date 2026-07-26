@@ -1,0 +1,44 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "time_of_day",
+  "title": "Time of Day",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b41ed651a679603af7fa1111e0ef0789d0119e9902416e9d6a90aeeaf2dce0ce",
+  "citations": [
+    "corpus:liquipedia_dota2/time_of_day@2360236",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Day-Night_Cycle",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Game_Clock_Modifying_Abilities",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Affected_Abilities",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Neutral_Creeps",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Vision",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Talents",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Server_Ticks",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Version_History",
+    "corpus:liquipedia_dota2/time_of_day@2360236#Patch_History"
+  ],
+  "packet_sha256": "46f782b07f57684b65f6b3431e17eadfba1ba7fe22b9ba13c12921694a048a89",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "77499ada5cd801e73b6337e5e9e969850018557a45c0837b2549b98f3f73a7f6",
+    "input_tokens": 16206,
+    "output_tokens": 5710,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:01:48.876464+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "b267d61c0601ef1630256228426ecddb6582988b4644b5c53991804b0be9760d",
+    "input_tokens": 16792,
+    "output_tokens": 2568,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:02:38.711659+00:00"
+  }
+}

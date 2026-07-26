@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "slow_resistance",
+  "title": "Slow Resistance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "94d59f3245d05eeb15ba50fd499fdff994d433a02a91d0f5b372eb3a95620a15",
+  "citations": [
+    "corpus:liquipedia_dota2/slow_resistance@2365304",
+    "corpus:liquipedia_dota2/slow_resistance@2365304#Equation",
+    "corpus:liquipedia_dota2/slow_resistance@2365304#Stacking",
+    "corpus:liquipedia_dota2/slow_resistance@2365304#Sources",
+    "corpus:liquipedia_dota2/slow_resistance@2365304#Affected_by_Slow_Resistance",
+    "corpus:liquipedia_dota2/slow_resistance@2365304#Recent_Changes"
+  ],
+  "packet_sha256": "aa745008e00ed80ca834eb8c3a93c006ef41bedddff2e0e94e66a1fa848f9501",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "67be6d332337ec8e8d4a60b2d60d30babf594183049551b41e569d0579bdab42",
+    "input_tokens": 15558,
+    "output_tokens": 1685,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:37:19.040771+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "e866f401821433c45848326fe388c0d1f2132a674d3a04cc7e1c65b3e2fde01b",
+    "input_tokens": 15123,
+    "output_tokens": 1698,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:38:01.166667+00:00"
+  }
+}

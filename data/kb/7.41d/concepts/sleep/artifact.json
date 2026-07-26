@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "sleep",
+  "title": "Sleep",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "bbe278cc2efea7d9ab1b1e0da649ce366eec5745483c000584d2ebfd3bb82f86",
+  "citations": [
+    "corpus:liquipedia_dota2/sleep@2380210",
+    "corpus:liquipedia_dota2/sleep@2380210#Sources",
+    "corpus:liquipedia_dota2/sleep@2380210#Castable_while_Sleeped",
+    "corpus:liquipedia_dota2/sleep@2380210#Secondary_Attack",
+    "corpus:liquipedia_dota2/sleep@2380210#Bounce_Attack",
+    "corpus:liquipedia_dota2/sleep@2380210#Auto_Attack",
+    "corpus:liquipedia_dota2/sleep@2380210#Patch_History"
+  ],
+  "packet_sha256": "2e19c66b8ca0306affc99b3b3d833ddcfda88f6f1880470aecb1a6186e108bb8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "43890bb0bd4a22fb70819aa71e02d12e6550434395dbd40cfcf45ffe153cc253",
+    "input_tokens": 15431,
+    "output_tokens": 3308,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:37:50.859372+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "ffd3efb0142858d459f48c10d9e94cd2c6e1f560d28bfff42a4829f989a5a42d",
+    "input_tokens": 15190,
+    "output_tokens": 2101,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:38:48.457466+00:00"
+  }
+}

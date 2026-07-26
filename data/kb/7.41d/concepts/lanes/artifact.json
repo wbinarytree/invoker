@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "lanes",
+  "title": "Lanes",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "47b49c2f27b08b2a96a7fe7f8badcfe7aeb963d5f933c3c3ebb363981ad28248",
+  "citations": [
+    "corpus:liquipedia_dota2/lanes@2329818",
+    "corpus:liquipedia_dota2/lanes@2329818#Terminology",
+    "corpus:liquipedia_dota2/lanes@2329818#Top_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Middle_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Bottom_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Safe_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Off_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Laning",
+    "corpus:liquipedia_dota2/lanes@2329818#Laning_Strategies",
+    "corpus:liquipedia_dota2/lanes@2329818#Solo_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Solo_Mid",
+    "corpus:liquipedia_dota2/lanes@2329818#Solo_Off",
+    "corpus:liquipedia_dota2/lanes@2329818#Dual_Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Tri-Lane",
+    "corpus:liquipedia_dota2/lanes@2329818#Version_history"
+  ],
+  "packet_sha256": "f0eb5efdbaf6abfae899aa5bc3f2b1e1b986193f4fca52c1a8a428d298a57a04",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "25a719257093b3c63a62036f14783da66763f62df4de88bab900e017ce2c74f0",
+    "input_tokens": 17256,
+    "output_tokens": 4439,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:17:35.082398+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "4c3bc83d0f838254cf6be3b9ed56fd53d463305ee49dd619622f34d79ba4f5f3",
+    "input_tokens": 18911,
+    "output_tokens": 921,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:19:05.727601+00:00"
+  }
+}

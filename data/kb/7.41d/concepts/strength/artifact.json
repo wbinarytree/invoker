@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "strength",
+  "title": "Strength",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e53b533af12b45c0739916d057705aa9061f04b0b73eaca96ef499a15c4ef6b9",
+  "citations": [
+    "corpus:liquipedia_dota2/strength@2381952",
+    "corpus:liquipedia_dota2/strength@2381952#Bonuses",
+    "corpus:liquipedia_dota2/strength@2381952#Strength_Heroes",
+    "corpus:liquipedia_dota2/strength@2381952#Strength_Increasing_Sources",
+    "corpus:liquipedia_dota2/strength@2381952#Strength_Granting_Talents",
+    "corpus:liquipedia_dota2/strength@2381952#Strength_Granting_Items",
+    "corpus:liquipedia_dota2/strength@2381952#Attack_Damage_Items",
+    "corpus:liquipedia_dota2/strength@2381952#Recent_Changes",
+    "corpus:liquipedia_dota2/strength@2381952#See_Also"
+  ],
+  "packet_sha256": "1b16493c3eb2ac294adb572be56e2fa02e3e77eccb9ec04b8df7196ff4b1a201",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "10",
+    "request_sha256": "1d773cd5dcdb7d05bd9a66eed60b59bb3802b581bc032d8c765becc0150decd4",
+    "input_tokens": 18812,
+    "output_tokens": 8696,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:26:30.438799+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "10",
+    "request_sha256": "751059169245ca6164abc3800e26f4fd8ff112a043766ab0621cedc8e1a2b6df",
+    "input_tokens": 20500,
+    "output_tokens": 2953,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:27:40.483913+00:00"
+  }
+}

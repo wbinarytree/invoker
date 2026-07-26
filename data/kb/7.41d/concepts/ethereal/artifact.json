@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "ethereal",
+  "title": "Ethereal",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1867863825b3bf808ba394a4d274327d7fea3b1bc01389ee9acde8b1b55a3165",
+  "citations": [
+    "corpus:liquipedia_dota2/ethereal@2309507",
+    "corpus:liquipedia_dota2/ethereal@2309507#Definition",
+    "corpus:liquipedia_dota2/ethereal@2309507#Sources",
+    "corpus:liquipedia_dota2/ethereal@2309507#Gallery",
+    "corpus:liquipedia_dota2/ethereal@2309507#Version_History",
+    "corpus:liquipedia_dota2/ethereal@2309507#Patch_History"
+  ],
+  "packet_sha256": "26346dc2bc53abb923161d2a5d10ac7a1e59cea5961a13a6dc9d86a59a924dea",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "826481cbf4639ffedf37bd7a7ea7efa3cc913ecfdf7b4438cb6ddff4241885c2",
+    "input_tokens": 15512,
+    "output_tokens": 3747,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:53:23.236008+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "a17dd89331a7469b0f65ecbd4debeaf917911c48e7a16b23194e209a6f9ae100",
+    "input_tokens": 15710,
+    "output_tokens": 960,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:53:44.842242+00:00"
+  }
+}

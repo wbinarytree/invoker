@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "ganking",
+  "title": "Ganking",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ae2d671e0aa7392b2a7225f8e7c62be6e34f2f8bfcd0b4b3ac65c327cfe19693",
+  "citations": [
+    "corpus:liquipedia_dota2/ganking@2148370",
+    "corpus:liquipedia_dota2/ganking@2148370#The_advantages_of_ganking",
+    "corpus:liquipedia_dota2/ganking@2148370#Heroes",
+    "corpus:liquipedia_dota2/ganking@2148370#Gankers",
+    "corpus:liquipedia_dota2/ganking@2148370#Roamers",
+    "corpus:liquipedia_dota2/ganking@2148370#Items",
+    "corpus:liquipedia_dota2/ganking@2148370#Preventing_enemy_ganks"
+  ],
+  "packet_sha256": "7ff8a5b8270e0f8425f917ef444a37d59eb6d04aa2b36c8c61fc86fc3704109c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "18ede147c83e16b1111e1374bc269bd7b2f5aceb1c6f5a38c13e8fae1c40e70a",
+    "input_tokens": 15737,
+    "output_tokens": 4160,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:55:39.921574+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "d1f914f346985b4c9f9d29484cb0dc82073b26ddff442729e459c559fc0000b0",
+    "input_tokens": 17077,
+    "output_tokens": 3167,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:57:00.618476+00:00"
+  }
+}

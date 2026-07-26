@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "non_targetable",
+  "title": "Non-targetable",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "104076274650035901144296238379596fccd5db23fb169e18a814a77b87fcd1",
+  "citations": [
+    "corpus:liquipedia_dota2/non_targetable@2382188",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Definition",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Unselectability",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Sources",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Directly_Unit-Targeting",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Secondary_Targets",
+    "corpus:liquipedia_dota2/non_targetable@2382188#Other_Cases"
+  ],
+  "packet_sha256": "b485388e5a391bd9595c55bb60f5623eb797c5b6d87117013ad49b6f614e3b3c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "43704e82c30319ea1f97340c900be4d11e34c70810c3d06f3aa03b968e945155",
+    "input_tokens": 16068,
+    "output_tokens": 3700,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:24:24.246726+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "a2dd239aa580bdb7e88123d476032f8be535de49fd8e59f5c3b638fcfa0c1f28",
+    "input_tokens": 16288,
+    "output_tokens": 2194,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:25:07.097799+00:00"
+  }
+}

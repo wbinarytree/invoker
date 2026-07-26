@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "talents",
+  "title": "Talents",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "20e9b1480dc5d4652a5ce2edb69f347fab56e219a0d96e6c262b17523b3b3a1c",
+  "citations": [
+    "corpus:liquipedia_dota2/talents@2332389",
+    "corpus:liquipedia_dota2/talents@2332389#Unlocking_Talents",
+    "corpus:liquipedia_dota2/talents@2332389#List_of_Talents"
+  ],
+  "packet_sha256": "617933c4256ee302d06020773661c9c7ca7f890b32f71193b4d9f215f33f7728",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "d826efd0496e4c348fb9b963ceb858dd67dc33bf9e2d4258536de73e2399234b",
+    "input_tokens": 23883,
+    "output_tokens": 11720,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:44:45.776470+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "f7d129922a8acbc26c705a6e8e486badbec22aa7a8db489b43f9a0c82e8141cb",
+    "input_tokens": 24033,
+    "output_tokens": 888,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:45:06.690355+00:00"
+  }
+}

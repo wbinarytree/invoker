@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "denying",
+  "title": "Denying",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "13d04731c9b28602d911bf32242b214902025c38feedb9a7987795ce7aa0d532",
+  "citations": [
+    "corpus:liquipedia_dota2/denying@2379552",
+    "corpus:liquipedia_dota2/denying@2379552#Denying_units",
+    "corpus:liquipedia_dota2/denying@2379552#Denying_towers",
+    "corpus:liquipedia_dota2/denying@2379552#Denying_heroes",
+    "corpus:liquipedia_dota2/denying@2379552#Specially_Deniable",
+    "corpus:liquipedia_dota2/denying@2379552#Lethal_Self-Damage",
+    "corpus:liquipedia_dota2/denying@2379552#Other_Special_Cases",
+    "corpus:liquipedia_dota2/denying@2379552#Non-Lethal_Self-Damage",
+    "corpus:liquipedia_dota2/denying@2379552#Deny_Override",
+    "corpus:liquipedia_dota2/denying@2379552#Trivia",
+    "corpus:liquipedia_dota2/denying@2379552#Version_History",
+    "corpus:liquipedia_dota2/denying@2379552#Patch_History",
+    "corpus:liquipedia_dota2/denying@2379552#Gallery",
+    "corpus:liquipedia_dota2/denying@2379552#See_also"
+  ],
+  "packet_sha256": "4ad1fdd94b5be3180a64b9549b7e2da7bd4bfa338bf03f8e20a661d5f303e51c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "ba6a4ce981c40fe948e04cab95380e906b75d907f2dd866a7cedfb87ea323f79",
+    "input_tokens": 17580,
+    "output_tokens": 7805,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:54:46.820553+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "0364f58b3302c88032f0b1bd6e57c2b9084e0533aa0913c1697c7e0b12c625e6",
+    "input_tokens": 18541,
+    "output_tokens": 2029,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:55:35.208126+00:00"
+  }
+}

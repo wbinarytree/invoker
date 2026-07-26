@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "creep_control_techniques",
+  "title": "Creep control techniques",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "dd80bfc788c534b59c4390cacc117f9def2500e98e8c51bd51a862176cee3075",
+  "citations": [
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Last-hitting",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Denying",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Attack_animations_and_projectile_speeds",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Equilibrium",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Creep_Blocking",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Pushing",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Pulling",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#Roles_and_last-hitting",
+    "corpus:liquipedia_dota2/creep_control_techniques@2079246#See_also"
+  ],
+  "packet_sha256": "a52d92add3b0ce077f8666c6242177c26f0108c4a2ef71dce712b946742489d7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "ab631f8ab378fcdb1eb7e6c9c1abb0cc257b0bd58d858e17b116b18fe1d662c9",
+    "input_tokens": 16098,
+    "output_tokens": 3784,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:15:52.002472+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "a7ceec70c7f6093b5b3ceff7d215d4b1b6b58cee9a4a5f646fd6618ad3d3dd00",
+    "input_tokens": 15607,
+    "output_tokens": 2897,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:17:04.545949+00:00"
+  }
+}

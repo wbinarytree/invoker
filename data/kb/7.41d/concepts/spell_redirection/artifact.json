@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_redirection",
+  "title": "Spell Redirection",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6a33f5bdd70793d26b44e1adc778c578e6c3ac8295d436e7608f8e71ef573044",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_redirection@2357986",
+    "corpus:liquipedia_dota2/spell_redirection@2357986#Definition",
+    "corpus:liquipedia_dota2/spell_redirection@2357986#Mechanics",
+    "corpus:liquipedia_dota2/spell_redirection@2357986#Spell_Redirect_Sources",
+    "corpus:liquipedia_dota2/spell_redirection@2357986#Recent_Changes"
+  ],
+  "packet_sha256": "49fa02d339385c406dceabd4b0f82a821dd99e1feaecdf932e7084c76e74b49b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "8acaf3a6b3d10f7c328fe738b4bf5ce8e0de0df5146725ef8682632f0c431a56",
+    "input_tokens": 15054,
+    "output_tokens": 1252,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:46:23.115085+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "219168fc486abe27fdc2889d4c8ec41e3e86e485ffa1505180816a49b476d0b6",
+    "input_tokens": 14691,
+    "output_tokens": 1505,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:47:03.611807+00:00"
+  }
+}

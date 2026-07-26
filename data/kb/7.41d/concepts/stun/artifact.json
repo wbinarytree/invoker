@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "stun",
+  "title": "Stun",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8346d0fabb10ad308b12652babb9d2c82f87edbcda1d81549d8ac3b1a66c3a11",
+  "citations": [
+    "corpus:liquipedia_dota2/stun@2405717",
+    "corpus:liquipedia_dota2/stun@2405717#Mechanics",
+    "corpus:liquipedia_dota2/stun@2405717#Definition",
+    "corpus:liquipedia_dota2/stun@2405717#Abilities_Castable_When_Stunned",
+    "corpus:liquipedia_dota2/stun@2405717#Stunned_Modifier_Sources",
+    "corpus:liquipedia_dota2/stun@2405717#Bash_Modifier_Sources",
+    "corpus:liquipedia_dota2/stun@2405717#Unique_Modifier_Sources",
+    "corpus:liquipedia_dota2/stun@2405717#Caster_Disabling_Stuns"
+  ],
+  "packet_sha256": "8912a40b409a415d49cb1abbcf39ce672d663cf5e01a749f5115027d10dde7bc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "1e098fc162792765e70a44d5a15d62b2766b6e094bf48962cdf1d8e7c1bd1c86",
+    "input_tokens": 16960,
+    "output_tokens": 9513,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:44:06.861582+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "7af890243e62b7907fcedb1a8e881afa848e1fd16a5de59aeb4db1767e8237a9",
+    "input_tokens": 21582,
+    "output_tokens": 1340,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:44:35.263423+00:00"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "mana",
+  "title": "Mana",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "fedd48db85b10c05c812d4b96c958cb764aef54eb0a04563701753792a739458",
+  "citations": [
+    "corpus:liquipedia_dota2/mana@2365137",
+    "corpus:liquipedia_dota2/mana@2365137#Display",
+    "corpus:liquipedia_dota2/mana@2365137#HUD_Mana_bar",
+    "corpus:liquipedia_dota2/mana@2365137#Over-head_Mana_bar",
+    "corpus:liquipedia_dota2/mana@2365137#Modifying_Mana",
+    "corpus:liquipedia_dota2/mana@2365137#Restoring_Mana",
+    "corpus:liquipedia_dota2/mana@2365137#Removing_Mana",
+    "corpus:liquipedia_dota2/mana@2365137#Setting_Mana",
+    "corpus:liquipedia_dota2/mana@2365137#Maximum_Mana_Affecting_Abilities",
+    "corpus:liquipedia_dota2/mana@2365137#Items",
+    "corpus:liquipedia_dota2/mana@2365137#Talents",
+    "corpus:liquipedia_dota2/mana@2365137#Mana_Restore_Manipulation",
+    "corpus:liquipedia_dota2/mana@2365137#Mana_Loss_Manipulation",
+    "corpus:liquipedia_dota2/mana@2365137#Talents_2",
+    "corpus:liquipedia_dota2/mana@2365137#On-restore_Effects",
+    "corpus:liquipedia_dota2/mana@2365137#Abilities_Modified_by_Mana",
+    "corpus:liquipedia_dota2/mana@2365137#Mana_Regeneration",
+    "corpus:liquipedia_dota2/mana@2365137#Recent_Changes"
+  ],
+  "packet_sha256": "2fb05911ed63fbe01c506b1954778099157054b5dae9c3edf1990730e0938fec",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "c100d57843c7cc6d3de19ca146d0d400198c47b42fdc0228e1fab03ad83da93a",
+    "input_tokens": 18651,
+    "output_tokens": 8392,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:32:59.263077+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "cbe2c3fc07998ca79b7ab76e2a4add1f7d106605d38cca039d345d07fb86ee23",
+    "input_tokens": 18213,
+    "output_tokens": 2748,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:33:59.975383+00:00"
+  }
+}

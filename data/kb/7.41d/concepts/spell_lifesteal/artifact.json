@@ -1,0 +1,44 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_lifesteal",
+  "title": "Spell Lifesteal",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "507ea42983ae49cb537f612df50674ae86fe538807cc066e9d2740544c6cd89c",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Sources",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Items",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Talents",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Details",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Item_and_Abilities",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Working",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Not_Working",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Spell_Lifesteal_Manipulation",
+    "corpus:liquipedia_dota2/spell_lifesteal@2383668#Recent_Changes"
+  ],
+  "packet_sha256": "11c28acb2dcf0523cb7a0f7d16ac649967ce80a9921d9e572ee6e066aec3da44",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "7123c14ef5affbc4d830cc2571947bb7707a95c6691ab0e49d899bc3392a79bf",
+    "input_tokens": 17843,
+    "output_tokens": 8401,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:49:08.466193+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "1811ea57c4fb9b63755087e80382b91177816ffd34c194d77dd727bd15e963aa",
+    "input_tokens": 18637,
+    "output_tokens": 2214,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:50:11.611562+00:00"
+  }
+}

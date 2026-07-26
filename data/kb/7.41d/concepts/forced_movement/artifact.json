@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "forced_movement",
+  "title": "Forced Movement",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7ead02cf811d1900bfba64f5655262f570aad4f36beb1279e0549963f83b6fba",
+  "citations": [
+    "corpus:liquipedia_dota2/forced_movement@2357980",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Definition",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Mechanics",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Lane_Creeps",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Fully_Disabling_Forced_Movement",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Non-disabling_Forced_Movement",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Pulling",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Upward_Movement",
+    "corpus:liquipedia_dota2/forced_movement@2357980#Knockback_Resistance"
+  ],
+  "packet_sha256": "6938fb54b263d10ce678ba518ef4e7ef3670bf00f1032fe4ec2111f67736849b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "6513594765c48aef7caaa287c955f96d6fafba92ca4b5e77b5aeaffe6427e2d7",
+    "input_tokens": 16771,
+    "output_tokens": 5661,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:56:11.010621+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "8175005f462c574933874d182a52fb2e1eeb44f626594dec0559a771ad16520d",
+    "input_tokens": 17571,
+    "output_tokens": 2680,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:57:21.618013+00:00"
+  }
+}

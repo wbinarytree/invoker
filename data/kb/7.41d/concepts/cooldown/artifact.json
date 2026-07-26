@@ -1,0 +1,51 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "cooldown",
+  "title": "Cooldown",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "11b770c0fb620c75b0dc98406d557304ba244204a3d418144db0f751bb31004d",
+  "citations": [
+    "corpus:liquipedia_dota2/cooldown@2391634",
+    "corpus:liquipedia_dota2/cooldown@2391634#Mechanics",
+    "corpus:liquipedia_dota2/cooldown@2391634#Sources_of_Reduction",
+    "corpus:liquipedia_dota2/cooldown@2391634#Flat_Reduction",
+    "corpus:liquipedia_dota2/cooldown@2391634#Talents",
+    "corpus:liquipedia_dota2/cooldown@2391634#Current_Cooldown_Reduction",
+    "corpus:liquipedia_dota2/cooldown@2391634#Percentage-based",
+    "corpus:liquipedia_dota2/cooldown@2391634#Unique_Percentage-based_Sources",
+    "corpus:liquipedia_dota2/cooldown@2391634#Ratio",
+    "corpus:liquipedia_dota2/cooldown@2391634#Examples",
+    "corpus:liquipedia_dota2/cooldown@2391634#Sources_of_Resetting",
+    "corpus:liquipedia_dota2/cooldown@2391634#Other_Interactions",
+    "corpus:liquipedia_dota2/cooldown@2391634#Unaffected_by_Cooldown_Manipulation",
+    "corpus:liquipedia_dota2/cooldown@2391634#Charges",
+    "corpus:liquipedia_dota2/cooldown@2391634#Charge-based_Abilities",
+    "corpus:liquipedia_dota2/cooldown@2391634#Self-Restoring_Item_Charges",
+    "corpus:liquipedia_dota2/cooldown@2391634#Recent_Changes"
+  ],
+  "packet_sha256": "31ed845e0121e779557ea624f24e64b9ebe1bf7047ffcf5f8997c9708d69c282",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "d48e20231734869bfff786078f015e54f057f236cc71841aeaf6a46fba4922e5",
+    "input_tokens": 18282,
+    "output_tokens": 8930,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:44:59.809064+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "c9e7ccc94c30dcce4c2b095537ea3aeb7507043724eff458f5dc4b4b057c63bc",
+    "input_tokens": 20354,
+    "output_tokens": 1957,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:45:48.587090+00:00"
+  }
+}

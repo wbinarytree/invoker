@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "fear_game_mechanic",
+  "title": "Fear (Game Mechanic)",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "23c607bb886fa8c0a9e0d435029242fbc82884f8f0f36d174d6cfb14ccbaacfd",
+  "citations": [
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Definition",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Mechanics",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Stacking",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Fountain_Fear",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Caster_Fear",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Hypnosis",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Version_History",
+    "corpus:liquipedia_dota2/fear_game_mechanic@2353559#Patch_History"
+  ],
+  "packet_sha256": "c5de5d209adca2413e4e9a35c9cb1040c6db7569765b3306416b2f007edd0098",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "7a6f4efe2b4525d4d2f487e8cad582c32d78a803402543ea70d91e9808b8f728",
+    "input_tokens": 15786,
+    "output_tokens": 5671,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:55:57.727049+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "81a51928cc9e52dd28ea45aa3903e455c09c4aac80762611f8b7133ef84716f2",
+    "input_tokens": 17129,
+    "output_tokens": 2466,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:56:56.665445+00:00"
+  }
+}

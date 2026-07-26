@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "damage_barrier",
+  "title": "Damage Barrier",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9ab034209394ed00fd3efb044a2191308a74ad8ce0b4b226ec70c6f0b521f6d6",
+  "citations": [
+    "corpus:liquipedia_dota2/damage_barrier@2357651",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Definition",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Physical_Damage_Barrier",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Magical_Damage_Barrier",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#All_Damage_Barrier",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Mechanics",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Before_Barrier_Absorption",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#After_Barrier_Absorption",
+    "corpus:liquipedia_dota2/damage_barrier@2357651#Stacking"
+  ],
+  "packet_sha256": "27589a16b7e6d267ce1b76adcd56be1c669de3813f220e63a6d4e65e4614d260",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "4a4e07e3b2380c19306dad455c132a9b08c5648510c0ce71130a6d5e03c23f83",
+    "input_tokens": 16264,
+    "output_tokens": 6749,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:38:11.883629+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "fcfe943099fa92aec0f12819f96726f94a3fd95ba71478248367c57765385575",
+    "input_tokens": 15841,
+    "output_tokens": 2189,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:39:05.548506+00:00"
+  }
+}

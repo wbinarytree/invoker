@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "mana_break",
+  "title": "Mana Break",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1ee14dcddfec745489527ba3c3f96ff6f7fcbb0f12ae71f51e1050825e9d8e4a",
+  "citations": [
+    "corpus:liquipedia_dota2/mana_break@2257669",
+    "corpus:liquipedia_dota2/mana_break@2257669#Stacking",
+    "corpus:liquipedia_dota2/mana_break@2257669#Sources",
+    "corpus:liquipedia_dota2/mana_break@2257669#Talents"
+  ],
+  "packet_sha256": "b9d12a168231a28d7822eef8a89d18b3939313ce0a11f83fb23acb3991b493e8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "79af3e7218644c5d55f018e70a7d0251f9d4d048da06d82231961d90a73c5a54",
+    "input_tokens": 15253,
+    "output_tokens": 3073,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:24:29.295167+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "6cf711403bb720d3ccdcc4fd084a330ccad48d65eae2f556feffb177f74b9a17",
+    "input_tokens": 14952,
+    "output_tokens": 1160,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:25:06.239523+00:00"
+  }
+}

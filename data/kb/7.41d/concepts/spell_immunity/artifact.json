@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_immunity",
+  "title": "Spell Immunity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "feb163ce19cf06ebe8bcd76f9b85868aa5b02ab5120170210393391db4b041aa",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_immunity@2360418",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Mechanics",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Damage_Interaction",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Dispel",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Debuff_Immunity",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Sources",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Non-hero_Units",
+    "corpus:liquipedia_dota2/spell_immunity@2360418#Spell_Immunity_Command"
+  ],
+  "packet_sha256": "4b302950dc020da6c9a795fe28465db1dadee41d3f7c05091726c8431fc6c42c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "3f5361f911efc81eb4b86fca4aa016427fdd552e530b0edd7c2d57847b4073a0",
+    "input_tokens": 15202,
+    "output_tokens": 2320,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:37:37.079329+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "d0f053fcc3d9daf55887e2b6a017f964cb467999cc9b0884fa9134409aab8840",
+    "input_tokens": 15240,
+    "output_tokens": 1607,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:38:18.301336+00:00"
+  }
+}

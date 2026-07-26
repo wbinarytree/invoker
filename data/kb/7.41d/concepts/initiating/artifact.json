@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "initiating",
+  "title": "Initiating",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "59b7be3e08c2a0794f01dbb7a22f0a09edaa1b21c02a285cc22b7f05834511f2",
+  "citations": [
+    "corpus:liquipedia_dota2/initiating@2143433",
+    "corpus:liquipedia_dota2/initiating@2143433#Heroes",
+    "corpus:liquipedia_dota2/initiating@2143433#Items",
+    "corpus:liquipedia_dota2/initiating@2143433#The_Key_to_Initiating"
+  ],
+  "packet_sha256": "0003c9a9e2e377a42b26c5f442289b359d9fe9078a1fd16402e22ea9e55b01ac",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "e7516da122dd3d2d9fc44255f4b95902592083227168cc396dbe8b4f10602244",
+    "input_tokens": 16359,
+    "output_tokens": 6408,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:10:43.391173+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "5ff374e479b0af6db29258358756e21c139170f967da6559c44b15328d911cf9",
+    "input_tokens": 16255,
+    "output_tokens": 1629,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:11:24.255945+00:00"
+  }
+}

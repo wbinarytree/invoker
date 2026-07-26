@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "restoration_manipulation",
+  "title": "Restoration Manipulation",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "378ad4b9c53ecd04eb6d409f8472949b001f98292538eef3ea862cece565edf0",
+  "citations": [
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Restoration_Classification",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Stacking",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Mathematic_Definition",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Stacking_Exceptions",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Heal_Manipulation",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Health_Restoration_Manipulation",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Health_Regen_Manipulation",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Attribute_Shift",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Health_Freeze",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Mana_Restoration_Manipulation",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Mana_Replenish_Manipulation",
+    "corpus:liquipedia_dota2/restoration_manipulation@2385409#Recent_Changes"
+  ],
+  "packet_sha256": "2f75c22dc2a0eccbebd606851e5211c67595a6a6e3a3432de56b88dd771cb6c6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "6a36057b80ecae2cf67b4b508a3011b4f02a6c1060551a77e19fec8edb2c0f3f",
+    "input_tokens": 17494,
+    "output_tokens": 7434,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:32:31.866088+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "0c9e32c5fcbe0774a11fc325617cd08f5eaad7c8fa3287162a680a7b6105ee7c",
+    "input_tokens": 17533,
+    "output_tokens": 1744,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:33:12.488067+00:00"
+  }
+}

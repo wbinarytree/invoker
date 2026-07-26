@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "damage_over_time",
+  "title": "Damage Over Time",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f4554a4292885279f1708a99012a39f5b6be5cd9f1415fd2f4fdfe5b2eeda79b",
+  "citations": [
+    "corpus:liquipedia_dota2/damage_over_time@2377716",
+    "corpus:liquipedia_dota2/damage_over_time@2377716#Definition",
+    "corpus:liquipedia_dota2/damage_over_time@2377716#Example",
+    "corpus:liquipedia_dota2/damage_over_time@2377716#Misc.",
+    "corpus:liquipedia_dota2/damage_over_time@2377716#Damage_Over_Time_Sources",
+    "corpus:liquipedia_dota2/damage_over_time@2377716#Fixed_Attack_Interval"
+  ],
+  "packet_sha256": "eb9b65f923e7ace2df1e63dafe5d59e9f4b9cc4083f157a67f421b9e2dd0351b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "2c099ca4d5b76eeac0208bf6535c0f22eb70a427569664490b9395f7c80bd993",
+    "input_tokens": 16342,
+    "output_tokens": 6484,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:46:13.185026+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "f2a5cd17b560442cfba9a78a8481ddb0f9e4db61c00c4a691ee604217cc6cb60",
+    "input_tokens": 16292,
+    "output_tokens": 1406,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:46:53.796501+00:00"
+  }
+}

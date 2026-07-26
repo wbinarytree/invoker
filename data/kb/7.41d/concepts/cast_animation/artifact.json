@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "cast_animation",
+  "title": "Cast Animation",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a92fbc4e98259a0577ae950621e74675d4680ac9701a3eaf144a3e5f740428f5",
+  "citations": [
+    "corpus:liquipedia_dota2/cast_animation@2383517",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Definition",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Cast_Point",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Instant_Cast",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Instant_Cast_Sources",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Instant_Cast_Items",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Conditional_Instant_Cast",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Vector_Targeting",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Modifying_Cast_Point",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Cast_Backswing",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Modifying_Cast_Backswing",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Instant_Cast_Backswing",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Channeling",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Cast_Speed_Manipulation",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Talents",
+    "corpus:liquipedia_dota2/cast_animation@2383517#Version_History"
+  ],
+  "packet_sha256": "d2b66aecaaa5a2311bf96809e3fa9312cce4a303444d23e511ee99841da006a1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "7728cd5ca642c1ba8adf99938c177475c56bc92c58e1cb7a889c6eb3db9cba36",
+    "input_tokens": 18547,
+    "output_tokens": 7469,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:16:56.031313+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "227d6dd9b809a9a164dcfe2a5d8092d9b5a99838c3a45edbcdd4d2f16abd3e0c",
+    "input_tokens": 18945,
+    "output_tokens": 1712,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:17:45.684559+00:00"
+  }
+}

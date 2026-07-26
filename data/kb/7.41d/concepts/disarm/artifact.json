@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "disarm",
+  "title": "Disarm",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9abbb87b351d730891dea025b2f5e85e9c1aa2869a0819f866fd2b725d6388b8",
+  "citations": [
+    "corpus:liquipedia_dota2/disarm@2353573",
+    "corpus:liquipedia_dota2/disarm@2353573#Sources",
+    "corpus:liquipedia_dota2/disarm@2353573#Ethereal_Sources",
+    "corpus:liquipedia_dota2/disarm@2353573#Hex_Sources",
+    "corpus:liquipedia_dota2/disarm@2353573#Self-Disarm_Sources",
+    "corpus:liquipedia_dota2/disarm@2353573#Misleading_Visuals",
+    "corpus:liquipedia_dota2/disarm@2353573#Instant_Attack",
+    "corpus:liquipedia_dota2/disarm@2353573#Version_History",
+    "corpus:liquipedia_dota2/disarm@2353573#Patch_History"
+  ],
+  "packet_sha256": "b374649243bce95bddc00d9012bb6d64766adb11e3d36b2265c4cd327df2198e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "17c26c91465b56d2f961b6ef404570a63243b882045ff7195e9d7f2a607b3817",
+    "input_tokens": 15545,
+    "output_tokens": 4134,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:53:33.930459+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "8393652051fc01a500f1165b9e3c219e853a24dcc8c33ef8cc6acfd0e537dd33",
+    "input_tokens": 16420,
+    "output_tokens": 1722,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:54:13.259979+00:00"
+  }
+}

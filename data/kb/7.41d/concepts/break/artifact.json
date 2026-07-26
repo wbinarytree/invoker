@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "break",
+  "title": "Break",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0d2b9515f87be8cbfc9477247029b56a3d783cb69b8930922bb6b2c132aee77f",
+  "citations": [
+    "corpus:liquipedia_dota2/break@2404623",
+    "corpus:liquipedia_dota2/break@2404623#Definition",
+    "corpus:liquipedia_dota2/break@2404623#Mechanics",
+    "corpus:liquipedia_dota2/break@2404623#Sources",
+    "corpus:liquipedia_dota2/break@2404623#Disabled_by_Break",
+    "corpus:liquipedia_dota2/break@2404623#Not_Disabled_by_Break",
+    "corpus:liquipedia_dota2/break@2404623#Trivia",
+    "corpus:liquipedia_dota2/break@2404623#Recent_Changes"
+  ],
+  "packet_sha256": "eeb3bb697f3c91ec094cd2717eb52e79ea58f3deb8b9d3f47903d8de4a5c209b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "9f18dbb732baf1d84785c5277bf08a2431bb06f35acbecf690fe4ad79ae4d45f",
+    "input_tokens": 19362,
+    "output_tokens": 6848,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:33:23.566797+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "b2e4ed5be18c4b2d865c7519ae03417f6c31c5e3f05ce9c9aaa1277f818da72d",
+    "input_tokens": 19784,
+    "output_tokens": 2390,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:34:13.094712+00:00"
+  }
+}

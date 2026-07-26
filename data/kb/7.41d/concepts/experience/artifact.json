@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "experience",
+  "title": "Experience",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "eef3ead5f197b2f963f6d62212961a08a8dfb3837fd41acd9386793bc787bf98",
+  "citations": [
+    "corpus:liquipedia_dota2/experience@2404795",
+    "corpus:liquipedia_dota2/experience@2404795#Leveling",
+    "corpus:liquipedia_dota2/experience@2404795#Acquiring_Experience",
+    "corpus:liquipedia_dota2/experience@2404795#Exceptions",
+    "corpus:liquipedia_dota2/experience@2404795#Hero_Kills",
+    "corpus:liquipedia_dota2/experience@2404795#Streak_Values",
+    "corpus:liquipedia_dota2/experience@2404795#Denying",
+    "corpus:liquipedia_dota2/experience@2404795#Experience_Granting_Abilities",
+    "corpus:liquipedia_dota2/experience@2404795#Talents",
+    "corpus:liquipedia_dota2/experience@2404795#Other_Experience_Sources",
+    "corpus:liquipedia_dota2/experience@2404795#Lane_Creeps",
+    "corpus:liquipedia_dota2/experience@2404795#Neutral_Creeps",
+    "corpus:liquipedia_dota2/experience@2404795#Roshan",
+    "corpus:liquipedia_dota2/experience@2404795#Summons",
+    "corpus:liquipedia_dota2/experience@2404795#Special",
+    "corpus:liquipedia_dota2/experience@2404795#Recent_Changes"
+  ],
+  "packet_sha256": "727bc942f77bc5e3fa3b7c6701f5744a0fdb1672e5f06738890b81998eb7b2f7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "04cfe59b9e6a5118789099e69b1ba1c2172158311d21ba7b46feef6786bb1ada",
+    "input_tokens": 18125,
+    "output_tokens": 7290,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:54:31.384251+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "013b0367bbea8ca5e9b31d56919ef6f662771810ab4f1ac0516ddd106fb61145",
+    "input_tokens": 17713,
+    "output_tokens": 2176,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:55:19.059711+00:00"
+  }
+}

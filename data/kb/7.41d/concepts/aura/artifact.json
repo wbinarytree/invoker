@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "aura",
+  "title": "Aura",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "aa7510a63ab518bd0c999d83e8c6ef4379d3d0a5f10d364884b5d1ebeac6be5b",
+  "citations": [
+    "corpus:liquipedia_dota2/aura@2395696",
+    "corpus:liquipedia_dota2/aura@2395696#Definition",
+    "corpus:liquipedia_dota2/aura@2395696#Positive_Aura_Sources",
+    "corpus:liquipedia_dota2/aura@2395696#Heroes",
+    "corpus:liquipedia_dota2/aura@2395696#Non-Hero_Units",
+    "corpus:liquipedia_dota2/aura@2395696#Items",
+    "corpus:liquipedia_dota2/aura@2395696#Buildings",
+    "corpus:liquipedia_dota2/aura@2395696#Negative_Aura_Sources",
+    "corpus:liquipedia_dota2/aura@2395696#Heroes_2",
+    "corpus:liquipedia_dota2/aura@2395696#Non-Hero_Units_2",
+    "corpus:liquipedia_dota2/aura@2395696#Items_2",
+    "corpus:liquipedia_dota2/aura@2395696#Aura_Linger_Duration",
+    "corpus:liquipedia_dota2/aura@2395696#Patch_History"
+  ],
+  "packet_sha256": "585174d1c621ba87ca75a29a208e8754c6da7318294053d339002a78b55f22cd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "6",
+    "request_sha256": "1ff82504b802351537fadb0accb709eb5ce91fde124093a7322be646777e750d",
+    "input_tokens": 16998,
+    "output_tokens": 5865,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:23:33.049054+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "6",
+    "request_sha256": "88372784816373fbc08ef00486ba92da0af331bbb1184318aef171887a82dedd",
+    "input_tokens": 16923,
+    "output_tokens": 1624,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:24:17.964312+00:00"
+  }
+}
