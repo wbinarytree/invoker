@@ -14,7 +14,13 @@ from invoker.gen.artifacts import (
     article_file_text,
     write_entity_artifact,
 )
-from invoker.gen.checks import check_article_numbers, check_marks, check_numbers, extract_marks
+from invoker.gen.checks import (
+    check_article_numbers,
+    check_coverage,
+    check_marks,
+    check_numbers,
+    extract_marks,
+)
 from invoker.gen.client import GenerationError, GenerationResult, StructuredResult
 
 T = TypeVar("T", bound=BaseModel)
@@ -151,6 +157,7 @@ def generate_concept(
     )
     citations = extract_marks(article.text)
     check_marks(citations, valid_marks, "article", slug)
+    check_coverage(citations, valid_marks, "article", slug)
     # scoped per citation, over section texts only — packet headers carry
     # key/revision digits that must never vouch for a number in prose
     check_article_numbers(article.text, text_by_mark, slug)

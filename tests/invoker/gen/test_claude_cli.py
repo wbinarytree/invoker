@@ -13,18 +13,31 @@ def cli_payload(
     is_error: bool = False,
     model: str = "claude-opus-5",
 ) -> dict:
+    # shape pinned live against claude-cli 2026-07-26: the top-level
+    # `usage` mixes all models' traffic and its input_tokens is only the
+    # uncached slice — real counts live in the requested model's
+    # modelUsage entry, split across the three input components
     return {
         "type": "result",
         "is_error": is_error,
         "result": result,
         "stop_reason": stop_reason,
-        "usage": {"input_tokens": 12, "output_tokens": 30},
+        "usage": {"input_tokens": 2, "output_tokens": 30},
         "modelUsage": {
             "claude-haiku-4-5-20251001": {
+                "inputTokens": 7,
                 "outputTokens": 99,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 40,
                 "canonicalModel": "claude-haiku-4-5",
             },
-            model: {"outputTokens": 30, "canonicalModel": model},
+            model: {
+                "inputTokens": 2,
+                "outputTokens": 30,
+                "cacheReadInputTokens": 1000,
+                "cacheCreationInputTokens": 650,
+                "canonicalModel": model,
+            },
         },
     }
 
@@ -66,9 +79,28 @@ def test_generate_returns_text_and_cli_provenance():
     prov = result.provenance
     assert prov.transport == "claude-cli"
     assert prov.model == "claude-opus-5"
-    assert prov.input_tokens == 12
+    # uncached + cache reads + cache writes from the requested model's
+    # entry — not the top-level usage (2) and not haiku's traffic
+    assert prov.input_tokens == 2 + 1000 + 650
     assert prov.output_tokens == 30
     assert len(prov.request_sha256) == 64
+
+
+def test_missing_input_component_records_null_not_partial_sum():
+    # a partial sum is an estimate; estimates never land in count fields
+    payload = cli_payload()
+    del payload["modelUsage"]["claude-opus-5"]["cacheCreationInputTokens"]
+    prov = generate(make_client(payload)).provenance
+    assert prov.input_tokens is None
+    assert prov.output_tokens == 30
+
+
+def test_unreported_counts_record_null():
+    payload = cli_payload()
+    payload["modelUsage"]["claude-opus-5"] = {"canonicalModel": "claude-opus-5"}
+    prov = generate(make_client(payload)).provenance
+    assert prov.input_tokens is None
+    assert prov.output_tokens is None
 
 
 def test_served_model_matches_requested_not_background_harness_model():

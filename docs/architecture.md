@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (Codex app-server backend, per-role backend selection, compression guard)
+Last updated: 2026-07-26 (citation-coverage check: every packet section cited or generation aborts)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -429,7 +429,12 @@ transports:
 - `claude_cli.py` — `ClaudeCliClient` over `claude -p` (subscription-billed;
   **the default transport**): headless JSON output, tools disabled, the
   harness system prompt fully replaced so prompts stay byte-controlled;
-  structured outputs are schema-instructed and validated client-side
+  structured outputs are schema-instructed and validated client-side.
+  Token counts come from the requested model's `modelUsage` entry, never
+  the top-level `usage` (which mixes background harness models and whose
+  `input_tokens` is only the uncached slice): input is recorded as the
+  sum of uncached + cache-read + cache-write components, null when any
+  component is unreported — a partial sum is an estimate
 - `codex.py` — `CodexClient` over the `codex app-server` JSON-RPC daemon
   (user's Codex/ChatGPT budget; protocol pinned against codex-cli
   0.145.0, default model `gpt-5.6-sol`): one daemon reused across calls,
@@ -487,9 +492,13 @@ inline (`build_packet`, sha256 recorded on the artifact). Two calls per
 concept: article (markdown, every factual sentence ends in
 `[corpus:<key>]` marks) then card (≤12 sentences, every sentence keeps
 its marks — compression with pointers back). Mechanical faithfulness
-check (shared `gen/checks.py`, same code path as items): every mark in
-article and card must resolve against the packet or generation aborts;
-marks are never checked against live sources.
+checks (shared `gen/checks.py`, same code path as items), layered: every
+mark in article and card must resolve against the packet; every packet
+section must be cited by the article (`check_coverage` — lossless
+compression, so an uncited section is dropped content; boilerplate
+anchors, currently `References`, are exempt); numbers must appear in
+their cited section. Any failure aborts generation listing the
+offenders; marks are never checked against live sources.
 Artifacts (schema v3): one folder per entity —
 `data/kb/<patch>/concepts/<slug>/` holding `article.md` in SKILL.md
 style (YAML frontmatter: title/kind/patch + the card with per-sentence
@@ -519,11 +528,14 @@ their percent flag from the raw description template (`%key%%%` = a
 literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
-the formula with its prices, and prose is behavior semantics only —
+the formula with its prices, prose is behavior semantics, and the
+article closes with the lore as a flavor line (prompt v5 — lore is
+required coverage, never allowlisted; user direction 2026-07-26) —
 each tier (identity line, card, article) adds information over the one
 above. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
-resolve against the packet, numbers per cited section. The shared mark
+resolve against the packet, every packet section (including `loc:`
+lore/description) must be cited, numbers per cited section. The shared mark
 grammar itself lives in `invoker.marks` (used by both generation and
 benchmark). CLI: `invoker generate-item <item> --patch <patch>`.
 

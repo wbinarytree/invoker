@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "1a01362262318eddabdc966fd938b7e5f6004bffc2ab3f9f08227fcff1ba6cda",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Accuracy",
+      "fact": "The average DPS increase from Accuracy against Evasion is shown for evasion values up to 35%."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "a2ee0abaf9b16f0036d3f1fd2b802c19ceed000ac603ae76a9d8a0379a5bb397",
+    "input_tokens": 24651,
+    "output_tokens": 2646,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T18:34:18.549888+00:00"
+  }
+}

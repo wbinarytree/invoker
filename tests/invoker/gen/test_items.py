@@ -34,7 +34,8 @@ def good_article() -> str:
         f"[{ATTRIBS}]\n\n"
         f"Attacks apply a 3-second debuff dealing 35 physical damage per second "
         f"and reducing spell damage output by 40%. [{DESC}] "
-        f"The debuff is dispellable and its damage is physical. [{MECHANICS}]"
+        f"The debuff is dispellable and its damage is physical. [{MECHANICS}] "
+        f"Forged to end the reign of mages. [{LORE}]"
     )
 
 
@@ -111,7 +112,7 @@ def test_generate_item_writes_artifact(tmp_path):
     assert saved["kind"] == "item"
     assert saved["slug"] == "mage_slayer"
     assert saved["title"] == "Mage Slayer"
-    assert set(saved["citations"]) == {COST, COMPONENTS, ATTRIBS, DESC, MECHANICS}
+    assert set(saved["citations"]) == {COST, COMPONENTS, ATTRIBS, DESC, MECHANICS, LORE}
     assert saved["article_provenance"]["prompt_name"] == "item-article"
     assert "card" not in saved  # the card's one home is the frontmatter
     file_text = (path.parent / "article.md").read_text()
@@ -139,9 +140,18 @@ def test_article_without_marks_fails_loudly(tmp_path):
 def test_number_not_in_cited_section_fails(tmp_path):
     # 3100 is in #cost, not in #attribs — a resolvable mark cannot vouch
     # for a number its own section does not contain
-    article = f"Costs 3100 gold. [{ATTRIBS}]"
+    article = good_article() + f"\n\nCosts 3100 gold. [{ATTRIBS}]"
     backend = FakeBackend(article, good_card())
     with pytest.raises(GenerationError, match="3100"):
+        run_generate(tmp_path, backend)
+
+
+def test_article_dropping_a_packet_section_fails_loudly(tmp_path):
+    # the lore loc section is uncited — coverage names the dropped key;
+    # loc keys have no anchor, so the References exemption never applies
+    article = good_article().replace(f" Forged to end the reign of mages. [{LORE}]", "")
+    backend = FakeBackend(article, good_card())
+    with pytest.raises(GenerationError, match=rf"does not cite packet sections.*{LORE}"):
         run_generate(tmp_path, backend)
 
 

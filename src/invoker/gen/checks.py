@@ -1,8 +1,10 @@
 """Mechanical faithfulness checks over the general ``[kind:KEY]`` mark
 grammar (``invoker.marks``), shared by every generator (concepts, items):
-marks must resolve against the context packet's keyed sections, and every
-number must appear in the text of the section(s) it cites. Checking is
-against the packet only — never live sources.
+marks must resolve against the context packet's keyed sections, every
+packet section must be cited by the article (lossless compression —
+boilerplate anchors exempt), and every number must appear in the text of
+the section(s) it cites. Checking is against the packet only — never
+live sources.
 """
 
 from __future__ import annotations
@@ -13,6 +15,10 @@ from invoker.gen.client import GenerationError
 from invoker.marks import MARK_PATTERN, Mark, strip_marks
 
 NUMBER_PATTERN = re.compile(r"\d+(?:\.\d+)?")
+
+COVERAGE_ALLOWLIST = frozenset({"References"})
+"""Section anchors exempt from coverage: wiki reference/footnote lists
+carry no load-bearing facts (spec: generation completeness gates)."""
 
 
 def extract_marks(text: str) -> list[str]:
@@ -31,6 +37,22 @@ def check_marks(used: list[str], valid: set[str], what: str, slug: str) -> None:
         )
     if not used:
         raise GenerationError(f"{slug}: {what} contains no citation marks")
+
+
+def check_coverage(cited: list[str], valid: set[str], what: str, slug: str) -> None:
+    """Every packet section must be cited — the article is a lossless
+    compression, so an uncited section is dropped content. Anchors in
+    ``COVERAGE_ALLOWLIST`` are boilerplate and exempt."""
+    cited_set = set(cited)
+    missing = sorted(
+        mark
+        for mark in valid
+        if mark not in cited_set and mark.partition("#")[2] not in COVERAGE_ALLOWLIST
+    )
+    if missing:
+        raise GenerationError(
+            f"{slug}: {what} does not cite packet sections: {', '.join(missing)}"
+        )
 
 
 def article_segments(text: str) -> list[tuple[str, list[str]]]:
