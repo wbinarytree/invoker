@@ -27,11 +27,11 @@ from invoker.gen.checks import (
     extract_marks,
 )
 from invoker.gen.client import GenerationError
-from invoker.gen.concepts import GenerationBackend
+from invoker.gen.concepts import GenerationBackend, persist_rejected
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "5"
+ITEM_PROMPT_VERSION = "6"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -42,8 +42,12 @@ knowledge, even when you are confident.
 - Every factual statement is covered by a citation mark of the form \
 [gamefile:KEY] or [loc:KEY], where KEY is one of the provided section keys, \
 copied exactly. A table block or run of sentences drawn from one section \
-shares a single mark at the end of the run.
-- Cite the single narrowest section that states the fact.
+shares a single mark at the end of the run. A mark always FOLLOWS the text \
+it vouches for: a table's marks go on their own line immediately after the \
+table — never on the sentence introducing it.
+- Cite the single narrowest section that states the fact. When one table \
+consolidates values from several sections, its trailing marks cover every \
+contributing section.
 - Open with a single sentence stating what the item is — name, quality, \
 and its effects by their real stat names — citing the sections that state \
 those facts. Concrete and plain: no flavor verbs ("burns", "cripples"), \
@@ -60,7 +64,11 @@ states appears in the table.
 interactions, dispellability. Keep it dense; no value appears twice.
 - When the sources carry lore, close the article with it as a short \
 flavor line citing its section — the lore is part of the record.
-- Numbers must match the cited section exactly.
+- Numbers must match the cited section exactly: reproduce values as the \
+source states them. Never derive, sum, convert, count, or round numbers; \
+reproduce ranges and series exactly as written.
+- The patch named in the request is context, not source material: never \
+state the patch or its version anywhere in the article, including the title.
 - If the sources do not cover something, leave it out. Never fill a gap with \
 a plausible value.
 - Markdown, a few short sections, no preamble, no meta-commentary about \
@@ -93,6 +101,9 @@ section states — never attach a mark to a sentence whose facts come from \
 elsewhere. Cite the narrowest key that states the fact; never pad with \
 broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
+- Every number must appear literally in the article text a sentence's marks \
+cover: never count list entries or table rows yourself, and never derive, \
+sum, convert, or round a value.
 - Use ONLY the article text. No outside knowledge."""
 
 
@@ -191,6 +202,7 @@ def generate_item(
     patch: str,
     kb_dir: Path,
     effort: str | None = None,
+    rejected_dir: Path | None = None,
 ) -> tuple[EntityArtifact, Path]:
     """Generate one item article + card from the game-file snapshot and
     write the artifact under <kb_dir>/items/<slug>/."""
@@ -209,44 +221,56 @@ def generate_item(
         user_content=(f"Item: {context.name} (patch {patch})\n\nSource sections:\n\n{packet}"),
         effort=effort,
     )
-    citations = extract_marks(article.text)
-    check_marks(citations, valid_marks, "article", slug)
-    check_coverage(citations, valid_marks, "article", slug)
-    check_article_numbers(article.text, text_by_mark, slug)
+    card = None
+    try:
+        citations = extract_marks(article.text)
+        check_marks(citations, valid_marks, "article", slug)
+        check_coverage(citations, valid_marks, "article", slug)
+        check_article_numbers(article.text, text_by_mark, slug)
 
-    card = backend.generate_structured(
-        EntityCard,
-        prompt_name="item-card",
-        prompt_version=ITEM_PROMPT_VERSION,
-        system=ITEM_CARD_SYSTEM_PROMPT,
-        user_content=f"Entity: {slug}\n\nArticle:\n\n{article.text}",
-        effort=effort,
-    )
-    card_marks = [mark for sentence in card.output.sentences for mark in sentence.marks]
-    check_marks(card_marks, valid_marks, "card", slug)
-    for position, sentence in enumerate(card.output.sentences, start=1):
-        cited_text = "\n".join(text_by_mark.get(mark, "") for mark in sentence.marks)
-        check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
+        card = backend.generate_structured(
+            EntityCard,
+            prompt_name="item-card",
+            prompt_version=ITEM_PROMPT_VERSION,
+            system=ITEM_CARD_SYSTEM_PROMPT,
+            user_content=f"Entity: {slug}\n\nArticle:\n\n{article.text}",
+            effort=effort,
+        )
+        card_marks = [mark for sentence in card.output.sentences for mark in sentence.marks]
+        check_marks(card_marks, valid_marks, "card", slug)
+        for position, sentence in enumerate(card.output.sentences, start=1):
+            cited_text = "\n".join(text_by_mark.get(mark, "") for mark in sentence.marks)
+            check_numbers(sentence.text, cited_text, f"card sentence {position}", slug)
 
-    file_text = article_file_text(
-        title=context.name,
-        kind="item",
-        patch=patch,
-        card=card.output,
-        body=article.text,
-    )
-    artifact = EntityArtifact(
-        kind="item",
-        slug=slug,
-        title=context.name,
-        patch=patch,
-        article_file="article.md",
-        article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
-        card=card.output,
-        citations=citations,
-        packet_sha256=packet_sha256,
-        article_provenance=article.provenance,
-        card_provenance=card.provenance,
-    )
-    path = write_entity_artifact(kb_dir / "items" / slug, artifact, file_text)
+        file_text = article_file_text(
+            title=context.name,
+            kind="item",
+            patch=patch,
+            card=card.output,
+            body=article.text,
+        )
+        artifact = EntityArtifact(
+            kind="item",
+            slug=slug,
+            title=context.name,
+            patch=patch,
+            article_file="article.md",
+            article_sha256=hashlib.sha256(file_text.encode()).hexdigest(),
+            card=card.output,
+            citations=citations,
+            packet_sha256=packet_sha256,
+            article_provenance=article.provenance,
+            card_provenance=card.provenance,
+        )
+        path = write_entity_artifact(kb_dir / "items" / slug, artifact, file_text)
+    except Exception as exc:
+        persist_rejected(
+            rejected_dir,
+            kind="items",
+            slug=slug,
+            article_text=article.text,
+            card=card.output if card is not None else None,
+            error=exc,
+        )
+        raise
     return artifact, path

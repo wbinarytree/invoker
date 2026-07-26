@@ -426,7 +426,7 @@ def generate_item_cmd(
     """
     from invoker.gen.client import GenerationError
     from invoker.gen.items import generate_item
-    from invoker.paths import kb_dir
+    from invoker.paths import kb_dir, rejected_dir
 
     cfg = _load_config()
     if cfg.game_data_dir is None:
@@ -442,6 +442,7 @@ def generate_item_cmd(
             patch=patch,
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
+            rejected_dir=rejected_dir(cfg.data_dir, patch),
         )
         typer.echo(f"Wrote {path} + {artifact.article_file}")
         typer.echo(
