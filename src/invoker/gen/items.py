@@ -31,7 +31,7 @@ from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "4"
+ITEM_PROMPT_VERSION = "5"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -58,6 +58,8 @@ builds-into line when the packet carries one. Every price the section \
 states appears in the table.
 - Prose is reserved for what the item does: behavior, mechanics, \
 interactions, dispellability. Keep it dense; no value appears twice.
+- When the sources carry lore, close the article with it as a short \
+flavor line citing its section — the lore is part of the record.
 - Numbers must match the cited section exactly.
 - If the sources do not cover something, leave it out. Never fill a gap with \
 a plausible value.

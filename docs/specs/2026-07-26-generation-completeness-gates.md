@@ -9,7 +9,10 @@ against the stored artifacts — codex v4 evasion fails with exactly its
 8 missing sections, all three canonical artifacts pass (References
 allowlisted), and both codex mage_slayer variants fail on the uncited
 lore section (a drop the guard's load-bearing definition ignores).
-Task 5 (guard the full canonical KB) remains open.
+Lore stays required, never allowlisted (user direction 2026-07-26: the
+lore is the encyclopedia's fun and belongs in the record); item prompt
+v5 demands a closing lore line so the gate is achievable on any
+backend. Task 5 (guard the full canonical KB) remains open.
 **Direction:** articles are lossless compressions of their packets.
 Related: `2026-07-26-game-file-grounded-generators.md` (marks, packets),
 `2026-07-26-serving-format-measurement.md` (backend experiments that
