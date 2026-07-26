@@ -23,9 +23,9 @@ from invoker.gen.checks import check_article_numbers, check_marks, check_numbers
 from invoker.gen.client import GenerationError
 from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
-from invoker.kg.item_context import ItemContext, build_item_context
+from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "2"
+ITEM_PROMPT_VERSION = "3"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -46,6 +46,10 @@ below, not the opener.
 - Numbers live in compact markdown stat tables. Include every value row the \
 cited section carries — Scepter/Shard columns too, when present — and never \
 restate a table value in prose. Values shown with a % sign keep it.
+- The components section is the build formula: a table with each \
+component and its gold cost, the recipe row when present, and a \
+builds-into line when the packet carries one. Every price the section \
+states appears in the table.
 - Prose is reserved for what the item does: behavior, mechanics, \
 interactions, dispellability. Keep it dense; no value appears twice.
 - Numbers must match the cited section exactly.
@@ -70,6 +74,10 @@ sentence.
 - State facts plainly with exact values. No flavor language: verbs like \
 "burns" or "cripples" and summaries like "combines X with Y" say nothing \
 checkable — write the stat names and numbers instead.
+- The card is the summary tier, not a copy of the article: it names the \
+build components and what the item builds into, but their prices stay in \
+the article's formula table. The card carries only the item's own \
+headline numbers.
 - Each sentence keeps the citation marks of the article text it compresses, \
 as strings of the form kind:KEY (e.g. gamefile:items/item_x#attribs) copied \
 exactly from the article's marks. A mark vouches only for facts its own \
@@ -78,6 +86,11 @@ elsewhere. Cite the narrowest key that states the fact; never pad with \
 broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - Use ONLY the article text. No outside knowledge."""
+
+
+def _item_ref_line(ref: ItemRef) -> str:
+    cost = f" — {ref.cost} gold" if ref.cost is not None else ""
+    return f"- {ref.name} ({ref.internal_name}){cost}"
 
 
 def _value_text(value: str | list[str] | None, percent: bool) -> str | None:
@@ -111,16 +124,22 @@ def build_item_packet(context: ItemContext) -> tuple[str, dict[str, str], str]:
         cost_lines.append(f"Quality: {context.quality}")
     if context.cost is not None:
         cost_lines.append(f"Cost: {context.cost} gold")
-    if context.recipe_cost is not None:
-        cost_lines.append(f"Recipe cost: {context.recipe_cost} gold")
     sections.append((f"{base}#cost", "\n".join(cost_lines)))
 
-    if context.components and context.component_names:
-        pairs = ", ".join(
-            f"{display} ({internal})"
-            for internal, display in zip(context.components, context.component_names, strict=True)
-        )
-        sections.append((f"{base}#components", f"Components: {pairs}"))
+    # the recipe graph, both directions: the build formula with each
+    # component's price (the recipe rides here, not #cost — it is part of
+    # the formula), and what this item builds into
+    recipe_lines: list[str] = []
+    if context.components:
+        recipe_lines.append("Components:")
+        recipe_lines.extend(_item_ref_line(ref) for ref in context.components)
+        if context.recipe_cost is not None:
+            recipe_lines.append(f"- Recipe — {context.recipe_cost} gold")
+    if context.builds_into:
+        recipe_lines.append("Builds into:")
+        recipe_lines.extend(_item_ref_line(ref) for ref in context.builds_into)
+    if recipe_lines:
+        sections.append((f"{base}#components", "\n".join(recipe_lines)))
 
     if context.attribs:
         sections.append(

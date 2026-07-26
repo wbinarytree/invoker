@@ -66,11 +66,29 @@ def test_packet_sections_and_marks():
     assert "MAGIC RESISTANCE: 18%" in text_by_mark[ATTRIBS]
     assert "bonus_magical_armor" not in text_by_mark[ATTRIBS]
     assert "Cost: 3100 gold" in text_by_mark[COST]
-    assert "Perseverance (item_pers)" in text_by_mark[COMPONENTS]
+    # the build formula carries component prices; a zero-cost recipe and an
+    # empty builds-into stay silent (null over placeholder)
+    assert "- Perseverance (item_pers) — 1300 gold" in text_by_mark[COMPONENTS]
+    assert "- Cloak (item_cloak) — 500 gold" in text_by_mark[COMPONENTS]
+    assert "Recipe" not in text_by_mark[COMPONENTS]
+    assert "Builds into" not in text_by_mark[COMPONENTS]
     assert "Dispellable: Yes" in text_by_mark[MECHANICS]
     assert f"## [{ATTRIBS}]" in packet
     _, _, digest2 = build_item_packet(context())
     assert digest == digest2
+
+
+def test_packet_recipe_graph_both_directions():
+    cloak = build_item_context(FIXTURE_ROOT, "item_cloak", patch="7.41b")
+    _, text_by_mark, _ = build_item_packet(cloak)
+    section = text_by_mark["gamefile:items/item_cloak#components"]
+    assert "Components:" not in section  # basic item — nothing built from
+    assert "Builds into:" in section
+    assert "- Mage Slayer (item_mage_slayer) — 3100 gold" in section
+    costed = build_item_context(FIXTURE_ROOT, "item_costed_recipe_thing", patch="7.41b")
+    _, text_by_mark, _ = build_item_packet(costed)
+    section = text_by_mark["gamefile:items/item_costed_recipe_thing#components"]
+    assert "- Recipe — 250 gold" in section
 
 
 def test_packet_sections_match_resolver_vocabulary():
