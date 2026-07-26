@@ -26,7 +26,7 @@ from invoker.gen.client import GenerationError, GenerationResult, StructuredResu
 
 T = TypeVar("T", bound=BaseModel)
 
-CONCEPT_PROMPT_VERSION = "5"
+CONCEPT_PROMPT_VERSION = "6"
 
 ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 encyclopedia.
 
@@ -48,7 +48,11 @@ from the same section share a single mark at the end of the run.
 - Cite the single narrowest section that states the fact. Never attach a \
 citation the text does not strictly need; a broad section key is wrong \
 when a more specific one states the fact.
-- Numbers must match the cited section exactly.
+- Numbers must match the cited section exactly: reproduce values as the \
+source states them. Never derive, sum, convert, count, or round numbers — \
+a value the source does not literally contain must not appear.
+- The patch named in the request is context, not source material: never \
+state the patch or its version anywhere in the article, including the title.
 - If the sources do not cover something, leave it out. Never fill a gap with a \
 plausible value.
 - Concise wording, complete content: brevity comes from tight sentences and \
