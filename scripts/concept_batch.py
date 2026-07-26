@@ -189,6 +189,9 @@ def main() -> int:
     parser.add_argument("--slugs", help="comma-separated explicit list (pilot mode)")
     parser.add_argument("--limit", type=int,
                         help="attempt at most N pending entities this invocation")
+    parser.add_argument("--exclude",
+                        help="comma-separated slugs to skip (chronic failures "
+                             "parked for manual review)")
     parser.add_argument("--emit-only", action="store_true")
     args = parser.parse_args()
 
@@ -208,6 +211,9 @@ def main() -> int:
             print(f"skipping existing: {', '.join(skipped)}")
     else:
         pending = discover(store, args.host, kb)
+    if args.exclude:
+        excluded = {s.strip() for s in args.exclude.split(",")}
+        pending = [s for s in pending if s not in excluded]
     if args.limit:
         pending = pending[: args.limit]
 
