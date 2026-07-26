@@ -444,8 +444,9 @@ inline (`build_packet`, sha256 recorded on the artifact). Two calls per
 concept: article (markdown, every factual sentence ends in
 `[corpus:<key>]` marks) then card (≤12 sentences, every sentence keeps
 its marks — compression with pointers back). Mechanical faithfulness
-check: every mark in article and card must resolve against the packet
-or generation aborts; marks are never checked against live sources.
+check (shared `gen/checks.py`, same code path as items): every mark in
+article and card must resolve against the packet or generation aborts;
+marks are never checked against live sources.
 Artifacts: one folder per entity — `data/kb/<patch>/concepts/<slug>/`
 holding `article.md` (the article — human-skim surface, diffable in the
 archive) + `artifact.json` (card, citations,

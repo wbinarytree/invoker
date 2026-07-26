@@ -1,10 +1,8 @@
 """Mechanical faithfulness checks over the general ``[kind:KEY]`` mark
-grammar (``invoker.marks``).
-
-Generation-side counterparts of the corpus-specific checks in
-``gen.concepts``: marks must resolve against the context packet's keyed
-sections, and every number must appear in the text of the section(s) it
-cites. Checking is against the packet only — never live sources.
+grammar (``invoker.marks``), shared by every generator (concepts, items):
+marks must resolve against the context packet's keyed sections, and every
+number must appear in the text of the section(s) it cites. Checking is
+against the packet only — never live sources.
 """
 
 from __future__ import annotations

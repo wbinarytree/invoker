@@ -3,13 +3,14 @@ import json
 import pytest
 
 from invoker.gen.artifacts import CardSentence, EntityCard
+from invoker.gen.checks import extract_marks
 from invoker.gen.client import (
     GenerationError,
     GenerationProvenance,
     GenerationResult,
     StructuredResult,
 )
-from invoker.gen.concepts import build_packet, extract_citations, generate_concept
+from invoker.gen.concepts import build_packet, generate_concept
 
 # reuse the corpus store fixture helpers from the sections tests
 from tests.invoker.corpus.test_sections import make_store
@@ -68,19 +69,19 @@ def test_build_packet_keys_and_stable_hash(tmp_path):
 
     make_store(tmp_path)
     sections = load_sections(CorpusStore(tmp_path), "testwiki", "evasion")
-    packet, keys, digest = build_packet(sections)
-    assert KEY in keys
-    assert LEAD_KEY in keys  # lead section is citable
+    packet, text_by_mark, digest = build_packet(sections)
+    assert f"corpus:{KEY}" in text_by_mark
+    assert f"corpus:{LEAD_KEY}" in text_by_mark  # lead section is citable
     assert f"[{KEY}]" in packet
     _, _, digest2 = build_packet(sections)
     assert digest == digest2
     # heading-only sections (no body text) are not packet targets
-    assert f"{LEAD_KEY}#Cleave_&_Splash" not in keys
+    assert f"corpus:{LEAD_KEY}#Cleave_&_Splash" not in text_by_mark
 
 
-def test_extract_citations_dedupes_in_order():
+def test_extract_marks_dedupes_in_order():
     text = f"A. [corpus:{KEY}] B. [corpus:{LEAD_KEY}] C. [corpus:{KEY}]"
-    assert extract_citations(text) == [KEY, LEAD_KEY]
+    assert extract_marks(text) == [f"corpus:{KEY}", f"corpus:{LEAD_KEY}"]
 
 
 def run_generate(tmp_path, backend):
