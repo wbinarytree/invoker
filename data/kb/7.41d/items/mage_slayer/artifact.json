@@ -5,7 +5,7 @@
   "title": "Mage Slayer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b70597dec8eea4416413944dd568e9875f851651c3d76d5e0e9f69d450264ea7",
+  "article_sha256": "f1e0fa4c29217a12fe3f7a1859a015de90310f0b4608fce51877be6e13bf06c1",
   "citations": [
     "gamefile:items/item_mage_slayer#cost",
     "gamefile:items/item_mage_slayer#attribs",
@@ -19,22 +19,22 @@
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "item-article",
-    "prompt_version": "4",
-    "request_sha256": "d289a22e7692369ba2405835e51081d6a0a91f603a04a13d2063ed9fd1b5b4b6",
-    "input_tokens": 2,
-    "output_tokens": 676,
+    "prompt_version": "5",
+    "request_sha256": "d8b46466d0ce3a57106069724f6e87834b27f5350a006ec6aebe6281428fa854",
+    "input_tokens": 2771,
+    "output_tokens": 1056,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-26T13:33:11.131556+00:00"
+    "generated_at": "2026-07-26T18:36:47.214604+00:00"
   },
   "card_provenance": {
     "model": "claude-opus-5",
     "transport": "claude-cli",
     "prompt_name": "item-card",
-    "prompt_version": "4",
-    "request_sha256": "259afbd2c6ae3b149f16881d13be71864c29ab2b29850a490e326f659f432e43",
-    "input_tokens": 2,
-    "output_tokens": 911,
+    "prompt_version": "5",
+    "request_sha256": "5d4e3e010c79bacd2fd9dd3da90719fedcb0d4ab3d5ba6c811d95904ee4f36d9",
+    "input_tokens": 3251,
+    "output_tokens": 1186,
     "stop_reason": "end_turn",
-    "generated_at": "2026-07-26T13:33:22.744694+00:00"
+    "generated_at": "2026-07-26T18:37:01.226982+00:00"
   }
 }
