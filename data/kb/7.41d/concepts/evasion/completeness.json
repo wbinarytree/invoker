@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "1a01362262318eddabdc966fd938b7e5f6004bffc2ab3f9f08227fcff1ba6cda",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash",
+      "fact": "Cleave deals damage in a trapezoid in front of the attacker, is based on the unit's total attack damage, and by default can be used only by melee units, not ranged units."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Cleave_&_Splash",
+      "fact": "Splash is typically dealt in a circle around the attacked unit rather than a trapezoid, and splash damage interacts with attack modifiers in the same way as cleave."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Sources",
+      "fact": "Evasion sources are determined by pseudo-random distribution only when their value is neither 0% nor 100%."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Items",
+      "fact": "Quickened Enchantment is listed as an evasion item, with its evasion shown as “Expression error: Unexpected < operator.%” and both cost and cost/value point listed as N/A."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Accuracy",
+      "fact": "The average DPS increase from Accuracy against Evasion is shown up to 35%."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
+      "fact": "Omitted hero ensured True Strike sources are Dark Seer's Normal Punch, Kez's Shodo Sai Mark, Nyx Assassin's Vendetta, and Tusk's Walrus PUNCH!. Shodo Sai Mark grants True Strike specifically to Kez's attack on the unit marked by the ability."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
+      "fact": "The ensured True Strike Instant Attack sources are Clinkz's Burning Barrage, Dawnbreaker's Starbreaker, Kez's Kazurai Katana and Talon Toss, Luna's Lunar Orbit, Mars's God's Rebuke, Monkey King's Boundless Strike, Pangolier's Swashbuckle and Shield Crash, Phantom Assassin's Stifling Dagger, Sand King's Stinger and two listed Epicenter variants, Sniper's Assassinate, Shadow Fiend's Shadowraze, Tidehunter's Anchor Smash, Tiny's Tree Throw and Tree Volley, and Void Spirit's Astral Step."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
+      "fact": "Among the Instant Attack True Strike sources, Shield Crash requires Aghanim's Scepter; one Epicenter listing requires Aghanim's Scepter and the other requires both Aghanim's Scepter and Aghanim's Shard; Shadowraze requires a talent. Not all Instant Attack abilities have True Strike."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
+      "fact": "Omitted item ensured True Strike sources are Parasma's Witch Blade, Silver Edge's Shadow Walk, and Witch Blade's Witch Blade."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike",
+      "fact": "Serrated Shiv's Gut 'Em is a chance-based True Strike source."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#True_Strike_Talents",
+      "fact": "The True Strike talent ability is passive."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Outgoing",
+      "fact": "Ancient Rumblehide's War Drums Aura has a player-controlled radius of 40%/43%/46%/51%; the effect is supplied by an aura that grants allies a chance not to miss."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Stacking",
+      "fact": "The stacking example states that Arc Warden within Magnetic Field's radius has 30/60/90/120 evasion and, without an evasion-negating source, incoming attacks miss while the Self is within the radius."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/evasion@2383969#Stacking",
+      "fact": "The worked examples identify level-4 Blur as an evasion source and give level-4 Smoke Screen a blind value of 0.7."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "a14c150f15720ab34a83bc8913bf870c622ba72fc979c442159a3a3fac3c50f8",
+    "input_tokens": 21796,
+    "output_tokens": 12800,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T16:23:57.248459+00:00"
+  }
+}
