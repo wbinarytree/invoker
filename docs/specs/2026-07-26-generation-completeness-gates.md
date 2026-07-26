@@ -1,8 +1,11 @@
 # Generation Completeness Gates (coverage check + compression guard)
 
 **Date:** 2026-07-26
-**Status:** proposed — drafted from the 2026-07-26 backend-comparison
-session; sign-off pending
+**Status:** accepted 2026-07-26 (user sign-off; guard-first order).
+Tasks 2-4 landed the same day — guard, CLI wiring, prompt v5 with both
+codex concepts regenerating to guard-clean. Task 1 (mechanical
+citation-coverage check in `gen/checks.py`) and task 5 (guard the full
+canonical KB) remain open.
 **Direction:** articles are lossless compressions of their packets.
 Related: `2026-07-26-game-file-grounded-generators.md` (marks, packets),
 `2026-07-26-serving-format-measurement.md` (backend experiments that

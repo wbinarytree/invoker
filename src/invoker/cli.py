@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Annotated
 import typer
 
 if TYPE_CHECKING:
+    from invoker.corpus.store import CorpusStore
     from invoker.gen.concepts import GenerationBackend
 
 from invoker import __version__
@@ -244,6 +245,10 @@ GenBackendOption = Annotated[
         help="Generation backend: claude-cli (subscription) or codex (app-server daemon).",
     ),
 ]
+GenModelOption = Annotated[
+    str | None,
+    typer.Option(help="Model override; defaults to the backend's pinned model."),
+]
 KbDirOption = Annotated[
     Path | None,
     typer.Option(
@@ -275,7 +280,7 @@ def _run_guard_gate(
     artifact_path: Path,
     guard_client: GenerationBackend,
     *,
-    store,
+    store: CorpusStore | None,
     game_data_dir: Path | None,
     host_key: str,
 ) -> None:
@@ -304,10 +309,6 @@ def _run_guard_gate(
         )
         raise typer.Exit(code=1)
     typer.echo(f"completeness guard: clean ({outcome.report_path})")
-GenModelOption = Annotated[
-    str | None,
-    typer.Option(help="Model override; defaults to the backend's pinned model."),
-]
 
 
 def _make_backend(name: str, model: str | None) -> GenerationBackend:

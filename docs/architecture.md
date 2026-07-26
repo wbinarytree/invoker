@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (Codex app-server backend, per-role backend selection)
+Last updated: 2026-07-26 (Codex app-server backend, per-role backend selection, compression guard)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -457,6 +457,29 @@ Refusal, truncation, empty output, unknown served model, and schema
 mismatch all raise `GenerationError` — never silently retried (hard
 line). Nothing under `gen/` may be imported from the bootstrap or query
 path; generation is a separate, rebuildable batch stage.
+
+**Compression guard** — `gen/guard.py` (spec:
+`docs/specs/2026-07-26-generation-completeness-gates.md`). A
+fresh-session LLM audit that the article is a lossless compression of
+its packet: one structured call over (packet, article) returning a flat
+`missing: [{section, fact}]` list — deliberately unranked; absence is a
+checkable claim (every flag must cite a real packet section key or the
+report itself is refused), importance is not. The report plus its own
+`GenerationProvenance` land in `completeness.json` (schema v1:
+`packet_sha256`, `packet_matches_artifact`, `missing`,
+`guard_provenance`) next to the artifact. `guard_entity` rebuilds the
+packet from today's substrate by artifact kind (concept: corpus
+sections; item: `ItemContext`), so old artifacts can be re-guarded — a
+drifted packet is recorded, never hidden. Both generator commands run
+the guard inline after a successful write (default backend `codex`,
+`--guard-backend`/`--guard-model`/`--skip-guard` to override) and exit 1
+on a nonempty report, leaving the artifact on disk for review — flags
+never edit articles and never trigger regeneration; committing the
+artifact is the acceptance act. `invoker guard-artifact <artifact.json>`
+re-guards any existing artifact. Prompt v5 of the concept article
+prompt (lossless compression, enumerations in full) is the
+guard-driven counterpart: measured 2026-07-26, codex concept artifacts
+went from 44/122 flags to clean.
 
 **Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
 packet = the concept's corpus sections rendered with citation keys

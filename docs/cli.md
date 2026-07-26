@@ -19,8 +19,9 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker fetch-corpus [--host <key>] [--patch <patch>]`
 - `invoker corpus-coverage [--host <key>]`
 - `invoker expand-corpus [--host <key>] [--limit <n>]`
-- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>]`
-- `invoker generate-item ITEM --patch <patch> [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>]`
+- `invoker generate-concept SLUG --patch <patch> [--host <key>] [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>] [--guard-backend <name>] [--guard-model <id>] [--skip-guard]`
+- `invoker generate-item ITEM --patch <patch> [--effort <level>] [--backend <name>] [--model <id>] [--kb-dir <dir>] [--guard-backend <name>] [--guard-model <id>] [--skip-guard]`
+- `invoker guard-artifact ARTIFACT_JSON [--host <key>] [--guard-backend <name>] [--guard-model <id>]`
 - `invoker render-kb --patch <patch> [--out <dir>]`
 - `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>] [--answerer-backend <name>] [--judge-backend <name>] [--kb-dir <dir>]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
@@ -265,6 +266,11 @@ uv run invoker generate-concept evasion --patch 7.41d
 - Every citation mark in the article and card must resolve against the
   concept's own corpus sections; an unresolvable mark aborts with exit 1.
 - Slow by design: two full generation calls per concept.
+- After a successful write, the compression guard (fresh session,
+  default backend `codex`) audits the article against the packet and
+  writes `completeness.json` next to the artifact; any missing fact
+  exits 1 with the report path, artifact left on disk for review.
+  `--skip-guard` opts out; `--guard-backend`/`--guard-model` override.
 
 ### `generate-item`
 
@@ -285,6 +291,22 @@ uv run invoker generate-item mage_slayer --patch 7.41d
   section.
 - Requires `INVOKER_GAME_DATA_DIR`; same `--backend`/`--model` selection
   and provenance recording as `generate-concept`.
+
+### `guard-artifact`
+
+Run the compression guard on an existing entity artifact (spec:
+`docs/specs/2026-07-26-generation-completeness-gates.md`). Rebuilds the
+packet from the current substrate (concepts need the corpus store;
+items need `INVOKER_GAME_DATA_DIR`), runs one fresh-session structured
+call, and writes `completeness.json` next to the artifact. Exits 1 when
+any packet fact is missing from the article. Flags are flat and
+unranked — reading the report is the human's job. A rebuilt packet that
+no longer matches the artifact's recorded packet hash is reported: the
+verdict is about today's substrate.
+
+```bash
+uv run invoker guard-artifact data/kb/7.41d/concepts/evasion/artifact.json
+```
 
 ### `render-kb`
 
@@ -324,8 +346,9 @@ uv run invoker run-benchmark --patch 7.41d --case uphill-miss --case facet-remov
   `--answerer-backend` / `--judge-backend` pick `claude-cli` (default) or
   `codex` per role. The judge defaults to the answerer's backend + model —
   hold it constant within an experiment (serving-format measurement
-  spec). Backends and models are recorded in the run report with prompt
-  versions and the KB content hash.
+  spec). The run report records the answerer/judge model ids, prompt
+  versions, and the KB content hash; the serving transport is recorded
+  per call in each case's provenance entries.
 - Report JSON lands under `data/benchmark-runs/<patch>/<run-id>/`
   (gitignored, disposable); per-case failures use the taxonomy
   `resolution-miss / fact-missing / fact-contradicted / trap-triggered /

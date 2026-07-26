@@ -37,9 +37,10 @@ def strict_output_schema(schema: dict) -> dict:
     def adapt(node: object) -> object:
         if isinstance(node, dict):
             adapted = {key: adapt(value) for key, value in node.items()}
-            if adapted.get("type") == "object" and "properties" in adapted:
+            properties = adapted.get("properties")
+            if adapted.get("type") == "object" and isinstance(properties, dict):
                 adapted.setdefault("additionalProperties", False)
-                adapted["required"] = sorted(adapted["properties"])
+                adapted["required"] = sorted(properties)
             return adapted
         if isinstance(node, list):
             return [adapt(item) for item in node]
@@ -68,13 +69,18 @@ class _AppServerProcess:
     pitfalls (the server writes notification bursts in one flush)."""
 
     def __init__(self, codex_bin: str) -> None:
-        self._proc = subprocess.Popen(
-            [codex_bin, "app-server"],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            text=True,
-        )
+        try:
+            self._proc = subprocess.Popen(
+                [codex_bin, "app-server"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+        except OSError as exc:
+            raise GenerationError(
+                f"cannot start {codex_bin!r} app-server: {exc} — is the codex CLI installed?"
+            ) from exc
         self._lines: queue.Queue[str | None] = queue.Queue()
         self._reader = threading.Thread(target=self._read, daemon=True)
         self._reader.start()
@@ -234,7 +240,9 @@ class CodexClient:
             turn = self._request("turn/start", turn_params, prompt_name)
             turn_id = turn["turn"]["id"]
             return self._collect_turn(prompt_name, thread_id, turn_id, served_model)
-        except GenerationError:
+        except Exception:
+            # any mid-call failure (not only GenerationError) tears the
+            # daemon down so no half-consumed turn leaks into the next call
             self.close()
             raise
 
