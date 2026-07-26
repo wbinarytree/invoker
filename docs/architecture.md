@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (citation-coverage check: every packet section cited or generation aborts)
+Last updated: 2026-07-27 (batch concept generation: allowlist from corpus sweep, structural digits not claims, rejected-output persistence, batch driver scripts)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -496,9 +496,17 @@ checks (shared `gen/checks.py`, same code path as items), layered: every
 mark in article and card must resolve against the packet; every packet
 section must be cited by the article (`check_coverage` — lossless
 compression, so an uncited section is dropped content; boilerplate
-anchors, currently `References`, are exempt); numbers must appear in
-their cited section. Any failure aborts generation listing the
-offenders; marks are never checked against live sources.
+anchors — `References`, `Gallery`, `See_Also`/`See_also`, enumerated
+across the full corpus per the batch KB generation spec — are exempt);
+numbers must appear in their cited section, after stripping markdown
+heading lines and ordered-list markers (structural digits mirror source
+section titles or carry the model's own numbering — they are not
+claims; list/table content stays checked). Any failure aborts
+generation listing the offenders; marks are never checked against live
+sources. Any failure after the article call also persists the paid
+output (article, card when present, error text) under
+`data/logs/rejected/<patch>/concepts/<slug>/<ts>/` before the abort
+propagates — never committed, post-mortem evidence only.
 Artifacts (schema v3): one folder per entity —
 `data/kb/<patch>/concepts/<slug>/` holding `article.md` in SKILL.md
 style (YAML frontmatter: title/kind/patch + the card with per-sentence
@@ -511,7 +519,16 @@ consumers load via `load_entity_article`/`write_entity_artifact` in
 card's first sentence is the identity line — it doubles as the entity's
 summary in the answerer index, so the card prompts require it to
 identify the entity concretely with its defining numbers (no flavor
-prose). CLI: `invoker generate-concept <slug> --patch <patch>`.
+prose). CLI: `invoker generate-concept <slug> --patch <patch>`. Batch
+runs are shell-level per the specs: `scripts/concept_batch.py` (worker
+pool of per-entity CLI subprocesses on the codex backend, JSONL
+manifest under `data/logs/batch/`, circuit breaker, transport-class
+re-queue-once) and `scripts/concept_report.py` (clean/flagged/
+unguarded/failed buckets from disk state; committing is the acceptance
+act). Concept prompt v8 hardening came out of the 2026-07-26 fleet:
+patch context never stated in prose, numbers never derived/counted/
+range-expanded (article and card), the corpus: prefix trap and
+one-line-section coverage named explicitly.
 
 **Item generator (S-items slice)** — `items.py` + shared `checks.py`
 (spec: `docs/specs/2026-07-26-game-file-grounded-generators.md`).

@@ -38,6 +38,9 @@ This file is the shortest path to the active design direction. Anything not list
 - Generation completeness gates — coverage check + compression guard
   (accepted; all gates landed, canonical KB regenerated under v5):
   [docs/specs/2026-07-26-generation-completeness-gates.md](specs/2026-07-26-generation-completeness-gates.md)
+- Batch KB generation — concept fleet on codex ran 2026-07-26 (91/98
+  artifacts, 7 parked; item run deferred):
+  [docs/specs/2026-07-26-batch-kb-generation.md](specs/2026-07-26-batch-kb-generation.md)
 
 ## Active plans
 
