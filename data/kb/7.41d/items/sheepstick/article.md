@@ -5,30 +5,43 @@ patch: 7.41d
 card:
   entity: sheepstick
   sentences:
-  - text: Scythe of Vyse is a rare 5200-gold item that grants 30 Intelligence and
-      8.5 Mana Regeneration; its Hex turns a target into a harmless critter and silences,
-      mutes, and disarms it for a Sheep Duration of 2.8 with Sheep Movement Speed
-      140.
+  - text: Scythe of Vyse is a rare item costing 5200 gold that grants 30 Intelligence
+      and 8.5 Mana Regeneration; its Hex turns the target into a harmless critter,
+      silences, mutes, and disarms it, with Sheep Duration 2.8 and Sheep Movement
+      Speed 140.
     marks:
     - gamefile:items/item_sheepstick#cost
     - gamefile:items/item_sheepstick#attribs
     - loc:DOTA_Tooltip_ability_item_sheepstick_Description
-  - text: It has an Upgrade Radius of 200.
+  - text: Upgrade Radius is 200.
     marks:
     - gamefile:items/item_sheepstick#attribs
-  - text: It is built from Mystic Staff for 2800 gold, Tiara of Selemene for 1700
-      gold, and a recipe for 700 gold.
+  - text: Scythe of Vyse is built from Mystic Staff for 2800 gold, Tiara of Selemene
+      for 1700 gold, and a Recipe for 700 gold.
     marks:
     - gamefile:items/item_sheepstick#components
-  - text: Hex is Unit Target with 800 cast range, 250 mana cost, and 20.0 cooldown.
+  - text: Hex has Unit Target behavior.
     marks:
     - gamefile:items/item_sheepstick#mechanics
   - text: Hex is dispellable by Strong Dispels Only.
     marks:
     - gamefile:items/item_sheepstick#mechanics
+  - text: Hex has Cast Range 800.
+    marks:
+    - gamefile:items/item_sheepstick#mechanics
+  - text: Hex has Mana Cost 250.
+    marks:
+    - gamefile:items/item_sheepstick#mechanics
+  - text: Hex has Cooldown 20.0.
+    marks:
+    - gamefile:items/item_sheepstick#mechanics
   - text: Hex instantly destroys illusions.
     marks:
     - loc:DOTA_Tooltip_ability_item_sheepstick_Description
+  - text: The most guarded relic among the cult of Vyse, it is the most coveted weapon
+      among magi.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_sheepstick_Lore
 ---
 
 # Scythe of Vyse

@@ -5,7 +5,7 @@
   "title": "Faerie Fire",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6044d7a370f30982a03024e7b45c45bfcf0f7ff8d1b2a963099d1d8b49ef3068",
+  "article_sha256": "e8df492a5291eb3f7df129d00af17b15feaac23d427b08bbfe0e7fe682b17936",
   "citations": [
     "gamefile:items/item_faerie_fire#cost",
     "gamefile:items/item_faerie_fire#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1cbc4824f1e5efd5b5226b909c124252399013abed48b1e4a10b24e32b372e7d",
-    "input_tokens": 14292,
-    "output_tokens": 319,
+    "prompt_version": "7",
+    "request_sha256": "da7dcf6d827af202dc477c5dd1d2f844bc9d880a3bdbf0deaeca7290e301e8ac",
+    "input_tokens": 13923,
+    "output_tokens": 573,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:22.002618+00:00"
+    "generated_at": "2026-07-27T12:10:41.427837+00:00"
   }
 }

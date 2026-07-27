@@ -5,21 +5,19 @@ patch: 7.41d
 card:
   entity: shawl
   sentences:
-  - text: Shawl is a 450 gold component that provides 10 Bonus Magical Armor and 10%
+  - text: Shawl is a 450 gold component that grants 10 Bonus Magical Armor and 10%
       Magic Resistance.
     marks:
     - gamefile:items/item_shawl#cost
     - gamefile:items/item_shawl#attribs
-  - text: Its build formula is Shawl (450 gold).
-    marks:
-    - gamefile:items/item_shawl#cost
-    - gamefile:items/item_shawl#components
-  - text: It builds into Consecrated Wraps, Glimmer Cape, and Pipe of Insight.
-    marks:
-    - gamefile:items/item_shawl#components
   - text: Shawl is passive.
     marks:
     - gamefile:items/item_shawl#mechanics
+  - text: 'Build formula: Shawl (450 gold); builds into Consecrated Wraps, Glimmer
+      Cape, and Pipe of Insight.'
+    marks:
+    - gamefile:items/item_shawl#cost
+    - gamefile:items/item_shawl#components
 ---
 
 # Shawl

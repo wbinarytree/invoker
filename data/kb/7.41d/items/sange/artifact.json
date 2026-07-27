@@ -5,7 +5,7 @@
   "title": "Sange",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f0a6d0002b603adca837190354b1b8ee703916805f90f94819be893821b2a1c4",
+  "article_sha256": "5e04dfe356d30caa13d4b9e87c4cf1ae1af99371ec5f9233354e295e0169bfeb",
   "citations": [
     "gamefile:items/item_sange#cost",
     "gamefile:items/item_sange#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "547244512fb0051f984c7225400b344693b386614c6d7d82ec068c80da3dd576",
-    "input_tokens": 14317,
-    "output_tokens": 347,
+    "prompt_version": "7",
+    "request_sha256": "f297a95b35b891c3392ee1b8de6b6a0939d3a3e73d57a755720862e75da5836d",
+    "input_tokens": 13944,
+    "output_tokens": 391,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:08.837758+00:00"
+    "generated_at": "2026-07-27T12:16:21.862384+00:00"
   }
 }

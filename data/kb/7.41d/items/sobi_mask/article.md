@@ -20,6 +20,9 @@ card:
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_sobi_mask#mechanics
+  - text: A mask commonly used by mages and warlocks for various rituals.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_sobi_mask_Lore
 ---
 
 # Sage's Mask

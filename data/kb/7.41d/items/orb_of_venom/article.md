@@ -5,20 +5,24 @@ patch: 7.41d
 card:
   entity: orb_of_venom
   sentences:
-  - text: Orb of Venom is a 350 gold component item whose passive Poison Attack deals
-      10 magical damage per second for 3.0 seconds at 1.0-second tick intervals.
+  - text: Orb of Venom is a component item costing 350 gold whose Poison Attack has
+      Damage 10, Poison Duration 3.0, and Tick Interval 1.0 and deals magical damage
+      per second.
     marks:
     - gamefile:items/item_orb_of_venom#cost
     - gamefile:items/item_orb_of_venom#attribs
     - loc:DOTA_Tooltip_ability_item_orb_of_venom_Description
-  - text: Poison Attack has a 9.0-second cooldown.
+  - text: Poison Attack is passive and poisons the target.
     marks:
-    - gamefile:items/item_orb_of_venom#mechanics
+    - loc:DOTA_Tooltip_ability_item_orb_of_venom_Description
   - text: Poison Attack has the `DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES`
       behavior.
     marks:
     - gamefile:items/item_orb_of_venom#mechanics
   - text: Poison Attack is dispellable.
+    marks:
+    - gamefile:items/item_orb_of_venom#mechanics
+  - text: Poison Attack has a 9.0 cooldown.
     marks:
     - gamefile:items/item_orb_of_venom#mechanics
   - text: 'Build formula: Orb of Venom (350 gold).'
@@ -27,6 +31,9 @@ card:
   - text: Orb of Venom builds into Hydra's Breath, Mage Slayer, and Witch Blade.
     marks:
     - gamefile:items/item_orb_of_venom#components
+  - text: Envenoms your veapon with the venom of a venomous viper.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_orb_of_venom_Lore
 ---
 
 # Orb of Venom

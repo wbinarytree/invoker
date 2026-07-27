@@ -5,24 +5,29 @@ patch: 7.41d
 card:
   entity: blood_grenade
   sentences:
-  - text: Blood Grenade is a 50-gold consumable item that provides 50 Health; Throw
-      Grenade has 50 Impact Damage, -15% Movespeed Slow, 15 Damage Over Time, 5 Debuff
-      Duration, 1 Tick Rate, and 300 Radius.
+  - text: Blood Grenade is a 50-gold consumable that provides 50 HEALTH; Throw Grenade
+      deals 50 IMPACT DAMAGE and 15 DAMAGE OVER TIME at a TICK RATE of 1 for a DEBUFF
+      DURATION of 5, applies -15% MOVESPEED SLOW, and has RADIUS 300.
     marks:
     - gamefile:items/item_blood_grenade#cost
     - gamefile:items/item_blood_grenade#attribs
     - loc:DOTA_Tooltip_Ability_item_blood_grenade_Description
-  - text: Throw Grenade targets an area and affects enemies with its Impact Damage,
-      Movespeed Slow, and periodic Damage Over Time.
-    marks:
-    - loc:DOTA_Tooltip_Ability_item_blood_grenade_Description
-  - text: Throw Grenade has Point Target and AOE behavior, a 900 Cast range, and a
-      10 Cooldown.
-    marks:
-    - gamefile:items/item_blood_grenade#mechanics
-  - text: Throw Grenade has 1100 Speed.
+  - text: Throw Grenade has SPEED 1100.
     marks:
     - gamefile:items/item_blood_grenade#attribs
+  - text: Its behavior is Point Target, AOE, DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING,
+      and DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES.
+    marks:
+    - gamefile:items/item_blood_grenade#mechanics
+  - text: Its cast range is 900.
+    marks:
+    - gamefile:items/item_blood_grenade#mechanics
+  - text: Its cooldown is 10.
+    marks:
+    - gamefile:items/item_blood_grenade#mechanics
+  - text: Both the hunter and the hunted must pay the blood price.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_blood_grenade_Lore
 ---
 
 # Blood Grenade

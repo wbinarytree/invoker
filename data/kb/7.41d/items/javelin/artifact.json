@@ -5,7 +5,7 @@
   "title": "Javelin",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b80827994cc571d72966b6e0029c2450589b939692d58634344b260191c91616",
+  "article_sha256": "5a3d8d93af3eb227337710ca0711ce1c74c16a595cfe0eaf92771b652b21e0ec",
   "citations": [
     "gamefile:items/item_javelin#cost",
     "gamefile:items/item_javelin#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5112e0fd407187412d85c0f7ae10dcac9c977cfd58135c2bc0e81640cd78f08c",
-    "input_tokens": 14308,
-    "output_tokens": 485,
+    "prompt_version": "7",
+    "request_sha256": "6f276eb0cf8c4834230aa8c1f16c7e3cabb3d6748ba48c712b9fd5d8b8d6515c",
+    "input_tokens": 13937,
+    "output_tokens": 647,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:24.976415+00:00"
+    "generated_at": "2026-07-27T12:12:48.697879+00:00"
   }
 }

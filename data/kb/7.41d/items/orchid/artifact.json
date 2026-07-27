@@ -5,7 +5,7 @@
   "title": "Orchid Malevolence",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ec51f0c3f5f0cd5f09daaaa136a998ed357d8b5d2bbde117488bdf77a47f284e",
+  "article_sha256": "ce2ac8e8a150094cee6d45dc98f30bad6a36746afacb69961b98f8817294e25e",
   "citations": [
     "gamefile:items/item_orchid#cost",
     "gamefile:items/item_orchid#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "6591b822856438dfe276f1b3481aa5cd01cf49d3f7f95218d76da1640699559a",
-    "input_tokens": 14428,
-    "output_tokens": 1705,
+    "prompt_version": "7",
+    "request_sha256": "a88bc0c8102634e5b48805f42ca61a40735905974f5fa9fee7f39264e9f0bcb6",
+    "input_tokens": 14057,
+    "output_tokens": 1823,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:22.726911+00:00"
+    "generated_at": "2026-07-27T12:15:07.816783+00:00"
   }
 }

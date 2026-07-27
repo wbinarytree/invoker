@@ -5,7 +5,7 @@
   "title": "Fierce",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3fea174892aeb3a7446e4b984ccae3038f607aa9c857a0c061b7883f34c095cc",
+  "article_sha256": "acf48524ebc98a1b8ab6a49a4c578636285097c50a98901eb1564cde1e0c31c5",
   "citations": [
     "gamefile:items/item_enhancement_fierce#cost",
     "gamefile:items/item_enhancement_fierce#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1b56c862d3857cf89f21eb1729854a0647577d51ea688b7656fe37955afcf1a5",
-    "input_tokens": 14207,
-    "output_tokens": 116,
+    "prompt_version": "7",
+    "request_sha256": "b69751ebc76ac2f3cda75991495a097fdd13dffdceea238e3b4cde4e41f7981d",
+    "input_tokens": 13838,
+    "output_tokens": 200,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:45.827878+00:00"
+    "generated_at": "2026-07-27T12:10:03.824854+00:00"
   }
 }

@@ -5,31 +5,29 @@ patch: 7.41d
 card:
   entity: travel_boots_2
   sentences:
-  - text: Boots of Travel 2 is a common 4500-gold item with 110 Movement Speed, 800
-      Maximum Distance, 2 TP Channel Time, 40 TP Cooldown, and 200 Vision Radius.
+  - text: Boots of Travel 2 is a common passive item costing 4500 gold that grants
+      110 Movement Speed, 800 Maximum Distance, 2 TP Channel Time, 40 TP Cooldown,
+      and 200 Vision Radius, and upgrades Town Portal Scroll to target units and heroes
+      without consuming a charge.
     marks:
     - gamefile:items/item_travel_boots_2#cost
     - gamefile:items/item_travel_boots_2#attribs
-  - text: Its build formula is Boots of Travel (2500 gold) and item_recipe_travel_boots
-      (—), producing Boots of Travel 2 (4500 gold).
+    - gamefile:items/item_travel_boots_2#mechanics
+    - loc:DOTA_Tooltip_ability_item_travel_boots_2_Description
+  - text: Boots of Travel (2500 gold) and item_recipe_travel_boots (—) build Boots
+      of Travel 2 (4500 gold).
     marks:
     - gamefile:items/item_travel_boots_2#components
     - gamefile:items/item_travel_boots_2#cost
-  - text: The item is passive.
-    marks:
-    - gamefile:items/item_travel_boots_2#mechanics
-  - text: It upgrades Town Portal Scroll to target units and heroes.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_travel_boots_2_Description
-  - text: It reduces Town Portal Scroll's cooldown and channel time.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_travel_boots_2_Description
-  - text: Town Portal Scroll charges are not consumed on use.
+  - text: The Town Portal Scroll upgrade reduces its cooldown and channel time.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_2_Description
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_2_Description
+  - text: Winged boots that grant omnipresence.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_travel_boots_2_Lore
 ---
 
 # Boots of Travel 2

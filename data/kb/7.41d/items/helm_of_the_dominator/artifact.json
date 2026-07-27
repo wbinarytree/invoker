@@ -5,7 +5,7 @@
   "title": "Helm of the Dominator",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7d6d58bfa33104f22ebd0de294e86bf0386330056df573b5891b415eee6b786c",
+  "article_sha256": "4b80d91c99433db7ebca88a00ee9afed65e64c9501f7e3d208242ce9f2565225",
   "citations": [
     "gamefile:items/item_helm_of_the_dominator#cost",
     "gamefile:items/item_helm_of_the_dominator#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5b9b9b49d16f1a31c71cce935a48a481d7e4a0e0ec3c323cc27b3008126f1efe",
-    "input_tokens": 14678,
-    "output_tokens": 2377,
+    "prompt_version": "7",
+    "request_sha256": "639cde09045174aeb86d39c7fb377e5a029a2d4da114922875dfd1ee4b8229b6",
+    "input_tokens": 14307,
+    "output_tokens": 2132,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:26.133974+00:00"
+    "generated_at": "2026-07-27T12:12:30.167421+00:00"
   }
 }

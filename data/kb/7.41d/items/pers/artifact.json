@@ -5,7 +5,7 @@
   "title": "Perseverance",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "685edcf33a5d99f0267098289639ffc3f57d17fc8a10e00c07edba4e1ef9e245",
+  "article_sha256": "dec410506c1982e5243f5af8ba91f71eea122dd89c82198cf754c0c4ff0d822c",
   "citations": [
     "gamefile:items/item_pers#cost",
     "gamefile:items/item_pers#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "eaa8e483b66e115abdcadfee164c545943c628c5c99340b8f8fb1dd6e241f649",
-    "input_tokens": 14312,
-    "output_tokens": 434,
+    "prompt_version": "7",
+    "request_sha256": "896f33a18e0fc63cb8d05bffbd6f01dfff8c0f93d6bee2481aa01762eaf0bb18",
+    "input_tokens": 13939,
+    "output_tokens": 371,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:57.955273+00:00"
+    "generated_at": "2026-07-27T12:14:59.329725+00:00"
   }
 }

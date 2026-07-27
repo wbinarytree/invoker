@@ -5,21 +5,23 @@ patch: 7.41d
 card:
   entity: assault
   sentences:
-  - text: Assault Cuirass is an epic 5125-gold item that grants 10 Armor and 30 Attack
-      Speed; its passive 1200-radius Assault Aura grants allied units and structures
-      30 Attack Speed and 5 Armor while applying -5 Armor to enemy units and structures.
+  - text: Assault Cuirass is an epic item costing 5125 gold that grants 10 Armor and
+      30 Attack Speed; its passive Assault Aura has a 1200 radius and gives allied
+      units and structures 30 Attack Speed and 5 Armor while giving enemy units and
+      structures -5 Armor.
     marks:
     - gamefile:items/item_assault#cost
     - gamefile:items/item_assault#attribs
     - gamefile:items/item_assault#mechanics
     - loc:DOTA_Tooltip_ability_item_assault_Description
-  - text: It is built from Buckler for 425 gold, Hyperstone for 2000 gold, Platemail
-      for 1400 gold, and a Recipe for 1300 gold.
+  - text: It is built from Buckler (425 gold), Hyperstone (2000 gold), Platemail (1400
+      gold), and a Recipe (1300 gold).
     marks:
     - gamefile:items/item_assault#components
-  - text: The passive has a cast range of 1200.
+  - text: “Forged in the depths of the nether reaches, this hellish mail provides
+      an army with increased armor and attack speed.”
     marks:
-    - gamefile:items/item_assault#mechanics
+    - loc:DOTA_Tooltip_ability_item_assault_Lore
 ---
 
 # Assault Cuirass

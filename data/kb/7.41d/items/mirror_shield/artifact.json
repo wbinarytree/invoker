@@ -5,7 +5,7 @@
   "title": "Mirror Shield",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2bd37698766fb31a40007811e61f6adfe020f2843fed6a897eaf51596c698777",
+  "article_sha256": "aeced5ecea85f07e8c599ac8e81642f1e4355be37a98650f6d1a2ee59114e9f3",
   "citations": [
     "gamefile:items/item_mirror_shield#cost",
     "gamefile:items/item_mirror_shield#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "294deaf15fae88d20ef81a85abb1b3c5a89b83b262c26c6d1cdc65192f173c80",
-    "input_tokens": 14264,
-    "output_tokens": 423,
+    "prompt_version": "7",
+    "request_sha256": "e333d7084381433379c94a9e80b2acbc9d7d915f727d297d24e50fec0e978c68",
+    "input_tokens": 13887,
+    "output_tokens": 460,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:42.688657+00:00"
+    "generated_at": "2026-07-27T12:13:52.516904+00:00"
   }
 }

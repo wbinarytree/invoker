@@ -5,7 +5,7 @@
   "title": "Elven Tunic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e30172ddcdd75c327aa6e270ad731673b933d1a2455eeea5e298536d5919d425",
+  "article_sha256": "7019ea9830f16aab0cd748eaadad5cc7dae3e6c429676600a013f2fa8e3bede3",
   "citations": [
     "gamefile:items/item_elven_tunic#cost",
     "gamefile:items/item_elven_tunic#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2cb8ecd719917b703ba3c5c58a0d8904397bcf7b7077c40466ba0523e5bc5868",
-    "input_tokens": 14233,
-    "output_tokens": 308,
+    "prompt_version": "7",
+    "request_sha256": "53120eca112199c1d6153e4585cb1d7f849cdabe85976b40383d08bbf997a61f",
+    "input_tokens": 13862,
+    "output_tokens": 212,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:37.497851+00:00"
+    "generated_at": "2026-07-27T12:09:40.845840+00:00"
   }
 }

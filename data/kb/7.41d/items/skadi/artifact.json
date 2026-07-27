@@ -5,7 +5,7 @@
   "title": "Eye of Skadi",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0bb1be6197350322f49bcef85dfe57093a4ab9b66cd8747721b06579e5d27772",
+  "article_sha256": "2c52f108bf9327a25a79f3a1f44115e39768a59a1c078f85ffcc9a282f41a42c",
   "citations": [
     "gamefile:items/item_skadi#cost",
     "gamefile:items/item_skadi#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "8a40580bda11ac2de4a1a75f49e6143c3724296d140d6b88f0d32d0ce50e9f1a",
-    "input_tokens": 14411,
-    "output_tokens": 2020,
+    "prompt_version": "7",
+    "request_sha256": "de7a26b0b078b6a64352e690836a57787fd4a2a8a9b348593a1c62361a0fcfcb",
+    "input_tokens": 14042,
+    "output_tokens": 1249,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:31.944010+00:00"
+    "generated_at": "2026-07-27T12:17:07.329183+00:00"
   }
 }

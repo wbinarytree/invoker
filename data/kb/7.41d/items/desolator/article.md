@@ -5,20 +5,17 @@ patch: 7.41d
 card:
   entity: desolator
   sentences:
-  - text: Desolator is a 3500-gold artifact item granting 55 Damage, 1 Bonus Damage
-      per Assist, and 2 Bonus Damage per Kill up to 30, while applying -6 Corruption
-      Armor for 7.0 seconds.
+  - text: Desolator is a 3500-gold artifact item with 55 Damage whose Corruption applies
+      -6 armor for 7.0 seconds and whose Soul Stealer grants 1 Bonus Damage per Assist
+      or 2 Bonus Damage per Kill, capped at 30.
     marks:
     - gamefile:items/item_desolator#cost
     - gamefile:items/item_desolator#attribs
     - loc:DOTA_Tooltip_ability_item_desolator_Description
-  - text: It is built from Mithril Hammer (1600 gold), Mithril Hammer (1600 gold),
-      and Orb of Blight (300 gold).
+  - text: It is built from a Mithril Hammer (1600 gold), a Mithril Hammer (1600 gold),
+      and an Orb of Blight (300 gold).
     marks:
     - gamefile:items/item_desolator#components
-  - text: Corruption causes attacks to reduce the target’s armor for a duration.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_desolator_Description
   - text: Soul Stealer grants Desolator damage whenever an enemy hero dies while affected
       by Corruption, subject to a maximum.
     marks:
@@ -29,6 +26,9 @@ card:
   - text: It is dispellable.
     marks:
     - gamefile:items/item_desolator#mechanics
+  - text: Its lore reads, “A wicked weapon, used in torturing political criminals.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_desolator_Lore
 ---
 
 # Desolator

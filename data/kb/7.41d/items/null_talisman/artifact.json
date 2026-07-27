@@ -5,7 +5,7 @@
   "title": "Null Talisman",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "58690385e577df333577e33916a44801e1ab9f9b7f2ec0eb5c398d5f61f05175",
+  "article_sha256": "fc61d791cf92764864354e992dd2979caf93cfdec15a55e571eb81c0c47f10a4",
   "citations": [
     "gamefile:items/item_null_talisman#cost",
     "gamefile:items/item_null_talisman#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a94adfd02768a6e389d492caeacddec6349642145af3fccae127cc018b10868e",
-    "input_tokens": 14285,
-    "output_tokens": 343,
+    "prompt_version": "7",
+    "request_sha256": "fb9210ddfdf3d3779c5cd2da4c4be771f05351b26685f084106f3d7c756ed65e",
+    "input_tokens": 13918,
+    "output_tokens": 377,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:04.245168+00:00"
+    "generated_at": "2026-07-27T12:14:06.016992+00:00"
   }
 }

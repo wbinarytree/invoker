@@ -5,17 +5,19 @@ patch: 7.41d
 card:
   entity: blades_of_attack
   sentences:
-  - text: Blades of Attack is a component item costing 450 gold that provides 9 Damage.
+  - text: Blades of Attack is a passive component item costing 450 gold that provides
+      9 Damage.
     marks:
     - gamefile:items/item_blades_of_attack#cost
     - gamefile:items/item_blades_of_attack#attribs
+    - gamefile:items/item_blades_of_attack#mechanics
   - text: It builds into Armlet of Mordiggian, Falcon Blade, Crystalys, Mage Slayer,
       Phase Boots, and Vladmir's Offering.
     marks:
     - gamefile:items/item_blades_of_attack#components
-  - text: Its behavior is passive.
+  - text: The damage of these small, concealable blades should not be underestimated.
     marks:
-    - gamefile:items/item_blades_of_attack#mechanics
+    - loc:DOTA_Tooltip_ability_item_blades_of_attack_Lore
 ---
 
 # Blades of Attack

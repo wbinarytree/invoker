@@ -5,7 +5,7 @@
   "title": "Broadsword",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d44a8708ecde797849d764850c8727a41d624190dda3d48908f47ec891379e87",
+  "article_sha256": "1a58879a0d4a75d0012030ff45c500ba4abb0acb1ba162306a5c6b1ed9c29113",
   "citations": [
     "gamefile:items/item_broadsword#cost",
     "gamefile:items/item_broadsword#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "d85cfda668bd80601f09eeffc75250749cf7136e94a1eb5cb7fb11be10821e9f",
-    "input_tokens": 14280,
-    "output_tokens": 390,
+    "prompt_version": "7",
+    "request_sha256": "ed83154e702e168a2f5c1b8692b121c5edba9ed86d22fe519f84d57e408190c8",
+    "input_tokens": 13905,
+    "output_tokens": 416,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:03.114239+00:00"
+    "generated_at": "2026-07-27T12:07:56.676222+00:00"
   }
 }

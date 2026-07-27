@@ -13,6 +13,9 @@ card:
     - gamefile:items/item_mirror_shield#attribs
     - gamefile:items/item_mirror_shield#mechanics
     - loc:DOTA_Tooltip_ability_item_mirror_shield_Description
+  - text: “The shield that long ago robbed the old one of his first memories.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_mirror_shield_Lore
 ---
 
 # Mirror Shield

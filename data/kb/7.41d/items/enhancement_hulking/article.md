@@ -8,9 +8,9 @@ card:
   - text: Hulking is a passive item enhancement costing 0 gold that provides -30 Attack
       Speed, 5% Health, and 1.5 Max Health Regen.
     marks:
-    - gamefile:items/item_enhancement_hulking#mechanics
     - gamefile:items/item_enhancement_hulking#cost
     - gamefile:items/item_enhancement_hulking#attribs
+    - gamefile:items/item_enhancement_hulking#mechanics
 ---
 
 # Hulking

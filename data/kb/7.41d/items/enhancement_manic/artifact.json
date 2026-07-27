@@ -5,7 +5,7 @@
   "title": "Manic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "bbdc51590c9e92ba60a9c2dd6e865f0a12bc9596b8bbf423799b7daf9c8949c4",
+  "article_sha256": "b65cef0be761e3fd3da21ee1098ffae0228cc1695e4df4052dea95a744b4d591",
   "citations": [
     "gamefile:items/item_enhancement_manic#attribs",
     "gamefile:items/item_enhancement_manic#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "54770f422cd144ac6c0fe058ab56ea6ef0137e82067dbbda069735fc280f3795",
-    "input_tokens": 14172,
-    "output_tokens": 232,
+    "prompt_version": "7",
+    "request_sha256": "53c048078a6c680ca1823c5611f21902bfbd24ed0baa4eb0c119295d9ad8a3f7",
+    "input_tokens": 13801,
+    "output_tokens": 214,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:01:04.003169+00:00"
+    "generated_at": "2026-07-27T12:10:12.517816+00:00"
   }
 }

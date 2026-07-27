@@ -11,6 +11,10 @@ card:
     - gamefile:items/item_philosophers_stone#mechanics
     - gamefile:items/item_philosophers_stone#cost
     - gamefile:items/item_philosophers_stone#attribs
+  - text: A weightless charm created by an enchanter with a powerful scorn for brute
+      force.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_philosophers_stone_Lore
 ---
 
 # Philosopher's Stone

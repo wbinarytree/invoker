@@ -5,7 +5,7 @@
   "title": "Evolved",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1fca587d1e0c3bb483d311a88e4fbcc7ef343e41d642421e9dc3408108c80df8",
+  "article_sha256": "87ba9b4ea9530ce74940ab1953f4cc671e7b2a3f646d2c0b6228d780ed715f94",
   "citations": [
     "gamefile:items/item_enhancement_evolved#cost",
     "gamefile:items/item_enhancement_evolved#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "25484ebfe40529523df2214c1e4ca133f5380112e138e2705a8ca5f839e6a211",
-    "input_tokens": 14178,
-    "output_tokens": 233,
+    "prompt_version": "7",
+    "request_sha256": "345548bddaa44edb02d3ffb263be3be82d3c6a14a9782e8f10e26c194fcd3ddd",
+    "input_tokens": 13811,
+    "output_tokens": 215,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:44.597294+00:00"
+    "generated_at": "2026-07-27T12:10:02.684643+00:00"
   }
 }

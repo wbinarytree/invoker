@@ -5,11 +5,11 @@ patch: 7.41d
 card:
   entity: enhancement_thick
   sentences:
-  - text: Thick is a 0-gold enhancement with Passive behavior that grants 7 Armor,
-      240 Health, and 3 Mana Regeneration.
+  - text: Thick is a Passive enhancement that costs 0 gold and grants 7 Armor, 240
+      Health, and 3 Mana Regeneration.
     marks:
-    - gamefile:items/item_enhancement_thick#cost
     - gamefile:items/item_enhancement_thick#mechanics
+    - gamefile:items/item_enhancement_thick#cost
     - gamefile:items/item_enhancement_thick#attribs
 ---
 

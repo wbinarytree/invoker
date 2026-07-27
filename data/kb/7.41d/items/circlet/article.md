@@ -5,7 +5,7 @@ patch: 7.41d
 card:
   entity: circlet
   sentences:
-  - text: Circlet is a passive component item costing 155 gold that grants 2 All Attributes.
+  - text: Circlet is a 155 gold component item that passively grants 2 All Attributes.
     marks:
     - gamefile:items/item_circlet#cost
     - gamefile:items/item_circlet#attribs
@@ -16,6 +16,9 @@ card:
   - text: It builds into Bracer, Null Talisman, Urn of Shadows, and Wraith Band.
     marks:
     - gamefile:items/item_circlet#components
+  - text: An elegant circlet designed for human princesses.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_circlet_Lore
 ---
 
 # Circlet

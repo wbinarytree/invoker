@@ -5,7 +5,7 @@
   "title": "Hyperstone",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "bad0077f576ce06a9d314e29b095dae0d0c79b85e64aceb00c9a57ae82275f0c",
+  "article_sha256": "e002a0107940c311844433c1f1dcf53d7ee91eb5637e0e00e6d0b9370252561a",
   "citations": [
     "gamefile:items/item_hyperstone#cost",
     "gamefile:items/item_hyperstone#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a25900e8fbb091f57cb5ba947292d1da8bded21a6fbaff5e172aae98523d4726",
-    "input_tokens": 14265,
-    "output_tokens": 441,
+    "prompt_version": "7",
+    "request_sha256": "297a628785b8cb257c29cc8f219520c141df17027a911306418b5eeeb20f44ee",
+    "input_tokens": 13892,
+    "output_tokens": 501,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:00.964326+00:00"
+    "generated_at": "2026-07-27T12:12:14.939033+00:00"
   }
 }

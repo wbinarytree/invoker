@@ -5,34 +5,48 @@ patch: 7.41d
 card:
   entity: hurricane_pike
   sentences:
-  - text: Hurricane Pike is a 4450-gold epic item granting 130 ranged attack range,
-      20 agility, 100 bonus attack speed, 200 health, 15 intelligence, and 15 strength;
-      its Hurricane Thrust pushes units 600 over 0.5 seconds and permits up to 5 unrestricted-range
+  - text: Hurricane Pike is an epic 4450-gold item that grants ranged heroes 130 Attack
+      Range, 20 Agility, 100 Bonus Attack Speed, 200 Health, 15 Intelligence, and
+      15 Strength, and provides Hurricane Thrust, a 650-cast-range, 150-mana active
+      with a 19.0 cooldown that pushes units and permits up to 5 unrestricted-range
       attacks against an enemy for 6 seconds.
     marks:
     - gamefile:items/item_hurricane_pike#cost
     - gamefile:items/item_hurricane_pike#attribs
+    - gamefile:items/item_hurricane_pike#mechanics
     - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description
-  - text: It is built from Force Staff for 2200 gold, Dragon Lance for 1900 gold,
-      and a Recipe for 350 gold, for a total cost of 4450 gold.
+  - text: Hurricane Pike (4450 gold) is built from Force Staff (2200 gold), Dragon
+      Lance (1900 gold), and a Recipe (350 gold).
     marks:
     - gamefile:items/item_hurricane_pike#cost
     - gamefile:items/item_hurricane_pike#components
-  - text: Hurricane Thrust has Unit Target behavior, 650 cast range, 150 mana cost,
-      and a 19.0-second cooldown.
+  - text: Against an enemy, Hurricane Thrust pushes the caster and target 600 away
+      from each other over 0.5 seconds.
     marks:
-    - gamefile:items/item_hurricane_pike#mechanics
-  - text: Its behavior includes DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK.
+    - gamefile:items/item_hurricane_pike#attribs
+    - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description
+  - text: The caster can then attack that enemy without range restrictions for 6 seconds,
+      up to 5 attacks, with 100 Bonus Attack Speed.
     marks:
-    - gamefile:items/item_hurricane_pike#mechanics
-  - text: Against an enemy, Hurricane Thrust pushes the caster and target away from
-      each other.
+    - gamefile:items/item_hurricane_pike#attribs
+    - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description
+  - text: When cast on the user or an ally, Hurricane Thrust pushes the target in
+      the direction it faces.
     marks:
     - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description
-  - text: When used on the caster or an ally, Hurricane Thrust pushes the target in
-      the direction it is facing.
+  - text: Hurricane Thrust has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK
+      behavior.
     marks:
-    - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description
+    - gamefile:items/item_hurricane_pike#mechanics
+  - text: Its Cast Range Enemy and Enemy Length values are both 425.
+    marks:
+    - gamefile:items/item_hurricane_pike#attribs
+  - text: Its Dizzy Distance Pct and Dizzy Duration values are both 0.
+    marks:
+    - gamefile:items/item_hurricane_pike#attribs
+  - text: “A legendary pike once held as the royal sigil of the ancient wyvern riders.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_hurricane_pike_Lore
 ---
 
 # Hurricane Pike

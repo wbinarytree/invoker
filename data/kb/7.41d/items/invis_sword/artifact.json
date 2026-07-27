@@ -5,7 +5,7 @@
   "title": "Shadow Blade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2575ee7d0f083202ba631c069ca78a0ba937f0737c5013f2e3cecfe99f8b135d",
+  "article_sha256": "dbd5be75dfc2e254c49e90a935c480a45a7cf39e09cf24bb1d1b708a6c6d1f62",
   "citations": [
     "gamefile:items/item_invis_sword#cost",
     "gamefile:items/item_invis_sword#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3307a512d4b4eec95036c2017bd8b9fe979eb1390e9103be5e40521622ee7252",
-    "input_tokens": 14447,
-    "output_tokens": 1976,
+    "prompt_version": "7",
+    "request_sha256": "f5bffce67a09d6c73e7a1313b0253ba6d381af09b60d30d153aeb06e8e2f5be0",
+    "input_tokens": 14501,
+    "output_tokens": 1054,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:42.589044+00:00"
+    "generated_at": "2026-07-27T12:12:55.110726+00:00"
   }
 }

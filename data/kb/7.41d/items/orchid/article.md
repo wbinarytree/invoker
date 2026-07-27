@@ -5,30 +5,19 @@ patch: 7.41d
 card:
   entity: orchid
   sentences:
-  - text: Orchid Malevolence is a rare 3275-gold item whose Soul Burn active silences
-      a target for a duration of 5, then inflicts 30% of the damage received during
-      the silence as bonus magical damage.
+  - text: Orchid Malevolence is a rare 3275-gold item that grants Soul Burn, a 5-second
+      silence that inflicts 30% of the damage received during the silence as bonus
+      magical damage when it ends.
     marks:
     - gamefile:items/item_orchid#cost
     - gamefile:items/item_orchid#attribs
     - loc:DOTA_Tooltip_ability_item_orchid_Description
-  - text: It provides 35 Attack Speed.
+  - text: It provides 35 Attack Speed, 20 Damage, 0.0 Health Regeneration, 12 Intelligence,
+      and 2.5 Mana Regeneration.
     marks:
     - gamefile:items/item_orchid#attribs
-  - text: It provides 20 Damage.
-    marks:
-    - gamefile:items/item_orchid#attribs
-  - text: It provides 0.0 Health Regeneration.
-    marks:
-    - gamefile:items/item_orchid#attribs
-  - text: It provides 12 Intelligence.
-    marks:
-    - gamefile:items/item_orchid#attribs
-  - text: It provides 2.5 Mana Regeneration.
-    marks:
-    - gamefile:items/item_orchid#attribs
-  - text: Its build formula is Oblivion Staff (1625 gold) + Claymore (1350 gold) +
-      Recipe (300 gold), and it builds into Bloodthorn.
+  - text: Its build formula is Oblivion Staff for 1625 gold, Claymore for 1350 gold,
+      and a Recipe for 300 gold; it builds into Bloodthorn.
     marks:
     - gamefile:items/item_orchid#components
   - text: Soul Burn has Unit Target behavior.
@@ -37,15 +26,18 @@ card:
   - text: Soul Burn is dispellable.
     marks:
     - gamefile:items/item_orchid#mechanics
-  - text: Soul Burn has 900 cast range.
+  - text: Its cast range is 900.
     marks:
     - gamefile:items/item_orchid#mechanics
-  - text: Soul Burn costs 125 mana.
+  - text: Its mana cost is 125.
     marks:
     - gamefile:items/item_orchid#mechanics
-  - text: Soul Burn has an 18.0 cooldown.
+  - text: Its cooldown is 18.0.
     marks:
     - gamefile:items/item_orchid#mechanics
+  - text: “A garnet rod constructed from the essence of a fire demon.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_orchid_Lore
 ---
 
 # Orchid Malevolence

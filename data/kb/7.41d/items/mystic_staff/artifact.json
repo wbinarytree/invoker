@@ -5,7 +5,7 @@
   "title": "Mystic Staff",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d4339304d57ce96ed218fe4ae931b41fdf6d6e710ec21bdaef889a3efe7f9046",
+  "article_sha256": "e45942c05cd552292eb4790b6172485363f22811bd9da3bdc8fddd4e0556af28",
   "citations": [
     "gamefile:items/item_mystic_staff#cost",
     "gamefile:items/item_mystic_staff#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ce7a44833962da157c4206aed3fe4981e11450e2693f4df2c1eb244185febfaa",
-    "input_tokens": 14259,
-    "output_tokens": 256,
+    "prompt_version": "7",
+    "request_sha256": "6af861b33df6b48c91ffdf66ee8225d921e5ae3478f99dd59035947118231012",
+    "input_tokens": 13892,
+    "output_tokens": 348,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:17.530592+00:00"
+    "generated_at": "2026-07-27T12:14:04.402440+00:00"
   }
 }

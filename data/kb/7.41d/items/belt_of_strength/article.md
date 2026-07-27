@@ -19,6 +19,9 @@ card:
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_belt_of_strength#mechanics
+  - text: “A valued accessory for improving vitality.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_belt_of_strength_Lore
 ---
 
 # Belt of Strength

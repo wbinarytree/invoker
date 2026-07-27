@@ -6,7 +6,7 @@ card:
   entity: dragon_scale
   sentences:
   - text: Dragon Scale is a 0-gold item whose passive Afterburn causes attacks to
-      apply 22 damage per second for 3 seconds and affects buildings.
+      apply 22 DAMAGE PER SEC for a DURATION of 3 and affects buildings.
     marks:
     - gamefile:items/item_dragon_scale#cost
     - gamefile:items/item_dragon_scale#attribs
@@ -14,6 +14,10 @@ card:
   - text: 'Build formula: Dragon Scale (0 gold).'
     marks:
     - gamefile:items/item_dragon_scale#cost
+  - text: The remains of a dragon always outvalue the wealth of even the most prodigious
+      hoard.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_dragon_scale_Lore
 ---
 
 # Dragon Scale

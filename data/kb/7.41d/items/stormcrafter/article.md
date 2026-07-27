@@ -5,22 +5,23 @@ patch: 7.41d
 card:
   entity: stormcrafter
   sentences:
-  - text: Stormcrafter is a 0-gold item whose passive Bottled Lightning zaps enemy
-      targets with Damage 70, Max Targets 2, Range 700, Slow 40%, and Slow Duration
-      0.4.
+  - text: Stormcrafter is a 0-gold item whose passive Bottled Lightning has a 6 cooldown
+      and zaps up to 2 enemy targets within 700 range for 70 damage, applying a 40%
+      slow for 0.4 seconds.
     marks:
     - gamefile:items/item_stormcrafter#cost
+    - gamefile:items/item_stormcrafter#mechanics
     - gamefile:items/item_stormcrafter#attribs
     - loc:DOTA_Tooltip_Ability_item_stormcrafter_Description
-  - text: Bottled Lightning has a cooldown of 6.
-    marks:
-    - gamefile:items/item_stormcrafter#mechanics
-  - text: Stormcrafter provides 0 Bonus Mana Regen.
+  - text: It grants 0 bonus mana regen.
     marks:
     - gamefile:items/item_stormcrafter#attribs
-  - text: Stormcrafter provides 0 Passive Movement Bonus.
+  - text: It grants 0 passive movement bonus.
     marks:
     - gamefile:items/item_stormcrafter#attribs
+  - text: The accidental byproduct of a spell conjured to entrap a lesser god.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_stormcrafter_Lore
 ---
 
 # Stormcrafter

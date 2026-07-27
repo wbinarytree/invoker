@@ -5,7 +5,7 @@
   "title": "Buckler",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ffe6217b66eee9f0f322e0d6ed5d9612d8e16cacb2215f0215c33149e5b6bb18",
+  "article_sha256": "7928cd10728bafb10be9520f8049c4bc7d8e522189012a65a81164a58f51e54b",
   "citations": [
     "gamefile:items/item_buckler#cost",
     "gamefile:items/item_buckler#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4df1a87827015c8a10ec3506e32a06f0a140a5f4ee694184b3f7173b88a7643b",
-    "input_tokens": 14347,
-    "output_tokens": 842,
+    "prompt_version": "7",
+    "request_sha256": "9c9c0e6a9cfa98b2f780eabb7f35f95b5127c6364f68fd512a7184257851d2a3",
+    "input_tokens": 13974,
+    "output_tokens": 1038,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:50.487191+00:00"
+    "generated_at": "2026-07-27T12:08:25.479643+00:00"
   }
 }

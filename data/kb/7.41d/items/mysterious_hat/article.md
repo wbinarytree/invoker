@@ -5,18 +5,24 @@ patch: 7.41d
 card:
   entity: mysterious_hat
   sentences:
-  - text: Fairy's Trinket is a passive 0-gold item that provides 50 Health, 5% Manacost
-      Reduction, and 5 Spell Amp.
+  - text: Fairy's Trinket is a 0 gold item that provides 50 Health, 5% Manacost Reduction,
+      and 5 Spell Amp.
     marks:
     - gamefile:items/item_mysterious_hat#cost
     - gamefile:items/item_mysterious_hat#attribs
-    - gamefile:items/item_mysterious_hat#mechanics
   - text: Its build formula is Fairy's Trinket (0 gold).
     marks:
     - gamefile:items/item_mysterious_hat#cost
-  - text: It has an 8.0 cooldown.
+  - text: Its behavior is Passive.
     marks:
     - gamefile:items/item_mysterious_hat#mechanics
+  - text: Its cooldown is 8.0.
+    marks:
+    - gamefile:items/item_mysterious_hat#mechanics
+  - text: “A small token imbued with the fortune of the fae in recognition of an intriguing
+      display of mortal kindness.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_mysterious_hat_Lore
 ---
 
 # Fairy's Trinket

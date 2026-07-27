@@ -5,7 +5,7 @@
   "title": "Observer Ward",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "35dd5174dd5299c6d74a867b9ca64dc8c0a9cd8201810fb35aded2f97ada1ba6",
+  "article_sha256": "967bda0d48214f18d0f652aa5c8431f7b8d1712c84316ca1cdd6a1db2e439c79",
   "citations": [
     "gamefile:items/item_ward_observer#cost",
     "loc:DOTA_Tooltip_ability_item_ward_observer_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "8626f260e555370e4da39aec8c2f2913cf778c41011b6d212d0a5c2d46fafef9",
-    "input_tokens": 14358,
-    "output_tokens": 741,
+    "prompt_version": "7",
+    "request_sha256": "95946d5b131222900201abf7bc0a5883536cbacbc4e6d90645bfc69e2906fa27",
+    "input_tokens": 13991,
+    "output_tokens": 1088,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:06.688262+00:00"
+    "generated_at": "2026-07-27T12:19:09.538202+00:00"
   }
 }

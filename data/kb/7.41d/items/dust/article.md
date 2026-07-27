@@ -5,10 +5,10 @@ patch: 7.41d
 card:
   entity: dust
   sentences:
-  - text: Dust of Appearance is an 80-gold consumable item that creates a 1050-radius
-      area for 12 seconds, reveals invisible heroes, applies -20% movement speed,
-      deals 25 damage to invisible units revealed by Dust, and leaves the enemy debuff
-      lingering for 8 seconds after they exit the area.
+  - text: Dust of Appearance is a consumable item costing 80 gold whose Reveal creates
+      a RADIUS 1050 area for DURATION 12, reveals invisible heroes, applies MOVESPEED
+      -20%, deals 25 DAMAGE to revealed invisible units, and leaves the enemy debuff
+      for LINGER DURATION 8 after they exit.
     marks:
     - gamefile:items/item_dust#cost
     - gamefile:items/item_dust#attribs
@@ -16,7 +16,7 @@ card:
   - text: Its behavior is Immediate, No Target.
     marks:
     - gamefile:items/item_dust#mechanics
-  - text: Its effect is dispellable.
+  - text: It is dispellable.
     marks:
     - gamefile:items/item_dust#mechanics
   - text: Its cast range is 1050.
@@ -28,6 +28,9 @@ card:
   - text: Its cooldown is 30.0.
     marks:
     - gamefile:items/item_dust#mechanics
+  - text: One may hide visage, but never volume.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_dust_Lore
 ---
 
 # Dust of Appearance

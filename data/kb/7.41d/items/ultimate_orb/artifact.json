@@ -5,7 +5,7 @@
   "title": "Ultimate Orb",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "009b59feb80963ce97a520069a5122573edc8e70d6659aa6542b80593b615ea4",
+  "article_sha256": "060297931864e0b35589714d9477100ed5acaaf560bc0f1ed89a15e590ffc5c9",
   "citations": [
     "gamefile:items/item_ultimate_orb#cost",
     "gamefile:items/item_ultimate_orb#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "60946b5b99cbcc27f8ee57920016a001105e01d9c319aa84cdc89f0e99bdc87b",
-    "input_tokens": 14262,
-    "output_tokens": 273,
+    "prompt_version": "7",
+    "request_sha256": "e7667875876dd7edcaf40e5e58285528ee49926ffeeab6d4fe01afb6a7de8a51",
+    "input_tokens": 13891,
+    "output_tokens": 317,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:53.164327+00:00"
+    "generated_at": "2026-07-27T12:18:11.003006+00:00"
   }
 }

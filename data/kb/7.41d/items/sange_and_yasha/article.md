@@ -18,6 +18,10 @@ card:
     marks:
     - gamefile:items/item_sange_and_yasha#components
     - gamefile:items/item_sange_and_yasha#cost
+  - text: Sange and Yasha, when attuned by the moonlight and used together, become
+      a very powerful combination.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_sange_and_yasha_Lore
 ---
 
 # Sange and Yasha

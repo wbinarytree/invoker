@@ -13,7 +13,10 @@ card:
   - text: Its build formula is Greater Faerie Fire (0 gold).
     marks:
     - gamefile:items/item_greater_faerie_fire#cost
-  - text: It has Immediate, No Target behavior and a 10.0 cooldown.
+  - text: Its behavior is Immediate, No Target.
+    marks:
+    - gamefile:items/item_greater_faerie_fire#mechanics
+  - text: It has a 10.0 cooldown.
     marks:
     - gamefile:items/item_greater_faerie_fire#mechanics
   - text: Imbue instantly restores health.

@@ -6,16 +6,14 @@ card:
   entity: blink
   sentences:
   - text: Blink Dagger is a 2250-gold component item whose active Blink provides target-point
-      teleportation with 1200 Blink Range, 960 Blink Range Clamp, and 3.0 Blink Damage
-      Cooldown.
+      teleportation with 1200 Blink Range, a 960 Blink Range Clamp, and a 3.0 Blink
+      Damage Cooldown.
     marks:
     - gamefile:items/item_blink#cost
     - loc:DOTA_Tooltip_ability_item_blink_Description
     - gamefile:items/item_blink#attribs
-  - text: Blink Dagger costs 2250 gold and builds into Arcane Blink, Overwhelming
-      Blink, and Swift Blink.
+  - text: It builds into Arcane Blink, Overwhelming Blink, and Swift Blink.
     marks:
-    - gamefile:items/item_blink#cost
     - gamefile:items/item_blink#components
   - text: Blink has Point Target, DOTA_ABILITY_BEHAVIOR_DIRECTIONAL, DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES,
       and DOTA_ABILITY_BEHAVIOR_OVERSHOOT behavior.
@@ -24,7 +22,7 @@ card:
   - text: Blink has 1200 cast range.
     marks:
     - gamefile:items/item_blink#mechanics
-  - text: Blink has 0 mana cost.
+  - text: Blink costs 0 mana.
     marks:
     - gamefile:items/item_blink#mechanics
   - text: Blink has a 15.0 cooldown.
@@ -35,6 +33,9 @@ card:
     marks:
     - loc:DOTA_Tooltip_ability_item_blink_Description
     - gamefile:items/item_blink#attribs
+  - text: The fabled dagger used by the fastest assassin ever to walk the lands.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_blink_Lore
 ---
 
 # Blink Dagger

@@ -5,7 +5,7 @@
   "title": "Grove Bow",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "c49353999dded4723b50ba8a9ae9879216ccd31b376a661c1e64094c2fd4e409",
+  "article_sha256": "908ccae6bc00933c51f3f8ecaeb451cf2da2471229dc4204e346e8a8ff148edb",
   "citations": [
     "gamefile:items/item_grove_bow#attribs",
     "gamefile:items/item_grove_bow#cost",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "38e36e33d686adb27c87a9fe974b7ec796e04a33e7930a6a463bbe74dbd6a59d",
-    "input_tokens": 14259,
-    "output_tokens": 400,
+    "prompt_version": "7",
+    "request_sha256": "e44cd9ddf707486841f7ec3446097d7ebca7994ec0aae87e18da49d779b51266",
+    "input_tokens": 13890,
+    "output_tokens": 698,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:39.317150+00:00"
+    "generated_at": "2026-07-27T12:11:31.441960+00:00"
   }
 }

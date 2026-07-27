@@ -5,17 +5,21 @@ patch: 7.41d
 card:
   entity: blade_of_alacrity
   sentences:
-  - text: Blade of Alacrity is a passive component item costing 1000 gold that grants
-      10 Agility.
+  - text: Blade of Alacrity is a component item costing 1000 gold that grants 10 Agility.
     marks:
     - gamefile:items/item_blade_of_alacrity#cost
     - gamefile:items/item_blade_of_alacrity#attribs
-    - gamefile:items/item_blade_of_alacrity#mechanics
-  - text: 'Build formula: Blade of Alacrity (1000 gold); it builds into Diffusal Blade,
-      Dragon Lance, Specialist''s Array, Aghanim''s Scepter, and Yasha.'
+  - text: Its build formula is Blade of Alacrity (1000 gold); it builds into Diffusal
+      Blade, Dragon Lance, Specialist's Array, Aghanim's Scepter, and Yasha.
     marks:
     - gamefile:items/item_blade_of_alacrity#cost
     - gamefile:items/item_blade_of_alacrity#components
+  - text: Its behavior is passive.
+    marks:
+    - gamefile:items/item_blade_of_alacrity#mechanics
+  - text: A long blade imbued with time magic.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_blade_of_alacrity_Lore
 ---
 
 # Blade of Alacrity

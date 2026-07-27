@@ -5,7 +5,7 @@
   "title": "Vast",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "80342c37bcde2b869012a396af375b3439fbc0735cbe734ae9ba777024680533",
+  "article_sha256": "44e021637621135edc6a10f228f0c325a303b19d990a021b287c5814c15235c4",
   "citations": [
     "gamefile:items/item_enhancement_vast#cost",
     "gamefile:items/item_enhancement_vast#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "6fc580186eb29aae2e1e47344b0db896dde5657f3bc5a18b5d8547fe861cc7d8",
-    "input_tokens": 14212,
-    "output_tokens": 356,
+    "prompt_version": "7",
+    "request_sha256": "9f44a54c0eda38c7385c1b78f9ebc095961cf29f5f9ed627e36aa43c89e66459",
+    "input_tokens": 13837,
+    "output_tokens": 276,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:12.073463+00:00"
+    "generated_at": "2026-07-27T12:10:24.617271+00:00"
   }
 }

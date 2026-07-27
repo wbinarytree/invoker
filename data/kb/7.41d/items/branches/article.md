@@ -5,19 +5,25 @@ patch: 7.41d
 card:
   entity: branches
   sentences:
-  - text: Iron Branch is a 55-gold consumable-quality item that grants 1 ALL ATTRIBUTES
-      and provides Plant Tree, which plants a tree for 20 seconds.
+  - text: Iron Branch is a consumable-quality item costing 55 gold that grants 1 ALL
+      ATTRIBUTES and provides point-target Plant Tree with TREE DURATION 20, cast
+      range 400, and cooldown 0.0.
     marks:
     - gamefile:items/item_branches#cost
     - gamefile:items/item_branches#attribs
-    - loc:DOTA_Tooltip_ability_item_branches_Description
-  - text: Plant Tree has Point Target behavior, 400 cast range, and 0.0 cooldown.
-    marks:
     - gamefile:items/item_branches#mechanics
-  - text: Iron Branch costs 55 gold and builds into Magic Wand.
+    - loc:DOTA_Tooltip_ability_item_branches_Description
+  - text: Plant Tree targets the ground to plant a tree.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_branches_Description
+  - text: Iron Branch (55 gold) builds into Magic Wand.
     marks:
     - gamefile:items/item_branches#cost
     - gamefile:items/item_branches#components
+  - text: A seemingly ordinary branch, its ironlike qualities are bestowed upon the
+      bearer.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_branches_Lore
 ---
 
 # Iron Branch

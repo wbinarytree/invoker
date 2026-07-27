@@ -6,23 +6,24 @@ card:
   entity: dagon_2
   sentences:
   - text: Dagon is a rare 4100-gold item that grants 6/7/8/9/10 All Attributes, 200/210/220/230/240
-      Health, 350/375/400/425/450 Mana, and 60/90/120/150/180 Cast Range, with Energy
-      Burst dealing 400/500/600/700/800 magical Damage to a targeted enemy unit.
+      Health, 350/375/400/425/450 Mana, and 60/90/120/150/180 Cast Range, and has
+      the unit-target Energy Burst, which deals 400/500/600/700/800 magical Damage
+      to an enemy unit.
     marks:
     - gamefile:items/item_dagon_2#cost
     - gamefile:items/item_dagon_2#attribs
     - gamefile:items/item_dagon_2#mechanics
     - loc:DOTA_Tooltip_ability_item_dagon_2_Description
-  - text: Energy Burst has 640 cast range.
+  - text: Energy Burst has 0 Damage Delay.
     marks:
     - gamefile:items/item_dagon_2#mechanics
   - text: Energy Burst costs 120/140/160/180/200 Mana.
     marks:
     - gamefile:items/item_dagon_2#mechanics
-  - text: Energy Burst has a 27/24/21/18/15 cooldown.
+  - text: Energy Burst has 640 cast range.
     marks:
     - gamefile:items/item_dagon_2#mechanics
-  - text: Energy Burst has a Damage Delay of 0.
+  - text: Energy Burst has a 27/24/21/18/15 cooldown.
     marks:
     - gamefile:items/item_dagon_2#mechanics
   - text: Energy Burst is upgradable.
@@ -32,6 +33,10 @@ card:
       and builds into Dagon (`item_dagon_3`).
     marks:
     - gamefile:items/item_dagon_2#components
+  - text: A lesser wand that grows in power the longer it is used, it brings magic
+      to the fingertips of the user.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_dagon_2_Lore
 ---
 
 # Dagon

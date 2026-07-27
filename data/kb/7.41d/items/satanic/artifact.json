@@ -5,7 +5,7 @@
   "title": "Satanic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f8ea494d0eb557b4347322f896a6b9abec924f5077d215ede14a45442d6a7742",
+  "article_sha256": "735300fa084a9716b8e3b86179ac3fd8a27089b8a7b474b2477514a08c113989",
   "citations": [
     "gamefile:items/item_satanic#cost",
     "gamefile:items/item_satanic#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "945db006f02fe3904d111a3c6dcdd27a3e9c502bc76850b58227cbebf119311c",
-    "input_tokens": 14409,
-    "output_tokens": 1577,
+    "prompt_version": "7",
+    "request_sha256": "044ce839abe2bab20f7cf9813e7965054c790ee4b56b95d956e04787cebdbf91",
+    "input_tokens": 14040,
+    "output_tokens": 1417,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:06.632739+00:00"
+    "generated_at": "2026-07-27T12:16:52.648862+00:00"
   }
 }

@@ -5,18 +5,25 @@ patch: 7.41d
 card:
   entity: monkey_king_bar
   sentences:
-  - text: Monkey King Bar is an epic item costing 5000 gold that grants 50 Attack
-      Speed, 80% Bonus Chance, 70 Bonus Chance Damage, 50 Damage, and 50 Attack Range
-      (Melee Only), and its passive Pierce gives attacks a chance to pierce evasion
-      and deal bonus magical damage.
+  - text: Monkey King Bar is an epic 5000-gold item that grants 50 Attack Speed, 50
+      Damage, and 50 Attack Range (Melee Only); its passive Pierce gives each attack
+      an 80% Bonus Chance to pierce through evasion and deal 70 Bonus Chance Damage
+      as magical damage.
     marks:
     - gamefile:items/item_monkey_king_bar#cost
     - gamefile:items/item_monkey_king_bar#attribs
     - loc:DOTA_Tooltip_ability_item_monkey_king_bar_Description
+  - text: The item’s behavior is passive.
+    marks:
+    - gamefile:items/item_monkey_king_bar#mechanics
   - text: It is built from Demon Edge (2200 gold), Blitz Knuckles (1000 gold), Javelin
-      (900 gold), and a recipe (900 gold).
+      (900 gold), and a recipe (900 gold), for a total cost of 5000 gold.
     marks:
     - gamefile:items/item_monkey_king_bar#components
+    - gamefile:items/item_monkey_king_bar#cost
+  - text: “A powerful staff used by a master warrior.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_monkey_king_bar_Lore
 ---
 
 # Monkey King Bar

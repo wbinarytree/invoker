@@ -5,7 +5,7 @@
   "title": "Bracer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "72bf78edc349f5b3558a024a1005f520bb4bd6bdaf87b74e9dbe5c9f33126e3a",
+  "article_sha256": "bb01d9ce35125026bb73337478d16b14768cd1e78aefb834b9a8d42e68fc338a",
   "citations": [
     "gamefile:items/item_bracer#cost",
     "gamefile:items/item_bracer#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "0890c59eae1f544211d4a11481df8101686729aa5547f2a59cd7e5b26f4ef58c",
-    "input_tokens": 14285,
-    "output_tokens": 653,
+    "prompt_version": "7",
+    "request_sha256": "ae7f4ec8a8a413246fca937a505774741ae3c35290500a837b93164bda102d39",
+    "input_tokens": 13918,
+    "output_tokens": 693,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:02.174638+00:00"
+    "generated_at": "2026-07-27T12:07:55.820235+00:00"
   }
 }

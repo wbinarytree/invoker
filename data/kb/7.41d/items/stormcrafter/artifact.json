@@ -5,7 +5,7 @@
   "title": "Stormcrafter",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b59710841571c65f3785db564ae09f5403ec4611b1c9788b6fcc15832359cf00",
+  "article_sha256": "1438631e587fbf99066f9498b00247d886e17c165764e8e2949a4a7441edd33b",
   "citations": [
     "gamefile:items/item_stormcrafter#attribs",
     "loc:DOTA_Tooltip_Ability_item_stormcrafter_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "33f25e5f1827db5245cacf0fb93a183900a1927e3f327b56e2b69c834d7f68a3",
-    "input_tokens": 14320,
-    "output_tokens": 660,
+    "prompt_version": "7",
+    "request_sha256": "6cbd9a8a693c5c8339e526734a86cf0c5f2e11ceb5c5807ea3634d2b6413e3bb",
+    "input_tokens": 13953,
+    "output_tokens": 628,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:10.546798+00:00"
+    "generated_at": "2026-07-27T12:17:31.775932+00:00"
   }
 }

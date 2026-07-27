@@ -5,18 +5,22 @@ patch: 7.41d
 card:
   entity: claymore
   sentences:
-  - text: Claymore is a component item costing 1350 gold that provides 20 Damage.
+  - text: Claymore is a 1350-gold component item that provides 20 DAMAGE.
     marks:
     - gamefile:items/item_claymore#cost
     - gamefile:items/item_claymore#attribs
-  - text: Its build formula is Claymore (1350 gold); it builds into Butterfly, Shadow
-      Blade, Crystalys, Orchid Malevolence, and Satanic.
+  - text: 'Build: Claymore (1350 gold); it builds into Butterfly, Shadow Blade, Crystalys,
+      Orchid Malevolence, and Satanic.'
     marks:
     - gamefile:items/item_claymore#cost
     - gamefile:items/item_claymore#components
   - text: Claymore has Passive behavior.
     marks:
     - gamefile:items/item_claymore#mechanics
+  - text: “A sword that can cut through armor, it's a commonly chosen first weapon
+      for budding swordsmen.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_claymore_Lore
 ---
 
 # Claymore

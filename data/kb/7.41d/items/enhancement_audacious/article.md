@@ -5,13 +5,11 @@ patch: 7.41d
 card:
   entity: enhancement_audacious
   sentences:
-  - text: Audacious is an enhancement costing 0 gold that provides 100 Attack Speed,
-      10 Incoming Damage, and 80 Magic Damage.
+  - text: Audacious is a passive enhancement costing 0 gold that provides 100 Attack
+      Speed, 10 Incoming Damage, and 80 Magic Damage.
     marks:
     - gamefile:items/item_enhancement_audacious#cost
     - gamefile:items/item_enhancement_audacious#attribs
-  - text: Audacious is passive.
-    marks:
     - gamefile:items/item_enhancement_audacious#mechanics
 ---
 

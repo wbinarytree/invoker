@@ -5,24 +5,24 @@ patch: 7.41d
 card:
   entity: vanguard
   sentences:
-  - text: Vanguard is an epic item costing 1700 gold that grants 250 Health, 4.5 Health
-      Regeneration, and a 60% chance to block 50 damage for melee heroes or 25 for
-      ranged heroes.
+  - text: Vanguard is an epic item costing 1700 gold that provides 250 Health, 4.5
+      Health Regeneration, 60% Block Chance, 50 Block Damage Melee, and 25 Block Damage
+      Ranged.
     marks:
     - gamefile:items/item_vanguard#cost
     - gamefile:items/item_vanguard#attribs
-    - loc:DOTA_Tooltip_ability_item_vanguard_Description
-  - text: Vanguard is built from Vitality Booster for 1000 gold and Ring of Health
-      for 700 gold, and builds into Crimson Guard.
+  - text: It is built from Vitality Booster for 1000 gold and Ring of Health for 700
+      gold, and builds into Crimson Guard.
     marks:
     - gamefile:items/item_vanguard#components
-  - text: Vanguard has passive behavior.
-    marks:
-    - gamefile:items/item_vanguard#mechanics
-  - text: Its passive is Damage Block, which can block damage from incoming attacks
-      with different amounts for melee and ranged heroes.
+  - text: Its Damage Block passive grants a chance to block damage from incoming attacks,
+      with different block amounts for melee and ranged heroes.
     marks:
     - loc:DOTA_Tooltip_ability_item_vanguard_Description
+  - text: “A powerful shield that defends its wielder from even the most vicious of
+      attacks.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vanguard_Lore
 ---
 
 # Vanguard

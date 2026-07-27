@@ -5,7 +5,7 @@
   "title": "Witchbane",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "a2f9d92cf4503a9c2a9ed229597d87f13506c66b937698d06214d9314a001189",
+  "article_sha256": "e4a3ccc7266aaf3100413654c58a897087a1178f79191c0998078e75cdf36e0e",
   "citations": [
     "gamefile:items/item_heavy_blade#attribs",
     "loc:DOTA_Tooltip_Ability_item_heavy_blade_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "fa8cf192aaff422eca8c9abc5dbf8f9b45c850d1f28ac8d6bfe96a6a0b738319",
-    "input_tokens": 14398,
-    "output_tokens": 1018,
+    "prompt_version": "7",
+    "request_sha256": "ecabcbc762258a25145fcc9f54a58b6b3c0ec7c85a51a1af5fcbb5219805371e",
+    "input_tokens": 14023,
+    "output_tokens": 803,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:31.089328+00:00"
+    "generated_at": "2026-07-27T12:11:54.340123+00:00"
   }
 }

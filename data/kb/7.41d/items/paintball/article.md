@@ -6,30 +6,27 @@ card:
   entity: paintball
   sentences:
   - text: Fae Grenade is a 0-gold item with 40 DPS, 7 duration, and 20 movement speed
-      whose Shadow Brand active damages an enemy every second and provides vision.
+      whose Shadow Brand active has 900 cast range, 25 mana cost, and 20.0 cooldown
+      and damages an enemy each second while providing vision.
     marks:
-    - gamefile:items/item_paintball#cost
     - gamefile:items/item_paintball#attribs
+    - gamefile:items/item_paintball#mechanics
+    - gamefile:items/item_paintball#cost
     - loc:DOTA_Tooltip_Ability_item_paintball_Description
-  - text: Shadow Brand has 900 cast range.
-    marks:
-    - gamefile:items/item_paintball#mechanics
-  - text: Shadow Brand costs 25 mana.
-    marks:
-    - gamefile:items/item_paintball#mechanics
-  - text: Shadow Brand has a 20.0 cooldown.
-    marks:
-    - gamefile:items/item_paintball#mechanics
-  - text: Shadow Brand throws a Mark toward a targeted enemy and applies a debuff
-      for its duration.
+  - text: Shadow Brand throws a Mark toward an enemy within cast range and applies
+      its debuff for the duration.
     marks:
     - loc:DOTA_Tooltip_Ability_item_paintball_Description
-  - text: Its behavior is Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES.
+  - text: Its behavior is Unit Target and `DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES`.
     marks:
     - gamefile:items/item_paintball#mechanics
   - text: The debuff is dispellable.
     marks:
     - gamefile:items/item_paintball#mechanics
+  - text: Those marked for death by the fae shine brightly to all manner of creatures
+      in the shadow realm.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_paintball_Lore
 ---
 
 # Fae Grenade

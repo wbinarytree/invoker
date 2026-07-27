@@ -10,11 +10,16 @@ card:
     - gamefile:items/item_ogre_axe#cost
     - gamefile:items/item_ogre_axe#mechanics
     - gamefile:items/item_ogre_axe#attribs
-  - text: 'Build formula: Ogre Axe (1000 gold); it builds into Black King Bar, Echo
-      Sabre, Eternal Shroud, Sange, and Aghanim''s Scepter.'
+  - text: 'Build formula: Ogre Axe (1000 gold).'
     marks:
     - gamefile:items/item_ogre_axe#cost
+  - text: It builds into Black King Bar, Echo Sabre, Eternal Shroud, Sange, and Aghanim's
+      Scepter.
+    marks:
     - gamefile:items/item_ogre_axe#components
+  - text: “You grow stronger just by holding it.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ogre_axe_Lore
 ---
 
 # Ogre Axe

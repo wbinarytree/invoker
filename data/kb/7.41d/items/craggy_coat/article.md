@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: craggy_coat
   sentences:
-  - text: Craggy Coat is a 0-gold item whose Toughen Up active grants 6 bonus armor
-      for 6 seconds at the cost of 20 movement speed.
+  - text: Craggy Coat is an item costing 0 gold whose Toughen Up active grants 6 Bonus
+      Armor for 6 seconds at the cost of 20 Movement Speed.
     marks:
     - gamefile:items/item_craggy_coat#cost
     - gamefile:items/item_craggy_coat#attribs
@@ -17,12 +17,9 @@ card:
   - text: Toughen Up has a 12-second cooldown.
     marks:
     - gamefile:items/item_craggy_coat#mechanics
-  - text: Craggy Coat provides 0 Armor Bonus.
+  - text: Toughen Up temporarily applies its effects to the user.
     marks:
-    - gamefile:items/item_craggy_coat#attribs
-  - text: Craggy Coat provides 0 Bonus Health.
-    marks:
-    - gamefile:items/item_craggy_coat#attribs
+    - loc:DOTA_Tooltip_ability_item_craggy_coat_Description
 ---
 
 # Craggy Coat

@@ -5,7 +5,7 @@
   "title": "Craggy Coat",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2fe459a424c76184b838d03d36f5f0cf4fb4d03462abc411062752d96491c650",
+  "article_sha256": "d3ca26d1c684b91304b55b0793ffc01d4455bf685fc163165f4d66d3e4300f3f",
   "citations": [
     "gamefile:items/item_craggy_coat#cost",
     "loc:DOTA_Tooltip_ability_item_craggy_coat_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "da948d9abaf47c00a698fa2b57ff69b5ae91851ad18bc360fc23ae8ba96e29b0",
-    "input_tokens": 14279,
-    "output_tokens": 613,
+    "prompt_version": "7",
+    "request_sha256": "6c70ee83b45733629b2ca76782760a189151b5d7e0b0b63c31ff97a5b71c989f",
+    "input_tokens": 13908,
+    "output_tokens": 620,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:01.214807+00:00"
+    "generated_at": "2026-07-27T12:08:37.388327+00:00"
   }
 }

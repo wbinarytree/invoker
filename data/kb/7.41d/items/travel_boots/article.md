@@ -19,18 +19,21 @@ card:
   - text: Its behavior is Passive.
     marks:
     - gamefile:items/item_travel_boots#mechanics
-  - text: The upgraded Town Portal Scroll can target units.
+  - text: It allows Town Portal Scroll to target units.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_Description
-  - text: The upgrade reduces Town Portal Scroll's cooldown.
+  - text: It reduces Town Portal Scroll's cooldown.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_Description
-  - text: Using the upgraded Town Portal Scroll does not consume a charge.
+  - text: It prevents Town Portal Scroll charges from being consumed on use.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_Description
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_travel_boots_Description
+  - text: “Winged boots that grant omnipresence.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_travel_boots_Lore
 ---
 
 # Boots of Travel

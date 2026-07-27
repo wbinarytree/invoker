@@ -6,9 +6,8 @@ card:
   entity: ghost
   sentences:
   - text: Ghost Scepter is a 1500 gold component item that grants 5 ALL ATTRIBUTES
-      and provides Ghost Form for a DURATION of 4.0, granting physical damage immunity,
-      preventing attacks, and increasing magic damage vulnerability with -30% EXTRA
-      SPELL DAMAGE PERCENT.
+      and provides 4.0-second Ghost Form, granting physical damage immunity, preventing
+      attacks, and applying -30% EXTRA SPELL DAMAGE PERCENT.
     marks:
     - gamefile:items/item_ghost#cost
     - gamefile:items/item_ghost#attribs
@@ -22,11 +21,16 @@ card:
   - text: Ghost Form has a 22.0 cooldown.
     marks:
     - gamefile:items/item_ghost#mechanics
-  - text: The build formula is Ghost Scepter (1500 gold), and it builds into Crella's
-      Crozier and Ethereal Blade.
+  - text: The build formula is Ghost Scepter (1500 gold).
     marks:
     - gamefile:items/item_ghost#cost
+  - text: Ghost Scepter builds into Crella's Crozier and Ethereal Blade.
+    marks:
     - gamefile:items/item_ghost#components
+  - text: “Imbues the wielder with a ghostly presence, allowing them to evade physical
+      damage.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ghost_Lore
 ---
 
 # Ghost Scepter

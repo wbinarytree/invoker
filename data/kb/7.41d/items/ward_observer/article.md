@@ -5,18 +5,15 @@ patch: 7.41d
 card:
   entity: ward_observer
   sentences:
-  - text: Observer Ward is a 0-gold consumable whose Plant use creates an invisible
-      Observer Ward that grants the user’s team ground vision with 1600 vision range
-      for 6 minutes.
+  - text: Observer Ward is a consumable item costing 0 gold whose Plant use creates
+      an invisible ward with 200 health, Lifetime 360, Duration Minutes Tooltip 6,
+      and 1600 ground vision range for the user’s team.
     marks:
     - gamefile:items/item_ward_observer#cost
     - loc:DOTA_Tooltip_ability_item_ward_observer_Description
     - gamefile:items/item_ward_observer#attribs
-  - text: The ward has 200 health.
-    marks:
-    - gamefile:items/item_ward_observer#attribs
-  - text: Plant is Point Target and AOE, with optional unit targeting and associated-consumable
-      suppression.
+  - text: Plant has Point Target, AOE, DOTA_ABILITY_BEHAVIOR_OPTIONAL_UNIT_TARGET,
+      and DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE behavior.
     marks:
     - gamefile:items/item_ward_observer#mechanics
   - text: Plant has 500 cast range.
@@ -33,6 +30,9 @@ card:
     marks:
     - gamefile:items/item_ward_observer#cost
     - gamefile:items/item_ward_observer#components
+  - text: A form of half-sentient plant, often cultivated by apprentice wizards.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ward_observer_Lore
 ---
 
 # Observer Ward

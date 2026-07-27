@@ -5,7 +5,7 @@
   "title": "Diadem",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e0c4b847b2195ea02862a6bde2ef088697d34d5c61c26e7870ea8ea6ec52c193",
+  "article_sha256": "830bd54340e0090930a6c0fc939437f1c949d28a555337d4000ce1efbc6c74ed",
   "citations": [
     "gamefile:items/item_diadem#cost",
     "gamefile:items/item_diadem#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "0f8465cab21c2ca54062b5af6d701fd0f774e3acddcbb2c541959df6512cf5c9",
-    "input_tokens": 14226,
-    "output_tokens": 326,
+    "prompt_version": "7",
+    "request_sha256": "88354a64dc3a222fddd097bbfec1ba20a9f91ae7ab5ff177264e8397da636a92",
+    "input_tokens": 13861,
+    "output_tokens": 245,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:43.202534+00:00"
+    "generated_at": "2026-07-27T12:09:20.800225+00:00"
   }
 }

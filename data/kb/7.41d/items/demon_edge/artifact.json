@@ -5,7 +5,7 @@
   "title": "Demon Edge",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ec5322129be09f39fc21349eec03441703730f8956df70563006f28247b5b205",
+  "article_sha256": "cdfdb06225a3d4db9967d531dd76429445aba0fd92e6cb8775d3015197441f8c",
   "citations": [
     "gamefile:items/item_demon_edge#cost",
     "gamefile:items/item_demon_edge#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "094b7845cfc36555c347f5700663cc060fffafdfc74ef1ba63bb3cf6658b0b15",
-    "input_tokens": 14259,
-    "output_tokens": 341,
+    "prompt_version": "7",
+    "request_sha256": "ded6f285c7acafd4d1d812e8f90ad4559a9a95f7aa7d8f7b8c737ed8b8344906",
+    "input_tokens": 13886,
+    "output_tokens": 289,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:26.652127+00:00"
+    "generated_at": "2026-07-27T12:09:16.560298+00:00"
   }
 }

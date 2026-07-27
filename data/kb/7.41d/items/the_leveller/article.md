@@ -5,17 +5,18 @@ patch: 7.41d
 card:
   entity: the_leveller
   sentences:
-  - text: The Leveller is a passive item costing 0 gold that grants 0 Bonus Armor,
-      0 Bonus Attack Speed, and 35% Demolish, causing attacks to deal more damage
-      to buildings.
+  - text: The Leveller is a passive item costing 0 gold that provides 0 Bonus Armor,
+      0 Bonus Attack Speed, and 35% Demolish; its Level passive causes attacks to
+      deal more damage to buildings.
     marks:
     - gamefile:items/item_the_leveller#mechanics
-    - gamefile:items/item_the_leveller#attribs
     - gamefile:items/item_the_leveller#cost
+    - gamefile:items/item_the_leveller#attribs
     - loc:DOTA_Tooltip_Ability_item_the_leveller_Description
-  - text: Its passive is named Level.
+  - text: A demonic blade that struck the final blow to crack the gates of the Sanctum
+      of Solanas.
     marks:
-    - loc:DOTA_Tooltip_Ability_item_the_leveller_Description
+    - loc:DOTA_Tooltip_Ability_item_the_leveller_Lore
 ---
 
 # The Leveller

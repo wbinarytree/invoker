@@ -5,7 +5,7 @@
   "title": "Fairy's Trinket",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "33928d681bdb9a5d7386533b7f7b44565a85e8931caed02126f7b6f1c06a37ce",
+  "article_sha256": "8eb55f2c18a20c0aafb4a1d4be0492e29501889cc9373e34b228790bb8bd87ba",
   "citations": [
     "gamefile:items/item_mysterious_hat#cost",
     "gamefile:items/item_mysterious_hat#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "552a9c5cf71e02dd87c9a97b383c75c88ff425dae6e1a98889972e772fa08e0b",
-    "input_tokens": 14260,
-    "output_tokens": 642,
+    "prompt_version": "7",
+    "request_sha256": "faa55781de36be1592e10f0b80ce8136a3da6f315754c90a996b4e3e5095ffba",
+    "input_tokens": 13887,
+    "output_tokens": 427,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:28.331341+00:00"
+    "generated_at": "2026-07-27T12:14:08.832936+00:00"
   }
 }

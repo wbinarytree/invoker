@@ -5,23 +5,23 @@ patch: 7.41d
 card:
   entity: mekansm
   sentences:
-  - text: Mekansm is a rare 1775-gold item that provides 5 Armor and restores 250
-      health to allied units within a 1200 radius, while its aura grants 2.5 health
-      regeneration within a 1200 radius.
+  - text: Mekansm is a rare item costing 1775 gold that provides 5 Armor, grants allied
+      units 2.5 Aura Health Regen within a 1200 Aura Radius, and restores 250 health
+      to allied units within a 1200 Heal Radius.
     marks:
     - gamefile:items/item_mekansm#cost
     - gamefile:items/item_mekansm#attribs
     - loc:DOTA_Tooltip_ability_item_mekansm_Description
-  - text: Restore has Immediate, No Target behavior.
+  - text: Its behavior is Immediate, No Target.
     marks:
     - gamefile:items/item_mekansm#mechanics
-  - text: Restore has 1200 cast range.
+  - text: Its cast range is 1200.
     marks:
     - gamefile:items/item_mekansm#mechanics
-  - text: Restore costs 100 mana.
+  - text: Its mana cost is 100.
     marks:
     - gamefile:items/item_mekansm#mechanics
-  - text: Restore has a 50.0 cooldown.
+  - text: Its cooldown is 50.0.
     marks:
     - gamefile:items/item_mekansm#mechanics
   - text: Mekansm is built from Headdress for 425 gold, Chainmail for 500 gold, and
@@ -31,6 +31,9 @@ card:
   - text: Mekansm builds into Guardian Greaves.
     marks:
     - gamefile:items/item_mekansm#components
+  - text: A glowing jewel formed out of assorted parts that somehow fit together perfectly.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_mekansm_Lore
 ---
 
 # Mekansm

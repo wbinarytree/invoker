@@ -5,14 +5,14 @@ patch: 7.41d
 card:
   entity: soul_ring
   sentences:
-  - text: Soul Ring is a common item costing 805 gold that grants 2 Armor and 6 Strength
-      and provides Sacrifice, which consumes health and has 170 Mana Gain and 10 Duration.
+  - text: Soul Ring is a common 805-gold item that grants 2 Armor and 6 Strength;
+      its active ability, Sacrifice, consumes health to grant 170 mana for 10 seconds.
     marks:
     - gamefile:items/item_soul_ring#cost
     - gamefile:items/item_soul_ring#attribs
     - loc:DOTA_Tooltip_ability_item_soul_ring_Description
-  - text: Its build formula is Ring of Protection (175 gold), Gauntlets of Strength
-      (140 gold), Gauntlets of Strength (140 gold), and Recipe (350 gold).
+  - text: Its build formula is Ring of Protection (175 gold) + Gauntlets of Strength
+      (140 gold) + Gauntlets of Strength (140 gold) + Recipe (350 gold).
     marks:
     - gamefile:items/item_soul_ring#components
   - text: Sacrifice has No Target, Immediate behavior.
@@ -25,6 +25,9 @@ card:
       the mana pool.
     marks:
     - loc:DOTA_Tooltip_ability_item_soul_ring_Description
+  - text: A ring that feeds on the souls of those who wear it.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_soul_ring_Lore
 ---
 
 # Soul Ring

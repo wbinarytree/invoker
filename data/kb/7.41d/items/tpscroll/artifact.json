@@ -5,7 +5,7 @@
   "title": "Town Portal Scroll",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7ba9977276f661bac8d66109e0cc501901306e27a7618728bc1c9fa31049e7a7",
+  "article_sha256": "4cfb1284b5750e320786bad5d70e828b24adb66ce693261cbc2370f22ac64012",
   "citations": [
     "gamefile:items/item_tpscroll#cost",
     "loc:DOTA_Tooltip_ability_item_tpscroll_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1592fde8e3da483be57bf30517a32fbfde3e27e7c70ab59f4e8345f2371d7f63",
-    "input_tokens": 14359,
-    "output_tokens": 787,
+    "prompt_version": "7",
+    "request_sha256": "955252eb04b4bb2b2efd370e9160883ed43a0a33d8c8bc38d406e1a534a0feb2",
+    "input_tokens": 14409,
+    "output_tokens": 824,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:10.643246+00:00"
+    "generated_at": "2026-07-27T12:18:15.216097+00:00"
   }
 }

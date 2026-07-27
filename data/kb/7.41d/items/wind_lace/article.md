@@ -19,6 +19,9 @@ card:
   - text: Bonuses from multiple Wind Laces do not stack.
     marks:
     - loc:DOTA_Tooltip_Ability_item_wind_lace_Description
+  - text: “Hasten to battle on wind-touched heels.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_wind_lace_Lore
 ---
 
 # Wind Lace

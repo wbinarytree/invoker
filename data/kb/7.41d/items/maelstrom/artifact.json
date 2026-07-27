@@ -5,7 +5,7 @@
   "title": "Maelstrom",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3c0d021bf9bdd63e5b9b19ff3fbe5d2f9d7e4c7273f2c5810bc617832ac7526b",
+  "article_sha256": "e51f9d13e95994a5c8ef75c16d3dc62a52b53499e897a5a86e1fd7613f5961f0",
   "citations": [
     "gamefile:items/item_maelstrom#cost",
     "gamefile:items/item_maelstrom#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "712b9646e95fa8d380e7aee6d56b5689cb0ecbe9cf54a4bfb9d396f4d493b534",
-    "input_tokens": 14418,
-    "output_tokens": 798,
+    "prompt_version": "7",
+    "request_sha256": "190c518a53e41304ad00094d7c2aee289a326e81cfd7fb56562ecb8a412bc3cc",
+    "input_tokens": 14047,
+    "output_tokens": 847,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:08:22.024336+00:00"
+    "generated_at": "2026-07-27T12:13:12.330856+00:00"
   }
 }

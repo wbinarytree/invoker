@@ -5,7 +5,7 @@
   "title": "Havoc Hammer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "370e48c5fcb09e39995e197fc43da4879929d8577e40476833a100569acb7c6c",
+  "article_sha256": "60d79a21d2c0f08e08419964e0919a39319f18407d2279ca4789ffbf7a46488b",
   "citations": [
     "gamefile:items/item_havoc_hammer#cost",
     "gamefile:items/item_havoc_hammer#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "79a82bcdfa3fc2bc98b262ca9938bd368d606df268a2e9709400a3d7339e2f77",
-    "input_tokens": 14355,
-    "output_tokens": 1781,
+    "prompt_version": "7",
+    "request_sha256": "34cea318107c4e5341e06459f1305dceec94fc51d5ca45729304326d6f7a6100",
+    "input_tokens": 13988,
+    "output_tokens": 1291,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:37.750864+00:00"
+    "generated_at": "2026-07-27T12:12:05.514385+00:00"
   }
 }

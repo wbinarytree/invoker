@@ -5,35 +5,38 @@ patch: 7.41d
 card:
   entity: lotus_orb
   sentences:
-  - text: Lotus Orb is a 3850-gold epic item that grants 10 Armor, 6.5 Health Regeneration,
-      250 Mana, and 4.0 Mana Regeneration, and provides Echo Shell, which applies
-      a 5-second shield that re-casts most targeted spells back to their caster.
+  - text: Lotus Orb is an epic item costing 3850 gold that grants 10 Armor, 6.5 Health
+      Regeneration, 250 Mana, and 4.0 Mana Regeneration, and its Echo Shell active
+      applies a shield to a target unit for an Active Duration of 5 that re-casts
+      most targeted spells back to their caster while the shielded unit still takes
+      damage from the spell.
     marks:
     - gamefile:items/item_lotus_orb#cost
     - gamefile:items/item_lotus_orb#attribs
     - loc:DOTA_Tooltip_ability_item_lotus_orb_Description
-  - text: It is built from Perseverance (1400 gold), Platemail (1400 gold), Energy
-      Booster (800 gold), and a Recipe (250 gold).
+  - text: Lotus Orb's build formula is Perseverance (1400 gold) + Platemail (1400
+      gold) + Energy Booster (800 gold) + Recipe (250 gold).
     marks:
     - gamefile:items/item_lotus_orb#components
+    - gamefile:items/item_lotus_orb#cost
   - text: Echo Shell has Unit Target behavior.
     marks:
     - gamefile:items/item_lotus_orb#mechanics
   - text: Echo Shell has 900 cast range.
     marks:
     - gamefile:items/item_lotus_orb#mechanics
-  - text: Echo Shell costs 175 mana.
+  - text: Echo Shell costs 175 Mana.
     marks:
     - gamefile:items/item_lotus_orb#mechanics
-  - text: Echo Shell has a 15.0-second cooldown.
+  - text: Echo Shell has a 15.0 cooldown.
     marks:
     - gamefile:items/item_lotus_orb#mechanics
-  - text: The shielded unit still takes damage from the reflected spell.
+  - text: Echo Shell's dispel type is Basic Dispel.
     marks:
     - loc:DOTA_Tooltip_ability_item_lotus_orb_Description
-  - text: Echo Shell applies a Basic Dispel.
+  - text: The jewel at its center still reflects a pale image of its creator.
     marks:
-    - loc:DOTA_Tooltip_ability_item_lotus_orb_Description
+    - loc:DOTA_Tooltip_ability_item_lotus_orb_Lore
 ---
 
 # Lotus Orb

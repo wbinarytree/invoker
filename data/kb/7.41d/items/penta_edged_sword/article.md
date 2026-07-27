@@ -5,19 +5,24 @@ patch: 7.41d
 card:
   entity: penta_edged_sword
   sentences:
-  - text: Penta-Edged Sword is a 0-gold item that grants 45 Damage and 100 melee-only
-      Attack Range; its passive Maim has a 25% chance to reduce an enemy hero’s Attack
-      Speed by 60 and Movement Speed by 20% for a duration of 3.
+  - text: Penta-Edged Sword is a 0-gold item granting 45 Damage and 100 melee-only
+      Attack Range, with a 25% Maim chance to reduce an enemy hero's Attack Speed
+      by 60 and Movement Speed by 20% for a duration of 3.
     marks:
     - gamefile:items/item_penta_edged_sword#attribs
     - gamefile:items/item_penta_edged_sword#cost
     - loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Description
-  - text: Its build formula is Penta-Edged Sword (0 gold).
+  - text: The build formula is Penta-Edged Sword (0 gold).
     marks:
     - gamefile:items/item_penta_edged_sword#cost
-  - text: Maim can trigger on each attack against an enemy hero.
+  - text: Maim is passive and can trigger on each attack against an enemy hero.
     marks:
     - gamefile:items/item_penta_edged_sword#mechanics
+    - loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Description
+  - text: The final, twisted work of a severely pious blacksmith, completed immediately
+      before the taking of his own life.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Lore
 ---
 
 # Penta-Edged Sword

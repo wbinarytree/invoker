@@ -5,7 +5,7 @@
   "title": "Prince's Knife",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e69294e35e66cc29c088d869e086535357b319bf87655ad7e30362392c46d13e",
+  "article_sha256": "5162387073e6cbe777dc34e373c9fc804c995d8450a5c392ebb227c08c0fd50d",
   "citations": [
     "gamefile:items/item_princes_knife#cost",
     "gamefile:items/item_princes_knife#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "24ed6d4b5c8cb5110f3b08540f9b8aa1d611b1c0310324558357035c455ca980",
-    "input_tokens": 14270,
-    "output_tokens": 494,
+    "prompt_version": "7",
+    "request_sha256": "3a43cc6e64b9d8b9e40986d00c5e5d841197973693a18b1ecb3175c3b163a33d",
+    "input_tokens": 13914,
+    "output_tokens": 499,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:51.099880+00:00"
+    "generated_at": "2026-07-27T12:15:33.616047+00:00"
   }
 }

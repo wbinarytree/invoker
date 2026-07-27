@@ -10,16 +10,18 @@ card:
     marks:
     - gamefile:items/item_vitality_booster#cost
     - gamefile:items/item_vitality_booster#attribs
-  - text: Its build formula is Vitality Booster (1000 gold).
+  - text: Its build formula is Vitality Booster (1000 gold); it builds into Aeon Disk,
+      Consecrated Wraps, Eternal Shroud, Rod of Atos, Soul Booster, and Vanguard.
     marks:
     - gamefile:items/item_vitality_booster#cost
-  - text: It builds into Aeon Disk, Consecrated Wraps, Eternal Shroud, Rod of Atos,
-      Soul Booster, and Vanguard.
-    marks:
     - gamefile:items/item_vitality_booster#components
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_vitality_booster#mechanics
+  - text: “A ruby gemstone that has been passed down through generations of warrior
+      kin.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vitality_booster_Lore
 ---
 
 # Vitality Booster

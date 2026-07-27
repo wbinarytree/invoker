@@ -5,7 +5,7 @@
   "title": "Aether Lens",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "beb44b14069fc1c0b0573ae3c3897fc9acb6ab9f87ff6e1690d875adb53fe54d",
+  "article_sha256": "aeca5c39278f4d557c66d54e5a6c8f086a8f1594a5dcbe7f92c699d22ebe2f4c",
   "citations": [
     "gamefile:items/item_aether_lens#cost",
     "gamefile:items/item_aether_lens#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "e278c0bf02f4e7ffda2877c2571ea319470b31984bc96d458922721c558fd826",
-    "input_tokens": 14277,
-    "output_tokens": 283,
+    "prompt_version": "7",
+    "request_sha256": "fbd647d0f76d34e8f777250a812ec2105b54d57b6e8b096b34642ee5ea95248b",
+    "input_tokens": 14327,
+    "output_tokens": 334,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:35.471803+00:00"
+    "generated_at": "2026-07-27T12:06:42.134676+00:00"
   }
 }

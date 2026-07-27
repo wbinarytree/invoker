@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_fierce
   sentences:
-  - text: Fierce is an Enhancement-quality item that costs 0 gold and provides 15
-      Damage, 250 Bonus Night Vision, and 30 Movement Speed.
+  - text: Fierce is an Enhancement-quality item costing 0 gold that provides 15 Damage,
+      250 Bonus Night Vision, and 30 Movement Speed.
     marks:
     - gamefile:items/item_enhancement_fierce#cost
     - gamefile:items/item_enhancement_fierce#attribs

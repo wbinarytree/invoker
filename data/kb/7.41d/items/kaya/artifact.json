@@ -5,7 +5,7 @@
   "title": "Kaya",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4f0ae0117dabec621e4541b10283f4bc69a5a865cc96cc98ff652a33ad8f9ab3",
+  "article_sha256": "a8bd46404c0d2120e7af47125180fe535aa6df1ebf33ea8f2b847b3755272aec",
   "citations": [
     "gamefile:items/item_kaya#cost",
     "gamefile:items/item_kaya#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "846c79b2c0e3ab663ba93417b91926ecac3c98b74c7f5f8de40177db8b44ccdd",
-    "input_tokens": 14283,
-    "output_tokens": 278,
+    "prompt_version": "7",
+    "request_sha256": "6a18e3ae1dc6e8747a3a82ddcaab2cc78baa15162992c7aa855127ddfd56df27",
+    "input_tokens": 13912,
+    "output_tokens": 347,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:41.972462+00:00"
+    "generated_at": "2026-07-27T12:12:41.598284+00:00"
   }
 }

@@ -17,6 +17,9 @@ card:
   - text: Perseverance is passive.
     marks:
     - gamefile:items/item_pers#mechanics
+  - text: “A gem that grants heart to the bearer.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_pers_Lore
 ---
 
 # Perseverance

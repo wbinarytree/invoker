@@ -5,7 +5,7 @@
   "title": "Guardian Greaves",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7ba58b97af8e2d2c7c8231bffe3d9c8fdc419330c2a1c2c85f8122c65d72aee5",
+  "article_sha256": "f18df831099595386b9b80589ffbac741faa399fd42dcc60a4b466552f43369f",
   "citations": [
     "gamefile:items/item_guardian_greaves#cost",
     "gamefile:items/item_guardian_greaves#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "26e4bdbc966b4456a023461cea3f39628ac133df4dc921bbaf87c893bdba218a",
-    "input_tokens": 14538,
-    "output_tokens": 1322,
+    "prompt_version": "7",
+    "request_sha256": "d380de0a2e432467b73fb98a3fa36376b2e0cdc062bcf348fbbee8d4fad99e92",
+    "input_tokens": 14165,
+    "output_tokens": 1449,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:07.629355+00:00"
+    "generated_at": "2026-07-27T12:11:54.185847+00:00"
   }
 }

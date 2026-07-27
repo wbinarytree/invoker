@@ -5,50 +5,49 @@ patch: 7.41d
 card:
   entity: mjollnir
   sentences:
-  - text: Mjollnir is a 5500-gold artifact item granting 90 Attack Speed and 25 Damage;
-      its passive Chain Lightning has a 25% chance to deal 180 magical damage per
-      target, while Static Charge has a 20% chance to deal 225 magical damage.
+  - text: Mjollnir is a 5500-gold artifact item that grants 90 attack speed and 25
+      damage, gives attacks a 25% Chain Lightning chance for 180 magical damage across
+      12 strikes, and provides Static Charge, whose shield has a 20% chance to release
+      4 bolts for 225 magical damage.
     marks:
     - gamefile:items/item_mjollnir#cost
     - gamefile:items/item_mjollnir#attribs
     - loc:DOTA_Tooltip_ability_item_mjollnir_Description
-  - text: 'Build formula: Maelstrom (2950 gold), Hyperstone (2000 gold), and Recipe
-      (550 gold).'
+  - text: Its build formula is Maelstrom for 2950 gold, Hyperstone for 2000 gold,
+      and a Recipe for 550 gold, totaling 5500 gold.
     marks:
     - gamefile:items/item_mjollnir#components
-  - text: The active has Unit Target behavior.
+    - gamefile:items/item_mjollnir#cost
+  - text: Chain Lightning has a 0.2 cooldown, 0.25 delay, and 650 radius.
+    marks:
+    - gamefile:items/item_mjollnir#attribs
+  - text: Static Charge has a 1.0 cooldown, 15.0 duration, 600 primary radius, 900
+      radius, and 900 secondary radius.
+    marks:
+    - gamefile:items/item_mjollnir#attribs
+  - text: Static Charge has Unit Target behavior.
     marks:
     - gamefile:items/item_mjollnir#mechanics
-  - text: It is dispellable.
+  - text: Static Charge is dispellable.
     marks:
     - gamefile:items/item_mjollnir#mechanics
-  - text: Its cast range is 800.
+  - text: Static Charge has 800 cast range, 50 mana cost, and a 35.0 cooldown.
     marks:
     - gamefile:items/item_mjollnir#mechanics
-  - text: It costs 50 mana and has a 35.0 cooldown.
-    marks:
-    - gamefile:items/item_mjollnir#mechanics
-  - text: Static Charge places a shield on a target unit that can shock a nearby attacker
-      and additional enemies.
+  - text: Static Charge places a charged shield on a target unit that can release
+      a magical-damage bolt at a nearby attacker and additional enemies.
     marks:
     - loc:DOTA_Tooltip_ability_item_mjollnir_Description
-  - text: Static Charge lasts 15.0 and its shock has a 1.0 cooldown.
-    marks:
-    - gamefile:items/item_mjollnir#attribs
-  - text: Static Charge has primary radius 600, radius 900, secondary radius 900,
-      and 4 strikes.
-    marks:
-    - gamefile:items/item_mjollnir#attribs
-  - text: Chain Lightning can trigger on attack, leaps between targets, and its proc
-      pierces evasion.
+  - text: Chain Lightning can trigger on attack, releasing a bolt that leaps between
+      targets and deals magical damage to each.
     marks:
     - loc:DOTA_Tooltip_ability_item_mjollnir_Description
-  - text: Chain Lightning has a 0.2 cooldown and 0.25 delay.
+  - text: Chain Lightning's proc pierces evasion.
     marks:
-    - gamefile:items/item_mjollnir#attribs
-  - text: Chain Lightning has 650 radius and 12 strikes.
+    - loc:DOTA_Tooltip_ability_item_mjollnir_Description
+  - text: Thor's magical hammer, made for him by the dwarves Brok and Eitri.
     marks:
-    - gamefile:items/item_mjollnir#attribs
+    - loc:DOTA_Tooltip_ability_item_mjollnir_Lore
 ---
 
 # Mjollnir

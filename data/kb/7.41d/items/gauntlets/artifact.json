@@ -5,7 +5,7 @@
   "title": "Gauntlets of Strength",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d42bf32fe1342453980f13cefdadd0005cf21d3c23162b80377a5e0678e20f0a",
+  "article_sha256": "201da20fe4288c4514538ae405adcf854f87c636a7f35682cb726a1a027293af",
   "citations": [
     "gamefile:items/item_gauntlets#cost",
     "gamefile:items/item_gauntlets#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "810901f2058509b38087672b829067603d1f6e298f996e2189ef00c62562ec2c",
-    "input_tokens": 14240,
-    "output_tokens": 414,
+    "prompt_version": "7",
+    "request_sha256": "841e47cbb3dbc8da2fa6625077193ad128894fab1223730cc217be6d7dd0c4ce",
+    "input_tokens": 13871,
+    "output_tokens": 518,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:55.904287+00:00"
+    "generated_at": "2026-07-27T12:10:58.841812+00:00"
   }
 }

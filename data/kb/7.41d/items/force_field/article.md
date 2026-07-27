@@ -5,23 +5,27 @@ patch: 7.41d
 card:
   entity: force_field
   sentences:
-  - text: Arcanist's Armor is a 0-gold item whose Shield passive grants other allies
-      within 1200 radius 4 Armor and 8% Magic Resistance, while Mega Shield grants
-      25% Damage Reflection for 5 seconds.
+  - text: Arcanist's Armor is a 0-gold item whose Shield passive grants all other
+      allies within a 1200 radius 4 Armor and 8% Magic Resistance, and whose Mega
+      Shield active grants 25% Damage Reflection for 5 seconds.
     marks:
     - gamefile:items/item_force_field#cost
     - gamefile:items/item_force_field#attribs
     - gamefile:items/item_force_field#mechanics
     - loc:DOTA_Tooltip_Ability_item_force_field_Description
-  - text: It grants the bearer 0 Armor and 0 Magic Resistance.
+  - text: It grants itself 0 Armor and 0 Magic Resistance.
     marks:
     - gamefile:items/item_force_field#attribs
   - text: Mega Shield has Immediate, No Target behavior.
     marks:
     - gamefile:items/item_force_field#mechanics
-  - text: Mega Shield has a 35-second cooldown.
+  - text: Mega Shield has a 35 cooldown.
     marks:
     - gamefile:items/item_force_field#mechanics
+  - text: “An exquisite piece commissioned by a paranoid monarch who choked on a piece
+      of fruit long before the item saw its intended use.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_force_field_Lore
 ---
 
 # Arcanist's Armor

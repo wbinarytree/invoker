@@ -5,7 +5,8 @@ patch: 7.41d
 card:
   entity: voodoo_mask
   sentences:
-  - text: Voodoo Mask is a 650-gold component item that provides 15% Spell Lifesteal.
+  - text: Voodoo Mask is a component item that costs 650 gold and provides 15% Spell
+      Lifesteal.
     marks:
     - gamefile:items/item_voodoo_mask#cost
     - gamefile:items/item_voodoo_mask#attribs
@@ -19,6 +20,9 @@ card:
       to enemies.
     marks:
     - loc:DOTA_Tooltip_ability_item_voodoo_mask_Description
+  - text: “A mask tuned to sip the arcane bindings that pass between caster and foe.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_voodoo_mask_Lore
 ---
 
 # Voodoo Mask

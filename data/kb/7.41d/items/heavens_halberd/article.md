@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: heavens_halberd
   sentences:
-  - text: Heaven's Halberd is a 3400-gold artifact item granting 9 Armor, 25% Evasion,
-      and 6.5 Health Regeneration, with Disarm preventing its target from attacking
+  - text: Heaven's Halberd is a 3400-gold artifact item that grants 9 Armor, 25% Evasion,
+      and 6.5 Health Regeneration; its Disarm active prevents the target from attacking
       for 3.5 seconds.
     marks:
     - gamefile:items/item_heavens_halberd#cost
@@ -31,6 +31,10 @@ card:
   - text: Disarm has a 16-second cooldown.
     marks:
     - gamefile:items/item_heavens_halberd#mechanics
+  - text: This halberd moves with the speed of a smaller weapon, allowing the bearer
+      to win duels that a heavy edge would not.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_heavens_halberd_Lore
 ---
 
 # Heaven's Halberd

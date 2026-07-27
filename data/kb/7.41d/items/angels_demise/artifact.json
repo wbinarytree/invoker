@@ -5,7 +5,7 @@
   "title": "Khanda",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "915a36c09e0e24e5a25e8f6d27eebb10e15f1da0e5e6052f12b846d091f3a9d0",
+  "article_sha256": "b3299e01d71cee38435072a9f8b309e02d5049569409f1db9b020d6259b143b6",
   "citations": [
     "gamefile:items/item_angels_demise#cost",
     "gamefile:items/item_angels_demise#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1ac7f89666983c751626403bbc3e030c309df3a71650bdd66ed4bccd3087e7e1",
-    "input_tokens": 14429,
-    "output_tokens": 2246,
+    "prompt_version": "7",
+    "request_sha256": "6be5a73da476adab2d29ffc2e7ea76a2e3fb0eba4b25c55f9387e78afdaeea29",
+    "input_tokens": 14479,
+    "output_tokens": 1876,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:41.531117+00:00"
+    "generated_at": "2026-07-27T12:07:12.877662+00:00"
   }
 }

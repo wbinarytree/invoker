@@ -5,7 +5,7 @@
   "title": "Dandelion Amulet",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "10402cf06e4a4332f95fc80c5dbbe1673e6cccecf4ff61d906eae5cfdda4b943",
+  "article_sha256": "94e434ce47da53d2be930549699a26cb9c7f891da481bb867276c64568ce9edf",
   "citations": [
     "gamefile:items/item_dandelion_amulet#attribs",
     "gamefile:items/item_dandelion_amulet#mechanics",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2149a491eb836b3c85487894414983ba332c5a9b71b53f4b0d19c5364b48045b",
-    "input_tokens": 14304,
-    "output_tokens": 598,
+    "prompt_version": "7",
+    "request_sha256": "f59eecc3eee86c27db640927b39b82058066e859381481937bf8717c348002c5",
+    "input_tokens": 14364,
+    "output_tokens": 693,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:46.013106+00:00"
+    "generated_at": "2026-07-27T12:09:16.322605+00:00"
   }
 }

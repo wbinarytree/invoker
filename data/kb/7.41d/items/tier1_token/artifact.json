@@ -5,7 +5,7 @@
   "title": "Tier 1 Token",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5fbdca89e39773aa904b38af463d2601d76e41cb796f865e6c0a68c160d13f20",
+  "article_sha256": "796dcf662006d1b89ff1cfee0dcac8a77f13d1f5c52864e24f35b0faf42a3e7a",
   "citations": [
     "gamefile:items/item_tier1_token#cost",
     "gamefile:items/item_tier1_token#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "da8082a169bc447abbc0feb681e1e363849d56aee68efbdc8e917cb0d8e08b67",
-    "input_tokens": 14174,
-    "output_tokens": 562,
+    "prompt_version": "7",
+    "request_sha256": "d6638daf392a427e655662a4ed218acca9064ee6ad123341c1cee9642e34821a",
+    "input_tokens": 13809,
+    "output_tokens": 568,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:34.000208+00:00"
+    "generated_at": "2026-07-27T12:17:47.184800+00:00"
   }
 }

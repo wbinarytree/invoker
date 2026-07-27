@@ -6,24 +6,23 @@ card:
   entity: nullifier
   sentences:
   - text: Nullifier is an epic item costing 4350 gold that grants 10 armor, 75 damage,
-      and 0 health regeneration; its unit-target Nullify active has 900 cast range,
-      0 mana cost, and a 10.0 cooldown, dispels its target, and applies a continuously
-      dispelling and slowing debuff with MUTE DURATION 4.0, SLOW PCT 10, and SLOW
-      INTERVAL DURATION 0.5.
+      and 0 health regeneration; its Nullify active dispels the target and applies
+      a continuously dispelling and slowing debuff with a Basic Dispel, 4.0 mute duration,
+      10% slow, and 0.5-second slow intervals.
     marks:
     - gamefile:items/item_nullifier#cost
     - gamefile:items/item_nullifier#attribs
-    - gamefile:items/item_nullifier#mechanics
     - loc:DOTA_Tooltip_ability_item_nullifier_Description
-  - text: Its build formula is Sacred Relic for 3400 gold and Splintmail for 950 gold.
+  - text: Nullify is Unit Target with 900 cast range, 0 mana cost, and a 10.0-second
+      cooldown.
     marks:
-    - gamefile:items/item_nullifier#components
-  - text: Nullify has a projectile speed of 1800.
+    - gamefile:items/item_nullifier#mechanics
+  - text: Nullify has 1800 projectile speed.
     marks:
     - gamefile:items/item_nullifier#attribs
-  - text: The debuff's continuous dispels use a Basic Dispel.
+  - text: Nullifier is built from Sacred Relic (3400 gold) and Splintmail (950 gold).
     marks:
-    - loc:DOTA_Tooltip_ability_item_nullifier_Description
+    - gamefile:items/item_nullifier#components
 ---
 
 # Nullifier

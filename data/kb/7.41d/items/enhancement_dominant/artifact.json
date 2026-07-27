@@ -5,7 +5,7 @@
   "title": "Dominant",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "de008b4897b1aadaeae4140018a381799928dcecfee56698c1824d9d8b8a3b1d",
+  "article_sha256": "e2639a2fdffd4895df3e7780f2e0c9578666d4e989492b95a38260916850faa2",
   "citations": [
     "gamefile:items/item_enhancement_dominant#attribs",
     "gamefile:items/item_enhancement_dominant#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "0d9f9ba9660c4b137fadbd05fdb28afc91849f5436d24b15f5d6a73431530f0c",
-    "input_tokens": 14177,
-    "output_tokens": 331,
+    "prompt_version": "7",
+    "request_sha256": "b2b318256ad7a1b570434c72df268f70c75e5a3885a87fc80f2787475c199cb2",
+    "input_tokens": 13806,
+    "output_tokens": 344,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:38.635179+00:00"
+    "generated_at": "2026-07-27T12:10:08.038088+00:00"
   }
 }

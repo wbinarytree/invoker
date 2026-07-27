@@ -5,7 +5,7 @@
   "title": "Helm of the Overlord",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "180c70f76abd2d4683451548ebeb5721de0c104f253f67baa5cbd3051ec490d3",
+  "article_sha256": "3757708ce91391c7210a3b70860af9e1148b1c6ab73e54d3f195d2529ada0041",
   "citations": [
     "gamefile:items/item_helm_of_the_overlord#cost",
     "gamefile:items/item_helm_of_the_overlord#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4912ed9da6962b93b35dd3a2441e1ddeb104b501d39c37e6589ec1a13d2d4a8d",
-    "input_tokens": 14637,
-    "output_tokens": 2637,
+    "prompt_version": "7",
+    "request_sha256": "fa15b5f96ab146e583641f80f937aea34bf2889d8ab710e668a22f6ec97a4538",
+    "input_tokens": 14268,
+    "output_tokens": 2523,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:09.893284+00:00"
+    "generated_at": "2026-07-27T12:12:39.743088+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Divine Rapier",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ab87fc521c599b4dac90a28dd5ca413b93d26b144c39c342b51be2b9762853d9",
+  "article_sha256": "799fb18131430d08427c06d61e735e18cf05d742ac623fbbb42d086e0fd3c683",
   "citations": [
     "gamefile:items/item_rapier#cost",
     "loc:DOTA_Tooltip_ability_item_rapier_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7f68b98389c21ee6cafb07a501512082453a21fc8a7e66618040e1570ddc84ba",
-    "input_tokens": 14373,
-    "output_tokens": 1800,
+    "prompt_version": "7",
+    "request_sha256": "a028fcc6d1bd56aa893720392d2c8e1eaf556955372e6c46662bd88360ad03db",
+    "input_tokens": 14004,
+    "output_tokens": 1590,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:30.670124+00:00"
+    "generated_at": "2026-07-27T12:16:13.024819+00:00"
   }
 }

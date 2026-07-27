@@ -5,7 +5,7 @@
   "title": "Claymore",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e8185d081eb5860bb1f35077948f710ec6477174c02c58dfcc6a0237c1b77816",
+  "article_sha256": "c103b53d798f0f2fb5f721ad9f607cb1c6168a81449017dbc60f7527aca0c0a5",
   "citations": [
     "gamefile:items/item_claymore#cost",
     "gamefile:items/item_claymore#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "09f4d23638cc3e48559691a4a5a0b2fd4a1b0df23a253b596cdca8239fa98943",
-    "input_tokens": 14281,
-    "output_tokens": 425,
+    "prompt_version": "7",
+    "request_sha256": "3f6ca8731f1da6b2158680734bf1f4eb13eca0068d0a8e2ae2492c56a7aeb00a",
+    "input_tokens": 13910,
+    "output_tokens": 603,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:42.359624+00:00"
+    "generated_at": "2026-07-27T12:08:25.314176+00:00"
   }
 }

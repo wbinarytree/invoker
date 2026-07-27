@@ -5,7 +5,7 @@
   "title": "Keen-eyed",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "395c16d384ec9fe52d22a1a169ead2e99ef5f50741ff354100912cd49f185071",
+  "article_sha256": "271c238ff0533c25b1d430c594fd7952c5bba173c1ab55a68ec587bac1cb3d90",
   "citations": [
     "gamefile:items/item_enhancement_keen_eyed#cost",
     "gamefile:items/item_enhancement_keen_eyed#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3a03bbf5704be8ecc6410da58c35f2f6b7c20dba6248b7b1d94e910490748265",
-    "input_tokens": 14221,
-    "output_tokens": 246,
+    "prompt_version": "7",
+    "request_sha256": "e4e81f8f478c49235e9f37db0df18b8c0ce6b0350480c283a979ff98893222a7",
+    "input_tokens": 13856,
+    "output_tokens": 320,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:48.619434+00:00"
+    "generated_at": "2026-07-27T12:10:12.268244+00:00"
   }
 }

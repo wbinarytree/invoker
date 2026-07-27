@@ -5,16 +5,22 @@ patch: 7.41d
 card:
   entity: lifesteal
   sentences:
-  - text: Morbid Mask is a 900-gold component item with passive 18% Lifesteal, healing
-      the attacker for 18% of physical damage dealt.
+  - text: Morbid Mask is a component item costing 900 gold that grants 18% Lifesteal.
     marks:
     - gamefile:items/item_lifesteal#cost
     - gamefile:items/item_lifesteal#attribs
-    - gamefile:items/item_lifesteal#mechanics
-    - loc:DOTA_Tooltip_ability_item_lifesteal_Description
   - text: It builds into Mask of Madness, Satanic, and Vladmir's Offering.
     marks:
     - gamefile:items/item_lifesteal#components
+  - text: Lifesteal is passive.
+    marks:
+    - gamefile:items/item_lifesteal#mechanics
+  - text: It heals the attacker for a percentage of physical damage dealt.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_lifesteal_Description
+  - text: “A mask that drains the energy of those caught in its gaze.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_lifesteal_Lore
 ---
 
 # Morbid Mask

@@ -5,26 +5,49 @@ patch: 7.41d
 card:
   entity: diffusal_blade
   sentences:
-  - text: Diffusal Blade is a 2500-gold artifact item granting 15 Agility and 10 Intelligence;
-      Inhibit slows an enemy with purge rate 5, purge root duration 3.0, and purge
-      slow duration 4.0, while Manabreak burns 40 mana per attack and deals 1 physical
-      damage per mana burned.
+  - text: Diffusal Blade is a 2500-gold artifact item that grants 15 Agility and 10
+      Intelligence; Inhibit slows an enemy, while Manabreak burns 40 mana per attack
+      and deals 1 physical damage per mana burned, with illusions burning 0 mana.
     marks:
     - gamefile:items/item_diffusal_blade#cost
     - gamefile:items/item_diffusal_blade#attribs
     - loc:DOTA_Tooltip_ability_item_diffusal_blade_Description
-  - text: Inhibit is dispellable and unit-targeted, with 600 cast range, 25 mana cost,
-      and 15.0 cooldown.
+  - text: Inhibit has Unit Target behavior.
     marks:
     - gamefile:items/item_diffusal_blade#mechanics
-  - text: Melee and ranged illusions each have 0 feedback mana burn.
+  - text: Its cast range is 600.
+    marks:
+    - gamefile:items/item_diffusal_blade#mechanics
+  - text: It is dispellable.
+    marks:
+    - gamefile:items/item_diffusal_blade#mechanics
+  - text: Its mana cost is 25.
+    marks:
+    - gamefile:items/item_diffusal_blade#mechanics
+  - text: Its cooldown is 15.0.
+    marks:
+    - gamefile:items/item_diffusal_blade#mechanics
+  - text: Its purge rate is 5.
     marks:
     - gamefile:items/item_diffusal_blade#attribs
-  - text: The build formula is Blade of Alacrity (1000 gold), Robe of the Magi (450
-      gold), and Recipe (1050 gold); it builds into Disperser.
+  - text: Its purge root duration is 3.0.
+    marks:
+    - gamefile:items/item_diffusal_blade#attribs
+  - text: Its purge slow duration is 4.0.
+    marks:
+    - gamefile:items/item_diffusal_blade#attribs
+  - text: Its build formula is Blade of Alacrity for 1000 gold, Robe of the Magi for
+      450 gold, and a Recipe for 1050 gold.
     marks:
     - gamefile:items/item_diffusal_blade#cost
     - gamefile:items/item_diffusal_blade#components
+  - text: It builds into Disperser.
+    marks:
+    - gamefile:items/item_diffusal_blade#components
+  - text: “An enchanted blade that allows the user to cut straight into the enemy's
+      soul.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_diffusal_blade_Lore
 ---
 
 # Diffusal Blade

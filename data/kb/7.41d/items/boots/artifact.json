@@ -5,7 +5,7 @@
   "title": "Boots of Speed",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5d84bc581f32ea047182245fceff7cd937e0e680ddd482ced4677a1bb23ad1e7",
+  "article_sha256": "66a03c47ddfb3e6298794778ea209b685cf4592f88adccc89341364d653792e4",
   "citations": [
     "gamefile:items/item_boots#cost",
     "gamefile:items/item_boots#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ecf2a0e41893ee439faedcb47672b0b7295c26a2187940494bfdcf01c6ecb7f2",
-    "input_tokens": 14293,
-    "output_tokens": 434,
+    "prompt_version": "7",
+    "request_sha256": "3041ff7fe623d57859d3ad0ca02ca5188e25c7b5a914ec3369607dd85d41620c",
+    "input_tokens": 13924,
+    "output_tokens": 719,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:31.510146+00:00"
+    "generated_at": "2026-07-27T12:07:57.095816+00:00"
   }
 }

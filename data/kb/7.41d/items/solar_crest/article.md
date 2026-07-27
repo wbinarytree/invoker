@@ -5,19 +5,22 @@ patch: 7.41d
 card:
   entity: solar_crest
   sentences:
-  - text: Solar Crest is a rare 2575-gold item granting 7 armor, 200 health, 200 mana,
-      and 25 movement speed; Shine gives an ally 5 armor, 60 attack speed, 15% movement
-      speed, and a 350 physical-damage barrier for 7 seconds.
+  - text: Solar Crest is a rare 2575-gold item that provides 7 armor, 200 health,
+      200 mana, and 25 movement speed, while Shine grants an ally 5 armor, 60 attack
+      speed, 15% movement speed, and a 350 physical damage barrier for 7 seconds.
     marks:
     - gamefile:items/item_solar_crest#cost
     - gamefile:items/item_solar_crest#attribs
     - loc:DOTA_Tooltip_ability_item_solar_crest_Description
   - text: It is built from Pavise (1350 gold), Chainmail (500 gold), Wind Lace (225
-      gold), and a Recipe (500 gold).
+      gold), and a recipe (500 gold).
     marks:
     - gamefile:items/item_solar_crest#components
     - gamefile:items/item_solar_crest#cost
-  - text: Shine has Unit Target, Immediate behavior.
+  - text: It provides 0 all attributes.
+    marks:
+    - gamefile:items/item_solar_crest#attribs
+  - text: Shine is unit-targeted and immediate.
     marks:
     - gamefile:items/item_solar_crest#mechanics
   - text: Shine is dispellable.
@@ -29,14 +32,16 @@ card:
   - text: Shine costs 100 mana.
     marks:
     - gamefile:items/item_solar_crest#mechanics
-  - text: Shine has a 16.0 cooldown.
+  - text: Shine has a 16.0-second cooldown.
     marks:
     - gamefile:items/item_solar_crest#mechanics
-  - text: When used on its owner, Shine does not grant its 5 armor, 15% movement speed,
-      or 60 attack speed bonuses.
+  - text: When used on self, Shine does not grant its bonus armor, movement speed,
+      or attack speed.
     marks:
     - loc:DOTA_Tooltip_ability_item_solar_crest_Description
-    - gamefile:items/item_solar_crest#attribs
+  - text: “A talisman forged to honor the daytime sky.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_solar_crest_Lore
 ---
 
 # Solar Crest

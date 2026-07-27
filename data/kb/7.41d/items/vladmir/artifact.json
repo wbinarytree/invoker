@@ -5,7 +5,7 @@
   "title": "Vladmir's Offering",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "617bd703f0f7929e02f3ca23f6a27905c1152700c5f07e860bff926245790d40",
+  "article_sha256": "b3ec928e2ad330c81412d953c4773748a5c112cb70a1c3a9eaf97bf5ab088242",
   "citations": [
     "gamefile:items/item_vladmir#cost",
     "gamefile:items/item_vladmir#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "cce1e95e48a7029036e636b089a86088325c666eed777e4578fc6c1231065bbb",
-    "input_tokens": 14473,
-    "output_tokens": 2635,
+    "prompt_version": "7",
+    "request_sha256": "3e830d72e74229114c10f8ff526022e70be94a4591f828c1c48b2da6d0302fd0",
+    "input_tokens": 14104,
+    "output_tokens": 1169,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:21:29.282019+00:00"
+    "generated_at": "2026-07-27T12:19:03.320436+00:00"
   }
 }

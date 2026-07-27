@@ -5,7 +5,7 @@
   "title": "Mekansm",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "dd92214c4281ce78393f2cd9054bca475b75390819a89b28e8661f896cca6568",
+  "article_sha256": "89425d570586fd94d8378460f629d83c0549a1b6fa397ebe5dbf18fb5703f422",
   "citations": [
     "gamefile:items/item_mekansm#cost",
     "gamefile:items/item_mekansm#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "66033695e3a7c1c977de1f7f619212df37ed7110ccc573c3d35f1d30530a7ce0",
-    "input_tokens": 14407,
-    "output_tokens": 775,
+    "prompt_version": "7",
+    "request_sha256": "bad9e2bdb050becb7f2d508d1072ddf854ce47002ff9ff116d16d6ee0484f002",
+    "input_tokens": 14030,
+    "output_tokens": 1368,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:50.723533+00:00"
+    "generated_at": "2026-07-27T12:14:14.478096+00:00"
   }
 }

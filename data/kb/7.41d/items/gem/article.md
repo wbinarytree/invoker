@@ -5,35 +5,37 @@ patch: 7.41d
 card:
   entity: gem
   sentences:
-  - text: Gem of True Sight is a 900-gold component item whose active Reveal grants
-      True Sight in a 300-radius area for 4 seconds and whose passive True Sight has
-      900 radius.
+  - text: Gem of True Sight is a 900-gold component item that reveals wards and units
+      in a 300-radius area for 4 seconds, lets allied vision see invisible units and
+      wards within 900 radius of its carrier, and drops on death and cannot be destroyed.
     marks:
     - gamefile:items/item_gem#cost
     - gamefile:items/item_gem#attribs
     - loc:DOTA_Tooltip_ability_item_gem_Description
-  - text: Reveal has Point Target, AOE behavior.
+  - text: Reveal has Point Target, AOE behavior, 300 cast range, and 12 cooldown.
     marks:
     - gamefile:items/item_gem#mechanics
-  - text: Reveal has 300 cast range.
-    marks:
-    - gamefile:items/item_gem#mechanics
-  - text: Reveal has a 12-second cooldown.
-    marks:
-    - gamefile:items/item_gem#mechanics
-  - text: Reveal exposes wards and units even in Fog of War.
+  - text: Reveal grants True Sight in its area, revealing wards and units even in
+      Fog of War.
     marks:
     - loc:DOTA_Tooltip_ability_item_gem_Description
-  - text: Passive True Sight lets allied vision within range of the carrier see invisible
-      units and wards.
+  - text: Passive True Sight allows any allied vision within range of the carrier
+      to see invisible units and wards.
     marks:
     - loc:DOTA_Tooltip_ability_item_gem_Description
-  - text: Everlasting causes the item to drop when its carrier dies.
+  - text: Everlasting causes the item to be dropped on death and prevents it from
+      being destroyed.
     marks:
     - loc:DOTA_Tooltip_ability_item_gem_Description
-  - text: Everlasting prevents the item from being destroyed.
+  - text: '“Not one thrall creature of the depths,
+
+      Nor spirit bound in drowning''s keep,
+
+      Nor Maelrawn the Tentacular,
+
+      Shall rest till seas, gem comes to sleep.”'
     marks:
-    - loc:DOTA_Tooltip_ability_item_gem_Description
+    - loc:DOTA_Tooltip_ability_item_gem_Lore
 ---
 
 # Gem of True Sight

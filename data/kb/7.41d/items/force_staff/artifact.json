@@ -5,7 +5,7 @@
   "title": "Force Staff",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "08d2bf409403db14b8e4afd8c941fc815d358ec64c0675ba2ccddf898dafeaec",
+  "article_sha256": "44c4a76cf9acb893088f2b72520a434a6b725571f677d2e563947edbacd57e99",
   "citations": [
     "gamefile:items/item_force_staff#cost",
     "gamefile:items/item_force_staff#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "000b687455b50e8060a7ff2f50fece35739b5bf7e30dae070ca62f8b6547e3ff",
-    "input_tokens": 14377,
-    "output_tokens": 746,
+    "prompt_version": "7",
+    "request_sha256": "9629882c0b339746ce3ed7f8d231a62dfaddad6c94140aae702ff23f39cb2bd2",
+    "input_tokens": 14006,
+    "output_tokens": 1297,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:11.190195+00:00"
+    "generated_at": "2026-07-27T12:11:11.037431+00:00"
   }
 }

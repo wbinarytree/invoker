@@ -11,11 +11,14 @@ card:
     - gamefile:items/item_robe#cost
     - gamefile:items/item_robe#attribs
     - gamefile:items/item_robe#mechanics
-  - text: Its build entry is Robe of the Magi (450 gold), and it builds into Diffusal
-      Blade, Kaya, Oblivion Staff, and Veil of Discord.
+  - text: Robe of the Magi (450 gold) builds into Diffusal Blade, Kaya, Oblivion Staff,
+      and Veil of Discord.
     marks:
     - gamefile:items/item_robe#cost
     - gamefile:items/item_robe#components
+  - text: This robe corrupts the soul of the user, but provides wisdom in return.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_robe_Lore
 ---
 
 # Robe of the Magi

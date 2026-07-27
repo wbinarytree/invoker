@@ -5,7 +5,7 @@
   "title": "Blast Rig",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "336e023a207e9b3c6ed14d9f426be3149c72b438e1fb45a4420d31edcb666e3d",
+  "article_sha256": "876f264dfc3ed6d478592155ba84471955bfeeb0f7d87c01698b069eae514bcb",
   "citations": [
     "gamefile:items/item_black_powder_bag#attribs",
     "gamefile:items/item_black_powder_bag#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "dfc24f8103bdecbbee5e22594e76fdd23608bad4a1b291e5ee8a65d9e18d5c58",
-    "input_tokens": 14365,
-    "output_tokens": 664,
+    "prompt_version": "7",
+    "request_sha256": "80e568d45d7384118fcd76fa80c0c5d4e74d04435ed865455a5b5b310428d794",
+    "input_tokens": 13990,
+    "output_tokens": 761,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:27.251352+00:00"
+    "generated_at": "2026-07-27T12:07:34.161707+00:00"
   }
 }

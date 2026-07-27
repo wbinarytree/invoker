@@ -5,7 +5,7 @@
   "title": "Vampiric",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "cfce60c425f556f9948dacaa222419b483c511050c9eeab2403643889f597e9a",
+  "article_sha256": "164be41d127ca1a4d40191b5cefe2ea0b873b64d6c9fefefc702ea048e329dbe",
   "citations": [
     "gamefile:items/item_enhancement_vampiric#cost",
     "gamefile:items/item_enhancement_vampiric#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a5095c28354893d22a27641697a822f968a49f63065fcaa923a571fd0e9b37f9",
-    "input_tokens": 14227,
-    "output_tokens": 373,
+    "prompt_version": "7",
+    "request_sha256": "668df3024ad9001a24a5fe744191b9015906323c8298d02f95ce1ecd76a3032c",
+    "input_tokens": 13854,
+    "output_tokens": 116,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:19.796083+00:00"
+    "generated_at": "2026-07-27T12:10:28.868532+00:00"
   }
 }

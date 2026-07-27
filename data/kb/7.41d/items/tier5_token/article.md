@@ -10,7 +10,7 @@ card:
     marks:
     - gamefile:items/item_tier5_token#cost
     - loc:DOTA_Tooltip_ability_item_tier5_token_Description
-  - text: It has No Target behavior.
+  - text: Its behavior is No Target.
     marks:
     - gamefile:items/item_tier5_token#mechanics
   - text: The resulting neutral item is not shareable.

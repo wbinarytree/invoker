@@ -5,40 +5,32 @@ patch: 7.41d
 card:
   entity: dagon_5
   sentences:
-  - text: Dagon is a rare 7400-gold item with Energy Burst, a unit-target active that
-      deals 400/500/600/700/800 magical damage to an enemy unit.
+  - text: Dagon is a rare item costing 7400 gold that grants 6/7/8/9/10 All Attributes,
+      200/210/220/230/240 Health, 350/375/400/425/450 Mana, and 60/90/120/150/180
+      Cast Range, and provides Energy Burst, an enemy-unit-target active with 640
+      cast range that deals 400/500/600/700/800 magical damage.
     marks:
     - gamefile:items/item_dagon_5#cost
+    - gamefile:items/item_dagon_5#attribs
     - gamefile:items/item_dagon_5#mechanics
     - loc:DOTA_Tooltip_ability_item_dagon_5_Description
-  - text: It grants 6/7/8/9/10 All Attributes.
-    marks:
-    - gamefile:items/item_dagon_5#attribs
-  - text: It grants 200/210/220/230/240 Health.
-    marks:
-    - gamefile:items/item_dagon_5#attribs
-  - text: It grants 350/375/400/425/450 Mana.
-    marks:
-    - gamefile:items/item_dagon_5#attribs
-  - text: It grants 60/90/120/150/180 Cast Range.
-    marks:
-    - gamefile:items/item_dagon_5#attribs
-  - text: Energy Burst has a damage delay of 0.
-    marks:
-    - gamefile:items/item_dagon_5#mechanics
-  - text: Energy Burst has 640 active cast range.
+  - text: Energy Burst has 0 damage delay.
     marks:
     - gamefile:items/item_dagon_5#mechanics
   - text: Energy Burst costs 120/140/160/180/200 mana.
     marks:
     - gamefile:items/item_dagon_5#mechanics
-  - text: Energy Burst has a 27/24/21/18/15 cooldown.
+  - text: Energy Burst has a 27/24/21/18/15-second cooldown.
     marks:
     - gamefile:items/item_dagon_5#mechanics
-  - text: Dagon is built from Dagon (`item_dagon_4`) for 6300 gold and `item_recipe_dagon`
+  - text: Its build formula is Dagon (item_dagon_4) for 6300 gold plus item_recipe_dagon
       for —.
     marks:
     - gamefile:items/item_dagon_5#components
+  - text: “A lesser wand that grows in power the longer it is used, it brings magic
+      to the fingertips of the user.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_dagon_5_Lore
 ---
 
 # Dagon

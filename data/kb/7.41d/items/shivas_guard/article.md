@@ -5,38 +5,41 @@ patch: 7.41d
 card:
   entity: shivas_guard
   sentences:
-  - text: Shiva's Guard is a 4500-gold epic item that provides 17 Armor and 0 Health
-      Regeneration, grants Arctic Blast for 260 magical damage and -40% movement speed
-      with a 4.0 debuff duration in an 825 radius, and grants Freezing Aura for -40
-      attack speed in a 1200 radius.
+  - text: Shiva's Guard is an epic 4500-gold item providing 17 Armor and 0 Health
+      Regeneration, with Arctic Blast dealing 260 magical damage and applying -40%
+      movement speed for 4.0 seconds in an 825 radius, and Freezing Aura applying
+      -40 attack speed in a 1200 radius.
     marks:
     - gamefile:items/item_shivas_guard#cost
     - gamefile:items/item_shivas_guard#attribs
     - loc:DOTA_Tooltip_ability_item_shivas_guard_Description
   - text: It is built from Platemail (1400 gold), Splintmail (950 gold), Chasm Stone
-      (800 gold), and a Recipe (1350 gold).
+      (800 gold), and a recipe (1350 gold).
     marks:
     - gamefile:items/item_shivas_guard#components
     - gamefile:items/item_shivas_guard#cost
-  - text: Arctic Blast has Immediate, No Target, and DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL
-      behavior.
-    marks:
-    - gamefile:items/item_shivas_guard#mechanics
-  - text: Arctic Blast costs 75 mana.
-    marks:
-    - gamefile:items/item_shivas_guard#mechanics
-  - text: Arctic Blast has a 27 cooldown.
-    marks:
-    - gamefile:items/item_shivas_guard#mechanics
-  - text: Arctic Blast is dispellable.
-    marks:
-    - gamefile:items/item_shivas_guard#mechanics
-  - text: The freezing wave has 400 Blast Speed.
+  - text: Arctic Blast has 400 Blast Speed.
     marks:
     - gamefile:items/item_shivas_guard#attribs
   - text: Its Area of Effect is 75.
     marks:
     - gamefile:items/item_shivas_guard#attribs
+  - text: Its ability behavior is Immediate, No Target, DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL.
+    marks:
+    - gamefile:items/item_shivas_guard#mechanics
+  - text: Its effect is dispellable.
+    marks:
+    - gamefile:items/item_shivas_guard#mechanics
+  - text: It costs 75 mana.
+    marks:
+    - gamefile:items/item_shivas_guard#mechanics
+  - text: It has a 27-second cooldown.
+    marks:
+    - gamefile:items/item_shivas_guard#mechanics
+  - text: Said to have belonged to a goddess, today it retains much of its former
+      power.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_shivas_guard_Lore
 ---
 
 # Shiva's Guard

@@ -5,7 +5,7 @@
   "title": "Enchanted Quiver",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8bc0e93996d718de25c909dd752d7be1ab6806dd2d7dcb73389cf0c9c1c5d3a3",
+  "article_sha256": "9a163d3a612bad7b88652249847f85c7884ecae79a81aee0e17f5d250fc60bec",
   "citations": [
     "gamefile:items/item_enchanted_quiver#attribs",
     "gamefile:items/item_enchanted_quiver#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a287940b506c59a7325108c9ad69d552e51a4dc020122a27d04e5c37acd3a1fc",
-    "input_tokens": 14292,
-    "output_tokens": 473,
+    "prompt_version": "7",
+    "request_sha256": "3053f1d6d8a8e5898345d07124d6c768fe0cab44f93c077842373bc277be6b1a",
+    "input_tokens": 13921,
+    "output_tokens": 507,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:59.700811+00:00"
+    "generated_at": "2026-07-27T12:09:53.795637+00:00"
   }
 }

@@ -5,13 +5,13 @@ patch: 7.41d
 card:
   entity: enhancement_vast
   sentences:
-  - text: Vast is a passive enhancement costing 0 gold that modifies Attack Range
-      (Melee & Ranged) by 60/90/120, Bonus Armor by -4/-6/-8, and Damage by 6/10/14.
+  - text: Vast is a passive enhancement costing 0 gold that provides 60/90/120 Attack
+      Range (Melee & Ranged), -4/-6/-8 Bonus Armor, and 6/10/14 Damage.
     marks:
     - gamefile:items/item_enhancement_vast#cost
     - gamefile:items/item_enhancement_vast#mechanics
     - gamefile:items/item_enhancement_vast#attribs
-  - text: Its build formula is Vast (0 gold).
+  - text: 'Build formula: Vast (0 gold).'
     marks:
     - gamefile:items/item_enhancement_vast#cost
 ---

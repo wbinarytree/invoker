@@ -5,7 +5,7 @@
   "title": "Giant's Ring",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e79d1787e6612cb6962e4a01c40e3fb3bf5f18b22bc261de7c200c735661865e",
+  "article_sha256": "125f982c7a72b6be4f57b3148771cc04e448fb9142f1e184cdb1e00c8387a832",
   "citations": [
     "gamefile:items/item_giants_ring#mechanics",
     "loc:DOTA_Tooltip_ability_item_giants_ring_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a84021439f7ab54fd7ed19cf9390576cd3b416e292e94e1c17d1de352aaf3d3c",
-    "input_tokens": 14309,
-    "output_tokens": 489,
+    "prompt_version": "7",
+    "request_sha256": "1aace5ad9cb9111e8be966d6afc8f48692ab5537243e7566414365d46eea42fe",
+    "input_tokens": 13936,
+    "output_tokens": 650,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:07.051356+00:00"
+    "generated_at": "2026-07-27T12:11:16.354753+00:00"
   }
 }

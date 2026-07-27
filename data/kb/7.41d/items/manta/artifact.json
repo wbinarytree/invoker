@@ -5,7 +5,7 @@
   "title": "Manta Style",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "154b876c8939bb052d85f5f42681b134a888bc305f10a8885dbb823487b54b52",
+  "article_sha256": "eb8ef2340c3304e8bd37c16a8fb3b7ec5f88904658639de375823f3e78c18cf2",
   "citations": [
     "gamefile:items/item_manta#cost",
     "gamefile:items/item_manta#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3c9404b2a74e836843e2dcfe0e3f1fed428855d9625b19f6fdb85b7091c380e2",
-    "input_tokens": 14491,
-    "output_tokens": 892,
+    "prompt_version": "7",
+    "request_sha256": "abaab09483102d39b011588e32490be3bfa5df48fa47e664a7e2a02b29233edf",
+    "input_tokens": 14116,
+    "output_tokens": 1442,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:50.571513+00:00"
+    "generated_at": "2026-07-27T12:13:53.214757+00:00"
   }
 }

@@ -5,18 +5,22 @@ patch: 7.41d
 card:
   entity: energy_booster
   sentences:
-  - text: Energy Booster is an 800-gold secret shop item that passively grants 250
-      Mana.
+  - text: Energy Booster is a secret shop item that costs 800 gold and passively grants
+      250 Mana.
     marks:
     - gamefile:items/item_energy_booster#cost
     - gamefile:items/item_energy_booster#attribs
     - gamefile:items/item_energy_booster#mechanics
-  - text: 'Build formula: Energy Booster (800 gold).'
+  - text: Its build formula is Energy Booster (800 gold).
     marks:
     - gamefile:items/item_energy_booster#cost
   - text: It builds into Aeon Disk, Aether Lens, Lotus Orb, and Soul Booster.
     marks:
     - gamefile:items/item_energy_booster#components
+  - text: This lapis gemstone is commonly added to the collection of wizards seeking
+      to improve their presence in combat.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_energy_booster_Lore
 ---
 
 # Energy Booster

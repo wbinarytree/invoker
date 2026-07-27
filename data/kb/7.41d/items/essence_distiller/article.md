@@ -6,56 +6,51 @@ card:
   entity: essence_distiller
   sentences:
   - text: Essence Distiller is a rare 1775-gold item that grants 3 All Attributes,
-      6 Armor, 150 Mana, and 1.75 Mana Regeneration and provides Soul Release, which
-      regenerates allied health or deals 25 damage per second to enemies.
+      6 Armor, 150 Mana, and 1.75 Mana Regeneration and provides the Soul Release
+      active, which provides health regeneration to allies with Soul Heal Amount 40
+      and deals damage per second to enemies with Soul Damage Amount 25.
     marks:
     - gamefile:items/item_essence_distiller#cost
     - gamefile:items/item_essence_distiller#attribs
     - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-  - text: Its build formula is Urn of Shadows (825 gold), Chainmail (500 gold), Wizard
-      Hat (250 gold), and Recipe (200 gold).
+  - text: It is built from Urn of Shadows for 825 gold, Chainmail for 500 gold, Wizard
+      Hat for 250 gold, and a recipe costing 200 gold.
     marks:
     - gamefile:items/item_essence_distiller#components
     - gamefile:items/item_essence_distiller#cost
-  - text: Soul Release has a cast range of 1000.
+  - text: Soul Release has 1000 cast range.
     marks:
     - gamefile:items/item_essence_distiller#mechanics
-  - text: Soul Release has a cooldown of 10.0.
+  - text: Soul Release has a 10.0 cooldown.
     marks:
     - gamefile:items/item_essence_distiller#mechanics
-  - text: On an ally, Soul Release provides health regeneration with a Soul Heal Amount
-      of 40.
+  - text: Soul Release has 8.0 Duration.
+    marks:
+    - gamefile:items/item_essence_distiller#attribs
+  - text: When ground targeted, Soul Release lies dormant and attaches to the first
+      enemy that enters its latch radius.
     marks:
     - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
+  - text: Its Ground Duration is 15.0.
+    marks:
     - gamefile:items/item_essence_distiller#attribs
-  - text: When ground targeted, Soul Release lies dormant for a Ground Duration of
-      15.0.
+  - text: Its Latch Range is 450.
+    marks:
+    - gamefile:items/item_essence_distiller#attribs
+  - text: On enemies, Soul Release provides True Sight over them.
     marks:
     - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-    - gamefile:items/item_essence_distiller#attribs
-  - text: It attaches to the first enemy that enters its 450 Latch Range.
+  - text: On enemies, Soul Release shares their vision with the wearer's team.
     marks:
     - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-    - gamefile:items/item_essence_distiller#attribs
-  - text: On an enemy, Soul Release deals 25 damage per second.
+  - text: Soul Release has 2 Soul Initial Charges.
     marks:
+    - gamefile:items/item_essence_distiller#attribs
+  - text: It gains 1 Soul Additional Charge whenever an enemy hero dies within its
+      1500 Soul Radius.
+    marks:
+    - gamefile:items/item_essence_distiller#attribs
     - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-    - gamefile:items/item_essence_distiller#attribs
-  - text: On enemies, it provides True Sight and shares their vision with the wearer's
-      team.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-  - text: Soul Release has a Duration of 8.0.
-    marks:
-    - gamefile:items/item_essence_distiller#attribs
-  - text: It gains 1 additional charge whenever an enemy hero dies within its 1500
-      Soul Radius.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_essence_distiller_Description
-    - gamefile:items/item_essence_distiller#attribs
-  - text: Soul Release starts with 2 charges.
-    marks:
-    - gamefile:items/item_essence_distiller#attribs
 ---
 
 # Essence Distiller

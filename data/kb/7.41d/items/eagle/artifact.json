@@ -5,7 +5,7 @@
   "title": "Eaglesong",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "dc8d58a584819343a7863d48494420ca1a5104b158d3005251db08967a5771cc",
+  "article_sha256": "d3482395b20a9080e5cd5b83557495243eaf94ad1c299739ed2910a84d3e2d38",
   "citations": [
     "gamefile:items/item_eagle#cost",
     "gamefile:items/item_eagle#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "fe2e55e684f372fd1d6f689d604bb6c4fa1280020c343646d41499f253a7e4d6",
-    "input_tokens": 14239,
-    "output_tokens": 310,
+    "prompt_version": "7",
+    "request_sha256": "f70c14b387ef14d644bbe1734730ce9d8541026785dbb409d70cfa7804564991",
+    "input_tokens": 14291,
+    "output_tokens": 372,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:50.523598+00:00"
+    "generated_at": "2026-07-27T12:09:32.483432+00:00"
   }
 }

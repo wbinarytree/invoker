@@ -5,7 +5,7 @@
   "title": "Orb of Corrosion",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d4a60e512aaa2e20b0e5628c9cf8d8779e09788f273e211794a5eaa25545ffd5",
+  "article_sha256": "0fd6351dd13acef8f8f8168199664a035e31e7d62e54b0096c98a9702f19e68d",
   "citations": [
     "gamefile:items/item_orb_of_corrosion#cost",
     "gamefile:items/item_orb_of_corrosion#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "d22aa63d16ea72226601231c1ed988ccc19ee5901ff65565a24580c9ce2f4095",
-    "input_tokens": 14415,
-    "output_tokens": 746,
+    "prompt_version": "7",
+    "request_sha256": "00f47f621f88526464881e13e59b70472766aa2e6f147d3d607de7b2d15530af",
+    "input_tokens": 14042,
+    "output_tokens": 1196,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:41.249321+00:00"
+    "generated_at": "2026-07-27T12:14:47.915976+00:00"
   }
 }

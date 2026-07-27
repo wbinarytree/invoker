@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: princes_knife
   sentences:
-  - text: Prince's Knife is a 0-gold item with 1.5 Duration, 140 Movespeed, 60 Projectile
-      Bonus, and passive Hex Strike, whose next attack hexes the hit enemy into a
-      frog and has a 10.0 cooldown.
+  - text: Prince's Knife is a 0 gold item granting 1.5 Duration, 140 Movespeed, and
+      60 Projectile Bonus; its passive Hex Strike causes the next attack to hex the
+      hit enemy into a frog and has a 10.0 cooldown.
     marks:
     - gamefile:items/item_princes_knife#cost
     - gamefile:items/item_princes_knife#attribs
     - gamefile:items/item_princes_knife#mechanics
     - loc:DOTA_Tooltip_ability_item_princes_knife_Description
-  - text: Prince's Knife is built from Prince's Knife (0 gold).
+  - text: Its build formula is Prince's Knife (0 gold).
     marks:
     - gamefile:items/item_princes_knife#cost
 ---

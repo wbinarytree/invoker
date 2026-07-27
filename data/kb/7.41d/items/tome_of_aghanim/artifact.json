@@ -5,7 +5,7 @@
   "title": "Tome of Aghanim",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4678f21ec8e1cfd2183b1c13886a3ed510347f9ba5f9cde3010f8f8b9fef31dd",
+  "article_sha256": "0a0665b7a4caef745dc2131798a60b7f5d2e7fc34f5750eba140bf2e7ab0ddf8",
   "citations": [
     "gamefile:items/item_tome_of_aghanim#cost",
     "loc:DOTA_Tooltip_ability_item_tome_of_aghanim_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "053a410205ca835ed05eb3a9811372bef1e567c3a0d46eba4f3d689dc9b2d257",
-    "input_tokens": 14294,
-    "output_tokens": 496,
+    "prompt_version": "7",
+    "request_sha256": "dd306a20152c337e316915df9256b5fa18ed9952f0b21b698bf9f95863d9144b",
+    "input_tokens": 13919,
+    "output_tokens": 642,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:59.388678+00:00"
+    "generated_at": "2026-07-27T12:18:06.836634+00:00"
   }
 }

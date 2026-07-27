@@ -5,9 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_keen_eyed
   sentences:
-  - text: Keen-eyed is an enhancement item with Passive behavior that costs 0 gold
-      and grants 1/1.5/2 Mana Regeneration, 125/135/145 Cast Range, and 10/12/14 Mana
-      Reduction Pct.
+  - text: Keen-eyed is a Passive enhancement item costing 0 gold that grants 1/1.5/2
+      Mana Regeneration, 125/135/145 Cast Range, and 10/12/14 Mana Reduction Pct.
     marks:
     - gamefile:items/item_enhancement_keen_eyed#cost
     - gamefile:items/item_enhancement_keen_eyed#mechanics

@@ -5,7 +5,7 @@
   "title": "Ex Machina",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1ae0bed5850811032af32a1ae844202b334ee7c82d14da78ca137040f938dd98",
+  "article_sha256": "4e8f679661dcaa9ba9d07f4b0e64d6ff8b0e0a707e9e0cd897412e440441681b",
   "citations": [
     "gamefile:items/item_ex_machina#cost",
     "gamefile:items/item_ex_machina#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9845877fbd67e9fc6b00c91bc53bb2969cc05a99059e79318a766d3f751d7ec8",
-    "input_tokens": 14277,
-    "output_tokens": 382,
+    "prompt_version": "7",
+    "request_sha256": "4c15175d6ef4fd5cfd1b7860185bc2b301e9240e4b8c61f894b0e2aeeb21eb15",
+    "input_tokens": 13904,
+    "output_tokens": 642,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:31.911004+00:00"
+    "generated_at": "2026-07-27T12:10:43.685949+00:00"
   }
 }

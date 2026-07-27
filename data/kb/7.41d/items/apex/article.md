@@ -5,12 +5,15 @@ patch: 7.41d
 card:
   entity: apex
   sentences:
-  - text: Apex is a Passive item costing 0 gold that grants 40 Primary Attribute and
-      24 Primary Stat Universal.
+  - text: Apex is an item with Passive behavior that costs 0 gold and grants 40 Primary
+      Attribute and 24 Primary Stat Universal.
     marks:
     - gamefile:items/item_apex#mechanics
     - gamefile:items/item_apex#attribs
     - gamefile:items/item_apex#cost
+  - text: “Three orbs of remarkable power bound within a single scepter.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_apex_Lore
 ---
 
 # Apex

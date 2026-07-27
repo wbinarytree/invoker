@@ -5,18 +5,22 @@ patch: 7.41d
 card:
   entity: falcon_blade
   sentences:
-  - text: Falcon Blade is a rare 1125-gold item that provides 14 Damage, 200 Health,
-      and 1.8 Mana Regeneration.
+  - text: Falcon Blade is a rare item costing 1125 gold that provides 14 Damage, 200
+      Health, and 1.8 Mana Regeneration.
     marks:
     - gamefile:items/item_falcon_blade#cost
     - gamefile:items/item_falcon_blade#attribs
-  - text: It is built from Blades of Attack (450 gold), Fluffy Hat (250 gold), Sage's
-      Mask (175 gold), and a 250-gold Recipe.
+  - text: Falcon Blade is built from Blades of Attack (450 gold), Fluffy Hat (250
+      gold), Sage's Mask (175 gold), and a Recipe (250 gold).
     marks:
     - gamefile:items/item_falcon_blade#components
   - text: Falcon Blade has passive behavior.
     marks:
     - gamefile:items/item_falcon_blade#mechanics
+  - text: An enchanted blade that long ago raised a hopeless urchin from pauper to
+      king.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_falcon_blade_Lore
 ---
 
 # Falcon Blade

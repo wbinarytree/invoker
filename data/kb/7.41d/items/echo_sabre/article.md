@@ -6,29 +6,31 @@ card:
   entity: echo_sabre
   sentences:
   - text: Echo Sabre is a 2700-gold artifact item that grants 20 Damage, 1.75 Mana
-      Regeneration, and 15 Strength; Echo Strike causes melee attacks to attack twice
-      in quick succession and applies 100% Movement Slow for 0.8 seconds on the first
-      strike.
+      Regeneration, and 15 Strength; Echo Strike makes melee attacks attack twice
+      in quick succession and applies 100% Movement Slow for 0.8 on the first strike.
     marks:
     - gamefile:items/item_echo_sabre#cost
     - gamefile:items/item_echo_sabre#attribs
     - loc:DOTA_Tooltip_Ability_item_echo_sabre_Description
-  - text: Echo Strike is passive.
+  - text: Its behavior is passive.
     marks:
     - gamefile:items/item_echo_sabre#mechanics
-  - text: Echo Strike is dispellable.
+  - text: It is dispellable.
     marks:
     - gamefile:items/item_echo_sabre#mechanics
-  - text: Echo Strike costs 0 mana.
+  - text: It has a mana cost of 0.
     marks:
     - gamefile:items/item_echo_sabre#mechanics
-  - text: Echo Strike has a 5-second cooldown.
+  - text: It has a cooldown of 5.
     marks:
     - gamefile:items/item_echo_sabre#mechanics
-  - text: Echo Sabre's build formula is Ogre Axe (1000 gold), Broadsword (1000 gold),
-      and Void Stone (700 gold); it builds into Harpoon.
+  - text: It is built from Ogre Axe (1000 gold), Broadsword (1000 gold), and Void
+      Stone (700 gold), and builds into Harpoon.
     marks:
     - gamefile:items/item_echo_sabre#components
+  - text: “A deceptively swift blade imbued with resonant magic.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_echo_sabre_Lore
 ---
 
 # Echo Sabre

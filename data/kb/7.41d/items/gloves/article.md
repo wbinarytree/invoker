@@ -5,11 +5,12 @@ patch: 7.41d
 card:
   entity: gloves
   sentences:
-  - text: Gloves of Haste is a 450 gold component item that passively grants 20 Attack
-      Speed.
+  - text: Gloves of Haste is a 450-gold component item that grants 20 Attack Speed.
     marks:
     - gamefile:items/item_gloves#cost
     - gamefile:items/item_gloves#attribs
+  - text: Its behavior is passive.
+    marks:
     - gamefile:items/item_gloves#mechanics
   - text: Its build formula is Gloves of Haste (450 gold).
     marks:
@@ -18,6 +19,9 @@ card:
       Treads.
     marks:
     - gamefile:items/item_gloves#components
+  - text: A pair of magical gloves that seems to render weapons weightless.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_gloves_Lore
 ---
 
 # Gloves of Haste

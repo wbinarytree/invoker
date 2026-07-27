@@ -8,13 +8,16 @@ card:
   - text: Null Talisman is a common passive item costing 505 gold that grants 2 Agility,
       5 Intelligence, 1.0 Mana Regeneration, 3% Max Mana, and 2 Strength.
     marks:
-    - gamefile:items/item_null_talisman#cost
     - gamefile:items/item_null_talisman#mechanics
+    - gamefile:items/item_null_talisman#cost
     - gamefile:items/item_null_talisman#attribs
   - text: It is built from Circlet (155 gold), Mantle of Intelligence (140 gold),
       and a Recipe (210 gold).
     marks:
     - gamefile:items/item_null_talisman#components
+  - text: “A small gemstone attached to several chains.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_null_talisman_Lore
 ---
 
 # Null Talisman

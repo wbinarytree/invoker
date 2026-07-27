@@ -5,7 +5,7 @@
   "title": "Apex",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "75b09ee6fdcc4b62b9e42a07d2fdc23b1da2943ba6100d4d4dba37fbfb6df538",
+  "article_sha256": "277e9bf04f731c8f49c1f8e34a9d84224d54fe742228dbdc59e346321632d461",
   "citations": [
     "gamefile:items/item_apex#mechanics",
     "gamefile:items/item_apex#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b08e4622dbda9b0b281779a9a210b93afce93ebaf4be1927400b56ad0fc7c655",
-    "input_tokens": 14183,
-    "output_tokens": 216,
+    "prompt_version": "7",
+    "request_sha256": "ddc5c68f3538dd01f167943d1d29a651f5a8902d369cd795239217587465c5a0",
+    "input_tokens": 14233,
+    "output_tokens": 309,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:32.520380+00:00"
+    "generated_at": "2026-07-27T12:06:43.291008+00:00"
   }
 }

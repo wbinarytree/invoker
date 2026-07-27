@@ -5,7 +5,7 @@
   "title": "Veil of Discord",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d9e3c610b8346fe76e34e2d8721788addd0a8b09f4df8fc9bfe74b2179b63120",
+  "article_sha256": "cf8f246d7e2e18fc57dc389322b45d626aaaf12c3161fad7a7765116088f1025",
   "citations": [
     "gamefile:items/item_veil_of_discord#cost",
     "gamefile:items/item_veil_of_discord#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "959ee2c8b84bc88ec103e1bc8b09e6826c9f6fe10b06a3bfad50256b990cc05d",
-    "input_tokens": 14548,
-    "output_tokens": 1306,
+    "prompt_version": "7",
+    "request_sha256": "f40a58d721f88cbe969f1ef5fc782f416d740c62f89a5fe201a78dc6f8282528",
+    "input_tokens": 14598,
+    "output_tokens": 1450,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:24.438573+00:00"
+    "generated_at": "2026-07-27T12:18:54.885405+00:00"
   }
 }

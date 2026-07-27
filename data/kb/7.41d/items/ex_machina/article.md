@@ -5,16 +5,17 @@ patch: 7.41d
 card:
   entity: ex_machina
   sentences:
-  - text: Ex Machina is a 0-gold item with 0 Bonus Armor whose 350-mana, 60.0-cooldown
-      active resets the cooldown on all items except Refresher Orb.
+  - text: 'Ex Machina is a 0-gold item with 0 Bonus Armor; its Immediate, No Target
+      Active: Reset Cooldowns costs 350 mana, has 60.0 Cooldown, and resets the cooldown
+      on all items except Refresher Orb.'
     marks:
     - gamefile:items/item_ex_machina#cost
     - gamefile:items/item_ex_machina#attribs
     - gamefile:items/item_ex_machina#mechanics
     - loc:DOTA_Tooltip_Ability_item_ex_machina_Description
-  - text: The active has Immediate, No Target behavior.
+  - text: “The remains of an ancient universe, preserved within a single sphere.”
     marks:
-    - gamefile:items/item_ex_machina#mechanics
+    - loc:DOTA_Tooltip_Ability_item_ex_machina_Lore
 ---
 
 # Ex Machina

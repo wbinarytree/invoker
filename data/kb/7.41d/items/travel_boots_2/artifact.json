@@ -5,7 +5,7 @@
   "title": "Boots of Travel 2",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7cb4cb4513936fbf19ac5f7c45540bf607703dadff10366a2aedbd43c9da633f",
+  "article_sha256": "7745df86c721b7c61c0799e0dc906a37ec2e18be11a5c86b5f70a3c4c2430da6",
   "citations": [
     "gamefile:items/item_travel_boots_2#cost",
     "gamefile:items/item_travel_boots_2#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1b143edfa12c2d8494813006f06ed1bbbd7c8ab18d567f0c3d7e41f93d2476e7",
-    "input_tokens": 14364,
-    "output_tokens": 817,
+    "prompt_version": "7",
+    "request_sha256": "5aa78ee4a602270e0122d63a1850c8d117b5a8ea3c46ae6690cba0505902311d",
+    "input_tokens": 13991,
+    "output_tokens": 837,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:22:49.321616+00:00"
+    "generated_at": "2026-07-27T12:18:17.562882+00:00"
   }
 }

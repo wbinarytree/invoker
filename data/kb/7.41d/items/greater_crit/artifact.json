@@ -5,7 +5,7 @@
   "title": "Daedalus",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7b5b55f8743e036ce898830f389eeeb540f499444ea3ddd1f154a3f6d9fb738c",
+  "article_sha256": "97c8b8972c070adbe3085d3dacca7cf0192c36a97f3e4a1caf8ff501fb6c1272",
   "citations": [
     "gamefile:items/item_greater_crit#cost",
     "gamefile:items/item_greater_crit#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c9444735e687999d30686c29590e128d19d935ca2bab8f9dece7ff7205a64d6b",
-    "input_tokens": 14304,
-    "output_tokens": 386,
+    "prompt_version": "7",
+    "request_sha256": "b0efd4d91e40dcdcf7c41e01f29be21f5828278b16a226240c719014d0ca40d4",
+    "input_tokens": 13929,
+    "output_tokens": 413,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:14.338245+00:00"
+    "generated_at": "2026-07-27T12:11:20.056692+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Blink Dagger",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2e67cd1318962ace009514797621e9b7cd6506c35433c29301e5ce2164fb6222",
+  "article_sha256": "5a8eeff52aa8c6ca2732f062ba84da5bede6fe4b6c2609c7d83b13a800361910",
   "citations": [
     "gamefile:items/item_blink#cost",
     "loc:DOTA_Tooltip_ability_item_blink_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3661c1b2838f4dd478a8c2df84b805b9a4679de92b0191d2a6787ef95e3428a8",
-    "input_tokens": 14411,
-    "output_tokens": 854,
+    "prompt_version": "7",
+    "request_sha256": "09ac9a3f1ead10069be8544160d5844d4e5f29e23e444c31e6b4a1e15c83422a",
+    "input_tokens": 14040,
+    "output_tokens": 637,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:16.593218+00:00"
+    "generated_at": "2026-07-27T12:07:35.276512+00:00"
   }
 }

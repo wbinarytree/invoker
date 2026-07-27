@@ -5,10 +5,10 @@ patch: 7.41d
 card:
   entity: vambrace
   sentences:
-  - text: Vambrace is a common 0-gold item granting 15 Bonus Attack Speed, 10 Bonus
+  - text: Vambrace is a common 0 gold item that grants 15 Bonus Attack Speed, 10 Bonus
       Magic Resistance, 10 Bonus Primary Stat, 4 Bonus Secondary Stat, and 8 Bonus
-      Spell Amp; Switch Attributes selects Strength, Agility, or Intelligence to receive
-      the primary-stat bonus while the other two receive the secondary-stat bonus.
+      Spell Amp, with Switch Attributes to switch the active attribute among Strength,
+      Agility, and Intelligence.
     marks:
     - gamefile:items/item_vambrace#cost
     - gamefile:items/item_vambrace#attribs
@@ -16,6 +16,15 @@ card:
   - text: Switch Attributes has Immediate, No Target behavior.
     marks:
     - gamefile:items/item_vambrace#mechanics
+  - text: The selected attribute receives Bonus Primary Stat, while the other two
+      receive Bonus Secondary Stat.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vambrace_Description
+    - gamefile:items/item_vambrace#attribs
+  - text: The coveted treasure that divided the heirs of Queen Raiya upon her death,
+      resulting in the eventual downfall of her kingdom.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vambrace_Lore
 ---
 
 # Vambrace

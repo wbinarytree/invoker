@@ -6,38 +6,51 @@ card:
   entity: ethereal_blade
   sentences:
   - text: Ethereal Blade is an epic item costing 5200 gold that grants 24 All Attributes,
-      24 Bonus Intellect, and 24 Bonus Strength; Ether Blast makes a target ethereal
-      for 4.0 seconds, while enemies receive -80% movement slow and 50 base magical
-      damage plus 1.0 times the caster’s summed attributes.
+      24 Bonus Intellect, and 24 Bonus Strength and provides Ether Blast, which converts
+      a target to ethereal form for 4.0 seconds.
     marks:
     - gamefile:items/item_ethereal_blade#cost
     - gamefile:items/item_ethereal_blade#attribs
     - loc:DOTA_Tooltip_ability_item_ethereal_blade_Description
-  - text: Its build formula is Ultimate Orb (2800 gold) + Ghost Scepter (1500 gold)
-      + Recipe (900 gold).
-    marks:
-    - gamefile:items/item_ethereal_blade#components
-  - text: Ethereal form makes the target immune to physical damage, unable to attack,
-      and more vulnerable to magic damage, with ETHEREAL DAMAGE BONUS -30%.
+  - text: In ethereal form, the target is immune to physical damage, cannot attack,
+      and is more vulnerable to magic damage.
     marks:
     - loc:DOTA_Tooltip_ability_item_ethereal_blade_Description
-    - gamefile:items/item_ethereal_blade#attribs
-  - text: Ether Blast has projectile speed 1400.
+  - text: Enemy targets receive -80% Blast Movement Slow.
     marks:
     - gamefile:items/item_ethereal_blade#attribs
-  - text: The ability is Unit Target, uses DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK,
-      and is dispellable.
+    - loc:DOTA_Tooltip_ability_item_ethereal_blade_Description
+  - text: Enemy targets take 50 base magical damage plus 1.0 times the sum of the
+      caster’s attributes.
+    marks:
+    - gamefile:items/item_ethereal_blade#attribs
+    - loc:DOTA_Tooltip_ability_item_ethereal_blade_Description
+  - text: Ethereal Damage Bonus is -30%.
+    marks:
+    - gamefile:items/item_ethereal_blade#attribs
+  - text: The build formula is Ultimate Orb for 2800 gold, Ghost Scepter for 1500
+      gold, and a Recipe for 900 gold.
+    marks:
+    - gamefile:items/item_ethereal_blade#components
+  - text: Ether Blast is Unit Target.
     marks:
     - gamefile:items/item_ethereal_blade#mechanics
-  - text: Its cast range is 800.
+  - text: Ether Blast is dispellable.
     marks:
     - gamefile:items/item_ethereal_blade#mechanics
-  - text: Its mana cost is 100.
+  - text: Ether Blast has 800 cast range.
     marks:
     - gamefile:items/item_ethereal_blade#mechanics
-  - text: Its cooldown is 22.0.
+  - text: Ether Blast costs 100 mana.
     marks:
     - gamefile:items/item_ethereal_blade#mechanics
+  - text: Ether Blast has a 22.0 cooldown.
+    marks:
+    - gamefile:items/item_ethereal_blade#mechanics
+  - text: A flickering blade of a ghastly nature, capable of dealing damage in both
+      magical and physical planes.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ethereal_blade_Lore
 ---
 
 # Ethereal Blade

@@ -11,10 +11,8 @@ card:
     - gamefile:items/item_kaya#cost
     - gamefile:items/item_kaya#attribs
   - text: Its build formula is Staff of Wizardry (1000 gold), Robe of the Magi (450
-      gold), and a Recipe (650 gold).
-    marks:
-    - gamefile:items/item_kaya#components
-  - text: It builds into Kaya and Sange, Meteor Hammer, Trident, and Yasha and Kaya.
+      gold), and a Recipe (650 gold); it builds into Kaya and Sange, Meteor Hammer,
+      Trident, and Yasha and Kaya.
     marks:
     - gamefile:items/item_kaya#components
   - text: Kaya has passive behavior.

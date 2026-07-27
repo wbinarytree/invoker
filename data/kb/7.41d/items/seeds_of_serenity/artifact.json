@@ -5,7 +5,7 @@
   "title": "Seeds of Serenity",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ec637a4b13714432c809f74252d2ee172e8ee62cd9e9db6b8b99a95e53f47bc6",
+  "article_sha256": "620f856ae6342f90b01f60841a289244ce8445f1ee87eed73a1c6de891e298e3",
   "citations": [
     "gamefile:items/item_seeds_of_serenity#mechanics",
     "loc:DOTA_Tooltip_Ability_item_seeds_of_serenity_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1a380a562daf8f890d5cb9f20ab50796e4b78ac9f747417abc16012a9ca1589a",
-    "input_tokens": 14378,
-    "output_tokens": 746,
+    "prompt_version": "7",
+    "request_sha256": "4bd6a3517b377f0d227d0f741303763391ddd29b312e96715afd1cabbb6a0755",
+    "input_tokens": 14007,
+    "output_tokens": 1436,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:13.558037+00:00"
+    "generated_at": "2026-07-27T12:16:43.441159+00:00"
   }
 }

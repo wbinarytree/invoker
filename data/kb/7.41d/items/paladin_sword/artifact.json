@@ -5,7 +5,7 @@
   "title": "Paladin Sword",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f6c636c798576eb0b8aae90dc4ded50b49cbc0da9aa9f7dffa1fb205b1ed9a96",
+  "article_sha256": "c1cd03842f93bafbd6aef920dfb79bba13d3fd45b18255c61ea324a7b34e2cae",
   "citations": [
     "gamefile:items/item_paladin_sword#attribs",
     "gamefile:items/item_paladin_sword#cost",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "687324798356d70dc2074156f2b85c5e7d78c68b32da90309dce4287f1669264",
-    "input_tokens": 14271,
-    "output_tokens": 281,
+    "prompt_version": "7",
+    "request_sha256": "232b64830d89b44bd8024985b436388ce5eff735fee4dd8aa8276b33203862f5",
+    "input_tokens": 13898,
+    "output_tokens": 383,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:41.351286+00:00"
+    "generated_at": "2026-07-27T12:14:56.643527+00:00"
   }
 }

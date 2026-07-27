@@ -5,7 +5,7 @@
   "title": "Greedy",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6d6c773c7c7c9de4c06d97d2221fca42a771b802bf70f82047cdf4ebd77ae6a1",
+  "article_sha256": "3a7ba9d25d039281f1000572772323e53ad15c35cf203e62078c121958abdfd1",
   "citations": [
     "gamefile:items/item_enhancement_greedy#cost",
     "gamefile:items/item_enhancement_greedy#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "bd1d557d498d60f56610d008ab528c718f9717e4affb3d96859f4111413da2c2",
-    "input_tokens": 14232,
-    "output_tokens": 273,
+    "prompt_version": "7",
+    "request_sha256": "e295d1a1df135bfaba2fec3d071a023736a9cd16a7cfaf1a477c59351eae4943",
+    "input_tokens": 13855,
+    "output_tokens": 268,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:43.144193+00:00"
+    "generated_at": "2026-07-27T12:10:11.756553+00:00"
   }
 }

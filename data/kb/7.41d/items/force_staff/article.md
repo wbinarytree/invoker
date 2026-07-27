@@ -6,32 +6,39 @@ card:
   entity: force_staff
   sentences:
   - text: Force Staff is a rare 2200-gold item that grants 175 Health and 10 Intelligence
-      and provides Force, which pushes a target unit 600 units in its facing direction
-      over 0.5 seconds.
+      and provides Force, which pushes a target unit 600 in its facing direction over
+      0.5 seconds.
     marks:
     - gamefile:items/item_force_staff#cost
     - gamefile:items/item_force_staff#attribs
     - gamefile:items/item_force_staff#mechanics
     - loc:DOTA_Tooltip_ability_item_force_staff_Description
+  - text: Its Enemy Cast Range is 850.
+    marks:
+    - gamefile:items/item_force_staff#attribs
+  - text: Force has a cast range of 550.
+    marks:
+    - gamefile:items/item_force_staff#mechanics
+  - text: Force costs 150 mana.
+    marks:
+    - gamefile:items/item_force_staff#mechanics
+  - text: Force has a 19.0-second cooldown.
+    marks:
+    - gamefile:items/item_force_staff#mechanics
   - text: Force has Unit Target behavior.
     marks:
     - gamefile:items/item_force_staff#mechanics
   - text: Force does not resume attacks.
     marks:
     - gamefile:items/item_force_staff#mechanics
-  - text: Force has 550 cast range, 150 mana cost, and 19.0 cooldown.
+  - text: Force Staff is built from Staff of Wizardry for 1000 gold, Fluffy Hat for
+      250 gold, and a Recipe for 950 gold, and builds into Hurricane Pike.
     marks:
-    - gamefile:items/item_force_staff#mechanics
-  - text: Its Enemy Cast Range is 850.
-    marks:
-    - gamefile:items/item_force_staff#attribs
-  - text: 'Build formula: Staff of Wizardry (1000 gold) + Fluffy Hat (250 gold) +
-      Recipe (950 gold).'
-    marks:
+    - gamefile:items/item_force_staff#cost
     - gamefile:items/item_force_staff#components
-  - text: Force Staff builds into Hurricane Pike.
+  - text: Allows you to manipulate others, for good or evil.
     marks:
-    - gamefile:items/item_force_staff#components
+    - loc:DOTA_Tooltip_ability_item_force_staff_Lore
 ---
 
 # Force Staff

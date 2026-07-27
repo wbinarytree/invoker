@@ -11,7 +11,7 @@ card:
     - gamefile:items/item_heart#cost
     - gamefile:items/item_heart#attribs
   - text: It is built from Reaver (2800 gold), Ring of Tarrasque (1700 gold), and
-      a Recipe (700 gold).
+      Recipe (700 gold).
     marks:
     - gamefile:items/item_heart#components
   - text: The item has passive behavior.
@@ -21,6 +21,9 @@ card:
       based on missing health.
     marks:
     - loc:DOTA_Tooltip_ability_item_heart_Description
+  - text: “Preserved heart of an extinct monster, it bolsters the bearer's fortitude.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_heart_Lore
 ---
 
 # Heart of Tarrasque

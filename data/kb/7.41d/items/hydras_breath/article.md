@@ -5,32 +5,36 @@ patch: 7.41d
 card:
   entity: hydras_breath
   sentences:
-  - text: Hydra's Breath is a rare 5900-gold item granting 30 Agility, 150 ranged-only
-      Attack Range, and 15 Strength; Miasma deals Magical Damage equal to 2.5% of
+  - text: Hydra's Breath is a rare 5900-gold item that grants 30 Agility, 150 ranged-only
+      attack range, and 15 Strength; Miasma deals magical damage equal to 2.5% of
       a target's Max HP per second for 3 seconds, while Polycephaly gives ranged attacks
-      a 30% chance to fire 3 additional projectiles within a 120-degree forward angle
-      and 150 bonus range.
+      a 30% chance to fire 3 additional projectiles.
     marks:
     - gamefile:items/item_hydras_breath#cost
     - gamefile:items/item_hydras_breath#attribs
     - loc:DOTA_Tooltip_Ability_item_hydras_breath_Description
-  - text: Miasma has 0 Poison Base Damage.
-    marks:
-    - gamefile:items/item_hydras_breath#attribs
-  - text: Polycephaly's additional projectiles have 20 Base Proc Damage and a 75%
-      Proc Damage Percentage.
+  - text: Polycephaly targets nearby enemies within a forward angle of 120 and gives
+      secondary projectiles 150 bonus range.
     marks:
     - gamefile:items/item_hydras_breath#attribs
     - loc:DOTA_Tooltip_Ability_item_hydras_breath_Description
-  - text: The primary attack's modified normal-attack damage value is 100%.
+  - text: Additional projectiles use 20 base proc damage and 75% proc damage.
     marks:
     - gamefile:items/item_hydras_breath#attribs
     - loc:DOTA_Tooltip_Ability_item_hydras_breath_Description
-  - text: Additional projectiles do not trigger on-hit effects except Miasma.
+  - text: Additional projectiles do not trigger on-hit effects other than Miasma.
     marks:
     - loc:DOTA_Tooltip_Ability_item_hydras_breath_Description
-  - text: It is built from Specialist's Array (2550 gold), Dragon Lance (1900 gold),
-      Orb of Venom (350 gold), and a Recipe (1100 gold).
+  - text: The primary attack has a separate proc-damage percentage of 100% in its
+      tooltip.
+    marks:
+    - gamefile:items/item_hydras_breath#attribs
+    - loc:DOTA_Tooltip_Ability_item_hydras_breath_Description
+  - text: Its behavior is Passive, with 0 cast range, 0 mana cost, and 0 cooldown.
+    marks:
+    - gamefile:items/item_hydras_breath#mechanics
+  - text: Its 5900-gold build formula is Specialist's Array at 2550 gold, Dragon Lance
+      at 1900 gold, Orb of Venom at 350 gold, and a Recipe at 1100 gold.
     marks:
     - gamefile:items/item_hydras_breath#components
 ---

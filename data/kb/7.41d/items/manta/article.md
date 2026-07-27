@@ -5,39 +5,47 @@ patch: 7.41d
 card:
   entity: manta
   sentences:
-  - text: Manta Style is a 4650-gold epic item granting 26 Agility, 15 Attack Speed,
-      10 Intelligence, 10% Movement Speed, and 10 Strength; its Mirror Image active
-      costs 125 mana, has a 34.0-second cooldown, and creates 2 images lasting 18
-      seconds.
+  - text: Manta Style is an epic item costing 4650 gold that grants 26 Agility, 15
+      Attack Speed, 10 Intelligence, 10% Movement Speed, and 10 Strength and provides
+      Mirror Image, which creates 2 images of the hero with an illusion duration of
+      18.
     marks:
     - gamefile:items/item_manta#cost
     - gamefile:items/item_manta#attribs
-    - gamefile:items/item_manta#mechanics
     - loc:DOTA_Tooltip_ability_item_manta_Description
-  - text: The build formula is Yasha (2100 gold), Diadem (1000 gold), and Recipe (1550
-      gold), producing Manta Style at 4650 gold.
+  - text: It is built from Yasha for 2100 gold, Diadem for 1000 gold, and a Recipe
+      for 1550 gold.
     marks:
     - gamefile:items/item_manta#components
-    - gamefile:items/item_manta#cost
-  - text: Mirror Image applies a Basic Dispel.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_manta_Description
-  - text: Mirror Image has No Target behavior and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK.
-    marks:
-    - gamefile:items/item_manta#mechanics
-  - text: The images deal 33% outgoing damage for melee heroes and 28% for ranged
-      heroes.
+  - text: The images deal 33% outgoing melee damage or 28% outgoing ranged damage.
     marks:
     - gamefile:items/item_manta#attribs
   - text: The images take 300% incoming damage.
     marks:
     - gamefile:items/item_manta#attribs
-  - text: Mirror Image provides 0.1 seconds of invulnerability.
+  - text: Mirror Image has an invulnerability duration of 0.1.
     marks:
     - gamefile:items/item_manta#attribs
-  - text: The images have 1000 vision radius.
+  - text: The images have a vision radius of 1000.
     marks:
     - gamefile:items/item_manta#attribs
+  - text: Mirror Image has No Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK
+      behavior.
+    marks:
+    - gamefile:items/item_manta#mechanics
+  - text: Mirror Image costs 125 mana.
+    marks:
+    - gamefile:items/item_manta#mechanics
+  - text: Mirror Image has a 34.0 cooldown.
+    marks:
+    - gamefile:items/item_manta#mechanics
+  - text: Mirror Image has a Basic Dispel dispel type.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_manta_Description
+  - text: “An axe made of reflective materials that causes confusion amongst enemy
+      ranks.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_manta_Lore
 ---
 
 # Manta Style

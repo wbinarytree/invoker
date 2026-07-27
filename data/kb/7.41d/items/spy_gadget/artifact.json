@@ -5,7 +5,7 @@
   "title": "Telescope",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "afb1ef1951c904736b9d9219a9835194983086cfe354a7d27f70747afa0355e5",
+  "article_sha256": "fba17c466dd6274629aeedee8d8726667e429af023509c095061e22730d0b3f8",
   "citations": [
     "gamefile:items/item_spy_gadget#attribs",
     "gamefile:items/item_spy_gadget#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "565f771805b1a671a4cfe4423d2350077aecdca4e5da950a8547dca381be1a9b",
-    "input_tokens": 14260,
-    "output_tokens": 636,
+    "prompt_version": "7",
+    "request_sha256": "a986bad11ff41461cb52d44a1906b7ed8430fa28abeafe321786a5f048878247",
+    "input_tokens": 13889,
+    "output_tokens": 1218,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:01.543728+00:00"
+    "generated_at": "2026-07-27T12:17:37.474414+00:00"
   }
 }

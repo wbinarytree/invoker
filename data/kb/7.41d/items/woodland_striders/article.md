@@ -5,17 +5,25 @@ patch: 7.41d
 card:
   entity: woodland_striders
   sentences:
-  - text: Woodland Striders is a 0-gold item providing 60 Health Regeneration and
-      140 Movement Speed; its 3-second Woodland Stride active creates trees behind
-      the user that remain for up to 15 seconds, while passive Tree Walking removes
-      the movement speed limit and permits free pathing through trees.
+  - text: Woodland Striders is a 0 gold item that provides 60 Health Regeneration
+      and 140 Movement Speed; its Woodland Stride has Active Duration 3 and creates
+      trees with Tree Duration 15, while Tree Walking removes the movement speed limit
+      and permits free pathing through trees.
     marks:
-    - gamefile:items/item_woodland_striders#cost
     - gamefile:items/item_woodland_striders#attribs
+    - gamefile:items/item_woodland_striders#cost
     - loc:DOTA_Tooltip_Ability_item_woodland_striders_Description
-  - text: Woodland Stride is an immediate, no-target active with a 20.0-second cooldown.
+  - text: Woodland Stride has Immediate, No Target behavior and a 20.0 cooldown.
     marks:
     - gamefile:items/item_woodland_striders#mechanics
+  - text: Woodland Stride creates a path of trees behind the user for its active duration,
+      and the trees remain for up to their tree duration.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_woodland_striders_Description
+  - text: Tree Walking removes the movement speed limit and permits free pathing through
+      trees.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_woodland_striders_Description
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_Ability_item_woodland_striders_Description

@@ -5,7 +5,7 @@
   "title": "Point Booster",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0b61fb0c499bb3d835cdb75c0f1dbb836cd343913eae7c36e990d184edc6b143",
+  "article_sha256": "3baee2ca9f2c553b31efd4953c2c522f750fc06d1887282732f332839e58e5a9",
   "citations": [
     "gamefile:items/item_point_booster#cost",
     "gamefile:items/item_point_booster#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ce1dc5ec8f486e6b17b031464638c9612882645779519d8b0a0657998fb7438d",
-    "input_tokens": 14294,
-    "output_tokens": 368,
+    "prompt_version": "7",
+    "request_sha256": "abbcc6f838343bb5dfa94c0742b08d16b4ed37c03aa1b0cf184be5880192a6c1",
+    "input_tokens": 13923,
+    "output_tokens": 417,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:33.912178+00:00"
+    "generated_at": "2026-07-27T12:15:19.058966+00:00"
   }
 }

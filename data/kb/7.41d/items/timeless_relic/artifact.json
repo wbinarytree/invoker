@@ -5,7 +5,7 @@
   "title": "Timeless Relic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "36c4b0efb04de5268441864e543f4219d6497aeb2b6dabe10907f0136db864da",
+  "article_sha256": "59a7d758f926a0195a1e934daf9bd40cc7304bea9011fe90fc4c844374c606b1",
   "citations": [
     "gamefile:items/item_timeless_relic#mechanics",
     "gamefile:items/item_timeless_relic#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "10c3055d3da76cef44e17766fdce4e656702e82e47f65e6843e401350272ff8d",
-    "input_tokens": 14253,
-    "output_tokens": 362,
+    "prompt_version": "7",
+    "request_sha256": "18b048c2f847063c290dacde5a194007f50c13d06525002f2976a7ce4f192b40",
+    "input_tokens": 13880,
+    "output_tokens": 389,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:54.041824+00:00"
+    "generated_at": "2026-07-27T12:17:57.754162+00:00"
   }
 }

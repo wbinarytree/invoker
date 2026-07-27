@@ -5,20 +5,22 @@ patch: 7.41d
 card:
   entity: ring_of_basilius
   sentences:
-  - text: Ring of Basilius is a rare item costing 425 gold that provides 0.25 Mana
-      Regeneration and passively grants allies 1.0 Aura Mana Regen within a 1200-radius
+  - text: Ring of Basilius is a rare 425-gold item that provides 0.25 Mana Regeneration
+      and passively grants allies 1.0 Aura Mana Regen within a 1200 radius through
       Basilius Aura.
     marks:
     - gamefile:items/item_ring_of_basilius#cost
     - gamefile:items/item_ring_of_basilius#attribs
     - loc:DOTA_Tooltip_ability_item_ring_of_basilius_Description
-  - text: Its cast range is 1200.
-    marks:
-    - gamefile:items/item_ring_of_basilius#mechanics
-  - text: It is built from Sage's Mask (175 gold) and a Recipe (250 gold), and builds
-      into Arcane Boots and Vladmir's Offering.
+  - text: It is built from Sage's Mask (175 gold) and a Recipe (250 gold).
     marks:
     - gamefile:items/item_ring_of_basilius#components
+  - text: It builds into Arcane Boots and Vladmir's Offering.
+    marks:
+    - gamefile:items/item_ring_of_basilius#components
+  - text: “Ring given as a reward to the greatest mages.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ring_of_basilius_Lore
 ---
 
 # Ring of Basilius

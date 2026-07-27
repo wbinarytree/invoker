@@ -5,7 +5,7 @@
   "title": "Philosopher's Stone",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3e1f031efe37498f4cf087c31991464e12dfee01761d120d0a844121fa5ccea0",
+  "article_sha256": "742f32457bc4ddacbdbe8f008b0bf9d29112715945d00388d1737e045a2aa62d",
   "citations": [
     "gamefile:items/item_philosophers_stone#attribs",
     "gamefile:items/item_philosophers_stone#mechanics",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1b58ae09029a7e7dacd624de00b847f2b33f210beb31f30f794053779bb070f9",
-    "input_tokens": 14216,
-    "output_tokens": 268,
+    "prompt_version": "7",
+    "request_sha256": "943a79bc510070fd34c3afbbb4cbd117e5adf4ea9234c52de9a90a959376c2b6",
+    "input_tokens": 13847,
+    "output_tokens": 288,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:36.080880+00:00"
+    "generated_at": "2026-07-27T12:14:59.722439+00:00"
   }
 }

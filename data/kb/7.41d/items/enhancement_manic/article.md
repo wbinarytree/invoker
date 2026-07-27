@@ -5,12 +5,12 @@ patch: 7.41d
 card:
   entity: enhancement_manic
   sentences:
-  - text: Manic is a 0-gold item that passively grants 18 BAT Reduce, 20 Cast Speed,
-      and 20 Vision Reduce.
+  - text: Manic is a 0-gold item granting passive 18 BAT Reduce, 20 Cast Speed, and
+      20 Vision Reduce.
     marks:
+    - gamefile:items/item_enhancement_manic#cost
     - gamefile:items/item_enhancement_manic#attribs
     - gamefile:items/item_enhancement_manic#mechanics
-    - gamefile:items/item_enhancement_manic#cost
 ---
 
 # Manic

@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: timeless_relic
   sentences:
-  - text: Timeless Relic is a passive item costing 0 gold that grants 10/20 Spell
-      Amp and 10/15% Debuff Duration.
+  - text: Timeless Relic is a 0 gold passive item that grants 10/20 Spell Amp and
+      10/15% Debuff Duration.
     marks:
     - gamefile:items/item_timeless_relic#mechanics
     - gamefile:items/item_timeless_relic#attribs
@@ -15,6 +15,9 @@ card:
     marks:
     - loc:DOTA_Tooltip_ability_item_timeless_relic_Description
     - gamefile:items/item_timeless_relic#mechanics
+  - text: An unmarred discovery from the excavated ruins of an ancient wizard's academy.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_timeless_relic_Lore
 ---
 
 # Timeless Relic

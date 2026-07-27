@@ -5,7 +5,7 @@
   "title": "Crimson Guard",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5a539cdd044560e858dfce8a2b135cc581987cb83f98dadb744973a13e657c44",
+  "article_sha256": "a8dca269dac67b317cdcd04b56f11d4007ce652b47a323925003ecaa53bcfd09",
   "citations": [
     "gamefile:items/item_crimson_guard#cost",
     "gamefile:items/item_crimson_guard#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "424bef80aaf1f8b5a8f0191b9834ae6707c5fa17411ac4024082d36a8a77b7c3",
-    "input_tokens": 14486,
-    "output_tokens": 1359,
+    "prompt_version": "7",
+    "request_sha256": "8d133959727014e670c4a94fb9eca2ac92a65a4c85fa00d0fb04f5d90904cf6a",
+    "input_tokens": 14119,
+    "output_tokens": 2372,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:11.800481+00:00"
+    "generated_at": "2026-07-27T12:09:14.525783+00:00"
   }
 }

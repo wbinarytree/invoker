@@ -5,7 +5,7 @@
   "title": "Pupil's Gift",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "9438aa796bc953655757b2a472d7c11eec6180e45ab2eb27cac3c41722d2d878",
+  "article_sha256": "485397a4ef68a9a219dc97ae863997069c3e0c6bfae8c282299e9322ba38fdb1",
   "citations": [
     "gamefile:items/item_pupils_gift#mechanics",
     "loc:DOTA_Tooltip_ability_item_pupils_gift_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4edbc174f422da922a1e3c07534975c0b79abfdf9ef335ea181e0540eacbbfba",
-    "input_tokens": 14194,
-    "output_tokens": 482,
+    "prompt_version": "7",
+    "request_sha256": "e0667150e0134869b4abf69bbe6696dbe3b0130c89e496b8ed4b88019839d24c",
+    "input_tokens": 13825,
+    "output_tokens": 479,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:38.657354+00:00"
+    "generated_at": "2026-07-27T12:15:32.113266+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Drum of Endurance",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "15a7f501e832c6c19eb88d8351e4ce1ca87bb8da302155f171b1f77cf908c2e5",
+  "article_sha256": "0dcc0129b0f4f26a2f3515779486c4e3e7e936ec092fdc02eb6a416467c16d61",
   "citations": [
     "gamefile:items/item_ancient_janggo#cost",
     "gamefile:items/item_ancient_janggo#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "83ce9be33bfe88c2cf1f8fd5326266b2c2a22e75e40d3d18b3032a2b77dbe5b3",
-    "input_tokens": 14479,
-    "output_tokens": 1111,
+    "prompt_version": "7",
+    "request_sha256": "9087dbf034a541f6909e94dbd7779fed1a4c33a1c5f15a12b206046321a545fb",
+    "input_tokens": 14533,
+    "output_tokens": 1018,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:38.920543+00:00"
+    "generated_at": "2026-07-27T12:06:58.381758+00:00"
   }
 }

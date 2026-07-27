@@ -5,7 +5,7 @@
   "title": "Aghanim's Scepter",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "abd85ab644584bfc7539833e30c3523a982cbcf0ce727e47549c0ac4c96dc5a8",
+  "article_sha256": "ef0f0c31bfd584f45b5891e84201999f23007fc6ec7337fe87aa9d9860302648",
   "citations": [
     "gamefile:items/item_ultimate_scepter#cost",
     "gamefile:items/item_ultimate_scepter#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "90e09885f562ecf84ba0cf9eabec4f13a31c1417533032cd35543021e2a5dc5d",
-    "input_tokens": 14363,
-    "output_tokens": 582,
+    "prompt_version": "7",
+    "request_sha256": "b613bdd7b6ed7a95ec7cb7536f6ea566858de16dbd755b16cab6adaa7a43309a",
+    "input_tokens": 13988,
+    "output_tokens": 371,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:58.251117+00:00"
+    "generated_at": "2026-07-27T12:18:19.607190+00:00"
   }
 }

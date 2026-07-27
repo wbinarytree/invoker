@@ -5,7 +5,7 @@
   "title": "Orb of Frost",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "866017ebfca7fd6cb84057e4c913217d0131b3f5fa5fc7517b2b740ce172b072",
+  "article_sha256": "755fdffb9d96377355451f8d77354f1eb8081431f7a7f471ab0d34457692ff0b",
   "citations": [
     "gamefile:items/item_orb_of_frost#cost",
     "gamefile:items/item_orb_of_frost#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "eb1d770650eaa20405a47684ee86a62ad5629ba5886975d983724f912723e320",
-    "input_tokens": 14368,
-    "output_tokens": 1206,
+    "prompt_version": "7",
+    "request_sha256": "d0f9da2412630b37b08dab9c306df65e10250a341ad163f84a2d7aa1e66536b9",
+    "input_tokens": 13999,
+    "output_tokens": 1171,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:01.999405+00:00"
+    "generated_at": "2026-07-27T12:14:46.456814+00:00"
   }
 }

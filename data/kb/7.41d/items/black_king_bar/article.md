@@ -5,22 +5,20 @@ patch: 7.41d
 card:
   entity: black_king_bar
   sentences:
-  - text: Black King Bar is an epic 4050-gold item granting 24 Damage and 10 Strength;
-      its Avatar active applies a Basic Dispel, grants 60% Magic Resistance and immunity
-      to reflected and pure damage, and makes negative effects from enemy spells have
-      no effect for 9/8/7 seconds.
+  - text: Black King Bar is an epic 4050-gold item that grants 24 damage and 10 strength;
+      Avatar lasts 9/8/7 seconds, applies a Basic Dispel, grants 60% magic resistance
+      and immunity to reflected and pure damage, and makes negative effects from enemy
+      spells have no effect.
     marks:
     - gamefile:items/item_black_king_bar#cost
     - gamefile:items/item_black_king_bar#attribs
     - loc:DOTA_Tooltip_ability_item_black_king_bar_Description
-  - text: It is built from Mithril Hammer for 1600 gold, Ogre Axe for 1000 gold, and
-      a Recipe for 1450 gold.
+  - text: Its build formula is Mithril Hammer (1600 gold), Ogre Axe (1000 gold), and
+      Recipe (1450 gold).
     marks:
     - gamefile:items/item_black_king_bar#components
-  - text: Avatar has a max level of 3.
-    marks:
-    - gamefile:items/item_black_king_bar#attribs
-  - text: Activation is Immediate and No Target.
+    - gamefile:items/item_black_king_bar#cost
+  - text: Avatar has Immediate, No Target behavior.
     marks:
     - gamefile:items/item_black_king_bar#mechanics
   - text: Activation costs 50 mana.
@@ -29,6 +27,9 @@ card:
   - text: Its cooldown is 95.
     marks:
     - gamefile:items/item_black_king_bar#mechanics
+  - text: A powerful staff imbued with the strength of giants.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_black_king_bar_Lore
 ---
 
 # Black King Bar

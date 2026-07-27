@@ -5,7 +5,7 @@
   "title": "Blade of Alacrity",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8b7cb83284e9f01ae4f543d62376e813080c45d8e9826a9e732c3e5b4482571a",
+  "article_sha256": "f40b08b6d195cd62d3f6a211ab8486e74b5ec112c7a8ef8cfc9f747463ffd6e5",
   "citations": [
     "gamefile:items/item_blade_of_alacrity#cost",
     "gamefile:items/item_blade_of_alacrity#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3fe9303dd16e1be95d104949ac2477e66190f0cc0456f62bfe0cc947fd34a34a",
-    "input_tokens": 14305,
-    "output_tokens": 506,
+    "prompt_version": "7",
+    "request_sha256": "60acf0d0ab6ff3e639935cf135481739dedbf4f7c1d10601aa3df81c1e37e311",
+    "input_tokens": 13932,
+    "output_tokens": 557,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:53.790903+00:00"
+    "generated_at": "2026-07-27T12:07:28.185879+00:00"
   }
 }

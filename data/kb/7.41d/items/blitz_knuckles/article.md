@@ -5,16 +5,18 @@ patch: 7.41d
 card:
   entity: blitz_knuckles
   sentences:
-  - text: Blitz Knuckles is a 1000-gold component item that grants 35 Attack Speed.
+  - text: Blitz Knuckles is a passive component item that costs 1000 gold and grants
+      35 Attack Speed.
     marks:
     - gamefile:items/item_blitz_knuckles#cost
     - gamefile:items/item_blitz_knuckles#attribs
-  - text: Its behavior is passive.
-    marks:
     - gamefile:items/item_blitz_knuckles#mechanics
-  - text: Blitz Knuckles builds into Shadow Blade, Monkey King Bar, and Oblivion Staff.
+  - text: It builds into Shadow Blade, Monkey King Bar, and Oblivion Staff.
     marks:
     - gamefile:items/item_blitz_knuckles#components
+  - text: An underground arcanist's update of a back-alley classic.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_blitz_knuckles_Lore
 ---
 
 # Blitz Knuckles

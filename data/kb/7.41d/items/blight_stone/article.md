@@ -6,7 +6,7 @@ card:
   entity: blight_stone
   sentences:
   - text: Orb of Blight is a 300-gold component whose passive Lesser Corruption applies
-      -2 Corruption Armor for 3.0 seconds.
+      -2 Corruption Armor and 3.0 Corruption Duration.
     marks:
     - gamefile:items/item_blight_stone#cost
     - gamefile:items/item_blight_stone#attribs
@@ -16,10 +16,14 @@ card:
     - gamefile:items/item_blight_stone#components
   - text: Attacks apply the armor reduction to their target.
     marks:
+    - loc:DOTA_Tooltip_Ability_item_blight_stone_Description
     - gamefile:items/item_blight_stone#mechanics
   - text: Lesser Corruption is dispellable.
     marks:
     - gamefile:items/item_blight_stone#mechanics
+  - text: An unnerving stone unearthed beneath the Fields of Endless Carnage.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_blight_stone_Lore
 ---
 
 # Orb of Blight

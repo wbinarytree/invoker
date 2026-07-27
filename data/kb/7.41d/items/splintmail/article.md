@@ -10,7 +10,7 @@ card:
     - gamefile:items/item_splintmail#cost
     - gamefile:items/item_splintmail#attribs
     - gamefile:items/item_splintmail#mechanics
-  - text: Its build formula lists Splintmail (950 gold) and no recipe cost.
+  - text: Its build formula is Splintmail (950 gold).
     marks:
     - gamefile:items/item_splintmail#cost
   - text: It builds into Blade Mail, Heaven's Halberd, Nullifier, and Shiva's Guard.

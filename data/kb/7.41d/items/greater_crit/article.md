@@ -10,16 +10,20 @@ card:
     marks:
     - gamefile:items/item_greater_crit#cost
     - gamefile:items/item_greater_crit#attribs
-  - text: It is built from Crystalys (2000 gold), Demon Edge (2200 gold), and a Recipe
-      (900 gold).
+  - text: It is built from Crystalys (2000 gold) and Demon Edge (2200 gold), with
+      a 900 gold Recipe.
     marks:
     - gamefile:items/item_greater_crit#components
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_greater_crit#mechanics
-  - text: Critical Strike applies to each attack.
+  - text: Its passive is Critical Strike and applies to each attack.
     marks:
     - loc:DOTA_Tooltip_ability_item_greater_crit_Description
+  - text: A weapon of incredible power that is difficult for even the strongest of
+      warriors to control.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_greater_crit_Lore
 ---
 
 # Daedalus

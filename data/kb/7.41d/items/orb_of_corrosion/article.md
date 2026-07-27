@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: orb_of_corrosion
   sentences:
-  - text: Orb of Corrosion is a rare item costing 1050 gold that grants 7 Agility
-      and makes attacks apply Corrosion for 3.0 seconds, with Corruption Armor -2,
-      Heal Reduction 16%, Slow Melee -8%, and Slow Ranged -16%.
+  - text: Orb of Corrosion is a rare item costing 1050 gold that grants 7 Agility;
+      its attacks apply Corrosion for 3.0, inflicting -2 Corruption Armor, -8% Slow
+      Melee or -16% Slow Ranged, and 16% Heal Reduction.
     marks:
     - gamefile:items/item_orb_of_corrosion#cost
     - gamefile:items/item_orb_of_corrosion#attribs
     - loc:DOTA_Tooltip_Ability_item_orb_of_corrosion_Description
-  - text: It is built from Band of Elvenskin (450 gold), Orb of Frost (300 gold),
-      and Orb of Blight (300 gold).
+  - text: Its build formula is Band of Elvenskin (450 gold) + Orb of Frost (300 gold)
+      + Orb of Blight (300 gold).
     marks:
     - gamefile:items/item_orb_of_corrosion#components
   - text: Its behavior is passive.
@@ -22,6 +22,10 @@ card:
   - text: Its effect is dispellable.
     marks:
     - gamefile:items/item_orb_of_corrosion#mechanics
+  - text: Seepage from the wounds of a warrior deity, sealed in an arcanist’s orb
+      following a campaign of vicious slaughter.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_orb_of_corrosion_Lore
 ---
 
 # Orb of Corrosion

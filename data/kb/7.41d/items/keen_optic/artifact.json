@@ -5,7 +5,7 @@
   "title": "Keen Optic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4dc5719360a619762ecbfa3f05f1030a1fd2124b382b4da31ec4b3b9dbafa7d6",
+  "article_sha256": "5133d365d37091880f230dfd67018f209ce84721411d58d5132ef2f6882e3ef9",
   "citations": [
     "gamefile:items/item_keen_optic#cost",
     "gamefile:items/item_keen_optic#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "8a5208d99745e493597f2e915790842aa4225ad165116ed1e496a454c96dea28",
-    "input_tokens": 14225,
-    "output_tokens": 92,
+    "prompt_version": "7",
+    "request_sha256": "08402dc9367fe4a6606c305363e1eab62a90a3166610b88bb497ad7866c86d1f",
+    "input_tokens": 13850,
+    "output_tokens": 226,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:41.822466+00:00"
+    "generated_at": "2026-07-27T12:12:54.848657+00:00"
   }
 }

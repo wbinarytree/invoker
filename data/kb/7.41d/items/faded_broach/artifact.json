@@ -5,7 +5,7 @@
   "title": "Faded Broach",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "28e6aeba5f30b9685218f946c980b28e8f44e3cd4ff2cfee9105f2002f529f47",
+  "article_sha256": "7f966a706b7678e8f0886c97feb44ec07e75ef772db9c502e08064041404cf38",
   "citations": [
     "gamefile:items/item_faded_broach#cost",
     "gamefile:items/item_faded_broach#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2b38c4a0bfb991ba2a3ffe2487d63ee19943168462a554c863b1893e04002e24",
-    "input_tokens": 14199,
-    "output_tokens": 260,
+    "prompt_version": "7",
+    "request_sha256": "4162d447df3f532a09fe38d63d2ec878f803a77ab6986ed781db35a1c8960ab5",
+    "input_tokens": 13822,
+    "output_tokens": 269,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:18.267206+00:00"
+    "generated_at": "2026-07-27T12:10:36.085882+00:00"
   }
 }

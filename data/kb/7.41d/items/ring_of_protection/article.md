@@ -5,17 +5,22 @@ patch: 7.41d
 card:
   entity: ring_of_protection
   sentences:
-  - text: Ring of Protection is a 175-gold component item that passively grants 2
-      Armor.
+  - text: Ring of Protection is a component item costing 175 gold that grants 2 Armor.
     marks:
     - gamefile:items/item_ring_of_protection#cost
     - gamefile:items/item_ring_of_protection#attribs
+  - text: Its behavior is passive.
+    marks:
     - gamefile:items/item_ring_of_protection#mechanics
-  - text: Its build formula is Ring of Protection (175 gold), and it builds into Buckler,
-      Iron Talon, Pavise, Soul Ring, and Urn of Shadows.
+  - text: 'Build formula: Ring of Protection (175 gold).'
     marks:
     - gamefile:items/item_ring_of_protection#cost
+  - text: It builds into Buckler, Iron Talon, Pavise, Soul Ring, and Urn of Shadows.
+    marks:
     - gamefile:items/item_ring_of_protection#components
+  - text: A glimmering ring that defends its bearer.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ring_of_protection_Lore
 ---
 
 # Ring of Protection

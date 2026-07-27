@@ -5,7 +5,7 @@
   "title": "Repair Kit",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "db85c8616c5ac279485cdcb6bc060e837733b82a4f36df4b91e8f600a54ee3eb",
+  "article_sha256": "001b6ec022723e9501867123089f7bdd657672833689137f21db48f437c26fa1",
   "citations": [
     "gamefile:items/item_repair_kit#cost",
     "gamefile:items/item_repair_kit#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3e2304c5b0b9182b8ffdf16b4dfa783be092590fcfcf1289a906aecf89be820e",
-    "input_tokens": 14298,
-    "output_tokens": 745,
+    "prompt_version": "7",
+    "request_sha256": "11fdb9ef3627b1b1bf8fbc99cc4d8fffb0e829c866412180cd37ce78710ee537",
+    "input_tokens": 13927,
+    "output_tokens": 1234,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:31.504086+00:00"
+    "generated_at": "2026-07-27T12:16:09.170582+00:00"
   }
 }

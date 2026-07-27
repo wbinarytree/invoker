@@ -5,7 +5,7 @@
   "title": "Monkey King Bar",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1d419d3c34255f9fb1d55a8d4e14fc2139345d8cc9ef98ae0a4265c7d7444d9d",
+  "article_sha256": "2f8ef5b7c6928b3ce525da5e254f0091ebb71265dd7c01525138ef41cb1b20cb",
   "citations": [
     "gamefile:items/item_monkey_king_bar#cost",
     "gamefile:items/item_monkey_king_bar#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "302200b83ad7e382ef7b842b34b6512eaf74b38c8aa54b2ef2daa19af31b3599",
-    "input_tokens": 14370,
-    "output_tokens": 1134,
+    "prompt_version": "7",
+    "request_sha256": "4d52725baf5e15cd5829a36d3543bf15f05b20c75084e25c445bf4247d5556c2",
+    "input_tokens": 13999,
+    "output_tokens": 740,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:46.890832+00:00"
+    "generated_at": "2026-07-27T12:14:09.072597+00:00"
   }
 }

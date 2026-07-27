@@ -5,7 +5,7 @@
   "title": "Illusionist's Cape",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "cf8b8764d9e3256e70c251bb74ca5036f829e3ee577da2e44207d7126f1981d9",
+  "article_sha256": "096467163ee3542c0aa95b28ff1c94fcf80a47cd8718927b91bc192e99eb5903",
   "citations": [
     "gamefile:items/item_illusionsts_cape#attribs",
     "loc:DOTA_Tooltip_Ability_item_illusionsts_cape_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3877f2f04955139d8c30346da77782a429ebdc93edd47e73b0e4db0f22d7390a",
-    "input_tokens": 14407,
-    "output_tokens": 1276,
+    "prompt_version": "7",
+    "request_sha256": "5c46912cf693df7a0ba0e767b80be9392acbc91fda8084cfd5a702d088ec1137",
+    "input_tokens": 14036,
+    "output_tokens": 956,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:55.349528+00:00"
+    "generated_at": "2026-07-27T12:12:30.254917+00:00"
   }
 }

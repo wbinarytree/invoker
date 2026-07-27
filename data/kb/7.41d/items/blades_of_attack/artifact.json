@@ -5,7 +5,7 @@
   "title": "Blades of Attack",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2e90ad73753f8e0dd717370246d4be82d7e83e411890c30f2771c49ef02df981",
+  "article_sha256": "28abd0d9e0a8b6c8076a4a65371a366905d0b284e0f1bb7db8de44211fb0d036",
   "citations": [
     "gamefile:items/item_blades_of_attack#cost",
     "gamefile:items/item_blades_of_attack#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c2d9e0a7504daed1b2c353a868835a979dec64524531e6a2951f6810793bf7f4",
-    "input_tokens": 14278,
-    "output_tokens": 291,
+    "prompt_version": "7",
+    "request_sha256": "c5635b970a21cd5bd3fe17f4802724a041d667d41327bb48b501b6dc04728835",
+    "input_tokens": 13905,
+    "output_tokens": 540,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:55.218916+00:00"
+    "generated_at": "2026-07-27T12:07:35.612709+00:00"
   }
 }

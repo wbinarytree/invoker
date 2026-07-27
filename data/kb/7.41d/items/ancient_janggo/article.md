@@ -5,25 +5,31 @@ patch: 7.41d
 card:
   entity: ancient_janggo
   sentences:
-  - text: Drum of Endurance is a rare 1625-gold item that grants 8 Strength; within
-      a 1200 radius, its 6-second Endurance active grants allies 35 Attack Speed and
-      13% Movement Speed, while Swiftness Aura grants allies 15 Movement Speed and
-      2.5 Health Regeneration.
+  - text: Drum of Endurance is a rare 1625 gold item that provides 8 Strength; within
+      a 1200 radius, Endurance grants allies 35 attack speed and 13% movement speed
+      for 6 seconds, while Swiftness Aura grants allies 15 movement speed and 2.5
+      health regeneration.
     marks:
     - gamefile:items/item_ancient_janggo#cost
     - gamefile:items/item_ancient_janggo#attribs
     - loc:DOTA_Tooltip_ability_item_ancient_janggo_Description
-  - text: It has a Charges Tooltip value of 8.
+  - text: Its Charges Tooltip value is 8.
     marks:
     - gamefile:items/item_ancient_janggo#attribs
-  - text: Endurance is immediate and no-target, ignores channeling, and has a 45.0
-      cooldown.
+  - text: Its behavior is Immediate, No Target, DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL.
     marks:
     - gamefile:items/item_ancient_janggo#mechanics
-  - text: Its build formula is Headdress (425 gold), Belt of Strength (450 gold),
-      Wind Lace (225 gold), and Recipe (525 gold); it builds into Boots of Bearing.
+  - text: Its cooldown is 45.0.
+    marks:
+    - gamefile:items/item_ancient_janggo#mechanics
+  - text: It is built from Headdress (425 gold), Belt of Strength (450 gold), Wind
+      Lace (225 gold), and a Recipe (525 gold), and it builds into Boots of Bearing.
     marks:
     - gamefile:items/item_ancient_janggo#components
+  - text: “A relic that enchants the bodies of those around it for swifter movement
+      in times of crisis.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ancient_janggo_Lore
 ---
 
 # Drum of Endurance

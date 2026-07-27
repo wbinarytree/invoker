@@ -5,7 +5,7 @@
   "title": "Titan Sliver",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "594092b1ffa7ed43c8cee46570eb700df7b7383d36ef51fe189926618d38a313",
+  "article_sha256": "6862209022d6a76c95a99b562a0345d2acadc6b2013fd8e098c18dab8722e87a",
   "citations": [
     "gamefile:items/item_titan_sliver#cost",
     "gamefile:items/item_titan_sliver#mechanics",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "09f21a75ff0c84041ce5bd8f5db24e74f29e6f09013a6d07cb076d48891046e1",
-    "input_tokens": 14228,
-    "output_tokens": 189,
+    "prompt_version": "7",
+    "request_sha256": "0972f170d91a1e177c49cd928c6ad3c7c31b3c30b714d802424f08683025fd29",
+    "input_tokens": 13855,
+    "output_tokens": 279,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:59.247163+00:00"
+    "generated_at": "2026-07-27T12:17:56.881495+00:00"
   }
 }

@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_crude
   sentences:
-  - text: Crude is a passive item enhancement costing 0 gold that provides 6/9/12
-      BAT Reduce and 9/12/15 Health Restoration and applies -9 Intelligence Pct.
+  - text: Crude is a passive item enhancement that costs 0 gold, provides 6/9/12 BAT
+      Reduce and 9/12/15 Health Restoration, and applies -9 Intelligence Pct.
     marks:
     - gamefile:items/item_enhancement_crude#cost
     - gamefile:items/item_enhancement_crude#attribs

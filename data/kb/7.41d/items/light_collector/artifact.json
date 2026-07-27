@@ -5,7 +5,7 @@
   "title": "Light Collector",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5f6db6b13316b507af242f1701d3ded36384dcf9b65793a496dee71c5027125f",
+  "article_sha256": "cc5a06a9435abae4de5b170db6f64c8f7ca33b93470c78b27a942a0454e9bad0",
   "citations": [
     "gamefile:items/item_light_collector#cost",
     "gamefile:items/item_light_collector#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "70f7451ec2621a6fa3e381bdf583f349f8f428fe2e3ce3c01eb153151a06ac9f",
-    "input_tokens": 14263,
-    "output_tokens": 493,
+    "prompt_version": "7",
+    "request_sha256": "22149d767a599a20c165c804550c213dca4de34b097fd113174fb9554bd8fec6",
+    "input_tokens": 13894,
+    "output_tokens": 647,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:08:03.443978+00:00"
+    "generated_at": "2026-07-27T12:13:06.673464+00:00"
   }
 }

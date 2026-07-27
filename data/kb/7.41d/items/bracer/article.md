@@ -5,17 +5,19 @@ patch: 7.41d
 card:
   entity: bracer
   sentences:
-  - text: Bracer is a common item costing 505 gold with passive behavior that grants
-      2 Agility, 0 bonus damage, 50 health, 0.75 health regeneration, 2 Intelligence,
-      and 5 Strength.
+  - text: Bracer is a common 505-gold item that passively grants 2 Agility, 0 Bonus
+      Damage, 50 Health, 0.75 Health Regeneration, 2 Intelligence, and 5 Strength.
     marks:
     - gamefile:items/item_bracer#cost
     - gamefile:items/item_bracer#attribs
     - gamefile:items/item_bracer#mechanics
-  - text: Bracer is built from Circlet (155 gold), Gauntlets of Strength (140 gold),
-      and Recipe (210 gold).
+  - text: Bracer's build formula is Circlet (155 gold) + Gauntlets of Strength (140
+      gold) + Recipe (210 gold).
     marks:
     - gamefile:items/item_bracer#components
+  - text: The bracer is a common choice to toughen up defenses and increase longevity.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_bracer_Lore
 ---
 
 # Bracer

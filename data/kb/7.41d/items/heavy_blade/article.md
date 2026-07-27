@@ -5,10 +5,9 @@ patch: 7.41d
 card:
   entity: heavy_blade
   sentences:
-  - text: 'Witchbane is a 0-gold item with Attack Speed, Damage, and Radius attributes:
-      it grants 0 Attack Speed, its Subjugate passive makes attacks deal bonus magical
-      damage equal to 4% of the target''s Max Mana, and its Cleanse active applies
-      a Basic Dispel to all enemies and allies in a 300-radius area.'
+  - text: Witchbane is a 0-gold item with 0 Attack Speed whose Subjugate passive adds
+      magical attack damage equal to 4% of the target's Max Mana and whose Cleanse
+      active applies a Basic Dispel to all enemies and allies in a 300-radius area.
     marks:
     - gamefile:items/item_heavy_blade#cost
     - gamefile:items/item_heavy_blade#attribs
@@ -25,6 +24,10 @@ card:
   - text: Cleanse has a 40-second cooldown.
     marks:
     - gamefile:items/item_heavy_blade#mechanics
+  - text: “With ready access to test subjects, untold cruelties have been dreamed
+      up and loosed upon the world from within the walls of the Tyler Estate.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_heavy_blade_Lore
 ---
 
 # Witchbane

@@ -5,7 +5,7 @@
   "title": "Hand of Midas",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "af5bbf9caae4463b540877e91d7ad5a7714253f8523212d91c40a47eae1b0905",
+  "article_sha256": "12c3076a16002ee190393d1450ea921e7d955e1cf3248d8229c4b7585f47f5da",
   "citations": [
     "gamefile:items/item_hand_of_midas#cost",
     "gamefile:items/item_hand_of_midas#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3b4ec5b16c08e947ed37297583c97d4133629be54bde4d087949c53e56520dde",
-    "input_tokens": 14389,
-    "output_tokens": 601,
+    "prompt_version": "7",
+    "request_sha256": "72d7f30af7efc813941678f7ace1786a491fc748121578ff34100c935ddbe7a8",
+    "input_tokens": 14012,
+    "output_tokens": 574,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:27.757734+00:00"
+    "generated_at": "2026-07-27T12:11:32.440391+00:00"
   }
 }

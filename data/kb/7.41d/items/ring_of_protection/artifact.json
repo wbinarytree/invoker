@@ -5,7 +5,7 @@
   "title": "Ring of Protection",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "410b535826cd769ee9ab50793e4562ece30d1383ddeefea59596c79884fe275e",
+  "article_sha256": "dbbbb1aa5dd7f8c87784731515a3c77ea2637c1d6a0420ba9cfb21b87d02e24b",
   "citations": [
     "gamefile:items/item_ring_of_protection#cost",
     "gamefile:items/item_ring_of_protection#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "915e79b6e37dda047f1fc440fe534f066880858d5ef99151e63b3cc8aed5df74",
-    "input_tokens": 14267,
-    "output_tokens": 432,
+    "prompt_version": "7",
+    "request_sha256": "48703822296b5bbc2351a921b5a2811ae0f7385ecfdbf9a74f0507954c4c4091",
+    "input_tokens": 13892,
+    "output_tokens": 383,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:38.950681+00:00"
+    "generated_at": "2026-07-27T12:16:04.224294+00:00"
   }
 }

@@ -6,21 +6,22 @@ card:
   entity: cloak_of_flames
   sentences:
   - text: Cloak of Flames is a 0-gold item whose passive Immolate deals 40 damage
-      per second to nearby enemy units within 375 radius and 25 damage per second
-      when used by illusions.
+      per second to nearby enemy units within a 375 radius and 25 damage per second
+      from illusions.
     marks:
     - gamefile:items/item_cloak_of_flames#attribs
-    - loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Description
     - gamefile:items/item_cloak_of_flames#cost
-  - text: It provides 0 armor.
+    - loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Description
+  - text: It provides 0 armor and 0 magic resistance.
     marks:
     - gamefile:items/item_cloak_of_flames#attribs
-  - text: It provides 0 magic resistance.
-    marks:
-    - gamefile:items/item_cloak_of_flames#attribs
-  - text: It has the `DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES` flag.
+  - text: It has Passive behavior and the `DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES`
+      flag.
     marks:
     - gamefile:items/item_cloak_of_flames#mechanics
+  - text: “A very fine cloak that plays host to an overly-protective living flame.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Lore
 ---
 
 # Cloak of Flames

@@ -5,7 +5,7 @@
   "title": "Eye of the Vizier",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "111c7cb5146d8b9716098b084155df1f85a1414dfa74a028b4de5b29dea9b2fe",
+  "article_sha256": "49f59253deba0decbe3d0ba4aa862763d46ab667b70cecf20687313639905135",
   "citations": [
     "gamefile:items/item_eye_of_the_vizier#cost",
     "gamefile:items/item_eye_of_the_vizier#mechanics",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "56923e5ab173b34d1e5b136b40be9739f9e93ff3fe2c3c7525becbcf7396fbfd",
-    "input_tokens": 14257,
-    "output_tokens": 405,
+    "prompt_version": "7",
+    "request_sha256": "be60aeb4d8ddabc9e43c0c57af2abc565c9b4983242714b12f034b492a5fbcc7",
+    "input_tokens": 13888,
+    "output_tokens": 380,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:15.827733+00:00"
+    "generated_at": "2026-07-27T12:10:37.519842+00:00"
   }
 }

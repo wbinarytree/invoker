@@ -5,7 +5,7 @@
   "title": "Trident",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "be4e0d8ba902ebfb80c1e7b74c1e7aa2788bbd596056279ddc171d3fb9b066a8",
+  "article_sha256": "917aff1e9b3c227548aa7502ea9ebb3743167067a9e56449721370c9c0d00a29",
   "citations": [
     "gamefile:items/item_trident#mechanics",
     "gamefile:items/item_trident#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3436470d4228ac0e494e3e3cd1fbc9b9986a037118fb728d1265ec65701c0bf8",
-    "input_tokens": 14314,
-    "output_tokens": 531,
+    "prompt_version": "7",
+    "request_sha256": "f95ed54d3949dca94ee50dfd08bccf2477d188bcec2c63a5e840aef50b575e6f",
+    "input_tokens": 13939,
+    "output_tokens": 615,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:22:39.263847+00:00"
+    "generated_at": "2026-07-27T12:18:15.055811+00:00"
   }
 }

@@ -11,10 +11,8 @@ card:
     - gamefile:items/item_tier2_token#cost
     - gamefile:items/item_tier2_token#mechanics
     - loc:DOTA_Tooltip_ability_item_tier2_token_Description
-  - text: The resulting neutral item is not shareable.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_tier2_token_Description
-  - text: Each hero can redeem only a single token per tier.
+  - text: The resulting neutral item is not shareable, and each hero can redeem only
+      a single token per tier.
     marks:
     - loc:DOTA_Tooltip_ability_item_tier2_token_Description
 ---

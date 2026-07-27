@@ -5,18 +5,22 @@ patch: 7.41d
 card:
   entity: hyperstone
   sentences:
-  - text: Hyperstone is a passive Secret Shop–quality item costing 2000 gold that
-      grants 60 Attack Speed.
+  - text: Hyperstone is a Secret Shop–quality item that costs 2000 gold and grants
+      60 Attack Speed.
     marks:
     - gamefile:items/item_hyperstone#cost
     - gamefile:items/item_hyperstone#attribs
-    - gamefile:items/item_hyperstone#mechanics
-  - text: Its build formula is Hyperstone (2000 gold).
+  - text: 'Build formula: Hyperstone (2000 gold); it builds into Assault Cuirass,
+      Mjollnir, and Moon Shard.'
     marks:
     - gamefile:items/item_hyperstone#cost
-  - text: It builds into Assault Cuirass, Mjollnir, and Moon Shard.
-    marks:
     - gamefile:items/item_hyperstone#components
+  - text: Hyperstone is passive.
+    marks:
+    - gamefile:items/item_hyperstone#mechanics
+  - text: A mystical, carved stone that boosts the fervor of the holder.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_hyperstone_Lore
 ---
 
 # Hyperstone

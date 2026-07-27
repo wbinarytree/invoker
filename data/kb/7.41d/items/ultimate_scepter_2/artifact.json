@@ -5,7 +5,7 @@
   "title": "Aghanim's Blessing",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ae758555ce53622b8361d27bbcc0abbfa9715d8100d47c993d30a3607c5a6145",
+  "article_sha256": "4e2a985b62d729a47eb3d39f1ffd32d7c9b50381549170f99cb2e97cc76fc6ab",
   "citations": [
     "gamefile:items/item_ultimate_scepter_2#cost",
     "gamefile:items/item_ultimate_scepter_2#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "e72281f71ee749e48c102f2ccb026f5444ae29412e7e538056abc1a29d9bca09",
-    "input_tokens": 14249,
-    "output_tokens": 366,
+    "prompt_version": "7",
+    "request_sha256": "d7b7226702cb20e8e7567cc24dfe7ff3e41c96b463a2370e9fb051a82796112f",
+    "input_tokens": 14309,
+    "output_tokens": 318,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:33.804794+00:00"
+    "generated_at": "2026-07-27T12:18:25.720270+00:00"
   }
 }

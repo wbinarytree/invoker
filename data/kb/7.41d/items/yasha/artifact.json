@@ -5,7 +5,7 @@
   "title": "Yasha",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3bcdc4fbdb5471cdfb85283ae199b96e481d5dfcd202aa0eaea04837014e6ba8",
+  "article_sha256": "50a3fd8f31b8550625fc8ef504af1ef83b29bf3a56bda691f5122345905b9070",
   "citations": [
     "gamefile:items/item_yasha#cost",
     "gamefile:items/item_yasha#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1dc27a4b045717a36a220ab85af42c8e709a99e2a56644fdbe9bc6e0b54ed374",
-    "input_tokens": 14326,
-    "output_tokens": 450,
+    "prompt_version": "7",
+    "request_sha256": "e0127bd202178cd765f0841f604aacb970379d3137711c6b92a1908ff19ed4df",
+    "input_tokens": 13951,
+    "output_tokens": 456,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:29.055372+00:00"
+    "generated_at": "2026-07-27T12:19:21.427113+00:00"
   }
 }

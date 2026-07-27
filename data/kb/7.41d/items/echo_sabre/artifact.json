@@ -5,7 +5,7 @@
   "title": "Echo Sabre",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "db434c9b34a17d5e5bfaec0a024ed07858d280c200ed10da4694a45f1f99290b",
+  "article_sha256": "5e2a86e16bb916d211d0441abcac869be9d8dbb153904d419dba97eddb4c312b",
   "citations": [
     "gamefile:items/item_echo_sabre#cost",
     "gamefile:items/item_echo_sabre#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ef984ac2ff2a5cb72f8127da295ef73e2148527cfcc6b4246b8556180637e817",
-    "input_tokens": 14381,
-    "output_tokens": 605,
+    "prompt_version": "7",
+    "request_sha256": "8d13ab858e0acc3b1966964f98bb2a2f1a44308dda18b557bc937a2ae3d1fa9a",
+    "input_tokens": 14012,
+    "output_tokens": 1007,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:03.284978+00:00"
+    "generated_at": "2026-07-27T12:09:55.478345+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Possessed Mask",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "df303ce14a0506162137c8821a61b79fafa0f7360d5a0f6d0ed40776af7343a3",
+  "article_sha256": "13e725d20301c79c2715e9f7bd97938ee32bdd53af8d2bc9cbb04493d8790356",
   "citations": [
     "gamefile:items/item_possessed_mask#cost",
     "gamefile:items/item_possessed_mask#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "6208ad33488f5b59284359dfe7c579ba6a55b3d39000afc9d4e481eabc5aba90",
-    "input_tokens": 14303,
-    "output_tokens": 397,
+    "prompt_version": "7",
+    "request_sha256": "d14e945ceb3a25d00b427ff3c063ebfe4a37aa55b563b5a4f86b71b254e92c77",
+    "input_tokens": 13930,
+    "output_tokens": 650,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:05.826566+00:00"
+    "generated_at": "2026-07-27T12:15:24.526936+00:00"
   }
 }

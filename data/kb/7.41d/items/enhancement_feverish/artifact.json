@@ -5,7 +5,7 @@
   "title": "Feverish",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "58a89408af1c674b7c5b593463a4359fb2125c393ebdad44ebdb95efeb268b9d",
+  "article_sha256": "448ec226d99919aa9a15fe66bf9d6acf0c2c6a0c61c522b0722151aefcbfef7d",
   "citations": [
     "gamefile:items/item_enhancement_feverish#cost",
     "gamefile:items/item_enhancement_feverish#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2914a5768cfeb0e7578ace607fe946978b62a6f1aedee66062f40a2811e0aefa",
-    "input_tokens": 14196,
-    "output_tokens": 246,
+    "prompt_version": "7",
+    "request_sha256": "2278b224ae8c98d3fa4493430a8f211775a41cdc2b0498aef05ccd250de31b89",
+    "input_tokens": 13825,
+    "output_tokens": 99,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:39.715942+00:00"
+    "generated_at": "2026-07-27T12:10:01.621395+00:00"
   }
 }

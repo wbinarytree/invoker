@@ -5,12 +5,18 @@ patch: 7.41d
 card:
   entity: paladin_sword
   sentences:
-  - text: Paladin Sword is a passive 0-gold item that provides 0 Bonus Amp, 16 Damage,
-      16% Lifesteal, 8% Spell Lifesteal, and 40 Creep Lifesteal Reduction Pct.
+  - text: Paladin Sword is a 0 gold item that provides 0 Bonus Amp, 16 Damage, 16%
+      Lifesteal, 8% Spell Lifesteal, and 40 Creep Lifesteal Reduction Pct.
+    marks:
+    - gamefile:items/item_paladin_sword#attribs
+    - gamefile:items/item_paladin_sword#cost
+  - text: Its behavior is passive.
     marks:
     - gamefile:items/item_paladin_sword#mechanics
-    - gamefile:items/item_paladin_sword#cost
-    - gamefile:items/item_paladin_sword#attribs
+  - text: The sigil blade of the legendary Brother Yhols of Gausra, stripped from
+      its scabbard on the day of his controversial excommunication.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_paladin_sword_Lore
 ---
 
 # Paladin Sword

@@ -5,19 +5,19 @@ patch: 7.41d
 card:
   entity: wraith_band
   sentences:
-  - text: Wraith Band is a common item costing 505 gold that provides 5 Agility, 1.75
-      Armor, 6 Attack Speed, 2 Intelligence, and 2 Strength.
+  - text: Wraith Band is a common passive item costing 505 gold that provides 5 Agility,
+      1.75 Armor, 6 Attack Speed, 2 Intelligence, and 2 Strength.
     marks:
     - gamefile:items/item_wraith_band#cost
     - gamefile:items/item_wraith_band#attribs
-  - text: Its build formula is Circlet (155 gold), Slippers of Agility (140 gold),
-      and Recipe (210 gold), totaling 505 gold.
+    - gamefile:items/item_wraith_band#mechanics
+  - text: It is built from a Circlet costing 155 gold, Slippers of Agility costing
+      140 gold, and a Recipe costing 210 gold.
     marks:
     - gamefile:items/item_wraith_band#components
-    - gamefile:items/item_wraith_band#cost
-  - text: Wraith Band is passive.
+  - text: “A circlet with faint whispers echoing about it.”
     marks:
-    - gamefile:items/item_wraith_band#mechanics
+    - loc:DOTA_Tooltip_ability_item_wraith_band_Lore
 ---
 
 # Wraith Band

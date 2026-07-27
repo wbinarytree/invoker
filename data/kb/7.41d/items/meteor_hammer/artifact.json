@@ -5,7 +5,7 @@
   "title": "Meteor Hammer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b8b89f191415df2f1521dfccfdb073c9845eb51172826a53c661ebeb84331c88",
+  "article_sha256": "ffcf3b9a3876cf0bc4128316ca2644a046854fd894ca584c709ab62af03fdf9b",
   "citations": [
     "gamefile:items/item_meteor_hammer#cost",
     "gamefile:items/item_meteor_hammer#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7a868f9ae8a1f7b1c1321aa43bdc1e52b0ec7a7503eb8895c575ea6e4d2973f6",
-    "input_tokens": 14556,
-    "output_tokens": 2513,
+    "prompt_version": "7",
+    "request_sha256": "7599b5aed52f85e40dd78c407d3f811e8f192055ab281a4fe4e5ad1b481f4c61",
+    "input_tokens": 14187,
+    "output_tokens": 2541,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:53.810320+00:00"
+    "generated_at": "2026-07-27T12:14:44.385644+00:00"
   }
 }

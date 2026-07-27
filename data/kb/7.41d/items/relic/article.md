@@ -3,18 +3,21 @@ title: Sacred Relic
 kind: item
 patch: 7.41d
 card:
-  entity: Sacred Relic
+  entity: relic
   sentences:
-  - text: Sacred Relic is a 3400-gold secret-shop item that grants 55 DAMAGE.
+  - text: Sacred Relic is a secret_shop item costing 3400 gold that grants 55 DAMAGE.
     marks:
     - gamefile:items/item_relic#cost
     - gamefile:items/item_relic#attribs
   - text: Its behavior is Passive.
     marks:
     - gamefile:items/item_relic#mechanics
-  - text: It builds into Nullifier, Radiance, and Divine Rapier.
+  - text: Sacred Relic builds into Nullifier, Radiance, and Divine Rapier.
     marks:
     - gamefile:items/item_relic#components
+  - text: “An ancient weapon that often turns the tides of war.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_relic_Lore
 ---
 
 # Sacred Relic

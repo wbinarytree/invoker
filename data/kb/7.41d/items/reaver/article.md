@@ -5,16 +5,19 @@ patch: 7.41d
 card:
   entity: reaver
   sentences:
-  - text: Reaver is a secret shop item that costs 2800 gold and grants 25 Strength.
+  - text: Reaver is a secret shop item costing 2800 gold that grants 25 Strength.
     marks:
     - gamefile:items/item_reaver#cost
     - gamefile:items/item_reaver#attribs
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_reaver#mechanics
-  - text: It builds into Heart of Tarrasque, Overwhelming Blink, and Satanic.
+  - text: Reaver builds into Heart of Tarrasque, Overwhelming Blink, and Satanic.
     marks:
     - gamefile:items/item_reaver#components
+  - text: “A massive axe capable of tearing whole mountains down.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_reaver_Lore
 ---
 
 # Reaver

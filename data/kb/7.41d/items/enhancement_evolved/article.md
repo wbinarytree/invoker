@@ -8,8 +8,8 @@ card:
   - text: Evolved is a passive enhancement costing 0 gold that grants 40 Primary Attribute
       and 24 Primary Stat Universal.
     marks:
-    - gamefile:items/item_enhancement_evolved#cost
     - gamefile:items/item_enhancement_evolved#mechanics
+    - gamefile:items/item_enhancement_evolved#cost
     - gamefile:items/item_enhancement_evolved#attribs
 ---
 

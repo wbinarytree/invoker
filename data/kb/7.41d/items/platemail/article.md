@@ -5,16 +5,19 @@ patch: 7.41d
 card:
   entity: platemail
   sentences:
-  - text: Platemail is a secret shop item that costs 1400 gold and grants 10 Armor.
+  - text: Platemail is a secret shop item costing 1400 gold that passively grants
+      10 armor.
     marks:
     - gamefile:items/item_platemail#cost
     - gamefile:items/item_platemail#attribs
+    - gamefile:items/item_platemail#mechanics
   - text: Platemail builds into Assault Cuirass, Lotus Orb, and Shiva's Guard.
     marks:
     - gamefile:items/item_platemail#components
-  - text: Its behavior is passive.
+  - text: Thick metal plates that protect the entire upper body. Avoid dropping on
+      feet.
     marks:
-    - gamefile:items/item_platemail#mechanics
+    - loc:DOTA_Tooltip_ability_item_platemail_Lore
 ---
 
 # Platemail

@@ -5,17 +5,22 @@ patch: 7.41d
 card:
   entity: gauntlets
   sentences:
-  - text: Gauntlets of Strength is a 140-gold component item that passively grants
-      3 Strength.
+  - text: Gauntlets of Strength is a 140-gold component item that grants 3 Strength.
     marks:
     - gamefile:items/item_gauntlets#cost
     - gamefile:items/item_gauntlets#attribs
-    - gamefile:items/item_gauntlets#mechanics
-  - text: Its purchase formula is Gauntlets of Strength (140 gold), and it builds
-      into Bracer and Soul Ring.
+  - text: The purchase is Gauntlets of Strength (140 gold).
     marks:
     - gamefile:items/item_gauntlets#cost
+  - text: It builds into Bracer and Soul Ring.
+    marks:
     - gamefile:items/item_gauntlets#components
+  - text: Its behavior is passive.
+    marks:
+    - gamefile:items/item_gauntlets#mechanics
+  - text: Studded leather gloves that add brute strength.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_gauntlets_Lore
 ---
 
 # Gauntlets of Strength

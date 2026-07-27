@@ -5,42 +5,43 @@ patch: 7.41d
 card:
   entity: wind_waker
   sentences:
-  - text: Wind Waker is a rare 6800-gold item that grants 35 Intelligence, 3.0 Mana
-      Regeneration, and 30 Movement Speed and provides the 2.5-duration Cyclone active
-      ability.
+  - text: Wind Waker is a rare 6800-gold item granting 35 Intelligence, 3.0 Mana Regeneration,
+      and 30 Movement Speed; its Cyclone active targets a unit at 550 range, costs
+      175 mana, has a 19.0-second cooldown, and makes the target invulnerable for
+      2.5 seconds.
     marks:
     - gamefile:items/item_wind_waker#cost
     - gamefile:items/item_wind_waker#attribs
+    - gamefile:items/item_wind_waker#mechanics
     - loc:DOTA_Tooltip_ability_item_wind_waker_Description
   - text: It is built from Eul's Scepter of Divinity for 2600 gold, Mystic Staff for
       2800 gold, and a Recipe for 1400 gold.
     marks:
     - gamefile:items/item_wind_waker#components
-  - text: Cyclone has 550 cast range.
-    marks:
-    - gamefile:items/item_wind_waker#mechanics
-  - text: Cyclone costs 175 mana.
-    marks:
-    - gamefile:items/item_wind_waker#mechanics
-  - text: Cyclone has a 19.0 cooldown.
-    marks:
-    - gamefile:items/item_wind_waker#mechanics
   - text: Cyclone can target the caster, an allied unit, or an enemy unit.
     marks:
     - loc:DOTA_Tooltip_ability_item_wind_waker_Description
-  - text: The Cyclone target becomes invulnerable.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_wind_waker_Description
-  - text: On self-cast, the tornado can be moved.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_wind_waker_Description
-  - text: An enemy target takes 50 magical damage upon landing.
+  - text: On self-cast, the tornado can be moved at 300 speed.
     marks:
     - gamefile:items/item_wind_waker#attribs
     - loc:DOTA_Tooltip_ability_item_wind_waker_Description
-  - text: Cyclone uses a Basic Dispel.
+  - text: Enemy targets take 50 magical damage upon landing.
+    marks:
+    - gamefile:items/item_wind_waker#attribs
+    - loc:DOTA_Tooltip_ability_item_wind_waker_Description
+  - text: Cyclone's dispel type is Basic Dispel.
     marks:
     - loc:DOTA_Tooltip_ability_item_wind_waker_Description
+  - text: Cyclone is dispellable.
+    marks:
+    - gamefile:items/item_wind_waker#mechanics
+  - text: Cyclone has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK behavior.
+    marks:
+    - gamefile:items/item_wind_waker#mechanics
+  - text: Proof enough to some that unseen forces manipulate the happenings of the
+      material plane.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_wind_waker_Lore
 ---
 
 # Wind Waker

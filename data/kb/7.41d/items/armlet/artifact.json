@@ -5,7 +5,7 @@
   "title": "Armlet of Mordiggian",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "18aabaa75ef840d57ea80207c0afac466bcde752867c9b271d9499d3db9b75f7",
+  "article_sha256": "a321feb1bd5e0aea84cab22ba97017a213eb921134d613119840361eba03a55d",
   "citations": [
     "gamefile:items/item_armlet#cost",
     "gamefile:items/item_armlet#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "410945b29b6283890c91bc9fdd480ddca09854af5fac9bff9ab1219aeee78498",
-    "input_tokens": 14484,
-    "output_tokens": 1350,
+    "prompt_version": "7",
+    "request_sha256": "ad4228e4d1cb3af3671f106ad038644b2e59e815a22032e90a51b1e79cecc602",
+    "input_tokens": 14113,
+    "output_tokens": 1026,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:30.906474+00:00"
+    "generated_at": "2026-07-27T12:07:08.937876+00:00"
   }
 }

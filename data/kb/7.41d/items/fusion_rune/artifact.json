@@ -5,7 +5,7 @@
   "title": "Fusion Rune",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b0b4bb5a891c685a18fd051d6ea1f7e1b58d7ebca6abadce3593163360f7db64",
+  "article_sha256": "d53fd395135576a7fb065c43119280d8a1cd44fece49b416203681d92bd8fa5e",
   "citations": [
     "gamefile:items/item_fusion_rune#cost",
     "loc:DOTA_Tooltip_ability_item_fusion_rune_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9f03e99c8daa92097112117e924f737abb732813d80f35018083758149935929",
-    "input_tokens": 14266,
-    "output_tokens": 720,
+    "prompt_version": "7",
+    "request_sha256": "007d8c9ba5f2398d14f52b79b404918dae5ac4251292ee7ad23c71dc749b70e7",
+    "input_tokens": 13897,
+    "output_tokens": 541,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:13.543276+00:00"
+    "generated_at": "2026-07-27T12:10:57.543603+00:00"
   }
 }

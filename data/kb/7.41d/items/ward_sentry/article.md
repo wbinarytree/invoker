@@ -6,21 +6,28 @@ card:
   entity: ward_sentry
   sentences:
   - text: Sentry Ward is a 50-gold consumable whose Plant use creates an invisible
-      watcher with 200 Health and a 420 lifetime that provides 1050-range True Sight
-      within existing allied vision, has 0 Vision Range, and grants no ground vision.
+      watcher that provides True Sight within 1050 to existing allied vision and has
+      0 vision range, granting no ground vision.
     marks:
     - gamefile:items/item_ward_sentry#cost
     - loc:DOTA_Tooltip_ability_item_ward_sentry_Description
     - gamefile:items/item_ward_sentry#attribs
-  - text: The build formula is Sentry Ward (50 gold) into Observer and Sentry Wards.
+  - text: Its build formula is Sentry Ward (50 gold), and it builds into Observer
+      and Sentry Wards.
     marks:
     - gamefile:items/item_ward_sentry#cost
     - gamefile:items/item_ward_sentry#components
   - text: Its Duration Minutes Tooltip is 7.
     marks:
     - gamefile:items/item_ward_sentry#attribs
-  - text: Its behavior is Point Target, AOE, DOTA_ABILITY_BEHAVIOR_OPTIONAL_UNIT_TARGET,
-      and DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE.
+  - text: It has 200 health.
+    marks:
+    - gamefile:items/item_ward_sentry#attribs
+  - text: It has 420 lifetime.
+    marks:
+    - gamefile:items/item_ward_sentry#attribs
+  - text: Its Behavior is Point Target, AOE, DOTA_ABILITY_BEHAVIOR_OPTIONAL_UNIT_TARGET,
+      DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE.
     marks:
     - gamefile:items/item_ward_sentry#mechanics
   - text: Its cast range is 500.
@@ -29,13 +36,16 @@ card:
   - text: Its cooldown is 1.0.
     marks:
     - gamefile:items/item_ward_sentry#mechanics
-  - text: True Sight reveals invisible enemy units and wards within existing allied
-      vision.
+  - text: True Sight allows invisible enemy units and wards within existing allied
+      vision to be seen.
     marks:
     - loc:DOTA_Tooltip_ability_item_ward_sentry_Description
   - text: Holding Control gives the Sentry Ward to an allied hero.
     marks:
     - loc:DOTA_Tooltip_ability_item_ward_sentry_Description
+  - text: Originally grown in the garden of a fearful king.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ward_sentry_Lore
 ---
 
 # Sentry Ward

@@ -5,32 +5,35 @@ patch: 7.41d
 card:
   entity: gungir
   sentences:
-  - text: Gleipnir is a 4650-gold artifact item that grants 450 Health, 12 Intelligence,
-      and 200 Mana; its Eternal Chains active roots all enemies within a 400 radius
+  - text: Gleipnir is an artifact item costing 4650 gold that grants 450 Health, 12
+      Intelligence, and 200 Mana; Eternal Chains roots all enemies within a 400 radius
       for 2.0 seconds.
     marks:
     - gamefile:items/item_gungir#cost
     - gamefile:items/item_gungir#attribs
     - loc:DOTA_Tooltip_ability_item_gungir_Description
-  - text: Eternal Chains has Point Target, AOE behavior.
+  - text: Eternal Chains has Point Target and AOE behavior.
     marks:
     - gamefile:items/item_gungir#mechanics
   - text: Eternal Chains is dispellable.
     marks:
     - gamefile:items/item_gungir#mechanics
-  - text: Eternal Chains has 1100 cast range.
+  - text: Its cast range is 1100.
     marks:
     - gamefile:items/item_gungir#mechanics
-  - text: Eternal Chains has a Mana cost of 150.
+  - text: Its Mana cost is 150.
     marks:
     - gamefile:items/item_gungir#mechanics
-  - text: Eternal Chains has a cooldown of 18.
+  - text: Its cooldown is 18.
     marks:
     - gamefile:items/item_gungir#mechanics
-  - text: 'Build formula: Rod of Atos (2250 gold), Point Booster (1200 gold), Chasm
-      Stone (800 gold), and Recipe (400 gold).'
+  - text: Gleipnir is built from Rod of Atos for 2250 gold, Point Booster for 1200
+      gold, Chasm Stone for 800 gold, and a Recipe for 400 gold.
     marks:
     - gamefile:items/item_gungir#components
+  - text: “Bindings forged by impossible means to leash an ancient evil.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_gungir_Lore
 ---
 
 # Gleipnir

@@ -17,6 +17,10 @@ card:
   - text: Butterfly is passive.
     marks:
     - gamefile:items/item_butterfly#mechanics
+  - text: “Only the mightiest and most experienced of warriors can wield the Butterfly,
+      but it provides incredible dexterity in combat.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_butterfly_Lore
 ---
 
 # Butterfly

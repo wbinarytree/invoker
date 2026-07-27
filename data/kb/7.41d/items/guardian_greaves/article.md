@@ -5,11 +5,10 @@ patch: 7.41d
 card:
   entity: guardian_greaves
   sentences:
-  - text: Guardian Greaves is a rare 4450-gold item that grants 5 Armor, 150 Mana,
-      50 Movement Speed, and 1.0 Mana Regeneration; Mend restores 325 health and 200
-      mana to nearby allies within 1200 radius and applies a Basic Dispel to the caster,
-      while Guardian Aura grants allied units 2.5 Health Regen and 1.5 Mana Regen
-      within 1200 radius.
+  - text: Guardian Greaves is a rare 4450 gold item granting 5 Armor, 150 Mana, 50
+      Movement Speed, and 1.0 Mana Regeneration; Mend restores 325 health and 200
+      mana to allies within 1200 and applies a Basic Dispel to the caster, while Guardian
+      Aura provides 2.5 Health Regen and 1.5 Mana Regen to allied units within 1200.
     marks:
     - gamefile:items/item_guardian_greaves#cost
     - gamefile:items/item_guardian_greaves#attribs
@@ -19,18 +18,26 @@ card:
     marks:
     - gamefile:items/item_guardian_greaves#components
     - gamefile:items/item_guardian_greaves#cost
-  - text: Mend is an Immediate, No Target active with 0 mana cost and a 45-second
-      cooldown.
+  - text: Mend has Immediate, No Target behavior.
     marks:
     - gamefile:items/item_guardian_greaves#mechanics
-  - text: When the wearer is below 25% health, Guardian Aura’s Health Regen increases
-      by 14.5.
+  - text: Mend costs 0 mana.
+    marks:
+    - gamefile:items/item_guardian_greaves#mechanics
+  - text: Mend has a 45-second cooldown.
+    marks:
+    - gamefile:items/item_guardian_greaves#mechanics
+  - text: Below the 25% health threshold, Guardian Aura increases the wearer's Health
+      Regen by 14.5.
     marks:
     - gamefile:items/item_guardian_greaves#attribs
     - loc:DOTA_Tooltip_ability_item_guardian_greaves_Description
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_guardian_greaves_Description
+  - text: One of many holy instruments constructed to honor the Omniscience.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_guardian_greaves_Lore
 ---
 
 # Guardian Greaves

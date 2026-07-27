@@ -5,7 +5,7 @@
   "title": "Nullifier",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "de7b65281d74e4e38a562324af288a8f9323138e51b34c6efe362bbea758c27d",
+  "article_sha256": "7dc18392944280b35a1ca0d250361a7c909c07082cf0d068632557659fc73e0e",
   "citations": [
     "gamefile:items/item_nullifier#cost",
     "gamefile:items/item_nullifier#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7b9ea048003c2da1a317e4df87b5f8102db5dcb00cfeb8991cdedded3d25939c",
-    "input_tokens": 14361,
-    "output_tokens": 2335,
+    "prompt_version": "7",
+    "request_sha256": "830676db25e6f958570770c53c2bb95f8c23a1bd813b9d30a0f2ab96f1e432a8",
+    "input_tokens": 13990,
+    "output_tokens": 908,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:10.461075+00:00"
+    "generated_at": "2026-07-27T12:14:43.190291+00:00"
   }
 }

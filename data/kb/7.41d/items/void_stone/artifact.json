@@ -5,7 +5,7 @@
   "title": "Void Stone",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "505806353c5445eb057e9b968233913497a778e8b5a9212902fd837299bf70b6",
+  "article_sha256": "0bd50231b3f8b68b1a5cf3bf7a85ef22c68e2efe527456d9757dcf009385537a",
   "citations": [
     "gamefile:items/item_void_stone#cost",
     "gamefile:items/item_void_stone#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f7413f938c267fc02c49379119e032f48c82942ad7bfcf41123c97c1bbfafe4d",
-    "input_tokens": 14261,
-    "output_tokens": 373,
+    "prompt_version": "7",
+    "request_sha256": "f2eeaabeb3ab4b442d13e5b66fc64e3961ca1942f4f2c0a3c1a24633ecfd2947",
+    "input_tokens": 13905,
+    "output_tokens": 382,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:38.685717+00:00"
+    "generated_at": "2026-07-27T12:18:49.992510+00:00"
   }
 }

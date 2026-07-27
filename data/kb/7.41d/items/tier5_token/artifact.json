@@ -5,7 +5,7 @@
   "title": "Tier 5 Token",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "9ac8140d205b9f1f3618669d96ed0107a19edbbc3ea77f6dba0a42a2501fa2df",
+  "article_sha256": "ab5ac09fe78f4bc12463bf2122e4409f41d84c1dc2c19b887caafccac5382fca",
   "citations": [
     "gamefile:items/item_tier5_token#cost",
     "loc:DOTA_Tooltip_ability_item_tier5_token_Description",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2d24594819e941581cee4abdf0b6bc41dd4962b9bded12ad6c38af96e5b85add",
-    "input_tokens": 14167,
-    "output_tokens": 312,
+    "prompt_version": "7",
+    "request_sha256": "fb9897313ee9d0420077d234dcf98f4cd20c87f389fdae22a9905b46cc62dc53",
+    "input_tokens": 13805,
+    "output_tokens": 413,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:01.557326+00:00"
+    "generated_at": "2026-07-27T12:17:56.984215+00:00"
   }
 }

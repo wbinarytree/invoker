@@ -5,17 +5,21 @@ patch: 7.41d
 card:
   entity: eagle
   sentences:
-  - text: Eaglesong is an item of secret_shop quality that costs 2800 gold and grants
+  - text: Eaglesong is a secret_shop-quality item that costs 2800 gold and grants
       25 Agility.
     marks:
     - gamefile:items/item_eagle#cost
     - gamefile:items/item_eagle#attribs
-  - text: Eaglesong is passive.
-    marks:
-    - gamefile:items/item_eagle#mechanics
   - text: Eaglesong builds into Butterfly, Disperser, and Swift Blink.
     marks:
     - gamefile:items/item_eagle#components
+  - text: Eaglesong is passive.
+    marks:
+    - gamefile:items/item_eagle#mechanics
+  - text: “Capturing the majestic call of an eagle, this mystical horn brings limitless
+      dexterity to those who hear it.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_eagle_Lore
 ---
 
 # Eaglesong

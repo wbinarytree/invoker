@@ -5,29 +5,36 @@ patch: 7.41d
 card:
   entity: tpscroll
   sentences:
-  - text: Town Portal Scroll is a consumable item costing 100 gold that provides Teleport,
-      a Point Target, Channelled ability with a Tooltip Channel Time of 3.0, 75 mana
-      cost, and 80.0 cooldown that teleports the user to a target friendly building.
+  - text: Town Portal Scroll is a 100-gold consumable whose Point Target, Channelled
+      Teleport costs 75 mana, has 3.0 Tooltip Channel Time and an 80.0 cooldown, and
+      teleports the user to a target friendly building.
     marks:
     - gamefile:items/item_tpscroll#cost
-    - loc:DOTA_Tooltip_ability_item_tpscroll_Description
     - gamefile:items/item_tpscroll#attribs
     - gamefile:items/item_tpscroll#mechanics
+    - loc:DOTA_Tooltip_ability_item_tpscroll_Description
   - text: Teleport has a Maximum Distance of 800.
     marks:
     - gamefile:items/item_tpscroll#attribs
   - text: Teleport has a Minimum Distance of 70.
     marks:
     - gamefile:items/item_tpscroll#attribs
-  - text: Its Vision Radius is 200.
+  - text: Teleport provides 200 Vision Radius.
     marks:
     - gamefile:items/item_tpscroll#attribs
-  - text: Its Cast range is 0.
+  - text: Teleport has 0 cast range.
     marks:
     - gamefile:items/item_tpscroll#mechanics
-  - text: Double-clicking Teleport sends the user to their team’s base fountain.
+  - text: Its behavior includes DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK, DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_CHANNEL,
+      and DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES.
+    marks:
+    - gamefile:items/item_tpscroll#mechanics
+  - text: Double-clicking teleports the user to their team’s base fountain.
     marks:
     - loc:DOTA_Tooltip_ability_item_tpscroll_Description
+  - text: “What a hero truly needs.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_tpscroll_Lore
 ---
 
 # Town Portal Scroll

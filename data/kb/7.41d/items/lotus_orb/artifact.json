@@ -5,7 +5,7 @@
   "title": "Lotus Orb",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e996c734396760ba544eea8a1e4b0b29bf552ab9334d08ed364246b326a5cd46",
+  "article_sha256": "b2c40a4f1026830619a5fbce32437ddedadd2610c7891c0fdee34ced373d9ff4",
   "citations": [
     "gamefile:items/item_lotus_orb#cost",
     "gamefile:items/item_lotus_orb#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "81b71468196f38bb4fef70afd978ade648617ed2d508021465e26d235a0f1895",
-    "input_tokens": 14414,
-    "output_tokens": 693,
+    "prompt_version": "7",
+    "request_sha256": "dea61729fac1cb346edb3a43354858b203d52d6e2595ead0321d931bee9a3435",
+    "input_tokens": 14045,
+    "output_tokens": 1913,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:08:12.687383+00:00"
+    "generated_at": "2026-07-27T12:13:35.229291+00:00"
   }
 }

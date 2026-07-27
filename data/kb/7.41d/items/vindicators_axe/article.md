@@ -6,12 +6,37 @@ card:
   entity: vindicators_axe
   sentences:
   - text: Vindicator's Axe is a 0-gold item that grants 20 bonus armor, 35 attack
-      speed, 30 bonus damage, and 20% slow resistance, with passive Vengeance providing
-      30 damage while its equipped hero is silenced or 20 armor while they are stunned.
+      speed, 30 bonus damage, and 20% slow resistance; its passive Vengeance effect
+      provides 30 damage while the equipped hero is silenced and 20 armor while the
+      hero is stunned.
+    marks:
+    - gamefile:items/item_vindicators_axe#attribs
+    - gamefile:items/item_vindicators_axe#cost
+    - gamefile:items/item_vindicators_axe#mechanics
+    - loc:DOTA_Tooltip_ability_item_vindicators_axe_Description
+  - text: It grants 20 bonus armor.
+    marks:
+    - gamefile:items/item_vindicators_axe#attribs
+  - text: It grants 35 attack speed.
+    marks:
+    - gamefile:items/item_vindicators_axe#attribs
+  - text: It grants 30 bonus damage.
+    marks:
+    - gamefile:items/item_vindicators_axe#attribs
+  - text: It grants 20% slow resistance.
+    marks:
+    - gamefile:items/item_vindicators_axe#attribs
+  - text: Vindicator's Axe costs 0 gold.
     marks:
     - gamefile:items/item_vindicators_axe#cost
-    - gamefile:items/item_vindicators_axe#attribs
+  - text: Vengeance is passive.
+    marks:
     - gamefile:items/item_vindicators_axe#mechanics
+  - text: Vengeance provides 30 damage while the equipped hero is silenced.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vindicators_axe_Description
+  - text: Vengeance provides 20 armor while the equipped hero is stunned.
+    marks:
     - loc:DOTA_Tooltip_ability_item_vindicators_axe_Description
 ---
 

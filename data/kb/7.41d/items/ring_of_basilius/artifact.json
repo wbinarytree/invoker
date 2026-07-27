@@ -5,7 +5,7 @@
   "title": "Ring of Basilius",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0e13f60a7477ef60f5031c87a32c0251587f154acd9784e935e7b6bb92ebb099",
+  "article_sha256": "95e42c5f26c1a659c787349ac4d14a9d4a4577eb886bd52b0f79bb86e2aeef51",
   "citations": [
     "gamefile:items/item_ring_of_basilius#cost",
     "gamefile:items/item_ring_of_basilius#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a880cf351785f0076b1d6333da2dbb52ad2f3521d122a7cd1eb6b9dde8c44a38",
-    "input_tokens": 14365,
-    "output_tokens": 711,
+    "prompt_version": "7",
+    "request_sha256": "2ed03d069086852ac55420f300e9ae9948c5222f9da8bf347e63e33b009b75ce",
+    "input_tokens": 13986,
+    "output_tokens": 618,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:54.217015+00:00"
+    "generated_at": "2026-07-27T12:15:57.116949+00:00"
   }
 }

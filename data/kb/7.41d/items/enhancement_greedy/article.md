@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_greedy
   sentences:
-  - text: Greedy is a 0-gold enhancement that provides -30/-60 Bonus Damage, 75/100
-      Bonus GPM, and 150/200 Mana, and its behavior is passive.
+  - text: Greedy is an enhancement costing 0 gold that passively provides -30/-60
+      Bonus Damage, 75/100 Bonus GPM, and 150/200 Mana.
     marks:
     - gamefile:items/item_enhancement_greedy#cost
     - gamefile:items/item_enhancement_greedy#attribs

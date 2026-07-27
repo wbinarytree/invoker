@@ -5,7 +5,7 @@
   "title": "Cloak",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "423b88fdebbb837a9d490774af5f4e846902a82b2f480b46c082e2b4367d816d",
+  "article_sha256": "15714701de935be35dfe6728e1cfb3830bb90e9f261e619fcb2a5ef508185ae6",
   "citations": [
     "gamefile:items/item_cloak#cost",
     "gamefile:items/item_cloak#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "68630ce7a9c9ad97866794c35581a4cdeff4d99b6b45a7415ab1ec1980cd735d",
-    "input_tokens": 14261,
-    "output_tokens": 324,
+    "prompt_version": "7",
+    "request_sha256": "fdf1fbb0047eeda376e95c60df8e12e7034d03da733877ba14d30caaa76e7934",
+    "input_tokens": 13890,
+    "output_tokens": 348,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:29.654499+00:00"
+    "generated_at": "2026-07-27T12:08:19.556374+00:00"
   }
 }

@@ -13,10 +13,12 @@ card:
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_mystic_staff#mechanics
-  - text: Mystic Staff builds into Arcane Blink, Parasma, Scythe of Vyse, and Wind
-      Waker.
+  - text: It builds into Arcane Blink, Parasma, Scythe of Vyse, and Wind Waker.
     marks:
     - gamefile:items/item_mystic_staff#components
+  - text: Enigmatic staff made of only the most expensive crystals.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_mystic_staff_Lore
 ---
 
 # Mystic Staff

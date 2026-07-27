@@ -5,7 +5,7 @@
   "title": "The Leveller",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7a8796f8cad23e95350a7cfa8d60805736ce381c4714ae442956216edc5e1be9",
+  "article_sha256": "7443aaf81488c06ba982bb2f685d00427b3d46c14e282fd978d462d298309825",
   "citations": [
     "gamefile:items/item_the_leveller#mechanics",
     "gamefile:items/item_the_leveller#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c651f3a55dde82a560ede0e17520acba8a8f4cd0b517d86e3d86443f5cc6b965",
-    "input_tokens": 14249,
-    "output_tokens": 411,
+    "prompt_version": "7",
+    "request_sha256": "36e3a94ccccc3c2cb1083d75dbf44e56c0994bab4265f70ee22d146c3c8957dd",
+    "input_tokens": 13876,
+    "output_tokens": 615,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:26.291176+00:00"
+    "generated_at": "2026-07-27T12:17:44.673945+00:00"
   }
 }

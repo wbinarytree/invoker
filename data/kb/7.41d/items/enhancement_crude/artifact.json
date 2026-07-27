@@ -5,7 +5,7 @@
   "title": "Crude",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "544461bffd408d8104b67546ae3ce4e8c2037a6842edecbea4eb6dfc19e18205",
+  "article_sha256": "02e7cc4c40598ed8c5c36cbc678ad534deae5bb1e53b92a71a06142e37a65691",
   "citations": [
     "gamefile:items/item_enhancement_crude#cost",
     "gamefile:items/item_enhancement_crude#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "71765b8185a0447c1f1d8613c428d7b64e689c8ec8c5ff8590ce51384834f684",
-    "input_tokens": 14182,
-    "output_tokens": 330,
+    "prompt_version": "7",
+    "request_sha256": "7d744d88143660c7071a34cea05861228f2bfb490366722af39071691040b036",
+    "input_tokens": 13815,
+    "output_tokens": 295,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:43.376683+00:00"
+    "generated_at": "2026-07-27T12:10:06.446273+00:00"
   }
 }

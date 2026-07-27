@@ -5,7 +5,7 @@
   "title": "Pavise",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d5000b20e7fd38e1d2f601079f4b959858104a5a19e595e563ae59ae71765cae",
+  "article_sha256": "86895927b861c3390bf33204ee20d13e64f19735d0dcc51281fe36f1271716fd",
   "citations": [
     "gamefile:items/item_pavise#cost",
     "gamefile:items/item_pavise#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "694b4dccd2e709f4babb4bca0ecb3417602396994f84fe1e8d12ac9ec676cdbd",
-    "input_tokens": 14414,
-    "output_tokens": 1063,
+    "prompt_version": "7",
+    "request_sha256": "e0eedd11cf73dec8ad865c5de5f7b43a3084efd9c3da75aa5e7e58b37598a13a",
+    "input_tokens": 14043,
+    "output_tokens": 704,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:13.795278+00:00"
+    "generated_at": "2026-07-27T12:15:05.333871+00:00"
   }
 }

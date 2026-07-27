@@ -5,7 +5,7 @@
   "title": "Essence Distiller",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7cb4fb72e1eb6866124ef89af1f0f49199675f446a0c5fa433ba6ef1453a2a5e",
+  "article_sha256": "2089070c78c3b69fcbbde265e97dde0a9afa8a501ddb690e115bcaec43337136",
   "citations": [
     "gamefile:items/item_essence_distiller#cost",
     "gamefile:items/item_essence_distiller#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3ab1e6b1b320580772c855ee88220a98053b051c1d6e80f187b4ac4d7b421cd5",
-    "input_tokens": 14543,
-    "output_tokens": 3901,
+    "prompt_version": "7",
+    "request_sha256": "e5bc16654026c731376745fe1de599f5a6cd531a00f4524376a22a5a589d55ca",
+    "input_tokens": 14168,
+    "output_tokens": 2829,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:54.358851+00:00"
+    "generated_at": "2026-07-27T12:11:35.139874+00:00"
   }
 }

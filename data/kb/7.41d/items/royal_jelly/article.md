@@ -5,26 +5,25 @@ patch: 7.41d
 card:
   entity: royal_jelly
   sentences:
-  - text: Royal Jelly is a 0-gold consumable with 10 maximum charges whose Consume
-      active grants a target allied unit 2.5 Health Regen and 1.25 Mana Regen per
-      charge for 8 seconds, with a 12-second cooldown.
+  - text: Royal Jelly is a 0-gold consumable item whose Consume active grants a target
+      allied unit 2.5 Health Regen and 1.25 Mana Regen per charge for 8 seconds.
     marks:
     - gamefile:items/item_royal_jelly#cost
     - gamefile:items/item_royal_jelly#attribs
     - loc:DOTA_Tooltip_ability_item_royal_jelly_Description
-  - text: Its listed Health and Mana values are 50 each.
+  - text: It has 50 Health and 50 Mana.
+    marks:
+    - gamefile:items/item_royal_jelly#attribs
+  - text: It has a maximum of 10 charges.
+    marks:
+    - gamefile:items/item_royal_jelly#attribs
+  - text: Consume has a 12-second cooldown.
     marks:
     - gamefile:items/item_royal_jelly#attribs
   - text: Consume has 300 cast range.
     marks:
     - gamefile:items/item_royal_jelly#mechanics
-  - text: Consume is unit-targeted.
-    marks:
-    - gamefile:items/item_royal_jelly#mechanics
-  - text: Consume is immediate.
-    marks:
-    - gamefile:items/item_royal_jelly#mechanics
-  - text: Consume does not resume attacks.
+  - text: Consume is unit-targeted and immediate, and does not resume attacks.
     marks:
     - gamefile:items/item_royal_jelly#mechanics
   - text: Using Consume expends all charges.
@@ -33,6 +32,11 @@ card:
   - text: The buff is lost if the affected unit is attacked by an enemy hero or Roshan.
     marks:
     - loc:DOTA_Tooltip_ability_item_royal_jelly_Description
+  - text: “To those who harvest olgru jelly, success serves more than mere profit—it
+      is often the means to survival, for only the jelly itself can cure the ravages
+      caused by a sting from the vigilant denizens of the giant hives.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_royal_jelly_Lore
 ---
 
 # Royal Jelly

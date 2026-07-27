@@ -5,7 +5,7 @@
   "title": "Harpoon",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "687da1fbdff6df29730c03a6fcd678ac49e41f3db8484301c4dad9193107bbeb",
+  "article_sha256": "edfd3fe0bae9494ca8b0cabf5121b8262f74842a8307b109a0445f4bd77cb79f",
   "citations": [
     "gamefile:items/item_harpoon#attribs",
     "loc:DOTA_Tooltip_Ability_item_harpoon_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f8556a9e07a93b86dd8fb93f9dbb47476d06ac67a78b24e38d907dfeb4952c00",
-    "input_tokens": 14553,
-    "output_tokens": 2147,
+    "prompt_version": "7",
+    "request_sha256": "0310a79f4a7398c211a6e95c7f53d7f24c6b18f1692798c4919bf1bcb0d9909d",
+    "input_tokens": 14186,
+    "output_tokens": 2398,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:05.270066+00:00"
+    "generated_at": "2026-07-27T12:12:18.026679+00:00"
   }
 }

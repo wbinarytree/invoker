@@ -5,39 +5,30 @@ patch: 7.41d
 card:
   entity: angels_demise
   sentences:
-  - text: Khanda is a common item costing 5600 gold whose Empower Spell, with cooldown
-      9, makes the next Unit Target spell cast on an enemy deal 250 separate additional
-      damage, disable passives, and apply a 30% Movement Speed slow with Slow Duration
-      4.
+  - text: Khanda is a 5600-gold common item whose Empower Spell passive has a Cooldown
+      of 9 and makes the next Unit Target spell cast on an enemy deal 250 separate
+      additional damage, disable passives, and apply 30% Movement Speed Slow for a
+      Slow Duration of 4.
     marks:
     - gamefile:items/item_angels_demise#cost
     - gamefile:items/item_angels_demise#attribs
     - gamefile:items/item_angels_demise#mechanics
     - loc:DOTA_Tooltip_Ability_item_angels_demise_Description
-  - text: Khanda grants 8 All Attributes.
+  - text: It grants 8 All Attributes, 450 Health, 7 Health Regeneration, 450 Mana,
+      3 Mana Regeneration, 250 Bonus Spell Damage, 30% Slow, and 4 Slow Duration.
     marks:
     - gamefile:items/item_angels_demise#attribs
-  - text: Khanda grants 450 Health.
-    marks:
-    - gamefile:items/item_angels_demise#attribs
-  - text: Khanda grants 7 Health Regeneration.
-    marks:
-    - gamefile:items/item_angels_demise#attribs
-  - text: Khanda grants 450 Mana.
-    marks:
-    - gamefile:items/item_angels_demise#attribs
-  - text: Khanda grants 3 Mana Regeneration.
-    marks:
-    - gamefile:items/item_angels_demise#attribs
-  - text: Khanda is built from Phylactery (2600 gold) and Soul Booster (3000 gold).
-    marks:
-    - gamefile:items/item_angels_demise#components
-  - text: Empower Spell is passive.
-    marks:
-    - gamefile:items/item_angels_demise#mechanics
   - text: Empower Spell is dispellable.
     marks:
     - gamefile:items/item_angels_demise#mechanics
+  - text: Its build formula is Phylactery (2600 gold) + Soul Booster (3000 gold) =
+      Khanda (5600 gold).
+    marks:
+    - gamefile:items/item_angels_demise#components
+    - gamefile:items/item_angels_demise#cost
+  - text: “A blade sharp enough to slice through magic itself.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_angels_demise_Lore
 ---
 
 # Khanda

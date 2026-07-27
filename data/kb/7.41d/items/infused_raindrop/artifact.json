@@ -5,7 +5,7 @@
   "title": "Infused Raindrops",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "99fc711c68ed9f1b606724d30d773c5bc03e8ff51ba957ce6d16f4c61e05ab1b",
+  "article_sha256": "b11bb7c255bc27ca8f25e5cf7efb276d200df4e1802b42475cb02dd2a5875cfe",
   "citations": [
     "gamefile:items/item_infused_raindrop#cost",
     "gamefile:items/item_infused_raindrop#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7c5a2c234a26203258266ca8ce05986cd9829f0811193d18f016698c1cd6f372",
-    "input_tokens": 14313,
-    "output_tokens": 408,
+    "prompt_version": "7",
+    "request_sha256": "61102c87674c49c1841bf6d8fca4cd577a7355462ae493255fff2c5af36364aa",
+    "input_tokens": 13940,
+    "output_tokens": 684,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:20.214115+00:00"
+    "generated_at": "2026-07-27T12:12:40.825972+00:00"
   }
 }

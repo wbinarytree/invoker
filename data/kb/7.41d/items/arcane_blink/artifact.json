@@ -5,7 +5,7 @@
   "title": "Arcane Blink",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f56794fc86c70cc7a453e6234e4377c008b1d715b3420ed9694a9ec4068ee53a",
+  "article_sha256": "ff5cc90388c1681f0369366590218f5b1b067cff2791cf559ea1b18ddfb5a2e6",
   "citations": [
     "gamefile:items/item_arcane_blink#cost",
     "gamefile:items/item_arcane_blink#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2e7c948a115ae7d05d84fa3ac9898dcaa1837a9f56f3627d25ae9c15b93c8ad5",
-    "input_tokens": 14461,
-    "output_tokens": 887,
+    "prompt_version": "7",
+    "request_sha256": "fb176d40ac7f4d78fde7479fd39aa44f8776f762348cd97a71f49e06234ca118",
+    "input_tokens": 14513,
+    "output_tokens": 1360,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:14.590720+00:00"
+    "generated_at": "2026-07-27T12:07:10.686782+00:00"
   }
 }

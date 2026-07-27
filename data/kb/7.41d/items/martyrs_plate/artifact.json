@@ -5,7 +5,7 @@
   "title": "Martyr's Plate",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0489d3a30999073c2184abe9c99938db6310d39a433de26faf45905210e8b45a",
+  "article_sha256": "fdda6afc929b0d916ef4584ff2af853d34c93629c555f5f0c7806804268ab216",
   "citations": [
     "gamefile:items/item_martyrs_plate#attribs",
     "loc:DOTA_Tooltip_ability_item_martyrs_plate_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "facfed4615bf496c9b83c8bfa539e4a3be293723bbea34267145dd91fa5971be",
-    "input_tokens": 14311,
-    "output_tokens": 502,
+    "prompt_version": "7",
+    "request_sha256": "c3bdfebe526982c9d4087d2435e2b72f761f0675ebc61a3a7cf2876f1a4062c9",
+    "input_tokens": 13940,
+    "output_tokens": 493,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:38.618914+00:00"
+    "generated_at": "2026-07-27T12:13:41.354913+00:00"
   }
 }

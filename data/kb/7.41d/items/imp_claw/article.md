@@ -5,16 +5,21 @@ patch: 7.41d
 card:
   entity: imp_claw
   sentences:
-  - text: Imp Claw is a passive item costing 0 gold with 0 Bonus Damage whose Critical
-      Strike makes the next attack a 130% critical strike on a 5.0 cooldown.
+  - text: Imp Claw is a passive 0-gold item with 0 Bonus Damage and a 5.0-cooldown
+      Critical Strike that makes the next attack a critical strike with a 130% Critical
+      Multiplier.
     marks:
+    - gamefile:items/item_imp_claw#cost
     - gamefile:items/item_imp_claw#attribs
     - gamefile:items/item_imp_claw#mechanics
     - loc:DOTA_Tooltip_ability_item_imp_claw_Description
-    - gamefile:items/item_imp_claw#cost
-  - text: Its build formula is Imp Claw (0 gold).
+  - text: 'Build formula: Imp Claw (0 gold).'
     marks:
     - gamefile:items/item_imp_claw#cost
+  - text: “Though their tasks are largely thankless, demon hunters can often turn
+      a profit bartering parts in Weeping Rose.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_imp_claw_Lore
 ---
 
 # Imp Claw

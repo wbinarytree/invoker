@@ -5,7 +5,7 @@
   "title": "Scythe of Vyse",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "44840982bad7f3f91fa1bb90c9759ae95a072482af3ead3cb336910838fc6b8b",
+  "article_sha256": "a1b8c63c09136fa8508e1854700e79f35a1882df7bca10502e88f9e3d85773bd",
   "citations": [
     "gamefile:items/item_sheepstick#cost",
     "gamefile:items/item_sheepstick#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "fb0389e037d4d17a860b831aaef87728de95c754644e2fb2a29d21db64d93f1b",
-    "input_tokens": 14403,
-    "output_tokens": 818,
+    "prompt_version": "7",
+    "request_sha256": "dd4b1591490e16ea0f906b680a9e4ba68b74ce61e0a185c5c9c37741867131ed",
+    "input_tokens": 14032,
+    "output_tokens": 1445,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:01.343028+00:00"
+    "generated_at": "2026-07-27T12:16:59.349735+00:00"
   }
 }

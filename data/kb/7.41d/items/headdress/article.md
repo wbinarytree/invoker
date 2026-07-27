@@ -6,17 +6,22 @@ card:
   entity: headdress
   sentences:
   - text: Headdress is a rare 425-gold item that provides 0.5 Health Regeneration
-      and passively grants allies 2.0 Aura Health Regen within a 1200 radius.
+      and has Regeneration Aura, a passive effect granting allies 2.0 Aura Health
+      Regen within a 1200 radius.
     marks:
     - gamefile:items/item_headdress#cost
     - gamefile:items/item_headdress#attribs
     - loc:DOTA_Tooltip_ability_item_headdress_Description
-  - text: Its build formula is Ring of Regen (175 gold) plus a Recipe (250 gold).
+  - text: Its behavior is Passive, with a 1200 cast range.
+    marks:
+    - gamefile:items/item_headdress#mechanics
+  - text: It is built from Ring of Regen (175 gold) and a Recipe (250 gold), and builds
+      into Drum of Endurance and Mekansm.
     marks:
     - gamefile:items/item_headdress#components
-  - text: It builds into Drum of Endurance and Mekansm.
+  - text: Creates a soothing aura that restores allies in battle.
     marks:
-    - gamefile:items/item_headdress#components
+    - loc:DOTA_Tooltip_ability_item_headdress_Lore
 ---
 
 # Headdress

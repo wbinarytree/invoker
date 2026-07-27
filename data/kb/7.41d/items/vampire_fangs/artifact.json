@@ -5,7 +5,7 @@
   "title": "Vampire Fangs",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8bd0f55b550bad089cb5f593708eae3552f5c91ebef129b71b0eadb469890967",
+  "article_sha256": "acc524aba6cec36023eacc5b1334418a9cc70e99125cdf6541a939f9566bcc70",
   "citations": [
     "gamefile:items/item_vampire_fangs#cost",
     "gamefile:items/item_vampire_fangs#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1cc873e6c5a36dca74ec1582b5ab6b7f5d8606a0e905d85515cb380ad52c2207",
-    "input_tokens": 14218,
-    "output_tokens": 306,
+    "prompt_version": "7",
+    "request_sha256": "9e258585225c2ff037420d55c91b283cd990587098ea6cd3ee77f1d5db6067d3",
+    "input_tokens": 13849,
+    "output_tokens": 314,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:47.705739+00:00"
+    "generated_at": "2026-07-27T12:18:28.911814+00:00"
   }
 }

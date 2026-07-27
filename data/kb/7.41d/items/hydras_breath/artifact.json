@@ -5,7 +5,7 @@
   "title": "Hydra's Breath",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "927522ea5180d5512f80c3147745a3b614585b10e95c08213e22af7f8295ca87",
+  "article_sha256": "b0b5bea3aa302a41c359ae8b49f5d149c0eb7ebdf0f641681f73ceeae0670a77",
   "citations": [
     "gamefile:items/item_hydras_breath#cost",
     "gamefile:items/item_hydras_breath#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "e56f3638f7cd6db178c48980bf06290549d7b85a05195b870b34a7ceab40cea6",
-    "input_tokens": 14574,
-    "output_tokens": 3875,
+    "prompt_version": "7",
+    "request_sha256": "1c62c7dee9b58c2a95c28fb359ce08d4662868fda8eca2d53b1c0e3bc2330a80",
+    "input_tokens": 14203,
+    "output_tokens": 2301,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:55.782909+00:00"
+    "generated_at": "2026-07-27T12:12:47.587977+00:00"
   }
 }

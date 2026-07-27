@@ -18,6 +18,9 @@ card:
   - text: Its behavior is Passive.
     marks:
     - gamefile:items/item_soul_booster#mechanics
+  - text: Regain lost courage.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_soul_booster_Lore
 ---
 
 # Soul Booster

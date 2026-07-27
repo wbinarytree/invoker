@@ -5,11 +5,11 @@ patch: 7.41d
 card:
   entity: enhancement_vampiric
   sentences:
-  - text: Vampiric is a passive enhancement costing 0 gold that grants 30% LIFESTEAL,
-      300 BONUS NIGHT VISION, and 20% SPELL LIFESTEAL.
+  - text: Vampiric is a 0-gold passive enhancement that grants 30% LIFESTEAL, 300
+      BONUS NIGHT VISION, and 20% SPELL LIFESTEAL.
     marks:
-    - gamefile:items/item_enhancement_vampiric#attribs
     - gamefile:items/item_enhancement_vampiric#cost
+    - gamefile:items/item_enhancement_vampiric#attribs
     - gamefile:items/item_enhancement_vampiric#mechanics
 ---
 

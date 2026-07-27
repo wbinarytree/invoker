@@ -5,7 +5,7 @@
   "title": "Eul's Scepter of Divinity",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2335194f3ff3085c46721450c81f627c367c16d030cfbbb36afa383e62a27314",
+  "article_sha256": "c14fda1f2e62c5464d5f86bcd10f5583e59e77777359735271e77c45648f3d78",
   "citations": [
     "gamefile:items/item_cyclone#cost",
     "gamefile:items/item_cyclone#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "eef58c673623dedb469e2dc2c0c5f54e8c640e45dc2893cce5f5c4240a3e4502",
-    "input_tokens": 14487,
-    "output_tokens": 1297,
+    "prompt_version": "7",
+    "request_sha256": "c37904346dffd614a696771f1725665fe1e514f6307b4049a9e3aacdd5eb32bc",
+    "input_tokens": 14114,
+    "output_tokens": 1946,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:41.730504+00:00"
+    "generated_at": "2026-07-27T12:09:11.387720+00:00"
   }
 }

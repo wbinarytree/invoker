@@ -5,7 +5,7 @@
   "title": "Sacred Relic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d7bbfcc95fe773cf00aedf4f5236330c6f7c39e34cbf64c0cb30dea87cba55dc",
+  "article_sha256": "a540261c2a1d2308d5553404658316826e48767cedb210e8b81c09c738df2817",
   "citations": [
     "gamefile:items/item_relic#cost",
     "gamefile:items/item_relic#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "57c0bde1674a10e29767102333547bb8bec79a6626cbab8af1d8702f3dc70ccb",
-    "input_tokens": 14229,
-    "output_tokens": 271,
+    "prompt_version": "7",
+    "request_sha256": "f4cf6f8c8af0c1d04776c59808deb041e1f4633cc816abf75d9bf280fd2cfb74",
+    "input_tokens": 13858,
+    "output_tokens": 404,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:03.761611+00:00"
+    "generated_at": "2026-07-27T12:15:50.929270+00:00"
   }
 }

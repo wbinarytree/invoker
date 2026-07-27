@@ -5,9 +5,8 @@ patch: 7.41d
 card:
   entity: doubloon
   sentences:
-  - text: Doubloon is a 0-gold No Target toggle item whose Flip toggle converts Max
-      Health to Max Mana or Max Mana to Max Health with 30% Conversion Pct and Cooldown
-      5.
+  - text: Doubloon is a 0-gold item whose No Target Flip toggle converts Max Health
+      to Max Mana or Max Mana to Max Health with 30% Conversion Pct and 5 cooldown.
     marks:
     - gamefile:items/item_doubloon#cost
     - loc:DOTA_Tooltip_ability_item_doubloon_Description
@@ -22,9 +21,6 @@ card:
   - text: Regen Bonus Pct is 0.
     marks:
     - gamefile:items/item_doubloon#attribs
-  - text: Its behavior is No Target, Toggle.
-    marks:
-    - gamefile:items/item_doubloon#mechanics
 ---
 
 # Doubloon

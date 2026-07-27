@@ -5,7 +5,7 @@
   "title": "Robe of the Magi",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "05ec7321d27da468047dfccdcd743c46c45cc74194f957d7eec63daceaed5e7b",
+  "article_sha256": "2613856030757e8e38c40e08ef28828208daf93bfb691e90759653edb55af347",
   "citations": [
     "gamefile:items/item_robe#cost",
     "gamefile:items/item_robe#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a8c0fcdf283d6ce95b36a23133154d851059cd99726b4b1cf77c808ddf58e887",
-    "input_tokens": 14263,
-    "output_tokens": 454,
+    "prompt_version": "7",
+    "request_sha256": "440a1b23c6ed90d77b57f52bc9982e89ad6693b11dba1e87450222d98f1ef0ee",
+    "input_tokens": 13890,
+    "output_tokens": 435,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:56.169234+00:00"
+    "generated_at": "2026-07-27T12:16:11.583248+00:00"
   }
 }

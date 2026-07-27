@@ -5,7 +5,7 @@
   "title": "Orb of Venom",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d683527c9dbf60e17fc49c16fa08ddb7a147b3e2f08c91dbf6a382caac70b82b",
+  "article_sha256": "d1bc72ad72de1d1de6fdafb325ed5564b0d0ab3d47e089efa682990f4c71d4c1",
   "citations": [
     "gamefile:items/item_orb_of_venom#cost",
     "gamefile:items/item_orb_of_venom#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "379918bd0a405dd87ad38cb8c97842fd8ef05d7d1c33e626454669c74de511dc",
-    "input_tokens": 14429,
-    "output_tokens": 761,
+    "prompt_version": "7",
+    "request_sha256": "2927af1103c292bac64ef9a1d380e6c335e4af7406ce52a9c41dedabaf83c302",
+    "input_tokens": 14050,
+    "output_tokens": 1062,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:17.171055+00:00"
+    "generated_at": "2026-07-27T12:14:47.036961+00:00"
   }
 }

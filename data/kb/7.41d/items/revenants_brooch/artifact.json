@@ -5,7 +5,7 @@
   "title": "Revenant's Brooch",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "eb0f05891e309239984f1ab4c03d19a6f3457756993c0f8ee6da956dc8da299a",
+  "article_sha256": "f4950b606322220a422a1d510ab9e251ad0414143c74834054978e7f0b1167da",
   "citations": [
     "gamefile:items/item_revenants_brooch#cost",
     "gamefile:items/item_revenants_brooch#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "742739cb6ee17012abf790120d2f4320f54fd7b0ab1bbf27c78c662819ad6942",
-    "input_tokens": 14360,
-    "output_tokens": 534,
+    "prompt_version": "7",
+    "request_sha256": "52f761598c1db1f331f811ad361281b265808d63fbda04ffb0be55e1996c06fa",
+    "input_tokens": 13987,
+    "output_tokens": 450,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:33.486571+00:00"
+    "generated_at": "2026-07-27T12:15:50.724320+00:00"
   }
 }

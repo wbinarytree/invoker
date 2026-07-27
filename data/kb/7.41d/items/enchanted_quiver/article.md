@@ -5,15 +5,20 @@ patch: 7.41d
 card:
   entity: enchanted_quiver
   sentences:
-  - text: Enchanted Quiver is a 0-gold passive item whose Certain Strike has a 4.0
-      cooldown and gives the next attack 250 magical bonus damage and True Strike,
-      plus 350 Active Bonus Attack Range for a ranged attacker; its Bonus Attack Range
-      is 0.
+  - text: Enchanted Quiver is a passive item costing 0 gold whose 4.0-cooldown Certain
+      Strike gives the next attack 250 magical Bonus Damage and True Strike, and grants
+      ranged attackers 350 Active Bonus Attack Range for that attack.
     marks:
     - gamefile:items/item_enchanted_quiver#cost
     - gamefile:items/item_enchanted_quiver#mechanics
     - gamefile:items/item_enchanted_quiver#attribs
     - loc:DOTA_Tooltip_Ability_item_enchanted_quiver_Description
+  - text: Its Bonus Attack Range is 0.
+    marks:
+    - gamefile:items/item_enchanted_quiver#attribs
+  - text: A graceful gift blessed by the goddess of the hunt.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_enchanted_quiver_Lore
 ---
 
 # Enchanted Quiver

@@ -5,21 +5,28 @@ patch: 7.41d
 card:
   entity: basher
   sentences:
-  - text: Skull Basher is an epic item costing 2875 gold that grants 30 Damage and
-      10 Strength and gives attacks a 25% melee or 10% ranged chance, with a 2.3 cooldown,
-      to stun for 1.2 and deal 100 bonus physical damage.
+  - text: 'Skull Basher is an epic item costing 2875 gold that grants 30 Damage and
+      10 Strength and provides Passive: Bash, which has a 25% chance for melee heroes
+      and 10% for ranged heroes to trigger on hit, stun the target for 1.2 duration,
+      and deal 100 bonus damage, with a 2.3 cooldown.'
     marks:
     - gamefile:items/item_basher#cost
     - gamefile:items/item_basher#attribs
-    - gamefile:items/item_basher#mechanics
     - loc:DOTA_Tooltip_ability_item_basher_Description
+  - text: Its build formula is Mithril Hammer (1600 gold), Belt of Strength (450 gold),
+      and Recipe (825 gold); it builds into Abyssal Blade.
+    marks:
+    - gamefile:items/item_basher#components
+  - text: Bash's damage type is Physical.
+    marks:
+    - gamefile:items/item_basher#mechanics
   - text: Bash is dispellable by Strong Dispels Only.
     marks:
     - gamefile:items/item_basher#mechanics
-  - text: It is built from Mithril Hammer for 1600 gold, Belt of Strength for 450
-      gold, and a Recipe for 825 gold, and builds into Abyssal Blade.
+  - text: A feared weapon in the right hands, this maul's ability to shatter the defenses
+      of its opponents should not be underestimated.
     marks:
-    - gamefile:items/item_basher#components
+    - loc:DOTA_Tooltip_ability_item_basher_Lore
 ---
 
 # Skull Basher

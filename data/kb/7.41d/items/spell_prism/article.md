@@ -5,16 +5,22 @@ patch: 7.41d
 card:
   entity: spell_prism
   sentences:
-  - text: Spell Prism is a 0-gold passive item that grants 5 All Attributes, 12% Cooldown
+  - text: Spell Prism is a 0-gold item that grants 5 All Attributes, 12% Cooldown
       Reduction, and 2 Mana Regeneration.
     marks:
     - gamefile:items/item_spell_prism#cost
     - gamefile:items/item_spell_prism#attribs
+  - text: Spell Prism has passive behavior.
+    marks:
     - gamefile:items/item_spell_prism#mechanics
-  - text: Its Cooldown Reduction passive reduces the cooldown time of all spells and
-      items.
+  - text: Its passive, Cooldown Reduction, reduces the cooldown time of all spells
+      and items.
     marks:
     - loc:DOTA_Tooltip_ability_item_spell_prism_Description
+  - text: Even the slightest flaw in the components of a spell prism can result in
+      the death of its user.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_spell_prism_Lore
 ---
 
 # Spell Prism

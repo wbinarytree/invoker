@@ -5,7 +5,7 @@
   "title": "Ring of Regen",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "cd893ee521471fba080b5e3318dd9a4ebb8093154d7ce84c60e8661934b3905b",
+  "article_sha256": "fec160f478a3dd0d24c8e306122b032bd7e806bb6acd3ad661bb4939700f56ef",
   "citations": [
     "gamefile:items/item_ring_of_regen#cost",
     "gamefile:items/item_ring_of_regen#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "fd1c385b21e2e995032ecb0b1bd341b49b31e95f846fc56014508beca6c91988",
-    "input_tokens": 14252,
-    "output_tokens": 431,
+    "prompt_version": "7",
+    "request_sha256": "60bd42b68fde0358550c08ebda0f407a50d11e2816166854c32dada528edb5da",
+    "input_tokens": 13885,
+    "output_tokens": 537,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:44.382095+00:00"
+    "generated_at": "2026-07-27T12:16:09.590749+00:00"
   }
 }

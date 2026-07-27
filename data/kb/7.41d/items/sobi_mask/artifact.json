@@ -5,7 +5,7 @@
   "title": "Sage's Mask",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "581f5b5f424b2ddf30ab9b214ba044058145ee653d0f87cee518dca228a7fd80",
+  "article_sha256": "339f1887ef8891681c14265069d5db93742bfd0b705bbfec02dcbc0e9b5b69b8",
   "citations": [
     "gamefile:items/item_sobi_mask#cost",
     "gamefile:items/item_sobi_mask#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a827f606bef551c641ecc292d8a86162b34abc831c6b963e2230d1ccbd2c29e2",
-    "input_tokens": 14291,
-    "output_tokens": 362,
+    "prompt_version": "7",
+    "request_sha256": "8298bbbdbcdc6343c4074fae70940a9633d0d02d4d39460a90671acfeb38e3f9",
+    "input_tokens": 13920,
+    "output_tokens": 452,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:15:41.853658+00:00"
+    "generated_at": "2026-07-27T12:16:57.945851+00:00"
   }
 }

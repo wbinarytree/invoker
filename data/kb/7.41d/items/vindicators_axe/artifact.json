@@ -5,7 +5,7 @@
   "title": "Vindicator's Axe",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "32951f13e315d64224f0b6bd46edaa82ad7ad00f5a353750175e25d039c0512f",
+  "article_sha256": "51057aa4d2ba61a90a568cd578a53bb19798636ef99a9326d71ff49e997f63c8",
   "citations": [
     "gamefile:items/item_vindicators_axe#attribs",
     "loc:DOTA_Tooltip_ability_item_vindicators_axe_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "13d03e8af04c715e4e444a58913bf2e96e2b40f8313f6cb2c0d1d201dec2e6d8",
-    "input_tokens": 14275,
-    "output_tokens": 539,
+    "prompt_version": "7",
+    "request_sha256": "8afb13b05467912e4c6de76c4cfcff0e16adf66c5e7e401e81490baf7be40dc9",
+    "input_tokens": 13902,
+    "output_tokens": 892,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:01.788221+00:00"
+    "generated_at": "2026-07-27T12:18:50.020171+00:00"
   }
 }

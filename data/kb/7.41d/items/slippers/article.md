@@ -5,7 +5,8 @@ patch: 7.41d
 card:
   entity: slippers
   sentences:
-  - text: Slippers of Agility is a 140-gold component item that grants 3 Agility.
+  - text: Slippers of Agility is a component item that costs 140 gold and grants 3
+      Agility.
     marks:
     - gamefile:items/item_slippers#cost
     - gamefile:items/item_slippers#attribs
@@ -15,6 +16,9 @@ card:
   - text: It builds into Wraith Band.
     marks:
     - gamefile:items/item_slippers#components
+  - text: “Light boots made from spider skin that tingles your senses.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_slippers_Lore
 ---
 
 # Slippers of Agility

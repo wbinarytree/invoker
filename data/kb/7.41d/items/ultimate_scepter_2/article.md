@@ -6,14 +6,17 @@ card:
   entity: ultimate_scepter_2
   sentences:
   - text: Aghanim's Blessing is a rare 5800-gold item with Passive behavior whose
-      Ability Upgrade upgrades the ultimate and some abilities of all heroes.
+      Ability Upgrade effect upgrades the ultimate and some abilities of all heroes.
     marks:
     - gamefile:items/item_ultimate_scepter_2#cost
     - gamefile:items/item_ultimate_scepter_2#mechanics
     - loc:DOTA_Tooltip_ability_item_ultimate_scepter_2_Description
-  - text: Its build formula is Aghanim's Scepter (4200 gold) plus Recipe (1600 gold).
+  - text: It is built from Aghanim's Scepter (4200 gold) and a Recipe (1600 gold).
     marks:
     - gamefile:items/item_ultimate_scepter_2#components
+  - text: The scepter of a wizard with demigod-like powers.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ultimate_scepter_2_Lore
 ---
 
 # Aghanim's Blessing

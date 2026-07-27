@@ -5,25 +5,28 @@ patch: 7.41d
 card:
   entity: smoke_of_deceit
   sentences:
-  - text: Smoke of Deceit is a consumable item costing 50 gold whose Disguise grants
-      invisibility and 15% bonus movement speed for a 45.0 duration to the caster
-      and allied player-controlled units within a 1200 application radius.
+  - text: Smoke of Deceit is a 50-gold consumable whose Disguise grants invisibility
+      and 15% bonus movement speed for 45.0 seconds to the caster and allied player-controlled
+      units within a 1200 application radius.
     marks:
     - gamefile:items/item_smoke_of_deceit#cost
     - gamefile:items/item_smoke_of_deceit#attribs
     - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description
+  - text: Its cooldown is 1.0.
+    marks:
+    - gamefile:items/item_smoke_of_deceit#mechanics
+  - text: The second cast cooldown is 2.0.
+    marks:
+    - gamefile:items/item_smoke_of_deceit#attribs
   - text: While the caster remains disguised, allies entering the 300 secondary application
-      radius also receive Disguise.
+      radius also receive the buff.
     marks:
     - gamefile:items/item_smoke_of_deceit#attribs
     - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description
-  - text: Each smoke can only be applied once to allies.
+  - text: Each smoke can be applied only once to allies.
     marks:
     - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description
-  - text: Attacking breaks the invisibility.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description
-  - text: Moving within the 1025 visibility radius of an enemy hero or tower breaks
+  - text: Attacking or moving within 1025 radius of an enemy hero or tower breaks
       the invisibility.
     marks:
     - gamefile:items/item_smoke_of_deceit#attribs
@@ -37,18 +40,9 @@ card:
   - text: It has no cooldown when moved into the main inventory.
     marks:
     - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description
-  - text: Its second cast cooldown is 2.0.
+  - text: The charlatan wizard Myrddin's only true contribution to the arcane arts.
     marks:
-    - gamefile:items/item_smoke_of_deceit#attribs
-  - text: Its behavior is No Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK.
-    marks:
-    - gamefile:items/item_smoke_of_deceit#mechanics
-  - text: Its cast range is 1200.
-    marks:
-    - gamefile:items/item_smoke_of_deceit#mechanics
-  - text: Its cooldown is 1.0.
-    marks:
-    - gamefile:items/item_smoke_of_deceit#mechanics
+    - loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Lore
 ---
 
 # Smoke of Deceit

@@ -5,7 +5,7 @@
   "title": "Crown",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1f3a8dbe371989d706f6fda1387ac774f9822bff5018c92e0fa2fa7aea847124",
+  "article_sha256": "ec5183323ccb586bc184324888e642c6523558904380c40a7fff7a3f55dcdf50",
   "citations": [
     "gamefile:items/item_crown#cost",
     "gamefile:items/item_crown#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3b5d60cd3cfd89d96a82b2c2a7a15ce850ea03c9caf6d33b1604f55fbada5b05",
-    "input_tokens": 14268,
-    "output_tokens": 282,
+    "prompt_version": "7",
+    "request_sha256": "aa1d4ddb3c42651cf281b41bbb6aed862ebf0fd196c468ad3508cb5a3a2a265e",
+    "input_tokens": 13905,
+    "output_tokens": 473,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:30.851202+00:00"
+    "generated_at": "2026-07-27T12:08:40.367310+00:00"
   }
 }

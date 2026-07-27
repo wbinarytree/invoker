@@ -5,39 +5,39 @@ patch: 7.41d
 card:
   entity: veil_of_discord
   sentences:
-  - text: Veil of Discord is a rare 1700-gold item that grants 175 Health, 10 Intelligence,
-      10% Spell Amp, and 18% Spell Lifesteal, and its active Spell Weakness causes
-      enemy heroes within a 900 radius to take 10% increased spell damage for 16.0
-      seconds.
+  - text: Veil of Discord is a rare item costing 1700 gold that grants 175 Health,
+      10 Intelligence, 10% Spell Amp, and 18% Spell Lifesteal, with an active Spell
+      Weakness that increases spell damage taken by 10% for 16.0 seconds.
     marks:
     - gamefile:items/item_veil_of_discord#cost
     - gamefile:items/item_veil_of_discord#attribs
     - loc:DOTA_Tooltip_ability_item_veil_of_discord_Description
+  - text: Its debuff radius is 900.
+    marks:
+    - gamefile:items/item_veil_of_discord#attribs
+  - text: Its resist debuff duration is 16.0.
+    marks:
+    - gamefile:items/item_veil_of_discord#attribs
   - text: Spell Weakness has a cast range of 900.
     marks:
     - gamefile:items/item_veil_of_discord#mechanics
-  - text: Spell Weakness has a mana cost of 50.
+  - text: Spell Weakness costs 50 mana.
     marks:
     - gamefile:items/item_veil_of_discord#mechanics
   - text: Spell Weakness has a cooldown of 16.
     marks:
     - gamefile:items/item_veil_of_discord#mechanics
-  - text: Spell Weakness is an AOE, no-target, immediate active.
+  - text: Spell Weakness is an AOE, no-target, immediate active that does not cancel
+      movement, ignores channeling, and is dispellable.
     marks:
     - gamefile:items/item_veil_of_discord#mechanics
-  - text: It does not cancel movement.
-    marks:
-    - gamefile:items/item_veil_of_discord#mechanics
-  - text: It can be cast while channeling.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_veil_of_discord_Description
-  - text: It is dispellable.
-    marks:
-    - gamefile:items/item_veil_of_discord#mechanics
-  - text: It is built from Voodoo Mask for 650 gold, Robe of the Magi for 450 gold,
-      Fluffy Hat for 250 gold, and a Recipe for 350 gold, and builds into Bloodstone.
+  - text: Its build formula is Voodoo Mask (650 gold), Robe of the Magi (450 gold),
+      Fluffy Hat (250 gold), and Recipe (350 gold); it builds into Bloodstone.
     marks:
     - gamefile:items/item_veil_of_discord#components
+  - text: “The headwear of corrupt magi.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_veil_of_discord_Lore
 ---
 
 # Veil of Discord

@@ -5,12 +5,17 @@ patch: 7.41d
 card:
   entity: elven_tunic
   sentences:
-  - text: Elven Tunic is a passive item costing 0 gold that grants 26 Attack Speed,
-      16% Evasion, and 7% Movement Speed.
+  - text: Elven Tunic is an item costing 0 gold that grants 26 Attack Speed, 16% Evasion,
+      and 7% Movement Speed.
     marks:
     - gamefile:items/item_elven_tunic#cost
     - gamefile:items/item_elven_tunic#attribs
+  - text: Elven Tunic is passive.
+    marks:
     - gamefile:items/item_elven_tunic#mechanics
+  - text: “Even simple items of elven make seem imbued with inexplicable efficacy.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_elven_tunic_Lore
 ---
 
 # Elven Tunic

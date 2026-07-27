@@ -5,23 +5,40 @@ patch: 7.41d
 card:
   entity: seeds_of_serenity
   sentences:
-  - text: Seeds of Serenity is a 0-gold point-targeted, area-of-effect item whose
-      Verdurous Dale provides allied units in a 400-radius area with 8 aura health
-      regeneration plus 25% of the caster’s health regeneration for 8 seconds.
+  - text: Seeds of Serenity is a 0-gold item with the point-targeted, area-of-effect
+      active Verdurous Dale, which gives allied units within its 400 radius health
+      regeneration based on AURA HEALTH REGEN 8 and 25% of the caster’s health regeneration
+      for DURATION 8.
     marks:
     - gamefile:items/item_seeds_of_serenity#cost
     - gamefile:items/item_seeds_of_serenity#mechanics
     - gamefile:items/item_seeds_of_serenity#attribs
     - loc:DOTA_Tooltip_Ability_item_seeds_of_serenity_Description
-  - text: Its build formula is Seeds of Serenity (0 gold).
+  - text: The build formula is Seeds of Serenity (0 gold).
     marks:
     - gamefile:items/item_seeds_of_serenity#cost
-  - text: Verdurous Dale has 350 cast range.
+  - text: BONUS HEALTH is 0.
+    marks:
+    - gamefile:items/item_seeds_of_serenity#attribs
+  - text: BONUS HEALTH REGEN is 0.
+    marks:
+    - gamefile:items/item_seeds_of_serenity#attribs
+  - text: Verdurous Dale has a cast range of 350.
     marks:
     - gamefile:items/item_seeds_of_serenity#mechanics
-  - text: Verdurous Dale has a 35.0-second cooldown.
+  - text: Verdurous Dale has a cooldown of 35.0.
     marks:
     - gamefile:items/item_seeds_of_serenity#mechanics
+  - text: Verdurous Dale targets the ground.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_seeds_of_serenity_Description
+  - text: The caster’s health regeneration contribution is fixed at the time of casting.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_seeds_of_serenity_Description
+  - text: An evergreen sprout treasured by the woodkin and highly coveted by interlopers
+      and their like.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_seeds_of_serenity_Lore
 ---
 
 # Seeds of Serenity

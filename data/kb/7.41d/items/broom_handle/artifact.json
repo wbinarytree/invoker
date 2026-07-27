@@ -5,7 +5,7 @@
   "title": "Broom Handle",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3a79f763093647607e366cff4b3b4110f153bdbc306fc985517263c564fe8b79",
+  "article_sha256": "caf7ff6b1bfd5380dd0bba21cfb1a356128f5a024ee626efa05b952331811a15",
   "citations": [
     "gamefile:items/item_broom_handle#mechanics",
     "gamefile:items/item_broom_handle#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5025d2fa42961adc9f1bdd26d5cd2d282d44ba420032273dcc29295c4d756e12",
-    "input_tokens": 14208,
-    "output_tokens": 219,
+    "prompt_version": "7",
+    "request_sha256": "56a0670a13fe0a08af4bb8266906e54b1358b62f4572a861b349664197305b2f",
+    "input_tokens": 13841,
+    "output_tokens": 286,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:29.664970+00:00"
+    "generated_at": "2026-07-27T12:08:00.437710+00:00"
   }
 }

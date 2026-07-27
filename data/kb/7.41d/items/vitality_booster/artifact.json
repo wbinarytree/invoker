@@ -5,7 +5,7 @@
   "title": "Vitality Booster",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "66f5fc8a920b01be3c08504560ffdc83d984b79dcb8190068af782f8f058ecd6",
+  "article_sha256": "cd80ce19b1141ea5bacd0a887afb89c42d3d96c9075b9aeb903ac94553c58455",
   "citations": [
     "gamefile:items/item_vitality_booster#cost",
     "gamefile:items/item_vitality_booster#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "407535d4f6ad428c7848ee59f7a368e5a474f6ace7fad198c21eef873fe62c7c",
-    "input_tokens": 14290,
-    "output_tokens": 364,
+    "prompt_version": "7",
+    "request_sha256": "fb7a6d57dce60fbb6840410546230e1faf6ca70984d95d9b5952f54d6a4634f2",
+    "input_tokens": 13919,
+    "output_tokens": 502,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:39.474322+00:00"
+    "generated_at": "2026-07-27T12:18:44.586120+00:00"
   }
 }

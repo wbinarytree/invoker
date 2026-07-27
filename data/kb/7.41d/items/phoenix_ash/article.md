@@ -5,13 +5,18 @@ patch: 7.41d
 card:
   entity: phoenix_ash
   sentences:
-  - text: Phoenix Ash is a 0-gold Passive item that provides 50 HEALTH PCT; its Rebirth
-      prevents lethal damage, heals the wearer to half health, resets non-ultimate
-      ability cooldowns, and consumes the item.
+  - text: Phoenix Ash is a 0-gold Passive item that provides 50 HEALTH PCT and Rebirth,
+      which prevents lethal damage and heals the wearer to half health.
     marks:
     - gamefile:items/item_phoenix_ash#cost
     - gamefile:items/item_phoenix_ash#mechanics
     - gamefile:items/item_phoenix_ash#attribs
+    - loc:DOTA_Tooltip_ability_item_phoenix_ash_Description
+  - text: Rebirth resets non-ultimate ability cooldowns.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_phoenix_ash_Description
+  - text: Phoenix Ash is consumed when Rebirth triggers.
+    marks:
     - loc:DOTA_Tooltip_ability_item_phoenix_ash_Description
 ---
 

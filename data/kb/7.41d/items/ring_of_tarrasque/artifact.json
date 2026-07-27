@@ -5,7 +5,7 @@
   "title": "Ring of Tarrasque",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "201a919964d64c72f56419865bb43992268925f41263bb80672d0809c8dc587e",
+  "article_sha256": "d10d3e6356d5dff2298d0216fa356be53db9b150c52ac6b2cccfbf5d1a2febf5",
   "citations": [
     "gamefile:items/item_ring_of_tarrasque#cost",
     "gamefile:items/item_ring_of_tarrasque#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "dc923f8af00a177d24d6808268f35a8f9874be9e534fa2df50a10100cdf9f025",
-    "input_tokens": 14302,
-    "output_tokens": 340,
+    "prompt_version": "7",
+    "request_sha256": "587364d0113541556f1e81138f02002f89b4a7cb233ea220a9b6d8ee1e509355",
+    "input_tokens": 13929,
+    "output_tokens": 458,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:49.942831+00:00"
+    "generated_at": "2026-07-27T12:16:08.978997+00:00"
   }
 }

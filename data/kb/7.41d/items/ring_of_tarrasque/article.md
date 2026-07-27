@@ -5,19 +5,24 @@ patch: 7.41d
 card:
   entity: ring_of_tarrasque
   sentences:
-  - text: Ring of Tarrasque is a passive component item costing 1700 gold that provides
+  - text: Ring of Tarrasque is a 1700-gold component item that passively provides
       12 Health Regeneration.
     marks:
     - gamefile:items/item_ring_of_tarrasque#cost
     - gamefile:items/item_ring_of_tarrasque#attribs
     - gamefile:items/item_ring_of_tarrasque#mechanics
-  - text: 'Build formula: Ring of Tarrasque (1700 gold).'
+  - text: Its behavior is passive.
+    marks:
+    - gamefile:items/item_ring_of_tarrasque#mechanics
+  - text: It consists of Ring of Tarrasque (1700 gold) and builds into Boots of Bearing,
+      Heart of Tarrasque, Pipe of Insight, and Refresher Orb.
     marks:
     - gamefile:items/item_ring_of_tarrasque#cost
-  - text: It builds into Boots of Bearing, Heart of Tarrasque, Pipe of Insight, and
-      Refresher Orb.
-    marks:
     - gamefile:items/item_ring_of_tarrasque#components
+  - text: An ageless ring forged with an otherwise simple blood magic amplified by
+      the presumed source of its key component.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ring_of_tarrasque_Lore
 ---
 
 # Ring of Tarrasque

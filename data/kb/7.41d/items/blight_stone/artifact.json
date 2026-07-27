@@ -5,7 +5,7 @@
   "title": "Orb of Blight",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2550303c9e169ab379cc45d17840f2ead7531fac96fdb496953ab303994ce1ea",
+  "article_sha256": "00291a154567a506071672c084831c19520a41146e391a8e54ea2211437f8f68",
   "citations": [
     "gamefile:items/item_blight_stone#cost",
     "gamefile:items/item_blight_stone#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "926c658ebd16f25b33d70d2120553e7d77ff873c1cd6965d7b2ce562a37ccf46",
-    "input_tokens": 14322,
-    "output_tokens": 596,
+    "prompt_version": "7",
+    "request_sha256": "ec076b66b018065bd2b8dc9e89720c7497ad340ea50ab8d7ff236a64e7d7f4a3",
+    "input_tokens": 13953,
+    "output_tokens": 649,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:08.371427+00:00"
+    "generated_at": "2026-07-27T12:07:35.314144+00:00"
   }
 }

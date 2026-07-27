@@ -5,7 +5,7 @@
   "title": "Voodoo Mask",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f13b6dacdc27aa7194891ddbbaa94b321ae95e79bb59983936b8dca0736c1647",
+  "article_sha256": "946f25a3aeee0dd75a0fffa785545c72209319cc88a116abfbea14e40433c56e",
   "citations": [
     "gamefile:items/item_voodoo_mask#cost",
     "gamefile:items/item_voodoo_mask#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2b5487afe0bcb87b81a8b4fc32913c870243b40b5bb04fcb8ab54f8f4af16a0b",
-    "input_tokens": 14284,
-    "output_tokens": 316,
+    "prompt_version": "7",
+    "request_sha256": "6e9547a51c8df5e1bb937745de02a1a298c41d1dfab5991383b7265d6d91638b",
+    "input_tokens": 13913,
+    "output_tokens": 403,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:35.204902+00:00"
+    "generated_at": "2026-07-27T12:18:47.349918+00:00"
   }
 }

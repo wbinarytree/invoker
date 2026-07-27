@@ -5,7 +5,7 @@
   "title": "Royal Jelly",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "bc0bd69e38c6b2dbe8b895110bd9c0459a134dde8e6c5aa470cd6ac70f7b19ff",
+  "article_sha256": "6e478a51d282e83da1fba629afe41f7b1ceaec268699178b8c4d3944ecc996f3",
   "citations": [
     "gamefile:items/item_royal_jelly#cost",
     "loc:DOTA_Tooltip_ability_item_royal_jelly_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "8f9b2d18fa6fe6f45d4825c145fcdab160d8e38f8a10a8f81665519a6bb46e6b",
-    "input_tokens": 14404,
-    "output_tokens": 1356,
+    "prompt_version": "7",
+    "request_sha256": "d96f7a0a3b97d3874a368724946a40f513ed540483745067dd431acfa2cb965d",
+    "input_tokens": 14029,
+    "output_tokens": 1430,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:38.865557+00:00"
+    "generated_at": "2026-07-27T12:16:39.341410+00:00"
   }
 }

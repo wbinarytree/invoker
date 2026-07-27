@@ -5,7 +5,7 @@
   "title": "Spell Prism",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "32e409105679878de200462276108f1a0dcbfd4e73a61f27c58614f071fd2db9",
+  "article_sha256": "3741cd0969741d24b1f7c786eb70e16557b78f64bb17e3bc83cc9e20c09ac487",
   "citations": [
     "gamefile:items/item_spell_prism#cost",
     "gamefile:items/item_spell_prism#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "d02d1d522f8a9c88d2cf3c1ea815c5d86a120f0ace93a6b0e2b7175b6acb2edc",
-    "input_tokens": 14262,
-    "output_tokens": 342,
+    "prompt_version": "7",
+    "request_sha256": "62bd19156bb8510c0086796d2b044722830653b063ffb7f037af5020c027e1ba",
+    "input_tokens": 13889,
+    "output_tokens": 292,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:31.721178+00:00"
+    "generated_at": "2026-07-27T12:17:12.374809+00:00"
   }
 }

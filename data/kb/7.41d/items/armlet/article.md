@@ -5,31 +5,37 @@ patch: 7.41d
 card:
   entity: armlet
   sentences:
-  - text: Armlet of Mordiggian is a 2500-gold epic item granting 6 Armor, 25 Attack
-      Speed, 15 Damage, and 5 Health Regeneration; its Unholy Strength toggle grants
-      4 bonus armor, 35 bonus damage, 0 slow resistance, and 25 bonus strength while
-      draining 45 health per second.
+  - text: Armlet of Mordiggian is an epic 2500-gold item granting 6 Armor, 25 Attack
+      Speed, 15 Damage, and 5 Health Regeneration; its Unholy Strength toggle has
+      a 0.036 Toggle Cooldown and grants 4 Unholy Bonus Armor, 35 Unholy Bonus Damage,
+      0 Unholy Bonus Slow Resistance, and 25 Unholy Bonus Strength while draining
+      45 health per second.
     marks:
     - gamefile:items/item_armlet#cost
     - gamefile:items/item_armlet#attribs
     - loc:DOTA_Tooltip_ability_item_armlet_Description
-  - text: Its build formula is Helm of Iron Will for 975 gold, Gloves of Haste for
-      450 gold, Blades of Attack for 450 gold, and a Recipe for 625 gold.
+  - text: It is built from Helm of Iron Will (975 gold), Gloves of Haste (450 gold),
+      Blades of Attack (450 gold), and a Recipe (625 gold).
     marks:
     - gamefile:items/item_armlet#components
-  - text: Its Toggle Cooldown stat is 0.036.
-    marks:
-    - gamefile:items/item_armlet#attribs
-  - text: Unholy Strength is a no-target toggle with DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL.
+    - gamefile:items/item_armlet#cost
+  - text: Unholy Strength has No Target, Toggle, and DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL
+      behavior.
     marks:
     - gamefile:items/item_armlet#mechanics
   - text: Unholy Strength has a 0.0 cooldown.
     marks:
     - gamefile:items/item_armlet#mechanics
-  - text: The bearer cannot die from its health drain or from the strength loss when
-      Unholy Strength is deactivated.
+  - text: The bearer cannot die from its health drain.
     marks:
     - loc:DOTA_Tooltip_ability_item_armlet_Description
+  - text: The bearer cannot die from the strength loss when Unholy Strength is deactivated.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_armlet_Description
+  - text: “Weapon of choice among brutes, the bearer sacrifices his life energy to
+      gain immense strength and power.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_armlet_Lore
 ---
 
 # Armlet of Mordiggian

@@ -5,7 +5,7 @@
   "title": "Power Treads",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5d4bc777896b53f3779f373c8dbe5470141f6676e5faf77ab1c6477bf8a4b79a",
+  "article_sha256": "869c95b6553547451d488766880d24a433bd639c38543eda6b429babb4c336ed",
   "citations": [
     "gamefile:items/item_power_treads#cost",
     "gamefile:items/item_power_treads#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "19adb13e6ab806deaff4b530f87ffaffa7e57e77d72e3f30d55f1a712443846a",
-    "input_tokens": 14422,
-    "output_tokens": 951,
+    "prompt_version": "7",
+    "request_sha256": "fd10c895568c713a0cff008a13d2c920b63cc3f9c3a592c99aabbe372a6e1d57",
+    "input_tokens": 14049,
+    "output_tokens": 981,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:13.488894+00:00"
+    "generated_at": "2026-07-27T12:15:36.258232+00:00"
   }
 }

@@ -15,6 +15,9 @@ card:
       Sphere.
     marks:
     - gamefile:items/item_ultimate_orb#components
+  - text: “A mystical orb containing the essence of life.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ultimate_orb_Lore
 ---
 
 # Ultimate Orb

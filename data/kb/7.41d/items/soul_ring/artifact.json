@@ -5,7 +5,7 @@
   "title": "Soul Ring",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "742234749f19ebbfbebd5f00c84641b34fecdd10952b7f064728e7318c21e8c0",
+  "article_sha256": "fc105e048529457db6f1d5f2e725a3b9e7933beba4aab4a42058c792a928b1f4",
   "citations": [
     "gamefile:items/item_soul_ring#cost",
     "gamefile:items/item_soul_ring#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "57d9cb02a44f3b9484b9bc06379256f02fa41084b4b466730c454e98f6a5d914",
-    "input_tokens": 14352,
-    "output_tokens": 937,
+    "prompt_version": "7",
+    "request_sha256": "4f3903c9833a895fadc694f12bcad583a71db4442284996df215e8765b6f17b3",
+    "input_tokens": 13981,
+    "output_tokens": 1099,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:48.707304+00:00"
+    "generated_at": "2026-07-27T12:17:25.633377+00:00"
   }
 }

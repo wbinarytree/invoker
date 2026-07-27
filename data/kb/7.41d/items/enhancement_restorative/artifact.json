@@ -5,7 +5,7 @@
   "title": "Restorative",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1bc42e8bc927fc8fc95356ae102b475aca765fb5d8f886f7fd6c7bf427abae54",
+  "article_sha256": "5da0dff193f34a8b1970ddafe765a1020ca6a43a6e1a054e1aa9f9cdbd0a4ce2",
   "citations": [
     "gamefile:items/item_enhancement_restorative#cost",
     "gamefile:items/item_enhancement_restorative#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5b4d9f600e1b698f553d2e942b9cf323ce61d0b6b6797968963e34697daf0425",
-    "input_tokens": 14206,
-    "output_tokens": 339,
+    "prompt_version": "7",
+    "request_sha256": "e6e4bbc98fdc7536800eae99de38a19487ac678754b1ae52d007fcd36f3a3a9a",
+    "input_tokens": 13831,
+    "output_tokens": 331,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:15.866311+00:00"
+    "generated_at": "2026-07-27T12:10:18.891681+00:00"
   }
 }

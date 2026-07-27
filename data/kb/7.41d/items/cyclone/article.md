@@ -5,18 +5,20 @@ patch: 7.41d
 card:
   entity: cyclone
   sentences:
-  - text: Eul's Scepter of Divinity is a rare 2600-gold item that grants 10 Intelligence,
-      2.5 Mana Regeneration, and 20 Movement Speed; its Cyclone active makes an enemy
-      or the wielder invulnerable for a 2.5 Cyclone duration, and enemies take 50
-      magical damage upon landing.
+  - text: Eul's Scepter of Divinity is a rare 2600-gold item granting 10 Intelligence,
+      2.5 Mana Regeneration, and 20 Movement Speed, with Cyclone making an enemy or
+      the wielder invulnerable for 2.5 seconds and dealing 50 magical damage to an
+      enemy upon landing.
     marks:
     - gamefile:items/item_cyclone#cost
     - gamefile:items/item_cyclone#attribs
     - loc:DOTA_Tooltip_ability_item_cyclone_Description
-  - text: It is built from Staff of Wizardry for 1000 gold, Void Stone for 700 gold,
-      Wind Lace for 225 gold, and a Recipe for 675 gold, and it builds into Wind Waker.
+  - text: Cyclone has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK behavior.
     marks:
-    - gamefile:items/item_cyclone#components
+    - gamefile:items/item_cyclone#mechanics
+  - text: Cyclone is dispellable.
+    marks:
+    - gamefile:items/item_cyclone#mechanics
   - text: Cyclone has 550 cast range.
     marks:
     - gamefile:items/item_cyclone#mechanics
@@ -26,15 +28,17 @@ card:
   - text: Cyclone has a 23.0 cooldown.
     marks:
     - gamefile:items/item_cyclone#mechanics
-  - text: Cyclone has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK behavior.
-    marks:
-    - gamefile:items/item_cyclone#mechanics
-  - text: Cyclone is dispellable.
-    marks:
-    - gamefile:items/item_cyclone#mechanics
   - text: Cyclone has a Basic Dispel type.
     marks:
     - loc:DOTA_Tooltip_ability_item_cyclone_Description
+  - text: It is built from Staff of Wizardry (1000 gold), Void Stone (700 gold), Wind
+      Lace (225 gold), and Recipe (675 gold), and builds into Wind Waker.
+    marks:
+    - gamefile:items/item_cyclone#components
+  - text: A mysterious scepter passed down through the ages, its disruptive winds
+      can be used for good or evil.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_cyclone_Lore
 ---
 
 # Eul's Scepter of Divinity

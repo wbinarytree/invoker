@@ -5,7 +5,7 @@
   "title": "Arcane Boots",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d931475535f66dede32c9926bdbb4145762440691fc0e2ec4617495bf9024da7",
+  "article_sha256": "535d61fa7d5b7b079472422d8d8d4f1d6271ffb7fae5fd27f99723a4658188a5",
   "citations": [
     "gamefile:items/item_arcane_boots#cost",
     "gamefile:items/item_arcane_boots#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "75d88451879340f18dda30cd5eb0547f27762235c252adabbdcf7de52c34af68",
-    "input_tokens": 14448,
-    "output_tokens": 785,
+    "prompt_version": "7",
+    "request_sha256": "77dd079ac1e6238aa9b4bf61de20a5bfb19c92e497b3949dae8ec977ebbb0ce9",
+    "input_tokens": 14073,
+    "output_tokens": 821,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:19.498636+00:00"
+    "generated_at": "2026-07-27T12:07:03.838361+00:00"
   }
 }

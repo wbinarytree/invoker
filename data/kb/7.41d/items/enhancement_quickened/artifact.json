@@ -5,7 +5,7 @@
   "title": "Quickened",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ece8a29560e5c8605bc7029906303081ace228d53198209de347a6d5732c9a8f",
+  "article_sha256": "a48acbb5c62551f985f36def480689a6e8f7ba222030a8ccc5917ddb31aff979",
   "citations": [
     "gamefile:items/item_enhancement_quickened#cost",
     "gamefile:items/item_enhancement_quickened#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3f0726a85eff35ee6a50958d078fe3a77a50611d2a63bf06db03cbf164f53468",
-    "input_tokens": 14219,
-    "output_tokens": 348,
+    "prompt_version": "7",
+    "request_sha256": "b67735dddf1759b978d5bab7e27dfed974cfd5df41af33d057e101a5096d4aad",
+    "input_tokens": 13848,
+    "output_tokens": 296,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:10.894886+00:00"
+    "generated_at": "2026-07-27T12:10:16.805597+00:00"
   }
 }

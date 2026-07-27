@@ -6,20 +6,17 @@ card:
   entity: quelling_blade
   sentences:
   - text: Quelling Blade is a 100-gold component item whose Chop Tree active destroys
-      a target tree and whose Quell passive grants 8 melee or 4 ranged attack damage
-      against non-hero units.
+      a target tree and whose Quell passive grants 8 Damage Bonus to melee heroes
+      or 4 Damage Bonus Ranged to ranged heroes against non-hero units.
     marks:
     - gamefile:items/item_quelling_blade#cost
     - gamefile:items/item_quelling_blade#attribs
     - loc:DOTA_Tooltip_ability_item_quelling_blade_Description
-  - text: Its build formula is Quelling Blade (100 gold).
+  - text: Quelling Blade (100 gold) builds into Battle Fury and Iron Talon.
     marks:
     - gamefile:items/item_quelling_blade#cost
     - gamefile:items/item_quelling_blade#components
-  - text: It builds into Battle Fury and Iron Talon.
-    marks:
-    - gamefile:items/item_quelling_blade#components
-  - text: Quelling Range Tooltip is 350.
+  - text: Its Quelling Range Tooltip value is 350.
     marks:
     - gamefile:items/item_quelling_blade#attribs
   - text: Chop Tree has Unit Target behavior.
@@ -34,6 +31,9 @@ card:
   - text: Its cooldown is 4.0.
     marks:
     - gamefile:items/item_quelling_blade#mechanics
+  - text: The axe of a fallen gnome, it allows you to effectively maneuver the forest.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_quelling_blade_Lore
 ---
 
 # Quelling Blade

@@ -5,21 +5,16 @@ patch: 7.41d
 card:
   entity: repair_kit
   sentences:
-  - text: Repair Kit is a consumable item costing 0 gold whose Building Repair targets
-      a building, restores 40% health over Duration 30, grants 10 armor for the same
-      period, and provides 25 Health Regeneration.
+  - text: Repair Kit is a 0-gold consumable whose Building Repair targets a building
+      within 600 range, restores 40% health over a Duration of 30, grants 10 Armor
+      Bonus for the same period, provides 25 Health Regeneration, and has a 60.0 cooldown.
     marks:
     - gamefile:items/item_repair_kit#cost
     - gamefile:items/item_repair_kit#attribs
     - loc:DOTA_Tooltip_ability_item_repair_kit_Description
-  - text: Building Repair has Unit Target, Immediate, DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK,
-      and DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE behavior.
-    marks:
     - gamefile:items/item_repair_kit#mechanics
-  - text: Building Repair has a cast range of 600.
-    marks:
-    - gamefile:items/item_repair_kit#mechanics
-  - text: Building Repair has a cooldown of 60.0.
+  - text: Building Repair's Behavior is Unit Target, Immediate, DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK,
+      and DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE.
     marks:
     - gamefile:items/item_repair_kit#mechanics
 ---

@@ -17,6 +17,10 @@ card:
   - text: Aether Lens has passive behavior.
     marks:
     - gamefile:items/item_aether_lens#mechanics
+  - text: “Polished with the incantation of his final breath, the gift of a dying
+      mage to his sickly son.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_aether_lens_Lore
 ---
 
 # Aether Lens

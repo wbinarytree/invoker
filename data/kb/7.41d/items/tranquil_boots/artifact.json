@@ -5,7 +5,7 @@
   "title": "Tranquil Boots",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5e8ca1f7ae3309bbfc1632935572a2ce61d52fa8bd5d106d1030040e343dba2f",
+  "article_sha256": "b3385b2dbe4bd0f2b6bca58b9d05771bfcb62c9b79cf8f590af40225ca3e6db7",
   "citations": [
     "gamefile:items/item_tranquil_boots#cost",
     "gamefile:items/item_tranquil_boots#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9ab2930c3901ec738966acb77b6e31fb38e6c43565924a996381107028cecfed",
-    "input_tokens": 14467,
-    "output_tokens": 1854,
+    "prompt_version": "7",
+    "request_sha256": "279629b0d79e0a360f629c8ab5464a0097acc218e3d34a5f01500772e4faa9d8",
+    "input_tokens": 14098,
+    "output_tokens": 2033,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:36.952284+00:00"
+    "generated_at": "2026-07-27T12:18:33.528356+00:00"
   }
 }

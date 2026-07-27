@@ -5,7 +5,7 @@
   "title": "Smoke of Deceit",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "bab6ca7d713c8990a6358686401b6440dc93496a5d978eab2b8619b2e4bb09a7",
+  "article_sha256": "0d9feb88343b25c290e16c896bddeed25f315ba93c5086ceefb487a9535f2f88",
   "citations": [
     "gamefile:items/item_smoke_of_deceit#cost",
     "loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ea3b48199767dce5f1eae7f449ec05a3c72dbd473f8769cf26b2df25153dc09c",
-    "input_tokens": 14433,
-    "output_tokens": 1502,
+    "prompt_version": "7",
+    "request_sha256": "232b9bef2c773d33061af8e780424cb4829b83e06cc6f33890f9bdcc046302cc",
+    "input_tokens": 14060,
+    "output_tokens": 1243,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:24.254718+00:00"
+    "generated_at": "2026-07-27T12:17:10.818194+00:00"
   }
 }

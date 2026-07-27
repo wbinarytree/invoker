@@ -5,28 +5,35 @@ patch: 7.41d
 card:
   entity: phylactery
   sentences:
-  - text: Phylactery is a common item costing 2600 gold that grants 6 all attributes,
-      5.5 health regeneration, and 2.25 mana regeneration; its passive Empower Spell
-      has 9.0 cooldown and makes the next Unit Target spell cast on an enemy deal
-      150 separate bonus spell damage and apply 30% slow for a duration of 3.
+  - text: Phylactery is a common item costing 2600 gold that grants 6 All Attributes,
+      5.5 Health Regeneration, 2.25 Mana Regeneration, and 150 Bonus Spell Damage;
+      its passive Empower Spell has a 9.0-second cooldown and causes the next Unit
+      Target spell cast on an enemy to deal separate bonus damage and apply a 30%
+      slow for 3 seconds.
     marks:
     - gamefile:items/item_phylactery#cost
     - gamefile:items/item_phylactery#attribs
     - gamefile:items/item_phylactery#mechanics
     - loc:DOTA_Tooltip_Ability_item_phylactery_Description
-  - text: Its bonus per kill is 0.
+  - text: Bonus per Kill is 0.
     marks:
     - gamefile:items/item_phylactery#attribs
-  - text: Its kill bonus window is 0.
+  - text: Kill Bonus Window is 0.
     marks:
     - gamefile:items/item_phylactery#attribs
-  - text: Its max kill bonus is 0.
+  - text: Max Kill Bonus is 0.
     marks:
     - gamefile:items/item_phylactery#attribs
-  - text: It is built from Perseverance for 1400 gold, Diadem for 1000 gold, and a
-      recipe for 200 gold, and builds into Khanda.
+  - text: The build formula is Perseverance for 1400 gold, Diadem for 1000 gold, and
+      a Recipe for 200 gold.
     marks:
     - gamefile:items/item_phylactery#components
+  - text: Phylactery builds into Khanda.
+    marks:
+    - gamefile:items/item_phylactery#components
+  - text: “An amulet overflowing with powerful magics.”
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_phylactery_Lore
 ---
 
 # Phylactery

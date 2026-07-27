@@ -5,7 +5,7 @@
   "title": "Abyssal Blade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "64eb43538a6032ebce96cb18ad48d5d37480c54c4773a271aa2d306e7fe5cc0d",
+  "article_sha256": "a7677f452ffa46bc1c7846661f04187fad6148a516d1f1777085ffd31b117578",
   "citations": [
     "gamefile:items/item_abyssal_blade#cost",
     "gamefile:items/item_abyssal_blade#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4f75a3969dfaa322f170a1a3c8e2d999f6bbce791ec9e49819471a06b5e6e8d5",
-    "input_tokens": 14488,
-    "output_tokens": 2202,
+    "prompt_version": "7",
+    "request_sha256": "21f413a42d6a43300edb313585b49c2b2af2a4e8416f670717e3595f137b281d",
+    "input_tokens": 14536,
+    "output_tokens": 1891,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:49:11.984785+00:00"
+    "generated_at": "2026-07-27T12:07:13.109236+00:00"
   }
 }

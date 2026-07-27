@@ -5,17 +5,19 @@ patch: 7.41d
 card:
   entity: crown
   sentences:
-  - text: Crown is a 450-gold component item that grants 4 ALL ATTRIBUTES.
+  - text: Crown is a passive component item costing 450 gold that grants 4 ALL ATTRIBUTES.
     marks:
     - gamefile:items/item_crown#cost
     - gamefile:items/item_crown#attribs
-  - text: Its behavior is passive.
-    marks:
     - gamefile:items/item_crown#mechanics
   - text: Crown builds into Consecrated Wraps, Dagon, Helm of the Dominator, Holy
       Locket, and Meteor Hammer.
     marks:
     - gamefile:items/item_crown#components
+  - text: A stately crown created to ensure a well-meaning but ungifted heir could
+      fend off usurpers and govern with a strong hand.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_crown_Lore
 ---
 
 # Crown

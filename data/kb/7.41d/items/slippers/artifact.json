@@ -5,7 +5,7 @@
   "title": "Slippers of Agility",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "373927fc5ba2cdf0ec3abe1c552a53be022b9469b17c3222d34787662c2782ad",
+  "article_sha256": "e4ae01cd0a891d199e3f9fe73580142b1b83b436cd2a1b95c420a8d1bb662a18",
   "citations": [
     "gamefile:items/item_slippers#cost",
     "gamefile:items/item_slippers#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "97dc0fb043f56a9d473bc98840b5a77f2dad7abcfd273d9f44b29d0d0357d1dd",
-    "input_tokens": 14222,
-    "output_tokens": 288,
+    "prompt_version": "7",
+    "request_sha256": "1a395895bd8aa2b0f1ad8c8342e0fde6ca9652d01c5a64f5057f8e7e2b7830ac",
+    "input_tokens": 13855,
+    "output_tokens": 285,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:15:47.718623+00:00"
+    "generated_at": "2026-07-27T12:16:47.898638+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Bloodthorn",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "40c2c89eabc32ac327129a23ac5bf87695778d4eec933c9bb409c551c564917c",
+  "article_sha256": "2cbcaf1e5b7974e6b6a6c7b1ef438725aef78979d020ff2965ff113fe78e1f08",
   "citations": [
     "gamefile:items/item_bloodthorn#cost",
     "gamefile:items/item_bloodthorn#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "620d9cba4799864535133a9b0db3019baf755919314b7d30e3663d0e5bb763b8",
-    "input_tokens": 14542,
-    "output_tokens": 2150,
+    "prompt_version": "7",
+    "request_sha256": "2d5e401904a75cd9eb1f631f42c8a239a27ee2b343c7c5644800fe2a4261af91",
+    "input_tokens": 14171,
+    "output_tokens": 2371,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:39.811215+00:00"
+    "generated_at": "2026-07-27T12:08:15.103837+00:00"
   }
 }

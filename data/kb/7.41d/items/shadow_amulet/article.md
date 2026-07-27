@@ -5,28 +5,44 @@ patch: 7.41d
 card:
   entity: shadow_amulet
   sentences:
-  - text: Shadow Amulet is a 900-gold item whose active Fade targets the caster or
-      an allied hero at 600 range for 0 mana, with 1.25 Fade Time, 3.5 Fade Duration,
-      35% Movement Speed Reduction during invisibility, and an 18.0-second cooldown.
+  - text: Shadow Amulet is a 900-gold item whose active Fade grants the caster or
+      a target allied hero invisibility with Fade Duration 3.5 and Fade Time 1.25,
+      applying 35% Movement Speed Reduction during invisibility.
     marks:
     - gamefile:items/item_shadow_amulet#cost
     - loc:DOTA_Tooltip_ability_item_shadow_amulet_Description
     - gamefile:items/item_shadow_amulet#attribs
+  - text: Fade has 600 cast range.
+    marks:
     - gamefile:items/item_shadow_amulet#mechanics
-  - text: The build formula is Shadow Amulet (900 gold), and it builds into Glimmer
-      Cape and Shadow Blade.
+  - text: Fade costs 0 mana.
+    marks:
+    - gamefile:items/item_shadow_amulet#mechanics
+  - text: Fade has an 18.0 cooldown.
+    marks:
+    - gamefile:items/item_shadow_amulet#mechanics
+  - text: The build formula is Shadow Amulet (900 gold).
     marks:
     - gamefile:items/item_shadow_amulet#cost
+  - text: Shadow Amulet builds into Glimmer Cape and Shadow Blade.
+    marks:
     - gamefile:items/item_shadow_amulet#components
   - text: Fade is immediate and unit-targeted.
     marks:
     - gamefile:items/item_shadow_amulet#mechanics
-  - text: Fade has DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT.
+  - text: Fade has `DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL`.
+    marks:
+    - gamefile:items/item_shadow_amulet#mechanics
+  - text: Fade has `DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT`.
     marks:
     - gamefile:items/item_shadow_amulet#mechanics
   - text: Fade is dispellable.
     marks:
     - gamefile:items/item_shadow_amulet#mechanics
+  - text: “A small talisman that clouds the senses of one's enemies when held perfectly
+      still.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_shadow_amulet_Lore
 ---
 
 # Shadow Amulet

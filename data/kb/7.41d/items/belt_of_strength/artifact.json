@@ -5,7 +5,7 @@
   "title": "Belt of Strength",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3d1be8b2f070fadddd950044629e3d0846d71a60cdbc7e90e247d753de44629e",
+  "article_sha256": "9815989267c3cf516f855bf142081f6ca14e9e5a39bfa90d3efb97d619026d36",
   "citations": [
     "gamefile:items/item_belt_of_strength#cost",
     "gamefile:items/item_belt_of_strength#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "be1e3017978333208f62ae0ca1bf3e392f0390b10dea75b7187ebd7b3827c14f",
-    "input_tokens": 14277,
-    "output_tokens": 271,
+    "prompt_version": "7",
+    "request_sha256": "cedf5150ae9dece9278f5c6705ed5f67a39a919549659dbf09e9389a4e9200ed",
+    "input_tokens": 13910,
+    "output_tokens": 525,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:42.690981+00:00"
+    "generated_at": "2026-07-27T12:07:23.909336+00:00"
   }
 }

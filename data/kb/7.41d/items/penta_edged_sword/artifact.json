@@ -5,7 +5,7 @@
   "title": "Penta-Edged Sword",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e48eec08bb48ac2c76eee32d5badc264b0d26384500f4874f3950ff974283fec",
+  "article_sha256": "8ad172b4304433881d36c8034a06fe41b9f1c8e168baeb5045684958ae016931",
   "citations": [
     "gamefile:items/item_penta_edged_sword#attribs",
     "loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1ed1c32f8166b37a7852694859730bd33722104d00a9c35aed448d885ca713bd",
-    "input_tokens": 14336,
-    "output_tokens": 1192,
+    "prompt_version": "7",
+    "request_sha256": "09cef8adb49bfc78cd5807339d1102483f789410680de2250370724373901060",
+    "input_tokens": 13965,
+    "output_tokens": 996,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:23.644236+00:00"
+    "generated_at": "2026-07-27T12:15:14.311012+00:00"
   }
 }

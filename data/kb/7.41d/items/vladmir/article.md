@@ -5,36 +5,33 @@ patch: 7.41d
 card:
   entity: vladmir
   sentences:
-  - text: Vladmir's Offering is a rare item costing 2200 gold that provides 1 Armor
-      and 0.75 Mana Regeneration, while its 1200-radius Vladmir's Aura grants nearby
-      allies 20% Lifesteal, 18% Bonus Damage, 1 Mana Regeneration, and 2.0 Armor.
+  - text: Vladmir's Offering is a rare 2200-gold item that provides 1 Armor and 0.75
+      Mana Regeneration; its 1200-radius Vladmir's Aura grants nearby allies 20% Lifesteal,
+      18% Bonus Damage, 1 Mana Regeneration, and 2.0 Armor.
     marks:
     - gamefile:items/item_vladmir#cost
     - gamefile:items/item_vladmir#attribs
     - loc:DOTA_Tooltip_ability_item_vladmir_Description
-  - text: Its behavior is Passive.
+  - text: It is passive and has a cast range of 1200.
     marks:
     - gamefile:items/item_vladmir#mechanics
-  - text: Its cast range is 1200.
-    marks:
-    - gamefile:items/item_vladmir#mechanics
-  - text: Its self damage bonus is 0.
+  - text: Its Damage Self value is 0.
     marks:
     - gamefile:items/item_vladmir#attribs
-    - loc:DOTA_Tooltip_ability_item_vladmir_Description
-  - text: Its self lifesteal is 0.
+  - text: Its Lifesteal Self value is 0.
     marks:
     - gamefile:items/item_vladmir#attribs
-    - loc:DOTA_Tooltip_ability_item_vladmir_Description
-  - text: Its creep lifesteal tooltip value is 12.
+  - text: Its Lifesteal Creeps Tooltip value is 12.
     marks:
     - gamefile:items/item_vladmir#attribs
-    - loc:DOTA_Tooltip_ability_item_vladmir_Description
-  - text: It is built from Buckler (425 gold), Ring of Basilius (425 gold), Morbid
-      Mask (900 gold), and Blades of Attack (450 gold), and builds into Wraith Pact.
+  - text: Its build formula is Buckler (425 gold), Ring of Basilius (425 gold), Morbid
+      Mask (900 gold), and Blades of Attack (450 gold); it builds into Wraith Pact.
     marks:
     - gamefile:items/item_vladmir#cost
     - gamefile:items/item_vladmir#components
+  - text: An eerie mask that is haunted with the malice of a fallen vampire.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_vladmir_Lore
 ---
 
 # Vladmir's Offering

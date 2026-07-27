@@ -5,7 +5,7 @@
   "title": "Force Boots",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "30a6e6736316b9c9641480f3968d92d5bf6ac44fb8c44d0d8270ee9c2777637d",
+  "article_sha256": "a949fd8cbce2dfa49ef9d88976f622f3a36f59788c139b209a401d8ed0962d2d",
   "citations": [
     "gamefile:items/item_force_boots#cost",
     "gamefile:items/item_force_boots#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b85c0f9ddcd931ceb53d5b1588f6adfcb228d1023410b32c39984a029a8c924a",
-    "input_tokens": 14382,
-    "output_tokens": 721,
+    "prompt_version": "7",
+    "request_sha256": "ee9df73f541d89b5a6debe2cf07a7ed193f96cae5187c1d92d8e31705aceac26",
+    "input_tokens": 14011,
+    "output_tokens": 1106,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:25.595279+00:00"
+    "generated_at": "2026-07-27T12:11:03.649633+00:00"
   }
 }

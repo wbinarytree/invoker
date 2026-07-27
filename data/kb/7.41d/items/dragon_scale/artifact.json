@@ -5,7 +5,7 @@
   "title": "Dragon Scale",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "a29d652487c85c23312eff195ce43c03f8917cb443b7612db837e7d36d5fcec6",
+  "article_sha256": "b9ac033ae52da2385e8ca63cce0ec4cdb345ad2f815f25474a183446d880b90d",
   "citations": [
     "gamefile:items/item_dragon_scale#cost",
     "gamefile:items/item_dragon_scale#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "33b277f962636a431e704070aeb833d2ecd54a1662c34ce33c2bff864e127092",
-    "input_tokens": 14269,
-    "output_tokens": 570,
+    "prompt_version": "7",
+    "request_sha256": "a34311b2eb3a5776eb27734eded1d5048ac5fbd90fd29337810b2a0e795dee54",
+    "input_tokens": 13898,
+    "output_tokens": 680,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:05.504732+00:00"
+    "generated_at": "2026-07-27T12:09:34.925759+00:00"
   }
 }

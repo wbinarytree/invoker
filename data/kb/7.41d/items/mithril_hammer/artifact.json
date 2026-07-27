@@ -5,7 +5,7 @@
   "title": "Mithril Hammer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4e17ce87a2b2c68c3fa0ba29ed831733c60955083fa604665a11d9afe88ec10c",
+  "article_sha256": "ec9c3bbe0d501c6ad96d6a440a2f2f5ca208c6682e192224213d7383f857f372",
   "citations": [
     "gamefile:items/item_mithril_hammer#cost",
     "gamefile:items/item_mithril_hammer#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9feb41ef292214d16ae6131d7732f47cdde995d1b7e5e0a75fe3b718d794d9f9",
-    "input_tokens": 14257,
-    "output_tokens": 349,
+    "prompt_version": "7",
+    "request_sha256": "5d007f63e9c4743972012efa2f0e26381e57771db3d41276aaa36bed10eb8ff7",
+    "input_tokens": 13882,
+    "output_tokens": 351,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:44.645575+00:00"
+    "generated_at": "2026-07-27T12:13:54.059307+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Sange and Yasha",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "fba118852d65447f852487585b8e380b990f10f66bdda512e639db35e5e9300c",
+  "article_sha256": "233a8839b571d1eef575b7eb64fbccddff8844e07732a54a8e0a8b0ac8e385cd",
   "citations": [
     "gamefile:items/item_sange_and_yasha#cost",
     "gamefile:items/item_sange_and_yasha#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a17a7bd65a9ba604a1e603c8e88f66024c1a867f08c2fd60bb6801de6cc3bdd0",
-    "input_tokens": 14337,
-    "output_tokens": 440,
+    "prompt_version": "7",
+    "request_sha256": "640a4631fe800bb52b7e6a89b0a3edccfbc3dcb9e10be5e110a16e3b720bfb59",
+    "input_tokens": 13968,
+    "output_tokens": 557,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:15:52.578760+00:00"
+    "generated_at": "2026-07-27T12:16:27.700965+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Refresher Orb",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1e57e366f72cb6f8a884b5003632ceed1a8562d1587847eb09934cb33229ad6f",
+  "article_sha256": "4411dee9a9449a760e4e3548f3da129e0256aed93aa1e7522d06f29d2bcf9ea1",
   "citations": [
     "gamefile:items/item_refresher#cost",
     "gamefile:items/item_refresher#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "38521f2d73f4566e618808d169e4f53b6dfd7e65f9d2658859ffa74d6171b3f0",
-    "input_tokens": 14403,
-    "output_tokens": 1441,
+    "prompt_version": "7",
+    "request_sha256": "e1d72f733863bbdf16cbc60afe8e3367e13b237a496a4fbabce198e2607e86cf",
+    "input_tokens": 14034,
+    "output_tokens": 823,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:00.328163+00:00"
+    "generated_at": "2026-07-27T12:15:56.061506+00:00"
   }
 }

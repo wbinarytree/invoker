@@ -5,7 +5,7 @@
   "title": "Quicksilver Amulet",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1646f4168989b8834cbd6d890dd3f8b4b3c8a19c0ae133ec1e343fa4443bbdbc",
+  "article_sha256": "1efe47597a1940e930b7247cb681212cf6e6ac4de8bccea6fa6ebf75d0d5eb99",
   "citations": [
     "gamefile:items/item_quicksilver_amulet#cost",
     "gamefile:items/item_quicksilver_amulet#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "626d0a40cbc9295eb8252959127c459da63d8e8ce737518f2a4877f93e0be5c9",
-    "input_tokens": 14374,
-    "output_tokens": 714,
+    "prompt_version": "7",
+    "request_sha256": "8ed3cbb25eec2fc156053526ff50405a4f936f20faeaf06dff45c513840332d0",
+    "input_tokens": 14009,
+    "output_tokens": 469,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:26.067215+00:00"
+    "generated_at": "2026-07-27T12:15:39.448720+00:00"
   }
 }

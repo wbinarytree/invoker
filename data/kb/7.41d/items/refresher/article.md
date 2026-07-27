@@ -5,13 +5,12 @@ patch: 7.41d
 card:
   entity: refresher
   sentences:
-  - text: Refresher Orb is a rare 5000-gold item that grants 14 health regeneration
-      and 7.0 mana regeneration; its Reset Cooldowns active costs 325 mana, has 180
-      cooldown, and resets the cooldowns of all your abilities.
+  - text: Refresher Orb is a rare 5000-gold item that grants 14 Health Regeneration
+      and 7.0 Mana Regeneration; its Reset Cooldowns active costs 325 mana, has a
+      180 cooldown, and resets the cooldowns of all your abilities.
     marks:
     - gamefile:items/item_refresher#cost
     - gamefile:items/item_refresher#attribs
-    - gamefile:items/item_refresher#mechanics
     - loc:DOTA_Tooltip_ability_item_refresher_Description
   - text: It is built from Ring of Tarrasque (1700 gold), Tiara of Selemene (1700
       gold), and a Recipe (1600 gold).
@@ -21,12 +20,15 @@ card:
       behavior.
     marks:
     - gamefile:items/item_refresher#mechanics
-  - text: It shares a cooldown with Refresher Shard.
+  - text: Reset Cooldowns shares a cooldown with Refresher Shard.
     marks:
     - loc:DOTA_Tooltip_ability_item_refresher_Description
-  - text: Its cooldown progresses only while it is in the hero’s main inventory.
+  - text: Its cooldown progresses only while Refresher Orb is in the hero’s main inventory.
     marks:
     - loc:DOTA_Tooltip_ability_item_refresher_Description
+  - text: A powerful artifact created for wizards.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_refresher_Lore
 ---
 
 # Refresher Orb

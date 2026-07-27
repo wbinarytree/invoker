@@ -5,7 +5,7 @@
   "title": "Oblivion Staff",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d4cd07074170dad587a7719fe0635223d65af920ed6996a90588dd18219ab174",
+  "article_sha256": "caf609dc691251cb7039e1e177ebc875720be08b70e70e50cc6bb05eb39607cd",
   "citations": [
     "gamefile:items/item_oblivion_staff#cost",
     "gamefile:items/item_oblivion_staff#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f4c6fc18cca2d8daf3432fe7833673f88c8cbf9f59aed480483a5a4cdcbf7c20",
-    "input_tokens": 14333,
-    "output_tokens": 528,
+    "prompt_version": "7",
+    "request_sha256": "efafcf95cd0d8db1e490638d4cd39e87beea84e4b1dd32610d63ee41ddb4c210",
+    "input_tokens": 13962,
+    "output_tokens": 419,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:19.277202+00:00"
+    "generated_at": "2026-07-27T12:14:21.193146+00:00"
   }
 }

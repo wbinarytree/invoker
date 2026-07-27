@@ -5,7 +5,7 @@
   "title": "Heart of Tarrasque",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3d363859c072d9d0a1235ffe6de84a996105a2d69a95e535380c22a885888845",
+  "article_sha256": "237a7977684ef9ae8c81cfb63906418d916c15561c00299480fe3254c56021e2",
   "citations": [
     "gamefile:items/item_heart#cost",
     "gamefile:items/item_heart#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7ac57497dcd0d33edf82cf18792e0cc2ebf1252cb234263a09eebaa20b79929a",
-    "input_tokens": 14306,
-    "output_tokens": 467,
+    "prompt_version": "7",
+    "request_sha256": "7bb754a4e64ab6b8f90a3e1af6dc91e3b841f0e894581b7827a8c1a9229da527",
+    "input_tokens": 13931,
+    "output_tokens": 440,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:06.775156+00:00"
+    "generated_at": "2026-07-27T12:11:44.562168+00:00"
   }
 }

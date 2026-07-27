@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: dandelion_amulet
   sentences:
-  - text: Dandelion Amulet is a 0-gold item whose passive Magical Damage Block, on
-      a 12-second cooldown, blocks up to 300 magic damage from each damage instance
+  - text: Dandelion Amulet is a 0-gold item with passive Magical Damage Block, which
+      has a 12-second cooldown and blocks up to 300 magic damage from damage instances
       exceeding 75 damage.
     marks:
     - gamefile:items/item_dandelion_amulet#cost
     - gamefile:items/item_dandelion_amulet#attribs
     - gamefile:items/item_dandelion_amulet#mechanics
     - loc:DOTA_Tooltip_ability_item_dandelion_amulet_Description
-  - text: Its build formula is Dandelion Amulet (0 gold).
+  - text: The build formula is Dandelion Amulet (0 gold).
     marks:
     - gamefile:items/item_dandelion_amulet#cost
   - text: It provides 0 mana.

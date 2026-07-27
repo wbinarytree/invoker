@@ -5,7 +5,7 @@
   "title": "Gem of True Sight",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6a25cc6f628c017c6058233c7292482e48aa208d123cf7c3b4b188cef02ee2c3",
+  "article_sha256": "bb7570bd9aaa21ceffa39db7a21009a7a5c43e2c404494e0c74a374fda752655",
   "citations": [
     "gamefile:items/item_gem#cost",
     "loc:DOTA_Tooltip_ability_item_gem_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b704fc1d6fc582d983851d2b6c70f9de368bd6e5de144c238720c45d592bf288",
-    "input_tokens": 14343,
-    "output_tokens": 1006,
+    "prompt_version": "7",
+    "request_sha256": "9091e07cebefad310c3fc327671bb91f18f2302e36062548207e006ed2ecf88b",
+    "input_tokens": 13968,
+    "output_tokens": 1209,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:33.322540+00:00"
+    "generated_at": "2026-07-27T12:11:15.876099+00:00"
   }
 }

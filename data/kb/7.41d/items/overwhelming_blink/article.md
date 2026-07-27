@@ -5,32 +5,26 @@ patch: 7.41d
 card:
   entity: overwhelming_blink
   sentences:
-  - text: Overwhelming Blink is a component-quality item costing 6800 gold that grants
-      25 Strength; its active teleports the user up to 1200 range, deals magical damage
-      in an 800 radius, and applies 50% Movement Slow and 50 Attack Slow for 6 seconds.
+  - text: Overwhelming Blink is a 6800-gold component-quality item granting 25 Strength;
+      its Overwhelming Blink active teleports the user within 1200 range and, in an
+      800 radius, deals Strength-based magical damage with 100 base damage, 50% instant
+      damage, and 100% damage over time while applying 50% movement slow and 50 attack
+      slow for 6 seconds.
     marks:
     - gamefile:items/item_overwhelming_blink#cost
     - gamefile:items/item_overwhelming_blink#attribs
     - gamefile:items/item_overwhelming_blink#mechanics
     - loc:DOTA_Tooltip_ability_item_overwhelming_blink_Description
-  - text: The active has a 0 mana cost.
+  - text: The active costs 0 mana.
     marks:
     - gamefile:items/item_overwhelming_blink#mechanics
-  - text: The active has a 15.0-second cooldown.
+  - text: The active has a 15.0 cooldown.
     marks:
     - gamefile:items/item_overwhelming_blink#mechanics
-  - text: Blink Range Clamp is 960.
+  - text: Blink range clamp is 960.
     marks:
     - gamefile:items/item_overwhelming_blink#attribs
-  - text: After teleportation, immediate damage is 100 plus 50% of Strength.
-    marks:
-    - gamefile:items/item_overwhelming_blink#attribs
-    - loc:DOTA_Tooltip_ability_item_overwhelming_blink_Description
-  - text: Additional damage over time is 100% of Strength.
-    marks:
-    - gamefile:items/item_overwhelming_blink#attribs
-    - loc:DOTA_Tooltip_ability_item_overwhelming_blink_Description
-  - text: Damage from an enemy hero or Roshan prevents use for the 3.0-second Blink
+  - text: Damage from an enemy hero or Roshan prevents activation during the 3.0 Blink
       Damage Cooldown.
     marks:
     - gamefile:items/item_overwhelming_blink#attribs
@@ -39,6 +33,10 @@ card:
       gold).'
     marks:
     - gamefile:items/item_overwhelming_blink#components
+  - text: A horrifying dagger forged in the chaos maw and nigh untouchable by mortal
+      hands.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_overwhelming_blink_Lore
 ---
 
 # Overwhelming Blink

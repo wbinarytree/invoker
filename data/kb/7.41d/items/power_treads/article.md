@@ -5,32 +5,30 @@ patch: 7.41d
 card:
   entity: power_treads
   sentences:
-  - text: Power Treads is a common item costing 1400 gold that grants 25 Attack Speed,
-      55 Bonus Movement Speed Melee, 45 Bonus Movement Speed Ranged, and 10 Selected
+  - text: Power Treads is a common 1400-gold item that grants 25 Attack Speed, 55
+      Bonus Movement Speed Melee or 45 Bonus Movement Speed Ranged, and 10 Selected
       Attribute, with the Switch Attribute active.
     marks:
     - gamefile:items/item_power_treads#cost
     - gamefile:items/item_power_treads#attribs
     - loc:DOTA_Tooltip_ability_item_power_treads_Description
-  - text: It grants 0 Bonus Damage.
-    marks:
-    - gamefile:items/item_power_treads#attribs
-  - text: Power Treads is built from Boots of Speed (500 gold), Gloves of Haste (450
-      gold), and Belt of Strength (450 gold).
+  - text: Power Treads (1400 gold) builds from Boots of Speed (500 gold), Gloves of
+      Haste (450 gold), and Belt of Strength (450 gold).
     marks:
     - gamefile:items/item_power_treads#cost
     - gamefile:items/item_power_treads#components
-  - text: Switch Attribute is an immediate, no-target active.
+  - text: Switch Attribute is an Immediate, No Target active.
     marks:
     - gamefile:items/item_power_treads#mechanics
-    - loc:DOTA_Tooltip_ability_item_power_treads_Description
-  - text: Switch Attribute selects Strength, Agility, or Intelligence, granting +10
-      to the selected attribute.
+  - text: The selected attribute bonus is +10 Strength, +10 Agility, or +10 Intelligence.
     marks:
     - loc:DOTA_Tooltip_ability_item_power_treads_Description
   - text: Movement speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_power_treads_Description
+  - text: A pair of tough-skinned boots that change to meet the demands of the wearer.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_power_treads_Lore
 ---
 
 # Power Treads

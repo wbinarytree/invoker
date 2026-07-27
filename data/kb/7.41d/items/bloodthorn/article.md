@@ -5,52 +5,50 @@ patch: 7.41d
 card:
   entity: bloodthorn
   sentences:
-  - text: Bloodthorn is an epic 6400-gold item granting 70 Attack Speed, 20 Damage,
-      0 Health Regeneration, 25 Intelligence, and 4 Mana Regeneration; Soul Rend silences
-      for 5 seconds and repeats 60% of damage taken, while Pierce has a 40% chance
-      to deal 60 bonus magical damage.
+  - text: Bloodthorn is an epic item costing 6400 gold that grants 70 Attack Speed,
+      20 Damage, 0 Health Regeneration, 25 Intelligence, and 4 Mana Regeneration;
+      Soul Rend silences for 5 seconds and repeats 60% of damage taken as magical
+      damage, while Pierce has a 40% chance to pierce evasion and deal 60 bonus magical
+      damage.
     marks:
     - gamefile:items/item_bloodthorn#cost
     - gamefile:items/item_bloodthorn#attribs
     - loc:DOTA_Tooltip_ability_item_bloodthorn_Description
-  - text: It is built from Orchid Malevolence (3275 gold), Oblivion Staff (1625 gold),
-      Javelin (900 gold), and a Recipe (600 gold).
+  - text: Bloodthorn is built from Orchid Malevolence (3275 gold), Oblivion Staff
+      (1625 gold), Javelin (900 gold), and a Recipe (600 gold).
     marks:
     - gamefile:items/item_bloodthorn#components
-  - text: Soul Rend has 900 cast range.
+  - text: Soul Rend has Unit Target behavior.
+    marks:
+    - gamefile:items/item_bloodthorn#mechanics
+  - text: Soul Rend has 900 Cast Range.
     marks:
     - gamefile:items/item_bloodthorn#mechanics
   - text: Soul Rend costs 150 mana.
     marks:
     - gamefile:items/item_bloodthorn#mechanics
-  - text: Soul Rend has a 15.0-second cooldown.
+  - text: Soul Rend has a 15.0 cooldown.
     marks:
     - gamefile:items/item_bloodthorn#mechanics
   - text: Soul Rend is dispellable.
     marks:
     - gamefile:items/item_bloodthorn#mechanics
-  - text: When the silence ends, Soul Rend deals 60% of all damage taken during it
-      again as magical damage.
+  - text: Attacks against the silenced target deal 50 additional damage from heroes
+      and 25 from creeps.
     marks:
     - gamefile:items/item_bloodthorn#attribs
     - loc:DOTA_Tooltip_ability_item_bloodthorn_Description
-  - text: During Soul Rend, hero attacks deal 50 additional damage and creep attacks
-      deal 25 additional damage.
-    marks:
-    - gamefile:items/item_bloodthorn#attribs
-    - loc:DOTA_Tooltip_ability_item_bloodthorn_Description
-  - text: The wielder and its controlled units gain True Strike against the silenced
-      target.
+  - text: Attacks from the wielder and their controlled units gain True Strike against
+      the silenced target.
     marks:
     - loc:DOTA_Tooltip_ability_item_bloodthorn_Description
-  - text: Pierce gives each attack a 40% chance to pierce evasion and deal 60 bonus
-      magical damage.
+  - text: Soul Rend has a Spell Amp Debuff of 35.
     marks:
     - gamefile:items/item_bloodthorn#attribs
-    - loc:DOTA_Tooltip_ability_item_bloodthorn_Description
-  - text: Its Spell Amp Debuff value is 35.
+  - text: “A reviled blade that bites deeper with each wriggle of its victim's final
+      throes.”
     marks:
-    - gamefile:items/item_bloodthorn#attribs
+    - loc:DOTA_Tooltip_ability_item_bloodthorn_Lore
 ---
 
 # Bloodthorn

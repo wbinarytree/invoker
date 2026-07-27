@@ -5,7 +5,8 @@ patch: 7.41d
 card:
   entity: talisman_of_evasion
   sentences:
-  - text: Talisman of Evasion is a 1300-gold secret_shop item that provides 15% EVASION.
+  - text: Talisman of Evasion is a secret_shop item costing 1300 gold that provides
+      15% EVASION.
     marks:
     - gamefile:items/item_talisman_of_evasion#cost
     - gamefile:items/item_talisman_of_evasion#attribs
@@ -18,6 +19,9 @@ card:
   - text: It builds into Butterfly, Heaven's Halberd, and Radiance.
     marks:
     - gamefile:items/item_talisman_of_evasion#components
+  - text: A necklace that allows you to anticipate enemy attacks.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_talisman_of_evasion_Lore
 ---
 
 # Talisman of Evasion

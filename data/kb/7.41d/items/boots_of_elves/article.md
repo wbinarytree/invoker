@@ -5,15 +5,19 @@ patch: 7.41d
 card:
   entity: boots_of_elves
   sentences:
-  - text: Band of Elvenskin is a passive component item costing 450 gold that grants
-      6 Agility.
+  - text: Band of Elvenskin is a component item costing 450 gold that grants 6 Agility.
     marks:
     - gamefile:items/item_boots_of_elves#cost
     - gamefile:items/item_boots_of_elves#attribs
-    - gamefile:items/item_boots_of_elves#mechanics
   - text: It builds into Orb of Corrosion and Yasha.
     marks:
     - gamefile:items/item_boots_of_elves#components
+  - text: Its behavior is passive.
+    marks:
+    - gamefile:items/item_boots_of_elves#mechanics
+  - text: “A tensile fabric often used for its light weight and ease of movement.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_boots_of_elves_Lore
 ---
 
 # Band of Elvenskin

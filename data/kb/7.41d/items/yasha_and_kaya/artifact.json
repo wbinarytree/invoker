@@ -5,7 +5,7 @@
   "title": "Yasha and Kaya",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ec3a187727a27da9e18df8a342e4a13d4d7563aed017abae3dde2d5c14071591",
+  "article_sha256": "9722f81895319a89f2b8288f51765dd39f90c57985580d340a113edd7ce082ca",
   "citations": [
     "gamefile:items/item_yasha_and_kaya#cost",
     "gamefile:items/item_yasha_and_kaya#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "d3e2545b314558a384f72a16e8617f6d4d5e4df06bef4da9fdc2ff8265f161d5",
-    "input_tokens": 14343,
-    "output_tokens": 376,
+    "prompt_version": "7",
+    "request_sha256": "20a41c24150c6d125896c555fd81399b574d2b485598af46708989985227f315",
+    "input_tokens": 13978,
+    "output_tokens": 571,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:33.287752+00:00"
+    "generated_at": "2026-07-27T12:19:26.193380+00:00"
   }
 }

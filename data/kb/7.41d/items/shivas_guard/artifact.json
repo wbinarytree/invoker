@@ -5,7 +5,7 @@
   "title": "Shiva's Guard",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "755dc47a3d726fbb799a7e4c22b663be90e3cfa8791f609e3b0c303ea42371bd",
+  "article_sha256": "dca0d760d18c185cc791b2f7892d63c51fc88e26715255ce204e03da5127845e",
   "citations": [
     "gamefile:items/item_shivas_guard#cost",
     "gamefile:items/item_shivas_guard#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9ae315d8910fa66bf2ba0eeed82b07a6a3b269f490812b39470b05101b306679",
-    "input_tokens": 14442,
-    "output_tokens": 2021,
+    "prompt_version": "7",
+    "request_sha256": "ed37321db779df98ea9a65b055fe8c2d0391e258b90fe9db1dc087252a642c6e",
+    "input_tokens": 14073,
+    "output_tokens": 1297,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:44.334113+00:00"
+    "generated_at": "2026-07-27T12:16:55.550143+00:00"
   }
 }

@@ -8,9 +8,9 @@ card:
   - text: Quickened is a passive enhancement costing 0 gold that provides 0/0/0/15%
       Evasion, 0/100/160/220 Mana, and 15/20/25/30 Movement Speed.
     marks:
-    - gamefile:items/item_enhancement_quickened#mechanics
     - gamefile:items/item_enhancement_quickened#cost
     - gamefile:items/item_enhancement_quickened#attribs
+    - gamefile:items/item_enhancement_quickened#mechanics
 ---
 
 # Quickened

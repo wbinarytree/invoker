@@ -5,22 +5,27 @@ patch: 7.41d
 card:
   entity: swift_blink
   sentences:
-  - text: Swift Blink is a 6800-gold component-quality item that grants 25 Agility;
-      its active teleports up to 1200 range, then grants 40% phased movement speed
-      and 35 bonus Agility for 6 seconds.
+  - text: Swift Blink is a component-quality item costing 6800 gold that grants 25
+      Agility; its active teleports the user within 1200 cast range, then grants phased
+      movement, 40% bonus movement, and 35 bonus Agility for 6 seconds.
     marks:
     - gamefile:items/item_swift_blink#cost
     - gamefile:items/item_swift_blink#attribs
+    - gamefile:items/item_swift_blink#mechanics
     - loc:DOTA_Tooltip_ability_item_swift_blink_Description
-  - text: Swift Blink has a 960 blink range clamp.
+  - text: The active has a mana cost of 0.
+    marks:
+    - gamefile:items/item_swift_blink#mechanics
+  - text: The active has a 15.0-second cooldown.
+    marks:
+    - gamefile:items/item_swift_blink#mechanics
+  - text: Its behavior is Point Target, DOTA_ABILITY_BEHAVIOR_DIRECTIONAL, DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES,
+      and DOTA_ABILITY_BEHAVIOR_OVERSHOOT.
+    marks:
+    - gamefile:items/item_swift_blink#mechanics
+  - text: Blink range clamp is 960.
     marks:
     - gamefile:items/item_swift_blink#attribs
-  - text: Its active has a 15.0-second cooldown.
-    marks:
-    - gamefile:items/item_swift_blink#mechanics
-  - text: Its active costs 0 mana.
-    marks:
-    - gamefile:items/item_swift_blink#mechanics
   - text: Damage from an enemy hero or Roshan prevents Swift Blink from being used
       for 3.0 seconds.
     marks:
@@ -30,6 +35,9 @@ card:
       Recipe (1750 gold).
     marks:
     - gamefile:items/item_swift_blink#components
+  - text: A cunning blade able to anticipate and enable its bearer's movements.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_swift_blink_Lore
 ---
 
 # Swift Blink

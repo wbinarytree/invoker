@@ -5,7 +5,7 @@
   "title": "Imp Claw",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5ddd667731acb79978ad6ac3645b301f60bbd889f7fbde75706ca1310efbaf8f",
+  "article_sha256": "ef74b4eb99dd8b34fff8a73f92f79c52e49907359d92f98e70a4837d8e5af890",
   "citations": [
     "gamefile:items/item_imp_claw#attribs",
     "loc:DOTA_Tooltip_ability_item_imp_claw_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b7bb1ef5f0f2f92b906a5ed6c870bb464567783773a26c57cf07b2ad784e7ff8",
-    "input_tokens": 14277,
-    "output_tokens": 539,
+    "prompt_version": "7",
+    "request_sha256": "ac48028adf27bedaa90600195fe38a7ef164acba2231114748a88afbff22201c",
+    "input_tokens": 14327,
+    "output_tokens": 876,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:11.391824+00:00"
+    "generated_at": "2026-07-27T12:12:45.951070+00:00"
   }
 }

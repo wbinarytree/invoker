@@ -5,29 +5,32 @@ patch: 7.41d
 card:
   entity: maelstrom
   sentences:
-  - text: Maelstrom is a 2950-gold artifact item granting 25 Attack Speed and 25 Damage
-      whose passive Chain Lightning has a 25% chance on attack to deal 110 magical
-      damage to each target, with 4 strikes within a 650 radius.
+  - text: Maelstrom is a 2950-gold artifact item that grants 25 Attack Speed and 25
+      Damage and passively has a 25% chance on attack to release Chain Lightning with
+      110 magical damage, 4 strikes, a 650 radius, 0.25 delay, and a 0.2 cooldown.
     marks:
     - gamefile:items/item_maelstrom#cost
     - gamefile:items/item_maelstrom#attribs
+    - gamefile:items/item_maelstrom#mechanics
     - loc:DOTA_Tooltip_ability_item_maelstrom_Description
-  - text: Chain Lightning has a 0.2 cooldown.
+  - text: Its Illusion Multiplier Pct is 100.
     marks:
     - gamefile:items/item_maelstrom#attribs
-  - text: Chain Lightning has a 0.25 delay.
+  - text: The Chain Lightning bolt leaps between targets and deals magical damage
+      to each.
     marks:
-    - gamefile:items/item_maelstrom#attribs
-  - text: The illusion multiplier is 100%.
-    marks:
-    - gamefile:items/item_maelstrom#attribs
+    - loc:DOTA_Tooltip_ability_item_maelstrom_Description
   - text: Its proc pierces evasion.
     marks:
     - loc:DOTA_Tooltip_ability_item_maelstrom_Description
-  - text: The build formula is Mithril Hammer for 1600 gold, Javelin for 900 gold,
-      and Gloves of Haste for 450 gold; Maelstrom builds into Mjollnir.
+  - text: Its build formula is Mithril Hammer for 1600 gold, Javelin for 900 gold,
+      and Gloves of Haste for 450 gold; it builds into Mjollnir.
     marks:
     - gamefile:items/item_maelstrom#components
+  - text: “A hammer forged for the gods themselves, Maelstrom allows its user to harness
+      the power of lightning.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_maelstrom_Lore
 ---
 
 # Maelstrom

@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: demon_edge
   sentences:
-  - text: Demon Edge is a secret_shop-quality item costing 2200 gold that grants 40
-      Damage.
+  - text: Demon Edge is a secret_shop-quality item that costs 2200 gold and grants
+      40 Damage.
     marks:
     - gamefile:items/item_demon_edge#cost
     - gamefile:items/item_demon_edge#attribs
@@ -16,6 +16,10 @@ card:
   - text: It builds into Daedalus, Monkey King Bar, Divine Rapier, and Silver Edge.
     marks:
     - gamefile:items/item_demon_edge#components
+  - text: “One of the oldest weapons forged by the Demon-Smith Abzidian, it killed
+      its maker when he tested its edge.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_demon_edge_Lore
 ---
 
 # Demon Edge

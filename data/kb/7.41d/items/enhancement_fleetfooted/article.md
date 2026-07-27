@@ -8,9 +8,9 @@ card:
   - text: Fleetfooted is an item that costs 0 gold and passively grants 115 Movement
       Speed.
     marks:
-    - gamefile:items/item_enhancement_fleetfooted#cost
     - gamefile:items/item_enhancement_fleetfooted#attribs
     - gamefile:items/item_enhancement_fleetfooted#mechanics
+    - gamefile:items/item_enhancement_fleetfooted#cost
 ---
 
 # Fleetfooted

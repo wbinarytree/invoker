@@ -5,7 +5,7 @@
   "title": "Shadow Amulet",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ba21d0b6f943fe1e6261ef8d62141ea13e22f3a1740f46fbae4d7677a1a4aade",
+  "article_sha256": "55e2ed18d2371a90196bdc1d5f2e04b747358fae9c14c7dc34ef855e92f02689",
   "citations": [
     "gamefile:items/item_shadow_amulet#cost",
     "loc:DOTA_Tooltip_ability_item_shadow_amulet_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3b6fd2e9d622ffae41a63f071d7644432e6192bb8bb340cbcacf27a018b78fab",
-    "input_tokens": 14386,
-    "output_tokens": 752,
+    "prompt_version": "7",
+    "request_sha256": "d45a55aff597d7978fde947d370bf2010765b51e012efa1545974394588714b5",
+    "input_tokens": 14019,
+    "output_tokens": 1150,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:00.859151+00:00"
+    "generated_at": "2026-07-27T12:16:57.349280+00:00"
   }
 }

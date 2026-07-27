@@ -5,7 +5,7 @@
   "title": "Ancient Guardian",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1a4f96a67ac4d921216d0a772509e09d2065927e5790731e048e0dc5d68c2bae",
+  "article_sha256": "d92ebfc0cac8093d4961f158049e28e526b5d04375c3d6ea8251f8b29c23fa37",
   "citations": [
     "gamefile:items/item_ancient_guardian#attribs",
     "loc:DOTA_Tooltip_ability_item_ancient_guardian_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3e12e4b10d0d2f6fd9ff1ad2e35c6340b778fcd498dd61a37dc1e02f1b8f9824",
-    "input_tokens": 14239,
-    "output_tokens": 342,
+    "prompt_version": "7",
+    "request_sha256": "cd6f707305dfdf964e634675834db9218b332f58ac207b3cd9e3b3ebdd57dfc3",
+    "input_tokens": 14289,
+    "output_tokens": 401,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:39.873291+00:00"
+    "generated_at": "2026-07-27T12:06:43.841690+00:00"
   }
 }

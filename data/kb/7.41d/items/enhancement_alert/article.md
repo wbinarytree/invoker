@@ -12,7 +12,16 @@ card:
     - gamefile:items/item_enhancement_alert#cost
     - gamefile:items/item_enhancement_alert#attribs
     - gamefile:items/item_enhancement_alert#mechanics
-  - text: Its build formula is Alert (0 gold).
+  - text: Attack Range (Melee & Ranged) is 0/0/0/80.
+    marks:
+    - gamefile:items/item_enhancement_alert#attribs
+  - text: Attack Speed is 7/15/23/31.
+    marks:
+    - gamefile:items/item_enhancement_alert#attribs
+  - text: Bonus Night Vision is 0/125/175/225.
+    marks:
+    - gamefile:items/item_enhancement_alert#attribs
+  - text: Alert is built from Alert (0 gold).
     marks:
     - gamefile:items/item_enhancement_alert#cost
 ---

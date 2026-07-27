@@ -11,14 +11,13 @@ card:
     - gamefile:items/item_third_eye#cost
     - gamefile:items/item_third_eye#attribs
     - gamefile:items/item_third_eye#mechanics
-  - text: True Sight lets allied vision within the carrier’s range reveal invisible
+    - loc:DOTA_Tooltip_ability_item_third_eye_Description
+  - text: True Sight allows allied vision within the carrier’s range to see invisible
       units and wards.
     marks:
     - loc:DOTA_Tooltip_ability_item_third_eye_Description
-  - text: Charge Loss removes a charge when the carrier dies.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_third_eye_Description
-  - text: The item disappears after all charges are lost.
+  - text: Charge Loss removes a charge on death, and the item disappears after all
+      charges are lost.
     marks:
     - loc:DOTA_Tooltip_ability_item_third_eye_Description
 ---

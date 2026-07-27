@@ -5,7 +5,7 @@
   "title": "Ogre Axe",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "fcd2400296a0f6d3a4f18689aa4cf0b53abc1dd3c9d2235ac41a1e7723ffab0b",
+  "article_sha256": "f28f80241ea0e5658544f1ed43ec1d49d1c38c430d66fe893495689a6870c275",
   "citations": [
     "gamefile:items/item_ogre_axe#cost",
     "gamefile:items/item_ogre_axe#mechanics",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "cf437f1b5d076c03b3b00d46d063afbc7116e39d7aa44662e98e5dcfdad5cc87",
-    "input_tokens": 14298,
-    "output_tokens": 448,
+    "prompt_version": "7",
+    "request_sha256": "21cd82b90293a4078fcb429638796359f7490d9e1c7e8c14c82cd04ec803cf30",
+    "input_tokens": 13927,
+    "output_tokens": 474,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:24.058794+00:00"
+    "generated_at": "2026-07-27T12:14:24.319088+00:00"
   }
 }

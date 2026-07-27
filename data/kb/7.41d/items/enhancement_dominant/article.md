@@ -5,12 +5,12 @@ patch: 7.41d
 card:
   entity: enhancement_dominant
   sentences:
-  - text: Dominant is a 0-gold passive enhancement that grants 25 Attack Speed, 205
-      Health, and 15% Magic Resistance.
+  - text: Dominant is a passive enhancement costing 0 gold that grants 25 Attack Speed,
+      205 Health, and 15% Magic Resistance.
     marks:
-    - gamefile:items/item_enhancement_dominant#cost
     - gamefile:items/item_enhancement_dominant#attribs
     - gamefile:items/item_enhancement_dominant#mechanics
+    - gamefile:items/item_enhancement_dominant#cost
   - text: 'Build formula: Dominant (0 gold).'
     marks:
     - gamefile:items/item_enhancement_dominant#cost

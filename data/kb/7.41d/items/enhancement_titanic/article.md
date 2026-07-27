@@ -6,7 +6,7 @@ card:
   entity: enhancement_titanic
   sentences:
   - text: Titanic is a passive enhancement costing 0 gold that grants 8/12/16 Base
-      Attack Damage and 10/12/14% Status Resistance while applying -9 Attack Speed.
+      Attack Damage and 10/12/14% Status Resistance and applies -9 Attack Speed.
     marks:
     - gamefile:items/item_enhancement_titanic#cost
     - gamefile:items/item_enhancement_titanic#attribs

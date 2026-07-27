@@ -6,18 +6,20 @@ card:
   entity: trickster_cloak
   sentences:
   - text: Trickster Cloak is a 0-gold item with 6 Duration, 0 Evasion, and 0 Magic
-      Resistance whose Cloak active grants invisibility.
+      Resistance whose active, Cloak, grants invisibility.
     marks:
     - gamefile:items/item_trickster_cloak#cost
     - gamefile:items/item_trickster_cloak#attribs
     - loc:DOTA_Tooltip_Ability_item_trickster_cloak_Description
-  - text: Cloak has Immediate, No Target, and DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL
-      behavior.
+  - text: Cloak is an immediate, no-target ability with DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL.
     marks:
     - gamefile:items/item_trickster_cloak#mechanics
   - text: Cloak has a 25.0 cooldown.
     marks:
     - gamefile:items/item_trickster_cloak#mechanics
+  - text: A fantastic garment immediately misplaced by its creator upon completion.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_trickster_cloak_Lore
 ---
 
 # Trickster Cloak

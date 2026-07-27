@@ -5,19 +5,21 @@ patch: 7.41d
 card:
   entity: chainmail
   sentences:
-  - text: Chainmail is a passive component item that costs 500 gold and provides 4
-      Armor.
+  - text: Chainmail is a 500-gold component item that passively provides 4 Armor.
     marks:
     - gamefile:items/item_chainmail#cost
     - gamefile:items/item_chainmail#attribs
     - gamefile:items/item_chainmail#mechanics
-  - text: Its build formula is Chainmail (500 gold).
+  - text: 'Build formula: Chainmail (500 gold).'
     marks:
     - gamefile:items/item_chainmail#cost
   - text: It builds into Essence Distiller, Medallion Of Courage, Mekansm, Phase Boots,
       Solar Crest, and Witch Blade.
     marks:
     - gamefile:items/item_chainmail#components
+  - text: “A medium weave of metal chains.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_chainmail_Lore
 ---
 
 # Chainmail

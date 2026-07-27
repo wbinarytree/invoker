@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c03c1a4804c03ebaa47f8ccf6b63e1640c9a18db72c7b0c34e680985f869cd90",
-    "input_tokens": 14219,
+    "prompt_version": "7",
+    "request_sha256": "cc6fb31ba0a79e8296e5bb48aeaa7346eefc717ed13a480674342a8b434198da",
+    "input_tokens": 13850,
     "output_tokens": 130,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:14.743426+00:00"
+    "generated_at": "2026-07-27T12:10:12.994192+00:00"
   }
 }

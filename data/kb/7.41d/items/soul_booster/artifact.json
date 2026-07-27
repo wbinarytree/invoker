@@ -5,7 +5,7 @@
   "title": "Soul Booster",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "af1fc20fc65d45ad4263141b6c85a2a89fa43b1e51b35a806cf1acde35c2ea24",
+  "article_sha256": "987563c346ce6ea63f1c1539b396cb5c494b863c9ee5ff0a88811a58c752d0b5",
   "citations": [
     "gamefile:items/item_soul_booster#cost",
     "gamefile:items/item_soul_booster#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a40754971aa2adf81689caea95d1918a35db0f8ae6adb2e744e4bb2d9e52150c",
-    "input_tokens": 14305,
-    "output_tokens": 296,
+    "prompt_version": "7",
+    "request_sha256": "5b57f43051331a56c0bb730a65efb7ee1c4499feaa29ed72cb364eac4571b0c3",
+    "input_tokens": 13932,
+    "output_tokens": 529,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:15:40.451215+00:00"
+    "generated_at": "2026-07-27T12:17:12.957251+00:00"
   }
 }

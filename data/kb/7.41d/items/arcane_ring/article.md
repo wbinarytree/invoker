@@ -5,9 +5,9 @@ patch: 7.41d
 card:
   entity: arcane_ring
   sentences:
-  - text: Arcane Ring is a 0-gold item with 0 bonus armor and 0 bonus intelligence
-      whose active, Replenish Mana, restores 30 mana plus 3% of the caster’s maximum
-      mana to nearby allies within 1200 radius.
+  - text: Arcane Ring is a 0-gold item that grants 0 bonus armor and 0 bonus intelligence;
+      its Replenish Mana active restores 30 mana plus 3% of the caster’s maximum mana
+      to nearby allies within a 1200 radius.
     marks:
     - gamefile:items/item_arcane_ring#cost
     - gamefile:items/item_arcane_ring#attribs
@@ -15,6 +15,9 @@ card:
   - text: Replenish Mana is an immediate, no-target active with a 60.0-second cooldown.
     marks:
     - gamefile:items/item_arcane_ring#mechanics
+  - text: “Once a prized heirloom of a minor lord’s house.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_arcane_ring_Lore
 ---
 
 # Arcane Ring

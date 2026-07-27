@@ -5,32 +5,28 @@ patch: 7.41d
 card:
   entity: specialists_array
   sentences:
-  - text: Specialist's Array is a rare item costing 2550 gold that grants 15 Agility
-      and provides passive Splitshot, giving ranged attacks a 30% proc chance to fire
-      2 additional projectiles that deal 20 base damage plus 75% of normal attack
-      damage.
+  - text: Specialist's Array is a rare 2550-gold item granting 15 Agility and passive
+      Splitshot, which gives ranged attacks a 30% chance to fire 2 additional projectiles
+      within 150 bonus range and a 120-degree forward angle; each deals 20 base damage
+      plus 75% normal attack damage, while the primary attack uses 100%.
     marks:
     - gamefile:items/item_specialists_array#cost
     - gamefile:items/item_specialists_array#attribs
     - loc:DOTA_Tooltip_Ability_item_specialists_array_Description
-  - text: Splitshot's secondary-target angle is 120 and its secondary-target range
-      bonus is 150.
+  - text: Splitshot is passive, costs 0 mana, and has a 0.0 cooldown.
     marks:
-    - gamefile:items/item_specialists_array#attribs
+    - gamefile:items/item_specialists_array#mechanics
   - text: Additional projectiles do not trigger on-hit effects.
     marks:
     - loc:DOTA_Tooltip_Ability_item_specialists_array_Description
-  - text: The primary attack's damage percentage is 100%.
-    marks:
-    - gamefile:items/item_specialists_array#attribs
-    - loc:DOTA_Tooltip_Ability_item_specialists_array_Description
-  - text: Splitshot has a mana cost of 0 and a cooldown of 0.0.
-    marks:
-    - gamefile:items/item_specialists_array#mechanics
-  - text: It is built from Blade of Alacrity (1000 gold), Broadsword (1000 gold),
-      and a Recipe (550 gold), and builds into Hydra's Breath.
+  - text: Its build formula is Blade of Alacrity for 1000 gold, Broadsword for 1000
+      gold, and a Recipe for 550 gold; it builds into Hydra's Breath.
     marks:
     - gamefile:items/item_specialists_array#components
+  - text: An impressive kit of trigger enhancements born in an aging assassin's idle
+      mind.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_specialists_array_Lore
 ---
 
 # Specialist's Array

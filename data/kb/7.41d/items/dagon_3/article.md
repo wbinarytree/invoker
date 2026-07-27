@@ -5,37 +5,39 @@ patch: 7.41d
 card:
   entity: dagon_3
   sentences:
-  - text: Dagon (item_dagon_3) is a rare item costing 5200 gold that grants 6/7/8/9/10
-      All Attributes, 200/210/220/230/240 Health, 350/375/400/425/450 Mana, and 60/90/120/150/180
-      Cast Range, and its Energy Burst deals 400/500/600/700/800 magical Damage to
-      a targeted enemy unit.
+  - text: Dagon is a rare 5200-gold item granting 6/7/8/9/10 All Attributes, 200/210/220/230/240
+      Health, 350/375/400/425/450 Mana, and 60/90/120/150/180 Cast Range; its unit-target
+      Energy Burst deals 400/500/600/700/800 magical Damage at 640 active cast range.
     marks:
     - gamefile:items/item_dagon_3#cost
     - gamefile:items/item_dagon_3#attribs
+    - gamefile:items/item_dagon_3#mechanics
     - loc:DOTA_Tooltip_ability_item_dagon_3_Description
-  - text: Energy Burst has Unit Target behavior.
+  - text: Energy Burst has a 120/140/160/180/200 Mana cost.
     marks:
-    - gamefile:items/item_dagon_3#mechanics
-  - text: Energy Burst has 640 active cast range.
-    marks:
-    - gamefile:items/item_dagon_3#mechanics
-  - text: Energy Burst has 0 Damage Delay.
-    marks:
-    - gamefile:items/item_dagon_3#mechanics
-  - text: Energy Burst costs 120/140/160/180/200 Mana.
-    marks:
+    - gamefile:items/item_dagon_3#attribs
     - gamefile:items/item_dagon_3#mechanics
   - text: Energy Burst has a 27/24/21/18/15 cooldown.
     marks:
+    - gamefile:items/item_dagon_3#attribs
+    - gamefile:items/item_dagon_3#mechanics
+  - text: Energy Burst has 0 Damage Delay.
+    marks:
+    - gamefile:items/item_dagon_3#attribs
     - gamefile:items/item_dagon_3#mechanics
   - text: Energy Burst is upgradable.
     marks:
     - loc:DOTA_Tooltip_ability_item_dagon_3_Description
-  - text: The build formula is Dagon (item_dagon_2) at 4100 gold plus item_recipe_dagon
-      (item_recipe_dagon) at —, for a total of 5200 gold; it builds into Dagon (item_dagon_4).
+  - text: Dagon builds from Dagon (item_dagon_2) for 4100 gold and item_recipe_dagon
+      (item_recipe_dagon) with recipe cost —, for a total of 5200 gold, and builds
+      into Dagon (item_dagon_4).
     marks:
     - gamefile:items/item_dagon_3#cost
     - gamefile:items/item_dagon_3#components
+  - text: “A lesser wand that grows in power the longer it is used, it brings magic
+      to the fingertips of the user.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_dagon_3_Lore
 ---
 
 # Dagon

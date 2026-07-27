@@ -5,7 +5,7 @@
   "title": "Radiance",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7999ed2ec5d30e0d5e8c2325a64e8a13c1f5c9dc78b474b9fe9909dd8f3a50e5",
+  "article_sha256": "69d5e7159da7d6e7fb31d4445acb0b1e2513ec92e4fca62d8a097c1a03be20fd",
   "citations": [
     "gamefile:items/item_radiance#cost",
     "gamefile:items/item_radiance#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4b5e46712eb5251562f4813fe545feefa991c9bd5a8f8c8272482f82c8f0f177",
-    "input_tokens": 14405,
-    "output_tokens": 1131,
+    "prompt_version": "7",
+    "request_sha256": "ef0ac536f5c4f7df29757b78a14e5f0111fe433def7e4613a6172c13c6f93498",
+    "input_tokens": 14038,
+    "output_tokens": 877,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:18.074968+00:00"
+    "generated_at": "2026-07-27T12:15:48.374562+00:00"
   }
 }

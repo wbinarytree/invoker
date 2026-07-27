@@ -5,7 +5,7 @@
   "title": "Ghost Scepter",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2f3680ecc6a739839a75b8ab730bc81c55d6f95387e2718602aa65354b4c09cf",
+  "article_sha256": "9faeadd910e4aafb82e5ba671566bc775d06fa80180fb55c32bca875753dcd08",
   "citations": [
     "gamefile:items/item_ghost#cost",
     "gamefile:items/item_ghost#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1b778c71d748defe82291b8e57cba6aa9f983b000c98e9ae956bdb2c5656d765",
-    "input_tokens": 14369,
-    "output_tokens": 1186,
+    "prompt_version": "7",
+    "request_sha256": "2bc15cb389ad995fad2a066eec1398cfa79ce6f562d02cab154e8726ed368327",
+    "input_tokens": 14002,
+    "output_tokens": 1132,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:29.150821+00:00"
+    "generated_at": "2026-07-27T12:11:27.127314+00:00"
   }
 }

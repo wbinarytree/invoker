@@ -5,7 +5,7 @@
   "title": "Moon Shard",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7f3af6d89723ea304d863000e476c032131f321675ba29dde027045e4af32769",
+  "article_sha256": "afa1e93816b8ba4be8d6620ea01bff3595dfc1ce83ddac391e5eb3a3c4e902ca",
   "citations": [
     "gamefile:items/item_moon_shard#cost",
     "gamefile:items/item_moon_shard#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "27d28b5624ca0df33b1bf27d3e42c7227c116af3fdf56d08d5fafed1511e4218",
-    "input_tokens": 14343,
-    "output_tokens": 599,
+    "prompt_version": "7",
+    "request_sha256": "baa467d80dec5f4c463686335b9b1263484b7c59dea6e6bdac8e2a4a53593283",
+    "input_tokens": 13974,
+    "output_tokens": 731,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:47.013758+00:00"
+    "generated_at": "2026-07-27T12:14:05.466197+00:00"
   }
 }

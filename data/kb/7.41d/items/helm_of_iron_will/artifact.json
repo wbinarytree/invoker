@@ -5,7 +5,7 @@
   "title": "Helm of Iron Will",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "42b83a4261c4c255f37cf89859be2a799c4fddbada264bbc3177e3f8938674f3",
+  "article_sha256": "f056a7a908a90f6909941e15c42bbf6d0313ff37641ca66c2ac94327ca6bb91c",
   "citations": [
     "gamefile:items/item_helm_of_iron_will#cost",
     "gamefile:items/item_helm_of_iron_will#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "affdba5c94d15672d9bbdd9e0be5383d10c2d923abd67c43205a55ded130211d",
-    "input_tokens": 14307,
-    "output_tokens": 886,
+    "prompt_version": "7",
+    "request_sha256": "2e201942c752d9badcf055f56c2e958f20f094bd1491a319fef70644996542a1",
+    "input_tokens": 13934,
+    "output_tokens": 537,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:09.701273+00:00"
+    "generated_at": "2026-07-27T12:11:58.851411+00:00"
   }
 }

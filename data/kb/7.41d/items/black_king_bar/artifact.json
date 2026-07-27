@@ -5,7 +5,7 @@
   "title": "Black King Bar",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1e8286d291f1733098a0e8bf91a99172e80edabd9f8fce3366fbf034e53b5a1d",
+  "article_sha256": "98a0b41d062cdefbb1b50f17c89c7dd59a46dd1df46c425e99049d53d9863ade",
   "citations": [
     "gamefile:items/item_black_king_bar#cost",
     "gamefile:items/item_black_king_bar#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2d9a2124affe0af6ff67896a4cd49b3762a8aee08149d00140f5701296508fa8",
-    "input_tokens": 14424,
-    "output_tokens": 1127,
+    "prompt_version": "7",
+    "request_sha256": "def58c6fdcf91dffe527baf5ae9e243673151c5c95d4a912f200cd5825ad06cd",
+    "input_tokens": 14057,
+    "output_tokens": 752,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:20.522259+00:00"
+    "generated_at": "2026-07-27T12:07:28.306949+00:00"
   }
 }

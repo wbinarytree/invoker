@@ -5,7 +5,7 @@
   "title": "Fluffy Hat",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "9298e97e1c450cbd817a47add005f794e9427ec98dc8f59855b152b3dd33bffe",
+  "article_sha256": "92231cbba27cdbd13ef8d0c28996a8e8082ce24151ee74d6b04022acbc9a2718",
   "citations": [
     "gamefile:items/item_fluffy_hat#cost",
     "gamefile:items/item_fluffy_hat#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9e8622fb87d82a34a9f7bed9837328a1a2043409a9291ef2509c215ec1dd6e5d",
-    "input_tokens": 14250,
-    "output_tokens": 292,
+    "prompt_version": "7",
+    "request_sha256": "d454a6b03868f40bee9993923bfecea184022b7e53b1a2a3762795a7328c2a30",
+    "input_tokens": 13875,
+    "output_tokens": 348,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:52.698804+00:00"
+    "generated_at": "2026-07-27T12:10:47.377459+00:00"
   }
 }

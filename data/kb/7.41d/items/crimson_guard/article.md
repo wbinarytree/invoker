@@ -6,34 +6,43 @@ card:
   entity: crimson_guard
   sentences:
   - text: Crimson Guard is an epic item costing 3725 gold that grants 6 Armor, 250
-      Health, and 12 Health Regeneration; Guard gives nearby allied heroes and buildings
-      100% damage block chance for 7 seconds, blocking 70 plus 2.0% of the caster’s
-      maximum health per incoming attack, while passive Damage Block has a 60% chance
-      to block 75 damage for melee heroes or 50 for ranged heroes.
+      Health, and 12 Health Regeneration; its active Guard gives nearby allied heroes
+      and buildings a 100% block chance against each incoming attack, with a fixed
+      block component of 70, a caster-maximum-health component of 2.0%, and DURATION
+      7, while passive Damage Block has a 60% chance to block 75 damage for melee
+      heroes or 50 for ranged heroes.
     marks:
     - gamefile:items/item_crimson_guard#cost
     - gamefile:items/item_crimson_guard#attribs
     - loc:DOTA_Tooltip_ability_item_crimson_guard_Description
+  - text: Its BLOCK PENALTY RANGED is 25.
+    marks:
+    - gamefile:items/item_crimson_guard#attribs
+  - text: Its BONUS AOE RADIUS is 1200.
+    marks:
+    - gamefile:items/item_crimson_guard#attribs
   - text: 'Build formula: Vanguard (1700 gold) + Helm of Iron Will (975 gold) + Recipe
       (1050 gold).'
     marks:
     - gamefile:items/item_crimson_guard#components
-  - text: Guard affects allies within a 1200 radius.
-    marks:
-    - gamefile:items/item_crimson_guard#attribs
-    - loc:DOTA_Tooltip_ability_item_crimson_guard_Description
-  - text: Guard has Immediate, No Target behavior.
-    marks:
-    - gamefile:items/item_crimson_guard#mechanics
-  - text: Guard costs 75 mana.
-    marks:
-    - gamefile:items/item_crimson_guard#mechanics
-  - text: Guard has a 40.0 cooldown.
+  - text: Guard is Immediate and No Target.
     marks:
     - gamefile:items/item_crimson_guard#mechanics
   - text: Guard is not dispellable.
     marks:
     - gamefile:items/item_crimson_guard#mechanics
+  - text: Guard has Cast range 1200.
+    marks:
+    - gamefile:items/item_crimson_guard#mechanics
+  - text: Guard has Mana cost 75.
+    marks:
+    - gamefile:items/item_crimson_guard#mechanics
+  - text: Guard has Cooldown 40.0.
+    marks:
+    - gamefile:items/item_crimson_guard#mechanics
+  - text: A cuirass originally built to protect against the dreaded Year Beast.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_crimson_guard_Lore
 ---
 
 # Crimson Guard

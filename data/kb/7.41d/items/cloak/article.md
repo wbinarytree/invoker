@@ -19,6 +19,10 @@ card:
   - text: Cloak has passive behavior.
     marks:
     - gamefile:items/item_cloak#mechanics
+  - text: A cloak made of a magical material that works to dispel any magic cast on
+      it.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_cloak_Lore
 ---
 
 # Cloak

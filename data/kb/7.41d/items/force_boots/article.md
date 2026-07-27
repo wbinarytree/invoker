@@ -6,13 +6,13 @@ card:
   entity: force_boots
   sentences:
   - text: Force Boots is a 0-gold item that grants 115 Movement Speed and 30 Health
-      Regeneration, provides Force to push a target 750 units over 0.5 seconds, and
-      provides Speed Unlock to remove the wearer's speed limit.
+      Regeneration; its active Force has Push Length 750 and Push Duration 0.5, while
+      passive Speed Unlock completely removes the wearer's speed limit.
     marks:
     - gamefile:items/item_force_boots#cost
     - gamefile:items/item_force_boots#attribs
     - loc:DOTA_Tooltip_ability_item_force_boots_Description
-  - text: Force has Unit Target behavior and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK.
+  - text: Force has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK behavior.
     marks:
     - gamefile:items/item_force_boots#mechanics
   - text: Force has 750 cast range.
@@ -21,7 +21,7 @@ card:
   - text: Force costs 75 mana.
     marks:
     - gamefile:items/item_force_boots#mechanics
-  - text: Force has an 8.0-second cooldown.
+  - text: Force has an 8.0 cooldown.
     marks:
     - gamefile:items/item_force_boots#mechanics
   - text: Force pushes the target in the direction they are facing.
@@ -33,9 +33,13 @@ card:
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_force_boots_Description
-  - text: Its build formula is Force Boots (0 gold).
+  - text: The build formula is Force Boots (0 gold).
     marks:
     - gamefile:items/item_force_boots#cost
+  - text: Elusive marvels never successfully studied for proper classification in
+      the archives.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_force_boots_Lore
 ---
 
 # Force Boots

@@ -5,7 +5,7 @@
   "title": "Wraith Band",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ebb036a9cc8a4817cab4d2abeef77dd2fa3b3c602b3aeda5fc0cb9fe7b87c2a2",
+  "article_sha256": "b26ca890629b3d6fc6046bf3796291194a168547751434d8b87f769ce73c391c",
   "citations": [
     "gamefile:items/item_wraith_band#cost",
     "gamefile:items/item_wraith_band#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b53b781c33f5dfc3bba9d1352816aa8a6b462669662303afe6135ac48b5fb651",
-    "input_tokens": 14275,
-    "output_tokens": 464,
+    "prompt_version": "7",
+    "request_sha256": "5412e2c5f2d414a90f7375ea077aed2d367258fa9a8c2c64069d14623688f64c",
+    "input_tokens": 13906,
+    "output_tokens": 565,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:28.020688+00:00"
+    "generated_at": "2026-07-27T12:19:23.591390+00:00"
   }
 }

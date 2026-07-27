@@ -5,10 +5,10 @@ patch: 7.41d
 card:
   entity: holy_locket
   sentences:
-  - text: Holy Locket is a rare 2250-gold item granting 7 All Attributes, 0 Bonus
-      Health, and 0 Bonus Mana; Energy Charge targets an ally, stores up to 25 charges,
-      restores 17 health and 15 mana per charge, and increases incoming Heal Amplification
-      by 15% for 4.0, while Holy Blessing increases provided heals by 10%.
+  - text: Holy Locket is a rare 2250-gold item whose Energy Charge targets an allied
+      unit, holds up to 25 charges, restores 17 health and 15 mana per charge, and
+      provides 15% Incoming Heal Increase Active for an Active Buff Duration of 4.0,
+      while Holy Blessing increases heals provided by 10%.
     marks:
     - gamefile:items/item_holy_locket#cost
     - gamefile:items/item_holy_locket#attribs
@@ -17,25 +17,24 @@ card:
       gold).
     marks:
     - gamefile:items/item_holy_locket#components
-    - gamefile:items/item_holy_locket#cost
-  - text: Holy Locket automatically gains charges on its 10 Charge Gain Timer and
-      whenever a visible enemy within its 1200 Charge Radius uses an ability.
+  - text: It grants 7 All Attributes, 0 Bonus Health, and 0 Bonus Mana.
+    marks:
+    - gamefile:items/item_holy_locket#attribs
+  - text: It automatically gains charges on its Charge Gain Timer of 10 and whenever
+      a visible enemy within its Charge Radius of 1200 uses an ability.
     marks:
     - gamefile:items/item_holy_locket#attribs
     - loc:DOTA_Tooltip_ability_item_holy_locket_Description
-  - text: Energy Charge targets an allied unit within 600 cast range.
+  - text: Its use behavior is Unit Target, Immediate, and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK,
+      with 600 cast range and 0.0 cooldown.
     marks:
     - gamefile:items/item_holy_locket#mechanics
-    - loc:DOTA_Tooltip_ability_item_holy_locket_Description
-  - text: Its behavior is Unit Target, Immediate, and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK.
-    marks:
-    - gamefile:items/item_holy_locket#mechanics
-  - text: The use property lists a 0.0 Cooldown.
-    marks:
-    - gamefile:items/item_holy_locket#mechanics
-  - text: Use Cooldown is 13.
+  - text: Its Use Cooldown stat is 13.
     marks:
     - gamefile:items/item_holy_locket#attribs
+  - text: A prized relic long thought lost forever in a failed crusade.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_holy_locket_Lore
 ---
 
 # Holy Locket

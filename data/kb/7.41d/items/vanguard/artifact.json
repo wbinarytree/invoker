@@ -5,7 +5,7 @@
   "title": "Vanguard",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f576577f08c1fd5b73aae5c1685bff33e7369c6d7d9244e50b49ce331f7e35ca",
+  "article_sha256": "3cd48e73e3de3bb9003cba5bfd8d0ecaf321a2bc057b253720cfb12d7dab104c",
   "citations": [
     "gamefile:items/item_vanguard#cost",
     "gamefile:items/item_vanguard#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9400e46706a06d7c898131c73f884a41856100fcbadc8a509afbabc1a47fad4d",
-    "input_tokens": 14352,
-    "output_tokens": 880,
+    "prompt_version": "7",
+    "request_sha256": "78682de39cbe810fd06d1aea2a8f1daa8acd03842e1e4f57c7425fe56eda2e02",
+    "input_tokens": 13985,
+    "output_tokens": 882,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:03.708573+00:00"
+    "generated_at": "2026-07-27T12:18:38.511613+00:00"
   }
 }

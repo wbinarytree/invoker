@@ -5,7 +5,7 @@
   "title": "Blitz Knuckles",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "bfb9cc58af55305711bf94ebbc85f69bb203d8cf42c56231181f6d959248add1",
+  "article_sha256": "130dc660002f286191c17f89619fd2b1d6fcd27b4fdd88a2a8a26c369e94ba29",
   "citations": [
     "gamefile:items/item_blitz_knuckles#cost",
     "gamefile:items/item_blitz_knuckles#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "76f77117e3ab7446b5b22b296d2d97ac655d68231ffa4b4255bbc718cf335918",
-    "input_tokens": 14260,
-    "output_tokens": 337,
+    "prompt_version": "7",
+    "request_sha256": "475dc9fbf24e06bfdb38c3e893cada6ddb1a29df63dd81e549655f4699c766c7",
+    "input_tokens": 13887,
+    "output_tokens": 367,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:45.529917+00:00"
+    "generated_at": "2026-07-27T12:07:36.457719+00:00"
   }
 }

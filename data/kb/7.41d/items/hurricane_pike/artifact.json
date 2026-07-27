@@ -5,7 +5,7 @@
   "title": "Hurricane Pike",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "dfe5e5e4ee883f5f23d08a9f2bcc1ad597c9956db095c827d43ec1646d3c61ea",
+  "article_sha256": "5d0c2ba5ab14734a15b2cceb8cb14a938912c2bfe528776f431872e7c48c7174",
   "citations": [
     "gamefile:items/item_hurricane_pike#cost",
     "gamefile:items/item_hurricane_pike#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "6fe4db665ad1e43c7ea909c8db477de4530c1087491e70f39c8be606b67560fb",
-    "input_tokens": 14516,
-    "output_tokens": 1487,
+    "prompt_version": "7",
+    "request_sha256": "9349f58a26e209f5ea94d588ce40dc4f016f2aec8f5fea42aa104a68a6e314a1",
+    "input_tokens": 14141,
+    "output_tokens": 1579,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:10.096920+00:00"
+    "generated_at": "2026-07-27T12:12:28.833616+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Tier 2 Token",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0dd805d917beeeac25e4d7a3f99dc226c293d9408bd797cb892bbe2bf0e3bdeb",
+  "article_sha256": "7ceb829f0c97064abfe948959bb973d8b44e7e96da5dad1186b709b46885699b",
   "citations": [
     "gamefile:items/item_tier2_token#cost",
     "gamefile:items/item_tier2_token#mechanics",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "4ca903c29b46cfbecd6fa75886b81bceabe033e2a80b9204d3c8a60b7e20fc9f",
-    "input_tokens": 14157,
-    "output_tokens": 354,
+    "prompt_version": "7",
+    "request_sha256": "b8c07e7fbf68100ec7da208e93c36f84cd405943733378999d4287db36a4bb91",
+    "input_tokens": 13784,
+    "output_tokens": 256,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:18:50.121740+00:00"
+    "generated_at": "2026-07-27T12:17:46.999716+00:00"
   }
 }

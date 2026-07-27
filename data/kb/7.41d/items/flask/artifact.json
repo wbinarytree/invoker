@@ -5,7 +5,7 @@
   "title": "Healing Salve",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6cf5cbecc8db778485da1f46c6108b68fb4aaf359b6bc0ef1567b4874a42d3b9",
+  "article_sha256": "c69e86c4aeaf20aebcbe00d5da158ebda9fc8acfae1da1b72bbf0f53293b831e",
   "citations": [
     "gamefile:items/item_flask#cost",
     "gamefile:items/item_flask#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9c8da79fde49aee26c4f4cf342b51f67746a9f0fc7d244fe80ba1e30c09254a7",
-    "input_tokens": 14313,
-    "output_tokens": 911,
+    "prompt_version": "7",
+    "request_sha256": "f732ebbc37be4978df181a3d6d0d289504e2025516118ddb90863ae0c4022ff6",
+    "input_tokens": 13946,
+    "output_tokens": 637,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:24.175433+00:00"
+    "generated_at": "2026-07-27T12:10:45.130210+00:00"
   }
 }

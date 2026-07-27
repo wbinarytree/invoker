@@ -5,13 +5,12 @@ patch: 7.41d
 card:
   entity: unwavering_condition
   sentences:
-  - text: Unwavering Condition is a 0-gold passive item that provides 95% MAGIC RESISTANCE
-      and fixes MAX HEALTH at 1800, which other effects and attributes cannot alter.
+  - text: Unwavering Condition is an item that costs 0 gold, provides 95% MAGIC RESISTANCE,
+      and fixes MAX HEALTH at 1800 so other effects and attributes cannot alter it.
     marks:
     - gamefile:items/item_unwavering_condition#cost
     - gamefile:items/item_unwavering_condition#attribs
     - gamefile:items/item_unwavering_condition#mechanics
-    - loc:DOTA_Tooltip_ability_item_unwavering_condition_Description
   - text: Its build formula is Unwavering Condition (0 gold).
     marks:
     - gamefile:items/item_unwavering_condition#cost

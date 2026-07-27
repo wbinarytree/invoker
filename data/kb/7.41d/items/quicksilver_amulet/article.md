@@ -14,34 +14,9 @@ card:
     - gamefile:items/item_quicksilver_amulet#attribs
     - gamefile:items/item_quicksilver_amulet#mechanics
     - loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Description
-  - text: Quicksilver Amulet costs 0 gold.
+  - text: “An enchanted talisman brimming with a mysterious substance.”
     marks:
-    - gamefile:items/item_quicksilver_amulet#cost
-  - text: It has 40 Animation Increase.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: It has 18 Attack Speed.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: It has 4% Movement Speed.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: It has 20 Bonus Attack.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: It has 5% Bonus Movement.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: It has 40 Projectile Increase.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#attribs
-  - text: The item’s behavior is passive.
-    marks:
-    - gamefile:items/item_quicksilver_amulet#mechanics
-  - text: Quicksilver’s bonus movement speed and attack speed apply whenever one of
-      the bearer’s abilities is on cooldown.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Description
+    - loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Lore
 ---
 
 # Quicksilver Amulet

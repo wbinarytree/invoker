@@ -5,7 +5,7 @@
   "title": "Mask of Madness",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e70ffd085ab6c248cb416c85abede4056a9a6f5b07c4ac726430dd38da835a5b",
+  "article_sha256": "4b1989dd9ca54075afe8223b6e6db49eb372121f2f937583569d7f8887de0a96",
   "citations": [
     "gamefile:items/item_mask_of_madness#cost",
     "gamefile:items/item_mask_of_madness#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2a4985a6120d09e02611ca9c36bb938b7a32f61d91ef204e47e56529940dab4d",
-    "input_tokens": 14475,
-    "output_tokens": 798,
+    "prompt_version": "7",
+    "request_sha256": "d8725b061df98d25b0520d18b2670f1f80db1688925a2f57f8dfe630f6507822",
+    "input_tokens": 14106,
+    "output_tokens": 708,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:50.862690+00:00"
+    "generated_at": "2026-07-27T12:13:47.579076+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Dust of Appearance",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "934174a86f036957fa6222a101bd88f05db1c47a4ec303f9bf7a87c9ea2524f6",
+  "article_sha256": "291f0bc916f3cf93afe4c35212988c808fc50c97f53667b914899b441825cc1e",
   "citations": [
     "gamefile:items/item_dust#cost",
     "gamefile:items/item_dust#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b89d0385baf68263d640def45ade0da289735766b367cbc7a3745255161b6fe6",
-    "input_tokens": 14338,
-    "output_tokens": 532,
+    "prompt_version": "7",
+    "request_sha256": "d90b9513f9c8a8e568b030309d9be8426ea1babe5d85ae870b045001e5a636d9",
+    "input_tokens": 13967,
+    "output_tokens": 768,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:59.751773+00:00"
+    "generated_at": "2026-07-27T12:09:36.525901+00:00"
   }
 }

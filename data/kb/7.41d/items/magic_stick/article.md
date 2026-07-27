@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: magic_stick
   sentences:
-  - text: Magic Stick is a 200-gold component item whose immediate, no-target active,
-      Energy Charge, has a 17.0-second cooldown and instantly restores 15 health and
-      15 mana per stored charge, up to 10 charges.
+  - text: Magic Stick is a 200-gold component item whose immediate, no-target Energy
+      Charge has a 17.0 cooldown and instantly restores 15 health and mana per stored
+      charge, up to 10 charges.
     marks:
     - gamefile:items/item_magic_stick#cost
     - gamefile:items/item_magic_stick#attribs
     - gamefile:items/item_magic_stick#mechanics
     - loc:DOTA_Tooltip_ability_item_magic_stick_Description
-  - text: Its build is Magic Stick (200 gold), and it builds into Magic Wand.
+  - text: Its build formula is Magic Stick (200 gold), and it builds into Magic Wand.
     marks:
     - gamefile:items/item_magic_stick#cost
     - gamefile:items/item_magic_stick#components
@@ -22,6 +22,10 @@ card:
     marks:
     - gamefile:items/item_magic_stick#attribs
     - loc:DOTA_Tooltip_ability_item_magic_stick_Description
+  - text: A simple wand used to channel magic energies, favored by apprentice wizards
+      and great warlocks alike.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_magic_stick_Lore
 ---
 
 # Magic Stick

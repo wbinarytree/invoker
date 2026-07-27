@@ -11,6 +11,11 @@ card:
     - gamefile:items/item_titan_sliver#cost
     - gamefile:items/item_titan_sliver#mechanics
     - gamefile:items/item_titan_sliver#attribs
+  - text: Though many desire this brilliant shard for its obvious qualities, a school
+      of study exists to determine the true size and purpose of its incomprehensible
+      whole.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_titan_sliver_Lore
 ---
 
 # Titan Sliver

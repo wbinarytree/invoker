@@ -5,7 +5,7 @@
   "title": "Pipe of Insight",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1be7bdaeb7395966fa3be18c5bd0ec1ba73c15b0870e49987ebdaee7330622da",
+  "article_sha256": "48ffaa356e50514303501a001aa422ed6926e3d48cb3a05f9891f9e0e39bfd5e",
   "citations": [
     "gamefile:items/item_pipe#cost",
     "gamefile:items/item_pipe#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "16218b21e8e33e81831dae91976a9579f8941117a1265118c642eb6cbcd3bae5",
-    "input_tokens": 14452,
-    "output_tokens": 1115,
+    "prompt_version": "7",
+    "request_sha256": "637bff9dcb0d81b7edd6b44ae7c436315f5ca85415f6725feaeabdb6623422b5",
+    "input_tokens": 14081,
+    "output_tokens": 985,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:14.057240+00:00"
+    "generated_at": "2026-07-27T12:15:28.295421+00:00"
   }
 }

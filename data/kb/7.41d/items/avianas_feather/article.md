@@ -6,8 +6,8 @@ card:
   entity: avianas_feather
   sentences:
   - text: Aviana's Feather is a 0-gold item that grants 25% Evasion and 30 Movement
-      Speed; its passive Free Bird grants flying movement to the equipped hero below
-      its 30% Flight Threshold.
+      Speed; its passive Free Bird grants flying movement while the equipped hero
+      is below the 30% Flight Threshold.
     marks:
     - gamefile:items/item_avianas_feather#attribs
     - gamefile:items/item_avianas_feather#cost

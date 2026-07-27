@@ -6,56 +6,42 @@ card:
   entity: harpoon
   sentences:
   - text: Harpoon is a 4700-gold item granting 10 Agility, 25 Damage, 10 Intelligence,
-      2.0 Mana Regeneration, and 25 Strength; its 50-mana, 19.0-cooldown Draw Forth
-      pulls the caster and an enemy closer together, while Echo Strike makes melee
-      attacks attack twice in quick succession.
+      2.0 Mana Regeneration, and 25 Strength; its 50-mana Draw Forth has 700 cast
+      range and a 19.0 cooldown and pulls the caster and enemy together, while Echo
+      Strike makes melee attacks strike twice and applies a 100% movement slow for
+      1.0 on the first strike.
     marks:
     - gamefile:items/item_harpoon#cost
     - gamefile:items/item_harpoon#attribs
     - gamefile:items/item_harpoon#mechanics
     - loc:DOTA_Tooltip_Ability_item_harpoon_Description
-  - text: 'Build formula: Echo Sabre (2700 gold) + Diadem (1000 gold) + Recipe (1000
-      gold).'
+  - text: Harpoon is built from Echo Sabre costing 2700 gold and Diadem costing 1000
+      gold, with a 1000-gold Recipe.
     marks:
     - gamefile:items/item_harpoon#components
     - gamefile:items/item_harpoon#cost
-  - text: Draw Forth targets an enemy and fires a harpoon that pulls the caster and
-      target closer together.
+  - text: Draw Forth's projectile speed is 2000.
     marks:
-    - loc:DOTA_Tooltip_Ability_item_harpoon_Description
+    - gamefile:items/item_harpoon#mechanics
+  - text: Draw Forth has a maximum distance of 1000 and a minimum distance of 100.
+    marks:
+    - gamefile:items/item_harpoon#mechanics
+  - text: Draw Forth has a 35% pull distance percentage and a 0.3 pull duration.
+    marks:
+    - gamefile:items/item_harpoon#mechanics
   - text: For a melee caster, Draw Forth always pulls the hero and target within melee
       distance of each other.
     marks:
     - loc:DOTA_Tooltip_Ability_item_harpoon_Description
-  - text: Targeting a tree with Draw Forth instead pulls the caster all the way to
-      it.
+  - text: Targeting a tree with Draw Forth pulls the caster all the way to it.
     marks:
-    - loc:DOTA_Tooltip_Ability_item_harpoon_Description
-  - text: Draw Forth has 700 cast range and 2000 projectile speed.
-    marks:
-    - gamefile:items/item_harpoon#attribs
-    - gamefile:items/item_harpoon#mechanics
-  - text: Its maximum distance is 1000 and minimum distance is 100.
-    marks:
-    - gamefile:items/item_harpoon#attribs
-    - gamefile:items/item_harpoon#mechanics
-  - text: Its pull distance percentage is 35% and pull duration is 0.3.
-    marks:
-    - gamefile:items/item_harpoon#attribs
-    - gamefile:items/item_harpoon#mechanics
-  - text: Its push length is 600.
-    marks:
-    - gamefile:items/item_harpoon#attribs
-    - gamefile:items/item_harpoon#mechanics
-  - text: Echo Strike's first strike applies a 100% movement slow for 1.0.
-    marks:
-    - gamefile:items/item_harpoon#attribs
-    - gamefile:items/item_harpoon#mechanics
     - loc:DOTA_Tooltip_Ability_item_harpoon_Description
   - text: Echo Strike has a passive cooldown of 5.
     marks:
-    - gamefile:items/item_harpoon#attribs
     - gamefile:items/item_harpoon#mechanics
+  - text: A perfect solution for the flight of foes.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_harpoon_Lore
 ---
 
 # Harpoon

@@ -5,19 +5,20 @@ patch: 7.41d
 card:
   entity: helm_of_iron_will
   sentences:
-  - text: Helm of Iron Will is a 975-gold component item that provides 4 armor and
-      4 health regeneration.
+  - text: Helm of Iron Will is a 975-gold passive component item that provides 4 armor
+      and 4 health regeneration.
     marks:
     - gamefile:items/item_helm_of_iron_will#cost
     - gamefile:items/item_helm_of_iron_will#attribs
-  - text: Its behavior is passive.
-    marks:
     - gamefile:items/item_helm_of_iron_will#mechanics
-  - text: Its build formula lists Helm of Iron Will at 975 gold, and it builds into
-      Armlet of Mordiggian, Crimson Guard, and Helm of the Dominator.
+  - text: Its build formula is Helm of Iron Will (975 gold); it builds into Armlet
+      of Mordiggian, Crimson Guard, and Helm of the Dominator.
     marks:
     - gamefile:items/item_helm_of_iron_will#cost
     - gamefile:items/item_helm_of_iron_will#components
+  - text: The helmet of a legendary warrior who fell in battle.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_helm_of_iron_will_Lore
 ---
 
 # Helm of Iron Will

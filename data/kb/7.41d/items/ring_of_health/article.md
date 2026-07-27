@@ -14,6 +14,9 @@ card:
   - text: It builds into Heaven's Halberd, Perseverance, and Vanguard.
     marks:
     - gamefile:items/item_ring_of_health#components
+  - text: A shiny ring found beneath a fat halfling's corpse.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ring_of_health_Lore
 ---
 
 # Ring of Health

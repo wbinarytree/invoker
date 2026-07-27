@@ -5,7 +5,7 @@
   "title": "Mantle of Intelligence",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3c49a1ed136029820d33d32984e3df66130fdbd773bad39a883b892b71d3f18e",
+  "article_sha256": "d9314bcc1f40bbc43b0e41580dbb0b759b2c71fa416c9260ae70a250aab3fb73",
   "citations": [
     "gamefile:items/item_mantle#cost",
     "gamefile:items/item_mantle#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b37af3b725f0cc2e31554940948155d0c106ef908c290284282354a069d04f25",
-    "input_tokens": 14218,
-    "output_tokens": 501,
+    "prompt_version": "7",
+    "request_sha256": "0d7d4f5d9c0d5d8ede106ac72594aeae1fb42cc2c07602f190fbef7e582ce573",
+    "input_tokens": 13843,
+    "output_tokens": 559,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:25.523949+00:00"
+    "generated_at": "2026-07-27T12:13:39.131014+00:00"
   }
 }

@@ -6,29 +6,45 @@ card:
   entity: abyssal_blade
   sentences:
   - text: Abyssal Blade is an epic item costing 6250 gold that grants 35 Damage, 26
-      Strength, 16% Health Restoration, and 30 Slow Resistance; its active Overwhelm
-      costs 75 mana, has 35 Cooldown and 150 Cast range, and stuns a target enemy
-      for 1.6 while piercing Debuff Immunity, while its passive Bash has a 25% melee
-      or 10% ranged chance to stun for 1.2 and deal 120 bonus physical damage, with
-      2.3 Cooldown.
+      Strength, 16% Health Restoration, and 30 Slow Resistance, with active Overwhelm
+      and passive Bash.
     marks:
     - gamefile:items/item_abyssal_blade#cost
     - gamefile:items/item_abyssal_blade#attribs
-    - gamefile:items/item_abyssal_blade#mechanics
     - loc:DOTA_Tooltip_ability_item_abyssal_blade_Description
-  - text: Abyssal Blade is built from Skull Basher for 2875 gold, Sange for 2100 gold,
-      and a Recipe costing 1275 gold.
+  - text: It is built from Skull Basher (2875 gold) and Sange (2100 gold), plus a
+      Recipe (1275 gold).
     marks:
     - gamefile:items/item_abyssal_blade#components
-  - text: Overwhelm has Unit Target behavior.
+    - gamefile:items/item_abyssal_blade#cost
+  - text: Bash Chance is 25% for melee heroes and 10% for ranged heroes.
+    marks:
+    - gamefile:items/item_abyssal_blade#attribs
+  - text: Bash has a 2.3 cooldown.
+    marks:
+    - gamefile:items/item_abyssal_blade#attribs
+  - text: Bash can trigger when melee or ranged heroes hit, stunning the target for
+      1.2 and dealing 120 bonus physical damage.
+    marks:
+    - gamefile:items/item_abyssal_blade#attribs
+    - loc:DOTA_Tooltip_ability_item_abyssal_blade_Description
+  - text: Overwhelm is Unit Target and has 150 cast range.
     marks:
     - gamefile:items/item_abyssal_blade#mechanics
+  - text: Overwhelm has a 75 mana cost and a 35 cooldown.
+    marks:
+    - gamefile:items/item_abyssal_blade#mechanics
+  - text: Overwhelm stuns a target enemy unit for 1.6 and pierces Debuff Immunity.
+    marks:
+    - gamefile:items/item_abyssal_blade#attribs
+    - loc:DOTA_Tooltip_ability_item_abyssal_blade_Description
   - text: Overwhelm is dispellable by Strong Dispels Only.
     marks:
     - gamefile:items/item_abyssal_blade#mechanics
-  - text: Bash can trigger when melee or ranged heroes hit.
+  - text: The lost blade of the Commander of the Abyss, this edge cuts into an enemy's
+      soul.
     marks:
-    - loc:DOTA_Tooltip_ability_item_abyssal_blade_Description
+    - loc:DOTA_Tooltip_ability_item_abyssal_blade_Lore
 ---
 
 # Abyssal Blade

@@ -5,7 +5,7 @@
   "title": "Circlet",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "81b8842a5b11f7945c7bc9550597b1fe4572ffd3a0cf27d46f117d2da7b0deaf",
+  "article_sha256": "1b465567a8f4811252040a81b10d5d4cd6343e1b119f9fa7991a7dee5bc61e3f",
   "citations": [
     "gamefile:items/item_circlet#cost",
     "gamefile:items/item_circlet#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "e5c1525c336ac4fac093c2f86960e6bd640d95ae6819bb4887e99eba8065a703",
-    "input_tokens": 14256,
-    "output_tokens": 507,
+    "prompt_version": "7",
+    "request_sha256": "d458c6e9442dd167ddb7b535ca9713c1d2de005fb9c17e7ea1ec1758d0654303",
+    "input_tokens": 13887,
+    "output_tokens": 489,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:35.899606+00:00"
+    "generated_at": "2026-07-27T12:08:18.190790+00:00"
   }
 }

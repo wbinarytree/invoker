@@ -5,13 +5,18 @@ patch: 7.41d
 card:
   entity: possessed_mask
   sentences:
-  - text: Possessed Mask is a 0-gold item with 5 Lifesteal and 0 Primary Attribute
-      whose passive heals the attacker for 5 HP per attack.
+  - text: Possessed Mask is a Passive item costing 0 gold that provides 5 Lifesteal
+      and 0 Primary Attribute, with its Lifesteal healing the attacker for 5 HP on
+      each attack.
     marks:
     - gamefile:items/item_possessed_mask#cost
     - gamefile:items/item_possessed_mask#attribs
     - gamefile:items/item_possessed_mask#mechanics
     - loc:DOTA_Tooltip_Ability_item_possessed_mask_Description
+  - text: Even when discarded with specific purpose and great care, this frightening
+      mask always finds its way onto the face of a new owner.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_possessed_mask_Lore
 ---
 
 # Possessed Mask

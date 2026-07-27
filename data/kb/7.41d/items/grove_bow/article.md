@@ -5,14 +5,20 @@ patch: 7.41d
 card:
   entity: grove_bow
   sentences:
-  - text: Grove Bow is a passive item costing 0 gold whose Magic Amp reduces the attacked
-      enemy's magic resistance; it has 20% Magic Resistance Reduction, 6 Debuff Duration,
-      0 Attack Range Bonus, and 0 Attack Speed Bonus.
+  - text: Grove Bow is a 0-gold item with Attack Range Bonus 0, Attack Speed Bonus
+      0, Debuff Duration 6, and Magic Resistance Reduction 20%; its Magic Amp passive
+      reduces the attacked enemy's magic resistance.
     marks:
     - gamefile:items/item_grove_bow#attribs
     - gamefile:items/item_grove_bow#cost
-    - gamefile:items/item_grove_bow#mechanics
     - loc:DOTA_Tooltip_ability_item_grove_bow_Description
+  - text: Grove Bow is passive.
+    marks:
+    - gamefile:items/item_grove_bow#mechanics
+  - text: “A gift from the moon goddess to one of her prized disciples many memories
+      ago.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_grove_bow_Lore
 ---
 
 # Grove Bow

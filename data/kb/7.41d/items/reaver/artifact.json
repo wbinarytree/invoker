@@ -5,7 +5,7 @@
   "title": "Reaver",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "b7d9bbe071173381a37de854816ecf83c0b88b86bf78305063ae513ba1a3c350",
+  "article_sha256": "b664276201d57d2b5211b1e1ab005dcb98951e88ffef257f5fe51c8bf0843789",
   "citations": [
     "gamefile:items/item_reaver#cost",
     "gamefile:items/item_reaver#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "bade2b697dbc42ba28bac7825abbd80e18851c7089f32c04b087a170896e8cc1",
-    "input_tokens": 14227,
-    "output_tokens": 383,
+    "prompt_version": "7",
+    "request_sha256": "6b1e6de58c2faffb315661add2a33078ba08e9b6c750a6ec6bd8750a8c747fce",
+    "input_tokens": 13852,
+    "output_tokens": 245,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:04.736477+00:00"
+    "generated_at": "2026-07-27T12:15:41.221659+00:00"
   }
 }

@@ -5,25 +5,27 @@ patch: 7.41d
 card:
   entity: arcane_boots
   sentences:
-  - text: Arcane Boots is a rare 1500-gold item that grants 125 mana, 45 movement
-      speed, and 0.25 mana regeneration; its 1200-radius Basilius Aura grants allies
-      1 mana regeneration, while Replenish restores 150 mana to nearby allies within
-      a 1200 radius.
+  - text: Arcane Boots is a rare 1500-gold item that grants 125 Mana, 45 Movement
+      Speed, and 0.25 Mana Regeneration; its Basilius Aura grants allies 1 mana regeneration
+      within 1200 radius, and Replenish restores 150 mana to allies within 1200 radius.
     marks:
     - gamefile:items/item_arcane_boots#cost
     - gamefile:items/item_arcane_boots#attribs
     - loc:DOTA_Tooltip_ability_item_arcane_boots_Description
-  - text: Its build formula is Boots of Speed (500 gold), Ring of Basilius (425 gold),
-      Wizard Hat (250 gold), and a 325-gold recipe; it builds into Guardian Greaves.
+  - text: It is built from Boots of Speed for 500 gold, Ring of Basilius for 425 gold,
+      Wizard Hat for 250 gold, and a 325-gold recipe, and builds into Guardian Greaves.
     marks:
     - gamefile:items/item_arcane_boots#components
-  - text: Replenish is an immediate, no-target active with 0 mana cost and a 55.0-second
+  - text: Replenish has Immediate, No Target behavior, costs 0 mana, and has a 55.0-second
       cooldown.
     marks:
     - gamefile:items/item_arcane_boots#mechanics
   - text: Movement speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_arcane_boots_Description
+  - text: Magi equipped with these boots are valued in battle.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_arcane_boots_Lore
 ---
 
 # Arcane Boots

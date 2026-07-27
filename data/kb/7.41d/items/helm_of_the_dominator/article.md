@@ -6,23 +6,20 @@ card:
   entity: helm_of_the_dominator
   sentences:
   - text: Helm of the Dominator is a 2550-gold artifact item granting 6 Armor, 6 Health
-      Regeneration, and 6 All Attributes; Dominate controls up to 1 neutral, non-ancient
-      unit at 700 cast range for 50 mana with a 45.0-second cooldown.
+      Regeneration, and 6 All Attributes; its 700-range Dominate costs 50 mana, has
+      a 45.0-second cooldown, and controls 1 neutral non-ancient unit with 370 Movement
+      Speed, at least 1000 Max Health, 25 Base Attack Damage, 12 Health Regeneration,
+      4 Mana Regeneration, and 4 Armor.
     marks:
     - gamefile:items/item_helm_of_the_dominator#cost
     - gamefile:items/item_helm_of_the_dominator#attribs
     - gamefile:items/item_helm_of_the_dominator#mechanics
     - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description
-  - text: Dominate has Unit Target and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK behavior.
+  - text: Dominate is Unit Target and has DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK
+      behavior.
     marks:
     - gamefile:items/item_helm_of_the_dominator#mechanics
-  - text: Dominate applies 370 base Movement Speed, a minimum of 1000 Max Health,
-      25 bonus Base Attack Damage, 12 bonus Health Regeneration, 4 bonus Mana Regeneration,
-      and 4 bonus Armor.
-    marks:
-    - gamefile:items/item_helm_of_the_dominator#attribs
-    - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description
-  - text: A dominated unit already exceeding 1000 Max Health retains its original
+  - text: A dominated unit whose Max Health already exceeds 1000 retains its original
       Max Health.
     marks:
     - gamefile:items/item_helm_of_the_dominator#attribs
@@ -35,18 +32,22 @@ card:
     marks:
     - gamefile:items/item_helm_of_the_dominator#attribs
     - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description
-  - text: The dominated unit cannot be killed by abilities that instantly kill creeps.
+  - text: The dominated unit cannot be killed by abilities that otherwise instantly
+      kill creeps.
     marks:
     - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description
-  - text: After the dominated unit takes damage from an enemy hero or Roshan, the
-      Helm is unavailable for 3 seconds.
+  - text: Enemy-hero or Roshan damage to the dominated unit makes the Helm unavailable
+      for 3 seconds.
     marks:
     - gamefile:items/item_helm_of_the_dominator#attribs
     - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description
-  - text: Its build formula is Helm of Iron Will (975 gold) + Crown (450 gold) + Recipe
-      (1125 gold); it builds into Helm of the Overlord.
+  - text: Its build formula is Helm of Iron Will for 975 gold, Crown for 450 gold,
+      and a Recipe for 1125 gold; it builds into Helm of the Overlord.
     marks:
     - gamefile:items/item_helm_of_the_dominator#components
+  - text: “The powerful headpiece of a dead necromancer.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Lore
 ---
 
 # Helm of the Dominator

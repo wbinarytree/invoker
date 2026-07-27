@@ -5,7 +5,7 @@
   "title": "Octarine Core",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "529f8983ba4fe21a08e6f2de78269a28505d2df62d6c7af50d2b0319437cae8c",
+  "article_sha256": "fc1c0c383d00705c3f7367dd79ca5d296edace0894f9d248e9c21b02deed7425",
   "citations": [
     "gamefile:items/item_octarine_core#cost",
     "gamefile:items/item_octarine_core#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7b010c925a6a4c2fdd656a5f071ddfe931edae0086efab9784870b9d435ad187",
-    "input_tokens": 14291,
-    "output_tokens": 455,
+    "prompt_version": "7",
+    "request_sha256": "cf54270f5cb79c43500f41dc2bc1abb661da6624cd338b518b7317137c5243a7",
+    "input_tokens": 13918,
+    "output_tokens": 609,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:20.959470+00:00"
+    "generated_at": "2026-07-27T12:14:24.996686+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Bullwhip",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0265f8d69584d5ed293127628ff782d7cf5719732fc22d353feef00b05c8c3df",
+  "article_sha256": "428b00155998830750e7e8640526ae58a9fbb7197125a011d7dab58cad91f455",
   "citations": [
     "loc:DOTA_Tooltip_ability_item_bullwhip_Description",
     "gamefile:items/item_bullwhip#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a3b29eef680ad4c26bbf00ff4e1357868c3043652588e14c15149a995479818a",
-    "input_tokens": 14292,
-    "output_tokens": 601,
+    "prompt_version": "7",
+    "request_sha256": "9cabeb51014485811fa3930b57e90d3a748b7eaf04995db592e74257ba3f45a7",
+    "input_tokens": 13923,
+    "output_tokens": 899,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:03.077402+00:00"
+    "generated_at": "2026-07-27T12:08:19.761728+00:00"
   }
 }

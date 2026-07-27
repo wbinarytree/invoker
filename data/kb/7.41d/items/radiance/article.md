@@ -7,36 +7,38 @@ card:
   sentences:
   - text: Radiance is an epic 4700-gold item granting 55 Damage and 25% Evasion; its
       toggleable Burn deals 60 magical damage per second within 650 radius, or 35
-      for illusions.
+      damage per second when emitted by illusions.
     marks:
     - gamefile:items/item_radiance#cost
     - gamefile:items/item_radiance#attribs
     - loc:DOTA_Tooltip_ability_item_radiance_Description
-  - text: It is built from Sacred Relic (3400 gold) and Talisman of Evasion (1300
-      gold).
+  - text: Its build formula is Sacred Relic (3400 gold) + Talisman of Evasion (1300
+      gold) = Radiance (4700 gold).
     marks:
     - gamefile:items/item_radiance#components
+    - gamefile:items/item_radiance#cost
   - text: Burn is a no-target toggle.
     marks:
     - gamefile:items/item_radiance#mechanics
   - text: Burn does not proc other abilities.
     marks:
     - gamefile:items/item_radiance#mechanics
-  - text: Burn ignores channeling.
+  - text: Burn ignores channeling and invisibility.
     marks:
     - gamefile:items/item_radiance#mechanics
-  - text: Burn ignores invisibility.
-    marks:
-    - gamefile:items/item_radiance#mechanics
-  - text: Its BLIND PCT is 0.
+  - text: BLIND PCT is 0.
     marks:
     - gamefile:items/item_radiance#attribs
-  - text: Its ILLUSION MULTIPLIER PCT is 100.
+  - text: ILLUSION MULTIPLIER PCT is 100.
     marks:
     - gamefile:items/item_radiance#attribs
-  - text: Its UPGRADE DAY VISION is 250.
+  - text: UPGRADE DAY VISION is 250.
     marks:
     - gamefile:items/item_radiance#attribs
+  - text: A divine weapon that causes damage and a bright burning effect that lays
+      waste to nearby enemies.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_radiance_Lore
 ---
 
 # Radiance

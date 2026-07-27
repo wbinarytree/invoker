@@ -6,13 +6,17 @@ card:
   entity: quickening_charm
   sentences:
   - text: Quickening Charm is a passive item costing 0 gold that provides 10% Cooldown
-      Reduction, reducing the cooldown time of all spells and items, and 10 Health
-      Regeneration.
+      Reduction and 10 Health Regeneration.
     marks:
     - gamefile:items/item_quickening_charm#mechanics
     - gamefile:items/item_quickening_charm#attribs
     - gamefile:items/item_quickening_charm#cost
+  - text: Cooldown Reduction reduces the cooldown time of all spells and items.
+    marks:
     - loc:DOTA_Tooltip_ability_item_quickening_charm_Description
+  - text: An evergreen amulet of druidic origins.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_quickening_charm_Lore
 ---
 
 # Quickening Charm

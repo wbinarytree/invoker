@@ -5,7 +5,7 @@
   "title": "Seer Stone",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8d20c53cf3bba69e6dccc161c7aca824bf6d00690425af03b0f9ac0e8d34e661",
+  "article_sha256": "89a65d162b7a6d61a251a57993ba2f40e78f6b015253fb7348efc18e5f55fb3b",
   "citations": [
     "gamefile:items/item_seer_stone#attribs",
     "loc:DOTA_Tooltip_ability_item_seer_stone_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "98ac1f981e4ce4db4398e2556becee80301e04664c2651ab7ecfa99b67a4f7fb",
-    "input_tokens": 14309,
-    "output_tokens": 731,
+    "prompt_version": "7",
+    "request_sha256": "d70141b041064802d2e03ffa6e449d1ad9b493a7c959b8754a4f9e79f7682832",
+    "input_tokens": 13938,
+    "output_tokens": 779,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:02.290908+00:00"
+    "generated_at": "2026-07-27T12:16:31.943611+00:00"
   }
 }

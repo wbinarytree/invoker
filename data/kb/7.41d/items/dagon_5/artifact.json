@@ -5,7 +5,7 @@
   "title": "Dagon",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "cafe0b5d8518fb9e5bcaa4dbd38892cdfe30037372dbbcfb2265ec0a78482416",
+  "article_sha256": "17d2b8ba5304d24b94f1508145eaf02332e90c3c09210314f67f5aae3f6c3bad",
   "citations": [
     "gamefile:items/item_dagon_5#cost",
     "gamefile:items/item_dagon_5#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c8efca7f984c932292d8eaf78681adfadd2edfafeca9b791788693d511f708ee",
-    "input_tokens": 14433,
-    "output_tokens": 1128,
+    "prompt_version": "7",
+    "request_sha256": "c22dd9c3fae5e1e72de22410bab475dbb4e164f443edcbaed62e9d57171678e6",
+    "input_tokens": 14062,
+    "output_tokens": 1491,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:56.099798+00:00"
+    "generated_at": "2026-07-27T12:09:28.066755+00:00"
   }
 }

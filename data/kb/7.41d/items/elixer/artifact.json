@@ -5,7 +5,7 @@
   "title": "Elixir",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "a8069ba8478bcccbec99c356c6e562eeea7835977573ca955ce17426e557dfd6",
+  "article_sha256": "1215c6c5b412fad88e312c32ad74db03800e14af3ac5fc8696520bc456898db7",
   "citations": [
     "loc:DOTA_Tooltip_ability_item_elixer_Description",
     "gamefile:items/item_elixer#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "62bdbfe9649b0aa8cb0bfa208a78dbbe20b84f35bf15d01ba6e4c89764f07ee6",
-    "input_tokens": 14256,
-    "output_tokens": 555,
+    "prompt_version": "7",
+    "request_sha256": "8fb7347aa77db75dc33bfa5ef39a4d79499c9dd9329809eb182ba10851047114",
+    "input_tokens": 13887,
+    "output_tokens": 673,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:59:57.323320+00:00"
+    "generated_at": "2026-07-27T12:09:47.643659+00:00"
   }
 }

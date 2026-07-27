@@ -5,7 +5,7 @@
   "title": "Staff of Wizardry",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "79b829a46f0487c09cf0778f320c584d7bebd6c9213f07cb2f9ec5f9dfa07ca2",
+  "article_sha256": "9166c3c984265c68d768aa1fd22d8e48505271a5a20270126773b1cd744acee1",
   "citations": [
     "gamefile:items/item_staff_of_wizardry#cost",
     "gamefile:items/item_staff_of_wizardry#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7b15a6b4bea0e60d3cf7e05d5a91d02a0b1e98455f1006652594feb8ac8006eb",
-    "input_tokens": 14288,
-    "output_tokens": 324,
+    "prompt_version": "7",
+    "request_sha256": "5035105319a46e70b507ee4402b3816bdefd6c6ea688d04c89bfd87f758d826f",
+    "input_tokens": 13921,
+    "output_tokens": 438,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:52.775871+00:00"
+    "generated_at": "2026-07-27T12:17:26.308626+00:00"
   }
 }

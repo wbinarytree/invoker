@@ -5,7 +5,7 @@
   "title": "Diffusal Blade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ea652a318031be5e782f1d3e15b45ada336b7473c1dace2195bc2a8905fda6f5",
+  "article_sha256": "46f0ae037aec3db4c0e9fbaa5d5bf7358d816194f5c2ddee72f4b255d4e33ac5",
   "citations": [
     "gamefile:items/item_diffusal_blade#cost",
     "gamefile:items/item_diffusal_blade#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "bad377bcbdcf8830c258be00e6a6edd0623ab31f1c39879a90f006ff5dfa7e18",
-    "input_tokens": 14471,
-    "output_tokens": 1962,
+    "prompt_version": "7",
+    "request_sha256": "2e7a0233edf14927372f080a14aa7dea93bc69206f97633d0b92ce4063ca5488",
+    "input_tokens": 14525,
+    "output_tokens": 1494,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:39.624825+00:00"
+    "generated_at": "2026-07-27T12:09:45.060419+00:00"
   }
 }

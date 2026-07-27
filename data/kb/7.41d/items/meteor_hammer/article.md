@@ -5,49 +5,38 @@ patch: 7.41d
 card:
   entity: meteor_hammer
   sentences:
-  - text: Meteor Hammer is an epic 2850-gold item granting 6 Agility, 24 Intelligence,
-      6 Strength, 35 Mana Regen Multiplier, and 10 Spell Amp; its 75-mana, 24-second-cooldown
-      active channels for up to 2 seconds, then summons a Magical meteor that impacts
-      a 400-radius area for 130 non-building or 90 building damage, stuns for 0.75
-      seconds, and applies 50 damage per second for 6 seconds plus a 20% non-building
-      slow.
+  - text: Meteor Hammer is an epic item costing 2850 gold that grants 6 Agility, 24
+      Intelligence, 6 Strength, 35 Mana Regen Multiplier, and 10 Spell Amp, and provides
+      a 75-mana active with a 24-second cooldown that channels for 2 seconds before
+      a 400-radius magical meteor strike.
     marks:
     - gamefile:items/item_meteor_hammer#cost
     - gamefile:items/item_meteor_hammer#attribs
     - gamefile:items/item_meteor_hammer#mechanics
     - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description
-  - text: Meteor Hammer builds from Kaya (2100 gold), Crown (450 gold), and a Recipe
-      (300 gold).
+  - text: It is built from Kaya (2100 gold), Crown (450 gold), and a Recipe (300 gold).
     marks:
     - gamefile:items/item_meteor_hammer#components
     - gamefile:items/item_meteor_hammer#cost
-  - text: The active has Point Target, AOE, and Channelled behavior.
+  - text: The active has Point Target, AOE, Channelled behavior and 600 cast range.
     marks:
     - gamefile:items/item_meteor_hammer#mechanics
-  - text: Its cast range is 600.
-    marks:
-    - gamefile:items/item_meteor_hammer#mechanics
-  - text: After a successful channel, the meteor lands in .5 seconds.
+  - text: After a successful channel, the meteor lands after .5 seconds.
     marks:
     - gamefile:items/item_meteor_hammer#attribs
     - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description
-  - text: Impact deals 130 Magical damage to non-building units and 90 Magical damage
-      to buildings.
+  - text: Impact deals 130 magical damage to non-building units and 90 magical damage
+      to buildings, stunning enemies for 0.75 seconds.
     marks:
     - gamefile:items/item_meteor_hammer#attribs
     - gamefile:items/item_meteor_hammer#mechanics
-  - text: Impact stuns enemies for 0.75 seconds.
+    - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description
+  - text: The burn deals 50 damage per second to buildings and non-building units
+      for 6 seconds at 1.0-second intervals.
     marks:
     - gamefile:items/item_meteor_hammer#attribs
     - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description
-  - text: The burn deals 50 damage per second for 6 seconds to enemy units and buildings.
-    marks:
-    - gamefile:items/item_meteor_hammer#attribs
-    - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description
-  - text: Burn damage occurs at 1.0-second intervals.
-    marks:
-    - gamefile:items/item_meteor_hammer#attribs
-  - text: Non-building units are slowed by 20% for the burn duration.
+  - text: Non-building units are slowed by 20% for the 6-second burn duration.
     marks:
     - gamefile:items/item_meteor_hammer#attribs
     - loc:DOTA_Tooltip_ability_item_meteor_hammer_Description

@@ -5,7 +5,7 @@
   "title": "Ascetic's Cap",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "81de263de5e11097742a11c7323be7930c768ccc8c05f3d798542167dfa6a99d",
+  "article_sha256": "0565d4aca17e61bccabcff27f80b0e998f2af6fda767d08b0128370c1575d3cd",
   "citations": [
     "gamefile:items/item_ascetic_cap#cost",
     "loc:DOTA_Tooltip_Ability_item_ascetic_cap_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "be74efeac9c982e52fcadabad4cb0344592053313aaf23054fd419697b3919dc",
-    "input_tokens": 14308,
-    "output_tokens": 623,
+    "prompt_version": "7",
+    "request_sha256": "ce5bc70759908279480db116534c8c62b818f69cd204ff66445a6785cc3949d2",
+    "input_tokens": 13933,
+    "output_tokens": 735,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:10.375505+00:00"
+    "generated_at": "2026-07-27T12:07:04.132346+00:00"
   }
 }

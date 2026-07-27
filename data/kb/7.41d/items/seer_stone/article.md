@@ -6,13 +6,13 @@ card:
   entity: seer_stone
   sentences:
   - text: Seer Stone is a 0-gold item that provides 350 Cast Range, 10 Mana Regeneration,
-      and 350 Vision Bonus and grants Reveal, which reveals a targeted area with 800
-      radius for 6 duration.
+      and 350 Vision Bonus and grants Reveal, an active ability that reveals an 800-radius
+      area for 6 seconds.
     marks:
     - gamefile:items/item_seer_stone#cost
     - gamefile:items/item_seer_stone#attribs
     - loc:DOTA_Tooltip_ability_item_seer_stone_Description
-  - text: Reveal has Point Target, AOE, and Immediate behavior.
+  - text: Reveal has Point Target, AOE, Immediate behavior.
     marks:
     - gamefile:items/item_seer_stone#mechanics
   - text: Reveal has 0 cast range.
@@ -24,6 +24,9 @@ card:
   - text: 'The build formula is Seer Stone cost: 0 gold.'
     marks:
     - gamefile:items/item_seer_stone#cost
+  - text: The curious creation of a wizard who professed to hail from another time.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_seer_stone_Lore
 ---
 
 # Seer Stone

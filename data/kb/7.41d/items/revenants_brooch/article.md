@@ -6,19 +6,22 @@ card:
   entity: revenants_brooch
   sentences:
   - text: Revenant's Brooch is a rare 3300-gold item that grants 35 damage, 30% critical
-      chance, 80% critical multiplier, and 15% spell lifesteal.
+      chance, 80% critical multiplier, and 15% spell lifesteal; its passive Phantom
+      Critical gives each attack a chance to deal additional bonus magic damage based
+      on the attack’s damage.
     marks:
     - gamefile:items/item_revenants_brooch#cost
     - gamefile:items/item_revenants_brooch#attribs
-  - text: Its passive Phantom Critical gives each attack a chance to deal additional
-      bonus magic damage based on the attack’s damage.
-    marks:
     - gamefile:items/item_revenants_brooch#mechanics
     - loc:DOTA_Tooltip_Ability_item_revenants_brooch_Description
-  - text: It is built from Crystalys (2000 gold) and Voodoo Mask (650 gold), with
-      a 650-gold recipe.
+  - text: It is built from Crystalys (2000 gold), Voodoo Mask (650 gold), and a recipe
+      (650 gold).
     marks:
     - gamefile:items/item_revenants_brooch#components
+  - text: The cursed brooch of a fallen guardian who stalks forever between the veil
+      of life and death.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_revenants_brooch_Lore
 ---
 
 # Revenant's Brooch

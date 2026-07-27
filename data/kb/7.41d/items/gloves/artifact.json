@@ -5,7 +5,7 @@
   "title": "Gloves of Haste",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d37b31e50a2eb107c54868a6573c00d15554649a2f013696a8c9cc0ab53280bd",
+  "article_sha256": "b4153b96418360c559de8efcab118855bac378da23c474e8a0a9cdc6b04acb8b",
   "citations": [
     "gamefile:items/item_gloves#cost",
     "gamefile:items/item_gloves#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "a4b5a8d7a3523cb875d20b9791ed0533473ddc0d5e7ba151845abee126d2f620",
-    "input_tokens": 14260,
-    "output_tokens": 357,
+    "prompt_version": "7",
+    "request_sha256": "316552c504b31a95350762e688ad7bc32a61e0db7de01a1ff8ed4c492cbbf6c7",
+    "input_tokens": 13891,
+    "output_tokens": 390,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:01.719093+00:00"
+    "generated_at": "2026-07-27T12:11:15.938211+00:00"
   }
 }

@@ -5,17 +5,21 @@ patch: 7.41d
 card:
   entity: yasha_and_kaya
   sentences:
-  - text: Yasha and Kaya is a passive artifact item costing 4200 gold that provides
-      16 Agility, 20 Attack Speed, 16 Intelligence, 25 Cast Speed Pct, 40 Mana Regen
-      Multiplier, 12 Movement Speed Percent Bonus, 12 Movement Speed Percent Bonus
-      Melee, and 12 Spell Amp.
+  - text: Yasha and Kaya is a 4200-gold artifact item providing 16 Agility, 20 Attack
+      Speed, 16 Intelligence, 25 Cast Speed Pct, 40 Mana Regen Multiplier, 12 Movement
+      Speed Percent Bonus, 12 Movement Speed Percent Bonus Melee, and 12 Spell Amp.
     marks:
     - gamefile:items/item_yasha_and_kaya#cost
     - gamefile:items/item_yasha_and_kaya#attribs
-    - gamefile:items/item_yasha_and_kaya#mechanics
-  - text: It is built from Yasha (2100 gold) and Kaya (2100 gold).
+  - text: Its build formula is Yasha (2100 gold) and Kaya (2100 gold).
     marks:
     - gamefile:items/item_yasha_and_kaya#components
+  - text: Yasha and Kaya is passive.
+    marks:
+    - gamefile:items/item_yasha_and_kaya#mechanics
+  - text: “Yasha and Kaya when paired together share a natural resonance.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_yasha_and_kaya_Lore
 ---
 
 # Yasha and Kaya

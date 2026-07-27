@@ -6,23 +6,18 @@ card:
   entity: ironwood_tree
   sentences:
   - text: Ironwood Tree is a 0-gold item that grants 5 All Attributes and provides
-      Plant Tree with Tree Duration 20.
+      Plant Tree, a Point Target use with 400 cast range, 15.0 cooldown, and 20 Tree
+      Duration.
     marks:
     - gamefile:items/item_ironwood_tree#cost
     - gamefile:items/item_ironwood_tree#attribs
+    - gamefile:items/item_ironwood_tree#mechanics
+  - text: Plant Tree targets the ground to plant a happy little tree.
+    marks:
     - loc:DOTA_Tooltip_ability_item_ironwood_tree_Description
-  - text: Plant Tree targets the ground.
+  - text: “Precious. And hearty as a weed.”
     marks:
-    - loc:DOTA_Tooltip_ability_item_ironwood_tree_Description
-  - text: Plant Tree has Point Target behavior.
-    marks:
-    - gamefile:items/item_ironwood_tree#mechanics
-  - text: Plant Tree has 400 cast range.
-    marks:
-    - gamefile:items/item_ironwood_tree#mechanics
-  - text: Plant Tree has a 15.0 cooldown.
-    marks:
-    - gamefile:items/item_ironwood_tree#mechanics
+    - loc:DOTA_Tooltip_ability_item_ironwood_tree_Lore
 ---
 
 # Ironwood Tree

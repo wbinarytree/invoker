@@ -16,6 +16,9 @@ card:
   - text: Its behavior is Passive.
     marks:
     - gamefile:items/item_fluffy_hat#mechanics
+  - text: Fine and functional foppery for the fashion-forward fighter.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_fluffy_hat_Lore
 ---
 
 # Fluffy Hat

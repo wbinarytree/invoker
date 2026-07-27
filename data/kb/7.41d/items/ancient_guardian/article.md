@@ -8,8 +8,11 @@ card:
   - text: Ancient Guardian is a 0-gold item with 50 Damage whose passive Ancient Power
       grants 50 Extra Bonus Damage while the unit is within 2000 Radius of an ancient.
     marks:
-    - gamefile:items/item_ancient_guardian#cost
     - gamefile:items/item_ancient_guardian#attribs
+    - gamefile:items/item_ancient_guardian#cost
+    - loc:DOTA_Tooltip_ability_item_ancient_guardian_Description
+  - text: Ancient Power is passive.
+    marks:
     - gamefile:items/item_ancient_guardian#mechanics
     - loc:DOTA_Tooltip_ability_item_ancient_guardian_Description
 ---

@@ -5,7 +5,7 @@
   "title": "Magic Stick",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "05bbf604d36819dfbc3e531c089f06d599a6ddd4b7188ed6619c45b24ed353b7",
+  "article_sha256": "53ca74b2d81f7adba47ea86dd1b73ea821b9527cc20bbdd8f1f0d063cddf113f",
   "citations": [
     "gamefile:items/item_magic_stick#cost",
     "loc:DOTA_Tooltip_ability_item_magic_stick_Description",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "184c470d4b919f0f3f6cfaa19f497c2fd5f6e9f92989c746dcf5864932abd068",
-    "input_tokens": 14318,
-    "output_tokens": 644,
+    "prompt_version": "7",
+    "request_sha256": "04cd77275e1baa21358103ec8b6d06088c5f80abaef59765d46e04c34be42e1e",
+    "input_tokens": 13951,
+    "output_tokens": 1009,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:42.765136+00:00"
+    "generated_at": "2026-07-27T12:13:21.840575+00:00"
   }
 }

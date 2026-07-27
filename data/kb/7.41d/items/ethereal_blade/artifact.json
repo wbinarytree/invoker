@@ -5,7 +5,7 @@
   "title": "Ethereal Blade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "154b81d000fa39eb0df36e312d8cb1d4b7956642377190a497a40c3db1a2446f",
+  "article_sha256": "652efc9527143702e17e0286aa9f8b48b84941661c6909c102dbe4ac3c86e044",
   "citations": [
     "gamefile:items/item_ethereal_blade#cost",
     "gamefile:items/item_ethereal_blade#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "1d65560e707469501b73b56c35f22ca8e56ca801866ad8c20ef278cce20ae560",
-    "input_tokens": 14530,
-    "output_tokens": 1435,
+    "prompt_version": "7",
+    "request_sha256": "70e8b3eb39cfa5661546a6ced3ef470882fe2952b440d9a73b13746f501af0ec",
+    "input_tokens": 14159,
+    "output_tokens": 2269,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:00.659748+00:00"
+    "generated_at": "2026-07-27T12:11:10.747801+00:00"
   }
 }

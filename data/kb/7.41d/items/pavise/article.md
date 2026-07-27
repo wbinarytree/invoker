@@ -5,20 +5,25 @@ patch: 7.41d
 card:
   entity: pavise
   sentences:
-  - text: Pavise is a rare item costing 1350 gold that grants 3 Armor, 175 Health,
-      and 175 Mana; its Protect active grants an allied target a 250-point physical
-      damage barrier for 7 seconds.
+  - text: Pavise is a rare 1350-gold item that grants 3 Armor, 175 Health, and 175
+      Mana, while Protect grants an allied target a 250-point physical damage barrier
+      for 7 seconds.
     marks:
     - gamefile:items/item_pavise#cost
     - gamefile:items/item_pavise#attribs
     - loc:DOTA_Tooltip_ability_item_pavise_Description
-  - text: Protect has Unit Target and Immediate behavior.
+  - text: It is built from Wizard Hat for 250 gold, Fluffy Hat for 250 gold, Ring
+      of Protection for 175 gold, and a recipe for 675 gold, and builds into Solar
+      Crest.
+    marks:
+    - gamefile:items/item_pavise#components
+  - text: Protect is unit-targeted and immediate.
     marks:
     - gamefile:items/item_pavise#mechanics
   - text: Protect is dispellable.
     marks:
     - gamefile:items/item_pavise#mechanics
-  - text: Protect has a cast range of 1000.
+  - text: Protect has 1000 cast range.
     marks:
     - gamefile:items/item_pavise#mechanics
   - text: Protect costs 60 Mana.
@@ -27,10 +32,9 @@ card:
   - text: Protect has a 16.0-second cooldown.
     marks:
     - gamefile:items/item_pavise#mechanics
-  - text: Pavise requires Wizard Hat for 250 gold, Fluffy Hat for 250 gold, Ring of
-      Protection for 175 gold, and a Recipe for 675 gold; it builds into Solar Crest.
+  - text: “Devised by a wizard who made one too many enemies.”
     marks:
-    - gamefile:items/item_pavise#components
+    - loc:DOTA_Tooltip_ability_item_pavise_Lore
 ---
 
 # Pavise

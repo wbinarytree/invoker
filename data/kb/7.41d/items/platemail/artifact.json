@@ -5,7 +5,7 @@
   "title": "Platemail",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "7555b69c0ffd41594fff6578cff40b92a7b0d3268f295886ff30b4d6b004cd9b",
+  "article_sha256": "3d780eca72029b4c76440ae707a67c5a20aae5a8327ddade71a206822c088e30",
   "citations": [
     "gamefile:items/item_platemail#cost",
     "gamefile:items/item_platemail#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5eeb3368da2a0b4b32ee1e274e7b445e9cf835a41e16607b177045298bcf534d",
-    "input_tokens": 14255,
-    "output_tokens": 289,
+    "prompt_version": "7",
+    "request_sha256": "c9f27c2443856f429996d0d7801c714bb04c6a31b9e0892a810bf83c2583189f",
+    "input_tokens": 13884,
+    "output_tokens": 350,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:44.843338+00:00"
+    "generated_at": "2026-07-27T12:15:13.392068+00:00"
   }
 }

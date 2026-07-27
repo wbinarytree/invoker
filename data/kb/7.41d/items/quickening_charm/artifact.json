@@ -5,7 +5,7 @@
   "title": "Quickening Charm",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "d05099845549be0b1951726fa3a182eb6b338193aecbaa664553af77225dfa5d",
+  "article_sha256": "682c438a1701339205f6bfc8b653a18f1834a6b865715f2ae277324c3c6e3111",
   "citations": [
     "gamefile:items/item_quickening_charm#mechanics",
     "gamefile:items/item_quickening_charm#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "462782ad4df71b1b52b16d1d7491239a839674094aff773e89a9d722c4e2560a",
-    "input_tokens": 14234,
-    "output_tokens": 299,
+    "prompt_version": "7",
+    "request_sha256": "0f6b872dfbb7dd8f9e94ed42659ce9059348f6472fe68b81326d0acc285855aa",
+    "input_tokens": 13861,
+    "output_tokens": 314,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:12:32.216100+00:00"
+    "generated_at": "2026-07-27T12:15:31.422451+00:00"
   }
 }

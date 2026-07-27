@@ -7,7 +7,7 @@ card:
   sentences:
   - text: Ring of Aquila is an item that grants 9 Agility, 3 Damage, 3 Intelligence,
       and 3 Strength, while Aquila Aura grants nearby allies 2 Armor and 1 Mana Regeneration
-      in a 1200 radius.
+      within a 1200 radius.
     marks:
     - gamefile:items/item_ring_of_aquila#attribs
     - loc:DOTA_Tooltip_ability_item_ring_of_aquila_Description
@@ -23,6 +23,9 @@ card:
   - text: Deactivating Aquila Aura stops it from affecting non-hero units.
     marks:
     - loc:DOTA_Tooltip_ability_item_ring_of_aquila_Description
+  - text: The ring of the fallen Warlord Aquila continues to support armies in battle.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_ring_of_aquila_Lore
 ---
 
 # Ring of Aquila

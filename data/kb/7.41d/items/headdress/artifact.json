@@ -5,7 +5,7 @@
   "title": "Headdress",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8ea188305596c41c379a99e36efed267520b4391edd7a025c0ad1bc5ffa69c38",
+  "article_sha256": "61075f625fb3f7c63155589824692376c8386d5543b2c2df7c53b5bd3a71bdd0",
   "citations": [
     "gamefile:items/item_headdress#cost",
     "gamefile:items/item_headdress#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "187ecf28d43ac733d21aba70d651bfcea3a4fd9473cf7ed8a0be0599ee928d87",
-    "input_tokens": 14364,
-    "output_tokens": 636,
+    "prompt_version": "7",
+    "request_sha256": "836cec5b780c11a30cdbfc49cfdfc297bd5a767543fae52d29bca7aa995f68e3",
+    "input_tokens": 13993,
+    "output_tokens": 483,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:32.252991+00:00"
+    "generated_at": "2026-07-27T12:11:45.054716+00:00"
   }
 }

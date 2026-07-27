@@ -5,25 +5,30 @@ patch: 7.41d
 card:
   entity: moon_shard
   sentences:
-  - text: Moon Shard is a 4000-gold consumable item that grants 140 attack speed and
-      400 bonus night vision, while Consume permanently grants 60 attack speed and
-      200 bonus night vision.
+  - text: Moon Shard is a 4000-gold consumable item that grants 140 Attack Speed and
+      400 Bonus Night Vision, while Consume permanently grants 60 Attack Speed and
+      200 Bonus Night Vision.
     marks:
     - gamefile:items/item_moon_shard#cost
     - gamefile:items/item_moon_shard#attribs
     - loc:DOTA_Tooltip_ability_item_moon_shard_Description
-  - text: Its build formula is Hyperstone (2000 gold) plus Hyperstone (2000 gold).
+  - text: It is built from Hyperstone (2000 gold) and Hyperstone (2000 gold), for
+      a total cost of 4000 gold.
     marks:
     - gamefile:items/item_moon_shard#components
+    - gamefile:items/item_moon_shard#cost
   - text: Moon Shard has Unit Target and Immediate behavior.
     marks:
     - gamefile:items/item_moon_shard#mechanics
-  - text: Consume is limited to one use.
+  - text: Consume permanently applies its consumed bonuses and is limited to one use.
     marks:
     - loc:DOTA_Tooltip_ability_item_moon_shard_Description
   - text: Shade Sight passively grants bonus night vision.
     marks:
     - loc:DOTA_Tooltip_ability_item_moon_shard_Description
+  - text: Said to be a tear from the lunar goddess Selemene.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_moon_shard_Lore
 ---
 
 # Moon Shard

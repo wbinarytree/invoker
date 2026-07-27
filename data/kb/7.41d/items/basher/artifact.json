@@ -5,7 +5,7 @@
   "title": "Skull Basher",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "11518fef4ddc866be10aca651976896d0c12026765d5141bd7e1e7f8b7648851",
+  "article_sha256": "091071a52812367758f4031f727699df3b6d958a3b8588ad1fff5af19e244079",
   "citations": [
     "gamefile:items/item_basher#cost",
     "gamefile:items/item_basher#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f710169359dfab8f660727403d265913606418b1b24f694909f76b3e57f8e2cc",
-    "input_tokens": 14423,
-    "output_tokens": 586,
+    "prompt_version": "7",
+    "request_sha256": "e317f2be670573c46557bb8e2d4ea51ac26e701592c159fd5eeb988988c11bef",
+    "input_tokens": 14054,
+    "output_tokens": 1155,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:53.016145+00:00"
+    "generated_at": "2026-07-27T12:07:28.710494+00:00"
   }
 }

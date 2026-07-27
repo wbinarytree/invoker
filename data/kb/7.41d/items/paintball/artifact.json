@@ -5,7 +5,7 @@
   "title": "Fae Grenade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "5b33ee790a75fc4b272eaeb1997a6880f2d9719fd3b06935a7eb8c2e9356bdac",
+  "article_sha256": "4386e6ee86384872e37cef7cbf7ac24b1043128a58e98662da45e7affe6cc55c",
   "citations": [
     "gamefile:items/item_paintball#attribs",
     "loc:DOTA_Tooltip_Ability_item_paintball_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c4af64526667f42890bfac232e3b8a7dee87563933edc61e8b0d38d6c364c325",
-    "input_tokens": 14357,
-    "output_tokens": 656,
+    "prompt_version": "7",
+    "request_sha256": "b5f798a13c0c8e37f7a506019d79bd4f649d5dea2e7e081232785108fac4e135",
+    "input_tokens": 13990,
+    "output_tokens": 795,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:57.456014+00:00"
+    "generated_at": "2026-07-27T12:14:52.530052+00:00"
   }
 }

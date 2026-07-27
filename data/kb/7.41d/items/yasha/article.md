@@ -11,13 +11,18 @@ card:
     - gamefile:items/item_yasha#cost
     - gamefile:items/item_yasha#attribs
   - text: Its build formula is Blade of Alacrity (1000 gold), Band of Elvenskin (450
-      gold), and Recipe (650 gold); it builds into Manta Style, Sange and Yasha, Trident,
-      and Yasha and Kaya.
+      gold), and Recipe (650 gold).
+    marks:
+    - gamefile:items/item_yasha#components
+  - text: It builds into Manta Style, Sange and Yasha, Trident, and Yasha and Kaya.
     marks:
     - gamefile:items/item_yasha#components
   - text: Yasha is passive.
     marks:
     - gamefile:items/item_yasha#mechanics
+  - text: Yasha is regarded as the swiftest weapon ever created.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_yasha_Lore
 ---
 
 # Yasha

@@ -11,6 +11,10 @@ card:
     - gamefile:items/item_eye_of_the_vizier#cost
     - gamefile:items/item_eye_of_the_vizier#mechanics
     - gamefile:items/item_eye_of_the_vizier#attribs
+  - text: The ring of a cunning court mage who imprisoned a cadre of enemies to serve
+      as his personal mana reserve.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_eye_of_the_vizier_Lore
 ---
 
 # Eye of the Vizier

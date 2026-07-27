@@ -5,19 +5,23 @@ patch: 7.41d
 card:
   entity: fusion_rune
   sentences:
-  - text: Fusion Rune is a 0-gold consumable item that targets a unit within 250 range
-      and grants the bonuses of every Power Rune for 50 seconds, with a 120.0-second
-      cooldown.
+  - text: Fusion Rune is a 0-gold consumable item that grants its target the bonuses
+      of every Power Rune for a duration of 50.
     marks:
     - gamefile:items/item_fusion_rune#cost
     - loc:DOTA_Tooltip_ability_item_fusion_rune_Description
     - gamefile:items/item_fusion_rune#attribs
-    - gamefile:items/item_fusion_rune#mechanics
-  - text: Its cast is Immediate and has DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK and
-      DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE.
+  - text: Its behavior is Unit Target, Immediate, DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK,
+      and DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE.
     marks:
     - gamefile:items/item_fusion_rune#mechanics
-  - text: Each use consumes a charge.
+  - text: Its cast range is 250.
+    marks:
+    - gamefile:items/item_fusion_rune#mechanics
+  - text: Its cooldown is 120.0.
+    marks:
+    - gamefile:items/item_fusion_rune#mechanics
+  - text: 'Use: Consume; each use consumes a charge.'
     marks:
     - loc:DOTA_Tooltip_ability_item_fusion_rune_Description
 ---

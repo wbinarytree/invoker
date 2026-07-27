@@ -5,7 +5,7 @@
   "title": "Woodland Striders",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "10714e71e5cd9448efa68d73dbd00f9d6552ecf0ce349dc6b38408fdee21fb32",
+  "article_sha256": "a2302fe77e24cc8110c58f98e10bb5a764f5234249b4a1540b672c06cb229ada",
   "citations": [
     "gamefile:items/item_woodland_striders#attribs",
     "loc:DOTA_Tooltip_Ability_item_woodland_striders_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f501832711e01e477c6b7f46a29e45b2bd31d7623cd262d6da285f493a23f00e",
-    "input_tokens": 14332,
-    "output_tokens": 573,
+    "prompt_version": "7",
+    "request_sha256": "01771d438cdd2d33135e935be9a11ed40b6290bde051b049e8a6a114509e019b",
+    "input_tokens": 13974,
+    "output_tokens": 901,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:30.614441+00:00"
+    "generated_at": "2026-07-27T12:19:29.273632+00:00"
   }
 }

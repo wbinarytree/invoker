@@ -10,7 +10,7 @@ card:
     marks:
     - gamefile:items/item_point_booster#cost
     - gamefile:items/item_point_booster#attribs
-  - text: 'Build formula: Point Booster — 1200 gold; builds into Dagon, Gleipnir,
+  - text: 'Build formula: Point Booster (1200 gold); builds into Dagon, Gleipnir,
       Soul Booster, Aghanim''s Scepter, and Wraith Pact.'
     marks:
     - gamefile:items/item_point_booster#cost
@@ -18,6 +18,9 @@ card:
   - text: Point Booster is passive.
     marks:
     - gamefile:items/item_point_booster#mechanics
+  - text: A perfectly formed amethyst that nourishes body and mind when held.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_point_booster_Lore
 ---
 
 # Point Booster

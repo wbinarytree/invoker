@@ -5,17 +5,14 @@ patch: 7.41d
 card:
   entity: mango_tree
   sentences:
-  - text: Mango Tree is a consumable point-target item with 200 cast range that plants
-      a mango tree, generates Enchanted Mangoes at a listed interval of 60 seconds,
-      and provides unobstructed vision in the area.
+  - text: Mango Tree is a consumable point-target item whose Plant a Mango Tree ability
+      targets ground within 200 cast range to plant a tree that generates Enchanted
+      Mangoes every 60 seconds and provides unobstructed vision in the area.
     marks:
     - gamefile:items/item_mango_tree#cost
-    - gamefile:items/item_mango_tree#mechanics
+    - loc:DOTA_Tooltip_ability_item_mango_tree_Description
     - gamefile:items/item_mango_tree#attribs
-    - loc:DOTA_Tooltip_ability_item_mango_tree_Description
-  - text: The item targets the ground to plant the tree.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_mango_tree_Description
+    - gamefile:items/item_mango_tree#mechanics
   - text: The tree provides unlimited mango power.
     marks:
     - loc:DOTA_Tooltip_ability_item_mango_tree_Description

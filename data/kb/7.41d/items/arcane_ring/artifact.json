@@ -5,7 +5,7 @@
   "title": "Arcane Ring",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "13a5cbe2e11c2946fdbab2f6e00c79a2493c4fdeb9cbe9f8589d3f555cae48e4",
+  "article_sha256": "34594eeee7d9d39abe23e6b42c85f9d17af5418bd09ed5920ad8b74c369cfead",
   "citations": [
     "gamefile:items/item_arcane_ring#attribs",
     "loc:DOTA_Tooltip_ability_item_arcane_ring_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "05c690297270d640b08062fcceaf6aa14d1693d05b8f1d3504b5d9e158873918",
-    "input_tokens": 14321,
-    "output_tokens": 358,
+    "prompt_version": "7",
+    "request_sha256": "75e48f6d47368d151142f20bc5a42e3252f22df980c55f4bd0e5f057708f89a0",
+    "input_tokens": 13952,
+    "output_tokens": 474,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:50.412066+00:00"
+    "generated_at": "2026-07-27T12:06:57.665334+00:00"
   }
 }

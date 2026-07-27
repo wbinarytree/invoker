@@ -5,22 +5,30 @@ patch: 7.41d
 card:
   entity: witch_blade
   sentences:
-  - text: Witch Blade is a common 2775-gold item granting 5 Armor, 40 Attack Speed,
-      12 Intelligence, and 1.5 Mana Regeneration; its passive gives the next attack
-      True Strike and poison that deals 0.75 times the wielder’s Intelligence as damage
-      every second while slowing by 25% for 4 seconds, with a 9.0-second cooldown.
+  - text: Witch Blade is a 2775-gold common item that grants 5 Armor, 40 Attack Speed,
+      12 Intelligence, and 1.5 Mana Regeneration; its Witch Blade passive gives the
+      next attack True Strike and poison that deals damage every second with a 0.75
+      Int Damage Multiplier and slows by 25% for 4 seconds.
     marks:
     - gamefile:items/item_witch_blade#cost
     - gamefile:items/item_witch_blade#attribs
     - loc:DOTA_Tooltip_ability_item_witch_blade_Description
-    - gamefile:items/item_witch_blade#mechanics
-  - text: Its Projectile Speed value is 300.
+  - text: Projectile Speed is 300.
     marks:
     - gamefile:items/item_witch_blade#attribs
-  - text: It is built from Oblivion Staff (1625 gold), Chainmail (500 gold), Orb of
-      Venom (350 gold), and a Recipe (300 gold), and builds into Parasma.
+  - text: Witch Blade has passive behavior and a 9.0 cooldown.
+    marks:
+    - gamefile:items/item_witch_blade#mechanics
+  - text: The build formula is Oblivion Staff (1625 gold), Chainmail (500 gold), Orb
+      of Venom (350 gold), and a Recipe (300 gold).
     marks:
     - gamefile:items/item_witch_blade#components
+  - text: Witch Blade builds into Parasma.
+    marks:
+    - gamefile:items/item_witch_blade#components
+  - text: A spiteful blade inadvertently possessed by the soul of its incautious creator.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_witch_blade_Lore
 ---
 
 # Witch Blade

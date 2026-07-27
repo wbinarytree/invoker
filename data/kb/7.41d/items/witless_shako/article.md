@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: witless_shako
   sentences:
-  - text: Witless Shako is a passive item costing 0 gold that increases Max Health
-      by 1350 and reduces Max Mana by 400.
+  - text: Witless Shako is a passive item costing 0 gold that increases the wearer’s
+      Max Health by 1350 and reduces their Max Mana by 400.
     marks:
     - gamefile:items/item_witless_shako#cost
     - gamefile:items/item_witless_shako#mechanics

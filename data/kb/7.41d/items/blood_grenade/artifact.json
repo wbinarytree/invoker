@@ -5,7 +5,7 @@
   "title": "Blood Grenade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "965b2074e2b9724f8d89284021a22650812725f3f4fc59fc0fa2b07dac26c49e",
+  "article_sha256": "8fe009ba993aaf225eb97469fd92423d9d42a921c38a092595d3b3e925a249b4",
   "citations": [
     "gamefile:items/item_blood_grenade#cost",
     "gamefile:items/item_blood_grenade#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9a71037a797ab196372a786bf431f07426c10920a230b40334684b7bbadb2b23",
-    "input_tokens": 14401,
-    "output_tokens": 850,
+    "prompt_version": "7",
+    "request_sha256": "f7b88d96de6f7f225984cf68045e86964d5ebc1cbced40d93d56f6b757f46fad",
+    "input_tokens": 14032,
+    "output_tokens": 1277,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:22.675094+00:00"
+    "generated_at": "2026-07-27T12:08:02.863273+00:00"
   }
 }

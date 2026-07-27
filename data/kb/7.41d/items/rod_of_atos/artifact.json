@@ -5,7 +5,7 @@
   "title": "Rod of Atos",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "59158af7ef7890a557f2e433fd3a91d24c0cd0dbe6f9d656d869bd813502eeaf",
+  "article_sha256": "7f0951c314705791b13e33785c44478a36e76a854169fdab560d00d8cc7e7076",
   "citations": [
     "gamefile:items/item_rod_of_atos#cost",
     "gamefile:items/item_rod_of_atos#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "dfd6262f815728e233bec8de805f953140090f9a02f8e6ef34c479343cc06c5f",
-    "input_tokens": 14412,
-    "output_tokens": 784,
+    "prompt_version": "7",
+    "request_sha256": "bf007a6c18b50d80930b9ad1f5afee89177c76ec11b130f76d6c05578ab03ab6",
+    "input_tokens": 14041,
+    "output_tokens": 824,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:28.162597+00:00"
+    "generated_at": "2026-07-27T12:16:24.941121+00:00"
   }
 }

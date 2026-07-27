@@ -11,10 +11,13 @@ card:
     - gamefile:items/item_octarine_core#cost
     - gamefile:items/item_octarine_core#attribs
     - gamefile:items/item_octarine_core#mechanics
-  - text: It is built from Soul Booster (3000 gold), Tiara of Selemene (1700 gold),
-      and a Recipe (200 gold).
+  - text: Its build formula is Soul Booster (3000 gold), Tiara of Selemene (1700 gold),
+      and Recipe (200 gold).
     marks:
     - gamefile:items/item_octarine_core#components
+  - text: “At the core of spellcraft are spectrums only the very gifted can sense.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_octarine_core_Lore
 ---
 
 # Octarine Core

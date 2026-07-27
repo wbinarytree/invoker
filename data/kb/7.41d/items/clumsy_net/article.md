@@ -5,17 +5,17 @@ patch: 7.41d
 card:
   entity: clumsy_net
   sentences:
-  - text: Clumsy Net is a 0-gold item with 0 ALL STATS and 0 MANA REGEN whose Unit
-      Target Ensnare has 600 cast range and 25.0 cooldown and ensnares the targeted
-      enemy and user for 1.75 duration.
+  - text: Clumsy Net is a 0-gold item with Ensnare, a Unit Target active with 600
+      cast range and 25.0 cooldown that ensnares a targeted enemy and the user for
+      1.75 duration.
     marks:
     - gamefile:items/item_clumsy_net#cost
     - gamefile:items/item_clumsy_net#attribs
     - gamefile:items/item_clumsy_net#mechanics
     - loc:DOTA_Tooltip_Ability_item_clumsy_net_Description
-  - text: Ensnare targets an enemy and ensnares both that enemy and the user.
+  - text: It grants 0 ALL STATS and 0 MANA REGEN.
     marks:
-    - loc:DOTA_Tooltip_Ability_item_clumsy_net_Description
+    - gamefile:items/item_clumsy_net#attribs
 ---
 
 # Clumsy Net

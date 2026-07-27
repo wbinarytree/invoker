@@ -5,7 +5,7 @@
   "title": "Wind Waker",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "edced12b92e3b711de603790027d36c2d1bef2bed7296ccd7a78c08a3b5819a5",
+  "article_sha256": "ab74a39c00786700da9db760a9562996360ef56570970f92cd9923fd37746717",
   "citations": [
     "gamefile:items/item_wind_waker#cost",
     "gamefile:items/item_wind_waker#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3bcc6b7de204a29db65718da18b97ba313345aa14426586febaf94c86372acf0",
-    "input_tokens": 14447,
-    "output_tokens": 1452,
+    "prompt_version": "7",
+    "request_sha256": "8ae96a0a18d4749ef092de7b8e620849b725d68cc5ce0528ca7c8896fd80a25e",
+    "input_tokens": 14074,
+    "output_tokens": 1796,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:44.918651+00:00"
+    "generated_at": "2026-07-27T12:19:30.753532+00:00"
   }
 }

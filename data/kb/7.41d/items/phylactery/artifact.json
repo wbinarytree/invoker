@@ -5,7 +5,7 @@
   "title": "Phylactery",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "653a223b73cc01ba6505b83d9a075e23c9fa575f2b6dbe0da4253d39f9d357b7",
+  "article_sha256": "4978daadb90bf62a103fdb2a1200d1d9021174bd4a73786eb942de54949c61e1",
   "citations": [
     "gamefile:items/item_phylactery#cost",
     "gamefile:items/item_phylactery#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ce72bd283d6fd1c990d6983fb90c8a17d3578c43344e3a286b583686785dce73",
-    "input_tokens": 14447,
-    "output_tokens": 1262,
+    "prompt_version": "7",
+    "request_sha256": "43737acbc6f6d0d8820cd62bb550d0e62e1708ce6dc3ed18ba09729c360528b1",
+    "input_tokens": 14074,
+    "output_tokens": 1380,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:13.763091+00:00"
+    "generated_at": "2026-07-27T12:15:31.317409+00:00"
   }
 }

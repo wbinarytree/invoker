@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_feverish
   sentences:
-  - text: Feverish is a passive item enhancement that costs 0 gold and provides 15%
-      Cooldown Reduction and 7 Cost Increase.
+  - text: Feverish is a 0-gold passive item enhancement that provides 15% Cooldown
+      Reduction and 7 Cost Increase.
     marks:
     - gamefile:items/item_enhancement_feverish#cost
     - gamefile:items/item_enhancement_feverish#attribs

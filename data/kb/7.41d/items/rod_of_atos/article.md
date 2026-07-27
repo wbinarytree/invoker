@@ -5,13 +5,13 @@ patch: 7.41d
 card:
   entity: rod_of_atos
   sentences:
-  - text: Rod of Atos is a rare item costing 2250 gold that grants 275 Health and
-      12 Intelligence; its active Cripple roots the target for 2.0 seconds.
+  - text: Rod of Atos is a rare 2250-gold item that grants 275 Health and 12 Intelligence;
+      its active Cripple roots a target for a duration of 2.0.
     marks:
     - gamefile:items/item_rod_of_atos#cost
     - gamefile:items/item_rod_of_atos#attribs
     - loc:DOTA_Tooltip_ability_item_rod_of_atos_Description
-  - text: Cripple is Unit Target.
+  - text: Cripple is unit-targeted.
     marks:
     - gamefile:items/item_rod_of_atos#mechanics
   - text: Cripple is dispellable.
@@ -26,10 +26,14 @@ card:
   - text: Cripple has an 18-second cooldown.
     marks:
     - gamefile:items/item_rod_of_atos#mechanics
-  - text: Rod of Atos is built from Staff of Wizardry (1000 gold), Vitality Booster
-      (1000 gold), and a Recipe (250 gold), and builds into Gleipnir.
+  - text: Rod of Atos requires Staff of Wizardry for 1000 gold, Vitality Booster for
+      1000 gold, and a Recipe for 250 gold; it builds into Gleipnir.
     marks:
     - gamefile:items/item_rod_of_atos#components
+  - text: Atos, the Lord of Blight, has his essence stored in this deceptively simple
+      wand.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_rod_of_atos_Lore
 ---
 
 # Rod of Atos

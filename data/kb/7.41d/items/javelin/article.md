@@ -5,16 +5,21 @@ patch: 7.41d
 card:
   entity: javelin
   sentences:
-  - text: Javelin is a 900-gold component item whose passive Pierce gives each attack
-      a 25% chance to pierce evasion and deal 60 bonus magical damage.
+  - text: Javelin is a 900-gold component item with passive Pierce, which gives each
+      attack a 25% Bonus Chance to pierce evasion and deal 60 Bonus Chance Damage
+      as bonus magical damage.
     marks:
     - gamefile:items/item_javelin#cost
     - gamefile:items/item_javelin#attribs
     - gamefile:items/item_javelin#mechanics
     - loc:DOTA_Tooltip_ability_item_javelin_Description
-  - text: Javelin builds into Bloodthorn, Maelstrom, and Monkey King Bar.
+  - text: It builds into Bloodthorn, Maelstrom, and Monkey King Bar.
     marks:
     - gamefile:items/item_javelin#components
+  - text: A rather typical spear that can sometimes pierce through an enemy's armor
+      when used to attack.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_javelin_Lore
 ---
 
 # Javelin

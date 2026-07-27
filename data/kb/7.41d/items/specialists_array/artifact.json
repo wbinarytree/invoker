@@ -5,7 +5,7 @@
   "title": "Specialist's Array",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4dcaf2254d4f77cc50c5955e0ac260af1d0abd3c6c4807e2a08cc261cda6ec22",
+  "article_sha256": "5654dffd9a192e03f2984571f7a4cf22d5911da7ec10a82cf8da217bdcc96af4",
   "citations": [
     "gamefile:items/item_specialists_array#cost",
     "gamefile:items/item_specialists_array#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2730a3e16005240e577abd231bbcef14077a42c88bd25760ec50c03ce54c64eb",
-    "input_tokens": 14478,
-    "output_tokens": 1636,
+    "prompt_version": "7",
+    "request_sha256": "a7ca32a18b1df0d0d354378732271da70134ec1a175c1e4c0fe4ae6fc6e7a475",
+    "input_tokens": 14107,
+    "output_tokens": 1133,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:14.916952+00:00"
+    "generated_at": "2026-07-27T12:17:22.429681+00:00"
   }
 }

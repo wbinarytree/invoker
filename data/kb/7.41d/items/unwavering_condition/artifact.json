@@ -5,7 +5,7 @@
   "title": "Unwavering Condition",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "70a904c0b7b915263e7a3050fbd78aecefcada59bc248416f968f091fcbc675d",
+  "article_sha256": "e83ed4f63c99152bcf509e963d02323889485375021110a0a6bb74cc886e1464",
   "citations": [
     "gamefile:items/item_unwavering_condition#attribs",
     "loc:DOTA_Tooltip_ability_item_unwavering_condition_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "0bee9dc98f4410a2a07a03ccad258815d3973540ff2728a71268c376e26c27ac",
-    "input_tokens": 14245,
-    "output_tokens": 543,
+    "prompt_version": "7",
+    "request_sha256": "8f1e59d7b46ba8d4a505ca7644b19e8749aad98d70c2992cfd81c0306d217a36",
+    "input_tokens": 13878,
+    "output_tokens": 550,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:40.736514+00:00"
+    "generated_at": "2026-07-27T12:18:31.665330+00:00"
   }
 }

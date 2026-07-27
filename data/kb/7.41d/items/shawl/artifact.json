@@ -5,7 +5,7 @@
   "title": "Shawl",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "0636d1d1f45dc1e93c37284a3b4b2e16e646c6065324270e807acc61255a9f44",
+  "article_sha256": "5f95c4a8be946d8e9f1363b3cf0028cfe6bf464fb8fda60112704839f45d7884",
   "citations": [
     "gamefile:items/item_shawl#cost",
     "gamefile:items/item_shawl#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "9f94bbfec3e00cafca42c6564e9943ea7900eab2267a444c43719da0d4309f46",
-    "input_tokens": 14230,
-    "output_tokens": 511,
+    "prompt_version": "7",
+    "request_sha256": "34d764ade3d5b3a93d75d1e6f2e1cc651d168f09986876e959e3ec2613fc4e30",
+    "input_tokens": 13859,
+    "output_tokens": 364,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:15:40.952948+00:00"
+    "generated_at": "2026-07-27T12:16:36.725206+00:00"
   }
 }

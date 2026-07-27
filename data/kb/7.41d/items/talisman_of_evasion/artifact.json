@@ -5,7 +5,7 @@
   "title": "Talisman of Evasion",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "eb625ac5e057dafafc6b48786f5652b0eece1ff309de548c5b5f49723b39da84",
+  "article_sha256": "3873424ff0344c09185c47f0aebe69ce7c5bbef6b50250b22f0d595aeba77da6",
   "citations": [
     "gamefile:items/item_talisman_of_evasion#cost",
     "gamefile:items/item_talisman_of_evasion#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "39c2836b38b99e191d8e8f71297ed6fc5df2cf08a9cf1cc4811a24b5b8a157e1",
-    "input_tokens": 14294,
-    "output_tokens": 472,
+    "prompt_version": "7",
+    "request_sha256": "2e6e1f30521eb13c181de193fbcc89df98ae468f59b4e604fc50c59ef682723b",
+    "input_tokens": 13921,
+    "output_tokens": 947,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:06.202772+00:00"
+    "generated_at": "2026-07-27T12:17:50.306104+00:00"
   }
 }

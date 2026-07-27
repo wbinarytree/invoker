@@ -5,7 +5,7 @@
   "title": "Falcon Blade",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4794b334fb148f297edf206f4fd49d7216b69f8afd61e113a80ac7af2456240f",
+  "article_sha256": "7f3832aa7afe6c67d8d90770c8701beb53e79681a867361d60b8ddb3ca0dea00",
   "citations": [
     "gamefile:items/item_falcon_blade#cost",
     "gamefile:items/item_falcon_blade#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "ecbaabda32d6197041b5513b007f36bedaf7ea1bd1116a6bbbf00095d3555135",
-    "input_tokens": 14281,
-    "output_tokens": 398,
+    "prompt_version": "7",
+    "request_sha256": "4f816eb810938f2ed535dcf8d1b0ea02718441005aa09b1b57877472cb6434ef",
+    "input_tokens": 13908,
+    "output_tokens": 406,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:48.005896+00:00"
+    "generated_at": "2026-07-27T12:10:41.189306+00:00"
   }
 }

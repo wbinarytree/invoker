@@ -5,7 +5,7 @@
   "title": "Magic Wand",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f41b1d360ec8fbb21ea4e834cdaac75473d7b6061cb885464efdbd1394feabc2",
+  "article_sha256": "2953e2b664a621641687643a904284bbd5ffe69e2e0d5d6ab8d2dbe100bfee2c",
   "citations": [
     "gamefile:items/item_magic_wand#cost",
     "gamefile:items/item_magic_wand#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "48157dc3ea07f8d836c6923d65d33aa82244a259c76630618808f439ac635a83",
-    "input_tokens": 14395,
-    "output_tokens": 648,
+    "prompt_version": "7",
+    "request_sha256": "1140d8ab45f4cffd1dbc6431b2d98eea095df41f635b1a8cb86eaff38f92c986",
+    "input_tokens": 14026,
+    "output_tokens": 970,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:50.452178+00:00"
+    "generated_at": "2026-07-27T12:13:29.342743+00:00"
   }
 }

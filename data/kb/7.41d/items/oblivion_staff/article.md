@@ -10,14 +10,18 @@ card:
     marks:
     - gamefile:items/item_oblivion_staff#cost
     - gamefile:items/item_oblivion_staff#attribs
-  - text: Its build formula is Blitz Knuckles (1000 gold), Robe of the Magi (450 gold),
-      and Sage's Mask (175 gold); it builds into Bloodthorn, Orchid Malevolence, and
-      Witch Blade.
+  - text: It is built from Blitz Knuckles for 1000 gold, Robe of the Magi for 450
+      gold, and Sage's Mask for 175 gold, and builds into Bloodthorn, Orchid Malevolence,
+      and Witch Blade.
     marks:
     - gamefile:items/item_oblivion_staff#components
   - text: Its behavior is passive.
     marks:
     - gamefile:items/item_oblivion_staff#mechanics
+  - text: Deceptively hidden as an ordinary staff, it is actually very powerful, much
+      like the Eldritch who originally possessed it.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_oblivion_staff_Lore
 ---
 
 # Oblivion Staff

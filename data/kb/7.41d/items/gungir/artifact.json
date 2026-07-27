@@ -5,7 +5,7 @@
   "title": "Gleipnir",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "594744f59939cb0b703af338c979348614df9518adda31c56330887b16aee651",
+  "article_sha256": "74a0dd61c851ab991746295816e4e021a2d5fc7fbbf5aa440cc700a91e1052ae",
   "citations": [
     "gamefile:items/item_gungir#cost",
     "gamefile:items/item_gungir#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b112fdd01f042ed125e258fb536be4a8ebd7cc1f8294749852df9feb26ddabc3",
-    "input_tokens": 14449,
-    "output_tokens": 1254,
+    "prompt_version": "7",
+    "request_sha256": "4a1e06a5a0eb7ef4e2e51a9d38b102f5e31a1d775bcad094fcef18dca756adaa",
+    "input_tokens": 14086,
+    "output_tokens": 1157,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:58.600636+00:00"
+    "generated_at": "2026-07-27T12:11:45.576709+00:00"
   }
 }

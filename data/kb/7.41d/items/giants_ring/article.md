@@ -5,10 +5,10 @@ patch: 7.41d
 card:
   entity: giants_ring
   sentences:
-  - text: Giant's Ring is a passive 0-gold item whose Giant's Foot lets its bearer
-      path over any terrain and damages units the bearer stands on, with 0 bonus strength,
-      100 damage radius, 60 model scale, 0 movement speed, and 100% strength damage
-      per second.
+  - text: Giant's Ring is a passive item costing 0 gold whose Giant's Foot lets the
+      bearer path over any terrain and damage units the bearer stands on top of, with
+      0 bonus strength, 100 damage radius, 60 model scale, 0 movement speed, and 100%
+      strength damage per second.
     marks:
     - gamefile:items/item_giants_ring#mechanics
     - loc:DOTA_Tooltip_ability_item_giants_ring_Description
@@ -17,6 +17,10 @@ card:
   - text: Its build formula is Giant's Ring (0 gold).
     marks:
     - gamefile:items/item_giants_ring#cost
+  - text: The ring was prized by an otherwise unremarkable ruler of Elze who abdicated
+      and vanished.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_giants_ring_Lore
 ---
 
 # Giant's Ring

@@ -5,7 +5,7 @@
   "title": "Heaven's Halberd",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "dcd375e406eab061045b9aa2fda8cfb4ebf38e3db90bd447e6816ee1922fb0a3",
+  "article_sha256": "166a381819531da8c1ab902eab1a11bcfce745b53af3b4ff32a271f5dd98b92a",
   "citations": [
     "gamefile:items/item_heavens_halberd#cost",
     "gamefile:items/item_heavens_halberd#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "8e2d8233117018e3a00ccd85d3c39cab8ea1e696fdcdcffede687f6702cdb789",
-    "input_tokens": 14480,
-    "output_tokens": 717,
+    "prompt_version": "7",
+    "request_sha256": "a13d6908b080ee4b4fc7484fafebfad237f12b222775cfa40d83166abfd5f1ea",
+    "input_tokens": 14107,
+    "output_tokens": 550,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:28.606688+00:00"
+    "generated_at": "2026-07-27T12:11:48.327457+00:00"
   }
 }

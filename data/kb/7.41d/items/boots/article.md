@@ -5,13 +5,13 @@ patch: 7.41d
 card:
   entity: boots
   sentences:
-  - text: Boots of Speed is a component item that costs 500 gold and provides 45 Movement
+  - text: Boots of Speed is a component item costing 500 gold that provides 45 Movement
       Speed.
     marks:
     - gamefile:items/item_boots#cost
     - gamefile:items/item_boots#attribs
-  - text: Its build formula is Boots of Speed for 500 gold; it builds into Arcane
-      Boots, Phase Boots, Power Treads, Tranquil Boots, and Boots of Travel.
+  - text: Boots of Speed costs 500 gold and builds into Arcane Boots, Phase Boots,
+      Power Treads, Tranquil Boots, and Boots of Travel.
     marks:
     - gamefile:items/item_boots#cost
     - gamefile:items/item_boots#components
@@ -21,6 +21,9 @@ card:
   - text: Movement Speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_boots_Description
+  - text: “Fleet footwear, increasing movement.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_boots_Lore
 ---
 
 # Boots of Speed

@@ -5,7 +5,7 @@
   "title": "Crystalys",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "fb0043e64a4ba5bc2fab7fc49a2ef7aca1043362ce66aaa4b2848dd17ad66ab5",
+  "article_sha256": "038f425bff2d73e6a3852eb03461daf20d08995b10f50b41c70dd534824fa87b",
   "citations": [
     "gamefile:items/item_lesser_crit#cost",
     "gamefile:items/item_lesser_crit#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b3d60b41c1096c1a4956b28f3991df8d71d678df12f8d03cf93446ab63880fad",
-    "input_tokens": 14395,
-    "output_tokens": 660,
+    "prompt_version": "7",
+    "request_sha256": "dabbe295a5c46621e96d9bf2610100c5173b43f6eccc0f5336dde31d3c091804",
+    "input_tokens": 14024,
+    "output_tokens": 1165,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:08:14.272694+00:00"
+    "generated_at": "2026-07-27T12:13:42.901645+00:00"
   }
 }

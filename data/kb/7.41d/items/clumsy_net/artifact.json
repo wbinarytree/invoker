@@ -5,7 +5,7 @@
   "title": "Clumsy Net",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8ca0141b8ee3241056ef0676ea01feda7a8d1bbd288b79861812126b2263f64b",
+  "article_sha256": "c0721d841248553caa127fb6444014d95e24bea10c5022d3af822c9f84195442",
   "citations": [
     "gamefile:items/item_clumsy_net#cost",
     "gamefile:items/item_clumsy_net#attribs",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "3eee415966edc5c66675d9285c4c8af3f5a60add99b2a52f030b350094cb1bdc",
-    "input_tokens": 14283,
-    "output_tokens": 816,
+    "prompt_version": "7",
+    "request_sha256": "1dc380293cf206c2e8c9290069024f9f2fb141f70b455d9efa764188d4f803b6",
+    "input_tokens": 13914,
+    "output_tokens": 674,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:50.940454+00:00"
+    "generated_at": "2026-07-27T12:08:32.145851+00:00"
   }
 }

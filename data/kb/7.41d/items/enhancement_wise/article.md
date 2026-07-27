@@ -5,8 +5,8 @@ patch: 7.41d
 card:
   entity: enhancement_wise
   sentences:
-  - text: Wise is a 0-gold enhancement that passively grants 1000 Bonus XPM and 15%
-      Max Mana.
+  - text: Wise is an enhancement costing 0 gold that passively grants 1000 Bonus XPM
+      and 15% Max Mana.
     marks:
     - gamefile:items/item_enhancement_wise#cost
     - gamefile:items/item_enhancement_wise#attribs

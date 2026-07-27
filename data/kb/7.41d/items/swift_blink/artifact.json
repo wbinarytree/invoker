@@ -5,7 +5,7 @@
   "title": "Swift Blink",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ce48b37f5e4ffff5edc6507824f2e1caf62e2b07e870a3fb8e8ff8227a53251d",
+  "article_sha256": "c65d057ce0ee940c222fb408cc45bd28d9c872fd73ffd234f1175d248eaf62c1",
   "citations": [
     "gamefile:items/item_swift_blink#cost",
     "gamefile:items/item_swift_blink#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "f9391a23d6b7120cc6a1b964fb82a6697dea32dcec0eaea2e99734da8185f074",
-    "input_tokens": 14463,
-    "output_tokens": 1362,
+    "prompt_version": "7",
+    "request_sha256": "f365f6335dfcb6d15d0906668cd7c5a3dee42972a9330aa14a8ffc584b4b5b6a",
+    "input_tokens": 14090,
+    "output_tokens": 1445,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:26.640424+00:00"
+    "generated_at": "2026-07-27T12:18:01.156127+00:00"
   }
 }

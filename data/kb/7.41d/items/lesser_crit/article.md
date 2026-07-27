@@ -5,20 +5,25 @@ patch: 7.41d
 card:
   entity: lesser_crit
   sentences:
-  - text: Crystalys is an epic item costing 2000 gold that grants 32 Damage, 30% Crit
-      Chance, 160% Crit Multiplier, and 60 Tooltip Crit Damage; its Critical Strike
-      passive gives each attack a chance to deal increased damage.
+  - text: Crystalys is an epic 2000-gold item with 32 Damage, 30% Crit Chance, a 160%
+      Crit Multiplier, and 60 Tooltip Crit Damage whose core effect is Critical Strike.
     marks:
     - gamefile:items/item_lesser_crit#cost
     - gamefile:items/item_lesser_crit#attribs
     - loc:DOTA_Tooltip_ability_item_lesser_crit_Description
-  - text: Its build formula is Claymore for 1350 gold, Blades of Attack for 450 gold,
-      and a Recipe for 200 gold.
+  - text: It is built from Claymore (1350 gold), Blades of Attack (450 gold), and
+      a Recipe (200 gold), and builds into Daedalus and Revenant's Brooch.
     marks:
     - gamefile:items/item_lesser_crit#components
-  - text: Crystalys builds into Daedalus and Revenant's Brooch.
+  - text: Its behavior is passive.
     marks:
-    - gamefile:items/item_lesser_crit#components
+    - gamefile:items/item_lesser_crit#mechanics
+  - text: Critical Strike gives each attack a chance to deal increased damage.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_lesser_crit_Description
+  - text: “A blade forged from rare crystals, it seeks weak points in enemy armor.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_lesser_crit_Lore
 ---
 
 # Crystalys

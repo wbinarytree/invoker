@@ -5,7 +5,7 @@
   "title": "Assault Cuirass",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "ac452bfe862f57877027c20099b5be2224bfe60b5964b504ca52369592f122d8",
+  "article_sha256": "39c6b06bf34dc7dedaaff5995a74b26d08774e6c63b2de0b21f54c43d8906ccf",
   "citations": [
     "gamefile:items/item_assault#cost",
     "gamefile:items/item_assault#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "5d2e11dc24c4d855be1da30f32b793ab5eb6329ef67faefcbb49c564d3bc9bcd",
-    "input_tokens": 14416,
-    "output_tokens": 1018,
+    "prompt_version": "7",
+    "request_sha256": "c8c21c7826b3bfc87476ce7f44c1e6f6468d915cca5a09430d0f907a69f314a2",
+    "input_tokens": 14041,
+    "output_tokens": 717,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:31.099566+00:00"
+    "generated_at": "2026-07-27T12:07:18.206791+00:00"
   }
 }

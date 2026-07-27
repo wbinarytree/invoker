@@ -5,7 +5,7 @@ patch: 7.41d
 card:
   entity: ascetic_cap
   sentences:
-  - text: Ascetic's Cap is a 0-gold item whose passive Endurance grants %status_resistance%%%
+  - text: Ascetic's Cap is an item costing 0 gold whose passive Endurance grants %status_resistance%%%
       Status Resistance and %slow_resistance%%% Slow Resistance for %duration% seconds
       whenever a debuff would be applied, with a 25.0-second cooldown.
     marks:
@@ -18,12 +18,15 @@ card:
   - text: It grants 0 HP Regen.
     marks:
     - gamefile:items/item_ascetic_cap#attribs
-  - text: Endurance costs 0 mana.
+  - text: Endurance has a mana cost of 0.
     marks:
     - gamefile:items/item_ascetic_cap#mechanics
-  - text: Its build formula is Ascetic's Cap (0 gold).
+  - text: It is built from Ascetic's Cap (0 gold).
     marks:
     - gamefile:items/item_ascetic_cap#cost
+  - text: An austere hat thought to be of Turstarkuri origin.
+    marks:
+    - loc:DOTA_Tooltip_Ability_item_ascetic_cap_Lore
 ---
 
 # Ascetic's Cap

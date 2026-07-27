@@ -6,38 +6,35 @@ card:
   entity: invis_sword
   sentences:
   - text: Shadow Blade is an epic item costing 3250 gold that grants 35 Attack Speed
-      and 25 Damage; its Shadow Walk active costs 75 mana, has a 25.0 cooldown, provides
-      up to 17.0 of invisibility after a 0.3 fade time, increases movement speed by
-      20%, allows movement through units, and grants 175 bonus physical damage to
-      an attack that ends invisibility.
+      and 25 Damage; its Shadow Walk active costs 75 mana, has a 25.0 cooldown, and
+      provides up to 17.0 seconds of invisibility, 20% movement speed, and 175 bonus
+      physical damage when ended by an attack.
     marks:
     - gamefile:items/item_invis_sword#cost
     - gamefile:items/item_invis_sword#attribs
     - gamefile:items/item_invis_sword#mechanics
     - loc:DOTA_Tooltip_ability_item_invis_sword_Description
-  - text: Shadow Walk is an immediate, no-target ability with DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL
-      behavior.
+  - text: Shadow Walk has a 0.3 fade time.
+    marks:
+    - gamefile:items/item_invis_sword#attribs
+  - text: Shadow Walk is immediate, requires no target, and ignores channeling.
     marks:
     - gamefile:items/item_invis_sword#mechanics
-  - text: Its invisibility ends when the 17.0 duration expires or the user attacks
-      or casts a spell.
-    marks:
-    - gamefile:items/item_invis_sword#attribs
-    - loc:DOTA_Tooltip_ability_item_invis_sword_Description
-  - text: The Windwalk Movement Speed value is 20%.
-    marks:
-    - gamefile:items/item_invis_sword#attribs
-  - text: The user can move through units while Shadow Walk is active.
+  - text: Its invisibility ends when its duration expires or the user attacks or casts
+      a spell.
     marks:
     - loc:DOTA_Tooltip_ability_item_invis_sword_Description
-  - text: An attack that ends the invisibility gains 175 bonus physical damage.
+  - text: While active, Shadow Walk allows movement through units.
     marks:
-    - gamefile:items/item_invis_sword#attribs
     - loc:DOTA_Tooltip_ability_item_invis_sword_Description
-  - text: The build formula is Claymore (1350 gold), Blitz Knuckles (1000 gold), and
-      Shadow Amulet (900 gold); Shadow Blade builds into Silver Edge.
+  - text: Shadow Blade is built from Claymore (1350 gold), Blitz Knuckles (1000 gold),
+      and Shadow Amulet (900 gold), and builds into Silver Edge.
     marks:
     - gamefile:items/item_invis_sword#components
+  - text: “The blade of a fallen king, it allows you to move unseen and strike from
+      the shadows.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_invis_sword_Lore
 ---
 
 # Shadow Blade

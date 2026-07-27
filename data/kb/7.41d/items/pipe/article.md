@@ -5,10 +5,10 @@ patch: 7.41d
 card:
   entity: pipe
   sentences:
-  - text: Pipe of Insight is a rare 3725-gold item granting 14 Health Regeneration
-      and 20% Magic Resistance; its active Barrier provides nearby allies a 425 magic-damage
-      barrier for 8.0 seconds within 1200 radius, while its passive Insight Aura provides
-      allied units 8% Magic Resistance within 1200 radius.
+  - text: Pipe of Insight is a rare 3725-gold item that grants 14 Health Regeneration
+      and 20% Magic Resistance, activates a 425 magic damage barrier for nearby allies
+      for 8.0 seconds within a 1200 radius, and gives allied units 8% Magic Resistance
+      within a 1200-radius Insight Aura.
     marks:
     - gamefile:items/item_pipe#cost
     - gamefile:items/item_pipe#attribs
@@ -25,13 +25,14 @@ card:
   - text: Barrier has a 60.0-second cooldown.
     marks:
     - gamefile:items/item_pipe#mechanics
-  - text: The barrier block for creeps is 425.
-    marks:
-    - gamefile:items/item_pipe#attribs
-  - text: The build formula is Ring of Tarrasque (1700 gold), Cloak (900 gold), Shawl
-      (450 gold), and Recipe (675 gold).
+  - text: The build formula is Ring of Tarrasque for 1700 gold, Cloak for 900 gold,
+      Shawl for 450 gold, and a Recipe for 675 gold.
     marks:
     - gamefile:items/item_pipe#components
+  - text: “A powerful artifact of mysterious origin, it creates barriers against magical
+      forces.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_pipe_Lore
 ---
 
 # Pipe of Insight

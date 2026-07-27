@@ -5,7 +5,7 @@
   "title": "Titanic",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "eef4dc200f105eb3db91d59348ccbd91d39a093e0f0aba0526cc35ae923ff38a",
+  "article_sha256": "2956f985aaaef1701ea851580dd6417d0248e44424299ea4131a4c013da9067d",
   "citations": [
     "gamefile:items/item_enhancement_titanic#cost",
     "gamefile:items/item_enhancement_titanic#attribs",
@@ -27,11 +27,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b4f1065495bdfc7ebf728788740c34f59773c8e22dcf47e55337c8bf8aff1a83",
-    "input_tokens": 14202,
-    "output_tokens": 285,
+    "prompt_version": "7",
+    "request_sha256": "b1589bbe79ba8bc655378b610ff3dca31cbe6d70dea98ead31c5e230113092d5",
+    "input_tokens": 13833,
+    "output_tokens": 296,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:03:14.310292+00:00"
+    "generated_at": "2026-07-27T12:10:22.319148+00:00"
   }
 }

@@ -5,28 +5,33 @@ patch: 7.41d
 card:
   entity: magic_wand
   sentences:
-  - text: Magic Wand is a common 460-gold item granting 3 All Attributes and Energy
-      Charge, which stores up to 20 charges and instantly restores 15 health and mana
-      per stored charge.
+  - text: Magic Wand is a common 460-gold item that grants 3 All Attributes and provides
+      Energy Charge, which instantly restores 15 health and mana per stored charge
+      up to 20 charges.
     marks:
     - gamefile:items/item_magic_wand#cost
     - gamefile:items/item_magic_wand#attribs
     - loc:DOTA_Tooltip_ability_item_magic_wand_Description
-  - text: Energy Charge is immediate and has no target.
+  - text: Its charge radius is 1200.
+    marks:
+    - gamefile:items/item_magic_wand#attribs
+  - text: Energy Charge has Immediate, No Target behavior.
     marks:
     - gamefile:items/item_magic_wand#mechanics
   - text: Energy Charge has a 15.0 cooldown.
     marks:
     - gamefile:items/item_magic_wand#mechanics
-  - text: It gains a charge whenever a visible enemy within the 1200 charge radius
-      uses an ability.
+  - text: It gains a charge whenever a visible enemy in range uses an ability.
     marks:
-    - gamefile:items/item_magic_wand#attribs
     - loc:DOTA_Tooltip_ability_item_magic_wand_Description
-  - text: Magic Wand is built from Magic Stick (200 gold), Iron Branch (55 gold),
-      Iron Branch (55 gold), and Recipe (150 gold), and builds into Holy Locket.
+  - text: It is built from Magic Stick (200 gold), Iron Branch (55 gold), Iron Branch
+      (55 gold), and Recipe (150 gold), and builds into Holy Locket.
     marks:
     - gamefile:items/item_magic_wand#components
+  - text: A simple wand used to channel magic energies, it is favored by apprentice
+      wizards and great warlocks alike.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_magic_wand_Lore
 ---
 
 # Magic Wand

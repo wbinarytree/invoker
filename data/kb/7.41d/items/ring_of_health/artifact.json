@@ -5,7 +5,7 @@
   "title": "Ring of Health",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "da90c44d315aff4b8ac7643fa25d12cea492e6a5c3ae7e2792493644169e4678",
+  "article_sha256": "82cb545693e57b61834b18adf6cfec83c27436a642ec7fcf21a42cdfba98c490",
   "citations": [
     "gamefile:items/item_ring_of_health#cost",
     "gamefile:items/item_ring_of_health#attribs",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "2139c3977e2c3bf9d92635ba7eb13aa57446d98916b8e8d84fe3137ccb3c4719",
-    "input_tokens": 14252,
-    "output_tokens": 337,
+    "prompt_version": "7",
+    "request_sha256": "a3e3b7cde52bf0f8f606ffb41e13dbfecad3f37b6b458be11f1ffa87551145cc",
+    "input_tokens": 13879,
+    "output_tokens": 340,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:36.820501+00:00"
+    "generated_at": "2026-07-27T12:15:59.727783+00:00"
   }
 }

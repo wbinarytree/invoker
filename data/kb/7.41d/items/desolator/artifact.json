@@ -5,7 +5,7 @@
   "title": "Desolator",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1cb7e8a4a6ce839ac13705882d5f482bbb474d21e1310f8237e68d309afb36e8",
+  "article_sha256": "d44e8b2579a05d6034eea21381aee8801193b01b1121109af0ae72123cb8e355",
   "citations": [
     "gamefile:items/item_desolator#cost",
     "gamefile:items/item_desolator#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c28d326069220f88a95d319271cd1207603c7c246bd0e7ea7eab481e0bb5f1a5",
-    "input_tokens": 14390,
-    "output_tokens": 1320,
+    "prompt_version": "7",
+    "request_sha256": "0d2295131e55821095b686d9d623db5c8abe1c09d4f22c7c8e84e7562769bf5c",
+    "input_tokens": 14023,
+    "output_tokens": 1607,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:26.350745+00:00"
+    "generated_at": "2026-07-27T12:09:41.032947+00:00"
   }
 }

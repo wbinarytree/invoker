@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: wizard_hat
   sentences:
-  - text: Wizard Hat is a 250-gold Passive item that grants 125 Mana.
+  - text: Wizard Hat is a Passive item that costs 250 gold and grants 125 Mana.
     marks:
     - gamefile:items/item_wizard_hat#mechanics
     - gamefile:items/item_wizard_hat#attribs
     - gamefile:items/item_wizard_hat#cost
-  - text: Its build formula is Wizard Hat (250 gold).
+  - text: 'Build formula: Wizard Hat (250 gold).'
     marks:
     - gamefile:items/item_wizard_hat#cost
-  - text: It builds into Arcane Boots, Dagon, Essence Distiller, and Pavise.
+  - text: Wizard Hat builds into Arcane Boots, Dagon, Essence Distiller, and Pavise.
     marks:
     - gamefile:items/item_wizard_hat#components
 ---

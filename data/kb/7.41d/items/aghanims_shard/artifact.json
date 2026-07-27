@@ -5,7 +5,7 @@
   "title": "Aghanim's Shard",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "155575427d73dd88e3be5f799c9463aae8cc097c831e9de027ae17d07f1440d4",
+  "article_sha256": "919713f2d253c145f0b115820d65bc91f3805d3ea9f21cf608acaefe085a8db8",
   "citations": [
     "gamefile:items/item_aghanims_shard#cost",
     "loc:DOTA_Tooltip_ability_item_aghanims_shard_Description",
@@ -28,11 +28,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "7435b24ca004e5e6bd8b12ff82e66a5ca1216a4032314d2a7a5cf787cf78e4ee",
-    "input_tokens": 14226,
-    "output_tokens": 296,
+    "prompt_version": "7",
+    "request_sha256": "8f7cfe8ab95b2466a5c4a718cc6e50e267eea27c05f307b415dda7bc63656ded",
+    "input_tokens": 14280,
+    "output_tokens": 347,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:40.628870+00:00"
+    "generated_at": "2026-07-27T12:06:45.403696+00:00"
   }
 }

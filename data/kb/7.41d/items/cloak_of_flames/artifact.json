@@ -5,7 +5,7 @@
   "title": "Cloak of Flames",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "e4101ea8feaa7a9cbfd5b0ce4294bfc7f2bf86c6d4fd9cbece95684e0a7f975b",
+  "article_sha256": "142caf6e9f1a1ea8cac782299555dcac73ef0c09245c8602e0014509d0f10052",
   "citations": [
     "gamefile:items/item_cloak_of_flames#attribs",
     "loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Description",
@@ -29,11 +29,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "80e902e6e5431d560e23047fc32ca3c4ec4b605c4dd4de1c45999bb953ca8dcc",
-    "input_tokens": 14328,
-    "output_tokens": 461,
+    "prompt_version": "7",
+    "request_sha256": "700f76c7cf6614c91624cd977e2aee6645509224a1b16904e577d9d9a187d468",
+    "input_tokens": 13953,
+    "output_tokens": 576,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:54.287758+00:00"
+    "generated_at": "2026-07-27T12:08:28.655841+00:00"
   }
 }

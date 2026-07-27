@@ -5,15 +5,15 @@ patch: 7.41d
 card:
   entity: tranquil_boots
   sentences:
-  - text: Tranquil Boots is a rare 900-gold item granting 14 health regeneration and
-      65 movement speed; Break triggers when the wearer attacks a hero or is attacked
-      by any unit, removing the health regeneration and reducing movement speed to
-      40 for 13 seconds.
+  - text: Tranquil Boots is a rare 900-gold item that grants 14 Health Regeneration
+      and 65 Movement Speed; its passive Break lasts 13 seconds, removes the regeneration
+      bonus, and reduces Movement Speed to 40 whenever the wearer attacks a hero or
+      is attacked by any unit.
     marks:
     - gamefile:items/item_tranquil_boots#cost
     - gamefile:items/item_tranquil_boots#attribs
     - loc:DOTA_Tooltip_ability_item_tranquil_boots_Description
-  - text: Its bonus armor is 0.
+  - text: Bonus Armor is 0.
     marks:
     - gamefile:items/item_tranquil_boots#attribs
   - text: Break Count is 1.
@@ -31,23 +31,24 @@ card:
   - text: Heal Interval is 0.334.
     marks:
     - gamefile:items/item_tranquil_boots#attribs
-  - text: Its behavior is passive.
+  - text: Break costs 0 mana.
     marks:
     - gamefile:items/item_tranquil_boots#mechanics
-  - text: Its mana cost is 0.
+  - text: Break has a 13.0 cooldown.
     marks:
     - gamefile:items/item_tranquil_boots#mechanics
-  - text: Its cooldown is 13.0.
-    marks:
-    - gamefile:items/item_tranquil_boots#mechanics
-  - text: Movement Speed bonuses from multiple pairs of boots do not stack.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_tranquil_boots_Description
-  - text: Tranquil Boots is built from Boots of Speed (500 gold), Wind Lace (225 gold),
-      and Ring of Regen (175 gold), and builds into Boots of Bearing.
+  - text: Tranquil Boots (900 gold) is built from Boots of Speed (500 gold), Wind
+      Lace (225 gold), and Ring of Regen (175 gold), and builds into Boots of Bearing.
     marks:
     - gamefile:items/item_tranquil_boots#cost
     - gamefile:items/item_tranquil_boots#components
+  - text: Movement Speed bonuses from multiple pairs of boots do not stack.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_tranquil_boots_Description
+  - text: While they increase the longevity of the wearer, this boot is not particularly
+      reliable.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_tranquil_boots_Lore
 ---
 
 # Tranquil Boots

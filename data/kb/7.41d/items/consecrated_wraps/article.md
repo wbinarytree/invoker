@@ -5,35 +5,35 @@ patch: 7.41d
 card:
   entity: consecrated_wraps
   sentences:
-  - text: Consecrated Wraps is a 2600-gold epic item granting 5 All Attributes, 250
-      Health, and 12% Magic Resistance; its Hallowed passive periodically gains charges
-      and consumes them after damage from a player-controlled unit or Roshan to grant
-      a scaling all damage barrier with 120 Barrier per Stack and a 360 Max Barrier
-      Tooltip.
+  - text: Consecrated Wraps is an epic 2600-gold item granting 5 All Attributes, 250
+      Health, and 12% Magic Resistance; its passive Hallowed periodically gains charges,
+      increases movement speed by 15% when a charge is gained, and converts consumed
+      charges into an all damage barrier with 120 capacity per stack, Duration 5,
+      and Max Barrier Tooltip 360.
     marks:
     - gamefile:items/item_consecrated_wraps#cost
     - gamefile:items/item_consecrated_wraps#attribs
     - loc:DOTA_Tooltip_ability_item_consecrated_wraps_Description
-  - text: Whenever Hallowed gains a charge, movement speed increases by 15%.
+  - text: It is built from Vitality Booster (1000 gold), Shawl (450 gold), Crown (450
+      gold), and Recipe (700 gold).
     marks:
-    - gamefile:items/item_consecrated_wraps#attribs
+    - gamefile:items/item_consecrated_wraps#components
+  - text: Taking damage from a player-controlled unit or Roshan consumes all Hallowed
+      charges.
+    marks:
     - loc:DOTA_Tooltip_ability_item_consecrated_wraps_Description
-  - text: Hallowed's Duration is 5.
+  - text: The barrier capacity scales with the charges consumed.
     marks:
-    - gamefile:items/item_consecrated_wraps#attribs
-  - text: Its Stack Threshold Damage is 0.
+    - loc:DOTA_Tooltip_ability_item_consecrated_wraps_Description
+  - text: Hallowed is passive.
     marks:
-    - gamefile:items/item_consecrated_wraps#attribs
+    - gamefile:items/item_consecrated_wraps#mechanics
   - text: Hallowed is dispellable.
     marks:
     - gamefile:items/item_consecrated_wraps#mechanics
   - text: Hallowed has a cooldown of 0.
     marks:
     - gamefile:items/item_consecrated_wraps#mechanics
-  - text: It is built from Vitality Booster (1000 gold), Shawl (450 gold), Crown (450
-      gold), and a Recipe (700 gold).
-    marks:
-    - gamefile:items/item_consecrated_wraps#components
 ---
 
 # Consecrated Wraps

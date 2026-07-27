@@ -5,7 +5,7 @@ patch: 7.41d
 card:
   entity: staff_of_wizardry
   sentences:
-  - text: Staff of Wizardry is a passive component item that costs 1000 gold and grants
+  - text: Staff of Wizardry is a passive component item costing 1000 gold that grants
       10 Intelligence.
     marks:
     - gamefile:items/item_staff_of_wizardry#cost
@@ -15,6 +15,9 @@ card:
       and Aghanim's Scepter.
     marks:
     - gamefile:items/item_staff_of_wizardry#components
+  - text: “A staff of magical powers passed down from the eldest mages.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_staff_of_wizardry_Lore
 ---
 
 # Staff of Wizardry

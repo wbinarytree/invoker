@@ -5,19 +5,20 @@ patch: 7.41d
 card:
   entity: sange
   sentences:
-  - text: Sange is a 2100-gold artifact item that grants 16 Strength, 12% Health Restoration,
-      and 25 Slow Resistance.
+  - text: Sange is a passive artifact item costing 2100 gold that grants 16 Strength,
+      12% Health Restoration, and 25 Slow Resistance.
     marks:
     - gamefile:items/item_sange#cost
     - gamefile:items/item_sange#attribs
-  - text: Its build formula is Ogre Axe (1000 gold), Belt of Strength (450 gold),
-      and Recipe (650 gold); it builds into Abyssal Blade, Kaya and Sange, Sange and
-      Yasha, and Trident.
+    - gamefile:items/item_sange#mechanics
+  - text: 'Build formula: Ogre Axe (1000 gold), Belt of Strength (450 gold), and Recipe
+      (650 gold); builds into Abyssal Blade, Kaya and Sange, Sange and Yasha, and
+      Trident.'
     marks:
     - gamefile:items/item_sange#components
-  - text: Sange is passive.
+  - text: “Sange is an unusually accurate weapon, seeking weak points automatically.”
     marks:
-    - gamefile:items/item_sange#mechanics
+    - loc:DOTA_Tooltip_ability_item_sange_Lore
 ---
 
 # Sange

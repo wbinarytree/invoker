@@ -5,29 +5,35 @@ patch: 7.41d
 card:
   entity: dagon_4
   sentences:
-  - text: 'Dagon is a rare item costing 6300 gold that provides the upgradable Unit
-      Target active Energy Burst: 640 Active Cast Range, 400/500/600/700/800 magical
-      Damage, 0 Damage Delay, 120/140/160/180/200 Mana Cost, and 27/24/21/18/15 Cooldown.'
+  - text: Dagon is a rare 6300-gold item that grants 6/7/8/9/10 All Attributes, 200/210/220/230/240
+      Health, 350/375/400/425/450 Mana, and 60/90/120/150/180 Cast Range, and provides
+      the upgradable unit-target Energy Burst, which deals 400/500/600/700/800 magical
+      Damage to an enemy unit.
     marks:
     - gamefile:items/item_dagon_4#cost
+    - gamefile:items/item_dagon_4#attribs
     - gamefile:items/item_dagon_4#mechanics
     - loc:DOTA_Tooltip_ability_item_dagon_4_Description
-  - text: Dagon grants 6/7/8/9/10 All Attributes.
-    marks:
-    - gamefile:items/item_dagon_4#attribs
-  - text: It grants 200/210/220/230/240 Health.
-    marks:
-    - gamefile:items/item_dagon_4#attribs
-  - text: It grants 350/375/400/425/450 Mana.
-    marks:
-    - gamefile:items/item_dagon_4#attribs
-  - text: It grants 60/90/120/150/180 Cast Range.
-    marks:
-    - gamefile:items/item_dagon_4#attribs
-  - text: 'Build formula: Dagon (item_dagon_3) (5200 gold) + item_recipe_dagon (item_recipe_dagon)
-      (—); builds into Dagon (item_dagon_5).'
+  - text: Its build formula is Dagon (item_dagon_3) for 5200 gold plus item_recipe_dagon
+      (item_recipe_dagon) for —, and it builds into Dagon (item_dagon_5).
     marks:
     - gamefile:items/item_dagon_4#components
+  - text: Energy Burst has 0 Damage Delay.
+    marks:
+    - gamefile:items/item_dagon_4#mechanics
+  - text: Energy Burst costs 120/140/160/180/200 Mana.
+    marks:
+    - gamefile:items/item_dagon_4#mechanics
+  - text: Energy Burst has 640 Active Cast Range.
+    marks:
+    - gamefile:items/item_dagon_4#mechanics
+  - text: Energy Burst has a 27/24/21/18/15 Cooldown.
+    marks:
+    - gamefile:items/item_dagon_4#mechanics
+  - text: “A lesser wand that grows in power the longer it is used, it brings magic
+      to the fingertips of the user.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_dagon_4_Lore
 ---
 
 # Dagon

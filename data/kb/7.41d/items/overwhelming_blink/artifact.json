@@ -5,7 +5,7 @@
   "title": "Overwhelming Blink",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "2319172b15d0516f898ad7dc973dccdcaeae67de2361a94190f6f4f2cbc87a90",
+  "article_sha256": "cd942a9a58f35666db3aeb7af3b17bf24d7b6f1e269b162821ccd181eed5411f",
   "citations": [
     "gamefile:items/item_overwhelming_blink#cost",
     "gamefile:items/item_overwhelming_blink#attribs",
@@ -30,11 +30,11 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "38289f4e1607b01eaa0af2e87f0b14e546fc48fb00108770c219cb08b684aa8d",
-    "input_tokens": 14577,
-    "output_tokens": 1534,
+    "prompt_version": "7",
+    "request_sha256": "faa436d32bf37b1a3dd93916fac2a4ab7b6d3072c660c8903f1ddfe8a04272cf",
+    "input_tokens": 14210,
+    "output_tokens": 2405,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:26.107715+00:00"
+    "generated_at": "2026-07-27T12:15:13.797699+00:00"
   }
 }
