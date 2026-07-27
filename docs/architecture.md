@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-27 (batch concept generation: allowlist from corpus sweep, structural digits not claims, rejected-output persistence, batch driver scripts)
+Last updated: 2026-07-27 (full 7.41d KB corpus accepted — concept + item fleets; bucket report --kind item with identifier-flag annotation; prompt versions concept v10 / item v6)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -525,10 +525,16 @@ pool of per-entity CLI subprocesses on the codex backend, JSONL
 manifest under `data/logs/batch/`, circuit breaker, transport-class
 re-queue-once) and `scripts/concept_report.py` (clean/flagged/
 unguarded/failed buckets from disk state; committing is the acceptance
-act). Concept prompt v8 hardening came out of the 2026-07-26 fleet:
-patch context never stated in prose, numbers never derived/counted/
+act). Both scripts take `--kind concept|item`; the report annotates
+the known-unresolvable flag classes per kind — concept flags citing
+coverage-allowlisted boilerplate anchors, item flags whose fact is an
+internal `item_*` identifier the prompt forbids in prose — and prints
+substantive item flags verbatim for the acceptance pass. Concept
+prompt v8–v10 hardening came out of the 2026-07-26 fleet: patch
+context never stated in prose, numbers never derived/counted/
 range-expanded (article and card), the corpus: prefix trap and
-one-line-section coverage named explicitly.
+one-line-section coverage named explicitly (v8); consolidated-table
+marks (v9); marks placed after the content they cite (v10).
 
 **Item generator (S-items slice)** — `items.py` + shared `checks.py`
 (spec: `docs/specs/2026-07-26-game-file-grounded-generators.md`).
@@ -546,8 +552,9 @@ literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
 the formula with its prices, prose is behavior semantics, and the
-article closes with the lore as a flavor line (prompt v5 — lore is
-required coverage, never allowlisted; user direction 2026-07-26) —
+article closes with the lore as a flavor line (prompt v6 — lore is
+required coverage, never allowlisted, user direction 2026-07-26; v6
+ports the concept-fleet v8–v10 hardening) —
 each tier (identity line, card, article) adds information over the one
 above. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must

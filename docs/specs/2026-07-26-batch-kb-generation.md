@@ -1,7 +1,7 @@
 # Batch KB Generation — All Concepts + Items Overnight on Codex
 
 **Date:** 2026-07-26
-**Status:** draft — needs sign-off
+**Status:** accepted and executed (concept fleet 2026-07-26, item fleet 2026-07-27; both corpora committed after bucket-review acceptance)
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md`;
 completes the coverage of `docs/specs/2026-07-26-game-file-grounded-generators.md`
 (slice 1 at full scope) and the concept generator's corpus scope.
