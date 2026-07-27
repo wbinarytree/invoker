@@ -62,6 +62,21 @@ class EntityArtifact(BaseModel):
     card_provenance: GenerationProvenance
 
 
+def kb_fingerprint(kb_dir: Path) -> tuple[str, int]:
+    """Content hash over every file in the KB archive plus the artifact
+    count — the record of exactly which KB state a report or export saw."""
+    digest = hashlib.sha256()
+    count = 0
+    if kb_dir.is_dir():
+        for path in sorted(kb_dir.rglob("*")):
+            if path.is_file():
+                digest.update(str(path.relative_to(kb_dir)).encode())
+                digest.update(path.read_bytes())
+                if path.name == "artifact.json":
+                    count += 1
+    return digest.hexdigest(), count
+
+
 def persist_rejected(
     rejected_dir: Path | None,
     *,

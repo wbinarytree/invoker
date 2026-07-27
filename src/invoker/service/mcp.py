@@ -20,6 +20,14 @@ class KnowledgeMCPAdapter:
             {"name": "list_bundle_patches", "input_schema": {"type": "object", "properties": {}}},
             {"name": "lookup_hero", "input_schema": _schema(["query"], ["patch"])},
             {"name": "get_hero_constants", "input_schema": _schema(["hero"], ["patch"])},
+            {"name": "kb_catalog", "input_schema": _schema([], ["patch", "kind"])},
+            {"name": "kb_resolve", "input_schema": _schema(["query"], ["patch"])},
+            {"name": "kb_card", "input_schema": _schema(["id"], ["patch"])},
+            {"name": "kb_article", "input_schema": _schema(["id"], ["patch"])},
+            {
+                "name": "search_changelog",
+                "input_schema": _schema([], ["grep", "entity", "note_patch", "patch"]),
+            },
             {"name": "resolve_team", "input_schema": _schema(["query"], ["patch"])},
             {"name": "resolve_player", "input_schema": _schema(["query"], ["team", "patch"])},
             {"name": "get_team_profile", "input_schema": _schema(["team"], ["patch"])},
@@ -39,6 +47,21 @@ class KnowledgeMCPAdapter:
             return self.service.lookup_hero(args["query"], patch=args.get("patch"))
         if name == "get_hero_constants":
             return self.service.get_hero_constants(args["hero"], patch=args.get("patch"))
+        if name == "kb_catalog":
+            return self.service.kb_catalog(patch=args.get("patch"), kind=args.get("kind"))
+        if name == "kb_resolve":
+            return self.service.kb_resolve(args["query"], patch=args.get("patch"))
+        if name == "kb_card":
+            return self.service.kb_card(args["id"], patch=args.get("patch"))
+        if name == "kb_article":
+            return self.service.kb_article(args["id"], patch=args.get("patch"))
+        if name == "search_changelog":
+            return self.service.search_changelog(
+                grep=args.get("grep"),
+                entity=args.get("entity"),
+                note_patch=args.get("note_patch"),
+                patch=args.get("patch"),
+            )
         if name == "resolve_team":
             return self.service.resolve_team(args["query"], patch=args.get("patch"))
         if name == "resolve_player":

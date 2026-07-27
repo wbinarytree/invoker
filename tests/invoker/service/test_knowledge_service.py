@@ -24,7 +24,7 @@ def _write_bundle(
     (bundle / "bundle.json").write_text(
         json.dumps(
             {
-                "schema_version": 1,
+                "schema_version": 2,
                 "default_patch": "7.41b",
                 "patches": ["7.41b"],
                 "generated_at": "2026-05-01T00:00:00Z",
