@@ -51,13 +51,14 @@ def good_card() -> EntityCard:
     )
 
 
-def run_generate(tmp_path, backend):
+def run_generate(tmp_path, backend, rejected_dir=None):
     return generate_item(
         FIXTURE_ROOT,
         backend,
         item="mage_slayer",
         patch="7.41b",
         kb_dir=tmp_path / "kb" / "7.41b",
+        rejected_dir=rejected_dir,
     )
 
 
@@ -228,6 +229,39 @@ def test_card_number_check_scoped_to_cited_section(tmp_path):
     backend = FakeBackend(good_article(), bad)
     with pytest.raises(GenerationError, match=r"card sentence 1.*99"):
         run_generate(tmp_path, backend)
+
+
+def test_check_failure_persists_rejected_item_article(tmp_path):
+    # parity with the concept side: a coverage failure after a paid
+    # article call lands article + error under rejected/items/<slug>/
+    article = good_article().replace(f"[{MECHANICS}] ", "")
+    rejected = tmp_path / "rejected"
+    with pytest.raises(GenerationError, match="does not cite"):
+        run_generate(tmp_path, FakeBackend(article, good_card()), rejected_dir=rejected)
+    (attempt,) = list((rejected / "items" / "mage_slayer").iterdir())
+    assert (attempt / "article.md").read_text() == article
+    assert "does not cite" in (attempt / "error.txt").read_text()
+    assert not (attempt / "card.json").exists()
+
+
+def test_item_card_failure_persists_article_and_card(tmp_path):
+    bad = EntityCard(
+        entity="mage_slayer",
+        sentences=[CardSentence(text="Rare item.", marks=["gamefile:items/item_mage_slayer#nope"])],
+    )
+    rejected = tmp_path / "rejected"
+    with pytest.raises(GenerationError, match="nope"):
+        run_generate(tmp_path, FakeBackend(good_article(), bad), rejected_dir=rejected)
+    (attempt,) = list((rejected / "items" / "mage_slayer").iterdir())
+    assert (attempt / "article.md").read_text() == good_article()
+    assert "nope" in (attempt / "card.json").read_text()
+
+
+def test_no_rejected_dir_means_no_persistence(tmp_path):
+    article = good_article().replace(f"[{MECHANICS}] ", "")
+    with pytest.raises(GenerationError, match="does not cite"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
+    assert not list(tmp_path.glob("**/rejected"))
 
 
 def test_regenerate_card_swaps_card_and_keeps_article(tmp_path):

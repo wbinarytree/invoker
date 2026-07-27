@@ -18,23 +18,25 @@ from invoker.gen.artifacts import (
     EntityCard,
     article_file_text,
     load_entity_article,
+    persist_rejected,
     write_entity_artifact,
 )
 from invoker.gen.checks import (
     article_segments,
     check_article_numbers,
     check_coverage,
+    check_heading_numbers,
     check_marks,
     check_numbers,
     check_title_heading,
     extract_marks,
 )
 from invoker.gen.client import GenerationError
-from invoker.gen.concepts import GenerationBackend, persist_rejected
+from invoker.gen.concepts import GenerationBackend
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "8"
+ITEM_PROMPT_VERSION = "9"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -110,6 +112,10 @@ exactly from the article's marks. A mark vouches only for facts its own \
 section states — never attach a mark to a sentence whose facts come from \
 elsewhere. Cite the narrowest key that states the fact; never pad with \
 broader keys.
+- A sentence that carries a value from a stat table cites the table's \
+section for that value — the prose section that *discusses* the stat \
+(a description, a mechanic) does not vouch for its number. Getting this \
+wrong is the most common way a card is rejected.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
 - When the article closes with a lore flavor line, the card's last sentence \
 carries that lore as the article states it, with the lore section's mark — \
@@ -253,6 +259,7 @@ def generate_item(
         check_marks(citations, valid_marks, "article", slug)
         check_coverage(citations, valid_marks, "article", slug)
         check_article_numbers(article.text, text_by_mark, slug)
+        check_heading_numbers(article.text, packet, slug)
 
         card = backend.generate_structured(
             EntityCard,
