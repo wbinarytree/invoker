@@ -39,6 +39,13 @@ contract:
   source links (the KB site renderer already proves this mapping).
 - **Heroes deferred** until the hero generator lands; the layout grammar
   already reserves `heroes/<slug>/`.
+- **English only** (user decision 2026-07-27). i18n is explicitly out of
+  scope for the KB contract — even Liquipedia doesn't handle it well.
+  Resolution, changelog text, and article payloads are English; the
+  bundle does not carry non-English locales for KB purposes. If
+  translation is ever genuinely needed, it is a downstream LLM/codex
+  pass with a term-hint glossary on the consumer side, never a bundle or
+  service concern.
 
 ## Design
 
@@ -92,8 +99,8 @@ existing method-per-route/tool pattern:
   agents that need discovery, not lookup.
 - `kb_resolve(query, patch=None)` — deterministic and conservative,
   matching the existing resolution rules: exact `<kind>/<slug>` ids,
-  slugs, casefolded titles; for items additionally localized display
-  names and source-backed aliases from the game-constants snapshot
+  slugs, casefolded titles; for items additionally English display names
+  and source-backed English aliases from the game-constants snapshot
   already in the bundle (the `lookup_hero` machinery, pointed at items).
   Ambiguity returns candidates; getters fail rather than choose; no
   fuzzy matching.
@@ -106,7 +113,7 @@ existing method-per-route/tool pattern:
   silently.
 - `search_changelog(query, patch=None)` — wraps the existing
   `snapshot/changelog.py` search over the bundled `changelog.json`,
-  returning per-patch hits with locale text. Missing changelog fails
+  returning per-patch hits with English note text. Missing changelog fails
   with the snapshot playbook pointer, mirroring the benchmark's loud
   temporal-case warning.
 
@@ -133,6 +140,7 @@ choice, never an export-time transformation.
 - Phylactery-side work: coach tools, staging, wiki tab — specced in that
   repo against this contract once it freezes.
 - Serving raw corpus documents through the service or bundle.
+- i18n / translated KB payloads (English-only decision above).
 
 ## Acceptance
 
