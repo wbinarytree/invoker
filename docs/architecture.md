@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-27 (full 7.41d KB corpus accepted — concept + item fleets; bucket report --kind item with identifier-flag annotation; prompt versions concept v10 / item v6)
+Last updated: 2026-07-27 (item KB quality follow-ups: #mechanics packet policy, guard prompt v2 register rules, item prompt v7 qualifiers + card lore, regenerate-item-card CLI)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -484,7 +484,11 @@ artifact is the acceptance act. `invoker guard-artifact <artifact.json>`
 re-guards any existing artifact. Prompt v5 of the concept article
 prompt (lossless compression, enumerations in full) is the
 guard-driven counterpart: measured 2026-07-26, codex concept artifacts
-went from 44/122 flags to clean.
+went from 44/122 flags to clean. Guard prompt v2 (quality-followups
+spec) teaches the guard the article register: a fact is carried when
+its value sits in a table and its meaning in prose (joint restatement
+never demanded), and internal identifiers, bare display labels, and
+unsubstituted template variables are never missing facts.
 
 **Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
 packet = the concept's corpus sections rendered with citation keys
@@ -552,16 +556,30 @@ literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
 the formula with its prices, prose is behavior semantics, and the
-article closes with the lore as a flavor line (prompt v6 — lore is
+article closes with the lore as a flavor line (prompt v7 — lore is
 required coverage, never allowlisted, user direction 2026-07-26; v6
-ports the concept-fleet v8–v10 hardening) —
+ports the concept-fleet v8–v10 hardening; v7 requires source
+qualifiers — cadence, damage-type restriction, trigger condition,
+active/passive classification — to survive into prose, and the card
+closes with the lore line, user direction 2026-07-27) —
 each tier (identity line, card, article) adds information over the one
-above. Same faithfulness discipline
+above. The `#mechanics` packet section applies the quality-followups
+policy: bare `Passive` on a record with no description (engine
+boilerplate on ~100 pure-stat records) emits no Behavior line, values
+duplicated by an attribs row are dropped (Valve stores some values
+twice), and behavior flags always render as labels — 26 mapped, plus a
+title-case fallback so raw `DOTA_ABILITY_BEHAVIOR_*` enums never reach
+prose. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
 resolve against the packet, every packet section (including `loc:`
 lore/description) must be cited, numbers per cited section. The shared mark
 grammar itself lives in `invoker.marks` (used by both generation and
-benchmark). CLI: `invoker generate-item <item> --patch <patch>`.
+benchmark). CLI: `invoker generate-item <item> --patch <patch>`;
+`invoker regenerate-item-card <slug> --patch <patch>` rebuilds only the
+card from the stored article (marks and numbers validated against the
+article's own citation structure via `article_segments` — today's
+packet may legitimately differ), used for the card-lore pass over the
+accepted corpus.
 
 KB layout grammar: entity classes are sibling directories —
 `concepts/<slug>/`, `items/<slug>/`, and (planned) `heroes/<slug>/`,
