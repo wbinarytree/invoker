@@ -96,6 +96,8 @@ def test_degenerate_sections_dropped_from_packet():
     assert is_degenerate_section("Error no text specified!")
     assert is_degenerate_section("Main Article: Rubick")
     assert is_degenerate_section("Main Article: Rubick\nError no text specified!")
+    # case variants slip through wiki markup ("Main article:") — casefolded
+    assert is_degenerate_section("Main article: Rubick")
     # content survives even alongside a stub line
     assert not is_degenerate_section("Main Article: Spell Steal\nRange\n800")
     assert not is_degenerate_section("Attacks miss 25% of the time.")
@@ -353,15 +355,24 @@ def test_no_rejected_dir_means_no_persistence(tmp_path):
 
 
 def test_structural_digits_are_not_number_claims(tmp_path):
-    # headings mirror source section titles ("Example 3") and ordered
-    # lists carry the model's own numbering — neither is a factual claim
+    # headings mirror source section titles and ordered lists carry the
+    # model's own numbering — neither is checked per-section. Heading
+    # digits must still exist somewhere in the packet (25 does; the
+    # list markers 1./2. stay unchecked entirely).
     article = good_article() + (
-        f"\n\n## Example 99: Miss Streaks\n\n"
+        f"\n\n## Example 25: Miss Streaks\n\n"
         f"1. Attacks can miss.\n"
         f"2. Consecutive misses happen. [corpus:{DEF_KEY}]"
     )
-    artifact, _ = run_generate(tmp_path, FakeBackend(article, good_card()))
-    assert artifact.slug == "evasion"
+    run_generate(tmp_path, FakeBackend(article, good_card()))
+
+
+def test_fabricated_heading_number_fails_loudly(tmp_path):
+    # the aura hole from the saved review: a model-authored heading
+    # carrying a value found nowhere in the packet is a fabrication
+    article = good_article() + "\n\n### Linger Duration = 0.033\n"
+    with pytest.raises(GenerationError, match="headings contain numbers"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
 
 
 def test_inline_numbers_still_checked_after_structural_strip(tmp_path):
@@ -400,3 +411,12 @@ def test_unknown_slug_fails_loudly(tmp_path):
             patch="7.41d",
             kb_dir=tmp_path / "kb",
         )
+
+
+def test_coverage_allowlist_is_casefolded():
+    from invoker.gen.checks import is_allowlisted_anchor
+
+    assert is_allowlisted_anchor("See_Also")
+    assert is_allowlisted_anchor("See_also")
+    assert is_allowlisted_anchor("References")
+    assert not is_allowlisted_anchor("Trivia")

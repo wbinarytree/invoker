@@ -27,13 +27,17 @@ def strip_structural_digits(text: str) -> str:
     markers (the numbering is the model's, the content stays checked)."""
     return ORDERED_LIST_MARKER.sub(r"\1", HEADING_LINE.sub("", text))
 
-COVERAGE_ALLOWLIST = frozenset({"References", "Gallery", "See_Also", "See_also"})
-"""Section anchors exempt from coverage: wiki reference/footnote lists,
-image galleries (captions whose charts never survive corpus extraction),
-and navigation link lists carry no load-bearing facts (specs: generation
-completeness gates; batch KB generation — anchors enumerated across all
-98 corpus pages 2026-07-26, both observed case variants of See_also).
-Trivia is deliberately absent: like item lore, it is content."""
+COVERAGE_ALLOWLIST = frozenset({"references", "gallery", "see_also"})
+"""Section anchors exempt from coverage, compared casefolded: wiki
+reference/footnote lists, image galleries (captions whose charts never
+survive corpus extraction), and navigation link lists carry no
+load-bearing facts (specs: generation completeness gates; batch KB
+generation). Trivia is deliberately absent: like item lore, it is
+content."""
+
+
+def is_allowlisted_anchor(anchor: str) -> bool:
+    return anchor.casefold() in COVERAGE_ALLOWLIST
 
 
 def extract_marks(text: str) -> list[str]:
@@ -72,7 +76,7 @@ def check_coverage(cited: list[str], valid: set[str], what: str, slug: str) -> N
     missing = sorted(
         mark
         for mark in valid
-        if mark not in cited_set and mark.partition("#")[2] not in COVERAGE_ALLOWLIST
+        if mark not in cited_set and not is_allowlisted_anchor(mark.partition("#")[2])
     )
     if missing:
         raise GenerationError(
@@ -117,6 +121,28 @@ def check_numbers(text: str, source_text: str, what: str, slug: str) -> None:
     if missing:
         raise GenerationError(
             f"{slug}: {what} contains numbers not found in the cited source: {', '.join(missing)}"
+        )
+
+
+def check_heading_numbers(text: str, packet: str, slug: str) -> None:
+    """Heading digits are exempt from per-section citation (they mirror
+    source titles — "Example 3", "Pre-7.41"), but a model-authored
+    heading carrying a value found nowhere in the whole packet is a
+    fabrication vector ("### Aura Linger Duration = 0.033", saved
+    review 2026-07-27). Checked against the full packet text, headers
+    included — looser than per-section, tighter than unchecked."""
+    headings = "\n".join(
+        match.group(0) for match in HEADING_LINE.finditer(strip_marks(text))
+    )
+    missing = sorted(
+        number
+        for number in set(NUMBER_PATTERN.findall(headings))
+        if number not in packet
+    )
+    if missing:
+        raise GenerationError(
+            f"{slug}: article headings contain numbers not found in the packet: "
+            f"{', '.join(missing)}"
         )
 
 

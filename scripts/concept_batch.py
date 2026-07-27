@@ -28,7 +28,7 @@ import subprocess
 import sys
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -98,6 +98,14 @@ def discover_items(game_data_dir: Path, patch: str, kb: Path) -> list[str]:
         for name in item_scope(game_data_dir, patch)
         if not (kb / "items" / item_slug(name) / "artifact.json").exists()
     ]
+
+
+def is_transport_class(bucket: str, *, paid_evidence: bool, timed_out: bool) -> bool:
+    """Transport-class = safe to re-queue because nothing was paid for:
+    no artifact, no rejected entry from this attempt, and not a timeout —
+    a kill 15 minutes in almost certainly interrupted a paid generation
+    whose reject was never written (saved review: double-pay window)."""
+    return bucket == "failed" and not paid_evidence and not timed_out
 
 
 def bucket_for(entity_dir: Path) -> str:
@@ -176,6 +184,7 @@ def run_entity(
     ]
     if kind == "concept":
         cmd += ["--host", host]
+    timed_out = False
     try:
         proc = subprocess.run(
             cmd, capture_output=True, text=True, timeout=ENTITY_TIMEOUT_S
@@ -184,15 +193,15 @@ def run_entity(
         stderr_tail = proc.stderr[-STDERR_TAIL_CHARS:]
     except subprocess.TimeoutExpired as exc:
         exit_code = -1
+        timed_out = True
         stderr_tail = f"timeout after {ENTITY_TIMEOUT_S}s: {exc}"
 
     bucket = bucket_for(entity_dir)
-    # transport-class = nothing was ever paid for: no artifact AND no
-    # rejected entry appeared during this attempt
     paid_evidence = rejected_entity.exists() and any(
         p.stat().st_mtime >= wall_start - 5 for p in rejected_entity.iterdir()
     )
-    transport_class = bucket == "failed" and not paid_evidence
+    transport_class = is_transport_class(bucket, paid_evidence=paid_evidence,
+                                         timed_out=timed_out)
 
     line = {
         "slug": slug,
@@ -226,13 +235,15 @@ def run_pool(slugs: list[str], *, concurrency: int, **entity_kwargs) -> list[str
         }
         queue = queue[concurrency:]
         while in_flight:
-            done = next(as_completed(in_flight))
-            in_flight.remove(done)
-            slug, outcome = done.result()
-            if outcome == "transport":
-                transport.append(slug)
-            if queue and not breaker.tripped:
-                in_flight.add(pool.submit(run_entity, queue.pop(0), **entity_kwargs))
+            done, in_flight = wait(in_flight, return_when=FIRST_COMPLETED)
+            for future in done:
+                slug, outcome = future.result()
+                if outcome == "transport":
+                    transport.append(slug)
+                if queue and not breaker.tripped:
+                    in_flight = in_flight | {
+                        pool.submit(run_entity, queue.pop(0), **entity_kwargs)
+                    }
         if queue:
             print(f"circuit breaker: {breaker.tripped} — "
                   f"{len(queue)} entities not attempted")

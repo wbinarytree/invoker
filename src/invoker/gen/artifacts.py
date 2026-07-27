@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal
 
@@ -59,6 +60,31 @@ class EntityArtifact(BaseModel):
     packet_sha256: str
     article_provenance: GenerationProvenance
     card_provenance: GenerationProvenance
+
+
+def persist_rejected(
+    rejected_dir: Path | None,
+    *,
+    kind: str,
+    slug: str,
+    article_text: str,
+    card: EntityCard | None,
+    error: Exception,
+) -> Path | None:
+    """Persist paid-for output that will not become an artifact — the
+    article (and card, when one exists) plus the error text — so an abort
+    never discards what the tokens bought. Returns the directory written,
+    or None when persistence is off (no rejected_dir)."""
+    if rejected_dir is None:
+        return None
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%f")
+    target = rejected_dir / kind / slug / stamp
+    target.mkdir(parents=True, exist_ok=True)
+    (target / "article.md").write_text(article_text)
+    if card is not None:
+        (target / "card.json").write_text(card.model_dump_json(indent=2))
+    (target / "error.txt").write_text(f"{type(error).__name__}: {error}\n")
+    return target
 
 
 def article_file_text(*, title: str, kind: str, patch: str, card: EntityCard, body: str) -> str:

@@ -42,7 +42,8 @@ target-version = "py311"
 select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]
 
 [tool.pyright]
-include = ["src", "tests"]
+include = ["src", "tests", "scripts"]
+extraPaths = ["scripts"]
 pythonVersion = "3.11"
 typeCheckingMode = "basic"
 

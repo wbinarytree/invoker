@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Protocol, TypeVar
 
@@ -14,11 +13,13 @@ from invoker.gen.artifacts import (
     EntityArtifact,
     EntityCard,
     article_file_text,
+    persist_rejected,
     write_entity_artifact,
 )
 from invoker.gen.checks import (
     check_article_numbers,
     check_coverage,
+    check_heading_numbers,
     check_marks,
     check_numbers,
     extract_marks,
@@ -125,7 +126,7 @@ class GenerationBackend(Protocol):
 
 
 WIKI_ERROR_TEXT = "Error no text specified!"
-MAIN_ARTICLE_LINE = re.compile(r"^Main Article:.*$", re.MULTILINE)
+MAIN_ARTICLE_LINE = re.compile(r"^Main Article:.*$", re.MULTILINE | re.IGNORECASE)
 
 
 def is_degenerate_section(text: str) -> bool:
@@ -156,31 +157,6 @@ def build_packet(sections: list[CorpusSection]) -> tuple[str, dict[str, str], st
         parts.append(f"## [{section.citation_key}] {crumb}\n{section.text}")
     packet = "\n\n".join(parts)
     return packet, text_by_mark, hashlib.sha256(packet.encode()).hexdigest()
-
-
-def persist_rejected(
-    rejected_dir: Path | None,
-    *,
-    kind: str,
-    slug: str,
-    article_text: str,
-    card: EntityCard | None,
-    error: Exception,
-) -> Path | None:
-    """Persist paid-for output that will not become an artifact — the
-    article (and card, when one exists) plus the error text — so an abort
-    never discards what the tokens bought. Returns the directory written,
-    or None when persistence is off (no rejected_dir)."""
-    if rejected_dir is None:
-        return None
-    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%f")
-    target = rejected_dir / kind / slug / stamp
-    target.mkdir(parents=True, exist_ok=True)
-    (target / "article.md").write_text(article_text)
-    if card is not None:
-        (target / "card.json").write_text(card.model_dump_json(indent=2))
-    (target / "error.txt").write_text(f"{type(error).__name__}: {error}\n")
-    return target
 
 
 def generate_concept(
@@ -221,6 +197,7 @@ def generate_concept(
         # scoped per citation, over section texts only — packet headers carry
         # key/revision digits that must never vouch for a number in prose
         check_article_numbers(article.text, text_by_mark, slug)
+        check_heading_numbers(article.text, packet, slug)
 
         card = backend.generate_structured(
             EntityCard,
