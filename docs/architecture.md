@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-27 (debt clearing: heading digits checked against whole packet, casefolded allowlist/degenerate matching, persist_rejected home in artifacts.py, item card prompt v9 table-value citation, driver timeout≠transport, scripts under pyright)
+Last updated: 2026-07-27 (KB exposure: export-kb consumer bundle + KnowledgeService KB ladder — kb_catalog/kb_resolve/kb_card/kb_article/search_changelog — over bundle schema 2; Unicode-aware service normalization)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -229,7 +229,7 @@ recorded in `release.json`.
 read-only service core for agent consumers. It loads one explicit resource
 bundle root and does not fetch network data during service reads.
 
-The first bundle layout is:
+The bundle layout is:
 
 - `bundle.json`
 - `authored/teams.yaml`
@@ -240,13 +240,46 @@ The first bundle layout is:
 - `game_constants/<patch>/items.json`
 - `game_constants/<patch>/neutral_items.json`
 - `game_constants/<patch>/localization/<locale>.json`
+- `game_constants/<patch>/changelog.json` (when changelog queries should work)
+- `kb/<patch>/index.json`, `kb/<patch>/sources.json`,
+  `kb/<patch>/{concepts,items}/<slug>/{article.md,artifact.json}` —
+  written by `invoker export-kb`
 - `derived/<patch>/teams/index.json`
 - `derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 
-`bundle.json` records `schema_version`, `patches`, and optional
-`default_patch`. If a bundle has one patch, service callers do not need to pass
-`patch`. If it has multiple patches and no default, patch-free calls fail with
-a clear ambiguity error listing available patches.
+`bundle.json` records `schema_version` (2), `patches`, `kb_patches`, and
+optional `default_patch`. If a bundle has one patch, service callers do not
+need to pass `patch`. If it has multiple patches and no default, patch-free
+calls fail with a clear ambiguity error listing available patches.
+
+**KB ladder** (spec:
+`docs/specs/2026-07-27-kb-exposure-service-and-bundle.md`): the service
+serves the exported KB tree through the granularity ladder — `kb_catalog`
+(index entries: id, kind, slug, title, identity line; the identity line is
+the card's first sentence, same as the answerer index summary),
+`kb_resolve` (deterministic and conservative: exact ids/slugs/casefolded
+titles plus item display names and source-backed aliases from every
+bundled locale via `export_identity_localization`; resolution keys may be
+any locale, content stays English; candidates on ambiguity, no fuzzy;
+degraded alias data is recorded as `alias_source: null`, never hidden),
+`kb_card` (structured sentences with marks + card provenance),
+`kb_article` (the verbatim article file + citations + provenance), and
+`search_changelog` (English note text over the bundled `changelog.json`,
+requiring at least one filter). Card and article reads go through
+`load_entity_article`, so a drifted bundle file fails the call. A missing
+`kb/<patch>/` tree fails with the `export-kb` command to run. Service
+normalization is Unicode-aware (same rule as `invoker.identity`), so CJK
+resolution keys survive.
+
+`invoker export-kb --patch <patch> --out-dir <bundle-root>` builds the KB
+tree from `data/kb/<patch>/` (`src/invoker/service/kb_bundle.py`): every
+artifact is verified through its sha binding before copying, `index.json`
+carries the catalog plus the KB content fingerprint (shared
+`kb_fingerprint`, now in `gen/artifacts.py`), `sources.json` carries
+corpus host base URLs and licenses so consumers can render `corpus:`
+marks as pinned live links, and `bundle.json` is created or updated.
+Re-exporting an unchanged KB is byte-stable. This exported tree is the
+data contract downstream consumers (phylactery) vendor.
 
 Hero constants are assembled from bundled game-file snapshots through
 `GameFilesSource` and the existing hero context builders. The public
