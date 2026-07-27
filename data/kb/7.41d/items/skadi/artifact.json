@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "skadi",
+  "title": "Eye of Skadi",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0bb1be6197350322f49bcef85dfe57093a4ab9b66cd8747721b06579e5d27772",
+  "citations": [
+    "gamefile:items/item_skadi#cost",
+    "gamefile:items/item_skadi#attribs",
+    "loc:DOTA_Tooltip_ability_item_skadi_Description",
+    "gamefile:items/item_skadi#components",
+    "gamefile:items/item_skadi#mechanics",
+    "loc:DOTA_Tooltip_ability_item_skadi_Lore"
+  ],
+  "packet_sha256": "307ec2d03892036ec1a64c1ae4f0b8ed6d50b81d925ce4703e1ba873ea94b551",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "46c372bcbf4f4cc87a08a138425501bf15d6ef1323e382f500fb45c717ccbdad",
+    "input_tokens": 14319,
+    "output_tokens": 1339,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:45.852263+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "8a40580bda11ac2de4a1a75f49e6143c3724296d140d6b88f0d32d0ce50e9f1a",
+    "input_tokens": 14411,
+    "output_tokens": 2020,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:31.944010+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "giants_ring",
+  "title": "Giant's Ring",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e79d1787e6612cb6962e4a01c40e3fb3bf5f18b22bc261de7c200c735661865e",
+  "citations": [
+    "gamefile:items/item_giants_ring#mechanics",
+    "loc:DOTA_Tooltip_ability_item_giants_ring_Description",
+    "gamefile:items/item_giants_ring#attribs",
+    "gamefile:items/item_giants_ring#cost",
+    "loc:DOTA_Tooltip_ability_item_giants_ring_Lore"
+  ],
+  "packet_sha256": "462036bbc32395e66b6e36cd9bfd61362d72860ea74442c2797feb0e3ab2908a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c7ca4bf3566d68c65cfe1f964abd5c84c5d592c560327618687db22313d8b333",
+    "input_tokens": 14208,
+    "output_tokens": 1240,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:49.341921+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a84021439f7ab54fd7ed19cf9390576cd3b416e292e94e1c17d1de352aaf3d3c",
+    "input_tokens": 14309,
+    "output_tokens": 489,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:07.051356+00:00"
+  }
+}

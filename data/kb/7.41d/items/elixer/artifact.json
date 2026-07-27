@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "elixer",
+  "title": "Elixir",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a8069ba8478bcccbec99c356c6e562eeea7835977573ca955ce17426e557dfd6",
+  "citations": [
+    "loc:DOTA_Tooltip_ability_item_elixer_Description",
+    "gamefile:items/item_elixer#attribs",
+    "gamefile:items/item_elixer#cost",
+    "gamefile:items/item_elixer#mechanics"
+  ],
+  "packet_sha256": "22363126e7d432a69b4af6643a86d8bfb64940e3319d8b9c5ad87087a588e858",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9576bc621118342cc71bbbcc10ba5159eebeff4d94626756d2f81ac3d5a11f7d",
+    "input_tokens": 14186,
+    "output_tokens": 1149,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:44.097075+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "62bdbfe9649b0aa8cb0bfa208a78dbbe20b84f35bf15d01ba6e4c89764f07ee6",
+    "input_tokens": 14256,
+    "output_tokens": 555,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:57.323320+00:00"
+  }
+}

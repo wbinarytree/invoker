@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "princes_knife",
+  "title": "Prince's Knife",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e69294e35e66cc29c088d869e086535357b319bf87655ad7e30362392c46d13e",
+  "citations": [
+    "gamefile:items/item_princes_knife#cost",
+    "gamefile:items/item_princes_knife#attribs",
+    "loc:DOTA_Tooltip_ability_item_princes_knife_Description",
+    "gamefile:items/item_princes_knife#mechanics"
+  ],
+  "packet_sha256": "2478e069befab1ba0a538880a2d59cd5ac847315bac17e96cd794914405275db",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f8adfd9480dfcef3e0ae287d11489a2efe97c8c9a0fe7f36b89f21423be70788",
+    "input_tokens": 14152,
+    "output_tokens": 1276,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:37.612629+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "24ed6d4b5c8cb5110f3b08540f9b8aa1d611b1c0310324558357035c455ca980",
+    "input_tokens": 14270,
+    "output_tokens": 494,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:51.099880+00:00"
+  }
+}

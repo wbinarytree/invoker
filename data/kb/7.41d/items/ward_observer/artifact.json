@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ward_observer",
+  "title": "Observer Ward",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "35dd5174dd5299c6d74a867b9ca64dc8c0a9cd8201810fb35aded2f97ada1ba6",
+  "citations": [
+    "gamefile:items/item_ward_observer#cost",
+    "loc:DOTA_Tooltip_ability_item_ward_observer_Description",
+    "gamefile:items/item_ward_observer#attribs",
+    "gamefile:items/item_ward_observer#mechanics",
+    "gamefile:items/item_ward_observer#components",
+    "loc:DOTA_Tooltip_ability_item_ward_observer_Lore"
+  ],
+  "packet_sha256": "af7e6bbc79e1b39a5b50a980bc57c76f3fccb76d9e5264f95e8511d3e0a10f47",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "656b98c353b36229bebd93a344978da67bbac242da1caedcf253854489234092",
+    "input_tokens": 13867,
+    "output_tokens": 1364,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:48.341401+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "8626f260e555370e4da39aec8c2f2913cf778c41011b6d212d0a5c2d46fafef9",
+    "input_tokens": 14358,
+    "output_tokens": 741,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:06.688262+00:00"
+  }
+}

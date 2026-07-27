@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_mystical",
+  "title": "Mystical",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5e4798e28d4f3f80830d6bb4c6785a1c2f8e723120f358bd99454871cd0ec135",
+  "citations": [
+    "gamefile:items/item_enhancement_mystical#cost",
+    "gamefile:items/item_enhancement_mystical#attribs",
+    "gamefile:items/item_enhancement_mystical#mechanics"
+  ],
+  "packet_sha256": "ade8bcc6827da656749779e12aae1f55c26cb485996e9dd3038e740afde78afa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8423ec428bedc9d8c2c3e476a000180bc5626416cfc4f7bca532248ba1d0f98d",
+    "input_tokens": 14136,
+    "output_tokens": 720,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:59.753610+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f5ff034c71a8985567c634e5b94424e59c92c69215e60274a8efe55de009bca3",
+    "input_tokens": 14233,
+    "output_tokens": 394,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:01:10.939150+00:00"
+  }
+}

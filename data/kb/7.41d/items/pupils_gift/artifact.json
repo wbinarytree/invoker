@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "pupils_gift",
+  "title": "Pupil's Gift",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9438aa796bc953655757b2a472d7c11eec6180e45ab2eb27cac3c41722d2d878",
+  "citations": [
+    "gamefile:items/item_pupils_gift#mechanics",
+    "loc:DOTA_Tooltip_ability_item_pupils_gift_Description",
+    "gamefile:items/item_pupils_gift#attribs",
+    "gamefile:items/item_pupils_gift#cost",
+    "loc:DOTA_Tooltip_ability_item_pupils_gift_Lore"
+  ],
+  "packet_sha256": "f794bfab5022ea52f9dc3d6359b6f9b78b243d713d0a8bb6e8f63faebdee3c41",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5fb2881174713f6880f11b3152f32dcb33513923450313c2d4586c318a52ce45",
+    "input_tokens": 14149,
+    "output_tokens": 682,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:25.786345+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "4edbc174f422da922a1e3c07534975c0b79abfdf9ef335ea181e0540eacbbfba",
+    "input_tokens": 14194,
+    "output_tokens": 482,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:38.657354+00:00"
+  }
+}

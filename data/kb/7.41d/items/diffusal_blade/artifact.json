@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "diffusal_blade",
+  "title": "Diffusal Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ea652a318031be5e782f1d3e15b45ada336b7473c1dace2195bc2a8905fda6f5",
+  "citations": [
+    "gamefile:items/item_diffusal_blade#cost",
+    "gamefile:items/item_diffusal_blade#attribs",
+    "loc:DOTA_Tooltip_ability_item_diffusal_blade_Description",
+    "gamefile:items/item_diffusal_blade#mechanics",
+    "gamefile:items/item_diffusal_blade#components",
+    "loc:DOTA_Tooltip_ability_item_diffusal_blade_Lore"
+  ],
+  "packet_sha256": "bab294078982db853596a15f0040b159a377f306686b13ca7574d277cad8ce17",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a9004a04f14a3040939d2118d92e6ae3177f1f709245d77691b0fe683be336b4",
+    "input_tokens": 13964,
+    "output_tokens": 1476,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:48.251596+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "bad377bcbdcf8830c258be00e6a6edd0623ab31f1c39879a90f006ff5dfa7e18",
+    "input_tokens": 14471,
+    "output_tokens": 1962,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:39.624825+00:00"
+  }
+}

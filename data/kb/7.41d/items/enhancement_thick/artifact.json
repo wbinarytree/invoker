@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_thick",
+  "title": "Thick",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "45ea47a33e59b91c36a2290dd3a32aa667210fb179a325f58b3f85c850596161",
+  "citations": [
+    "gamefile:items/item_enhancement_thick#cost",
+    "gamefile:items/item_enhancement_thick#mechanics",
+    "gamefile:items/item_enhancement_thick#attribs"
+  ],
+  "packet_sha256": "db234f28614fd6b200266b4ec7297057997c96bf1f0e7f4e3196c90addc68582",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "10741f436fef7168e6574ae1b30993a36518d980d7528c6575327ce67d645972",
+    "input_tokens": 14096,
+    "output_tokens": 673,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:05.028353+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "79bfc43ff70fc47eb5cd9cbfee3ffef625300bd31edffef01680587fb817af72",
+    "input_tokens": 14183,
+    "output_tokens": 196,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:13.193997+00:00"
+  }
+}

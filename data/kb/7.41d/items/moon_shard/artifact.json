@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "moon_shard",
+  "title": "Moon Shard",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7f3af6d89723ea304d863000e476c032131f321675ba29dde027045e4af32769",
+  "citations": [
+    "gamefile:items/item_moon_shard#cost",
+    "gamefile:items/item_moon_shard#attribs",
+    "loc:DOTA_Tooltip_ability_item_moon_shard_Description",
+    "gamefile:items/item_moon_shard#components",
+    "gamefile:items/item_moon_shard#mechanics",
+    "loc:DOTA_Tooltip_ability_item_moon_shard_Lore"
+  ],
+  "packet_sha256": "a6b7785e3f1ab9d8126c2e3806018443e2e585d0cbc00fce7558f47a9db88915",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9af9baca6f59125a634a0cb9545e3b83e27eef31209c66fa49ddd5f2b00ac7c6",
+    "input_tokens": 14254,
+    "output_tokens": 1320,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:29.911192+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "27d28b5624ca0df33b1bf27d3e42c7227c116af3fdf56d08d5fafed1511e4218",
+    "input_tokens": 14343,
+    "output_tokens": 599,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:47.013758+00:00"
+  }
+}

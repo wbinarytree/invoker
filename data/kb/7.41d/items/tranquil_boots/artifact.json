@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tranquil_boots",
+  "title": "Tranquil Boots",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5e8ca1f7ae3309bbfc1632935572a2ce61d52fa8bd5d106d1030040e343dba2f",
+  "citations": [
+    "gamefile:items/item_tranquil_boots#cost",
+    "gamefile:items/item_tranquil_boots#attribs",
+    "loc:DOTA_Tooltip_ability_item_tranquil_boots_Description",
+    "gamefile:items/item_tranquil_boots#mechanics",
+    "gamefile:items/item_tranquil_boots#components",
+    "loc:DOTA_Tooltip_ability_item_tranquil_boots_Lore"
+  ],
+  "packet_sha256": "6c6786b473c70b9c26dfa476c013939e89e3b257f26d98e53614967d5f3b743c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "10ab54be59b30d2ea90e72f39f2c4d1005cff16b818113a3584c3cfc8ad0bdd9",
+    "input_tokens": 14372,
+    "output_tokens": 1300,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:52.332658+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "9ab2930c3901ec738966acb77b6e31fb38e6c43565924a996381107028cecfed",
+    "input_tokens": 14467,
+    "output_tokens": 1854,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:36.952284+00:00"
+  }
+}

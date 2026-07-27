@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "void_stone",
+  "title": "Void Stone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "505806353c5445eb057e9b968233913497a778e8b5a9212902fd837299bf70b6",
+  "citations": [
+    "gamefile:items/item_void_stone#cost",
+    "gamefile:items/item_void_stone#attribs",
+    "gamefile:items/item_void_stone#mechanics",
+    "gamefile:items/item_void_stone#components",
+    "loc:DOTA_Tooltip_ability_item_void_stone_Lore"
+  ],
+  "packet_sha256": "b867c09047e204c1481213ac7d4c2dac82b774dfedd18cb4a92998e74e6ee847",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0bced20cfbaa828f8ecf138d36f006bd3f52cffca2cdd43d472cea43b242e611",
+    "input_tokens": 13785,
+    "output_tokens": 560,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:26.799786+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f7413f938c267fc02c49379119e032f48c82942ad7bfcf41123c97c1bbfafe4d",
+    "input_tokens": 14261,
+    "output_tokens": 373,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:38.685717+00:00"
+  }
+}

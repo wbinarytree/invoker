@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "arcane_boots",
+  "title": "Arcane Boots",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d931475535f66dede32c9926bdbb4145762440691fc0e2ec4617495bf9024da7",
+  "citations": [
+    "gamefile:items/item_arcane_boots#cost",
+    "gamefile:items/item_arcane_boots#attribs",
+    "loc:DOTA_Tooltip_ability_item_arcane_boots_Description",
+    "gamefile:items/item_arcane_boots#components",
+    "gamefile:items/item_arcane_boots#mechanics",
+    "loc:DOTA_Tooltip_ability_item_arcane_boots_Lore"
+  ],
+  "packet_sha256": "f5246b71135e1afa581afe4e32dde62964b122d286817c75c50b4097fcc81d70",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e3ae243d7310b2892f4d97c6919396a463dc4586e02503706e4f6444dfc049e2",
+    "input_tokens": 13936,
+    "output_tokens": 1969,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:59.091377+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "75d88451879340f18dda30cd5eb0547f27762235c252adabbdcf7de52c34af68",
+    "input_tokens": 14448,
+    "output_tokens": 785,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:19.498636+00:00"
+  }
+}

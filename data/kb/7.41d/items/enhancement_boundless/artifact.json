@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_boundless",
+  "title": "Boundless",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "11181eaa12f244a685e4a119499dd37a657165df730f503e6aea429e4b97840c",
+  "citations": [
+    "gamefile:items/item_enhancement_boundless#cost",
+    "gamefile:items/item_enhancement_boundless#mechanics",
+    "gamefile:items/item_enhancement_boundless#attribs"
+  ],
+  "packet_sha256": "888ceeda3915a3665bc3b2084dc6fc83583de0e01d1908daef47c3b5cb3270bf",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9464b784f74d6a527e9e1afbee8fa30735a3e4753835623855a41146c0c2714b",
+    "input_tokens": 13687,
+    "output_tokens": 678,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:23.646548+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "c721ccfe3e0af2a20c4086c3804ea2a95e17f68deaeed142b2098c2ea9122e1f",
+    "input_tokens": 14190,
+    "output_tokens": 274,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:32.078502+00:00"
+  }
+}

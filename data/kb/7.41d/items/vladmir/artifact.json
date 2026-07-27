@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vladmir",
+  "title": "Vladmir's Offering",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "617bd703f0f7929e02f3ca23f6a27905c1152700c5f07e860bff926245790d40",
+  "citations": [
+    "gamefile:items/item_vladmir#cost",
+    "gamefile:items/item_vladmir#attribs",
+    "loc:DOTA_Tooltip_ability_item_vladmir_Description",
+    "gamefile:items/item_vladmir#mechanics",
+    "gamefile:items/item_vladmir#components",
+    "loc:DOTA_Tooltip_ability_item_vladmir_Lore"
+  ],
+  "packet_sha256": "3423c2a58deec2596e6a734ad18fcab837b8d9ea9e0d9b79c9c70a3c20190e6d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1eb55bc406b55ea0aff37136d101346d7a59fe4847992e968a5e826f16cfcaf3",
+    "input_tokens": 13952,
+    "output_tokens": 2857,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:24.498243+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "cce1e95e48a7029036e636b089a86088325c666eed777e4578fc6c1231065bbb",
+    "input_tokens": 14473,
+    "output_tokens": 2635,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:21:29.282019+00:00"
+  }
+}

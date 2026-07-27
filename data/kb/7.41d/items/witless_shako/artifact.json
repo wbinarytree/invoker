@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "witless_shako",
+  "title": "Witless Shako",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8842bf5cedc55c73598abe46b6718dd025a231fb39b4045eb32fa5b3b0309de4",
+  "citations": [
+    "gamefile:items/item_witless_shako#cost",
+    "gamefile:items/item_witless_shako#mechanics",
+    "loc:DOTA_Tooltip_ability_item_witless_shako_Description",
+    "gamefile:items/item_witless_shako#attribs"
+  ],
+  "packet_sha256": "e0c51f92649d6da06c73c5d397668a7b5ed27f70f8ea1ab7c27350440ba43811",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e41db772a492ef3702763d4f140f818f6a8a238ba880e6ba8605d4ca48678738",
+    "input_tokens": 13708,
+    "output_tokens": 986,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:11.056091+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "fddbdb8a0a1bb75532ace4486d6cf8ed1a32cb2e6480ab2c342de77760a37832",
+    "input_tokens": 14193,
+    "output_tokens": 582,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:25.040486+00:00"
+  }
+}

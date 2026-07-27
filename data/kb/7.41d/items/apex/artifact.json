@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "apex",
+  "title": "Apex",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "75b09ee6fdcc4b62b9e42a07d2fdc23b1da2943ba6100d4d4dba37fbfb6df538",
+  "citations": [
+    "gamefile:items/item_apex#mechanics",
+    "gamefile:items/item_apex#attribs",
+    "gamefile:items/item_apex#cost",
+    "loc:DOTA_Tooltip_Ability_item_apex_Lore"
+  ],
+  "packet_sha256": "5ae03a96e7d90569f0fc64f192e478c108938ea5c0a40d25f035167ee36eee56",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "caa7faae142a91f29d83eadb3158e4b015aed46b8e5f9b6c485a68fbccb53d88",
+    "input_tokens": 14113,
+    "output_tokens": 622,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:23.814531+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b08e4622dbda9b0b281779a9a210b93afce93ebaf4be1927400b56ad0fc7c655",
+    "input_tokens": 14183,
+    "output_tokens": 216,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:32.520380+00:00"
+  }
+}

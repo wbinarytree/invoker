@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_keen_eyed",
+  "title": "Keen-eyed",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "395c16d384ec9fe52d22a1a169ead2e99ef5f50741ff354100912cd49f185071",
+  "citations": [
+    "gamefile:items/item_enhancement_keen_eyed#cost",
+    "gamefile:items/item_enhancement_keen_eyed#mechanics",
+    "gamefile:items/item_enhancement_keen_eyed#attribs"
+  ],
+  "packet_sha256": "54d7060ce99ecf9062688baa4bb67bbf22f038e133d48414d1c19f09cfce1231",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ff5bb29420c62c892d680554b0f88ceeddb3bb400fb38c754d223335dd58ad5d",
+    "input_tokens": 14131,
+    "output_tokens": 593,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:40.142938+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3a03bbf5704be8ecc6410da58c35f2f6b7c20dba6248b7b1d94e910490748265",
+    "input_tokens": 14221,
+    "output_tokens": 246,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:48.619434+00:00"
+  }
+}

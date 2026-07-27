@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_hulking",
+  "title": "Hulking",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9b759aadf2c9fa1d393e472c38355cddeea1c01bb16bca0666b9e56d33fd7891",
+  "citations": [
+    "gamefile:items/item_enhancement_hulking#cost",
+    "gamefile:items/item_enhancement_hulking#attribs",
+    "gamefile:items/item_enhancement_hulking#mechanics"
+  ],
+  "packet_sha256": "3bf3930071c59a63fae766068fac42ed8d8c5e71f1275f0c1bea4f936929bec1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "98f02e80deab149c20fbedd3f186e7f28343b241c55c029f622da6091f756c61",
+    "input_tokens": 13681,
+    "output_tokens": 685,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:38.918521+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3485e8198673f2a98c35514fd2765aadcf74f925d307a2fc56947f460a9eea86",
+    "input_tokens": 14196,
+    "output_tokens": 311,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:50.022560+00:00"
+  }
+}

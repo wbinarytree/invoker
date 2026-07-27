@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blood_grenade",
+  "title": "Blood Grenade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "965b2074e2b9724f8d89284021a22650812725f3f4fc59fc0fa2b07dac26c49e",
+  "citations": [
+    "gamefile:items/item_blood_grenade#cost",
+    "gamefile:items/item_blood_grenade#attribs",
+    "loc:DOTA_Tooltip_Ability_item_blood_grenade_Description",
+    "gamefile:items/item_blood_grenade#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_blood_grenade_Lore"
+  ],
+  "packet_sha256": "cc5dc27d026c774901aabd90ab911ffa107185ebeeac36b28e85c46fd074f5a1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "332b9dc3d32720b3b856fe2187af077116258a42407905a953bd3c5456a876fd",
+    "input_tokens": 14282,
+    "output_tokens": 1618,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:57.838421+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "9a71037a797ab196372a786bf431f07426c10920a230b40334684b7bbadb2b23",
+    "input_tokens": 14401,
+    "output_tokens": 850,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:22.675094+00:00"
+  }
+}

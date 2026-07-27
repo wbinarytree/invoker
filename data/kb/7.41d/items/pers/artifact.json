@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "pers",
+  "title": "Perseverance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "685edcf33a5d99f0267098289639ffc3f57d17fc8a10e00c07edba4e1ef9e245",
+  "citations": [
+    "gamefile:items/item_pers#cost",
+    "gamefile:items/item_pers#attribs",
+    "gamefile:items/item_pers#components",
+    "gamefile:items/item_pers#mechanics",
+    "loc:DOTA_Tooltip_ability_item_pers_Lore"
+  ],
+  "packet_sha256": "e212522d44a3ce63b83e68a942d7546835fdf933f443da457e64d8ec1df6fc58",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "844fe2f42fa9d6c340bc0416166ac42260b1abf64405d059c6bd2551f03ecde3",
+    "input_tokens": 13829,
+    "output_tokens": 709,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:46.347019+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "eaa8e483b66e115abdcadfee164c545943c628c5c99340b8f8fb1dd6e241f649",
+    "input_tokens": 14312,
+    "output_tokens": 434,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:57.955273+00:00"
+  }
+}

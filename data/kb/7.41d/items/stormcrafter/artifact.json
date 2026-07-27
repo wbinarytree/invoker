@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "stormcrafter",
+  "title": "Stormcrafter",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b59710841571c65f3785db564ae09f5403ec4611b1c9788b6fcc15832359cf00",
+  "citations": [
+    "gamefile:items/item_stormcrafter#attribs",
+    "loc:DOTA_Tooltip_Ability_item_stormcrafter_Description",
+    "gamefile:items/item_stormcrafter#cost",
+    "gamefile:items/item_stormcrafter#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_stormcrafter_Lore"
+  ],
+  "packet_sha256": "aec682a8159a6e2ffd1cdacdcb771d2070d642932b96d9d6a8f64f7249cdb124",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "64899fef79b7d9a8181c7db51bc965457ffe372fd41fd9a6ee80a37ba54ddeb1",
+    "input_tokens": 13797,
+    "output_tokens": 1328,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:55.758658+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "33f25e5f1827db5245cacf0fb93a183900a1927e3f327b56e2b69c834d7f68a3",
+    "input_tokens": 14320,
+    "output_tokens": 660,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:10.546798+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_basilius",
+  "title": "Ring of Basilius",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0e13f60a7477ef60f5031c87a32c0251587f154acd9784e935e7b6bb92ebb099",
+  "citations": [
+    "gamefile:items/item_ring_of_basilius#cost",
+    "gamefile:items/item_ring_of_basilius#attribs",
+    "loc:DOTA_Tooltip_ability_item_ring_of_basilius_Description",
+    "gamefile:items/item_ring_of_basilius#mechanics",
+    "gamefile:items/item_ring_of_basilius#components",
+    "loc:DOTA_Tooltip_ability_item_ring_of_basilius_Lore"
+  ],
+  "packet_sha256": "7e7b874b007825b3d3fe542278408fbf97a49ecf0b3dc104dbda58539671af6b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "581d7f627628ac44d74e5b12707afddfbc071962c3da2029c3423319f7294f74",
+    "input_tokens": 13863,
+    "output_tokens": 1361,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:37.608410+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a880cf351785f0076b1d6333da2dbb52ad2f3521d122a7cd1eb6b9dde8c44a38",
+    "input_tokens": 14365,
+    "output_tokens": 711,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:54.217015+00:00"
+  }
+}

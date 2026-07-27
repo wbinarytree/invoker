@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ironwood_tree",
+  "title": "Ironwood Tree",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d10d3114c90efa3cd82c40d0b651240dc9527d93f240ed39ff4f4f726f8a3bbc",
+  "citations": [
+    "gamefile:items/item_ironwood_tree#attribs",
+    "loc:DOTA_Tooltip_ability_item_ironwood_tree_Description",
+    "gamefile:items/item_ironwood_tree#cost",
+    "gamefile:items/item_ironwood_tree#mechanics",
+    "loc:DOTA_Tooltip_ability_item_ironwood_tree_Lore"
+  ],
+  "packet_sha256": "552b53b0674c9d08cb4fad99e6557f2465bcacd7b3a989aede142b657ce2065d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e3abdbd1e347b850f67fb7c5005dc24d7c1d1c2ba702cecd60ba715b185ca28a",
+    "input_tokens": 13748,
+    "output_tokens": 927,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:04.628134+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5c5279393d7c652f08b1e6fb96a866d33fa7364ddb06668701089d244cfff170",
+    "input_tokens": 14270,
+    "output_tokens": 557,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:19.847372+00:00"
+  }
+}

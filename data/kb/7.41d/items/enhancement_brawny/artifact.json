@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_brawny",
+  "title": "Brawny",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9684e4c8904af50f94abd40a83ac50225233f1d27ac9cb6ad47dd535e84ee808",
+  "citations": [
+    "gamefile:items/item_enhancement_brawny#cost",
+    "gamefile:items/item_enhancement_brawny#attribs",
+    "gamefile:items/item_enhancement_brawny#mechanics"
+  ],
+  "packet_sha256": "8ca8b52ea6976ed07cc68b58caa8e70975bea828f78a7012653569dd5c0bc6bd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "463cad4f88531d444d7df012ec08ab58af3afff1ebd3090de6037f1fc7a7fe1e",
+    "input_tokens": 13705,
+    "output_tokens": 709,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:21.191134+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2d6d36e0400ff510d2f9f8604c44fd06a82bde5dc9ae2482d1be301fc01376b1",
+    "input_tokens": 14224,
+    "output_tokens": 356,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:31.791137+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vitality_booster",
+  "title": "Vitality Booster",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "66f5fc8a920b01be3c08504560ffdc83d984b79dcb8190068af782f8f058ecd6",
+  "citations": [
+    "gamefile:items/item_vitality_booster#cost",
+    "gamefile:items/item_vitality_booster#attribs",
+    "gamefile:items/item_vitality_booster#components",
+    "gamefile:items/item_vitality_booster#mechanics",
+    "loc:DOTA_Tooltip_ability_item_vitality_booster_Lore"
+  ],
+  "packet_sha256": "8b2188d077a34590ae8c520e866a858a40e37761596ddb449e4b38d781c878ef",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ad00e82ca70c12b0045c2de1c7113ed70eee047f5a8e362cc04974c8a8f2a066",
+    "input_tokens": 13825,
+    "output_tokens": 778,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:29.918963+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "407535d4f6ad428c7848ee59f7a368e5a474f6ace7fad198c21eef873fe62c7c",
+    "input_tokens": 14290,
+    "output_tokens": 364,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:39.474322+00:00"
+  }
+}

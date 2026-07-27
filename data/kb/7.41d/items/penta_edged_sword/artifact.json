@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "penta_edged_sword",
+  "title": "Penta-Edged Sword",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e48eec08bb48ac2c76eee32d5badc264b0d26384500f4874f3950ff974283fec",
+  "citations": [
+    "gamefile:items/item_penta_edged_sword#attribs",
+    "loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Description",
+    "gamefile:items/item_penta_edged_sword#cost",
+    "gamefile:items/item_penta_edged_sword#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_penta_edged_sword_Lore"
+  ],
+  "packet_sha256": "d5d7ca5bc5891cf2bf54d40eea2210769dac430207c6f9a70ccf73d7ddd9fbf2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ece786b023548158648c3bbac148deb01c0714fa8ef9ba5605dd3fdacce1e8f5",
+    "input_tokens": 13832,
+    "output_tokens": 821,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:48.443970+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "1ed1c32f8166b37a7852694859730bd33722104d00a9c35aed448d885ca713bd",
+    "input_tokens": 14336,
+    "output_tokens": 1192,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:23.644236+00:00"
+  }
+}

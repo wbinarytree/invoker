@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "sheepstick",
+  "title": "Scythe of Vyse",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "44840982bad7f3f91fa1bb90c9759ae95a072482af3ead3cb336910838fc6b8b",
+  "citations": [
+    "gamefile:items/item_sheepstick#cost",
+    "gamefile:items/item_sheepstick#attribs",
+    "loc:DOTA_Tooltip_ability_item_sheepstick_Description",
+    "gamefile:items/item_sheepstick#components",
+    "gamefile:items/item_sheepstick#mechanics",
+    "loc:DOTA_Tooltip_ability_item_sheepstick_Lore"
+  ],
+  "packet_sha256": "7e5baaa07b83784224703477738bbf445955ffa5107774c49fd4dc4c6081eda9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0fb28dfd383f781306cb9f312466534e7962ebab48d90b813f70072b3e95769f",
+    "input_tokens": 14330,
+    "output_tokens": 1058,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:38.866865+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "fb0389e037d4d17a860b831aaef87728de95c754644e2fb2a29d21db64d93f1b",
+    "input_tokens": 14403,
+    "output_tokens": 818,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:01.343028+00:00"
+  }
+}

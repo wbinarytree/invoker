@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "reaver",
+  "title": "Reaver",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b7d9bbe071173381a37de854816ecf83c0b88b86bf78305063ae513ba1a3c350",
+  "citations": [
+    "gamefile:items/item_reaver#cost",
+    "gamefile:items/item_reaver#attribs",
+    "gamefile:items/item_reaver#mechanics",
+    "gamefile:items/item_reaver#components",
+    "loc:DOTA_Tooltip_ability_item_reaver_Lore"
+  ],
+  "packet_sha256": "5ba279a00a12a179a7b77e5147f9057d8067f4d6f4c67f0b707fb03719516331",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5c5bbaeded9c25390f101388b557e68f7076eb87c04ef02ae4e3eef2b38068e5",
+    "input_tokens": 13755,
+    "output_tokens": 688,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:54.825811+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "bade2b697dbc42ba28bac7825abbd80e18851c7089f32c04b087a170896e8cc1",
+    "input_tokens": 14227,
+    "output_tokens": 383,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:04.736477+00:00"
+  }
+}

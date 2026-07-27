@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enchanted_mango",
+  "title": "Enchanted Mango",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "231950ff038dacb8fc43e74eaf25da207b4fc3f3505ec0b0bc30deeffafafbd4",
+  "citations": [
+    "gamefile:items/item_enchanted_mango#cost",
+    "gamefile:items/item_enchanted_mango#attribs",
+    "loc:DOTA_Tooltip_ability_item_enchanted_mango_Description",
+    "gamefile:items/item_enchanted_mango#mechanics",
+    "loc:DOTA_Tooltip_ability_item_enchanted_mango_Lore"
+  ],
+  "packet_sha256": "2ce1ed789f6dfd5259201342bd7fca08f5c5ead65369550cbded253873d593b2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "37d2b084fd5fc8460c9bbe5403dec4702fe392b27708867fbebd589af5e5b037",
+    "input_tokens": 14227,
+    "output_tokens": 1435,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:49.944664+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "02063da47b5ed5c26ffd82835b0cf5457b81d508cc5f80f6f20071854d1d255a",
+    "input_tokens": 14342,
+    "output_tokens": 914,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:12.997969+00:00"
+  }
+}

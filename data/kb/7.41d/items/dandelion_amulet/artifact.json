@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "dandelion_amulet",
+  "title": "Dandelion Amulet",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "10402cf06e4a4332f95fc80c5dbbe1673e6cccecf4ff61d906eae5cfdda4b943",
+  "citations": [
+    "gamefile:items/item_dandelion_amulet#attribs",
+    "gamefile:items/item_dandelion_amulet#mechanics",
+    "loc:DOTA_Tooltip_ability_item_dandelion_amulet_Description",
+    "gamefile:items/item_dandelion_amulet#cost"
+  ],
+  "packet_sha256": "36fec6d4620cb4b5ddd68d3d0a4364deeb111f1ca55f4c3ca3a69cde353a8b46",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d253e03ab48c23383fb77c172250559f5c6fe14e589d78eeaf5cd0e887d4f93e",
+    "input_tokens": 13741,
+    "output_tokens": 1309,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:32.230267+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2149a491eb836b3c85487894414983ba332c5a9b71b53f4b0d19c5364b48045b",
+    "input_tokens": 14304,
+    "output_tokens": 598,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:46.013106+00:00"
+  }
+}

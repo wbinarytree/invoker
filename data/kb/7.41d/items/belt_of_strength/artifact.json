@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "belt_of_strength",
+  "title": "Belt of Strength",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3d1be8b2f070fadddd950044629e3d0846d71a60cdbc7e90e247d753de44629e",
+  "citations": [
+    "gamefile:items/item_belt_of_strength#cost",
+    "gamefile:items/item_belt_of_strength#attribs",
+    "gamefile:items/item_belt_of_strength#components",
+    "gamefile:items/item_belt_of_strength#mechanics",
+    "loc:DOTA_Tooltip_ability_item_belt_of_strength_Lore"
+  ],
+  "packet_sha256": "e8e12df24fe4f3599961cbb3a9bc15a6349882bd1315030de68191bf770db3ae",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "19433d2db4efa9340a94744ba4906b70a3e2c4f32c571943d8830337c19e5c26",
+    "input_tokens": 14229,
+    "output_tokens": 592,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:33.002245+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "be1e3017978333208f62ae0ca1bf3e392f0390b10dea75b7187ebd7b3827c14f",
+    "input_tokens": 14277,
+    "output_tokens": 271,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:42.690981+00:00"
+  }
+}

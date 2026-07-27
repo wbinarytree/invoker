@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "null_talisman",
+  "title": "Null Talisman",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "58690385e577df333577e33916a44801e1ab9f9b7f2ec0eb5c398d5f61f05175",
+  "citations": [
+    "gamefile:items/item_null_talisman#cost",
+    "gamefile:items/item_null_talisman#mechanics",
+    "gamefile:items/item_null_talisman#attribs",
+    "gamefile:items/item_null_talisman#components",
+    "loc:DOTA_Tooltip_ability_item_null_talisman_Lore"
+  ],
+  "packet_sha256": "dff385a129cafcc5c327b1cfcb1528b509b18768f50580a0bee4a913ae1d524e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "540b666b41941a4a12028cd7e0490a181d28d64330260649f585ed76565c385c",
+    "input_tokens": 13778,
+    "output_tokens": 772,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:53.720819+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a94adfd02768a6e389d492caeacddec6349642145af3fccae127cc018b10868e",
+    "input_tokens": 14285,
+    "output_tokens": 343,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:04.245168+00:00"
+  }
+}

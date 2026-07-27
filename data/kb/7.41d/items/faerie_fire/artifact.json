@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "faerie_fire",
+  "title": "Faerie Fire",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6044d7a370f30982a03024e7b45c45bfcf0f7ff8d1b2a963099d1d8b49ef3068",
+  "citations": [
+    "gamefile:items/item_faerie_fire#cost",
+    "gamefile:items/item_faerie_fire#attribs",
+    "loc:DOTA_Tooltip_ability_item_faerie_fire_Description",
+    "gamefile:items/item_faerie_fire#mechanics",
+    "loc:DOTA_Tooltip_ability_item_faerie_fire_Lore"
+  ],
+  "packet_sha256": "ca1d356d3419d3989c5dc1bedfd21f23f893a789e184e1d963eea73fb0762fec",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "acc1d4c6dd82130dd8073a1916a244f85830bb5c8d4fa113e3c08502c31c4909",
+    "input_tokens": 14173,
+    "output_tokens": 1076,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:12.502723+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "1cbc4824f1e5efd5b5226b909c124252399013abed48b1e4a10b24e32b372e7d",
+    "input_tokens": 14292,
+    "output_tokens": 319,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:22.002618+00:00"
+  }
+}

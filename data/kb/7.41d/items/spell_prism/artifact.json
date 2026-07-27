@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "spell_prism",
+  "title": "Spell Prism",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "32e409105679878de200462276108f1a0dcbfd4e73a61f27c58614f071fd2db9",
+  "citations": [
+    "gamefile:items/item_spell_prism#cost",
+    "gamefile:items/item_spell_prism#attribs",
+    "gamefile:items/item_spell_prism#mechanics",
+    "loc:DOTA_Tooltip_ability_item_spell_prism_Description",
+    "loc:DOTA_Tooltip_ability_item_spell_prism_Lore"
+  ],
+  "packet_sha256": "76859687921cf28a18f67af6758588a7a38e6a816b3093d42790315ac11b1a75",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f90ad5957bc0a5b51da1eb4d96f302d0071c576789bda8ab4622814ee395af2b",
+    "input_tokens": 13747,
+    "output_tokens": 748,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:21.808915+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "d02d1d522f8a9c88d2cf3c1ea815c5d86a120f0ace93a6b0e2b7175b6acb2edc",
+    "input_tokens": 14262,
+    "output_tokens": 342,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:31.721178+00:00"
+  }
+}

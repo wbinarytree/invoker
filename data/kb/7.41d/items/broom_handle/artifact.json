@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "broom_handle",
+  "title": "Broom Handle",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3a79f763093647607e366cff4b3b4110f153bdbc306fc985517263c564fe8b79",
+  "citations": [
+    "gamefile:items/item_broom_handle#mechanics",
+    "gamefile:items/item_broom_handle#attribs",
+    "gamefile:items/item_broom_handle#cost",
+    "loc:DOTA_Tooltip_Ability_item_broom_handle_Lore"
+  ],
+  "packet_sha256": "5d5c992c82009243401ddded7293e8d64c6fdf0be476f5f5de5f4a2a246963e4",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f33295cdf72612984bf8f34c58d7f04a03cee5d15c40101dd5fcc4a9b46cc106",
+    "input_tokens": 14145,
+    "output_tokens": 677,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:20.829839+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5025d2fa42961adc9f1bdd26d5cd2d282d44ba420032273dcc29295c4d756e12",
+    "input_tokens": 14208,
+    "output_tokens": 219,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:29.664970+00:00"
+  }
+}

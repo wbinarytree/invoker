@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "cloak_of_flames",
+  "title": "Cloak of Flames",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e4101ea8feaa7a9cbfd5b0ce4294bfc7f2bf86c6d4fd9cbece95684e0a7f975b",
+  "citations": [
+    "gamefile:items/item_cloak_of_flames#attribs",
+    "loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Description",
+    "gamefile:items/item_cloak_of_flames#cost",
+    "gamefile:items/item_cloak_of_flames#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_cloak_of_flames_Lore"
+  ],
+  "packet_sha256": "1601ea72a53d56090900b3b494dc7ca5eddb62a404c6679c3d073c9f49090958",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f753d6f6a4c570a2335faa8e37f40d7ebfa8f7986d4ed4363140783149f8dd0d",
+    "input_tokens": 14223,
+    "output_tokens": 1614,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:42.559482+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "80e902e6e5431d560e23047fc32ca3c4ec4b605c4dd4de1c45999bb953ca8dcc",
+    "input_tokens": 14328,
+    "output_tokens": 461,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:54.287758+00:00"
+  }
+}

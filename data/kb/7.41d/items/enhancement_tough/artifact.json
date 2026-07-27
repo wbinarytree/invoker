@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_tough",
+  "title": "Tough",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "534f7d9ec4731751f1b4fa4f803a302c1e73dbd024f54d9d44c97f42d9ea53c2",
+  "citations": [
+    "gamefile:items/item_enhancement_tough#cost",
+    "gamefile:items/item_enhancement_tough#attribs",
+    "gamefile:items/item_enhancement_tough#mechanics"
+  ],
+  "packet_sha256": "6bd367d8d043767628c5c9ac1a5d5ea03a72cd94444589fb93588b5f98f00975",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "235e8265b2567a520808e51e0b1a99a79a648f957520bf3d6fec5b46df3a0ad5",
+    "input_tokens": 14119,
+    "output_tokens": 780,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:05.762620+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "c30a7569514da3ebc6cd5d98b03c58ddac376f2c72795b94fa9ba661a506fcff",
+    "input_tokens": 14210,
+    "output_tokens": 308,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:15.128151+00:00"
+  }
+}

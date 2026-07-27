@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "shivas_guard",
+  "title": "Shiva's Guard",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "755dc47a3d726fbb799a7e4c22b663be90e3cfa8791f609e3b0c303ea42371bd",
+  "citations": [
+    "gamefile:items/item_shivas_guard#cost",
+    "gamefile:items/item_shivas_guard#attribs",
+    "loc:DOTA_Tooltip_ability_item_shivas_guard_Description",
+    "gamefile:items/item_shivas_guard#components",
+    "gamefile:items/item_shivas_guard#mechanics",
+    "loc:DOTA_Tooltip_ability_item_shivas_guard_Lore"
+  ],
+  "packet_sha256": "2d57cd260c772a9cf14e0f274c0260fa4a2ceac358a24b54bb3faee7304c648a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "58d0fd95f964e5c80bd6294c5457a700c750b598ce4f7c06e7ead97957a276c7",
+    "input_tokens": 14376,
+    "output_tokens": 1448,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:47.021081+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "9ae315d8910fa66bf2ba0eeed82b07a6a3b269f490812b39470b05101b306679",
+    "input_tokens": 14442,
+    "output_tokens": 2021,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:44.334113+00:00"
+  }
+}

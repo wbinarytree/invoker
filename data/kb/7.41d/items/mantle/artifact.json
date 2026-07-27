@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mantle",
+  "title": "Mantle of Intelligence",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3c49a1ed136029820d33d32984e3df66130fdbd773bad39a883b892b71d3f18e",
+  "citations": [
+    "gamefile:items/item_mantle#cost",
+    "gamefile:items/item_mantle#attribs",
+    "gamefile:items/item_mantle#components",
+    "gamefile:items/item_mantle#mechanics",
+    "loc:DOTA_Tooltip_ability_item_mantle_Lore"
+  ],
+  "packet_sha256": "e3447cbbee4766e0b812c605e1901d3dd0e21f6106f3539b4401e823c91ec367",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c24e5b0cbd4d842ba8270790efc4af707c78772f8fdda93e12572f525f74406e",
+    "input_tokens": 14151,
+    "output_tokens": 662,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:12.724567+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b37af3b725f0cc2e31554940948155d0c106ef908c290284282354a069d04f25",
+    "input_tokens": 14218,
+    "output_tokens": 501,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:25.523949+00:00"
+  }
+}

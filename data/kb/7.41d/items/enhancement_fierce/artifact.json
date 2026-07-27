@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_fierce",
+  "title": "Fierce",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3fea174892aeb3a7446e4b984ccae3038f607aa9c857a0c061b7883f34c095cc",
+  "citations": [
+    "gamefile:items/item_enhancement_fierce#cost",
+    "gamefile:items/item_enhancement_fierce#attribs",
+    "gamefile:items/item_enhancement_fierce#mechanics"
+  ],
+  "packet_sha256": "5d3e92ea2d410f180a7783e6a985bdd7ac73a111ca01c0420f509d9c46585efc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6ba2204f9c4d33826a52f9ed43e90b5aa324e20495ad70e7a2878f6e1371b7aa",
+    "input_tokens": 13684,
+    "output_tokens": 935,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:40.265646+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "1b56c862d3857cf89f21eb1729854a0647577d51ea688b7656fe37955afcf1a5",
+    "input_tokens": 14207,
+    "output_tokens": 116,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:45.827878+00:00"
+  }
+}

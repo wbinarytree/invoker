@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "elven_tunic",
+  "title": "Elven Tunic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e30172ddcdd75c327aa6e270ad731673b933d1a2455eeea5e298536d5919d425",
+  "citations": [
+    "gamefile:items/item_elven_tunic#cost",
+    "gamefile:items/item_elven_tunic#attribs",
+    "gamefile:items/item_elven_tunic#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_elven_tunic_Lore"
+  ],
+  "packet_sha256": "69011ef445cd3dd5ece4ff53ccea0547e4adb52b155728e8adfada593378a532",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a67313233c3e5b4c9c7e97b65c4a731c38b155b3fa83c3d5dffc11bf77e30a67",
+    "input_tokens": 14133,
+    "output_tokens": 462,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:28.525916+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2cb8ecd719917b703ba3c5c58a0d8904397bcf7b7077c40466ba0523e5bc5868",
+    "input_tokens": 14233,
+    "output_tokens": 308,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:37.497851+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "magic_stick",
+  "title": "Magic Stick",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "05bbf604d36819dfbc3e531c089f06d599a6ddd4b7188ed6619c45b24ed353b7",
+  "citations": [
+    "gamefile:items/item_magic_stick#cost",
+    "loc:DOTA_Tooltip_ability_item_magic_stick_Description",
+    "gamefile:items/item_magic_stick#components",
+    "gamefile:items/item_magic_stick#attribs",
+    "gamefile:items/item_magic_stick#mechanics",
+    "loc:DOTA_Tooltip_ability_item_magic_stick_Lore"
+  ],
+  "packet_sha256": "7497fb5f9d848beb8532313105477e34b81ea03a84e90608a94254f0fdce9351",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "511fce5ca7c99fcb594e90fff054fa40c9630a17adfdf19384cc6cda5f54ff2b",
+    "input_tokens": 14236,
+    "output_tokens": 1202,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:26.377255+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "184c470d4b919f0f3f6cfaa19f497c2fd5f6e9f92989c746dcf5864932abd068",
+    "input_tokens": 14318,
+    "output_tokens": 644,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:42.765136+00:00"
+  }
+}

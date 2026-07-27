@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_titanic",
+  "title": "Titanic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "eef4dc200f105eb3db91d59348ccbd91d39a093e0f0aba0526cc35ae923ff38a",
+  "citations": [
+    "gamefile:items/item_enhancement_titanic#cost",
+    "gamefile:items/item_enhancement_titanic#attribs",
+    "gamefile:items/item_enhancement_titanic#mechanics"
+  ],
+  "packet_sha256": "b1367edb718c7f09df614932ff547da5008a588c7622eaa8885c5e2c6ab804e3",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a328b9d9b412f0bfa9309ac1297e54dd44eeff4eacceda47cab65270686c6b60",
+    "input_tokens": 14112,
+    "output_tokens": 689,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:05.117640+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b4f1065495bdfc7ebf728788740c34f59773c8e22dcf47e55337c8bf8aff1a83",
+    "input_tokens": 14202,
+    "output_tokens": 285,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:14.310292+00:00"
+  }
+}

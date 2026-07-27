@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "lance_of_pursuit",
+  "title": "Lance of Pursuit",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d78c1ab2877582d4c5336196389d20a41cc84b66514eac51e8c52612cb3d9bcd",
+  "citations": [
+    "gamefile:items/item_lance_of_pursuit#attribs",
+    "loc:DOTA_Tooltip_Ability_item_lance_of_pursuit_Description",
+    "gamefile:items/item_lance_of_pursuit#cost",
+    "gamefile:items/item_lance_of_pursuit#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_lance_of_pursuit_Lore"
+  ],
+  "packet_sha256": "72e237af14db532041aa33a12b9290e89a9e43cf4147892ad2c85f85d643930b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "10d5a49028c715eaf599332d05c2530a89ae8f2718c9ac8f2f4b385927006c41",
+    "input_tokens": 13823,
+    "output_tokens": 1371,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:58.205041+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a070987777404553fe7addc0c96b628cc608f14309a6b81b93f6cd4c32512ce5",
+    "input_tokens": 14369,
+    "output_tokens": 703,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:16.148323+00:00"
+  }
+}

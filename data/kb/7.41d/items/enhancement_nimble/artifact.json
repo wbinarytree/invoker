@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_nimble",
+  "title": "Nimble",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6d7de7d92ab55785e3c73a932ffa8d92299414a8ac4fe2ed36287af855786a8f",
+  "citations": [
+    "gamefile:items/item_enhancement_nimble#cost",
+    "gamefile:items/item_enhancement_nimble#attribs",
+    "gamefile:items/item_enhancement_nimble#mechanics"
+  ],
+  "packet_sha256": "8262932b8015e5b553df3bc768ed19d2ab209e10b9ddc1a594ec8416a167f4d3",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "785f1ee66ec704e9c99835964d16ab4a1b0d764e465a366011df37f2faf276e1",
+    "input_tokens": 14121,
+    "output_tokens": 739,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:04.265440+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "c03c1a4804c03ebaa47f8ccf6b63e1640c9a18db72c7b0c34e680985f869cd90",
+    "input_tokens": 14219,
+    "output_tokens": 130,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:14.743426+00:00"
+  }
+}

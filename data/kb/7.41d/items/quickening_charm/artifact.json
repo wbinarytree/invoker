@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "quickening_charm",
+  "title": "Quickening Charm",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d05099845549be0b1951726fa3a182eb6b338193aecbaa664553af77225dfa5d",
+  "citations": [
+    "gamefile:items/item_quickening_charm#mechanics",
+    "gamefile:items/item_quickening_charm#attribs",
+    "gamefile:items/item_quickening_charm#cost",
+    "loc:DOTA_Tooltip_ability_item_quickening_charm_Description",
+    "loc:DOTA_Tooltip_ability_item_quickening_charm_Lore"
+  ],
+  "packet_sha256": "473b0c4a95427529a2c7c47987b10df14d55824a23f39700c19bddab05da6639",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "273a2557c557b3e50cbf77c4bdd38a90436f72fb389750acf882cc52c6e5c7d0",
+    "input_tokens": 14167,
+    "output_tokens": 609,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:20.989417+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "462782ad4df71b1b52b16d1d7491239a839674094aff773e89a9d722c4e2560a",
+    "input_tokens": 14234,
+    "output_tokens": 299,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:32.216100+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "dragon_scale",
+  "title": "Dragon Scale",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a29d652487c85c23312eff195ce43c03f8917cb443b7612db837e7d36d5fcec6",
+  "citations": [
+    "gamefile:items/item_dragon_scale#cost",
+    "gamefile:items/item_dragon_scale#attribs",
+    "loc:DOTA_Tooltip_Ability_item_dragon_scale_Description",
+    "gamefile:items/item_dragon_scale#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_dragon_scale_Lore"
+  ],
+  "packet_sha256": "f10b2e6cb2b7af55d365260bf8739f9172728c1990634f0ab18bdaa908a2b0b0",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "840d47e3be34f1642da5e50a84aae3d1d2ea602dd3c0dca70d015b289b829479",
+    "input_tokens": 13745,
+    "output_tokens": 1274,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:48.773155+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "33b277f962636a431e704070aeb833d2ecd54a1662c34ce33c2bff864e127092",
+    "input_tokens": 14269,
+    "output_tokens": 570,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:05.504732+00:00"
+  }
+}

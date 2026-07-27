@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "keen_optic",
+  "title": "Keen Optic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4dc5719360a619762ecbfa3f05f1030a1fd2124b382b4da31ec4b3b9dbafa7d6",
+  "citations": [
+    "gamefile:items/item_keen_optic#cost",
+    "gamefile:items/item_keen_optic#attribs",
+    "gamefile:items/item_keen_optic#mechanics",
+    "loc:DOTA_Tooltip_ability_item_keen_optic_Lore"
+  ],
+  "packet_sha256": "6910f746d45b95d8922ee03e0bea03580fcb0ba56fba545cd52e472ae3f46cf6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8de806a208654c5e731781fe5b8f2c0a83a2151fd7fd66b08fbcd4cbbf25321c",
+    "input_tokens": 13712,
+    "output_tokens": 470,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:34.061589+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "8a5208d99745e493597f2e915790842aa4225ad165116ed1e496a454c96dea28",
+    "input_tokens": 14225,
+    "output_tokens": 92,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:41.822466+00:00"
+  }
+}

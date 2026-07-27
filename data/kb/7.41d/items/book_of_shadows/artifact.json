@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "book_of_shadows",
+  "title": "Book of Shadows",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ce744965fe91349ae801618c46a76cf53d24d772d2f80dc8c0669b3468a61258",
+  "citations": [
+    "gamefile:items/item_book_of_shadows#attribs",
+    "loc:DOTA_Tooltip_ability_item_book_of_shadows_Description",
+    "gamefile:items/item_book_of_shadows#cost",
+    "gamefile:items/item_book_of_shadows#mechanics",
+    "loc:DOTA_Tooltip_ability_item_book_of_shadows_Lore"
+  ],
+  "packet_sha256": "fe1be35e86ec2e6ad8975483626aa139f40dfbae0793339a15f84297fed6f365",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ad7971362796952bbf26e4408cc87ce9184e8f0922eac37d278ed1b771912529",
+    "input_tokens": 14217,
+    "output_tokens": 1339,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:27.989957+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3f18fccc0b9ddf561d9dc778f3e2cd8d751afc34ff07cc5feb00053590a43068",
+    "input_tokens": 14334,
+    "output_tokens": 519,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:44.699429+00:00"
+  }
+}

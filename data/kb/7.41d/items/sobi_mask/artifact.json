@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "sobi_mask",
+  "title": "Sage's Mask",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "581f5b5f424b2ddf30ab9b214ba044058145ee653d0f87cee518dca228a7fd80",
+  "citations": [
+    "gamefile:items/item_sobi_mask#cost",
+    "gamefile:items/item_sobi_mask#attribs",
+    "gamefile:items/item_sobi_mask#components",
+    "gamefile:items/item_sobi_mask#mechanics",
+    "loc:DOTA_Tooltip_ability_item_sobi_mask_Lore"
+  ],
+  "packet_sha256": "5e4475b030adef6110670633f1bf6f4d5cab19ee085fe302720cc244693510aa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1ac0061fcfc06ef5e3c24bc68246d9bc587fb8ae9ffbae233ec20eaedc294dbf",
+    "input_tokens": 14248,
+    "output_tokens": 674,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:29.147621+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a827f606bef551c641ecc292d8a86162b34abc831c6b963e2230d1ccbd2c29e2",
+    "input_tokens": 14291,
+    "output_tokens": 362,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:41.853658+00:00"
+  }
+}

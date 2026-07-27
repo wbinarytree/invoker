@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "armlet",
+  "title": "Armlet of Mordiggian",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "18aabaa75ef840d57ea80207c0afac466bcde752867c9b271d9499d3db9b75f7",
+  "citations": [
+    "gamefile:items/item_armlet#cost",
+    "gamefile:items/item_armlet#attribs",
+    "loc:DOTA_Tooltip_ability_item_armlet_Description",
+    "gamefile:items/item_armlet#components",
+    "gamefile:items/item_armlet#mechanics",
+    "loc:DOTA_Tooltip_ability_item_armlet_Lore"
+  ],
+  "packet_sha256": "415dfc2287db5868a7acbf4883409d3e191cb56e1bd5750bf6541624d3a7cc77",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d00fcfecf3df52916f586049954d8dd2492ba91fa1d4695f2203156397ffcd0b",
+    "input_tokens": 14382,
+    "output_tokens": 1489,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:56.759087+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "410945b29b6283890c91bc9fdd480ddca09854af5fac9bff9ab1219aeee78498",
+    "input_tokens": 14484,
+    "output_tokens": 1350,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:30.906474+00:00"
+  }
+}

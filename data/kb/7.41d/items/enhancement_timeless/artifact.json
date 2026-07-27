@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_timeless",
+  "title": "Timeless",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "db607d31893596b8c9fab7e453e2359a388d495260492bcddf5e83a610ba8863",
+  "citations": [
+    "gamefile:items/item_enhancement_timeless#mechanics",
+    "gamefile:items/item_enhancement_timeless#attribs",
+    "gamefile:items/item_enhancement_timeless#cost"
+  ],
+  "packet_sha256": "4da57b1cccc8edbff86ceb79ad2f3822ebf916e9ab5fc8470005f5771d66aafc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "950e346ec67ac9f84a454267202966c9dc3c4030c9f62b652c6a4eee5e233e27",
+    "input_tokens": 14096,
+    "output_tokens": 659,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:06.354298+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "d7fd5b32fbd78e8405d8f3209df965dc09cacff69d14cc1fe4f009b106052f97",
+    "input_tokens": 14171,
+    "output_tokens": 282,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:15.505860+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_regen",
+  "title": "Ring of Regen",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cd893ee521471fba080b5e3318dd9a4ebb8093154d7ce84c60e8661934b3905b",
+  "citations": [
+    "gamefile:items/item_ring_of_regen#cost",
+    "gamefile:items/item_ring_of_regen#attribs",
+    "gamefile:items/item_ring_of_regen#mechanics",
+    "gamefile:items/item_ring_of_regen#components",
+    "loc:DOTA_Tooltip_ability_item_ring_of_regen_Lore"
+  ],
+  "packet_sha256": "81840c808fdc2874dafac13b1f6732df0950e6799fb31ae0e1b5a490e9d82c88",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0eeceba0ff5f09dafad24b67e614bb64975824bddcef55013ddb2817c290ab2d",
+    "input_tokens": 13750,
+    "output_tokens": 680,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:31.042606+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "fd1c385b21e2e995032ecb0b1bd341b49b31e95f846fc56014508beca6c91988",
+    "input_tokens": 14252,
+    "output_tokens": 431,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:44.382095+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "guardian_greaves",
+  "title": "Guardian Greaves",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7ba58b97af8e2d2c7c8231bffe3d9c8fdc419330c2a1c2c85f8122c65d72aee5",
+  "citations": [
+    "gamefile:items/item_guardian_greaves#cost",
+    "gamefile:items/item_guardian_greaves#attribs",
+    "loc:DOTA_Tooltip_ability_item_guardian_greaves_Description",
+    "gamefile:items/item_guardian_greaves#components",
+    "gamefile:items/item_guardian_greaves#mechanics",
+    "loc:DOTA_Tooltip_ability_item_guardian_greaves_Lore"
+  ],
+  "packet_sha256": "58467e6fd982101b85635b47f49e1196d1ae406fae56bc65963163f1647b242b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e63a9de00ceef068a9848af8f99a6d7812495c881799f3c5b481aa4a2db15f0b",
+    "input_tokens": 14444,
+    "output_tokens": 2532,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:38.483634+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "26e4bdbc966b4456a023461cea3f39628ac133df4dc921bbaf87c893bdba218a",
+    "input_tokens": 14538,
+    "output_tokens": 1322,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:07.629355+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "woodland_striders",
+  "title": "Woodland Striders",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "10714e71e5cd9448efa68d73dbd00f9d6552ecf0ce349dc6b38408fdee21fb32",
+  "citations": [
+    "gamefile:items/item_woodland_striders#attribs",
+    "loc:DOTA_Tooltip_Ability_item_woodland_striders_Description",
+    "gamefile:items/item_woodland_striders#mechanics",
+    "gamefile:items/item_woodland_striders#cost"
+  ],
+  "packet_sha256": "f880057a93929fcdb9884c4846f6842ff65afb5f5565f8a93b697c5a87180b2d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1f54c9c44e268bcc5fb5e60002de13a0b1e8086854bae7811c43d7724f695a0f",
+    "input_tokens": 13779,
+    "output_tokens": 1053,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:16.417646+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f501832711e01e477c6b7f46a29e45b2bd31d7623cd262d6da285f493a23f00e",
+    "input_tokens": 14332,
+    "output_tokens": 573,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:30.614441+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "helm_of_the_overlord",
+  "title": "Helm of the Overlord",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "180c70f76abd2d4683451548ebeb5721de0c104f253f67baa5cbd3051ec490d3",
+  "citations": [
+    "gamefile:items/item_helm_of_the_overlord#cost",
+    "gamefile:items/item_helm_of_the_overlord#attribs",
+    "loc:DOTA_Tooltip_ability_item_helm_of_the_overlord_Description",
+    "gamefile:items/item_helm_of_the_overlord#components",
+    "gamefile:items/item_helm_of_the_overlord#mechanics",
+    "loc:DOTA_Tooltip_ability_item_helm_of_the_overlord_Lore"
+  ],
+  "packet_sha256": "c14bcd5adc150bea41d3c8a630d17a5bc0c8ffcc71550051d97266090813f63b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d619d5ee16cbef05e4e2ab5a8489edcf6fac33c2d871e9c5da14c61688f26441",
+    "input_tokens": 14533,
+    "output_tokens": 1775,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:11.606972+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "4912ed9da6962b93b35dd3a2441e1ddeb104b501d39c37e6589ec1a13d2d4a8d",
+    "input_tokens": 14637,
+    "output_tokens": 2637,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:09.893284+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "trickster_cloak",
+  "title": "Trickster Cloak",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "058ecaafbb07d550336cd0afaa8c64693666ad3c456ad4f34c73cf9a06c5f537",
+  "citations": [
+    "gamefile:items/item_trickster_cloak#cost",
+    "gamefile:items/item_trickster_cloak#attribs",
+    "loc:DOTA_Tooltip_Ability_item_trickster_cloak_Description",
+    "gamefile:items/item_trickster_cloak#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_trickster_cloak_Lore"
+  ],
+  "packet_sha256": "c00174dbd04f154f2b7bc8f81ee83b57377a3cd6bdbd82391fa822e52bf7047e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9a9c3042b2e5a33547cee2ca279a00c932ec5a8aca845504b558ec8e0103835d",
+    "input_tokens": 14195,
+    "output_tokens": 1321,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:53.831196+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7f36eef16121c295b6d3b9655358b48bea8a298624e5a414d56d4cfbe3108997",
+    "input_tokens": 14320,
+    "output_tokens": 501,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:06.332259+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "gauntlets",
+  "title": "Gauntlets of Strength",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d42bf32fe1342453980f13cefdadd0005cf21d3c23162b80377a5e0678e20f0a",
+  "citations": [
+    "gamefile:items/item_gauntlets#cost",
+    "gamefile:items/item_gauntlets#attribs",
+    "gamefile:items/item_gauntlets#components",
+    "gamefile:items/item_gauntlets#mechanics",
+    "loc:DOTA_Tooltip_ability_item_gauntlets_Lore"
+  ],
+  "packet_sha256": "32aacdafe0bfbde4d68de9400cfddaa2c2154900a0d4e2a27a013bfd49276f7a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c1a54fcf47adec34ecdb75854fdf63e5b3a337fbae519d5ddaeba3953e51e28c",
+    "input_tokens": 13736,
+    "output_tokens": 868,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:42.225406+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "810901f2058509b38087672b829067603d1f6e298f996e2189ef00c62562ec2c",
+    "input_tokens": 14240,
+    "output_tokens": 414,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:55.904287+00:00"
+  }
+}

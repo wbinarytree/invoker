@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "travel_boots_2",
+  "title": "Boots of Travel 2",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7cb4cb4513936fbf19ac5f7c45540bf607703dadff10366a2aedbd43c9da633f",
+  "citations": [
+    "gamefile:items/item_travel_boots_2#cost",
+    "gamefile:items/item_travel_boots_2#attribs",
+    "gamefile:items/item_travel_boots_2#components",
+    "gamefile:items/item_travel_boots_2#mechanics",
+    "loc:DOTA_Tooltip_ability_item_travel_boots_2_Description",
+    "loc:DOTA_Tooltip_ability_item_travel_boots_2_Lore"
+  ],
+  "packet_sha256": "28079f59b6936e501597272324d1a84ad285e764b2e9eaf6cf00f196e0ab39ec",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "fb2be989e71f0488f81e258a4dad95ffc6f76b720ef736a0abbbb0da473c2766",
+    "input_tokens": 14280,
+    "output_tokens": 1206,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:22:29.550376+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "1b143edfa12c2d8494813006f06ed1bbbd7c8ab18d567f0c3d7e41f93d2476e7",
+    "input_tokens": 14364,
+    "output_tokens": 817,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:22:49.321616+00:00"
+  }
+}

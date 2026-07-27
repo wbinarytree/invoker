@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ascetic_cap",
+  "title": "Ascetic's Cap",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "81de263de5e11097742a11c7323be7930c768ccc8c05f3d798542167dfa6a99d",
+  "citations": [
+    "gamefile:items/item_ascetic_cap#cost",
+    "loc:DOTA_Tooltip_Ability_item_ascetic_cap_Description",
+    "gamefile:items/item_ascetic_cap#attribs",
+    "gamefile:items/item_ascetic_cap#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_ascetic_cap_Lore"
+  ],
+  "packet_sha256": "7ba414b621656fa1da96e1df5c8b050d96111642d0a857ba03117186589210cb",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7a837af69c3fc4d214d3c94b4afb78444c7b33d02aaab71c17433dfda89a2bad",
+    "input_tokens": 14194,
+    "output_tokens": 1556,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:54.497649+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "be74efeac9c982e52fcadabad4cb0344592053313aaf23054fd419697b3919dc",
+    "input_tokens": 14308,
+    "output_tokens": 623,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:10.375505+00:00"
+  }
+}

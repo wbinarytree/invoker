@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_vampiric",
+  "title": "Vampiric",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cfce60c425f556f9948dacaa222419b483c511050c9eeab2403643889f597e9a",
+  "citations": [
+    "gamefile:items/item_enhancement_vampiric#cost",
+    "gamefile:items/item_enhancement_vampiric#attribs",
+    "gamefile:items/item_enhancement_vampiric#mechanics"
+  ],
+  "packet_sha256": "90a8d2f1c794e94bcf7a5f6b5bf2ee998f8d322208c3df9f5d4151125c4b06af",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b15109c255d6bec9b571eec414850de94ac3e6debc63db483a330dabda6e570d",
+    "input_tokens": 14117,
+    "output_tokens": 940,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:09.438944+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a5095c28354893d22a27641697a822f968a49f63065fcaa923a571fd0e9b37f9",
+    "input_tokens": 14227,
+    "output_tokens": 373,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:19.796083+00:00"
+  }
+}

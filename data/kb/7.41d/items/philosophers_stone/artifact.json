@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "philosophers_stone",
+  "title": "Philosopher's Stone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3e1f031efe37498f4cf087c31991464e12dfee01761d120d0a844121fa5ccea0",
+  "citations": [
+    "gamefile:items/item_philosophers_stone#attribs",
+    "gamefile:items/item_philosophers_stone#mechanics",
+    "gamefile:items/item_philosophers_stone#cost",
+    "loc:DOTA_Tooltip_ability_item_philosophers_stone_Lore"
+  ],
+  "packet_sha256": "8652839d4bcabee4c1e292b3ad535922204c732e29776fe5c177549c101eb482",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0ee2307552d8a828b97c448fc35656dbb7269f5dbbbbab5ae9f238e39a910f68",
+    "input_tokens": 14152,
+    "output_tokens": 774,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:26.178452+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "1b58ae09029a7e7dacd624de00b847f2b33f210beb31f30f794053779bb070f9",
+    "input_tokens": 14216,
+    "output_tokens": 268,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:36.080880+00:00"
+  }
+}

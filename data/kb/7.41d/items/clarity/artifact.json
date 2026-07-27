@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "clarity",
+  "title": "Clarity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6c9f2f76b3496378b9e76279a39761a69d073fb4cf5f675f75d8534dffc0fc93",
+  "citations": [
+    "gamefile:items/item_clarity#cost",
+    "gamefile:items/item_clarity#attribs",
+    "gamefile:items/item_clarity#mechanics",
+    "loc:DOTA_Tooltip_ability_item_clarity_Description",
+    "loc:DOTA_Tooltip_ability_item_clarity_Lore"
+  ],
+  "packet_sha256": "d60a1d5d27f4c272e1c3619120d452eae5dcb73a79f5043b243446982544dc31",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "fa34f0770f719f572dfd868d83f25a5bf5cfe188de745b1063bc3faa62ea9f15",
+    "input_tokens": 14210,
+    "output_tokens": 1551,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:46.102742+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ba5f848f0d63d7f899b66af3d5676f3df6b9b740a9d7f8de6c302e24a3eb93d8",
+    "input_tokens": 14287,
+    "output_tokens": 437,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:57.494210+00:00"
+  }
+}

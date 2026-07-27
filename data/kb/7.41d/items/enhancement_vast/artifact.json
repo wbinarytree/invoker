@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_vast",
+  "title": "Vast",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "80342c37bcde2b869012a396af375b3439fbc0735cbe734ae9ba777024680533",
+  "citations": [
+    "gamefile:items/item_enhancement_vast#cost",
+    "gamefile:items/item_enhancement_vast#mechanics",
+    "gamefile:items/item_enhancement_vast#attribs"
+  ],
+  "packet_sha256": "0dd15fa66e016aeba2192d33f128515165619b61953963898a3fb6ed5be82bea",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "88732ac2b18b3eec9089a2f646bf8b833200b166a444b5b36807bd03f5854e6e",
+    "input_tokens": 13710,
+    "output_tokens": 696,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:00.492582+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "6fc580186eb29aae2e1e47344b0db896dde5657f3bc5a18b5d8547fe861cc7d8",
+    "input_tokens": 14212,
+    "output_tokens": 356,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:12.073463+00:00"
+  }
+}

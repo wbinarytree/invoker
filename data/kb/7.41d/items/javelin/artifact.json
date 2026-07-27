@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "javelin",
+  "title": "Javelin",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b80827994cc571d72966b6e0029c2450589b939692d58634344b260191c91616",
+  "citations": [
+    "gamefile:items/item_javelin#cost",
+    "gamefile:items/item_javelin#attribs",
+    "gamefile:items/item_javelin#components",
+    "gamefile:items/item_javelin#mechanics",
+    "loc:DOTA_Tooltip_ability_item_javelin_Description",
+    "loc:DOTA_Tooltip_ability_item_javelin_Lore"
+  ],
+  "packet_sha256": "7024bca4b4cd70f7d507e2416485885516f6b3d41607d7e03811143844db61e9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6fe00f399ba74cce416c586ab2a37f90ddcde84972fded6d3f97ec196f61d10d",
+    "input_tokens": 13832,
+    "output_tokens": 1026,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:12.597736+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5112e0fd407187412d85c0f7ae10dcac9c977cfd58135c2bc0e81640cd78f08c",
+    "input_tokens": 14308,
+    "output_tokens": 485,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:24.976415+00:00"
+  }
+}

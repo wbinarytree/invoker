@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "black_powder_bag",
+  "title": "Blast Rig",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "336e023a207e9b3c6ed14d9f426be3149c72b438e1fb45a4420d31edcb666e3d",
+  "citations": [
+    "gamefile:items/item_black_powder_bag#attribs",
+    "gamefile:items/item_black_powder_bag#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_black_powder_bag_Description",
+    "gamefile:items/item_black_powder_bag#cost",
+    "loc:DOTA_Tooltip_Ability_item_black_powder_bag_Lore"
+  ],
+  "packet_sha256": "5fd5d6e142efcda3aab6bc9c1ed8e02732932ac33a8544e034f9c5e4880c893a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e253102800098e0c454eb3406c21372ac8b624d4bbbe039dfc7e182672e1d435",
+    "input_tokens": 14241,
+    "output_tokens": 1812,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:56.396449+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "dfc24f8103bdecbbee5e22594e76fdd23608bad4a1b291e5ee8a65d9e18d5c58",
+    "input_tokens": 14365,
+    "output_tokens": 664,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:27.251352+00:00"
+  }
+}

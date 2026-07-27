@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "helm_of_the_dominator",
+  "title": "Helm of the Dominator",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7d6d58bfa33104f22ebd0de294e86bf0386330056df573b5891b415eee6b786c",
+  "citations": [
+    "gamefile:items/item_helm_of_the_dominator#cost",
+    "gamefile:items/item_helm_of_the_dominator#attribs",
+    "loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Description",
+    "gamefile:items/item_helm_of_the_dominator#mechanics",
+    "gamefile:items/item_helm_of_the_dominator#components",
+    "loc:DOTA_Tooltip_ability_item_helm_of_the_dominator_Lore"
+  ],
+  "packet_sha256": "34ff512065843c452e83bc20b9da284c848c14fb10932d782694d69a84a8b9fb",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1312a0aff9b9955ac3ed2c8d5ee818a0baeff37ab98f27b46a8efe13f8c0164c",
+    "input_tokens": 14544,
+    "output_tokens": 2716,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:40.095587+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5b9b9b49d16f1a31c71cce935a48a481d7e4a0e0ec3c323cc27b3008126f1efe",
+    "input_tokens": 14678,
+    "output_tokens": 2377,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:26.133974+00:00"
+  }
+}

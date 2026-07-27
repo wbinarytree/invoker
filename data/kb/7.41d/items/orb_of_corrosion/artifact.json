@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "orb_of_corrosion",
+  "title": "Orb of Corrosion",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d4a60e512aaa2e20b0e5628c9cf8d8779e09788f273e211794a5eaa25545ffd5",
+  "citations": [
+    "gamefile:items/item_orb_of_corrosion#cost",
+    "gamefile:items/item_orb_of_corrosion#attribs",
+    "loc:DOTA_Tooltip_Ability_item_orb_of_corrosion_Description",
+    "gamefile:items/item_orb_of_corrosion#components",
+    "gamefile:items/item_orb_of_corrosion#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_orb_of_corrosion_Lore"
+  ],
+  "packet_sha256": "8ea59f8a7890a74273e32ea73bbdc5b5ac22ab0b9051f5d8da5198aca39f2fc2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a5418cb6a7718bda4eaf730019005774fb04850d47b15586cce8fa190dea48c0",
+    "input_tokens": 14326,
+    "output_tokens": 1211,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:23.487230+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "d22aa63d16ea72226601231c1ed988ccc19ee5901ff65565a24580c9ce2f4095",
+    "input_tokens": 14415,
+    "output_tokens": 746,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:41.249321+00:00"
+  }
+}

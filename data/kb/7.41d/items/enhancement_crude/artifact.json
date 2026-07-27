@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_crude",
+  "title": "Crude",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "544461bffd408d8104b67546ae3ce4e8c2037a6842edecbea4eb6dfc19e18205",
+  "citations": [
+    "gamefile:items/item_enhancement_crude#cost",
+    "gamefile:items/item_enhancement_crude#attribs",
+    "gamefile:items/item_enhancement_crude#mechanics"
+  ],
+  "packet_sha256": "959a2e5158b1e6459460246977b33e7c63073e087bffb0151fbeb41dd90c8084",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7c9c5d873b486401fc94e0e243354f4c369717c35c6da882ffbdaf88c629f16f",
+    "input_tokens": 13688,
+    "output_tokens": 1188,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:34.456284+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "71765b8185a0447c1f1d8613c428d7b64e689c8ec8c5ff8590ce51384834f684",
+    "input_tokens": 14182,
+    "output_tokens": 330,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:43.376683+00:00"
+  }
+}

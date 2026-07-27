@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ultimate_scepter",
+  "title": "Aghanim's Scepter",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "abd85ab644584bfc7539833e30c3523a982cbcf0ce727e47549c0ac4c96dc5a8",
+  "citations": [
+    "gamefile:items/item_ultimate_scepter#cost",
+    "gamefile:items/item_ultimate_scepter#attribs",
+    "loc:DOTA_Tooltip_ability_item_ultimate_scepter_Description",
+    "gamefile:items/item_ultimate_scepter#components",
+    "gamefile:items/item_ultimate_scepter#mechanics",
+    "loc:DOTA_Tooltip_ability_item_ultimate_scepter_Lore"
+  ],
+  "packet_sha256": "719e5d1ede2d51d02108efc62c36e4163ccb3f2957452f52523b49303e492481",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6b9c557bbbee2524e7ed15907d0cec54c498189b575bb66ebd4cb742fa09bf84",
+    "input_tokens": 14292,
+    "output_tokens": 847,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:43.596322+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "90e09885f562ecf84ba0cf9eabec4f13a31c1417533032cd35543021e2a5dc5d",
+    "input_tokens": 14363,
+    "output_tokens": 582,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:58.251117+00:00"
+  }
+}

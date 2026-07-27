@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_restorative",
+  "title": "Restorative",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1bc42e8bc927fc8fc95356ae102b475aca765fb5d8f886f7fd6c7bf427abae54",
+  "citations": [
+    "gamefile:items/item_enhancement_restorative#cost",
+    "gamefile:items/item_enhancement_restorative#mechanics",
+    "gamefile:items/item_enhancement_restorative#attribs"
+  ],
+  "packet_sha256": "9cdc2d46028a214874b45ab556ae1d03ea987b723236299a758eed15ffa829f8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "988b47cf2f57bbf86de040a9db98f7cd02dc355045a3a31864b1b8b4a2caccd4",
+    "input_tokens": 14112,
+    "output_tokens": 689,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:05.283495+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5b4d9f600e1b698f553d2e942b9cf323ce61d0b6b6797968963e34697daf0425",
+    "input_tokens": 14206,
+    "output_tokens": 339,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:15.866311+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "kaya_and_sange",
+  "title": "Kaya and Sange",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "02d81bdd0cbc0b3191d4e76226e70b7da6b22b46d5838f89117d4608e611e174",
+  "citations": [
+    "gamefile:items/item_kaya_and_sange#cost",
+    "gamefile:items/item_kaya_and_sange#attribs",
+    "gamefile:items/item_kaya_and_sange#components",
+    "gamefile:items/item_kaya_and_sange#mechanics",
+    "loc:DOTA_Tooltip_ability_item_kaya_and_sange_Lore"
+  ],
+  "packet_sha256": "96e3f11afd093dfdb7b0a882319e19a25c59a9d1e8cb62416ce8d14ae6a789cb",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "101c9fc631c914f87c4856a0e4029a54d9870df05a2d821f9c1f7cb7aecda527",
+    "input_tokens": 13814,
+    "output_tokens": 807,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:31.334915+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "040e62bddc85fedebd758fdf8422f76b120172ce16b0505685e48b1b218d8509",
+    "input_tokens": 14322,
+    "output_tokens": 300,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:42.003302+00:00"
+  }
+}

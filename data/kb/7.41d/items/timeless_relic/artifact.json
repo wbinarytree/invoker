@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "timeless_relic",
+  "title": "Timeless Relic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "36c4b0efb04de5268441864e543f4219d6497aeb2b6dabe10907f0136db864da",
+  "citations": [
+    "gamefile:items/item_timeless_relic#mechanics",
+    "gamefile:items/item_timeless_relic#attribs",
+    "gamefile:items/item_timeless_relic#cost",
+    "loc:DOTA_Tooltip_ability_item_timeless_relic_Description",
+    "loc:DOTA_Tooltip_ability_item_timeless_relic_Lore"
+  ],
+  "packet_sha256": "aecdf632cae83acd1caa3a0bb0076eade9ba0d45b339deb29afdae8138034622",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "825b9bd3ed0b4cb0b2e99c248ab3edbec580d867fab20398ddebe3a2ec8a6170",
+    "input_tokens": 14162,
+    "output_tokens": 739,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:42.618229+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "10c3055d3da76cef44e17766fdce4e656702e82e47f65e6843e401350272ff8d",
+    "input_tokens": 14253,
+    "output_tokens": 362,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:54.041824+00:00"
+  }
+}

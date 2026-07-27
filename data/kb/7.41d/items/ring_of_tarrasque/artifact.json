@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_tarrasque",
+  "title": "Ring of Tarrasque",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "201a919964d64c72f56419865bb43992268925f41263bb80672d0809c8dc587e",
+  "citations": [
+    "gamefile:items/item_ring_of_tarrasque#cost",
+    "gamefile:items/item_ring_of_tarrasque#attribs",
+    "gamefile:items/item_ring_of_tarrasque#mechanics",
+    "gamefile:items/item_ring_of_tarrasque#components",
+    "loc:DOTA_Tooltip_ability_item_ring_of_tarrasque_Lore"
+  ],
+  "packet_sha256": "a43d8236b7d0a0bd7a38c893a6b7a28ba0007286a545941658ded281267b3786",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "34c1b7ebea65a107a2b03435574b6988f6effe4f3d0ec6ae97fc0d1f1caace16",
+    "input_tokens": 13803,
+    "output_tokens": 751,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:40.040884+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "dc923f8af00a177d24d6808268f35a8f9874be9e534fa2df50a10100cdf9f025",
+    "input_tokens": 14302,
+    "output_tokens": 340,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:49.942831+00:00"
+  }
+}

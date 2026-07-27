@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ultimate_scepter_2",
+  "title": "Aghanim's Blessing",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ae758555ce53622b8361d27bbcc0abbfa9715d8100d47c993d30a3607c5a6145",
+  "citations": [
+    "gamefile:items/item_ultimate_scepter_2#cost",
+    "gamefile:items/item_ultimate_scepter_2#mechanics",
+    "loc:DOTA_Tooltip_ability_item_ultimate_scepter_2_Description",
+    "gamefile:items/item_ultimate_scepter_2#components",
+    "loc:DOTA_Tooltip_ability_item_ultimate_scepter_2_Lore"
+  ],
+  "packet_sha256": "8cc7043aefd61f3507fee95edffb2044d6638611adc740516b1a9b39c7753e26",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "20ce594ccc460bc2256921a39214869a21a27957599764697e30a71856e31f62",
+    "input_tokens": 14196,
+    "output_tokens": 1093,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:21.945201+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "e72281f71ee749e48c102f2ccb026f5444ae29412e7e538056abc1a29d9bca09",
+    "input_tokens": 14249,
+    "output_tokens": 366,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:33.804794+00:00"
+  }
+}

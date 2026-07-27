@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "meteor_hammer",
+  "title": "Meteor Hammer",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b8b89f191415df2f1521dfccfdb073c9845eb51172826a53c661ebeb84331c88",
+  "citations": [
+    "gamefile:items/item_meteor_hammer#cost",
+    "gamefile:items/item_meteor_hammer#attribs",
+    "loc:DOTA_Tooltip_ability_item_meteor_hammer_Description",
+    "gamefile:items/item_meteor_hammer#components",
+    "gamefile:items/item_meteor_hammer#mechanics"
+  ],
+  "packet_sha256": "937cf1588547b0b4a880e9a4c8c4010a679548dcfd8f7276f11d1adf12eecfd9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d63f0e84c8523a88b282e46c0b15f1191f523d9481e466777d4fc02fdad321e2",
+    "input_tokens": 14441,
+    "output_tokens": 2078,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:51.024489+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7a868f9ae8a1f7b1c1321aa43bdc1e52b0ec7a7503eb8895c575ea6e4d2973f6",
+    "input_tokens": 14556,
+    "output_tokens": 2513,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:53.810320+00:00"
+  }
+}

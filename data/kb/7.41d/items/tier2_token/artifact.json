@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tier2_token",
+  "title": "Tier 2 Token",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0dd805d917beeeac25e4d7a3f99dc226c293d9408bd797cb892bbe2bf0e3bdeb",
+  "citations": [
+    "gamefile:items/item_tier2_token#cost",
+    "gamefile:items/item_tier2_token#mechanics",
+    "loc:DOTA_Tooltip_ability_item_tier2_token_Description"
+  ],
+  "packet_sha256": "514761ee7022a00a2bf6602fe0bc1c60d4a3d6f28331ac1817210341bf1e7486",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7889cecb06a088182495132c975ef95ef520013edd148ab00812f95c21bb74f7",
+    "input_tokens": 13685,
+    "output_tokens": 643,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:40.786161+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "4ca903c29b46cfbecd6fa75886b81bceabe033e2a80b9204d3c8a60b7e20fc9f",
+    "input_tokens": 14157,
+    "output_tokens": 354,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:50.121740+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "solar_crest",
+  "title": "Solar Crest",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8031bbe2d2d329313c57f9fe54f2dc51c34ba81ffa0466cde1b371439ec2ca7c",
+  "citations": [
+    "gamefile:items/item_solar_crest#cost",
+    "gamefile:items/item_solar_crest#attribs",
+    "loc:DOTA_Tooltip_ability_item_solar_crest_Description",
+    "gamefile:items/item_solar_crest#components",
+    "gamefile:items/item_solar_crest#mechanics",
+    "loc:DOTA_Tooltip_ability_item_solar_crest_Lore"
+  ],
+  "packet_sha256": "db28a6fc99d4ac37160d29acf9515879e6a46cf441427b70257391ef44be2aba",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "73ef467b89301835fcf6eacc131a6856fdd6ff47d6f731cb10e585722dfde472",
+    "input_tokens": 14344,
+    "output_tokens": 1917,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:54.025455+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "aac509f8521315e1ff6e500d978fbe048a9c5f03f30f4099e30ab88ab377694f",
+    "input_tokens": 14433,
+    "output_tokens": 1304,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:20.835039+00:00"
+  }
+}

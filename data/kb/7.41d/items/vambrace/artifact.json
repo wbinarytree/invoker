@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vambrace",
+  "title": "Vambrace",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e4d4f401609e3a85fe88faa6346e86fab4259f243927d022e70f5cbbfc8fef87",
+  "citations": [
+    "gamefile:items/item_vambrace#cost",
+    "gamefile:items/item_vambrace#attribs",
+    "loc:DOTA_Tooltip_ability_item_vambrace_Description",
+    "gamefile:items/item_vambrace#mechanics",
+    "loc:DOTA_Tooltip_ability_item_vambrace_Lore"
+  ],
+  "packet_sha256": "b3505f0d80bb1e37318835ce80bdc80eb355316c2cbd0212194c9c2fd0be49d7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0e231c0d998de2132eaaf7ca3aed11938ca8da4a45619a4e1235334526b887e2",
+    "input_tokens": 13800,
+    "output_tokens": 1463,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:39.167514+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "44dd8ff3594bd57343c9b36cbb87c34e5ececa81e90503ad34575b05fb2175f9",
+    "input_tokens": 14347,
+    "output_tokens": 413,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:50.842020+00:00"
+  }
+}

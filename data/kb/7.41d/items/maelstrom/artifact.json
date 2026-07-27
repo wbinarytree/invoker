@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "maelstrom",
+  "title": "Maelstrom",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3c0d021bf9bdd63e5b9b19ff3fbe5d2f9d7e4c7273f2c5810bc617832ac7526b",
+  "citations": [
+    "gamefile:items/item_maelstrom#cost",
+    "gamefile:items/item_maelstrom#attribs",
+    "loc:DOTA_Tooltip_ability_item_maelstrom_Description",
+    "gamefile:items/item_maelstrom#components",
+    "gamefile:items/item_maelstrom#mechanics",
+    "loc:DOTA_Tooltip_ability_item_maelstrom_Lore"
+  ],
+  "packet_sha256": "bc4fc611aa05d62b3b2544e567032375f363a33b176b41d35a0f5ddc5ce9315a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8dd56c5795d52b687d96fb8666c2fa7f9a6ade49341aa66c236b007255d39ef9",
+    "input_tokens": 14340,
+    "output_tokens": 1422,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:02.090432+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "712b9646e95fa8d380e7aee6d56b5689cb0ecbe9cf54a4bfb9d396f4d493b534",
+    "input_tokens": 14418,
+    "output_tokens": 798,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:22.024336+00:00"
+  }
+}

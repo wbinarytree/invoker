@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "faded_broach",
+  "title": "Faded Broach",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "28e6aeba5f30b9685218f946c980b28e8f44e3cd4ff2cfee9105f2002f529f47",
+  "citations": [
+    "gamefile:items/item_faded_broach#cost",
+    "gamefile:items/item_faded_broach#attribs",
+    "gamefile:items/item_faded_broach#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_faded_broach_Lore"
+  ],
+  "packet_sha256": "b5ffea723270e85294ebe5464529f3e90d8a2729702b5cce736afd84bf447f76",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "05e67e5ee099982776acded774f7fe36d17aa9b6db99ab85cd2c1998a33d4ce0",
+    "input_tokens": 13707,
+    "output_tokens": 876,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:10.205930+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2b38c4a0bfb991ba2a3ffe2487d63ee19943168462a554c863b1893e04002e24",
+    "input_tokens": 14199,
+    "output_tokens": 260,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:18.267206+00:00"
+  }
+}

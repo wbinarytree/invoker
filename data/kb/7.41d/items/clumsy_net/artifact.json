@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "clumsy_net",
+  "title": "Clumsy Net",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8ca0141b8ee3241056ef0676ea01feda7a8d1bbd288b79861812126b2263f64b",
+  "citations": [
+    "gamefile:items/item_clumsy_net#cost",
+    "gamefile:items/item_clumsy_net#attribs",
+    "loc:DOTA_Tooltip_Ability_item_clumsy_net_Description",
+    "gamefile:items/item_clumsy_net#mechanics"
+  ],
+  "packet_sha256": "640882ebde6192969b78edf9ea80085a4a2c83bbee17203f172bb6586fd0da7b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "45f885b53020e9af13ab4f841b45ed5cc0b8a059d1206b9c707e6dc9aecf3d69",
+    "input_tokens": 14152,
+    "output_tokens": 1190,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:28.585162+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3eee415966edc5c66675d9285c4c8af3f5a60add99b2a52f030b350094cb1bdc",
+    "input_tokens": 14283,
+    "output_tokens": 816,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:50.940454+00:00"
+  }
+}

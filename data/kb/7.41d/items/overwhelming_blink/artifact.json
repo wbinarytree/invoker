@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "overwhelming_blink",
+  "title": "Overwhelming Blink",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2319172b15d0516f898ad7dc973dccdcaeae67de2361a94190f6f4f2cbc87a90",
+  "citations": [
+    "gamefile:items/item_overwhelming_blink#cost",
+    "gamefile:items/item_overwhelming_blink#attribs",
+    "gamefile:items/item_overwhelming_blink#mechanics",
+    "loc:DOTA_Tooltip_ability_item_overwhelming_blink_Description",
+    "gamefile:items/item_overwhelming_blink#components",
+    "loc:DOTA_Tooltip_ability_item_overwhelming_blink_Lore"
+  ],
+  "packet_sha256": "04e084e2e8dabaf582c86b2693037ca61ec47fa7cebd5fc10246db6d7c598d5f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "23a44e898c84a54d5987b27254b109b126000f55f9019b6b53673262d99d3a14",
+    "input_tokens": 14023,
+    "output_tokens": 1583,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:46.106150+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "38289f4e1607b01eaa0af2e87f0b14e546fc48fb00108770c219cb08b684aa8d",
+    "input_tokens": 14577,
+    "output_tokens": 1534,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:26.107715+00:00"
+  }
+}

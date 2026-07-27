@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "light_collector",
+  "title": "Light Collector",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5f6db6b13316b507af242f1701d3ded36384dcf9b65793a496dee71c5027125f",
+  "citations": [
+    "gamefile:items/item_light_collector#cost",
+    "gamefile:items/item_light_collector#attribs",
+    "gamefile:items/item_light_collector#mechanics"
+  ],
+  "packet_sha256": "337052ad08d06c2bc75889233901b25fc0aa8cfbbb3f59ccb57d5f007224de23",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "95e89d579328974251edbe6bf04847a8e1db1392824d1c7ead3f18d07ca19283",
+    "input_tokens": 14144,
+    "output_tokens": 747,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:48.349896+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "70f7451ec2621a6fa3e381bdf583f349f8f428fe2e3ce3c01eb153151a06ac9f",
+    "input_tokens": 14263,
+    "output_tokens": 493,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:03.443978+00:00"
+  }
+}

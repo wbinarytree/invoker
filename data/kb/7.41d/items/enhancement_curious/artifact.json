@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_curious",
+  "title": "Unleashed",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f6790ae847ee00d05b21b56668ae4cf5894f1c33d3366550038dc84f106d5cc6",
+  "citations": [
+    "gamefile:items/item_enhancement_curious#cost",
+    "gamefile:items/item_enhancement_curious#attribs",
+    "gamefile:items/item_enhancement_curious#mechanics"
+  ],
+  "packet_sha256": "11b538d14e9fe0feafef773cecd3153ab04b5bcf732b8f04aa66efbc1185532a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f360f2e127e94bd1786eb05a16c744fd820ddacc07026f3eba230803b44db714",
+    "input_tokens": 13666,
+    "output_tokens": 587,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:27.842204+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ceb8f969bd5e886ec1393521afbb3abd60c2a75fd6d957d813d463f9189fccc0",
+    "input_tokens": 14157,
+    "output_tokens": 202,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:37.196258+00:00"
+  }
+}

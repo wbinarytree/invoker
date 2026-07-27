@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "revenants_brooch",
+  "title": "Revenant's Brooch",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "eb0f05891e309239984f1ab4c03d19a6f3457756993c0f8ee6da956dc8da299a",
+  "citations": [
+    "gamefile:items/item_revenants_brooch#cost",
+    "gamefile:items/item_revenants_brooch#attribs",
+    "gamefile:items/item_revenants_brooch#components",
+    "gamefile:items/item_revenants_brooch#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_revenants_brooch_Description",
+    "loc:DOTA_Tooltip_ability_item_revenants_brooch_Lore"
+  ],
+  "packet_sha256": "61ac5ceb432b3158f05aafd705d3a92b4ae5291b3dceb7bdb90ee3111e522692",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c68c1ce9d414857eb7037ba335d07c715da9dc31056a1eab37fb053fd0cc50dc",
+    "input_tokens": 13856,
+    "output_tokens": 844,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:18.445398+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "742739cb6ee17012abf790120d2f4320f54fd7b0ab1bbf27c78c662819ad6942",
+    "input_tokens": 14360,
+    "output_tokens": 534,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:33.486571+00:00"
+  }
+}

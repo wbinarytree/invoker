@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "boots",
+  "title": "Boots of Speed",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5d84bc581f32ea047182245fceff7cd937e0e680ddd482ced4677a1bb23ad1e7",
+  "citations": [
+    "gamefile:items/item_boots#cost",
+    "gamefile:items/item_boots#attribs",
+    "gamefile:items/item_boots#components",
+    "gamefile:items/item_boots#mechanics",
+    "loc:DOTA_Tooltip_ability_item_boots_Description",
+    "loc:DOTA_Tooltip_ability_item_boots_Lore"
+  ],
+  "packet_sha256": "96377bc944c3753982d634c088923e67e31934d6c168f6135081f2eaa9ebdca9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d702a2b178570403c4232d2b9dc657a8271b4751af15f78256362ac848247bdb",
+    "input_tokens": 13809,
+    "output_tokens": 594,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:19.839815+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ecf2a0e41893ee439faedcb47672b0b7295c26a2187940494bfdcf01c6ecb7f2",
+    "input_tokens": 14293,
+    "output_tokens": 434,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:31.510146+00:00"
+  }
+}

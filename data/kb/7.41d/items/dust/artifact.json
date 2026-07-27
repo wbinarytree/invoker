@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "dust",
+  "title": "Dust of Appearance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "934174a86f036957fa6222a101bd88f05db1c47a4ec303f9bf7a87c9ea2524f6",
+  "citations": [
+    "gamefile:items/item_dust#cost",
+    "gamefile:items/item_dust#attribs",
+    "gamefile:items/item_dust#mechanics",
+    "loc:DOTA_Tooltip_ability_item_dust_Description",
+    "loc:DOTA_Tooltip_ability_item_dust_Lore"
+  ],
+  "packet_sha256": "497c350c27e81e98acdf766e2d9cca7f6cd02acb4d94dd304d7c647d61eea6b7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4b5518476772818cd262dadb807836e85bc3d5a7e38af7c3aabfc5871a96f596",
+    "input_tokens": 14243,
+    "output_tokens": 1153,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:44.079465+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b89d0385baf68263d640def45ade0da289735766b367cbc7a3745255161b6fe6",
+    "input_tokens": 14338,
+    "output_tokens": 532,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:59.751773+00:00"
+  }
+}

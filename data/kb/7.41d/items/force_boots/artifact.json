@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "force_boots",
+  "title": "Force Boots",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "30a6e6736316b9c9641480f3968d92d5bf6ac44fb8c44d0d8270ee9c2777637d",
+  "citations": [
+    "gamefile:items/item_force_boots#cost",
+    "gamefile:items/item_force_boots#attribs",
+    "loc:DOTA_Tooltip_ability_item_force_boots_Description",
+    "gamefile:items/item_force_boots#mechanics",
+    "loc:DOTA_Tooltip_ability_item_force_boots_Lore"
+  ],
+  "packet_sha256": "b389398b7d0564f058d5892e1e1cb7acd3158555a1a55ffcc119e5abe2cd0ad7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6293a0be666ba0f05c42a580efff261c245622a2dc08d895a7638bd85757e77a",
+    "input_tokens": 14248,
+    "output_tokens": 1904,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:08.834721+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b85c0f9ddcd931ceb53d5b1588f6adfcb228d1023410b32c39984a029a8c924a",
+    "input_tokens": 14382,
+    "output_tokens": 721,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:25.595279+00:00"
+  }
+}

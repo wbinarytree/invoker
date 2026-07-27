@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_aquila",
+  "title": "Ring of Aquila",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "06e27d2b29ba50c145a001db1d20525d7a004974f5a4536552bbeced72ad6782",
+  "citations": [
+    "gamefile:items/item_ring_of_aquila#cost",
+    "gamefile:items/item_ring_of_aquila#attribs",
+    "loc:DOTA_Tooltip_ability_item_ring_of_aquila_Description",
+    "gamefile:items/item_ring_of_aquila#mechanics",
+    "loc:DOTA_Tooltip_ability_item_ring_of_aquila_Lore"
+  ],
+  "packet_sha256": "541fc7105eaae2c8ac719503809736dfc8fdc3cab06cb5046b34501b3335cdbd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "cb8c1141200f6b03a62df284d33b790ad910e5ec36ae569fa2a792cef70d0ca0",
+    "input_tokens": 13811,
+    "output_tokens": 1319,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:36.487150+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5750b9c5d7bb2035572d4546be97a4e4f47a4652fbf9b84fc465741053add466",
+    "input_tokens": 14316,
+    "output_tokens": 877,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:59.372679+00:00"
+  }
+}

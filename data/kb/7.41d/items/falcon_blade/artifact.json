@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "falcon_blade",
+  "title": "Falcon Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4794b334fb148f297edf206f4fd49d7216b69f8afd61e113a80ac7af2456240f",
+  "citations": [
+    "gamefile:items/item_falcon_blade#cost",
+    "gamefile:items/item_falcon_blade#attribs",
+    "gamefile:items/item_falcon_blade#components",
+    "gamefile:items/item_falcon_blade#mechanics",
+    "loc:DOTA_Tooltip_ability_item_falcon_blade_Lore"
+  ],
+  "packet_sha256": "ec2edc4d670e24cc8ff08f8758d42b4fc9f46a0d2e0c757a781bb33c59b05a3c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "01e5ecb2707101fc4877c7fec9f7cfefeeb2ad43935695833b27d0ef1568387d",
+    "input_tokens": 13789,
+    "output_tokens": 587,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:30.494145+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ecbaabda32d6197041b5513b007f36bedaf7ea1bd1116a6bbbf00095d3555135",
+    "input_tokens": 14281,
+    "output_tokens": 398,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:48.005896+00:00"
+  }
+}

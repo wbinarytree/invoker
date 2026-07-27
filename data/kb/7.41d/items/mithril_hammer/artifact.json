@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mithril_hammer",
+  "title": "Mithril Hammer",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4e17ce87a2b2c68c3fa0ba29ed831733c60955083fa604665a11d9afe88ec10c",
+  "citations": [
+    "gamefile:items/item_mithril_hammer#cost",
+    "gamefile:items/item_mithril_hammer#attribs",
+    "gamefile:items/item_mithril_hammer#mechanics",
+    "gamefile:items/item_mithril_hammer#components",
+    "loc:DOTA_Tooltip_ability_item_mithril_hammer_Lore"
+  ],
+  "packet_sha256": "1e00eb95a86d9f66abb314d130ebff7f09c03e79cdb1341800dcacc9750f141c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7078eed015a9c62f526687eee11bc1f052ea14fc0812a303ed151f2101ca7537",
+    "input_tokens": 14207,
+    "output_tokens": 1258,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:30.253470+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "9feb41ef292214d16ae6131d7732f47cdde995d1b7e5e0a75fe3b718d794d9f9",
+    "input_tokens": 14257,
+    "output_tokens": 349,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:44.645575+00:00"
+  }
+}

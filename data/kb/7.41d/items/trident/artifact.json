@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "trident",
+  "title": "Trident",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "be4e0d8ba902ebfb80c1e7b74c1e7aa2788bbd596056279ddc171d3fb9b066a8",
+  "citations": [
+    "gamefile:items/item_trident#mechanics",
+    "gamefile:items/item_trident#attribs",
+    "gamefile:items/item_trident#components",
+    "gamefile:items/item_trident#cost",
+    "loc:DOTA_Tooltip_Ability_item_trident_Description"
+  ],
+  "packet_sha256": "97e5ff35c6dadbe1062bf2ae8af05f75c0f591b0d603e6fbb9320c25f828d32c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d28d7264c4ec1a9b98ca6f583e64f9e05793138cd998bdc0f3604b49c4998567",
+    "input_tokens": 13814,
+    "output_tokens": 801,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:22:21.185133+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3436470d4228ac0e494e3e3cd1fbc9b9986a037118fb728d1265ec65701c0bf8",
+    "input_tokens": 14314,
+    "output_tokens": 531,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:22:39.263847+00:00"
+  }
+}

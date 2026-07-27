@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "eye_of_the_vizier",
+  "title": "Eye of the Vizier",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "111c7cb5146d8b9716098b084155df1f85a1414dfa74a028b4de5b29dea9b2fe",
+  "citations": [
+    "gamefile:items/item_eye_of_the_vizier#cost",
+    "gamefile:items/item_eye_of_the_vizier#mechanics",
+    "gamefile:items/item_eye_of_the_vizier#attribs",
+    "loc:DOTA_Tooltip_Ability_item_eye_of_the_vizier_Lore"
+  ],
+  "packet_sha256": "ee24121f2ede002ab94afe88a1bd5e51586dbf16da2d43d57c204a1f83c468d9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "df84cf1f59f201f7e86f59559f0d39b4750896acf751a50166f574023131289b",
+    "input_tokens": 14162,
+    "output_tokens": 742,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:04.911924+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "56923e5ab173b34d1e5b136b40be9739f9e93ff3fe2c3c7525becbcf7396fbfd",
+    "input_tokens": 14257,
+    "output_tokens": 405,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:15.827733+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "shadow_amulet",
+  "title": "Shadow Amulet",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ba21d0b6f943fe1e6261ef8d62141ea13e22f3a1740f46fbae4d7677a1a4aade",
+  "citations": [
+    "gamefile:items/item_shadow_amulet#cost",
+    "loc:DOTA_Tooltip_ability_item_shadow_amulet_Description",
+    "gamefile:items/item_shadow_amulet#attribs",
+    "gamefile:items/item_shadow_amulet#mechanics",
+    "gamefile:items/item_shadow_amulet#components",
+    "loc:DOTA_Tooltip_ability_item_shadow_amulet_Lore"
+  ],
+  "packet_sha256": "356c592a6537b2956e4ee49187d5572a0d6c06ee2111a19d7dddbe2fb776a495",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "986881f5d7140bf5a9762c0fff77bc98401219e4b6ba915ae9731528b05e1f4f",
+    "input_tokens": 14295,
+    "output_tokens": 1391,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:43.713399+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3b6fd2e9d622ffae41a63f071d7644432e6192bb8bb340cbcacf27a018b78fab",
+    "input_tokens": 14386,
+    "output_tokens": 752,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:00.859151+00:00"
+  }
+}

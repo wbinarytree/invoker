@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "lifesteal",
+  "title": "Morbid Mask",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "dfc0ec7e55a509c002852c0c33afb9111fd3b84ba408341203b86142ede29e54",
+  "citations": [
+    "gamefile:items/item_lifesteal#cost",
+    "gamefile:items/item_lifesteal#attribs",
+    "gamefile:items/item_lifesteal#components",
+    "gamefile:items/item_lifesteal#mechanics",
+    "loc:DOTA_Tooltip_ability_item_lifesteal_Description",
+    "loc:DOTA_Tooltip_ability_item_lifesteal_Lore"
+  ],
+  "packet_sha256": "0c952053c7cc2edb1ce17cc5c9b8b24b68f3dacbde8f3ab4764e497964d6feed",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b3f1f5db8889c839123016e1267a00dacdda74c5a2388202618653cf18eafcc9",
+    "input_tokens": 14224,
+    "output_tokens": 1070,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:50.374030+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "76afb21bc6323ab3c9962c02fe358585dc764b0018ff2296081863e483c699ec",
+    "input_tokens": 14283,
+    "output_tokens": 664,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:07.243447+00:00"
+  }
+}

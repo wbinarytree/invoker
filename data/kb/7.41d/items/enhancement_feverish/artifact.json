@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_feverish",
+  "title": "Feverish",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "58a89408af1c674b7c5b593463a4359fb2125c393ebdad44ebdb95efeb268b9d",
+  "citations": [
+    "gamefile:items/item_enhancement_feverish#cost",
+    "gamefile:items/item_enhancement_feverish#attribs",
+    "gamefile:items/item_enhancement_feverish#mechanics"
+  ],
+  "packet_sha256": "a46c8b99fa73bab0e8d88f15b1cd62d6577ad8a25656f64ff5f03c3a0da657d5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e39d0b34b6082b9767e946cd218b7f56ea6e715739a9ca4b48c36f72027ad916",
+    "input_tokens": 13680,
+    "output_tokens": 868,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:32.173165+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2914a5768cfeb0e7578ace607fe946978b62a6f1aedee66062f40a2811e0aefa",
+    "input_tokens": 14196,
+    "output_tokens": 246,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:39.715942+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "heavy_blade",
+  "title": "Witchbane",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a2f9d92cf4503a9c2a9ed229597d87f13506c66b937698d06214d9314a001189",
+  "citations": [
+    "gamefile:items/item_heavy_blade#attribs",
+    "loc:DOTA_Tooltip_Ability_item_heavy_blade_Description",
+    "gamefile:items/item_heavy_blade#cost",
+    "gamefile:items/item_heavy_blade#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_heavy_blade_Lore"
+  ],
+  "packet_sha256": "d89225bddaec1ec20492b801ab57cd0e06a6a7eaea2e15750b2b6ffa6977fa4b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "46a9767692913ad02bbe937d07caf5bafb229fcf7056ea7b03d391294551430c",
+    "input_tokens": 14235,
+    "output_tokens": 1402,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:09.364312+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "fa8cf192aaff422eca8c9abc5dbf8f9b45c850d1f28ac8d6bfe96a6a0b738319",
+    "input_tokens": 14398,
+    "output_tokens": 1018,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:31.089328+00:00"
+  }
+}

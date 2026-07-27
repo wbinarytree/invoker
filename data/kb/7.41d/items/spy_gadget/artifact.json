@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "spy_gadget",
+  "title": "Telescope",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "afb1ef1951c904736b9d9219a9835194983086cfe354a7d27f70747afa0355e5",
+  "citations": [
+    "gamefile:items/item_spy_gadget#attribs",
+    "gamefile:items/item_spy_gadget#mechanics",
+    "gamefile:items/item_spy_gadget#cost",
+    "loc:DOTA_Tooltip_ability_item_spy_gadget_Description",
+    "loc:DOTA_Tooltip_ability_item_spy_gadget_Lore"
+  ],
+  "packet_sha256": "0e3b8864e1ab331231d3d434f4436e6d2e2384b03b0873504454d9ca356cb5aa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9a2caf2261687f4590fbc533cd7083e609577608fa65dafce84713a550046d46",
+    "input_tokens": 14194,
+    "output_tokens": 746,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:42.227939+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "565f771805b1a671a4cfe4423d2350077aecdca4e5da950a8547dca381be1a9b",
+    "input_tokens": 14260,
+    "output_tokens": 636,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:01.543728+00:00"
+  }
+}
