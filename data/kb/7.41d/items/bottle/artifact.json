@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bottle",
+  "title": "Bottle",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "02929c2601b7c1d516dbfd7f420b30cf5e0ec97532496edb4156a1eda4d5ccb4",
+  "citations": [
+    "gamefile:items/item_bottle#cost",
+    "loc:DOTA_Tooltip_ability_item_bottle_Description",
+    "gamefile:items/item_bottle#attribs",
+    "gamefile:items/item_bottle#mechanics",
+    "loc:DOTA_Tooltip_ability_item_bottle_Lore"
+  ],
+  "packet_sha256": "d963658fbce986020e83a6940aa50a8d8078b3e31d960f18400477eab79b534e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "aa1c75491eee3b3acb23de064c8d37af474c0fe7d049813db378dec718119e10",
+    "input_tokens": 13913,
+    "output_tokens": 1437,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:47.987738+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "4a86b831080adcb54a7943a88ad8692a78fa245038fe89a44a4e7869db7d5bbf",
+    "input_tokens": 14058,
+    "output_tokens": 1472,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:07.852153+00:00"
+  }
+}

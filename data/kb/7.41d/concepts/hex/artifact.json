@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "hex",
+  "title": "Hex",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "475c66bbfa32164739ba78bac3d0e90b6e198f00b2b51a4f7fbf7de31b30047a",
+  "citations": [
+    "corpus:liquipedia_dota2/hex@2383903",
+    "corpus:liquipedia_dota2/hex@2383903#Mechanics",
+    "corpus:liquipedia_dota2/hex@2383903#Set_Movement_Speed",
+    "corpus:liquipedia_dota2/hex@2383903#Sources_of_Hex",
+    "corpus:liquipedia_dota2/hex@2383903#Modifying_Hex_Models",
+    "corpus:liquipedia_dota2/hex@2383903#Gallery",
+    "corpus:liquipedia_dota2/hex@2383903#Version_History",
+    "corpus:liquipedia_dota2/hex@2383903#Patch_History"
+  ],
+  "packet_sha256": "6699d33a28d68c6c48187e63a4348ff4a4fe7078080eaecc21fa06a9987b328f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "4dbd35b17237324524679c47c615c27a168f8c7b06c8701db4a19d63effcded3",
+    "input_tokens": 15481,
+    "output_tokens": 2311,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:00:43.192031+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "dcf4d846d3d8ae06ef1e01bde7600d1147640dfdc07e9871c52e87d758dacb72",
+    "input_tokens": 15129,
+    "output_tokens": 1361,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:01:27.070026+00:00"
+  }
+}

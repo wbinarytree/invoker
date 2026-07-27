@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "craggy_coat",
+  "title": "Craggy Coat",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d3ca26d1c684b91304b55b0793ffc01d4455bf685fc163165f4d66d3e4300f3f",
+  "citations": [
+    "gamefile:items/item_craggy_coat#cost",
+    "loc:DOTA_Tooltip_ability_item_craggy_coat_Description",
+    "gamefile:items/item_craggy_coat#attribs",
+    "gamefile:items/item_craggy_coat#mechanics"
+  ],
+  "packet_sha256": "7adae1385f2ba8ee4723dbf52e16dd37deaf576593bb81b9d5ecc2f7e36e1203",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9f29dc4c5fde211636347505add7ef10c3c9ba8c8c39c53c0dd26660459bc3e2",
+    "input_tokens": 14176,
+    "output_tokens": 1281,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:41.247446+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6c70ee83b45733629b2ca76782760a189151b5d7e0b0b63c31ff97a5b71c989f",
+    "input_tokens": 13908,
+    "output_tokens": 620,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:37.388327+00:00"
+  }
+}

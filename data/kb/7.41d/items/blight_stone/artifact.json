@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blight_stone",
+  "title": "Orb of Blight",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "00291a154567a506071672c084831c19520a41146e391a8e54ea2211437f8f68",
+  "citations": [
+    "gamefile:items/item_blight_stone#cost",
+    "gamefile:items/item_blight_stone#attribs",
+    "loc:DOTA_Tooltip_Ability_item_blight_stone_Description",
+    "gamefile:items/item_blight_stone#components",
+    "gamefile:items/item_blight_stone#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_blight_stone_Lore"
+  ],
+  "packet_sha256": "278f806525e29fc7b24efdf771ce94a4aa2d9f65b2339f4d1f8402b3e08e8ff9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7279deb3927b277781af3b0f8a7073b57550d0ff96310a54e8c5c0ec3c163cef",
+    "input_tokens": 14260,
+    "output_tokens": 1184,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:47.867365+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ec076b66b018065bd2b8dc9e89720c7497ad340ea50ab8d7ff236a64e7d7f4a3",
+    "input_tokens": 13953,
+    "output_tokens": 649,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:35.314144+00:00"
+  }
+}

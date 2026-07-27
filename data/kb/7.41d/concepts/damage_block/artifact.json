@@ -1,0 +1,52 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "damage_block",
+  "title": "Damage Block",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "809b59a7b1de887aea6a66871bdd7c9b4ceda3d16f26b3705a1a2dda07e01647",
+  "citations": [
+    "corpus:liquipedia_dota2/damage_block@2379270",
+    "corpus:liquipedia_dota2/damage_block@2379270#Overview",
+    "corpus:liquipedia_dota2/damage_block@2379270#Mana_Shield_Damage_Block",
+    "corpus:liquipedia_dota2/damage_block@2379270#Physical_Damage_Block",
+    "corpus:liquipedia_dota2/damage_block@2379270#Magical_Damage_Block",
+    "corpus:liquipedia_dota2/damage_block@2379270#Universal_Damage_Block",
+    "corpus:liquipedia_dota2/damage_block@2379270#Melee_Damage_Block",
+    "corpus:liquipedia_dota2/damage_block@2379270#Details",
+    "corpus:liquipedia_dota2/damage_block@2379270#Other_Sources",
+    "corpus:liquipedia_dota2/damage_block@2379270#Blocked_Spell_Damage",
+    "corpus:liquipedia_dota2/damage_block@2379270#Not_Blocked_Attack_Damage",
+    "corpus:liquipedia_dota2/damage_block@2379270#Sources",
+    "corpus:liquipedia_dota2/damage_block@2379270#Stacking",
+    "corpus:liquipedia_dota2/damage_block@2379270#Side_Effects",
+    "corpus:liquipedia_dota2/damage_block@2379270#Chance-based_blocking",
+    "corpus:liquipedia_dota2/damage_block@2379270#Examples",
+    "corpus:liquipedia_dota2/damage_block@2379270#Preventing_on-damage_effects",
+    "corpus:liquipedia_dota2/damage_block@2379270#Recent_Changes"
+  ],
+  "packet_sha256": "fc63e2a6bce1d488e88b2fe5ca76281826ee980ae304a7b73754d96b21503f6f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "2254a0bda6f2b9c8e9eb5a9d3c080909d66c0129c98de721122bdd1fd558e157",
+    "input_tokens": 16565,
+    "output_tokens": 8785,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:38:26.319050+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "dd6df621da75ffc7179d8663e9d7f6e6b833ba2b4a5ce20186ff4a0b641b365d",
+    "input_tokens": 16605,
+    "output_tokens": 2576,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:39:27.307704+00:00"
+  }
+}

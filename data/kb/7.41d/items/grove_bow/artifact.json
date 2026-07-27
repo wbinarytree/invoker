@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "grove_bow",
+  "title": "Grove Bow",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "908ccae6bc00933c51f3f8ecaeb451cf2da2471229dc4204e346e8a8ff148edb",
+  "citations": [
+    "gamefile:items/item_grove_bow#attribs",
+    "gamefile:items/item_grove_bow#cost",
+    "gamefile:items/item_grove_bow#mechanics",
+    "loc:DOTA_Tooltip_ability_item_grove_bow_Description",
+    "loc:DOTA_Tooltip_ability_item_grove_bow_Lore"
+  ],
+  "packet_sha256": "50d1fa36a32a09d5850c858b410f7ed69bd464720bd89d9d092864e37011c1aa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8dccf30ab23260cf89d0956ec883cc91f3ce0e264a353782b143a9d29267aa22",
+    "input_tokens": 13758,
+    "output_tokens": 747,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:28.058536+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e44cd9ddf707486841f7ec3446097d7ebca7994ec0aae87e18da49d779b51266",
+    "input_tokens": 13890,
+    "output_tokens": 698,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:31.441960+00:00"
+  }
+}

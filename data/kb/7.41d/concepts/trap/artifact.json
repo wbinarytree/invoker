@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "trap",
+  "title": "Trap",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7c4e639e938f0c1328cabf4145d112ea96be002d27e0692b93357f9c10dc9210",
+  "citations": [
+    "corpus:liquipedia_dota2/trap@2226366",
+    "corpus:liquipedia_dota2/trap@2226366#Definition",
+    "corpus:liquipedia_dota2/trap@2226366#Pathing_Blockers",
+    "corpus:liquipedia_dota2/trap@2226366#Temporary_Fence",
+    "corpus:liquipedia_dota2/trap@2226366#Forced_Movement_Disabling",
+    "corpus:liquipedia_dota2/trap@2226366#Version_History",
+    "corpus:liquipedia_dota2/trap@2226366#Patch_History"
+  ],
+  "packet_sha256": "80576c95b5709d14cc7092784e9342fca4fd83e070a1147e92adb6bd8b022963",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "f2ab1c6493beb9f31b3bfb0183be5ca5304d3ba78f49f3adbc016266a913da49",
+    "input_tokens": 15699,
+    "output_tokens": 3775,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:47:14.694134+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "7af32549949427373fa80ced392719b64bfd30da7a76b1fa68f456b5930aac91",
+    "input_tokens": 16171,
+    "output_tokens": 1737,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:47:55.129204+00:00"
+  }
+}

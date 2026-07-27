@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "silence",
+  "title": "Silence",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5d3acfcca0bfd216dc9958cc428debbeac9314d2576e74789669652dd61f4b47",
+  "citations": [
+    "corpus:liquipedia_dota2/silence@2405718",
+    "corpus:liquipedia_dota2/silence@2405718#Definition",
+    "corpus:liquipedia_dota2/silence@2405718#Mechanics",
+    "corpus:liquipedia_dota2/silence@2405718#Abilities_Castable_When_Silenced",
+    "corpus:liquipedia_dota2/silence@2405718#Silence",
+    "corpus:liquipedia_dota2/silence@2405718#Mute",
+    "corpus:liquipedia_dota2/silence@2405718#Version_History",
+    "corpus:liquipedia_dota2/silence@2405718#Patch_History"
+  ],
+  "packet_sha256": "e4eab62e59e42ca10d2135a3064b4ac0e58ce8148838dd89e009f31a37059a6f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "a389a76dd7aa79304c3ce72fa877ebfa50eb461930cb07ae4d598e54040b21d5",
+    "input_tokens": 16456,
+    "output_tokens": 4909,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:31:37.796438+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "144e42aceb14f9cf38a39d0927d1392c8894e8c805b0552a5f72c50a957eed2f",
+    "input_tokens": 16269,
+    "output_tokens": 1562,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:32:11.824357+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ancient_guardian",
+  "title": "Ancient Guardian",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d92ebfc0cac8093d4961f158049e28e526b5d04375c3d6ea8251f8b29c23fa37",
+  "citations": [
+    "gamefile:items/item_ancient_guardian#attribs",
+    "loc:DOTA_Tooltip_ability_item_ancient_guardian_Description",
+    "gamefile:items/item_ancient_guardian#cost",
+    "gamefile:items/item_ancient_guardian#mechanics"
+  ],
+  "packet_sha256": "b9e01a530a8ca0c876a2c6dde0508da035eb8a41fa99271e5256b1e848074ddc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "353f62758578506f0555034d6294bb21b788553582d09f140ffea1fb43a43d5b",
+    "input_tokens": 14151,
+    "output_tokens": 723,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:26.993523+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "cd6f707305dfdf964e634675834db9218b332f58ac207b3cd9e3b3ebdd57dfc3",
+    "input_tokens": 14289,
+    "output_tokens": 401,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:06:43.841690+00:00"
+  }
+}

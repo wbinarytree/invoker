@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "cyclone",
+  "title": "Eul's Scepter of Divinity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c14fda1f2e62c5464d5f86bcd10f5583e59e77777359735271e77c45648f3d78",
+  "citations": [
+    "gamefile:items/item_cyclone#cost",
+    "gamefile:items/item_cyclone#attribs",
+    "loc:DOTA_Tooltip_ability_item_cyclone_Description",
+    "gamefile:items/item_cyclone#components",
+    "gamefile:items/item_cyclone#mechanics",
+    "loc:DOTA_Tooltip_ability_item_cyclone_Lore"
+  ],
+  "packet_sha256": "c24746044dbb04d74d2839142851adf9c40ec3b43fb72da8f9aba6cacb084aef",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6b015d88430f97d256c4823b65785e221db4a5617a037883576a155599ebb18d",
+    "input_tokens": 13954,
+    "output_tokens": 1879,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:14.409319+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c37904346dffd614a696771f1725665fe1e514f6307b4049a9e3aacdd5eb32bc",
+    "input_tokens": 14114,
+    "output_tokens": 1946,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:11.387720+00:00"
+  }
+}

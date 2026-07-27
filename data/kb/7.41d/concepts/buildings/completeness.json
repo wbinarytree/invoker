@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "c9fa22f37b581361cbc63f406625c3e9944799a813898677b131f09fba0e3b3d",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/buildings@2376134#Backdoor_Protection",
+      "fact": "The Ancient-centered Backdoor Protection detection radius extends beyond the base."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/buildings@2376134#Glyph_of_Fortification",
+      "fact": "Glyph of Fortification lists J as its hotkey."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/buildings@2376134#Effigy_Buildings",
+      "fact": "The count of 7 Effigy Buildings per base is explicitly stated as of version 7.41d."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "273363f4c1da85403bfadab5bbf139315c14a0db6744ebd7ca0ed69e21f41ba4",
+    "input_tokens": 31502,
+    "output_tokens": 6866,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:51:09.515904+00:00"
+  }
+}

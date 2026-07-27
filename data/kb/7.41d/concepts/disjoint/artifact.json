@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "disjoint",
+  "title": "Disjoint",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c637215a409afcd1dc896d55c2a6076e5de910786b72901042d319f963f16e0e",
+  "citations": [
+    "corpus:liquipedia_dota2/disjoint@2360423",
+    "corpus:liquipedia_dota2/disjoint@2360423#Disjointing_Abilities",
+    "corpus:liquipedia_dota2/disjoint@2360423#Teleporting",
+    "corpus:liquipedia_dota2/disjoint@2360423#Invisibility",
+    "corpus:liquipedia_dota2/disjoint@2360423#Hiding",
+    "corpus:liquipedia_dota2/disjoint@2360423#Invulnerability",
+    "corpus:liquipedia_dota2/disjoint@2360423#Disjointable_projectiles",
+    "corpus:liquipedia_dota2/disjoint@2360423#Undisjointable_projectiles",
+    "corpus:liquipedia_dota2/disjoint@2360423#Balance_changelog"
+  ],
+  "packet_sha256": "ce8b0273df4be284731546916a3c18208e3ef176602c9899efb4f1fd9058fd5d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "3f5debcdf104194f440462e6cd910a44a51a3356fe1eb9234dd49f587434e979",
+    "input_tokens": 16450,
+    "output_tokens": 6572,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:54:42.963736+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "e398c797efc6a31ed80095ddea5055c957b8885ff2b5893337cbb9039bb3a5d5",
+    "input_tokens": 16148,
+    "output_tokens": 1856,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:55:23.375751+00:00"
+  }
+}

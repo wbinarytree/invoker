@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "runes",
+  "title": "Runes",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7129eb9f355a1ac458bb2eb27406ed4b964e57c54af9b30c12bec03b83387f32",
+  "citations": [
+    "corpus:liquipedia_dota2/runes@2401387",
+    "corpus:liquipedia_dota2/runes@2401387#Definition",
+    "corpus:liquipedia_dota2/runes@2401387#Activate",
+    "corpus:liquipedia_dota2/runes@2401387#Amplify_Damage",
+    "corpus:liquipedia_dota2/runes@2401387#Arcane",
+    "corpus:liquipedia_dota2/runes@2401387#Haste",
+    "corpus:liquipedia_dota2/runes@2401387#Illusion",
+    "corpus:liquipedia_dota2/runes@2401387#Invisibility",
+    "corpus:liquipedia_dota2/runes@2401387#Regeneration",
+    "corpus:liquipedia_dota2/runes@2401387#Shield",
+    "corpus:liquipedia_dota2/runes@2401387#Bounty",
+    "corpus:liquipedia_dota2/runes@2401387#Water",
+    "corpus:liquipedia_dota2/runes@2401387#Recent_Changes",
+    "corpus:liquipedia_dota2/runes@2401387#Gallery"
+  ],
+  "packet_sha256": "50498ef76bcddca880375be6ceb333d5a6d099efdf4c285cd139b23f048a8116",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "6cfd2becf26d5c39774151c2aa3f0796bb1f81bfb60474e547362d2c339a577d",
+    "input_tokens": 18184,
+    "output_tokens": 15304,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:34:38.465244+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "336cae97e9fe45541dfc34fcf7e146fd8137062a121a43bcef1134d93f74d555",
+    "input_tokens": 23194,
+    "output_tokens": 3166,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:35:56.958124+00:00"
+  }
+}

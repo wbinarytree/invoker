@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "travel_boots",
+  "title": "Boots of Travel",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d5b35cb825f698ed91c141ea05ac74b9837ae41e5a3ecb4718bbf41d2c6f2129",
+  "citations": [
+    "gamefile:items/item_travel_boots#cost",
+    "gamefile:items/item_travel_boots#attribs",
+    "loc:DOTA_Tooltip_ability_item_travel_boots_Description",
+    "gamefile:items/item_travel_boots#components",
+    "gamefile:items/item_travel_boots#mechanics",
+    "loc:DOTA_Tooltip_ability_item_travel_boots_Lore"
+  ],
+  "packet_sha256": "475c2f0caf3a6defdbe37b240fe3ed3adf1e640ea9722e91b17f7dfdbb0d3717",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f925c090f56a972ebad0e17b94c21d2465316bef6858a5cf9212da706ac71190",
+    "input_tokens": 14267,
+    "output_tokens": 860,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:42.852559+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "387aa4585a07990801bf94b34f7416bae14b488014e18cd9946723f9d155910b",
+    "input_tokens": 14003,
+    "output_tokens": 637,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:11.433866+00:00"
+  }
+}

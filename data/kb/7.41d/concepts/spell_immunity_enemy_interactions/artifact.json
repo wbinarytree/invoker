@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_immunity_enemy_interactions",
+  "title": "Spell Immunity/Enemy Interactions",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ea803db626402de858849026dea48ebb64792f8e2ef1b5cf8a778db2264c5129",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Interactions_with_Spell_Immune_Enemies",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Fully_piercing",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Choosing_as_target",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Partially_piercing",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Not_Piercing",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Other_Cases",
+    "corpus:liquipedia_dota2/spell_immunity_enemy_interactions@2383442#Interactions_with_Spell_Immune_Wards"
+  ],
+  "packet_sha256": "30aabc13a5fd718287c25506bf3fb8d99b9e8dd308e5a415477f80fe56a2dbd2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "4e92005c9f133ba2bacb88bed3a8608b118b63d78915bf901a44d94c6a060740",
+    "input_tokens": 20630,
+    "output_tokens": 8183,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:39:09.283766+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "67396ab0ee9a9fcc4407f3696caf508ed8e28837802a0df2f5e95982a74d9736",
+    "input_tokens": 20864,
+    "output_tokens": 3296,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:40:21.475521+00:00"
+  }
+}

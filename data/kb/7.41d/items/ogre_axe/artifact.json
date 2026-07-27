@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ogre_axe",
+  "title": "Ogre Axe",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f28f80241ea0e5658544f1ed43ec1d49d1c38c430d66fe893495689a6870c275",
+  "citations": [
+    "gamefile:items/item_ogre_axe#cost",
+    "gamefile:items/item_ogre_axe#mechanics",
+    "gamefile:items/item_ogre_axe#attribs",
+    "gamefile:items/item_ogre_axe#components",
+    "loc:DOTA_Tooltip_ability_item_ogre_axe_Lore"
+  ],
+  "packet_sha256": "03b437970738a9d3ee11fc7b2c4b3307b1d6bee21940a3564d3d5abdd2336390",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "45d33211300ace71d25f9e793fd591556d1ade59f4e6d3f5888f4b576c473eee",
+    "input_tokens": 13800,
+    "output_tokens": 710,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:10.515735+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "21cd82b90293a4078fcb429638796359f7490d9e1c7e8c14c82cd04ec803cf30",
+    "input_tokens": 13927,
+    "output_tokens": 474,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:24.319088+00:00"
+  }
+}

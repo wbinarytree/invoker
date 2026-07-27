@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "gungir",
+  "title": "Gleipnir",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "74a0dd61c851ab991746295816e4e021a2d5fc7fbbf5aa440cc700a91e1052ae",
+  "citations": [
+    "gamefile:items/item_gungir#cost",
+    "gamefile:items/item_gungir#attribs",
+    "loc:DOTA_Tooltip_ability_item_gungir_Description",
+    "gamefile:items/item_gungir#mechanics",
+    "gamefile:items/item_gungir#components",
+    "loc:DOTA_Tooltip_ability_item_gungir_Lore"
+  ],
+  "packet_sha256": "5c72abe03f67a400e6f7ed911dd8cc9de2da21d89d02bb2e167c248ed2a4d61c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "894c8352b7e7f85e13bf6c0eb321c0105cb38de4c8722f3581621d6692c03dd3",
+    "input_tokens": 14290,
+    "output_tokens": 1975,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:23.094629+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "4a1e06a5a0eb7ef4e2e51a9d38b102f5e31a1d775bcad094fcef18dca756adaa",
+    "input_tokens": 14086,
+    "output_tokens": 1157,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:45.576709+00:00"
+  }
+}

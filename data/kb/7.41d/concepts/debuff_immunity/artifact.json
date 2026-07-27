@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "debuff_immunity",
+  "title": "Debuff Immunity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "90f9d56eda710d396dc9af5b2a83316bf67599fee67637a79848313fa0152023",
+  "citations": [
+    "corpus:liquipedia_dota2/debuff_immunity@2381690",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Mechanics",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Debuffs",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Damage",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Mana",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#True_Sight_and_Vision",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Dispel",
+    "corpus:liquipedia_dota2/debuff_immunity@2381690#Sources"
+  ],
+  "packet_sha256": "c1dddee4704884d7da8e9c68aef19b358d7a08136d1e1b2f5b7c6c9ce7161d3c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "b003bfea200d1c04380bc089cf030bbd4d71bc77b9a57ee4a12a6f15562870f0",
+    "input_tokens": 15715,
+    "output_tokens": 3449,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:53:28.305495+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "99f91d5825fa86699d794ffb76ffd6cb7f39792522d5adf9528b262ea5117bac",
+    "input_tokens": 15332,
+    "output_tokens": 1523,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:54:00.817204+00:00"
+  }
+}

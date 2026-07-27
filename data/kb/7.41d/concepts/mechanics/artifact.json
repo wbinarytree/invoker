@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "mechanics",
+  "title": "Mechanics",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "501e0ce73e493ac0091748707a77df352572c05ef8c439696f910e90981b5040",
+  "citations": [
+    "corpus:liquipedia_dota2/mechanics@2378401",
+    "corpus:liquipedia_dota2/mechanics@2378401#Unit_Mechanics",
+    "corpus:liquipedia_dota2/mechanics@2378401#Attack_Mechanics",
+    "corpus:liquipedia_dota2/mechanics@2378401#Attack_modifiers",
+    "corpus:liquipedia_dota2/mechanics@2378401#World_Mechanics",
+    "corpus:liquipedia_dota2/mechanics@2378401#Status_effects",
+    "corpus:liquipedia_dota2/mechanics@2378401#Dispelling",
+    "corpus:liquipedia_dota2/mechanics@2378401#Gameplay",
+    "corpus:liquipedia_dota2/mechanics@2378401#System",
+    "corpus:liquipedia_dota2/mechanics@2378401#Settings",
+    "corpus:liquipedia_dota2/mechanics@2378401#Matchmaking",
+    "corpus:liquipedia_dota2/mechanics@2378401#Cosmetic_items"
+  ],
+  "packet_sha256": "51cf2735d406f35f880047b2b14e7fc186750b9f5ee9d4b2f2cb317245ea99b3",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "336e973b09a7da7e18676ebf84616acf63c95a96a7386a993bd6c96f9354b2c3",
+    "input_tokens": 18560,
+    "output_tokens": 7672,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:25:31.610809+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "a8edab691cf94ac095e32a969e29d88fef7cd7719412719fdb26d55ea684fd8f",
+    "input_tokens": 20461,
+    "output_tokens": 2396,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:26:26.620317+00:00"
+  }
+}

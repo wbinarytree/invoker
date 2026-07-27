@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "558006c3f7d78a350dfd146aa21f6ef7ba557c4cbd53feda84ae8d1c3560d272",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/trees@2217001#Tree_Count",
+      "fact": "The current total of 2357 trees applies since Version 7.41d."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "e776c7003be4e25912b6c7109e633194f8797751157a1b67dd71c9530ba3f08e",
+    "input_tokens": 19128,
+    "output_tokens": 355,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:48:50.744706+00:00"
+  }
+}

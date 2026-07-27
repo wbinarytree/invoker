@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "abyssal_blade",
+  "title": "Abyssal Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a7677f452ffa46bc1c7846661f04187fad6148a516d1f1777085ffd31b117578",
+  "citations": [
+    "gamefile:items/item_abyssal_blade#cost",
+    "gamefile:items/item_abyssal_blade#attribs",
+    "loc:DOTA_Tooltip_ability_item_abyssal_blade_Description",
+    "gamefile:items/item_abyssal_blade#components",
+    "gamefile:items/item_abyssal_blade#mechanics",
+    "loc:DOTA_Tooltip_ability_item_abyssal_blade_Lore"
+  ],
+  "packet_sha256": "3ce1c44bbdf531343f9f7a572ff23e70faf4d922800421ce321ec0a32e7adbcc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9e114985893944954962be3450d10a46392f9cfd8ce900959ee5561db94558cf",
+    "input_tokens": 14397,
+    "output_tokens": 1595,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:48:14.798785+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "21f413a42d6a43300edb313585b49c2b2af2a4e8416f670717e3595f137b281d",
+    "input_tokens": 14536,
+    "output_tokens": 1891,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:13.109236+00:00"
+  }
+}

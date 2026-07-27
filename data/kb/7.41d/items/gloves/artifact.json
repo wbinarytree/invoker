@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "gloves",
+  "title": "Gloves of Haste",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b4153b96418360c559de8efcab118855bac378da23c474e8a0a9cdc6b04acb8b",
+  "citations": [
+    "gamefile:items/item_gloves#cost",
+    "gamefile:items/item_gloves#attribs",
+    "gamefile:items/item_gloves#mechanics",
+    "gamefile:items/item_gloves#components",
+    "loc:DOTA_Tooltip_ability_item_gloves_Lore"
+  ],
+  "packet_sha256": "c7481631bd7964fbc37329afed31fa9e83e7236542d9ad745dc8ee3ca6b090da",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "02d4e79fccd665b0078414d99066247e5b0e6968959d896c38a3d5096ef4a28e",
+    "input_tokens": 13775,
+    "output_tokens": 568,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:48.046293+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "316552c504b31a95350762e688ad7bc32a61e0db7de01a1ff8ed4c492cbbf6c7",
+    "input_tokens": 13891,
+    "output_tokens": 390,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:15.938211+00:00"
+  }
+}

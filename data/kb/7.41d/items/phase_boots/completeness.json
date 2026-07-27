@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "a53cfd6a2af60d4242233e8f6eb1c9f71515ed1e7fb3fe5861aef140789b7b61",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_phase_boots_Description",
+      "fact": "Phase gives 20% increased movement speed to melee heroes and 10% to ranged heroes."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "2",
+    "request_sha256": "1e8e833565dd8ba3e2f437f538bf47ede0de79e9b21a6ed56b56e585d5aceac0",
+    "input_tokens": 14594,
+    "output_tokens": 572,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:03:48.448807+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "scan",
+  "title": "Scan",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f65f35e47e54f2becded4e2f595d7c32848693e07efa6fed0dff8c99af71a051",
+  "citations": [
+    "corpus:liquipedia_dota2/scan@2346506",
+    "corpus:liquipedia_dota2/scan@2346506#Scan",
+    "corpus:liquipedia_dota2/scan@2346506#Version_History",
+    "corpus:liquipedia_dota2/scan@2346506#Patch_History"
+  ],
+  "packet_sha256": "a647c6b2157d1354474a46d9c5972f1e69f0866bb633e2b032671277ff7c0471",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "8b79141fa439e3db6011d5062d17c75c5f0550a99eed9f8bf9bb6d3298275851",
+    "input_tokens": 15581,
+    "output_tokens": 4193,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:31:16.145514+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "6e2d3c2d7b81b9b8a42d1e65784e1b9cefab83db004b86fc1aed9fcec68dada0",
+    "input_tokens": 15776,
+    "output_tokens": 974,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:31:41.729839+00:00"
+  }
+}

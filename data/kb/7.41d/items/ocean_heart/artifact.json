@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ocean_heart",
+  "title": "Ocean Heart",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c69d10bb0479f06d02ab9bb7f5ceabfb9935f513305314602c8772ee6140af01",
+  "citations": [
+    "gamefile:items/item_ocean_heart#cost",
+    "gamefile:items/item_ocean_heart#attribs",
+    "gamefile:items/item_ocean_heart#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_ocean_heart_Description",
+    "loc:DOTA_Tooltip_Ability_item_ocean_heart_Lore"
+  ],
+  "packet_sha256": "b2a9b33ef279b99ea04c22ff558e2ff229591fc4d6ee030dc57817db52bec490",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "80337fbaf45ebbadf5596f3c2892ffc3077e93a2ded10d6da89125cf25643341",
+    "input_tokens": 13748,
+    "output_tokens": 1205,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:17.150446+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "19c20532db1b0d8f7470d770b21a7e1fc76fcbab1b7f1341674dc557fa71692b",
+    "input_tokens": 13863,
+    "output_tokens": 281,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:16.639379+00:00"
+  }
+}

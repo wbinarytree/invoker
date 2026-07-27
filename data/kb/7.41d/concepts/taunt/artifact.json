@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "taunt",
+  "title": "Taunt",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "277e6a841ccdd0c546c3b8171b52d704f5a0846823caddce49263729825f2136",
+  "citations": [
+    "corpus:liquipedia_dota2/taunt@2331389",
+    "corpus:liquipedia_dota2/taunt@2331389#Mechanics",
+    "corpus:liquipedia_dota2/taunt@2331389#Stacking",
+    "corpus:liquipedia_dota2/taunt@2331389#Sources",
+    "corpus:liquipedia_dota2/taunt@2331389#Abilities_Castable_When_Taunted",
+    "corpus:liquipedia_dota2/taunt@2331389#Version_History"
+  ],
+  "packet_sha256": "060a09ce627f984f9612134b02989e1f4b1bb1ada5be78952323d400141e1eab",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "6c550c35157da473149afd8c9b08683f786c1591844e4d1baa0fe7d4c8cb763e",
+    "input_tokens": 15934,
+    "output_tokens": 4747,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:42:48.951553+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "0a08fed542bf17337d2349eddc83a9d97f8be3ca133b6d86c5f9774a37146e7f",
+    "input_tokens": 16319,
+    "output_tokens": 1270,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:43:21.192486+00:00"
+  }
+}

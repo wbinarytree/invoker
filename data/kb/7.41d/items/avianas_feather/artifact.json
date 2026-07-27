@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "avianas_feather",
+  "title": "Aviana's Feather",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6c064ff7d90ea79c987f6f2a852608a0b8e96d8ce0d2c543caa39c9f97e9f19d",
+  "citations": [
+    "gamefile:items/item_avianas_feather#attribs",
+    "loc:DOTA_Tooltip_ability_item_avianas_feather_Description",
+    "gamefile:items/item_avianas_feather#cost",
+    "gamefile:items/item_avianas_feather#mechanics"
+  ],
+  "packet_sha256": "9bb73196f6c42bf739d0aa3942969588ecade4f20c73fc6eee2b7cb214172c64",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "557455d9a6313cd66eec51d402b8b06829e8fd5a41e27feafbb8653a522f714f",
+    "input_tokens": 14142,
+    "output_tokens": 729,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:29.426013+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "99694546d89cb78a8281d10fc3b0f974e0856c94bfa5fbf2264c5120877f3603",
+    "input_tokens": 13875,
+    "output_tokens": 467,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:15.359388+00:00"
+  }
+}

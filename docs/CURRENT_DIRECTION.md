@@ -38,6 +38,14 @@ This file is the shortest path to the active design direction. Anything not list
 - Generation completeness gates — coverage check + compression guard
   (accepted; all gates landed, canonical KB regenerated under v5):
   [docs/specs/2026-07-26-generation-completeness-gates.md](specs/2026-07-26-generation-completeness-gates.md)
+- Batch KB generation — concept + item fleets on codex ran
+  2026-07-26/27; full 7.41d corpus committed (concepts 98/98: 86 clean,
+  12 flagged; items 292/292: 289 clean, 3 recorded-nuance flags):
+  [docs/specs/2026-07-26-batch-kb-generation.md](specs/2026-07-26-batch-kb-generation.md)
+- Item KB quality follow-ups — mechanics packet policy, guard v2,
+  qualifier prompts v7/v8 + mandatory H1, card lore (executed
+  2026-07-27; all runs complete, corpus accepted):
+  [docs/specs/2026-07-27-item-kb-quality-followups.md](specs/2026-07-27-item-kb-quality-followups.md)
 
 ## Active plans
 

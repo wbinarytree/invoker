@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "34dde518768f763b0723a2a5139238f3b7150664b8065f8fe871c148d838fc9e",
+  "packet_matches_artifact": false,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_flask_Description",
+      "fact": "The health regeneration lasts for 13 seconds."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "2",
+    "request_sha256": "2d766fd80b0ace66c7068853cd4fd328d35795bb147b89a36ade1dc6f2463729",
+    "input_tokens": 13976,
+    "output_tokens": 374,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:54:33.412921+00:00"
+  }
+}

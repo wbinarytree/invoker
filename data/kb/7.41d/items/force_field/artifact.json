@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "force_field",
+  "title": "Arcanist's Armor",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1ce96607f949fe01dc880327e143fbbdbb27149d19b639cd5c188dee3299afd9",
+  "citations": [
+    "gamefile:items/item_force_field#cost",
+    "loc:DOTA_Tooltip_Ability_item_force_field_Description",
+    "gamefile:items/item_force_field#attribs",
+    "gamefile:items/item_force_field#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_force_field_Lore"
+  ],
+  "packet_sha256": "fc97cbac90869cb312a1d53ea365a917f91d8e4ebdb035f2ffb8ee84e739c556",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b6aa8985e653a204a0aa4f7de5a8b3d20f87d2da6ca50915c92a6cd94f4ebde1",
+    "input_tokens": 14234,
+    "output_tokens": 1692,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:02.866798+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "d6ed07e5718230bcc18766b8a6d4992f9db89e334b413b6de3f97a7d02dd3f16",
+    "input_tokens": 14002,
+    "output_tokens": 764,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:00.473277+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "repair_kit",
+  "title": "Repair Kit",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "001b6ec022723e9501867123089f7bdd657672833689137f21db48f437c26fa1",
+  "citations": [
+    "gamefile:items/item_repair_kit#cost",
+    "gamefile:items/item_repair_kit#attribs",
+    "loc:DOTA_Tooltip_ability_item_repair_kit_Description",
+    "gamefile:items/item_repair_kit#mechanics"
+  ],
+  "packet_sha256": "309130e85f7c86d29f9ce909c75a8385be7a3f133fd52d766005844ea016ffa6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7027dda9e2a696aa95046d6518ca17e39f688cb24bb4eb9876bce5a321517af0",
+    "input_tokens": 13780,
+    "output_tokens": 786,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:08.626721+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "11fdb9ef3627b1b1bf8fbc99cc4d8fffb0e829c866412180cd37ce78710ee537",
+    "input_tokens": 13927,
+    "output_tokens": 1234,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:09.170582+00:00"
+  }
+}

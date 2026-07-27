@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "paladin_sword",
+  "title": "Paladin Sword",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c1cd03842f93bafbd6aef920dfb79bba13d3fd45b18255c61ea324a7b34e2cae",
+  "citations": [
+    "gamefile:items/item_paladin_sword#attribs",
+    "gamefile:items/item_paladin_sword#cost",
+    "gamefile:items/item_paladin_sword#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_paladin_sword_Lore"
+  ],
+  "packet_sha256": "8b36e7526f3b20cb419e4577368e02974cf11ae05e6d60ccbadb1a7bfaa4a0f2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "144fcb80f175d78f86c4e111c754f082384c7b80f5d5def47fff6db73cf42591",
+    "input_tokens": 13753,
+    "output_tokens": 754,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:31.193941+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "232b64830d89b44bd8024985b436388ce5eff735fee4dd8aa8276b33203862f5",
+    "input_tokens": 13898,
+    "output_tokens": 383,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:56.643527+00:00"
+  }
+}

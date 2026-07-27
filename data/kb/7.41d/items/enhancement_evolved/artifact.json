@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_evolved",
+  "title": "Evolved",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "87ba9b4ea9530ce74940ab1953f4cc671e7b2a3f646d2c0b6228d780ed715f94",
+  "citations": [
+    "gamefile:items/item_enhancement_evolved#cost",
+    "gamefile:items/item_enhancement_evolved#mechanics",
+    "gamefile:items/item_enhancement_evolved#attribs"
+  ],
+  "packet_sha256": "64dd94d26fa8cb1659eff11141554d200f823a135aef25cafadbac14d8b6947d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6f24e135f688386198347816c8e940ec345d779cc401d6f5fbe0648613abb6f4",
+    "input_tokens": 14092,
+    "output_tokens": 1014,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:36.445742+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "345548bddaa44edb02d3ffb263be3be82d3c6a14a9782e8f10e26c194fcd3ddd",
+    "input_tokens": 13811,
+    "output_tokens": 215,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:02.684643+00:00"
+  }
+}

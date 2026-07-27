@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "chainmail",
+  "title": "Chainmail",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4386d056a730ee9d6d90ff37b06ce70bbd546190dcfb5bd31401afb995cb47d2",
+  "citations": [
+    "gamefile:items/item_chainmail#cost",
+    "gamefile:items/item_chainmail#attribs",
+    "gamefile:items/item_chainmail#mechanics",
+    "gamefile:items/item_chainmail#components",
+    "loc:DOTA_Tooltip_ability_item_chainmail_Lore"
+  ],
+  "packet_sha256": "512e31ed1415372a84b81bfd17594e8eb916542f5f68cf1b7627e59329bbc49a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d875c170cfb81650d42c2e7940dfdd482b9b47adbc5256798560dc6ca0933d84",
+    "input_tokens": 14220,
+    "output_tokens": 746,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:22.662563+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "76abe70159152da3483711df80dc7ff670f89f3e2646c2958801f85c2cad09fc",
+    "input_tokens": 13888,
+    "output_tokens": 406,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:13.177669+00:00"
+  }
+}

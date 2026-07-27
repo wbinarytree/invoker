@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "buildings_neutral_buildings",
+  "title": "Buildings/Neutral Buildings",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "619fcad7612914a48534963b595b905fdf1f24a33a040b71368a8e2e2822dfa7",
+  "citations": [
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Outposts",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Outpost_Ability",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Watchers",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Watcher_Ability",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Twin_Gates",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Twin_Gate_Ability",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Lotus_Pools",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Lotus_Pool_Abilities",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Shrines_of_Wisdom",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Shrine_of_Wisdom_Ability",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Trivia",
+    "corpus:liquipedia_dota2/buildings_neutral_buildings@2220325#Recent_Changes"
+  ],
+  "packet_sha256": "9d188b1bcc595083a45cc7543673f4934f5a13a5c3da84a4fa88ccb80f097b4c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "00e1ceb20a29d207b6c1dd821f5d6535cdd5591552244d670e3b4a95fb519417",
+    "input_tokens": 17039,
+    "output_tokens": 7383,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:33:23.388613+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "c924c9bdd3b705901b37385989e097ab8ede133cbe0bb53cff7ced9fde6a715b",
+    "input_tokens": 18235,
+    "output_tokens": 2707,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:34:26.295672+00:00"
+  }
+}

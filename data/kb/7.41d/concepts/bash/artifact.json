@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "bash",
+  "title": "Bash",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "612da18d06278811151e8ec759d8626a302ef869a0745a1a32c5bb2d8395dc30",
+  "citations": [
+    "corpus:liquipedia_dota2/bash@2363764",
+    "corpus:liquipedia_dota2/bash@2363764#Stacking",
+    "corpus:liquipedia_dota2/bash@2363764#Sources_of_Bash",
+    "corpus:liquipedia_dota2/bash@2363764#Talents",
+    "corpus:liquipedia_dota2/bash@2363764#Recent_Changes"
+  ],
+  "packet_sha256": "d63a862c3ec9eb99b157e57978f111df9442ad58b6ca0f88a5a5a0aa9a74e89a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "b97dbe058db49756190e94c28e07b8c8ef6d6440443f0cc798b86105c5bf966c",
+    "input_tokens": 15069,
+    "output_tokens": 2173,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:14:10.940970+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "e8c48ea6c139ab95a477964aa73ed396ce1b110b899b27b92682bbc91efe20ca",
+    "input_tokens": 15370,
+    "output_tokens": 856,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:14:29.695986+00:00"
+  }
+}

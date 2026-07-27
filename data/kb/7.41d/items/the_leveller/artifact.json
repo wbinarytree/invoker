@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "the_leveller",
+  "title": "The Leveller",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7443aaf81488c06ba982bb2f685d00427b3d46c14e282fd978d462d298309825",
+  "citations": [
+    "gamefile:items/item_the_leveller#mechanics",
+    "gamefile:items/item_the_leveller#attribs",
+    "gamefile:items/item_the_leveller#cost",
+    "loc:DOTA_Tooltip_Ability_item_the_leveller_Description",
+    "loc:DOTA_Tooltip_Ability_item_the_leveller_Lore"
+  ],
+  "packet_sha256": "5ce2a060f975bcae893078a0e96b8764a5f69f92950d08e752b457f90ee7521b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "501ee20ecb4bbdaab1fa958d26cbe6144e087e91f6482c19477ebe6685d5ee49",
+    "input_tokens": 13750,
+    "output_tokens": 1772,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:14.810804+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "36e3a94ccccc3c2cb1083d75dbf44e56c0994bab4265f70ee22d146c3c8957dd",
+    "input_tokens": 13876,
+    "output_tokens": 615,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:44.673945+00:00"
+  }
+}

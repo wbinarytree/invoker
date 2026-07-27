@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "devastator",
+  "title": "Parasma",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "658233ec6650764b14757f7330359a62732c40d2e27da0b15a20da554f106b75",
+  "citations": [
+    "gamefile:items/item_devastator#cost",
+    "gamefile:items/item_devastator#attribs",
+    "gamefile:items/item_devastator#mechanics",
+    "loc:DOTA_Tooltip_ability_item_devastator_Description",
+    "gamefile:items/item_devastator#components",
+    "loc:DOTA_Tooltip_ability_item_devastator_Lore"
+  ],
+  "packet_sha256": "8e456b1b7eed0eefea1b6f931e86be500ead7538c715ee19ad14c004913bb9e2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "7",
+    "request_sha256": "fedd7a9384ae0a5b5f599eba3c716d3af0779c75bcdb820367cba7d2dc34b48e",
+    "input_tokens": 14421,
+    "output_tokens": 3528,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:58:42.990032+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6622dda68f05eedbc3ddc5960697aa2df4344026702530aebccf128bec220235",
+    "input_tokens": 14509,
+    "output_tokens": 1645,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:59:21.817620+00:00"
+  }
+}

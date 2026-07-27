@@ -1,3 +1,4 @@
+import dataclasses
 import json
 from pathlib import Path
 
@@ -6,7 +7,8 @@ import pytest
 from invoker.gen.artifacts import CardSentence, EntityCard
 from invoker.gen.client import GenerationError
 from invoker.gen.items import build_item_packet, generate_item
-from invoker.kg.item_context import build_item_context
+from invoker.kg.ability_context import AttribEntry
+from invoker.kg.item_context import ItemContext, build_item_context
 
 # reuse the queued-output fake from the concept tests
 from tests.invoker.gen.test_concepts import FakeBackend
@@ -92,6 +94,69 @@ def test_packet_recipe_graph_both_directions():
     assert "- Recipe — 250 gold" in section
 
 
+def make_context(**overrides) -> ItemContext:
+    base = ItemContext(
+        patch="7.41b",
+        internal_name="item_stick",
+        name="Stick",
+        cost=1350,
+        recipe_cost=None,
+        quality="component",
+        behavior=["Passive"],
+        damage_type=None,
+        dispellable=None,
+        description=None,
+        description_token=None,
+        lore=None,
+        lore_token=None,
+        attribs=[AttribEntry(header="DAMAGE:", value="20", key="bonus_damage")],
+        components=None,
+        builds_into=[],
+    )
+    return dataclasses.replace(base, **overrides)
+
+
+def test_boilerplate_passive_emits_no_mechanics_section():
+    # bare Passive on a stat-stick (no description = no ability) is engine
+    # boilerplate; the section vanishes rather than forcing a vacuous
+    # "has Passive behavior" sentence into every article
+    _, text_by_mark, _ = build_item_packet(make_context())
+    assert "gamefile:items/item_stick#mechanics" not in text_by_mark
+
+
+def test_passive_kept_when_item_has_an_ability():
+    _, text_by_mark, _ = build_item_packet(
+        make_context(
+            description="Passive: Combo Breaker",
+            description_token="DOTA_Tooltip_ability_item_stick_Description",
+        )
+    )
+    assert "Behavior: Passive" in text_by_mark["gamefile:items/item_stick#mechanics"]
+
+
+def test_mechanics_value_duplicating_attrib_row_is_dropped():
+    # the KV stores aeon_disk's cooldown twice (AbilityCooldown and an
+    # AbilityValues key); only the attribs row survives
+    _, text_by_mark, _ = build_item_packet(
+        make_context(
+            description="Passive: Combo Breaker",
+            description_token="DOTA_Tooltip_ability_item_stick_Description",
+            attribs=[
+                AttribEntry(
+                    header="COOLDOWN DURATION:",
+                    value=["105.0", "125.0", "145.0", "165.0"],
+                    key="cooldown_duration",
+                )
+            ],
+            cooldown=["105.0", "125.0", "145.0", "165.0"],
+            mana_cost="150",
+        )
+    )
+    mechanics = text_by_mark["gamefile:items/item_stick#mechanics"]
+    assert "Cooldown" not in mechanics
+    assert "Mana cost: 150" in mechanics
+
+
 def test_packet_sections_match_resolver_vocabulary():
     # cross-module contract: every gamefile section the packet can emit
     # must be in the resolver's fixed vocabulary, and vice versa — a
@@ -132,7 +197,7 @@ def test_unknown_mark_fails_loudly(tmp_path):
 
 
 def test_article_without_marks_fails_loudly(tmp_path):
-    backend = FakeBackend("Prose without citations.", good_card())
+    backend = FakeBackend("# Mage Slayer\n\nProse without citations.", good_card())
     with pytest.raises(GenerationError, match="no citation marks"):
         run_generate(tmp_path, backend)
 
@@ -163,6 +228,50 @@ def test_card_number_check_scoped_to_cited_section(tmp_path):
     backend = FakeBackend(good_article(), bad)
     with pytest.raises(GenerationError, match=r"card sentence 1.*99"):
         run_generate(tmp_path, backend)
+
+
+def test_regenerate_card_swaps_card_and_keeps_article(tmp_path):
+    from invoker.gen.artifacts import load_entity_article
+    from invoker.gen.items import regenerate_item_card
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    lore_card = EntityCard(
+        entity="mage_slayer",
+        sentences=[
+            CardSentence(text="Rare item, 3100 gold.", marks=[COST]),
+            CardSentence(text="Forged to end the reign of mages.", marks=[LORE]),
+        ],
+    )
+    backend = FakeBackend("unused", lore_card)
+    updated, path2 = regenerate_item_card(backend, artifact_path=path)
+    assert path2 == path
+    assert updated.card.sentences[-1].marks == [LORE]
+    # sha rebinds and the article body is byte-identical
+    reloaded, body = load_entity_article(path)
+    assert reloaded.card == lore_card
+    assert body == good_article()
+    # only the card call went to the backend — the article was not regenerated
+    assert [call["prompt_name"] for call in backend.calls] == ["item-card"]
+
+
+def test_regenerate_card_rejects_marks_outside_the_article(tmp_path):
+    from invoker.gen.items import regenerate_item_card
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    before = path.read_text()
+    bad_card = EntityCard(
+        entity="mage_slayer",
+        sentences=[CardSentence(text="Rare item.", marks=["gamefile:items/item_mage_slayer#nope"])],
+    )
+    with pytest.raises(GenerationError, match="card"):
+        regenerate_item_card(FakeBackend("unused", bad_card), artifact_path=path)
+    assert path.read_text() == before  # nothing written on failure
+
+
+def test_article_without_title_heading_fails_loudly(tmp_path):
+    headless = good_article().removeprefix("# Mage Slayer\n\n")
+    with pytest.raises(GenerationError, match="does not open with"):
+        run_generate(tmp_path, FakeBackend(headless, good_card()))
 
 
 def test_unknown_item_fails_loudly(tmp_path):

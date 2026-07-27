@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "quelling_blade",
+  "title": "Quelling Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6ec3c7ea8dc16c12901af7f705a00562fcb5d26f9b65695b0e9467f588a1c114",
+  "citations": [
+    "gamefile:items/item_quelling_blade#cost",
+    "gamefile:items/item_quelling_blade#attribs",
+    "loc:DOTA_Tooltip_ability_item_quelling_blade_Description",
+    "gamefile:items/item_quelling_blade#components",
+    "gamefile:items/item_quelling_blade#mechanics",
+    "loc:DOTA_Tooltip_ability_item_quelling_blade_Lore"
+  ],
+  "packet_sha256": "fb1760e6a03d198c829b1077356f162e862f1ed864b640c2282f388c2b832187",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "dc5ff6268e97da16e6cd6dacbad4ccfaa8adc360964ca6f2e26043fe5081f910",
+    "input_tokens": 13844,
+    "output_tokens": 1205,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:30.137028+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "172d88fc7965b0f4c925a54efb3a59bb456952c4df733b0437f52ce95e94e31e",
+    "input_tokens": 14009,
+    "output_tokens": 1009,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:37.649893+00:00"
+  }
+}

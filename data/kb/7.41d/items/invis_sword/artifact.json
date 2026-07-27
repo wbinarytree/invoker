@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "invis_sword",
+  "title": "Shadow Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "dbd5be75dfc2e254c49e90a935c480a45a7cf39e09cf24bb1d1b708a6c6d1f62",
+  "citations": [
+    "gamefile:items/item_invis_sword#cost",
+    "gamefile:items/item_invis_sword#attribs",
+    "loc:DOTA_Tooltip_ability_item_invis_sword_Description",
+    "gamefile:items/item_invis_sword#mechanics",
+    "gamefile:items/item_invis_sword#components",
+    "loc:DOTA_Tooltip_ability_item_invis_sword_Lore"
+  ],
+  "packet_sha256": "5159060112ce429c04d5819b6137f36b935fbc62fa11fc0b887b9cc99e4ff803",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b5d8aaf75fd455a93f29bbafec4d9cac35dee2f8478a825a46f63c838f2f3ccb",
+    "input_tokens": 13941,
+    "output_tokens": 935,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:03.288930+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "f5bffce67a09d6c73e7a1313b0253ba6d381af09b60d30d153aeb06e8e2f5be0",
+    "input_tokens": 14501,
+    "output_tokens": 1054,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:55.110726+00:00"
+  }
+}

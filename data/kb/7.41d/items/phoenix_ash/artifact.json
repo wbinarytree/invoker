@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "phoenix_ash",
+  "title": "Phoenix Ash",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a5709e46dd4e6f913963254f8bcb0c2007a72dc398bcbfa471ce72b347c66b64",
+  "citations": [
+    "gamefile:items/item_phoenix_ash#cost",
+    "gamefile:items/item_phoenix_ash#mechanics",
+    "gamefile:items/item_phoenix_ash#attribs",
+    "loc:DOTA_Tooltip_ability_item_phoenix_ash_Description"
+  ],
+  "packet_sha256": "f44a55132e4d61a63d706f0d964d37b2fd498fea6fdabaef929ec454784d5d4c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "224b74451971c4353fa617384d7128c4e81c23c6d48de4226844d963a1a92342",
+    "input_tokens": 14140,
+    "output_tokens": 1254,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:39.449864+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "290c89f8d3dd67e152634948c881f079a325c2d604642b3bbf740a92379e8458",
+    "input_tokens": 13879,
+    "output_tokens": 541,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:08.999279+00:00"
+  }
+}

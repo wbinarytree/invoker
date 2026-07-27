@@ -1,0 +1,44 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "universal",
+  "title": "Universal",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4469c5f013fb9aff7e8aaf212c61eb448591a86e1b781167b45f1f410bfff979",
+  "citations": [
+    "corpus:liquipedia_dota2/universal@2372468",
+    "corpus:liquipedia_dota2/universal@2372468#Bonuses",
+    "corpus:liquipedia_dota2/universal@2372468#Universal_Heroes",
+    "corpus:liquipedia_dota2/universal@2372468#Abilities_Modifying_All_Attributes",
+    "corpus:liquipedia_dota2/universal@2372468#All_Attribute_Granting_Talents",
+    "corpus:liquipedia_dota2/universal@2372468#Attribute_Granting_Items",
+    "corpus:liquipedia_dota2/universal@2372468#Attack_Damage_Items",
+    "corpus:liquipedia_dota2/universal@2372468#All_Attribute_Items",
+    "corpus:liquipedia_dota2/universal@2372468#Recent_Changes",
+    "corpus:liquipedia_dota2/universal@2372468#See_Also"
+  ],
+  "packet_sha256": "6fbcafa175abddcd0d48d57ba196f4d49a892ce2cb78839880bc2a964e3151fc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "5b98f87cdb72f0a4cb73fd29a8a33c21eabd3f31d32f52c4ad84c9e106b6e5cc",
+    "input_tokens": 18768,
+    "output_tokens": 9165,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:17:07.656955+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "5bf59cb864940e269fcb53b349e6fbc677b701412f33a580eff2b6fbd8db7dfa",
+    "input_tokens": 20331,
+    "output_tokens": 3570,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:18:28.775959+00:00"
+  }
+}

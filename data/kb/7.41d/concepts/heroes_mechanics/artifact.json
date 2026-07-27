@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "heroes_mechanics",
+  "title": "Heroes/Mechanics",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "839c4a84ef64ce6dabaf2ac09d53dd5d6f22b2fe7be5e0148f81ec3c2383a580",
+  "citations": [
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Complexity",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Spawning",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Clones",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Illusions",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Killing_and_Dying",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Respawning",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Respawn_Time",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Buyback",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Details",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Displays",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Leveling",
+    "corpus:liquipedia_dota2/heroes_mechanics@2359189#Ability_Interactions"
+  ],
+  "packet_sha256": "d5f1597921a0cd32ebdd9a631d421ef82ecfc5415f5b05fd845e4a46b33b5224",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "a6f07322a597ef6214fbb294f1e3b9f41dbef9a42330cebb73180ca5598bdb79",
+    "input_tokens": 19863,
+    "output_tokens": 8823,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:11:06.322367+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "94f629f211aca1f184db565d7ff7210379bec79cab9d91f1c1df5ed222cd09ff",
+    "input_tokens": 19565,
+    "output_tokens": 3218,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:12:50.913817+00:00"
+  }
+}

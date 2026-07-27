@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mirror_shield",
+  "title": "Mirror Shield",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "aeced5ecea85f07e8c599ac8e81642f1e4355be37a98650f6d1a2ee59114e9f3",
+  "citations": [
+    "gamefile:items/item_mirror_shield#cost",
+    "gamefile:items/item_mirror_shield#attribs",
+    "gamefile:items/item_mirror_shield#mechanics",
+    "loc:DOTA_Tooltip_ability_item_mirror_shield_Description",
+    "loc:DOTA_Tooltip_ability_item_mirror_shield_Lore"
+  ],
+  "packet_sha256": "42d558df59dfbfc6eb5dbbb76cb731708453db3f5f75f6524fc15e9daf94f494",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "60be13c838e0cd4539c78f06da7196b767170b679fbfb38648f04e7d30b21cc0",
+    "input_tokens": 14179,
+    "output_tokens": 1264,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:30.011990+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e333d7084381433379c94a9e80b2acbc9d7d915f727d297d24e50fec0e978c68",
+    "input_tokens": 13887,
+    "output_tokens": 460,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:52.516904+00:00"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "health_regeneration",
+  "title": "Health Regeneration",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9422815a559d9638d2e2eb6169b79e4afc89ccd239828a4662dbdf747bf6c82e",
+  "citations": [
+    "corpus:liquipedia_dota2/health_regeneration@2330984",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Base_Health_Regeneration",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Heroes",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Creeps",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Summons",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Modifying_Health_Regeneration",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Abilities",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Talents",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Items",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Health_Regen_Manipulation",
+    "corpus:liquipedia_dota2/health_regeneration@2330984#Recent_Changes"
+  ],
+  "packet_sha256": "8048f9479f2070e12f97c19007b10db63d36d1d056b0fbfdf39a09fb81d9cff2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "62737b100e1f2c8bb1874e7b93c49c596b672dd8778b97fa8f102c8b70f5dd67",
+    "input_tokens": 17102,
+    "output_tokens": 6739,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:57:55.283207+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "721955151eedebc3932b5a2b8f20fb700a332b8a98658e2ee7b3e0a58ecafe3b",
+    "input_tokens": 17585,
+    "output_tokens": 3140,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:59:03.987047+00:00"
+  }
+}

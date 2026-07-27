@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "slippers",
+  "title": "Slippers of Agility",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e4ae01cd0a891d199e3f9fe73580142b1b83b436cd2a1b95c420a8d1bb662a18",
+  "citations": [
+    "gamefile:items/item_slippers#cost",
+    "gamefile:items/item_slippers#attribs",
+    "gamefile:items/item_slippers#mechanics",
+    "gamefile:items/item_slippers#components",
+    "loc:DOTA_Tooltip_ability_item_slippers_Lore"
+  ],
+  "packet_sha256": "bc4e0b99510b245a05e8b5d7b7f8646d93c8aea6da7256f9ea7263b9549c58b2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "3ed4a8932023714eee70fae17e963c56ab0a4588271cc395e59ee280efd633e5",
+    "input_tokens": 13719,
+    "output_tokens": 712,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:35.009474+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "1a395895bd8aa2b0f1ad8c8342e0fde6ca9652d01c5a64f5057f8e7e2b7830ac",
+    "input_tokens": 13855,
+    "output_tokens": 285,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:47.898638+00:00"
+  }
+}

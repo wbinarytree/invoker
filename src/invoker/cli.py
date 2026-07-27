@@ -371,7 +371,7 @@ def generate_concept_cmd(
     from invoker.corpus.store import CorpusStore
     from invoker.gen.client import GenerationError
     from invoker.gen.concepts import generate_concept
-    from invoker.paths import corpus_dir, kb_dir
+    from invoker.paths import corpus_dir, kb_dir, rejected_dir
 
     cfg = _load_config()
     store = CorpusStore(corpus_dir(cfg.data_dir))
@@ -386,6 +386,7 @@ def generate_concept_cmd(
             patch=patch,
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
+            rejected_dir=rejected_dir(cfg.data_dir, patch),
         )
         typer.echo(f"Wrote {path} + {artifact.article_file}")
         typer.echo(
@@ -425,7 +426,7 @@ def generate_item_cmd(
     """
     from invoker.gen.client import GenerationError
     from invoker.gen.items import generate_item
-    from invoker.paths import kb_dir
+    from invoker.paths import kb_dir, rejected_dir
 
     cfg = _load_config()
     if cfg.game_data_dir is None:
@@ -441,6 +442,7 @@ def generate_item_cmd(
             patch=patch,
             kb_dir=kb_dir_override or kb_dir(cfg.data_dir, patch),
             effort=effort,
+            rejected_dir=rejected_dir(cfg.data_dir, patch),
         )
         typer.echo(f"Wrote {path} + {artifact.article_file}")
         typer.echo(
@@ -463,6 +465,48 @@ def generate_item_cmd(
         raise typer.Exit(code=1) from exc
     finally:
         _close_backends(client, guard_client or client)
+
+
+@app.command("regenerate-item-card")
+def regenerate_item_card_cmd(
+    item: str = typer.Argument(..., help="Item slug under data/kb/<patch>/items/."),
+    patch: str = typer.Option(..., help="Patch of the stored artifact."),
+    effort: str | None = typer.Option(None, help="Generation effort level override."),
+    backend: GenBackendOption = "claude-cli",
+    model: GenModelOption = None,
+    kb_dir_override: KbDirOption = None,
+) -> None:
+    """Regenerate only an item's card from its stored article.
+
+    The article and completeness report are untouched; card marks and
+    numbers validate against the article's citation structure. A failed
+    check exits 1 and writes nothing (quality-followups spec: card-lore
+    pass over an already-accepted corpus).
+    """
+    from invoker.gen.client import GenerationError
+    from invoker.gen.items import regenerate_item_card
+    from invoker.paths import kb_dir
+
+    cfg = _load_config()
+    client = _make_backend(backend, model)
+    try:
+        artifact, path = regenerate_item_card(
+            client,
+            artifact_path=(kb_dir_override or kb_dir(cfg.data_dir, patch))
+            / "items"
+            / item
+            / "artifact.json",
+            effort=effort,
+        )
+        typer.echo(
+            f"Wrote {path} (card: {len(artifact.card.sentences)} sentences, "
+            f"model {artifact.card_provenance.model})"
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(client)
 
 
 @app.command("guard-artifact")

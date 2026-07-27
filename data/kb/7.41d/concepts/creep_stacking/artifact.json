@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "creep_stacking",
+  "title": "Creep Stacking",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6e9aeca55d90a4488d368d64dbf1e96259977d127442286cb3f2bb4d6ac16b85",
+  "citations": [
+    "corpus:liquipedia_dota2/creep_stacking@2307142",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Basics",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Camp_Boundary_Boxes",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Advanced_Techniques",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Safespotting",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Creep_Pulling",
+    "corpus:liquipedia_dota2/creep_stacking@2307142#Tips"
+  ],
+  "packet_sha256": "664094d948865ee5b015c46f696724f7708784d55e1e1e0cde3fa9cd7820c552",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "3d34293d673121c58ee3071b596807f618d57819ff5914d2868c932356d10c1a",
+    "input_tokens": 14621,
+    "output_tokens": 2185,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:35:24.355887+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "aca6a59e5de340a6f91c3fa48aa80c5c9968407fe4ad9b8fcd640d502373857a",
+    "input_tokens": 15101,
+    "output_tokens": 961,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:35:52.944794+00:00"
+  }
+}

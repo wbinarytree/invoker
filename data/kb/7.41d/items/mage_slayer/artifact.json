@@ -5,7 +5,7 @@
   "title": "Mage Slayer",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "f1e0fa4c29217a12fe3f7a1859a015de90310f0b4608fce51877be6e13bf06c1",
+  "article_sha256": "5579c7571fb47c65a8b679197751544c883b5adb9a8bd3d334f56a622f45395a",
   "citations": [
     "gamefile:items/item_mage_slayer#cost",
     "gamefile:items/item_mage_slayer#attribs",
@@ -27,14 +27,14 @@
     "generated_at": "2026-07-26T18:36:47.214604+00:00"
   },
   "card_provenance": {
-    "model": "claude-opus-5",
-    "transport": "claude-cli",
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "5",
-    "request_sha256": "5d4e3e010c79bacd2fd9dd3da90719fedcb0d4ab3d5ba6c811d95904ee4f36d9",
-    "input_tokens": 3251,
-    "output_tokens": 1186,
-    "stop_reason": "end_turn",
-    "generated_at": "2026-07-26T18:37:01.226982+00:00"
+    "prompt_version": "7",
+    "request_sha256": "b06ce99a13d5fc4dd52b9b85eabc02a1e26dfddfeb79958a4f17915c87008ecd",
+    "input_tokens": 14103,
+    "output_tokens": 1345,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:27.563955+00:00"
   }
 }

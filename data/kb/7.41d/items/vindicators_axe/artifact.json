@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vindicators_axe",
+  "title": "Vindicator's Axe",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "51057aa4d2ba61a90a568cd578a53bb19798636ef99a9326d71ff49e997f63c8",
+  "citations": [
+    "gamefile:items/item_vindicators_axe#attribs",
+    "loc:DOTA_Tooltip_ability_item_vindicators_axe_Description",
+    "gamefile:items/item_vindicators_axe#cost",
+    "gamefile:items/item_vindicators_axe#mechanics"
+  ],
+  "packet_sha256": "479e50e4fde0b1ebcfe3a342c4332ac7afc2a498bbd1a10af988401c48bce6ec",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "226c2a6aa2ab32f8845ca16e88bf94cf241b860aa499514f64b6fe6e1c69b02f",
+    "input_tokens": 14161,
+    "output_tokens": 1222,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:45.114436+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "8afb13b05467912e4c6de76c4cfcff0e16adf66c5e7e401e81490baf7be40dc9",
+    "input_tokens": 13902,
+    "output_tokens": 892,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:50.020171+00:00"
+  }
+}

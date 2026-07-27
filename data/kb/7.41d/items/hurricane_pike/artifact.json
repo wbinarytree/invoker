@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "hurricane_pike",
+  "title": "Hurricane Pike",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5d0c2ba5ab14734a15b2cceb8cb14a938912c2bfe528776f431872e7c48c7174",
+  "citations": [
+    "gamefile:items/item_hurricane_pike#cost",
+    "gamefile:items/item_hurricane_pike#attribs",
+    "loc:DOTA_Tooltip_Ability_item_hurricane_pike_Description",
+    "gamefile:items/item_hurricane_pike#components",
+    "gamefile:items/item_hurricane_pike#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_hurricane_pike_Lore"
+  ],
+  "packet_sha256": "f744cd670ccf69c40edf63fc749986a5e8bf9d90cd0e90902b8228c0053b48d2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "96eea1041a7380ebbc4898591e784cb85a1361f433bbd7207ae6a8b652f5053c",
+    "input_tokens": 14424,
+    "output_tokens": 2467,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:32.143433+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9349f58a26e209f5ea94d588ce40dc4f016f2aec8f5fea42aa104a68a6e314a1",
+    "input_tokens": 14141,
+    "output_tokens": 1579,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:28.833616+00:00"
+  }
+}

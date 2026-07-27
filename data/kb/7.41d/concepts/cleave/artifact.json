@@ -1,0 +1,51 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "cleave",
+  "title": "Cleave",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cb067952ecd7c0fba448d0d1fd675195a2ed83f8537fa6f18e6acde03438aa3c",
+  "citations": [
+    "corpus:liquipedia_dota2/cleave@2380874",
+    "corpus:liquipedia_dota2/cleave@2380874#Mechanics",
+    "corpus:liquipedia_dota2/cleave@2380874#Stacking",
+    "corpus:liquipedia_dota2/cleave@2380874#Ability_Draft",
+    "corpus:liquipedia_dota2/cleave@2380874#Damage",
+    "corpus:liquipedia_dota2/cleave@2380874#Area_of_Effect",
+    "corpus:liquipedia_dota2/cleave@2380874#Attack_Modifier_Interactions",
+    "corpus:liquipedia_dota2/cleave@2380874#Instant_Attack",
+    "corpus:liquipedia_dota2/cleave@2380874#Cleave_Sources",
+    "corpus:liquipedia_dota2/cleave@2380874#Talents",
+    "corpus:liquipedia_dota2/cleave@2380874#Splash",
+    "corpus:liquipedia_dota2/cleave@2380874#Splash_Sources",
+    "corpus:liquipedia_dota2/cleave@2380874#Other_Sources",
+    "corpus:liquipedia_dota2/cleave@2380874#Tree_Grab",
+    "corpus:liquipedia_dota2/cleave@2380874#Psi_Blades",
+    "corpus:liquipedia_dota2/cleave@2380874#Version_History",
+    "corpus:liquipedia_dota2/cleave@2380874#Patch_History"
+  ],
+  "packet_sha256": "4d96a3949d0726b9c1e30635313893a74f7a6fe684bf7f88a196ff76bfe68831",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "6d1cc6279331ca61982c70721999af2f6e3a8a2aa62b27d7c005908abffedc64",
+    "input_tokens": 16718,
+    "output_tokens": 6298,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:36:14.424088+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "160db2ae67a12822432e336fcd5cac51764b12832cf1bdbd9a01138e04e55328",
+    "input_tokens": 16785,
+    "output_tokens": 1675,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:36:49.969078+00:00"
+  }
+}

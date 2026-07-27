@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "angels_demise",
+  "title": "Khanda",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b3299e01d71cee38435072a9f8b309e02d5049569409f1db9b020d6259b143b6",
+  "citations": [
+    "gamefile:items/item_angels_demise#cost",
+    "gamefile:items/item_angels_demise#attribs",
+    "loc:DOTA_Tooltip_Ability_item_angels_demise_Description",
+    "gamefile:items/item_angels_demise#components",
+    "gamefile:items/item_angels_demise#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_angels_demise_Lore"
+  ],
+  "packet_sha256": "f75305e71c102b68aeb377722fe1a3568814ac4a108398cd370920c24aa61c0b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a16af97f06e63eb403010e08998777572fd43fe80be12717a2fd2ec5a936032b",
+    "input_tokens": 14292,
+    "output_tokens": 1409,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:45.041149+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6be5a73da476adab2d29ffc2e7ea76a2e3fb0eba4b25c55f9387e78afdaeea29",
+    "input_tokens": 14479,
+    "output_tokens": 1876,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:12.877662+00:00"
+  }
+}

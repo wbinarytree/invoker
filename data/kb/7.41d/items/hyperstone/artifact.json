@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "hyperstone",
+  "title": "Hyperstone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e002a0107940c311844433c1f1dcf53d7ee91eb5637e0e00e6d0b9370252561a",
+  "citations": [
+    "gamefile:items/item_hyperstone#cost",
+    "gamefile:items/item_hyperstone#attribs",
+    "gamefile:items/item_hyperstone#components",
+    "gamefile:items/item_hyperstone#mechanics",
+    "loc:DOTA_Tooltip_ability_item_hyperstone_Lore"
+  ],
+  "packet_sha256": "45f472d7cc9d60b8b9ae146ff5d82025db8cefc9490504ccccecbfef29c0ddae",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "3b81e06b160e48a594e474e138fa83205bbaae70aa349892a13488e4df72e3e7",
+    "input_tokens": 13766,
+    "output_tokens": 976,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:48.836722+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "297a628785b8cb257c29cc8f219520c141df17027a911306418b5eeeb20f44ee",
+    "input_tokens": 13892,
+    "output_tokens": 501,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:14.939033+00:00"
+  }
+}

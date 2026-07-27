@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "soul_booster",
+  "title": "Soul Booster",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "987563c346ce6ea63f1c1539b396cb5c494b863c9ee5ff0a88811a58c752d0b5",
+  "citations": [
+    "gamefile:items/item_soul_booster#cost",
+    "gamefile:items/item_soul_booster#attribs",
+    "gamefile:items/item_soul_booster#components",
+    "gamefile:items/item_soul_booster#mechanics",
+    "loc:DOTA_Tooltip_ability_item_soul_booster_Lore"
+  ],
+  "packet_sha256": "359c663c9d4b9e44e16bc6c0e919b5b142164f3983f0cc264e90615e40eba5b4",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "2f51484f43c9b6c601f4649a8dfb960a06a73a091a7fa851d79ebdd41b3d792a",
+    "input_tokens": 14253,
+    "output_tokens": 745,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:30.579554+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "5b57f43051331a56c0bb730a65efb7ee1c4499feaa29ed72cb364eac4571b0c3",
+    "input_tokens": 13932,
+    "output_tokens": 529,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:12.957251+00:00"
+  }
+}

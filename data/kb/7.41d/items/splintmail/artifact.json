@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "splintmail",
+  "title": "Splintmail",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "88e25c37ff92c27966833bf60c0216b62492161c51eb99e42a846b346a1d3069",
+  "citations": [
+    "gamefile:items/item_splintmail#cost",
+    "gamefile:items/item_splintmail#attribs",
+    "gamefile:items/item_splintmail#mechanics",
+    "gamefile:items/item_splintmail#components"
+  ],
+  "packet_sha256": "d2f4dcce9fce65e601ccf9858a9908dbf9601e08c8651481d4e440c4f19310b1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "39b37ff301b8b7321fae2bf8752ffc3b2e085f8510297af5c53ff677b3503ca4",
+    "input_tokens": 13746,
+    "output_tokens": 561,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:27.310127+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "4029398e40996857a7bedf450108f228f4dee617706f722014804f9da395e703",
+    "input_tokens": 13864,
+    "output_tokens": 401,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:23.350522+00:00"
+  }
+}

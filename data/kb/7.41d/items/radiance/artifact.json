@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "radiance",
+  "title": "Radiance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "69d5e7159da7d6e7fb31d4445acb0b1e2513ec92e4fca62d8a097c1a03be20fd",
+  "citations": [
+    "gamefile:items/item_radiance#cost",
+    "gamefile:items/item_radiance#attribs",
+    "loc:DOTA_Tooltip_ability_item_radiance_Description",
+    "gamefile:items/item_radiance#components",
+    "gamefile:items/item_radiance#mechanics",
+    "loc:DOTA_Tooltip_ability_item_radiance_Lore"
+  ],
+  "packet_sha256": "fd41f8d45c0806cc35f61a2a397f9bce16ff8f49ff11f35f0a615bee13d5d1ac",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c754e510ba4f662fec1e6d7fa37568de91ba1caced7f42bf2a10aac56779aa2c",
+    "input_tokens": 14321,
+    "output_tokens": 1917,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:51.536089+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ef0ac536f5c4f7df29757b78a14e5f0111fe433def7e4613a6172c13c6f93498",
+    "input_tokens": 14038,
+    "output_tokens": 877,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:48.374562+00:00"
+  }
+}

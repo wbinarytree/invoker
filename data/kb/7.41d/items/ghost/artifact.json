@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ghost",
+  "title": "Ghost Scepter",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9faeadd910e4aafb82e5ba671566bc775d06fa80180fb55c32bca875753dcd08",
+  "citations": [
+    "gamefile:items/item_ghost#cost",
+    "gamefile:items/item_ghost#attribs",
+    "loc:DOTA_Tooltip_ability_item_ghost_Description",
+    "gamefile:items/item_ghost#mechanics",
+    "gamefile:items/item_ghost#components",
+    "loc:DOTA_Tooltip_ability_item_ghost_Lore"
+  ],
+  "packet_sha256": "5534fc67ed282c8618c5e14e4eabbf6a872f1652e785677048a1480589749890",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "db34f1190893fab330b518d1e7f999aa243c65b7a863ddc1a20f30c22ad1de17",
+    "input_tokens": 14256,
+    "output_tokens": 1653,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:00.149507+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "2bc15cb389ad995fad2a066eec1398cfa79ce6f562d02cab154e8726ed368327",
+    "input_tokens": 14002,
+    "output_tokens": 1132,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:27.127314+00:00"
+  }
+}

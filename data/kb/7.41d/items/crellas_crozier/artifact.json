@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "crellas_crozier",
+  "title": "Crella's Crozier",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6e3ed6898fa6e6ea140a4c600f42058016b4bae87800910a145938e4c16de851",
+  "citations": [
+    "gamefile:items/item_crellas_crozier#cost",
+    "gamefile:items/item_crellas_crozier#attribs",
+    "loc:DOTA_Tooltip_ability_item_crellas_crozier_Description",
+    "gamefile:items/item_crellas_crozier#components",
+    "gamefile:items/item_crellas_crozier#mechanics"
+  ],
+  "packet_sha256": "2b568fbddc08371af06f8ef466271e900cf80055016159e382421c09d87b44aa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "7",
+    "request_sha256": "96ea2a7d5b6288008ac7a7880f1d862d77d02829659c5fe25aac7875d25ca0f6",
+    "input_tokens": 14479,
+    "output_tokens": 2114,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:58:09.448078+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c50fb6a7abaee1220cc6b913cd4155ae2b0bea95cf123c8ba50743f538a5e8f4",
+    "input_tokens": 14644,
+    "output_tokens": 2068,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:58:50.671300+00:00"
+  }
+}

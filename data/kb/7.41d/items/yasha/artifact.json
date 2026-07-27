@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "yasha",
+  "title": "Yasha",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "50a3fd8f31b8550625fc8ef504af1ef83b29bf3a56bda691f5122345905b9070",
+  "citations": [
+    "gamefile:items/item_yasha#cost",
+    "gamefile:items/item_yasha#attribs",
+    "gamefile:items/item_yasha#components",
+    "gamefile:items/item_yasha#mechanics",
+    "loc:DOTA_Tooltip_ability_item_yasha_Lore"
+  ],
+  "packet_sha256": "c7335ab93ee45479a93aee3dadcc16054ad0b8a547d81efc4fd0de66c65abd6a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "41034d9b5d428847ffbd99f5b71c07d6c888eca69096038aabb5a565ac313349",
+    "input_tokens": 13834,
+    "output_tokens": 614,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:14.214144+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e0127bd202178cd765f0841f604aacb970379d3137711c6b92a1908ff19ed4df",
+    "input_tokens": 13951,
+    "output_tokens": 456,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:21.427113+00:00"
+  }
+}

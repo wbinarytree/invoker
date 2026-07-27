@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ancient_janggo",
+  "title": "Drum of Endurance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0dcc0129b0f4f26a2f3515779486c4e3e7e936ec092fdc02eb6a416467c16d61",
+  "citations": [
+    "gamefile:items/item_ancient_janggo#cost",
+    "gamefile:items/item_ancient_janggo#attribs",
+    "loc:DOTA_Tooltip_ability_item_ancient_janggo_Description",
+    "gamefile:items/item_ancient_janggo#mechanics",
+    "gamefile:items/item_ancient_janggo#components",
+    "loc:DOTA_Tooltip_ability_item_ancient_janggo_Lore"
+  ],
+  "packet_sha256": "521ecf4f1ef82a02bb60e0b37f854b26b496f6ce85cc3f8d59e07fa98a15f1d2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "659d085be4d9fbda61111d109e77d40f62c5b18a0bd84d70231953ab7c7c044a",
+    "input_tokens": 14395,
+    "output_tokens": 2832,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:09.655771+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9087dbf034a541f6909e94dbd7779fed1a4c33a1c5f15a12b206046321a545fb",
+    "input_tokens": 14533,
+    "output_tokens": 1018,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:06:58.381758+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vanguard",
+  "title": "Vanguard",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3cd48e73e3de3bb9003cba5bfd8d0ecaf321a2bc057b253720cfb12d7dab104c",
+  "citations": [
+    "gamefile:items/item_vanguard#cost",
+    "gamefile:items/item_vanguard#attribs",
+    "gamefile:items/item_vanguard#components",
+    "gamefile:items/item_vanguard#mechanics",
+    "loc:DOTA_Tooltip_ability_item_vanguard_Description",
+    "loc:DOTA_Tooltip_ability_item_vanguard_Lore"
+  ],
+  "packet_sha256": "7bc9c3527d53cfa089afe603406b0292574cc58300089da92298f4ef4a863196",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4496313e69e88700289dd3ab2be0ced2f4077fe31e67002ca4729a44d0eff966",
+    "input_tokens": 13834,
+    "output_tokens": 1359,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:41.573306+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "78682de39cbe810fd06d1aea2a8f1daa8acd03842e1e4f57c7425fe56eda2e02",
+    "input_tokens": 13985,
+    "output_tokens": 882,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:38.511613+00:00"
+  }
+}

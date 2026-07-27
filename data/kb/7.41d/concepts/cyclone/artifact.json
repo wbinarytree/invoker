@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "cyclone",
+  "title": "Cyclone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c3de9ce6a8c21137d8affb0edf19dd769bbae46c88ead9b3b12283741acd2169",
+  "citations": [
+    "corpus:liquipedia_dota2/cyclone@2252519",
+    "corpus:liquipedia_dota2/cyclone@2252519#Mechanics",
+    "corpus:liquipedia_dota2/cyclone@2252519#Sources",
+    "corpus:liquipedia_dota2/cyclone@2252519#Version_History",
+    "corpus:liquipedia_dota2/cyclone@2252519#Gallery"
+  ],
+  "packet_sha256": "1eb143abfadcf5eee0b18e010eb7fa5d194403cbf2c249aaa0f2d30e1b47eb7a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "740a598c639406dbdf25909f688aac02d5da0eabfd791d6934e1d86c971f182b",
+    "input_tokens": 14654,
+    "output_tokens": 922,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:20:35.374740+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "6ed01e751061ab46e4042031ab8f7c1b8e4091944bbbe0bba6baf3268b473746",
+    "input_tokens": 14535,
+    "output_tokens": 965,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:21:01.994652+00:00"
+  }
+}

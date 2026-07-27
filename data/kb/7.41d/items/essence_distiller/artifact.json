@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "essence_distiller",
+  "title": "Essence Distiller",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2089070c78c3b69fcbbde265e97dde0a9afa8a501ddb690e115bcaec43337136",
+  "citations": [
+    "gamefile:items/item_essence_distiller#cost",
+    "gamefile:items/item_essence_distiller#attribs",
+    "loc:DOTA_Tooltip_ability_item_essence_distiller_Description",
+    "gamefile:items/item_essence_distiller#components",
+    "gamefile:items/item_essence_distiller#mechanics"
+  ],
+  "packet_sha256": "0ee195ec565599e3410ef197a595ab165e0c61535862299ead809fd250b9c956",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "668e75b370adbc79f85fc26d6bcb33f09dc04d0ac669741fecd56efdcdc5598d",
+    "input_tokens": 14431,
+    "output_tokens": 1545,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:23.821703+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e5bc16654026c731376745fe1de599f5a6cd531a00f4524376a22a5a589d55ca",
+    "input_tokens": 14168,
+    "output_tokens": 2829,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:35.139874+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "silver_edge",
+  "title": "Silver Edge",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f07b5e433ea054fbdac661cb23d12c5df07dbb2664f8cad2fe0fe31ca13ecf4e",
+  "citations": [
+    "gamefile:items/item_silver_edge#cost",
+    "gamefile:items/item_silver_edge#attribs",
+    "loc:DOTA_Tooltip_ability_item_silver_edge_Description",
+    "gamefile:items/item_silver_edge#components",
+    "gamefile:items/item_silver_edge#mechanics",
+    "loc:DOTA_Tooltip_ability_item_silver_edge_Lore"
+  ],
+  "packet_sha256": "e95ed27d684ae8e6d334f695c8e71f5ad7ffc4f37c9e45360ef98b2a2c4720e9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "7",
+    "request_sha256": "0bd67cfef5df02656aae496f579b369a511ea526f5b6e9de02fde66be67fb297",
+    "input_tokens": 14489,
+    "output_tokens": 1911,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:00:35.499403+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "fe1be6149278d58a2c58368306ccc7799b85a84fc3303436185feb949783cb59",
+    "input_tokens": 14529,
+    "output_tokens": 1978,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:01:19.448860+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "imp_claw",
+  "title": "Imp Claw",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ef74b4eb99dd8b34fff8a73f92f79c52e49907359d92f98e70a4837d8e5af890",
+  "citations": [
+    "gamefile:items/item_imp_claw#attribs",
+    "loc:DOTA_Tooltip_ability_item_imp_claw_Description",
+    "gamefile:items/item_imp_claw#mechanics",
+    "gamefile:items/item_imp_claw#cost",
+    "loc:DOTA_Tooltip_ability_item_imp_claw_Lore"
+  ],
+  "packet_sha256": "9fc5afabc1bcf141bc8d6b7a11d7aa7e5ebdd1a6fca71a8f588aa53418bd2f2c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "eb918b92ec1a85478e10b96ce193e6fdbeac17752961feeda7b4ee5d4a66ffd7",
+    "input_tokens": 13757,
+    "output_tokens": 763,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:54.267413+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ac48028adf27bedaa90600195fe38a7ef164acba2231114748a88afbff22201c",
+    "input_tokens": 14327,
+    "output_tokens": 876,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:45.951070+00:00"
+  }
+}

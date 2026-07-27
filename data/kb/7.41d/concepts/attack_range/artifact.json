@@ -1,0 +1,53 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "attack_range",
+  "title": "Attack Range",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0bbc9cf80defa9545fd8ecdf908b910fff7e2602449d89bba13b88cb7fcd2bea",
+  "citations": [
+    "corpus:liquipedia_dota2/attack_range@2376555",
+    "corpus:liquipedia_dota2/attack_range@2376555#Definitions",
+    "corpus:liquipedia_dota2/attack_range@2376555#Heroes",
+    "corpus:liquipedia_dota2/attack_range@2376555#Miss_Chance",
+    "corpus:liquipedia_dota2/attack_range@2376555#Motion_Buffer",
+    "corpus:liquipedia_dota2/attack_range@2376555#Acquisition_Range",
+    "corpus:liquipedia_dota2/attack_range@2376555#Base_Attack_Range",
+    "corpus:liquipedia_dota2/attack_range@2376555#Heroes_2",
+    "corpus:liquipedia_dota2/attack_range@2376555#Creeps",
+    "corpus:liquipedia_dota2/attack_range@2376555#Summons",
+    "corpus:liquipedia_dota2/attack_range@2376555#Spell_Steal",
+    "corpus:liquipedia_dota2/attack_range@2376555#Increasing_Sources",
+    "corpus:liquipedia_dota2/attack_range@2376555#Ranged_Heroes",
+    "corpus:liquipedia_dota2/attack_range@2376555#Talents",
+    "corpus:liquipedia_dota2/attack_range@2376555#Melee_Heroes",
+    "corpus:liquipedia_dota2/attack_range@2376555#Reducing_Sources",
+    "corpus:liquipedia_dota2/attack_range@2376555#Set_Base_Attack_Range",
+    "corpus:liquipedia_dota2/attack_range@2376555#Active_Attack_Modifiers",
+    "corpus:liquipedia_dota2/attack_range@2376555#Recent_Changes"
+  ],
+  "packet_sha256": "5a02c133b398159d4faf3c7aabd42252f25e3c7d4111dc5e19f8578fdbf9efcd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "36046e263216ffd4a379f6e5e00c6f5401fc01b5b9f548b382a9472b93206a36",
+    "input_tokens": 17239,
+    "output_tokens": 9268,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:13:53.682863+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "42c9f1c35e1bafb780fbb2e66cc81efe8080701748456891d114e4ac6166ab48",
+    "input_tokens": 17635,
+    "output_tokens": 2201,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:14:51.205729+00:00"
+  }
+}

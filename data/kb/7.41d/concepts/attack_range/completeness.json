@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "5a02c133b398159d4faf3c7aabd42252f25e3c7d4111dc5e19f8578fdbf9efcd",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/attack_range@2376555#Motion_Buffer",
+      "fact": "The Tower (Tier 1) versus Marci example assumes there are no other attack-range-increasing sources."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/attack_range@2376555#Motion_Buffer",
+      "fact": "The Muerta versus Marci example assumes there are no other attack-range-increasing sources."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "e7450ca5366604252d94a6bcfedfee9a15d850c96fa93e8eafda73abc2741872",
+    "input_tokens": 21360,
+    "output_tokens": 1869,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:15:46.569290+00:00"
+  }
+}

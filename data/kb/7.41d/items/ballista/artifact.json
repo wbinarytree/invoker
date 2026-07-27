@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ballista",
+  "title": "Ballista",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "987bbc3162d32c2348c322063d0b7a6a9e199e7ad1ce3c3a135d7794e4b3bc42",
+  "citations": [
+    "gamefile:items/item_ballista#attribs",
+    "gamefile:items/item_ballista#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_ballista_Description",
+    "gamefile:items/item_ballista#cost",
+    "loc:DOTA_Tooltip_Ability_item_ballista_Lore"
+  ],
+  "packet_sha256": "bd28bb2fb3739539b6866f8401fab8911643de8c85e73805bda13e40c34b05a3",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "7",
+    "request_sha256": "57e49679e758dd708b2f3850828dad056aaacbef30ae1717176613b887aae168",
+    "input_tokens": 14277,
+    "output_tokens": 2339,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:58:11.953278+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ba3d769dd0be0917541c381a591037d0fde49b29ac8f8a1ffe1fc399f6ed4ab7",
+    "input_tokens": 14348,
+    "output_tokens": 1005,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T11:58:37.980228+00:00"
+  }
+}

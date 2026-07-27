@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blades_of_attack",
+  "title": "Blades of Attack",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "28abd0d9e0a8b6c8076a4a65371a366905d0b284e0f1bb7db8de44211fb0d036",
+  "citations": [
+    "gamefile:items/item_blades_of_attack#cost",
+    "gamefile:items/item_blades_of_attack#attribs",
+    "gamefile:items/item_blades_of_attack#components",
+    "gamefile:items/item_blades_of_attack#mechanics",
+    "loc:DOTA_Tooltip_ability_item_blades_of_attack_Lore"
+  ],
+  "packet_sha256": "940bbab87f88ee46beb8a34e457809ba137951d550e306ec52d325d009874455",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9a65377e66f4bd9f4cf40470519444c63c462deefe40f7ce276783d2995c4cda",
+    "input_tokens": 14239,
+    "output_tokens": 957,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:44.501722+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c5635b970a21cd5bd3fe17f4802724a041d667d41327bb48b501b6dc04728835",
+    "input_tokens": 13905,
+    "output_tokens": 540,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:35.612709+00:00"
+  }
+}

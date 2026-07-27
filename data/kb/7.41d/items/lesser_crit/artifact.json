@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "lesser_crit",
+  "title": "Crystalys",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "038f425bff2d73e6a3852eb03461daf20d08995b10f50b41c70dd534824fa87b",
+  "citations": [
+    "gamefile:items/item_lesser_crit#cost",
+    "gamefile:items/item_lesser_crit#attribs",
+    "loc:DOTA_Tooltip_ability_item_lesser_crit_Description",
+    "gamefile:items/item_lesser_crit#components",
+    "gamefile:items/item_lesser_crit#mechanics",
+    "loc:DOTA_Tooltip_ability_item_lesser_crit_Lore"
+  ],
+  "packet_sha256": "6114c0cc65ad42b19a264558714651fc2d5f36fd9f535f19bad76e6ae04368a8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "14bb26c5ebbc88b8bd066040bc492be1e395d4fae0566d04616d700ec006ae8b",
+    "input_tokens": 14285,
+    "output_tokens": 1399,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:54.412006+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "dabbe295a5c46621e96d9bf2610100c5173b43f6eccc0f5336dde31d3c091804",
+    "input_tokens": 14024,
+    "output_tokens": 1165,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:42.901645+00:00"
+  }
+}

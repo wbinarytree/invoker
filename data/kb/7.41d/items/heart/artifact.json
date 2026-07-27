@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "heart",
+  "title": "Heart of Tarrasque",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "237a7977684ef9ae8c81cfb63906418d916c15561c00299480fe3254c56021e2",
+  "citations": [
+    "gamefile:items/item_heart#cost",
+    "gamefile:items/item_heart#attribs",
+    "gamefile:items/item_heart#components",
+    "gamefile:items/item_heart#mechanics",
+    "loc:DOTA_Tooltip_ability_item_heart_Description",
+    "loc:DOTA_Tooltip_ability_item_heart_Lore"
+  ],
+  "packet_sha256": "3b672e65335e7e6fb0d1fb5b4ed829485f12a28060ab99f25e8d922cfb1c9d85",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "07ad872db2c01f533edb15a5530b4508c29c6dd57b0794d1d2e08299ca6be8a5",
+    "input_tokens": 14236,
+    "output_tokens": 773,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:05:53.475306+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "7bb754a4e64ab6b8f90a3e1af6dc91e3b841f0e894581b7827a8c1a9229da527",
+    "input_tokens": 13931,
+    "output_tokens": 440,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:44.562168+00:00"
+  }
+}

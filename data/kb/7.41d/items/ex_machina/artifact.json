@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ex_machina",
+  "title": "Ex Machina",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4e8f679661dcaa9ba9d07f4b0e64d6ff8b0e0a707e9e0cd897412e440441681b",
+  "citations": [
+    "gamefile:items/item_ex_machina#cost",
+    "gamefile:items/item_ex_machina#attribs",
+    "loc:DOTA_Tooltip_Ability_item_ex_machina_Description",
+    "gamefile:items/item_ex_machina#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_ex_machina_Lore"
+  ],
+  "packet_sha256": "317584af3743eb588e4d23426840cec1e376c3c761f6abf6b621ad7e1b6ad370",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "15ce16479c3b12bf5a6ff7172613c44c624cef22233391e9382bb2c2fda47f21",
+    "input_tokens": 14171,
+    "output_tokens": 1473,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:20.185587+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "4c15175d6ef4fd5cfd1b7860185bc2b301e9240e4b8c61f894b0e2aeeb21eb15",
+    "input_tokens": 13904,
+    "output_tokens": 642,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:43.685949+00:00"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "leash",
+  "title": "Leash",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a5ccbdfd01e5e4a35573e128a8358a72c6b9e9bdd65dc88a48bf20019ec2556a",
+  "citations": [
+    "corpus:liquipedia_dota2/leash@2363699",
+    "corpus:liquipedia_dota2/leash@2363699#Mechanics",
+    "corpus:liquipedia_dota2/leash@2363699#Sources",
+    "corpus:liquipedia_dota2/leash@2363699#Ignores_Leash",
+    "corpus:liquipedia_dota2/leash@2363699#Disable_Certain_Components",
+    "corpus:liquipedia_dota2/leash@2363699#Other",
+    "corpus:liquipedia_dota2/leash@2363699#Version_History",
+    "corpus:liquipedia_dota2/leash@2363699#Patch_History"
+  ],
+  "packet_sha256": "6d4d503f815f3d6a83038d6b48f224da0999308f35d8413ab75653e0425223bd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "5916df78af33d12909508cc8fad7a7f80bc3079e4d88894b7d508eda0c22ae28",
+    "input_tokens": 15450,
+    "output_tokens": 3524,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:17:26.740617+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "82d091602feb9df9da06cd493743199390f6477a7e90b1c741008d1e8af17cf8",
+    "input_tokens": 15922,
+    "output_tokens": 1017,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:17:50.624917+00:00"
+  }
+}

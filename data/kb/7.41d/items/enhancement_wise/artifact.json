@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_wise",
+  "title": "Wise",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ae3eac00c0d380e5f7eb54dbaba1aff8e7b2f429469df5ddec7ee3e60d8e13b1",
+  "citations": [
+    "gamefile:items/item_enhancement_wise#cost",
+    "gamefile:items/item_enhancement_wise#attribs",
+    "gamefile:items/item_enhancement_wise#mechanics"
+  ],
+  "packet_sha256": "6321550f7fbc9efab0b82dc97ab512063ed68b5b6005737fd8f1e5f9ca767140",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1e0127c45941c0b67d9318f63d2837a7cdef0e80435318ed9f7434b99c75ce12",
+    "input_tokens": 14094,
+    "output_tokens": 666,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:47:57.748127+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "7dad398a5756a3d6949431456f69f251f2d5dd018f3132bb2292fea4e12bc487",
+    "input_tokens": 13805,
+    "output_tokens": 205,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:28.050983+00:00"
+  }
+}

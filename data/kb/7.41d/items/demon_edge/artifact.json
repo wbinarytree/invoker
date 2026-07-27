@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "demon_edge",
+  "title": "Demon Edge",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cdfdb06225a3d4db9967d531dd76429445aba0fd92e6cb8775d3015197441f8c",
+  "citations": [
+    "gamefile:items/item_demon_edge#cost",
+    "gamefile:items/item_demon_edge#attribs",
+    "gamefile:items/item_demon_edge#mechanics",
+    "gamefile:items/item_demon_edge#components",
+    "loc:DOTA_Tooltip_ability_item_demon_edge_Lore"
+  ],
+  "packet_sha256": "1f8635eb4e6b320fe8c7099a37e9a9482533bbe944eb93c64c277cdf41427d45",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "fe5d6da0ccc2a6e4ef8a3ab50178ba8fc3e084bbe7977b4cbb666bc7178be5d4",
+    "input_tokens": 13790,
+    "output_tokens": 650,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:16.623051+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ded6f285c7acafd4d1d812e8f90ad4559a9a95f7aa7d8f7b8c737ed8b8344906",
+    "input_tokens": 13886,
+    "output_tokens": 289,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:16.560298+00:00"
+  }
+}

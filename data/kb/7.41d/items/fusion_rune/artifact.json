@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "fusion_rune",
+  "title": "Fusion Rune",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d53fd395135576a7fb065c43119280d8a1cd44fece49b416203681d92bd8fa5e",
+  "citations": [
+    "gamefile:items/item_fusion_rune#cost",
+    "loc:DOTA_Tooltip_ability_item_fusion_rune_Description",
+    "gamefile:items/item_fusion_rune#attribs",
+    "gamefile:items/item_fusion_rune#mechanics"
+  ],
+  "packet_sha256": "062e73086df864e3f50668eff91d0f3b9977b65e97ec677c9f905bdc298ffe86",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "33bb949911cdf1c0483a62430e5ff1ebc198690444981dd49505f67089cd9dd7",
+    "input_tokens": 14171,
+    "output_tokens": 1270,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:54.382787+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "007d8c9ba5f2398d14f52b79b404918dae5ac4251292ee7ad23c71dc749b70e7",
+    "input_tokens": 13897,
+    "output_tokens": 541,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:57.543603+00:00"
+  }
+}

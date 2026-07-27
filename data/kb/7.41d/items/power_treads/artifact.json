@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "power_treads",
+  "title": "Power Treads",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "869c95b6553547451d488766880d24a433bd639c38543eda6b429babb4c336ed",
+  "citations": [
+    "gamefile:items/item_power_treads#cost",
+    "gamefile:items/item_power_treads#attribs",
+    "loc:DOTA_Tooltip_ability_item_power_treads_Description",
+    "gamefile:items/item_power_treads#components",
+    "gamefile:items/item_power_treads#mechanics",
+    "loc:DOTA_Tooltip_ability_item_power_treads_Lore"
+  ],
+  "packet_sha256": "6ea7b94d8c1e4c31f172eacce54aa2c51bd72d805750ca8742a910531ec1dce1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "30ae63595ddbdc184bb6044e106e767679c1fd93e2aeec0210d76d8d8e0e7501",
+    "input_tokens": 14273,
+    "output_tokens": 1686,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:48.429822+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "fd10c895568c713a0cff008a13d2c920b63cc3f9c3a592c99aabbe372a6e1d57",
+    "input_tokens": 14049,
+    "output_tokens": 981,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:36.258232+00:00"
+  }
+}

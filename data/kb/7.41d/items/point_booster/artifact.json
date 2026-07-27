@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "point_booster",
+  "title": "Point Booster",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3baee2ca9f2c553b31efd4953c2c522f750fc06d1887282732f332839e58e5a9",
+  "citations": [
+    "gamefile:items/item_point_booster#cost",
+    "gamefile:items/item_point_booster#attribs",
+    "gamefile:items/item_point_booster#components",
+    "gamefile:items/item_point_booster#mechanics",
+    "loc:DOTA_Tooltip_ability_item_point_booster_Lore"
+  ],
+  "packet_sha256": "cde8b3f0254d454d62e7499f4b49f17d1d13d20d5e1c48559d1ea8881fe42448",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "44dcaa766f8f8f93d4774412c88632d3f9f7af795e0a49c7e771dad68f6b807c",
+    "input_tokens": 13797,
+    "output_tokens": 782,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:24.349921+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "abbcc6f838343bb5dfa94c0742b08d16b4ed37c03aa1b0cf184be5880192a6c1",
+    "input_tokens": 13923,
+    "output_tokens": 417,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:19.058966+00:00"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "trees",
+  "title": "Trees",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4760f2600fb18fad6ad22cbcc73db3c856f487975bc39797e7e1e54326368e8e",
+  "citations": [
+    "corpus:liquipedia_dota2/trees@2217001",
+    "corpus:liquipedia_dota2/trees@2217001#Mechanics",
+    "corpus:liquipedia_dota2/trees@2217001#Respawn_Time",
+    "corpus:liquipedia_dota2/trees@2217001#Tree_Count",
+    "corpus:liquipedia_dota2/trees@2217001#Tree-Walking",
+    "corpus:liquipedia_dota2/trees@2217001#Planted_Trees",
+    "corpus:liquipedia_dota2/trees@2217001#Trees_Interacting_Abilities",
+    "corpus:liquipedia_dota2/trees@2217001#Destroying_Trees",
+    "corpus:liquipedia_dota2/trees@2217001#Recent_Changes"
+  ],
+  "packet_sha256": "558006c3f7d78a350dfd146aa21f6ef7ba557c4cbd53feda84ae8d1c3560d272",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "5a85945fbe78bfbdf6c026dc545f20508f1aa643e55b62d4a32a46b91770b809",
+    "input_tokens": 15703,
+    "output_tokens": 5521,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:47:46.689205+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "9851506b1662d0835ecf7fde868550c9f2d6333fc9a937312e528e72af985cbc",
+    "input_tokens": 17533,
+    "output_tokens": 2222,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:48:38.675954+00:00"
+  }
+}

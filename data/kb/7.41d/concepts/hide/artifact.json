@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "hide",
+  "title": "Hide",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9fb88dea9740643cb8176c349204a0590590542344baf8721e0328112a1af652",
+  "citations": [
+    "corpus:liquipedia_dota2/hide@2396533",
+    "corpus:liquipedia_dota2/hide@2396533#Mechanics",
+    "corpus:liquipedia_dota2/hide@2396533#Sources",
+    "corpus:liquipedia_dota2/hide@2396533#Piercing_Hidden",
+    "corpus:liquipedia_dota2/hide@2396533#Path_Block",
+    "corpus:liquipedia_dota2/hide@2396533#Effect_Pause",
+    "corpus:liquipedia_dota2/hide@2396533#Castable_while_Hidden",
+    "corpus:liquipedia_dota2/hide@2396533#Debuff_Immunity",
+    "corpus:liquipedia_dota2/hide@2396533#Stun",
+    "corpus:liquipedia_dota2/hide@2396533#Silence",
+    "corpus:liquipedia_dota2/hide@2396533#Can't_Act",
+    "corpus:liquipedia_dota2/hide@2396533#Other_Modifiers",
+    "corpus:liquipedia_dota2/hide@2396533#Shared_Unit_Control",
+    "corpus:liquipedia_dota2/hide@2396533#Map_Interactions",
+    "corpus:liquipedia_dota2/hide@2396533#Patch_History"
+  ],
+  "packet_sha256": "19c8e51f7d7dc93ee3b3f6e5f11c881cfd250c3b85323063f9b82130d45a8793",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "7",
+    "request_sha256": "05809479344df1a580d4463024540a8a4bc4bdfab344389fb5b65c99c49d7253",
+    "input_tokens": 17013,
+    "output_tokens": 6150,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:02:00.591160+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "7",
+    "request_sha256": "9148b3d81b474a555361be9fa126b5d8afedc99b15baf80e469972fcbc192dfa",
+    "input_tokens": 17265,
+    "output_tokens": 1548,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:02:37.738513+00:00"
+  }
+}

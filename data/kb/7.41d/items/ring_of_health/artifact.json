@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_health",
+  "title": "Ring of Health",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "82cb545693e57b61834b18adf6cfec83c27436a642ec7fcf21a42cdfba98c490",
+  "citations": [
+    "gamefile:items/item_ring_of_health#cost",
+    "gamefile:items/item_ring_of_health#attribs",
+    "gamefile:items/item_ring_of_health#mechanics",
+    "gamefile:items/item_ring_of_health#components",
+    "loc:DOTA_Tooltip_ability_item_ring_of_health_Lore"
+  ],
+  "packet_sha256": "d3553c803490c601123195d97bc1d79fd1e98b7b47fa0e42268b908929d63256",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "cc5d3b1ccea6b3ef3576b7f80c05ace3f34e517f6caaa0f19eb8071d48ba67ce",
+    "input_tokens": 13764,
+    "output_tokens": 736,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:26.972260+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "a3e3b7cde52bf0f8f606ffb41e13dbfecad3f37b6b458be11f1ffa87551145cc",
+    "input_tokens": 13879,
+    "output_tokens": 340,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:59.727783+00:00"
+  }
+}

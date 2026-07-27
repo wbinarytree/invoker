@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "royal_jelly",
+  "title": "Royal Jelly",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6e478a51d282e83da1fba629afe41f7b1ceaec268699178b8c4d3944ecc996f3",
+  "citations": [
+    "gamefile:items/item_royal_jelly#cost",
+    "loc:DOTA_Tooltip_ability_item_royal_jelly_Description",
+    "gamefile:items/item_royal_jelly#attribs",
+    "gamefile:items/item_royal_jelly#mechanics",
+    "loc:DOTA_Tooltip_ability_item_royal_jelly_Lore"
+  ],
+  "packet_sha256": "450db310a177bb143eb58301d0c2a35a0c31b070dde5dac2281e2283ec3c3d91",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "971bedc7324211bd2007e72635d55e6f671ed344fc026dcd076bac4591762275",
+    "input_tokens": 13883,
+    "output_tokens": 1656,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:11.489225+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "d96f7a0a3b97d3874a368724946a40f513ed540483745067dd431acfa2cb965d",
+    "input_tokens": 14029,
+    "output_tokens": 1430,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:39.341410+00:00"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_reflection",
+  "title": "Spell Reflection",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d65bbf9cdbac8a23f5a12145114c0380ed99a8c7df44d66a1041fc78ea369599",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_reflection@2383953",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Definition",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Mechanics",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Sources_of_Spell_Reflection",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Not-reflected_Unit_Target_Abilities",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Bounce",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Multiple_Target",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Point_Target",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Projectile",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Usually_reflected_without_Aghanim_upgrades",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Other_Unique_interactions",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Fully_reflected_abilities",
+    "corpus:liquipedia_dota2/spell_reflection@2383953#Recent_Changes"
+  ],
+  "packet_sha256": "23b9d7427c1ccebcf4c580c3b7648c01dc0e90c967ca401a7ee818a53f169003",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "4b3134357b58173f5aae982ef91c6badbf5d77e2439cd3cbdb57657c22f58e85",
+    "input_tokens": 18497,
+    "output_tokens": 8977,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:43:57.252196+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "66e46c36ccd4d7c0160d05550223ce242e1d52241e8edc85e5c211b7c49a08ac",
+    "input_tokens": 19560,
+    "output_tokens": 2602,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:44:57.185126+00:00"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "mana_regeneration",
+  "title": "Mana Regeneration",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "25c94ea175d9f58969bf2ab5b529b8e789a549431846101ed0c9277aa430e8fe",
+  "citations": [
+    "corpus:liquipedia_dota2/mana_regeneration@2244534",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Base_Mana_Regeneration",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Heroes",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Creeps",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Summons",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Modifying_Mana_Regeneration",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Ability",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Talents",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Items",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Mana_Regen_Manipulation",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Talents_2",
+    "corpus:liquipedia_dota2/mana_regeneration@2244534#Recent_Changes"
+  ],
+  "packet_sha256": "95f6b5393754d6a34a617caae58b8f3eafb63fb4a6ad5312ccbc8821c8e99b95",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "4fb6ca31d0c8b28c0f89df08752bb9afba765605bb1e7a8086e4a90dd5b2bf0e",
+    "input_tokens": 17243,
+    "output_tokens": 6506,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:32:09.638638+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "5e48b50f4b9f9dccdabca7c2adb79b8a32052d841b6503ec1e3200e7609aa2bb",
+    "input_tokens": 17311,
+    "output_tokens": 2361,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:33:15.303917+00:00"
+  }
+}

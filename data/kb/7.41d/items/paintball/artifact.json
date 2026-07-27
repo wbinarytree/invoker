@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "paintball",
+  "title": "Fae Grenade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4386e6ee86384872e37cef7cbf7ac24b1043128a58e98662da45e7affe6cc55c",
+  "citations": [
+    "gamefile:items/item_paintball#attribs",
+    "loc:DOTA_Tooltip_Ability_item_paintball_Description",
+    "gamefile:items/item_paintball#mechanics",
+    "gamefile:items/item_paintball#cost",
+    "loc:DOTA_Tooltip_Ability_item_paintball_Lore"
+  ],
+  "packet_sha256": "2f254f267c7e4c9e0f37ffc3df321b15211e75f4cb860ba7d116807437aaeef8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f7c985e58cb128fd9c9407cd3134029ed07bd536f71620a1bf048fdf9003ef45",
+    "input_tokens": 13805,
+    "output_tokens": 1366,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:41.021484+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "b5f798a13c0c8e37f7a506019d79bd4f649d5dea2e7e081232785108fac4e135",
+    "input_tokens": 13990,
+    "output_tokens": 795,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:52.530052+00:00"
+  }
+}

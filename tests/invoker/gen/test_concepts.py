@@ -88,12 +88,37 @@ def test_build_packet_keys_and_stable_hash(tmp_path):
     assert f"corpus:{LEAD_KEY}#Cleave_&_Splash" not in text_by_mark
 
 
+def test_degenerate_sections_dropped_from_packet():
+    from invoker.corpus.sections import CorpusSection
+    from invoker.gen.concepts import is_degenerate_section
+
+    # observed in the corpus: template error leads and bare cross-ref stubs
+    assert is_degenerate_section("Error no text specified!")
+    assert is_degenerate_section("Main Article: Rubick")
+    assert is_degenerate_section("Main Article: Rubick\nError no text specified!")
+    # content survives even alongside a stub line
+    assert not is_degenerate_section("Main Article: Spell Steal\nRange\n800")
+    assert not is_degenerate_section("Attacks miss 25% of the time.")
+
+    def section(anchor: str, text: str) -> CorpusSection:
+        return CorpusSection(
+            host_key="w", slug="p", revision_id=1, anchor=anchor,
+            heading=anchor, level=2, breadcrumbs=(anchor,), text=text,
+        )
+
+    sections = [section("Real", "Facts here."), section("Stub", "Main Article: Rubick")]
+    _, text_by_mark, _ = build_packet(sections)
+    keys = list(text_by_mark)
+    assert any("Real" in k for k in keys)
+    assert not any("Stub" in k for k in keys)
+
+
 def test_extract_marks_dedupes_in_order():
     text = f"A. [corpus:{KEY}] B. [corpus:{LEAD_KEY}] C. [corpus:{KEY}]"
     assert extract_marks(text) == [f"corpus:{KEY}", f"corpus:{LEAD_KEY}"]
 
 
-def run_generate(tmp_path, backend):
+def run_generate(tmp_path, backend, rejected_dir=None):
     from invoker.corpus.store import CorpusStore
 
     make_store(tmp_path)
@@ -104,6 +129,7 @@ def run_generate(tmp_path, backend):
         slug="evasion",
         patch="7.41d",
         kb_dir=tmp_path / "kb" / "7.41d",
+        rejected_dir=rejected_dir,
     )
 
 
@@ -262,6 +288,96 @@ def test_check_coverage_requires_anchorless_sections_and_exempts_references():
     # citing References does not excuse a dropped real section
     with pytest.raises(GenerationError, match=r"w/p@1#Facts"):
         check_coverage(["corpus:w/p@1", "corpus:w/p@1#References"], valid, "article", "p")
+
+
+def test_check_coverage_exempts_batch_boilerplate_anchors():
+    # anchors enumerated across the full corpus (batch KB generation
+    # spec): galleries and both observed See_also case variants are
+    # boilerplate; Trivia is content and must stay required
+    valid = {
+        "corpus:w/p@1#Facts",
+        "corpus:w/p@1#Gallery",
+        "corpus:w/p@1#See_Also",
+        "corpus:w/p@1#See_also",
+        "corpus:w/p@1#Trivia",
+    }
+    check_coverage(
+        ["corpus:w/p@1#Facts", "corpus:w/p@1#Trivia"], valid, "article", "p"
+    )
+    with pytest.raises(GenerationError, match=r"w/p@1#Trivia"):
+        check_coverage(["corpus:w/p@1#Facts"], valid, "article", "p")
+
+
+def test_card_citing_a_subset_of_sections_passes(tmp_path):
+    # coverage is article-only by design: the card is a compression and
+    # may cite any subset; good_card cites exactly one of three sections
+    backend = FakeBackend(good_article(), good_card())
+    artifact, _ = run_generate(tmp_path, backend)
+    card_marks = {m for s in artifact.card.sentences for m in s.marks}
+    assert card_marks < set(ALL_KEYS)
+
+
+def test_check_failure_persists_rejected_article(tmp_path):
+    # coverage failure after a paid article call: the article and error
+    # land in the rejected dir before the abort propagates
+    article = (
+        f"Evasion is a mechanic that causes attacks to miss. [corpus:{LEAD_KEY}]\n\n"
+        f"Ranged attacks from low ground miss 25% of the time. [corpus:{KEY}]"
+    )
+    rejected = tmp_path / "rejected"
+    with pytest.raises(GenerationError, match="does not cite"):
+        run_generate(tmp_path, FakeBackend(article, good_card()), rejected_dir=rejected)
+    (attempt,) = list((rejected / "concepts" / "evasion").iterdir())
+    assert (attempt / "article.md").read_text() == article
+    assert "does not cite" in (attempt / "error.txt").read_text()
+    # the card call never ran, so no card is persisted
+    assert not (attempt / "card.json").exists()
+
+
+def test_card_failure_persists_article_and_card(tmp_path):
+    bad = good_card(mark="corpus:testwiki/evasion@42#Invented")
+    rejected = tmp_path / "rejected"
+    with pytest.raises(GenerationError, match="Invented"):
+        run_generate(tmp_path, FakeBackend(good_article(), bad), rejected_dir=rejected)
+    (attempt,) = list((rejected / "concepts" / "evasion").iterdir())
+    assert (attempt / "article.md").read_text() == good_article()
+    assert "Invented" in (attempt / "card.json").read_text()
+
+
+def test_no_rejected_dir_means_no_persistence(tmp_path):
+    # default: aborts behave exactly as before, nothing extra on disk
+    backend = FakeBackend("Prose without any citations.", good_card())
+    with pytest.raises(GenerationError, match="no citation marks"):
+        run_generate(tmp_path, backend)
+    assert not (tmp_path / "rejected").exists()
+
+
+def test_structural_digits_are_not_number_claims(tmp_path):
+    # headings mirror source section titles ("Example 3") and ordered
+    # lists carry the model's own numbering — neither is a factual claim
+    article = good_article() + (
+        f"\n\n## Example 99: Miss Streaks\n\n"
+        f"1. Attacks can miss.\n"
+        f"2. Consecutive misses happen. [corpus:{DEF_KEY}]"
+    )
+    artifact, _ = run_generate(tmp_path, FakeBackend(article, good_card()))
+    assert artifact.slug == "evasion"
+
+
+def test_inline_numbers_still_checked_after_structural_strip(tmp_path):
+    # the same digit in prose (not structure) must still be vouched for
+    article = good_article() + f"\n\nMisses stack 99 times. [corpus:{DEF_KEY}]"
+    with pytest.raises(GenerationError, match="99"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
+
+
+def test_ordered_list_content_numbers_still_checked(tmp_path):
+    # only the list marker is structural; the content stays checked
+    article = good_article() + (
+        f"\n\n1. Misses stack 99 times. [corpus:{DEF_KEY}]"
+    )
+    with pytest.raises(GenerationError, match="99"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
 
 
 def test_numbers_inside_citation_marks_are_ignored(tmp_path):

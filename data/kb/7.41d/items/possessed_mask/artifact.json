@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "possessed_mask",
+  "title": "Possessed Mask",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "13e725d20301c79c2715e9f7bd97938ee32bdd53af8d2bc9cbb04493d8790356",
+  "citations": [
+    "gamefile:items/item_possessed_mask#cost",
+    "gamefile:items/item_possessed_mask#attribs",
+    "gamefile:items/item_possessed_mask#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_possessed_mask_Description",
+    "loc:DOTA_Tooltip_Ability_item_possessed_mask_Lore"
+  ],
+  "packet_sha256": "7619ce98dd49434dd04cb5a7bf9aab0cd77119056f4812e909c734fdc29b573b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b3083ab936898383b4e616246918462b237973a200d87accfba5ffc0454047f4",
+    "input_tokens": 14172,
+    "output_tokens": 1308,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:45.711824+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "d14e945ceb3a25d00b427ff3c063ebfe4a37aa55b563b5a4f86b71b254e92c77",
+    "input_tokens": 13930,
+    "output_tokens": 650,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:24.526936+00:00"
+  }
+}

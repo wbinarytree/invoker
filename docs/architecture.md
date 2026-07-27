@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-26 (citation-coverage check: every packet section cited or generation aborts)
+Last updated: 2026-07-27 (item KB quality follow-ups: #mechanics packet policy, guard prompt v2 register rules, item prompt v7 qualifiers + card lore, regenerate-item-card CLI)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -484,7 +484,11 @@ artifact is the acceptance act. `invoker guard-artifact <artifact.json>`
 re-guards any existing artifact. Prompt v5 of the concept article
 prompt (lossless compression, enumerations in full) is the
 guard-driven counterpart: measured 2026-07-26, codex concept artifacts
-went from 44/122 flags to clean.
+went from 44/122 flags to clean. Guard prompt v2 (quality-followups
+spec) teaches the guard the article register: a fact is carried when
+its value sits in a table and its meaning in prose (joint restatement
+never demanded), and internal identifiers, bare display labels, and
+unsubstituted template variables are never missing facts.
 
 **Concept generator (S1)** — `concepts.py` + `artifacts.py`. Context
 packet = the concept's corpus sections rendered with citation keys
@@ -496,9 +500,17 @@ checks (shared `gen/checks.py`, same code path as items), layered: every
 mark in article and card must resolve against the packet; every packet
 section must be cited by the article (`check_coverage` — lossless
 compression, so an uncited section is dropped content; boilerplate
-anchors, currently `References`, are exempt); numbers must appear in
-their cited section. Any failure aborts generation listing the
-offenders; marks are never checked against live sources.
+anchors — `References`, `Gallery`, `See_Also`/`See_also`, enumerated
+across the full corpus per the batch KB generation spec — are exempt);
+numbers must appear in their cited section, after stripping markdown
+heading lines and ordered-list markers (structural digits mirror source
+section titles or carry the model's own numbering — they are not
+claims; list/table content stays checked). Any failure aborts
+generation listing the offenders; marks are never checked against live
+sources. Any failure after the article call also persists the paid
+output (article, card when present, error text) under
+`data/logs/rejected/<patch>/concepts/<slug>/<ts>/` before the abort
+propagates — never committed, post-mortem evidence only.
 Artifacts (schema v3): one folder per entity —
 `data/kb/<patch>/concepts/<slug>/` holding `article.md` in SKILL.md
 style (YAML frontmatter: title/kind/patch + the card with per-sentence
@@ -511,7 +523,22 @@ consumers load via `load_entity_article`/`write_entity_artifact` in
 card's first sentence is the identity line — it doubles as the entity's
 summary in the answerer index, so the card prompts require it to
 identify the entity concretely with its defining numbers (no flavor
-prose). CLI: `invoker generate-concept <slug> --patch <patch>`.
+prose). CLI: `invoker generate-concept <slug> --patch <patch>`. Batch
+runs are shell-level per the specs: `scripts/concept_batch.py` (worker
+pool of per-entity CLI subprocesses on the codex backend, JSONL
+manifest under `data/logs/batch/`, circuit breaker, transport-class
+re-queue-once) and `scripts/concept_report.py` (clean/flagged/
+unguarded/failed buckets from disk state; committing is the acceptance
+act). Both scripts take `--kind concept|item`; the report annotates
+the known-unresolvable flag classes per kind — concept flags citing
+coverage-allowlisted boilerplate anchors, item flags whose fact is an
+internal `item_*` identifier the prompt forbids in prose — and prints
+substantive item flags verbatim for the acceptance pass. Concept
+prompt v8–v10 hardening came out of the 2026-07-26 fleet: patch
+context never stated in prose, numbers never derived/counted/
+range-expanded (article and card), the corpus: prefix trap and
+one-line-section coverage named explicitly (v8); consolidated-table
+marks (v9); marks placed after the content they cite (v10).
 
 **Item generator (S-items slice)** — `items.py` + shared `checks.py`
 (spec: `docs/specs/2026-07-26-game-file-grounded-generators.md`).
@@ -529,15 +556,30 @@ literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
 the formula with its prices, prose is behavior semantics, and the
-article closes with the lore as a flavor line (prompt v5 — lore is
-required coverage, never allowlisted; user direction 2026-07-26) —
+article closes with the lore as a flavor line (prompt v7 — lore is
+required coverage, never allowlisted, user direction 2026-07-26; v6
+ports the concept-fleet v8–v10 hardening; v7 requires source
+qualifiers — cadence, damage-type restriction, trigger condition,
+active/passive classification — to survive into prose, and the card
+closes with the lore line, user direction 2026-07-27) —
 each tier (identity line, card, article) adds information over the one
-above. Same faithfulness discipline
+above. The `#mechanics` packet section applies the quality-followups
+policy: bare `Passive` on a record with no description (engine
+boilerplate on ~100 pure-stat records) emits no Behavior line, values
+duplicated by an attribs row are dropped (Valve stores some values
+twice), and behavior flags always render as labels — 26 mapped, plus a
+title-case fallback so raw `DOTA_ABILITY_BEHAVIOR_*` enums never reach
+prose. Same faithfulness discipline
 as concepts via `gen/checks.py` — general `[kind:KEY]` marks must
 resolve against the packet, every packet section (including `loc:`
 lore/description) must be cited, numbers per cited section. The shared mark
 grammar itself lives in `invoker.marks` (used by both generation and
-benchmark). CLI: `invoker generate-item <item> --patch <patch>`.
+benchmark). CLI: `invoker generate-item <item> --patch <patch>`;
+`invoker regenerate-item-card <slug> --patch <patch>` rebuilds only the
+card from the stored article (marks and numbers validated against the
+article's own citation structure via `article_segments` — today's
+packet may legitimately differ), used for the card-lore pass over the
+accepted corpus.
 
 KB layout grammar: entity classes are sibling directories —
 `concepts/<slug>/`, `items/<slug>/`, and (planned) `heroes/<slug>/`,

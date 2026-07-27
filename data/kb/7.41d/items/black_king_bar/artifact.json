@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "black_king_bar",
+  "title": "Black King Bar",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "98a0b41d062cdefbb1b50f17c89c7dd59a46dd1df46c425e99049d53d9863ade",
+  "citations": [
+    "gamefile:items/item_black_king_bar#cost",
+    "gamefile:items/item_black_king_bar#attribs",
+    "loc:DOTA_Tooltip_ability_item_black_king_bar_Description",
+    "gamefile:items/item_black_king_bar#components",
+    "gamefile:items/item_black_king_bar#mechanics",
+    "loc:DOTA_Tooltip_ability_item_black_king_bar_Lore"
+  ],
+  "packet_sha256": "0aa326f0e98f9f2318d456a19c4df2dc5206ab12978c3a3e0c2ad8c91654d267",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9c4748d93ef3968adacf3762c0e69cff772cbec3d7ccd48c61fd8df74354c780",
+    "input_tokens": 13882,
+    "output_tokens": 3766,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:52.192626+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "def58c6fdcf91dffe527baf5ae9e243673151c5c95d4a912f200cd5825ad06cd",
+    "input_tokens": 14057,
+    "output_tokens": 752,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:28.306949+00:00"
+  }
+}

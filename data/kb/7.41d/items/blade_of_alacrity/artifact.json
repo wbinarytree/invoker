@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blade_of_alacrity",
+  "title": "Blade of Alacrity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f40b08b6d195cd62d3f6a211ab8486e74b5ec112c7a8ef8cfc9f747463ffd6e5",
+  "citations": [
+    "gamefile:items/item_blade_of_alacrity#cost",
+    "gamefile:items/item_blade_of_alacrity#attribs",
+    "gamefile:items/item_blade_of_alacrity#components",
+    "gamefile:items/item_blade_of_alacrity#mechanics",
+    "loc:DOTA_Tooltip_ability_item_blade_of_alacrity_Lore"
+  ],
+  "packet_sha256": "965ba2ee7b5cc853c5f6a8f26652d47bef355b21d6706701911f9f5ffc4afe2a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f7cf94a7610a061cb41b61cf664199813175d0fab8669188fd93ba4b567c37c5",
+    "input_tokens": 14232,
+    "output_tokens": 791,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:37.342510+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "60acf0d0ab6ff3e639935cf135481739dedbf4f7c1d10601aa3df81c1e37e311",
+    "input_tokens": 13932,
+    "output_tokens": 557,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:28.185879+00:00"
+  }
+}

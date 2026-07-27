@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "attack_animation",
+  "title": "Attack Animation",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2a2807451e1689629f1529d2655bed3b4e90a735ccec4d57a4737068a448362f",
+  "citations": [
+    "corpus:liquipedia_dota2/attack_animation@2383432",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Definition",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Attack_Animation_Manipulation",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Orb_Walking",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Attack_Animations_of_Heroes",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Attack_Animation_of_Other_Units",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Version_History",
+    "corpus:liquipedia_dota2/attack_animation@2383432#Patch_History"
+  ],
+  "packet_sha256": "8578a53fa758dfc3a1a7e4d7feaba468fe1fbec2c410ef38c8c25e867dbaac12",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "55068f5772d9abc311964a325d3fa230492d48fd5ef433fbbe76ac26cc7ae201",
+    "input_tokens": 18304,
+    "output_tokens": 5298,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:10:53.097329+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "7a873bf25fa0fb0a702605c7cfad046f30cd46b3fd386b92c057f009c1edb71f",
+    "input_tokens": 18490,
+    "output_tokens": 2491,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:12:02.005021+00:00"
+  }
+}

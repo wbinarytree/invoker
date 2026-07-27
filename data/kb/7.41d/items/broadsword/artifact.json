@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "broadsword",
+  "title": "Broadsword",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1a58879a0d4a75d0012030ff45c500ba4abb0acb1ba162306a5c6b1ed9c29113",
+  "citations": [
+    "gamefile:items/item_broadsword#cost",
+    "gamefile:items/item_broadsword#attribs",
+    "gamefile:items/item_broadsword#components",
+    "gamefile:items/item_broadsword#mechanics",
+    "loc:DOTA_Tooltip_ability_item_broadsword_Lore"
+  ],
+  "packet_sha256": "6b5f7289550303907fca418c9aa23884ef6b5baf21e54c93685c1ad00db4b5ae",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b4220db4e0db51b907b5f3bfdd1af5fc5660e70475ce3d0b76a3fd9c4fe57b6c",
+    "input_tokens": 13798,
+    "output_tokens": 734,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:49.949754+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "ed83154e702e168a2f5c1b8692b121c5edba9ed86d22fe519f84d57e408190c8",
+    "input_tokens": 13905,
+    "output_tokens": 416,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:56.676222+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "dagon_4",
+  "title": "Dagon",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8fbf45b2612dfa620ca5563b33664dc7ad3d1b436c7ede46a45a9fa38bde078c",
+  "citations": [
+    "gamefile:items/item_dagon_4#cost",
+    "gamefile:items/item_dagon_4#attribs",
+    "gamefile:items/item_dagon_4#mechanics",
+    "loc:DOTA_Tooltip_ability_item_dagon_4_Description",
+    "gamefile:items/item_dagon_4#components",
+    "loc:DOTA_Tooltip_ability_item_dagon_4_Lore"
+  ],
+  "packet_sha256": "3344dfcdb854cd87a6b8dc50e2faa9f0e8a8063eff4bd2c7920793ac02c40ae1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7198e3e0ba214772a4d015cc81afe6ed9123092a538276ef4e108557f2889321",
+    "input_tokens": 13960,
+    "output_tokens": 2899,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:46.842155+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "1cb9c2f1cd24a84b13df32d656538dc1229902fbe891dc0d81d6ef7ead8abcc0",
+    "input_tokens": 14124,
+    "output_tokens": 1441,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:10.357204+00:00"
+  }
+}

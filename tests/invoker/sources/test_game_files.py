@@ -145,6 +145,17 @@ def test_item_record_carries_resolved_loc_tokens():
     assert record["lore_token"] == "DOTA_Tooltip_ability_item_mage_slayer_Lore"
 
 
+def test_behavior_flags_never_pass_through_raw():
+    from invoker.sources.game_files import _behavior
+
+    labels = _behavior(
+        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        " | DOTA_ABILITY_BEHAVIOR_SOME_FUTURE_FLAG"
+    )
+    assert labels == ["Unit Target", "Doesn't Resume Attack", "Some Future Flag"]
+    assert not any("DOTA_ABILITY_BEHAVIOR" in label for label in labels)
+
+
 def test_game_files_source_fails_loudly_when_patch_missing():
     with pytest.raises(GameFilesSourceError):
         GameFilesSource(FIXTURE_ROOT, "missing")

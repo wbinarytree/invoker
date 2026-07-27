@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "3816e36b9f52815f89f74c70498814c4225ea22021b1e36d64d915446b5ece25",
+  "packet_matches_artifact": true,
+  "missing": [],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "c729f5f25a718643c92dd3c776c8107ac389fb381640fd0368404b02f0113f92",
+    "input_tokens": 14477,
+    "output_tokens": 230,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:27.956964+00:00"
+  }
+}

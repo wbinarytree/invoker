@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tango",
+  "title": "Tango",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6431959a125e3bcc48ea897f184048ea6da4ca60a01cb566ef133f713baca62a",
+  "citations": [
+    "gamefile:items/item_tango#cost",
+    "gamefile:items/item_tango#attribs",
+    "loc:DOTA_Tooltip_ability_item_tango_Description",
+    "gamefile:items/item_tango#mechanics",
+    "loc:DOTA_Tooltip_ability_item_tango_Lore"
+  ],
+  "packet_sha256": "7ed668ed78df2652ba155e4a33666f52ff4bed4111f880aff8e051c2ed63fd4b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "064dfd33267ed9f509965c64ab58a47914e43f2f25b7575b7b9c012a58cd5304",
+    "input_tokens": 13806,
+    "output_tokens": 1857,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:12.495037+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "09ec864e2531a0b85ed1a28128e0c30dbfc2b86cd9d3f06f2c8fcdf083a1f161",
+    "input_tokens": 13960,
+    "output_tokens": 576,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:38.993110+00:00"
+  }
+}

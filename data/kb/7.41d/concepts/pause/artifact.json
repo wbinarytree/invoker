@@ -1,0 +1,36 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "pause",
+  "title": "Pause",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "71d066f28142b2e2e5cc1ca8c9b53585c827356d42621ee0ef7046524ea5b821",
+  "citations": [
+    "corpus:liquipedia_dota2/pause@2123931",
+    "corpus:liquipedia_dota2/pause@2123931#Other_uses_of_pause"
+  ],
+  "packet_sha256": "603c1399001746a45e9cfe7ca4be60b6e4cd30ded5aa54c3fbeb999f6ad3625f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "bb5c19dedfa33ff7887de2c58711ee6b3e91bd900d4473dbe6eff84de984e222",
+    "input_tokens": 15462,
+    "output_tokens": 1656,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:23:46.349256+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "49d315eb9c3c7122032ebcbdaee27202a48f85604376e2759a32adbd0264ffbe",
+    "input_tokens": 15092,
+    "output_tokens": 981,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:24:09.982012+00:00"
+  }
+}

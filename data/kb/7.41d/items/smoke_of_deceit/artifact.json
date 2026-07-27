@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "smoke_of_deceit",
+  "title": "Smoke of Deceit",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0d9feb88343b25c290e16c896bddeed25f315ba93c5086ceefb487a9535f2f88",
+  "citations": [
+    "gamefile:items/item_smoke_of_deceit#cost",
+    "loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Description",
+    "gamefile:items/item_smoke_of_deceit#attribs",
+    "gamefile:items/item_smoke_of_deceit#mechanics",
+    "loc:DOTA_Tooltip_ability_item_smoke_of_deceit_Lore"
+  ],
+  "packet_sha256": "4f557048d397ce1b0f36e1d84c5681ee9627b7e9721d9b844130fc142e8b2643",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "e538fdc06d607f0e4c78a20b40a180714aafb8a556fbe787a83ea622a173c25d",
+    "input_tokens": 14367,
+    "output_tokens": 1433,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:47.656538+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "232b9bef2c773d33061af8e780424cb4829b83e06cc6f33890f9bdcc046302cc",
+    "input_tokens": 14060,
+    "output_tokens": 1243,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:10.818194+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "third_eye",
+  "title": "Third Eye",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8a157eb0fb7971b34d8345d43b0c0e40853015b23982cb18eee5f6c47a81d2cc",
+  "citations": [
+    "gamefile:items/item_third_eye#attribs",
+    "gamefile:items/item_third_eye#mechanics",
+    "loc:DOTA_Tooltip_ability_item_third_eye_Description",
+    "gamefile:items/item_third_eye#cost"
+  ],
+  "packet_sha256": "eb0e56b05d9ad0a5cd6b999cd1d722c0c6cb640048f93bf1402686e1a11e9f2f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ad6a33ca7569df4ff5eb469e610549dd81fc1e6e0a3a014bf18177210948c1fa",
+    "input_tokens": 13739,
+    "output_tokens": 1187,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:01.141275+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "76cf61efa778f63dc07292309f6e65e07cdcd40cdd08bfb9903c93e58c81cc38",
+    "input_tokens": 13861,
+    "output_tokens": 688,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:45.467556+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "boots_of_elves",
+  "title": "Band of Elvenskin",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "665c2679c03ef0b0ae4e3455b1e1b3ae1dcb28c61e55e334e9ae400ef2778422",
+  "citations": [
+    "gamefile:items/item_boots_of_elves#cost",
+    "gamefile:items/item_boots_of_elves#attribs",
+    "gamefile:items/item_boots_of_elves#components",
+    "gamefile:items/item_boots_of_elves#mechanics",
+    "loc:DOTA_Tooltip_ability_item_boots_of_elves_Lore"
+  ],
+  "packet_sha256": "94df5081198a32f5ac7fe2b54c9eb34fa940461606d69b4f64ce0a7f6e3901df",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4b5ce0894a6154610a9ec5495e2ad675798ac7e32047cac5d0bb1b27bf14f48f",
+    "input_tokens": 13757,
+    "output_tokens": 648,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:32.829912+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "70945e429b02905f301e53d7380a61c3ab519c815b36f42c6a27118c9276c4f9",
+    "input_tokens": 13877,
+    "output_tokens": 304,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:46.526107+00:00"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mysterious_hat",
+  "title": "Fairy's Trinket",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8eb55f2c18a20c0aafb4a1d4be0492e29501889cc9373e34b228790bb8bd87ba",
+  "citations": [
+    "gamefile:items/item_mysterious_hat#cost",
+    "gamefile:items/item_mysterious_hat#attribs",
+    "gamefile:items/item_mysterious_hat#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_mysterious_hat_Lore"
+  ],
+  "packet_sha256": "bde04115a9bd88f3844d34cdc264757d8dfe9c74fd987d028f3ce53d85d9e997",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "07edb61a1423220cae8bb134ebbc0f1f595ee567d5d68715ed77b73a44688750",
+    "input_tokens": 14152,
+    "output_tokens": 745,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:09.648270+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "faa55781de36be1592e10f0b80ce8136a3da6f315754c90a996b4e3e5095ffba",
+    "input_tokens": 13887,
+    "output_tokens": 427,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:08.832936+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "arcane_blink",
+  "title": "Arcane Blink",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ff5cc90388c1681f0369366590218f5b1b067cff2791cf559ea1b18ddfb5a2e6",
+  "citations": [
+    "gamefile:items/item_arcane_blink#cost",
+    "gamefile:items/item_arcane_blink#attribs",
+    "loc:DOTA_Tooltip_ability_item_arcane_blink_Description",
+    "gamefile:items/item_arcane_blink#mechanics",
+    "gamefile:items/item_arcane_blink#components",
+    "loc:DOTA_Tooltip_ability_item_arcane_blink_Lore"
+  ],
+  "packet_sha256": "937aa4d34b965b4ba25e72cb0e1a552113c525a46bb141c04d7e0bcf71db8826",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4f36cfd2d67b5961aa40addbda803d582b7f0ccbe04073ec92e00aa27e3d6040",
+    "input_tokens": 14363,
+    "output_tokens": 1466,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:53.542319+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "fb176d40ac7f4d78fde7479fd39aa44f8776f762348cd97a71f49e06234ca118",
+    "input_tokens": 14513,
+    "output_tokens": 1360,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:10.686782+00:00"
+  }
+}

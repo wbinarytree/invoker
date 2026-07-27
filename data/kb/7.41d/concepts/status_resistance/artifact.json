@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "status_resistance",
+  "title": "Status Resistance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4d8a32201323481fb01b6e4b13f4497d346921f1cff79710ac2472742a5c5753",
+  "citations": [
+    "corpus:liquipedia_dota2/status_resistance@2379177",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Definition",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Equations",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Stacking",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Examples",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Modifying_Status_Resistance",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Increasing_Sources",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Items",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Talents",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Reducing_Sources",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Debuff_Duration_Manipulation",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Unaffected_Abilities",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Duration_Reduced",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Dynamic_Tick_Intervals",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Other_Interactions",
+    "corpus:liquipedia_dota2/status_resistance@2379177#Recent_Changes"
+  ],
+  "packet_sha256": "8d3be3886b5e62d6b7ada48ee432a5cc80bf6106701321f913abf5c254a27195",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "44362534001fb42a95b4c265490ea8340a7278dced59e9690dfe6f8e4ee36879",
+    "input_tokens": 20333,
+    "output_tokens": 8275,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:48:29.156338+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "42173f1c278f59a788f36146c2855a18e092de5599a9ab42229f9627896a99b4",
+    "input_tokens": 20361,
+    "output_tokens": 2348,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:49:32.691515+00:00"
+  }
+}

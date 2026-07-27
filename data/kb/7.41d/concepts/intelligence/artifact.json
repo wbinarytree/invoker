@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "intelligence",
+  "title": "Intelligence",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "664d5e14dcdea77970b36218bf50b32f5c1f48096b6eb2f935753378a506cfd4",
+  "citations": [
+    "corpus:liquipedia_dota2/intelligence@2381953",
+    "corpus:liquipedia_dota2/intelligence@2381953#Bonuses",
+    "corpus:liquipedia_dota2/intelligence@2381953#Intelligence_Heroes",
+    "corpus:liquipedia_dota2/intelligence@2381953#Intelligence_Granting_Sources",
+    "corpus:liquipedia_dota2/intelligence@2381953#Intelligence_Granting_Talents",
+    "corpus:liquipedia_dota2/intelligence@2381953#Intelligence_Granting_Items",
+    "corpus:liquipedia_dota2/intelligence@2381953#Attack_Damage_Items",
+    "corpus:liquipedia_dota2/intelligence@2381953#Recent_Changes",
+    "corpus:liquipedia_dota2/intelligence@2381953#See_Also"
+  ],
+  "packet_sha256": "9cbbcabd055e72c78d6880ade83864316f835938a792deff3e144b45d9440481",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "e62d2ee4f6d16d1b541b540a411cba19e604a812ba0c6a7b4ef8417667d39106",
+    "input_tokens": 18897,
+    "output_tokens": 9437,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:17:13.079768+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "f4c0e19070c5d3102e77a227ed77718bfd7fa8a25ff115cd356d730b93dc6a4e",
+    "input_tokens": 20540,
+    "output_tokens": 1989,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:17:53.917213+00:00"
+  }
+}

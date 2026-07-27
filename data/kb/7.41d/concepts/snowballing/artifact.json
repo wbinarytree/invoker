@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "snowballing",
+  "title": "Snowballing",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6954a31d12e522252c5f70a0033921ab643d26c045506685b72f17c0ed064a02",
+  "citations": [
+    "corpus:liquipedia_dota2/snowballing@2148434",
+    "corpus:liquipedia_dota2/snowballing@2148434#Heroes_that_are_known_as_Snowballers",
+    "corpus:liquipedia_dota2/snowballing@2148434#Nature_of_Snowballing_heroes"
+  ],
+  "packet_sha256": "3b9d6071a39fe5763975f37942eda789438219e7caf2b3dd6d53e1d6317a739d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "62266e86ec15889e0edbafdb3aaee8a80395d6a0e15ead1abd60fb229763d5c7",
+    "input_tokens": 15246,
+    "output_tokens": 2575,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:37:27.905509+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "2469092be59cdffd2c19599db2659a8ef1a16b17031f70fb41a5bb418bce9c97",
+    "input_tokens": 16009,
+    "output_tokens": 1485,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:38:06.147923+00:00"
+  }
+}

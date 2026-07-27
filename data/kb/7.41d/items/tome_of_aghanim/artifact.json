@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tome_of_aghanim",
+  "title": "Tome of Aghanim",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0a0665b7a4caef745dc2131798a60b7f5d2e7fc34f5750eba140bf2e7ab0ddf8",
+  "citations": [
+    "gamefile:items/item_tome_of_aghanim#cost",
+    "loc:DOTA_Tooltip_ability_item_tome_of_aghanim_Description",
+    "gamefile:items/item_tome_of_aghanim#attribs",
+    "gamefile:items/item_tome_of_aghanim#mechanics"
+  ],
+  "packet_sha256": "78fb66495a490434fa81e17e2e99d37ed9bbd494ddcdaffde01683226fa4cc2e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "34dcc66576eb4bc6b844b31820f34d372cda7457f27172ed417c653b65ca952a",
+    "input_tokens": 14184,
+    "output_tokens": 1076,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:45.530958+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "dd306a20152c337e316915df9256b5fa18ed9952f0b21b698bf9f95863d9144b",
+    "input_tokens": 13919,
+    "output_tokens": 642,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:06.836634+00:00"
+  }
+}

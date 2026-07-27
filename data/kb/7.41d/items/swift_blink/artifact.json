@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "swift_blink",
+  "title": "Swift Blink",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c65d057ce0ee940c222fb408cc45bd28d9c872fd73ffd234f1175d248eaf62c1",
+  "citations": [
+    "gamefile:items/item_swift_blink#cost",
+    "gamefile:items/item_swift_blink#attribs",
+    "loc:DOTA_Tooltip_ability_item_swift_blink_Description",
+    "gamefile:items/item_swift_blink#mechanics",
+    "gamefile:items/item_swift_blink#components",
+    "loc:DOTA_Tooltip_ability_item_swift_blink_Lore"
+  ],
+  "packet_sha256": "489fca059bfd005bfb68d39d19831989e1184165032dd6fc368cf6f0dac63547",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "21de6e393971ba483baa8eef329a1118dea598ab7c4909679b97534bd3b62f66",
+    "input_tokens": 14358,
+    "output_tokens": 1642,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:57.038274+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "f365f6335dfcb6d15d0906668cd7c5a3dee42972a9330aa14a8ffc584b4b5b6a",
+    "input_tokens": 14090,
+    "output_tokens": 1445,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:01.156127+00:00"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "vampire_fangs",
+  "title": "Vampire Fangs",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "acc524aba6cec36023eacc5b1334418a9cc70e99125cdf6541a939f9566bcc70",
+  "citations": [
+    "gamefile:items/item_vampire_fangs#cost",
+    "gamefile:items/item_vampire_fangs#attribs",
+    "gamefile:items/item_vampire_fangs#mechanics"
+  ],
+  "packet_sha256": "8de738940217b9b7ef08de2663857b04538b699c2a771bcdae472f594e50b73b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "21d235eccb9556f592547f457c849c5a361bbc630a9650fc611dffe5c85f050e",
+    "input_tokens": 14120,
+    "output_tokens": 1051,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:37.373790+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9e258585225c2ff037420d55c91b283cd990587098ea6cd3ee77f1d5db6067d3",
+    "input_tokens": 13849,
+    "output_tokens": 314,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:28.911814+00:00"
+  }
+}

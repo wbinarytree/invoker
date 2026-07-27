@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "energy_booster",
+  "title": "Energy Booster",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "06bb6754a74b3d50d1f98ea2eef0c5d14517ba20d684c9ef6cd3a8854d227e30",
+  "citations": [
+    "gamefile:items/item_energy_booster#cost",
+    "gamefile:items/item_energy_booster#attribs",
+    "gamefile:items/item_energy_booster#mechanics",
+    "gamefile:items/item_energy_booster#components",
+    "loc:DOTA_Tooltip_ability_item_energy_booster_Lore"
+  ],
+  "packet_sha256": "eda26819d4722adafb965032e2197c69bf7d6c550f563dbdcf4be6cda16c9c01",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9e9225b878109ee41e78e99d2e65b0e21f50b688fbd24abdb463e70fc21df2af",
+    "input_tokens": 13780,
+    "output_tokens": 769,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:32.995844+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "73d07ed75a987d497db136eaadfa2fb3512c69451189cbeeb8b97b431fa74e10",
+    "input_tokens": 13912,
+    "output_tokens": 456,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:52.049686+00:00"
+  }
+}

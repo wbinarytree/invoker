@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "pushing",
+  "title": "Pushing",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5fc0e1b3519657675ac7e7a236d7f7aeb5dbbb52b34713e7a977f77e108e195e",
+  "citations": [
+    "corpus:liquipedia_dota2/pushing@2148417",
+    "corpus:liquipedia_dota2/pushing@2148417#The_advantages_of_pushing",
+    "corpus:liquipedia_dota2/pushing@2148417#Heroes",
+    "corpus:liquipedia_dota2/pushing@2148417#Items",
+    "corpus:liquipedia_dota2/pushing@2148417#Countering_pushes"
+  ],
+  "packet_sha256": "d0e4734c9f8d7a0dce12486f117bad608fa1910627ec2944ffbb24e5fc74416c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "efd9062516c84c4cb3e5d418e4accbfe802de04d79c17390e754bab70e21734b",
+    "input_tokens": 15322,
+    "output_tokens": 3461,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:28:32.762279+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "43944761fa3f55915d9269a33b3c884c1ab0e60f469a7f43466849b78cd76f57",
+    "input_tokens": 16097,
+    "output_tokens": 1529,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:29:16.480382+00:00"
+  }
+}

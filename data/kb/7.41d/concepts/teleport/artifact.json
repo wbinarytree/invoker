@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "teleport",
+  "title": "Teleport",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2fa3b1227de0afe9f4a2bb76dc7e8d863675593fab90cfaad93772dc49b35a31",
+  "citations": [
+    "corpus:liquipedia_dota2/teleport@2340208",
+    "corpus:liquipedia_dota2/teleport@2340208#Mechanics",
+    "corpus:liquipedia_dota2/teleport@2340208#Disjointing",
+    "corpus:liquipedia_dota2/teleport@2340208#Teleporting_Abilities",
+    "corpus:liquipedia_dota2/teleport@2340208#Teleport-like_Abilities",
+    "corpus:liquipedia_dota2/teleport@2340208#Blinking_Abilities",
+    "corpus:liquipedia_dota2/teleport@2340208#Repositioning_Abilities",
+    "corpus:liquipedia_dota2/teleport@2340208#Version_History",
+    "corpus:liquipedia_dota2/teleport@2340208#Patch_History"
+  ],
+  "packet_sha256": "b5b3a8b5490644fe896158e2b8c530d42575b6f78ffbc8ca2055f7445c741a0c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "f92f923de15f0fdd1d9a25d1486e5c05ee82c3331c628d3adc0939bcf9b761f4",
+    "input_tokens": 15764,
+    "output_tokens": 3414,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:47:17.569792+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "be8bd355c77f0ecac46e7e6b27e5223a01f9957a42eb5886aa6fc3ee5525e374",
+    "input_tokens": 15296,
+    "output_tokens": 2502,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:48:15.157352+00:00"
+  }
+}

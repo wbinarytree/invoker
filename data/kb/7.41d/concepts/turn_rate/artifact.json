@@ -1,0 +1,51 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "turn_rate",
+  "title": "Turn Rate",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "64c578c8805e7a521f8b6da51d3279a02b65116f473f19d14844b372a431ba83",
+  "citations": [
+    "corpus:liquipedia_dota2/turn_rate@2394976",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Mechanics",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Stacking",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Turn_Rate_Comparison",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Units",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Modifying_Turn_Rate",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Turn_Rate_Slowing_Abilities",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Turn_Rate_Improving_Abilities",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Turn_Rate_Setting_Abilities",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Turn_Rate_Lock",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Stunned",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Disarmed,_can_use_spells_without_facing_target",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Disarmed,_can_use_spells_following_hero_facing",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Allowes_anything_following_hero_facing",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Abilities_that_allow_you_to_use_other_abilities_without_turning",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Abilities_Ignores_Turning",
+    "corpus:liquipedia_dota2/turn_rate@2394976#Recent_Changes"
+  ],
+  "packet_sha256": "c5f230c08914e1dbf983d70641fb782dd82a4e9bb111321d7aaf5348fe4740ae",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "ea87ad97cb9d34b82aee9e8e6a02624c2ab7266e1f24eb41e520350153597686",
+    "input_tokens": 18348,
+    "output_tokens": 7937,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:05:24.635325+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "f2ca9ffade29a1478f9c8fbce26080d7554d864988a62a75ad97a26b1c62c223",
+    "input_tokens": 18356,
+    "output_tokens": 1890,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:06:08.449541+00:00"
+  }
+}

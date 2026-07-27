@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "monkey_king_bar",
+  "title": "Monkey King Bar",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2f8ef5b7c6928b3ce525da5e254f0091ebb71265dd7c01525138ef41cb1b20cb",
+  "citations": [
+    "gamefile:items/item_monkey_king_bar#cost",
+    "gamefile:items/item_monkey_king_bar#attribs",
+    "loc:DOTA_Tooltip_ability_item_monkey_king_bar_Description",
+    "gamefile:items/item_monkey_king_bar#components",
+    "gamefile:items/item_monkey_king_bar#mechanics",
+    "loc:DOTA_Tooltip_ability_item_monkey_king_bar_Lore"
+  ],
+  "packet_sha256": "3036eba6fdf76fae5f34cf10eabae43307e48ee19c4baf87290253f74169031f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9612c805995869ffb416656143551ea5033233f544b1991970c3dc91bab409d2",
+    "input_tokens": 13866,
+    "output_tokens": 1156,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:16.388771+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "4d52725baf5e15cd5829a36d3543bf15f05b20c75084e25c445bf4247d5556c2",
+    "input_tokens": 13999,
+    "output_tokens": 740,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:09.072597+00:00"
+  }
+}

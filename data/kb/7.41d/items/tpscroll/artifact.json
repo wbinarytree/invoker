@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tpscroll",
+  "title": "Town Portal Scroll",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4cfb1284b5750e320786bad5d70e828b24adb66ce693261cbc2370f22ac64012",
+  "citations": [
+    "gamefile:items/item_tpscroll#cost",
+    "loc:DOTA_Tooltip_ability_item_tpscroll_Description",
+    "gamefile:items/item_tpscroll#mechanics",
+    "gamefile:items/item_tpscroll#attribs",
+    "loc:DOTA_Tooltip_ability_item_tpscroll_Lore"
+  ],
+  "packet_sha256": "0fa31f01d12479412ace2bad58915a15db5a8cbb934757a32d590e1a45bbee3e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "59c32cbd4cf8c32983b5dcca1cb60902606ad56ddba96d4ff3bac5aea2b6124a",
+    "input_tokens": 13824,
+    "output_tokens": 1363,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:51.374264+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "955252eb04b4bb2b2efd370e9160883ed43a0a33d8c8bc38d406e1a534a0feb2",
+    "input_tokens": 14409,
+    "output_tokens": 824,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:15.216097+00:00"
+  }
+}

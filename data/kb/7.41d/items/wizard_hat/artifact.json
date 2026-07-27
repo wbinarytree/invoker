@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "wizard_hat",
+  "title": "Wizard Hat",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8a30e2186836b75964e52b0192a6834f5000d66b91ec8c98eeb5768e25c4524a",
+  "citations": [
+    "gamefile:items/item_wizard_hat#mechanics",
+    "gamefile:items/item_wizard_hat#attribs",
+    "gamefile:items/item_wizard_hat#cost",
+    "gamefile:items/item_wizard_hat#components"
+  ],
+  "packet_sha256": "4ee484ea7434edf20f94085a59331d4e7b005f6043414684e4f7429dd54fad12",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "52be68fbec3180af7f7368a0f5af21d2105a1c0d1a89b1b2760ab71b1ef29131",
+    "input_tokens": 13751,
+    "output_tokens": 592,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:07.680602+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6ef5177474187a6e207c2229bedae580dac41e3abdf1275f1e62bd120ee8be6e",
+    "input_tokens": 13839,
+    "output_tokens": 363,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:08.056903+00:00"
+  }
+}

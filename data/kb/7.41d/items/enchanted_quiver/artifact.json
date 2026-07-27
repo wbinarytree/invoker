@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enchanted_quiver",
+  "title": "Enchanted Quiver",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9a163d3a612bad7b88652249847f85c7884ecae79a81aee0e17f5d250fc60bec",
+  "citations": [
+    "gamefile:items/item_enchanted_quiver#attribs",
+    "gamefile:items/item_enchanted_quiver#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_enchanted_quiver_Description",
+    "gamefile:items/item_enchanted_quiver#cost",
+    "loc:DOTA_Tooltip_Ability_item_enchanted_quiver_Lore"
+  ],
+  "packet_sha256": "e74272c591cf57876b2f8c22852ae6d7bc46e0669e09ae729a4d3880fcb3e6a9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a1def0950b748a04b6273b6705369aef56ac18c163897bf21cc09fa7d55f8c9c",
+    "input_tokens": 14201,
+    "output_tokens": 1192,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:44.320403+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "3053f1d6d8a8e5898345d07124d6c768fe0cab44f93c077842373bc277be6b1a",
+    "input_tokens": 13921,
+    "output_tokens": 507,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:53.795637+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "witch_blade",
+  "title": "Witch Blade",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6d055b68fde6c19160add113fb0a4f55ddfa1297b2c8bc2f695412c6fdac4468",
+  "citations": [
+    "gamefile:items/item_witch_blade#cost",
+    "gamefile:items/item_witch_blade#attribs",
+    "loc:DOTA_Tooltip_ability_item_witch_blade_Description",
+    "gamefile:items/item_witch_blade#mechanics",
+    "gamefile:items/item_witch_blade#components",
+    "loc:DOTA_Tooltip_ability_item_witch_blade_Lore"
+  ],
+  "packet_sha256": "a16627cd229fcbc9eadaddf6fc7dcc0a8dd486a4dbd12a96cc7037cf1db53088",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6d80e4c203d3d89d5f1f4439c07c5afafdcb6dad9dbb4de94474d41b7bff6b81",
+    "input_tokens": 14338,
+    "output_tokens": 928,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:14.336758+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c5d957444672b8b65640141555d323510d71525ec35cb7248f8a06f3625b2ae0",
+    "input_tokens": 14067,
+    "output_tokens": 1165,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:18.228567+00:00"
+  }
+}

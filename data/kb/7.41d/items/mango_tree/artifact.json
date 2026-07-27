@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mango_tree",
+  "title": "Mango Tree",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f4c21479814b0dee44c27cfa2c0b4c579b3d18cdc5cafd40b097e59e44d3b89f",
+  "citations": [
+    "gamefile:items/item_mango_tree#cost",
+    "loc:DOTA_Tooltip_ability_item_mango_tree_Description",
+    "gamefile:items/item_mango_tree#attribs",
+    "gamefile:items/item_mango_tree#mechanics"
+  ],
+  "packet_sha256": "f5149d3424c35b8474a70cb56422dcd0914faf63ab9954f5b203bcbdbe7b58c5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4e959a95bdb580aab1bcd892d492c6627f29aa9f83893da287e9b19048b8795d",
+    "input_tokens": 14144,
+    "output_tokens": 1246,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:28.323238+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "374ea887400828234aa5fc87f4594bb7f1778164fc31372d2fd557d348853285",
+    "input_tokens": 13868,
+    "output_tokens": 880,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:46.353039+00:00"
+  }
+}

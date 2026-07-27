@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "dragon_lance",
+  "title": "Dragon Lance",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3bb212afb4fa777792126c01255e267b8c52f37044a44a1536869cab5073b194",
+  "citations": [
+    "gamefile:items/item_dragon_lance#cost",
+    "gamefile:items/item_dragon_lance#attribs",
+    "gamefile:items/item_dragon_lance#components",
+    "gamefile:items/item_dragon_lance#mechanics",
+    "loc:DOTA_Tooltip_ability_item_dragon_lance_Lore"
+  ],
+  "packet_sha256": "fd51e5e610dad4f1bc6fe1e078062861eda2982b996e9c2a1608bd765b257266",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "cbacb1a035a43717e8a2d4f611ef94ffe491796dbd448fadef21dfad0cea67b9",
+    "input_tokens": 14258,
+    "output_tokens": 816,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:39.105047+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "5a1710c482021666d6d926548fb85e4a42bad6196e35473b06bb2c554e05b2f3",
+    "input_tokens": 13959,
+    "output_tokens": 456,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:29.262593+00:00"
+  }
+}

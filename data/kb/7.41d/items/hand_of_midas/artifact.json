@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "hand_of_midas",
+  "title": "Hand of Midas",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "12c3076a16002ee190393d1450ea921e7d955e1cf3248d8229c4b7585f47f5da",
+  "citations": [
+    "gamefile:items/item_hand_of_midas#cost",
+    "gamefile:items/item_hand_of_midas#attribs",
+    "loc:DOTA_Tooltip_ability_item_hand_of_midas_Description",
+    "gamefile:items/item_hand_of_midas#components",
+    "gamefile:items/item_hand_of_midas#mechanics",
+    "loc:DOTA_Tooltip_ability_item_hand_of_midas_Lore"
+  ],
+  "packet_sha256": "17f1e70f338de4247c20aa224d1d31d61e86262301437e7957b7d18e97f7fd01",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d80306c778d1314341b3c1bd53e03f58503668619d109575d66cc0a690bac1e4",
+    "input_tokens": 14271,
+    "output_tokens": 1615,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:12.488998+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "72d7f30af7efc813941678f7ace1786a491fc748121578ff34100c935ddbe7a8",
+    "input_tokens": 14012,
+    "output_tokens": 574,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:32.440391+00:00"
+  }
+}

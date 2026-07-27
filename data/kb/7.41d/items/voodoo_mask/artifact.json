@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "voodoo_mask",
+  "title": "Voodoo Mask",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "946f25a3aeee0dd75a0fffa785545c72209319cc88a116abfbea14e40433c56e",
+  "citations": [
+    "gamefile:items/item_voodoo_mask#cost",
+    "gamefile:items/item_voodoo_mask#attribs",
+    "gamefile:items/item_voodoo_mask#components",
+    "gamefile:items/item_voodoo_mask#mechanics",
+    "loc:DOTA_Tooltip_ability_item_voodoo_mask_Description",
+    "loc:DOTA_Tooltip_ability_item_voodoo_mask_Lore"
+  ],
+  "packet_sha256": "8d887612369ce41b6e2fd8f334a9a20556bbd1885c1cb9db997cb5e50dbb7fa9",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c6db33661ebbe65bc359f52289194bb2ad3c76f2eec7767145f1d06ddfd3899a",
+    "input_tokens": 13802,
+    "output_tokens": 584,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:25.879240+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6e9547a51c8df5e1bb937745de02a1a298c41d1dfab5991383b7265d6d91638b",
+    "input_tokens": 13913,
+    "output_tokens": 403,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:47.349918+00:00"
+  }
+}

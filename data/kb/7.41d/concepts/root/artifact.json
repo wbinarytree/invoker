@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "root",
+  "title": "Root",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2e0f1e2f10c8f7dde7dfc45756b1074ccf7f5546cbf4fe126dd3ab9f1e1d5dd8",
+  "citations": [
+    "corpus:liquipedia_dota2/root@2383465",
+    "corpus:liquipedia_dota2/root@2383465#Definition",
+    "corpus:liquipedia_dota2/root@2383465#Mechanics",
+    "corpus:liquipedia_dota2/root@2383465#True_Sight",
+    "corpus:liquipedia_dota2/root@2383465#Disarm",
+    "corpus:liquipedia_dota2/root@2383465#Root_Sources",
+    "corpus:liquipedia_dota2/root@2383465#Bind_Sources",
+    "corpus:liquipedia_dota2/root@2383465#Ally-Rooting_Abilities",
+    "corpus:liquipedia_dota2/root@2383465#Fully_Disabled_by_Root",
+    "corpus:liquipedia_dota2/root@2383465#Partially_disabled_by_Root",
+    "corpus:liquipedia_dota2/root@2383465#Recent_Changes"
+  ],
+  "packet_sha256": "51d5ec856dc4df54a7ce6b566ae5198dfce3b93a5de80641ba4e282af8f1797c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "ce24d2268588ea89c314898b41ae7aafc7d4ed69c8f0574ab9d89202daa44e94",
+    "input_tokens": 16381,
+    "output_tokens": 3661,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:28:38.865382+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "f3c11093286a789c92110dcdf20fe05deb0f1cbddad8017b3b176f6eeff15d6f",
+    "input_tokens": 16059,
+    "output_tokens": 1309,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:29:11.903307+00:00"
+  }
+}

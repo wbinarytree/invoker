@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "453389072c99c26b879f433a8a9da161827fbc16a75e89111702318b87f1420f",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/magic_resistance@2394734#Heroes",
+      "fact": "The Base magic-resistance ability is passive and affects self."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "1db97a2d88ff06eab558fef2e78e6d10c908b3a2150baae437a8f32931db112c",
+    "input_tokens": 24349,
+    "output_tokens": 4116,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:22:29.083033+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "magic_wand",
+  "title": "Magic Wand",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2953e2b664a621641687643a904284bbd5ffe69e2e0d5d6ab8d2dbe100bfee2c",
+  "citations": [
+    "gamefile:items/item_magic_wand#cost",
+    "gamefile:items/item_magic_wand#attribs",
+    "loc:DOTA_Tooltip_ability_item_magic_wand_Description",
+    "gamefile:items/item_magic_wand#mechanics",
+    "gamefile:items/item_magic_wand#components",
+    "loc:DOTA_Tooltip_ability_item_magic_wand_Lore"
+  ],
+  "packet_sha256": "ec5268f28536dcce96903ccb82277642b9341e2128c55a851af331ebebf250d6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "24a8842f94c5bdfcaa9969ff68f4c0a229dd1ec72a41e19fe5c107bf51190e57",
+    "input_tokens": 14295,
+    "output_tokens": 1386,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:33.480857+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "1140d8ab45f4cffd1dbc6431b2d98eea095df41f635b1a8cb86eaff38f92c986",
+    "input_tokens": 14026,
+    "output_tokens": 970,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:29.342743+00:00"
+  }
+}

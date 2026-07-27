@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "wraith_band",
+  "title": "Wraith Band",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b26ca890629b3d6fc6046bf3796291194a168547751434d8b87f769ce73c391c",
+  "citations": [
+    "gamefile:items/item_wraith_band#cost",
+    "gamefile:items/item_wraith_band#attribs",
+    "gamefile:items/item_wraith_band#components",
+    "gamefile:items/item_wraith_band#mechanics",
+    "loc:DOTA_Tooltip_ability_item_wraith_band_Lore"
+  ],
+  "packet_sha256": "14ee9c7340260d46f24d53234b838557c8e82da58ddec60a5a882afbb877936b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a9839ffb1c3fa9c4bc5716b7d97f62eb1483096cbe341ab7cecb38e950fd1980",
+    "input_tokens": 13772,
+    "output_tokens": 520,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:11.384689+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "5412e2c5f2d414a90f7375ea077aed2d367258fa9a8c2c64069d14623688f64c",
+    "input_tokens": 13906,
+    "output_tokens": 565,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:23.591390+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "buckler",
+  "title": "Buckler",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7928cd10728bafb10be9520f8049c4bc7d8e522189012a65a81164a58f51e54b",
+  "citations": [
+    "gamefile:items/item_buckler#cost",
+    "gamefile:items/item_buckler#attribs",
+    "gamefile:items/item_buckler#mechanics",
+    "loc:DOTA_Tooltip_ability_item_buckler_Description",
+    "gamefile:items/item_buckler#components",
+    "loc:DOTA_Tooltip_ability_item_buckler_Lore"
+  ],
+  "packet_sha256": "b98444aa744e99227ae54610bec360168fac6f63c5a216493779fed92b1b21e6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "bb827d34704ef5f7b34d75f503342eaa90474d7b8bbcc86b67885b54b79c5821",
+    "input_tokens": 14265,
+    "output_tokens": 3132,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:29.925136+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9c9c0e6a9cfa98b2f780eabb7f35f95b5127c6364f68fd512a7184257851d2a3",
+    "input_tokens": 13974,
+    "output_tokens": 1038,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:25.479643+00:00"
+  }
+}

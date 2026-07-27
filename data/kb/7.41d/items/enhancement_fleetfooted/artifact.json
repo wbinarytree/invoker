@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_fleetfooted",
+  "title": "Fleetfooted",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "de96d635b0751990a2246566324e5fa857e27f0cc22b13b48c4a5b8b0380370b",
+  "citations": [
+    "gamefile:items/item_enhancement_fleetfooted#attribs",
+    "gamefile:items/item_enhancement_fleetfooted#mechanics",
+    "gamefile:items/item_enhancement_fleetfooted#cost"
+  ],
+  "packet_sha256": "30751bb28d8a0b88c7e7e1abde4f610a5bcade98af18b05caafbe40f63fd3b61",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "76adde68da1faac183b9609ba91b62609cbc4863b57457232d889a7720b754c6",
+    "input_tokens": 13674,
+    "output_tokens": 351,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:29.638537+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c150de983e1ac19c9fc7b24cd506edee7c299c19188a28ddbb117e6cf80fc233",
+    "input_tokens": 13801,
+    "output_tokens": 209,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:05.393657+00:00"
+  }
+}

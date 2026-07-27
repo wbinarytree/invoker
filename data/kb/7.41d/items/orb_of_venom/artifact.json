@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "orb_of_venom",
+  "title": "Orb of Venom",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d1bc72ad72de1d1de6fdafb325ed5564b0d0ab3d47e089efa682990f4c71d4c1",
+  "citations": [
+    "gamefile:items/item_orb_of_venom#cost",
+    "gamefile:items/item_orb_of_venom#attribs",
+    "loc:DOTA_Tooltip_ability_item_orb_of_venom_Description",
+    "gamefile:items/item_orb_of_venom#mechanics",
+    "gamefile:items/item_orb_of_venom#components",
+    "loc:DOTA_Tooltip_ability_item_orb_of_venom_Lore"
+  ],
+  "packet_sha256": "bfb32b31aed6c15a26012ec61864ea12c2b47502d2bec1a2c8ff9c71658e418b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8a955cdee541d6b59d3b848f0e59533f2afa38f445fc14c142959998171298c7",
+    "input_tokens": 13881,
+    "output_tokens": 2441,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:00.628984+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "2927af1103c292bac64ef9a1d380e6c335e4af7406ce52a9c41dedabaf83c302",
+    "input_tokens": 14050,
+    "output_tokens": 1062,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:14:47.036961+00:00"
+  }
+}

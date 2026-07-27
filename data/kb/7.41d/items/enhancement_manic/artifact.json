@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_manic",
+  "title": "Manic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b65cef0be761e3fd3da21ee1098ffae0228cc1695e4df4052dea95a744b4d591",
+  "citations": [
+    "gamefile:items/item_enhancement_manic#attribs",
+    "gamefile:items/item_enhancement_manic#mechanics",
+    "gamefile:items/item_enhancement_manic#cost"
+  ],
+  "packet_sha256": "82a657a873a0ce55f0159578751f6e9348d6dd8c74306898248f97fa4fa03ecd",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c93f92a6d8e3d44c24582eaacc9829e7d1d1d2918ff05cd2f61f694faaec20e5",
+    "input_tokens": 14098,
+    "output_tokens": 660,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:56.407211+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "53c048078a6c680ca1823c5611f21902bfbd24ed0baa4eb0c119295d9ad8a3f7",
+    "input_tokens": 13801,
+    "output_tokens": 214,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:12.517816+00:00"
+  }
+}

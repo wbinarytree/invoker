@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "doubloon",
+  "title": "Doubloon",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "457f8c1351131e12ef2b3bf5727d66d2a43e2550bd22f5939cb74c2652dd36fa",
+  "citations": [
+    "gamefile:items/item_doubloon#cost",
+    "loc:DOTA_Tooltip_ability_item_doubloon_Description",
+    "gamefile:items/item_doubloon#attribs",
+    "gamefile:items/item_doubloon#mechanics"
+  ],
+  "packet_sha256": "4bf2c8daff12ed5f8ce0b814740e3c8759575ef680e90db3e44f662bcf5fcac5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "75645e19a8515de49b22965bbea3851da9c3c09df0fb1c0c8bdb7d6a4d9b9d50",
+    "input_tokens": 14169,
+    "output_tokens": 1231,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:44.332931+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e224c076ac516be8137a53864d7eb11a61360492cd123555aa7cb2ba61fb66cc",
+    "input_tokens": 13857,
+    "output_tokens": 581,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:31.798814+00:00"
+  }
+}

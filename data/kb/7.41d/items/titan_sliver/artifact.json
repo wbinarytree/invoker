@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "titan_sliver",
+  "title": "Titan Sliver",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6862209022d6a76c95a99b562a0345d2acadc6b2013fd8e098c18dab8722e87a",
+  "citations": [
+    "gamefile:items/item_titan_sliver#cost",
+    "gamefile:items/item_titan_sliver#mechanics",
+    "gamefile:items/item_titan_sliver#attribs",
+    "loc:DOTA_Tooltip_Ability_item_titan_sliver_Lore"
+  ],
+  "packet_sha256": "72dcb4b6c38d875d61587394a48c19190c65c6e2d31e666e9b586bdc62213719",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "7d67b2b54bcdd931ea554846d02780fbac3bdb0f1f65f7cbf0b22eb03e231642",
+    "input_tokens": 14147,
+    "output_tokens": 1232,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:52.302055+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "0972f170d91a1e177c49cd928c6ad3c7c31b3c30b714d802424f08683025fd29",
+    "input_tokens": 13855,
+    "output_tokens": 279,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:56.881495+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "helm_of_iron_will",
+  "title": "Helm of Iron Will",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f056a7a908a90f6909941e15c42bbf6d0313ff37641ca66c2ac94327ca6bb91c",
+  "citations": [
+    "gamefile:items/item_helm_of_iron_will#cost",
+    "gamefile:items/item_helm_of_iron_will#attribs",
+    "gamefile:items/item_helm_of_iron_will#components",
+    "gamefile:items/item_helm_of_iron_will#mechanics",
+    "loc:DOTA_Tooltip_ability_item_helm_of_iron_will_Lore"
+  ],
+  "packet_sha256": "995060e6beb8d52e077f89a7834500ddb80737300a3c1a6c2bec7775ddd6c528",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "76413812905a715a7c2e4643a4e7e9c910ef6672cb99c967450ff6479a92ebfc",
+    "input_tokens": 14222,
+    "output_tokens": 694,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:05:48.244122+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "2e201942c752d9badcf055f56c2e958f20f094bd1491a319fef70644996542a1",
+    "input_tokens": 13934,
+    "output_tokens": 537,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:58.851411+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blink",
+  "title": "Blink Dagger",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5a8eeff52aa8c6ca2732f062ba84da5bede6fe4b6c2609c7d83b13a800361910",
+  "citations": [
+    "gamefile:items/item_blink#cost",
+    "loc:DOTA_Tooltip_ability_item_blink_Description",
+    "gamefile:items/item_blink#attribs",
+    "gamefile:items/item_blink#components",
+    "gamefile:items/item_blink#mechanics",
+    "loc:DOTA_Tooltip_ability_item_blink_Lore"
+  ],
+  "packet_sha256": "3816e36b9f52815f89f74c70498814c4225ea22021b1e36d64d915446b5ece25",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1eae8ca4121b5af64301e79679b4e15c13a9599cabf6dccb055e9d9b0a9311e3",
+    "input_tokens": 14312,
+    "output_tokens": 1937,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:57.376271+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "09ac9a3f1ead10069be8544160d5844d4e5f29e23e444c31e6b4a1e15c83422a",
+    "input_tokens": 14040,
+    "output_tokens": 637,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:35.276512+00:00"
+  }
+}

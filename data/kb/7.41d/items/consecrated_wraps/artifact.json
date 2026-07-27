@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "consecrated_wraps",
+  "title": "Consecrated Wraps",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3d1ddeba63f68a7322cd3c825d7a9d959db1806b521c26fbe05b83f1abcc5a3c",
+  "citations": [
+    "gamefile:items/item_consecrated_wraps#cost",
+    "gamefile:items/item_consecrated_wraps#attribs",
+    "loc:DOTA_Tooltip_ability_item_consecrated_wraps_Description",
+    "gamefile:items/item_consecrated_wraps#mechanics",
+    "gamefile:items/item_consecrated_wraps#components"
+  ],
+  "packet_sha256": "ef46cedace943674577a6df2a4985686b5c97c21db9841cd0c62239ef3675c21",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "eaa47e07ecf7edca99ee83849c9efc9b4bad5434c6c44210060f7476c1123cc5",
+    "input_tokens": 14345,
+    "output_tokens": 907,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:22.534028+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "7af260c199e50d5e7ac5001b882ba021e0a28648db97d7c6988acf1df731d9bc",
+    "input_tokens": 14052,
+    "output_tokens": 1741,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:01.482339+00:00"
+  }
+}

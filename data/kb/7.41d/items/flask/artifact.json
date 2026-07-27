@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "flask",
+  "title": "Healing Salve",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c69e86c4aeaf20aebcbe00d5da158ebda9fc8acfae1da1b72bbf0f53293b831e",
+  "citations": [
+    "gamefile:items/item_flask#cost",
+    "gamefile:items/item_flask#attribs",
+    "gamefile:items/item_flask#mechanics",
+    "loc:DOTA_Tooltip_ability_item_flask_Description",
+    "loc:DOTA_Tooltip_ability_item_flask_Lore"
+  ],
+  "packet_sha256": "d00723ca8c7788e8debb32a8ce43ffdc88dcaa9f236d24147c4e0802170d4a5f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "150b500b67ff5f649bf46e2ecc890119564fcbacb2665d624e6ad23fb79b1dce",
+    "input_tokens": 14238,
+    "output_tokens": 1321,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:05:58.863146+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "f732ebbc37be4978df181a3d6d0d289504e2025516118ddb90863ae0c4022ff6",
+    "input_tokens": 13946,
+    "output_tokens": 637,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:45.130210+00:00"
+  }
+}

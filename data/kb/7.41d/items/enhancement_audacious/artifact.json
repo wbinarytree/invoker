@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_audacious",
+  "title": "Audacious",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "dc209441f3958eb8287b7d440b2e74a14ac0f86cf6a1c46eb476a05328913066",
+  "citations": [
+    "gamefile:items/item_enhancement_audacious#cost",
+    "gamefile:items/item_enhancement_audacious#attribs",
+    "gamefile:items/item_enhancement_audacious#mechanics"
+  ],
+  "packet_sha256": "1961bc62e420a4e48500bdced639a4996fcd3b7a8f9ec40c9b8fd55a2fabaa92",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "eba7c866e41666c5053666df4a620e6c3b22426d0fef3ef0ee75be10358ae0fb",
+    "input_tokens": 13680,
+    "output_tokens": 526,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:00:05.764124+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "8cfbcd3746d4ecd9a8fa582e9baeb54eb05834842f19d0a67fc89f7f7db2e34f",
+    "input_tokens": 13832,
+    "output_tokens": 309,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:51.797980+00:00"
+  }
+}

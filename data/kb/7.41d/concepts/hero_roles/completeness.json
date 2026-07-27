@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "027c2cf366529e7d37838fada490d17b7790ccb983f496b72ad942e07ebd0b92",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "corpus:liquipedia_dota2/hero_roles@2374059#Ganker",
+      "fact": "Most gankers become semi-carries if their ganking is successful, owing to the resulting large gold and level advantage."
+    },
+    {
+      "section": "corpus:liquipedia_dota2/hero_roles@2374059#Offlaner",
+      "fact": "Heroes that excel in the offlane and remain effective throughout the game generally have at least one of the listed offlane qualities."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "b55645f1a51cecdd666f77c745734f15f0e5d9039c38072703d20d5e95141301",
+    "input_tokens": 27242,
+    "output_tokens": 4772,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:14:51.684373+00:00"
+  }
+}

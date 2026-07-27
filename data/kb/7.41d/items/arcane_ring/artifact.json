@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "arcane_ring",
+  "title": "Arcane Ring",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "34594eeee7d9d39abe23e6b42c85f9d17af5418bd09ed5920ad8b74c369cfead",
+  "citations": [
+    "gamefile:items/item_arcane_ring#attribs",
+    "loc:DOTA_Tooltip_ability_item_arcane_ring_Description",
+    "gamefile:items/item_arcane_ring#cost",
+    "gamefile:items/item_arcane_ring#mechanics",
+    "loc:DOTA_Tooltip_ability_item_arcane_ring_Lore"
+  ],
+  "packet_sha256": "cd766a8de45f432c42b57619c0320f16e34d2f6e5c985d54c7ca85e0b1ccbfe1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "b17b6f02d751d12bc60b129980e9d8bf544df24a20ad72b3a54a945c6fca3266",
+    "input_tokens": 14207,
+    "output_tokens": 1319,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:40.204546+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "75e48f6d47368d151142f20bc5a42e3252f22df980c55f4bd0e5f057708f89a0",
+    "input_tokens": 13952,
+    "output_tokens": 474,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:06:57.665334+00:00"
+  }
+}

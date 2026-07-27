@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "relic",
+  "title": "Sacred Relic",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a540261c2a1d2308d5553404658316826e48767cedb210e8b81c09c738df2817",
+  "citations": [
+    "gamefile:items/item_relic#cost",
+    "gamefile:items/item_relic#attribs",
+    "gamefile:items/item_relic#mechanics",
+    "gamefile:items/item_relic#components",
+    "loc:DOTA_Tooltip_ability_item_relic_Lore"
+  ],
+  "packet_sha256": "c8c0f0f2f76a1371ee9908037fe1749e928ea047cb04fcd3d9939e28493ac5f7",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "15c5ae5fce37512b240f552031190c4dc29205efdf7b55e62167d833d1d5c431",
+    "input_tokens": 13747,
+    "output_tokens": 644,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:55.345968+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "f4cf6f8c8af0c1d04776c59808deb041e1f4633cc816abf75d9bf280fd2cfb74",
+    "input_tokens": 13858,
+    "output_tokens": 404,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:15:50.929270+00:00"
+  }
+}

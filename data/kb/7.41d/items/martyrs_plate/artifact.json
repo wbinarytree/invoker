@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "martyrs_plate",
+  "title": "Martyr's Plate",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "fdda6afc929b0d916ef4584ff2af853d34c93629c555f5f0c7806804268ab216",
+  "citations": [
+    "gamefile:items/item_martyrs_plate#attribs",
+    "loc:DOTA_Tooltip_ability_item_martyrs_plate_Description",
+    "gamefile:items/item_martyrs_plate#mechanics",
+    "gamefile:items/item_martyrs_plate#cost"
+  ],
+  "packet_sha256": "b75f2766f62e3d2c1621a9d8509ba778c5c65e377a068ad829770815402daeb1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "22d1aff29a22f705bc4e4e252258af98a19a273a5924d518163d7d6c2e92582d",
+    "input_tokens": 14177,
+    "output_tokens": 1315,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:24.633165+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "c3bdfebe526982c9d4087d2435e2b72f761f0675ebc61a3a7cf2876f1a4062c9",
+    "input_tokens": 13940,
+    "output_tokens": 493,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:41.354913+00:00"
+  }
+}

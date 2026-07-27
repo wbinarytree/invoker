@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "seer_stone",
+  "title": "Seer Stone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "89a65d162b7a6d61a251a57993ba2f40e78f6b015253fb7348efc18e5f55fb3b",
+  "citations": [
+    "gamefile:items/item_seer_stone#attribs",
+    "loc:DOTA_Tooltip_ability_item_seer_stone_Description",
+    "gamefile:items/item_seer_stone#mechanics",
+    "gamefile:items/item_seer_stone#cost",
+    "loc:DOTA_Tooltip_ability_item_seer_stone_Lore"
+  ],
+  "packet_sha256": "92b4847070addad0d99f697ff3945d4e5bd1e6da481a7a65021bf5f413e7ffc6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1dc0efc5685ab513512eeb4aba286d3fc90baa2569b034d7b444336f3f769595",
+    "input_tokens": 14196,
+    "output_tokens": 1558,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:43.120045+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "d70141b041064802d2e03ffa6e449d1ad9b493a7c959b8754a4f9e79f7682832",
+    "input_tokens": 13938,
+    "output_tokens": 779,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:31.943611+00:00"
+  }
+}

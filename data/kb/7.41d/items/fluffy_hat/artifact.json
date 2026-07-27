@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "fluffy_hat",
+  "title": "Fluffy Hat",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "92231cbba27cdbd13ef8d0c28996a8e8082ce24151ee74d6b04022acbc9a2718",
+  "citations": [
+    "gamefile:items/item_fluffy_hat#cost",
+    "gamefile:items/item_fluffy_hat#attribs",
+    "gamefile:items/item_fluffy_hat#components",
+    "gamefile:items/item_fluffy_hat#mechanics",
+    "loc:DOTA_Tooltip_ability_item_fluffy_hat_Lore"
+  ],
+  "packet_sha256": "3fd332130f3226cb014b47d96b9434a6e39fc62f14cbf4381b4f928f6a41835a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "37dbc1d62a505a4e3fe492093f6c219306c7aa603e5b0601d8cf493f1eea758b",
+    "input_tokens": 13777,
+    "output_tokens": 733,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:37.186102+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "d454a6b03868f40bee9993923bfecea184022b7e53b1a2a3762795a7328c2a30",
+    "input_tokens": 13875,
+    "output_tokens": 348,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:47.377459+00:00"
+  }
+}

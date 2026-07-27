@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bullwhip",
+  "title": "Bullwhip",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "428b00155998830750e7e8640526ae58a9fbb7197125a011d7dab58cad91f455",
+  "citations": [
+    "loc:DOTA_Tooltip_ability_item_bullwhip_Description",
+    "gamefile:items/item_bullwhip#attribs",
+    "gamefile:items/item_bullwhip#mechanics",
+    "gamefile:items/item_bullwhip#cost",
+    "loc:DOTA_Tooltip_ability_item_bullwhip_Lore"
+  ],
+  "packet_sha256": "98de00d2c51ab5af02adba05a379defc63e9763d9a01d713c437e4022037e6e1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "2a430769065ee45c165522d03100af6c987196b6a42131843c78ab109d3f1794",
+    "input_tokens": 14221,
+    "output_tokens": 1818,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:48.852885+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9cabeb51014485811fa3930b57e90d3a748b7eaf04995db592e74257ba3f45a7",
+    "input_tokens": 13923,
+    "output_tokens": 899,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:19.761728+00:00"
+  }
+}

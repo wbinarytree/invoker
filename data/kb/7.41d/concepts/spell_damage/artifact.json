@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_damage",
+  "title": "Spell Damage",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "fe3ef8c403fbe213704b37aa93c695ecf5ce3fe0341ca218490c0a6ebd4625a8",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_damage@2401019",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Stacking",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Example_1:_Outgoing_Manipulation",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Example_2:_Incoming_and_Outgoing_Manipulation",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Example_3:_Generic_Damage_Manipulation",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Incoming_Spell_Damage_Amplification",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Abilities",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Outgoing_Spell_Damage_Manipulation",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Item_Sources",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Exceptions",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Talents",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Version_History",
+    "corpus:liquipedia_dota2/spell_damage@2401019#Patch_History"
+  ],
+  "packet_sha256": "a4269a43fd526405304417b10b50c3101c6725818ca56464906379fbbe1d6469",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "9",
+    "request_sha256": "098aa540112f077e9a1a044c8924a585952cab04900eb97f26d2b25f7288b0e7",
+    "input_tokens": 16902,
+    "output_tokens": 8600,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:19:58.119342+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "9",
+    "request_sha256": "75163f9a84638535bb18e0a8c34c09983ddc3143554ad4d6f5cd72735e2f484c",
+    "input_tokens": 18290,
+    "output_tokens": 1985,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:20:47.681125+00:00"
+  }
+}

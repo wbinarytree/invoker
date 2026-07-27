@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "robe",
+  "title": "Robe of the Magi",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2613856030757e8e38c40e08ef28828208daf93bfb691e90759653edb55af347",
+  "citations": [
+    "gamefile:items/item_robe#cost",
+    "gamefile:items/item_robe#attribs",
+    "gamefile:items/item_robe#components",
+    "gamefile:items/item_robe#mechanics",
+    "loc:DOTA_Tooltip_ability_item_robe_Lore"
+  ],
+  "packet_sha256": "3e8dcf0bf261351a898a9a06ded8c7bae46c5999d89844ffd7b64259296ba2e4",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "808bd64e163ccd7379c029f6f991920ee29814dcfa00aed88bab21fb5dcf3ccb",
+    "input_tokens": 13778,
+    "output_tokens": 685,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:41.103223+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "440a1b23c6ed90d77b57f52bc9982e89ad6693b11dba1e87450222d98f1ef0ee",
+    "input_tokens": 13890,
+    "output_tokens": 435,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:11.583248+00:00"
+  }
+}

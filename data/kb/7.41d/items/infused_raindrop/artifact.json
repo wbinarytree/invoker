@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "infused_raindrop",
+  "title": "Infused Raindrops",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b11bb7c255bc27ca8f25e5cf7efb276d200df4e1802b42475cb02dd2a5875cfe",
+  "citations": [
+    "gamefile:items/item_infused_raindrop#cost",
+    "gamefile:items/item_infused_raindrop#attribs",
+    "gamefile:items/item_infused_raindrop#mechanics",
+    "loc:DOTA_Tooltip_ability_item_infused_raindrop_Description",
+    "loc:DOTA_Tooltip_ability_item_infused_raindrop_Lore"
+  ],
+  "packet_sha256": "6f5ea620e17eb4ad7a1cf86793fe1cad3bde69ea705d696f32bdac88a6f71dc1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "fb399c5223e4930dfec385ac2d3899ceae94acacafd2b1aecc42564d92e7ddb2",
+    "input_tokens": 13797,
+    "output_tokens": 1312,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:08.701578+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "61102c87674c49c1841bf6d8fca4cd577a7355462ae493255fff2c5af36364aa",
+    "input_tokens": 13940,
+    "output_tokens": 684,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:40.825972+00:00"
+  }
+}

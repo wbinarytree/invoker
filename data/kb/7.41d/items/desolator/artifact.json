@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "desolator",
+  "title": "Desolator",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d44e8b2579a05d6034eea21381aee8801193b01b1121109af0ae72123cb8e355",
+  "citations": [
+    "gamefile:items/item_desolator#cost",
+    "gamefile:items/item_desolator#attribs",
+    "loc:DOTA_Tooltip_ability_item_desolator_Description",
+    "gamefile:items/item_desolator#components",
+    "gamefile:items/item_desolator#mechanics",
+    "loc:DOTA_Tooltip_ability_item_desolator_Lore"
+  ],
+  "packet_sha256": "aa43900bdcef56ffe15681ee644dd06c4ec24500264bd82e0a18d323ed1031ea",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c23f95934a3920865ecffc3e2021e08d6b8d07073a66b814714b3cf01b9828a1",
+    "input_tokens": 14305,
+    "output_tokens": 1358,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:49.069011+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "0d2295131e55821095b686d9d623db5c8abe1c09d4f22c7c8e84e7562769bf5c",
+    "input_tokens": 14023,
+    "output_tokens": 1607,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:41.032947+00:00"
+  }
+}

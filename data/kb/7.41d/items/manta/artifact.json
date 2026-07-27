@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "manta",
+  "title": "Manta Style",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "eb8ef2340c3304e8bd37c16a8fb3b7ec5f88904658639de375823f3e78c18cf2",
+  "citations": [
+    "gamefile:items/item_manta#cost",
+    "gamefile:items/item_manta#attribs",
+    "loc:DOTA_Tooltip_ability_item_manta_Description",
+    "gamefile:items/item_manta#components",
+    "gamefile:items/item_manta#mechanics",
+    "loc:DOTA_Tooltip_ability_item_manta_Lore"
+  ],
+  "packet_sha256": "0e79d6a567aa519121024275cffc62261b9970fde9d8b90357e301e6ab14e075",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0ad4a28318c2ab6576629494179aca625c312ba415b6f43caa506ddcb5a01086",
+    "input_tokens": 14392,
+    "output_tokens": 1497,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:28.907726+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "abaab09483102d39b011588e32490be3bfa5df48fa47e664a7e2a02b29233edf",
+    "input_tokens": 14116,
+    "output_tokens": 1442,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:53.214757+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "talisman_of_evasion",
+  "title": "Talisman of Evasion",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3873424ff0344c09185c47f0aebe69ce7c5bbef6b50250b22f0d595aeba77da6",
+  "citations": [
+    "gamefile:items/item_talisman_of_evasion#cost",
+    "gamefile:items/item_talisman_of_evasion#attribs",
+    "gamefile:items/item_talisman_of_evasion#mechanics",
+    "gamefile:items/item_talisman_of_evasion#components",
+    "loc:DOTA_Tooltip_ability_item_talisman_of_evasion_Lore"
+  ],
+  "packet_sha256": "3bf0422aa2f81f5da58b7543d04076b3b92f6894d8f0b88cd47452a993ee194d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "de16bad38b8af4eedaa8bd5f39757b90af0183e5b8cd10bd5a076c9d8874bcc4",
+    "input_tokens": 13784,
+    "output_tokens": 707,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:52.174248+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "2e6e1f30521eb13c181de193fbcc89df98ae468f59b4e604fc50c59ef682723b",
+    "input_tokens": 13921,
+    "output_tokens": 947,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:17:50.306104+00:00"
+  }
+}

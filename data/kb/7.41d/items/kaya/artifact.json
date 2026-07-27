@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "kaya",
+  "title": "Kaya",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "a8bd46404c0d2120e7af47125180fe535aa6df1ebf33ea8f2b847b3755272aec",
+  "citations": [
+    "gamefile:items/item_kaya#cost",
+    "gamefile:items/item_kaya#attribs",
+    "gamefile:items/item_kaya#components",
+    "gamefile:items/item_kaya#mechanics"
+  ],
+  "packet_sha256": "9e8f43802caadcce1e3a441dc744413d0f59099e78ba445c42ff8851161e4e0e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "3197456acafa17118f417078c40bbb13d54aafa06f459d7edafefb7d482670e9",
+    "input_tokens": 13801,
+    "output_tokens": 773,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:31.983021+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "6a18e3ae1dc6e8747a3a82ddcaab2cc78baa15162992c7aa855127ddfd56df27",
+    "input_tokens": 13912,
+    "output_tokens": 347,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:41.598284+00:00"
+  }
+}

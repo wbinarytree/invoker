@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "wind_waker",
+  "title": "Wind Waker",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ab74a39c00786700da9db760a9562996360ef56570970f92cd9923fd37746717",
+  "citations": [
+    "gamefile:items/item_wind_waker#cost",
+    "gamefile:items/item_wind_waker#attribs",
+    "loc:DOTA_Tooltip_ability_item_wind_waker_Description",
+    "gamefile:items/item_wind_waker#components",
+    "gamefile:items/item_wind_waker#mechanics",
+    "loc:DOTA_Tooltip_ability_item_wind_waker_Lore"
+  ],
+  "packet_sha256": "da36c376099fdfa88806489085308c2ff66dd55a77a700ca28a4eb05700b4378",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f5da0f1775b3067cbcdb0251b5a8e99548767c49e983265d609e7438fdaa1406",
+    "input_tokens": 13941,
+    "output_tokens": 1374,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:11.269561+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "8ae96a0a18d4749ef092de7b8e620849b725d68cc5ce0528ca7c8896fd80a25e",
+    "input_tokens": 14074,
+    "output_tokens": 1796,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:30.753532+00:00"
+  }
+}

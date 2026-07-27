@@ -1,0 +1,51 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "cast_range",
+  "title": "Cast Range",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f16bc52accd65488f5ec60a60ccbe434573d60f26873c28774f4a1cdf4f0af0b",
+  "citations": [
+    "corpus:liquipedia_dota2/cast_range@2363234",
+    "corpus:liquipedia_dota2/cast_range@2363234#Collision_Size_Bonus_Range",
+    "corpus:liquipedia_dota2/cast_range@2363234#No_Target",
+    "corpus:liquipedia_dota2/cast_range@2363234#Vector_Targeting",
+    "corpus:liquipedia_dota2/cast_range@2363234#Target_Area",
+    "corpus:liquipedia_dota2/cast_range@2363234#Target_Unit",
+    "corpus:liquipedia_dota2/cast_range@2363234#Motion_Buffer",
+    "corpus:liquipedia_dota2/cast_range@2363234#Example",
+    "corpus:liquipedia_dota2/cast_range@2363234#Target_Point",
+    "corpus:liquipedia_dota2/cast_range@2363234#Example_2",
+    "corpus:liquipedia_dota2/cast_range@2363234#Other_Cast_Range_Bonuses",
+    "corpus:liquipedia_dota2/cast_range@2363234#Cast_Range_Granting_Abilities",
+    "corpus:liquipedia_dota2/cast_range@2363234#Bonuses",
+    "corpus:liquipedia_dota2/cast_range@2363234#Talents",
+    "corpus:liquipedia_dota2/cast_range@2363234#Details",
+    "corpus:liquipedia_dota2/cast_range@2363234#Reductions",
+    "corpus:liquipedia_dota2/cast_range@2363234#Patch_History"
+  ],
+  "packet_sha256": "d3ca12b967be5856eb1ca4461e176a2f1766915bee1ee77beaafa238807f3929",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "6",
+    "request_sha256": "e7369bf85197cb4d3322194299d6c082c5b15f52afc24243fcee41f32a517982",
+    "input_tokens": 16499,
+    "output_tokens": 5975,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:27:07.642865+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "6",
+    "request_sha256": "bedb0f14382aae8390546b5d84a0800e49041a30e0891bc6e6af4ad71f25e622",
+    "input_tokens": 16190,
+    "output_tokens": 2655,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:28:14.020908+00:00"
+  }
+}

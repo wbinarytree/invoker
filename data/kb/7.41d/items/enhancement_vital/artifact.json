@@ -1,0 +1,37 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "enhancement_vital",
+  "title": "Vital",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "39f772782349c2f4ea29200db40641fd969ae0a4f37f2a3f0ab325868a9321cc",
+  "citations": [
+    "gamefile:items/item_enhancement_vital#cost",
+    "gamefile:items/item_enhancement_vital#attribs",
+    "gamefile:items/item_enhancement_vital#mechanics"
+  ],
+  "packet_sha256": "a57c6fb2a750d145c3003620d6e7f53c1ec8d54bc001d2179bd30c99bde254f4",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8e6906521a9ecdd1807f6184e94329252dbe4542ee68862507843b81203d736d",
+    "input_tokens": 14089,
+    "output_tokens": 659,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:01.284001+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "df47cc4eb4f7bd1dd2b6d12df67371654168ab5e94d318b053759dfbe17c5c41",
+    "input_tokens": 13804,
+    "output_tokens": 233,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:10:26.306097+00:00"
+  }
+}

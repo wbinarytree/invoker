@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ward_sentry",
+  "title": "Sentry Ward",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "9d52933c35e25dbfae7066cbc654a04c26caef9ee0732ebdda0c0bb8a0fe24a7",
+  "citations": [
+    "gamefile:items/item_ward_sentry#cost",
+    "loc:DOTA_Tooltip_ability_item_ward_sentry_Description",
+    "gamefile:items/item_ward_sentry#components",
+    "gamefile:items/item_ward_sentry#attribs",
+    "gamefile:items/item_ward_sentry#mechanics",
+    "loc:DOTA_Tooltip_ability_item_ward_sentry_Lore"
+  ],
+  "packet_sha256": "bf82569985d2f20ad005d898cf36b8a77afa0e095cea5bf1486186194de80ebe",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ca06384a71b678e6794018f606ac6770849b9eaef66e54e9c5a3e23c0f839507",
+    "input_tokens": 13896,
+    "output_tokens": 1388,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:48.621994+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "0375ebe2679d1a3ca44f97a50f0561e97df625c904efcd51308cfda608ff7b1f",
+    "input_tokens": 14013,
+    "output_tokens": 1404,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:19:20.003940+00:00"
+  }
+}

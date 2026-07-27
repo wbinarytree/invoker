@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "eagle",
+  "title": "Eaglesong",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d3482395b20a9080e5cd5b83557495243eaf94ad1c299739ed2910a84d3e2d38",
+  "citations": [
+    "gamefile:items/item_eagle#cost",
+    "gamefile:items/item_eagle#attribs",
+    "gamefile:items/item_eagle#components",
+    "gamefile:items/item_eagle#mechanics",
+    "loc:DOTA_Tooltip_ability_item_eagle_Lore"
+  ],
+  "packet_sha256": "4a4086c0d6cb742a4623a6133f0a80a95439968c6a11db0606b68ff53b4b4389",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "bc0db94da97a87f1bfee699cfff53d1d3fbaed1f3c2cd7b908bd20f1cf530134",
+    "input_tokens": 14180,
+    "output_tokens": 926,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:41.696568+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "f70c14b387ef14d644bbe1734730ce9d8541026785dbb409d70cfa7804564991",
+    "input_tokens": 14291,
+    "output_tokens": 372,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:09:32.483432+00:00"
+  }
+}

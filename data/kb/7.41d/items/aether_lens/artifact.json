@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "aether_lens",
+  "title": "Aether Lens",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "aeca5c39278f4d557c66d54e5a6c8f086a8f1594a5dcbe7f92c699d22ebe2f4c",
+  "citations": [
+    "gamefile:items/item_aether_lens#cost",
+    "gamefile:items/item_aether_lens#attribs",
+    "gamefile:items/item_aether_lens#components",
+    "gamefile:items/item_aether_lens#mechanics",
+    "loc:DOTA_Tooltip_ability_item_aether_lens_Lore"
+  ],
+  "packet_sha256": "94810d3c015b854374747cffaf484e6a12f82a3b2627a8f664c8b19aa9529caa",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5ba3aebc2a04e0593941c8f9ada8a590842efadcf6ad11b7dba95be7bd94d80e",
+    "input_tokens": 14200,
+    "output_tokens": 649,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:27.248686+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "fbd647d0f76d34e8f777250a812ec2105b54d57b6e8b096b34642ee5ea95248b",
+    "input_tokens": 14327,
+    "output_tokens": 334,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:06:42.134676+00:00"
+  }
+}

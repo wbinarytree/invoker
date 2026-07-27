@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "rod_of_atos",
+  "title": "Rod of Atos",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7f0951c314705791b13e33785c44478a36e76a854169fdab560d00d8cc7e7076",
+  "citations": [
+    "gamefile:items/item_rod_of_atos#cost",
+    "gamefile:items/item_rod_of_atos#attribs",
+    "loc:DOTA_Tooltip_ability_item_rod_of_atos_Description",
+    "gamefile:items/item_rod_of_atos#mechanics",
+    "gamefile:items/item_rod_of_atos#components",
+    "loc:DOTA_Tooltip_ability_item_rod_of_atos_Lore"
+  ],
+  "packet_sha256": "a1e7bc7bd04c2014efa441f8bee840346574cc2132550031a8bc2d447832fa91",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "67b259a9aa36d9903efdc35cb5177052830f7f65da4c74b9067c49977ced53db",
+    "input_tokens": 13867,
+    "output_tokens": 1582,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:06.796355+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "bf007a6c18b50d80930b9ad1f5afee89177c76ec11b130f76d6c05578ab03ab6",
+    "input_tokens": 14041,
+    "output_tokens": 824,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:16:24.941121+00:00"
+  }
+}

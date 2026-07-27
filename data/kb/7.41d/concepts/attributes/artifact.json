@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "attributes",
+  "title": "Attributes",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "bc99ab44c422f965653a40d9bf164353c748c533a6cb2cd4fb289fdfa6df2102",
+  "citations": [
+    "corpus:liquipedia_dota2/attributes@2369347",
+    "corpus:liquipedia_dota2/attributes@2369347#Primary_Attribute",
+    "corpus:liquipedia_dota2/attributes@2369347#Strength",
+    "corpus:liquipedia_dota2/attributes@2369347#Agility",
+    "corpus:liquipedia_dota2/attributes@2369347#Intelligence",
+    "corpus:liquipedia_dota2/attributes@2369347#Universal",
+    "corpus:liquipedia_dota2/attributes@2369347#Attribute_Bonus",
+    "corpus:liquipedia_dota2/attributes@2369347#Items_Granting_Attributes",
+    "corpus:liquipedia_dota2/attributes@2369347#Talents_Granting_Attributes",
+    "corpus:liquipedia_dota2/attributes@2369347#Talents_Granting_Attribute_Combinations",
+    "corpus:liquipedia_dota2/attributes@2369347#Abilities_Modifying_Attributes",
+    "corpus:liquipedia_dota2/attributes@2369347#Abilities_Modified_by_Attributes",
+    "corpus:liquipedia_dota2/attributes@2369347#Recent_Changes"
+  ],
+  "packet_sha256": "cd9f6d5572bd1c85b514bf15d283f9be123a1a3f0833d7a58d71900e6410c26f",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "1303a1481056df643c6752732246efa89eb5f396615b62b83bcadaae927cf438",
+    "input_tokens": 16873,
+    "output_tokens": 7471,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:15:31.875052+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "cbb8d6867e7819d837e9c7ec8969e4e87107413b3d31b64bdddb92760e31c772",
+    "input_tokens": 16901,
+    "output_tokens": 2503,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:16:37.388621+00:00"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "spell_block",
+  "title": "Spell Block",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "c313d014e29be6a727201401f88f0c9a725da9c896ff8e4dff6030c5dab93b56",
+  "citations": [
+    "corpus:liquipedia_dota2/spell_block@2383952",
+    "corpus:liquipedia_dota2/spell_block@2383952#Definition",
+    "corpus:liquipedia_dota2/spell_block@2383952#Mechanics",
+    "corpus:liquipedia_dota2/spell_block@2383952#Spell_Block_Sources",
+    "corpus:liquipedia_dota2/spell_block@2383952#Talents",
+    "corpus:liquipedia_dota2/spell_block@2383952#Not-blocked_Unit_Target_Abilities",
+    "corpus:liquipedia_dota2/spell_block@2383952#Bounce",
+    "corpus:liquipedia_dota2/spell_block@2383952#Multiple_Target",
+    "corpus:liquipedia_dota2/spell_block@2383952#Point_Target",
+    "corpus:liquipedia_dota2/spell_block@2383952#Projectile",
+    "corpus:liquipedia_dota2/spell_block@2383952#Partially_Blocking",
+    "corpus:liquipedia_dota2/spell_block@2383952#Other_Unique_Interactions",
+    "corpus:liquipedia_dota2/spell_block@2383952#Fully_blocked_abilities",
+    "corpus:liquipedia_dota2/spell_block@2383952#Recent_Changes"
+  ],
+  "packet_sha256": "b0ec00a1ba28787260535a95a4814d8babfd7c3cdc598e666d17f8d8fabf4722",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "8",
+    "request_sha256": "85126280c38b774d3aa8db2efef8293efc4c80e8d58ba1bf5749f3fe6ef08b03",
+    "input_tokens": 17802,
+    "output_tokens": 7424,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:39:19.226591+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "8",
+    "request_sha256": "dceaf6bfd8dfc82b767f6d1826fce381cbf5305f9573986a2c04fba52e640214",
+    "input_tokens": 18473,
+    "output_tokens": 2222,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T21:40:18.173686+00:00"
+  }
+}

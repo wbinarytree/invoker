@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "basher",
+  "title": "Skull Basher",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "091071a52812367758f4031f727699df3b6d958a3b8588ad1fff5af19e244079",
+  "citations": [
+    "gamefile:items/item_basher#cost",
+    "gamefile:items/item_basher#attribs",
+    "loc:DOTA_Tooltip_ability_item_basher_Description",
+    "gamefile:items/item_basher#mechanics",
+    "gamefile:items/item_basher#components",
+    "loc:DOTA_Tooltip_ability_item_basher_Lore"
+  ],
+  "packet_sha256": "e8204688b013c408c3abf701eb512aeb8a0afbaf6acaa1de62d526a1a60fb476",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8cd1ff3902b12784daab1656e3b903f72d6ff1c3b0b2e455f1d71e4fe5ef5fa9",
+    "input_tokens": 14341,
+    "output_tokens": 1428,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:50:38.358541+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "e317f2be670573c46557bb8e2d4ea51ac26e701592c159fd5eeb988988c11bef",
+    "input_tokens": 14054,
+    "output_tokens": 1155,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:07:28.710494+00:00"
+  }
+}

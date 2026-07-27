@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "unwavering_condition",
+  "title": "Unwavering Condition",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e83ed4f63c99152bcf509e963d02323889485375021110a0a6bb74cc886e1464",
+  "citations": [
+    "gamefile:items/item_unwavering_condition#attribs",
+    "loc:DOTA_Tooltip_ability_item_unwavering_condition_Description",
+    "gamefile:items/item_unwavering_condition#cost",
+    "gamefile:items/item_unwavering_condition#mechanics"
+  ],
+  "packet_sha256": "edabae84fd0636aa4b9c84a8a95397b18b726eefd50019f72fe3985b888b802e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "25f3632df3b4c94d07e201a9a8e741e4047fad9ec94aa1f91b6629d7605415cc",
+    "input_tokens": 14139,
+    "output_tokens": 1176,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:26.756244+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "8f1e59d7b46ba8d4a505ca7644b19e8749aad98d70c2992cfd81c0306d217a36",
+    "input_tokens": 13878,
+    "output_tokens": 550,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:18:31.665330+00:00"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bloodthorn",
+  "title": "Bloodthorn",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2cbcaf1e5b7974e6b6a6c7b1ef438725aef78979d020ff2965ff113fe78e1f08",
+  "citations": [
+    "gamefile:items/item_bloodthorn#cost",
+    "gamefile:items/item_bloodthorn#attribs",
+    "loc:DOTA_Tooltip_ability_item_bloodthorn_Description",
+    "gamefile:items/item_bloodthorn#components",
+    "gamefile:items/item_bloodthorn#mechanics",
+    "loc:DOTA_Tooltip_ability_item_bloodthorn_Lore"
+  ],
+  "packet_sha256": "3df3cc87fa7c3d01f465276ae0b59c7a36a351e9840391a97bf349f1d8827f52",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "165e7c490277e7310412209aa8bc2e3015958860deca7ccada95060eaa0f5717",
+    "input_tokens": 14458,
+    "output_tokens": 1407,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:54.575678+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "2d5e401904a75cd9eb1f631f42c8a239a27ee2b343c7c5644800fe2a4261af91",
+    "input_tokens": 14171,
+    "output_tokens": 2371,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:08:15.103837+00:00"
+  }
+}

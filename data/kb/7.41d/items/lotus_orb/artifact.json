@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "lotus_orb",
+  "title": "Lotus Orb",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "b2c40a4f1026830619a5fbce32437ddedadd2610c7891c0fdee34ced373d9ff4",
+  "citations": [
+    "gamefile:items/item_lotus_orb#cost",
+    "gamefile:items/item_lotus_orb#attribs",
+    "loc:DOTA_Tooltip_ability_item_lotus_orb_Description",
+    "gamefile:items/item_lotus_orb#components",
+    "gamefile:items/item_lotus_orb#mechanics",
+    "loc:DOTA_Tooltip_ability_item_lotus_orb_Lore"
+  ],
+  "packet_sha256": "3098d69bed7cdf8fcc30033b80b2921b6812368798d696f058cdebe6ceb8f1d5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "632f9a465cc179141577f6285b27246a62a10864c19a9aa337cdc662f95032aa",
+    "input_tokens": 14308,
+    "output_tokens": 1104,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:53.447449+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "dea61729fac1cb346edb3a43354858b203d52d6e2595ead0321d931bee9a3435",
+    "input_tokens": 14045,
+    "output_tokens": 1913,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:13:35.229291+00:00"
+  }
+}

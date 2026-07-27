@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "havoc_hammer",
+  "title": "Havoc Hammer",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "60d79a21d2c0f08e08419964e0919a39319f18407d2279ca4789ffbf7a46488b",
+  "citations": [
+    "gamefile:items/item_havoc_hammer#cost",
+    "gamefile:items/item_havoc_hammer#attribs",
+    "gamefile:items/item_havoc_hammer#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_havoc_hammer_Description"
+  ],
+  "packet_sha256": "764207c01d7d21271b8d1b9e455d667f6d8524921da5beaffa51a6db78a5760e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4ed5d554934e3f33c69b7e96ab559f8902a25c59e14307261d122db45e5e8bed",
+    "input_tokens": 14232,
+    "output_tokens": 843,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:05:50.648040+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "34cea318107c4e5341e06459f1305dceec94fc51d5ca45729304326d6f7a6100",
+    "input_tokens": 13988,
+    "output_tokens": 1291,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:12:05.514385+00:00"
+  }
+}

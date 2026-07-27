@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "force_staff",
+  "title": "Force Staff",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "44c4a76cf9acb893088f2b72520a434a6b725571f677d2e563947edbacd57e99",
+  "citations": [
+    "gamefile:items/item_force_staff#cost",
+    "gamefile:items/item_force_staff#attribs",
+    "loc:DOTA_Tooltip_ability_item_force_staff_Description",
+    "gamefile:items/item_force_staff#mechanics",
+    "gamefile:items/item_force_staff#components",
+    "loc:DOTA_Tooltip_ability_item_force_staff_Lore"
+  ],
+  "packet_sha256": "074343f40182b9b15eca926db2dce461d5c1fb1f185e525e31017a53a9434fc0",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "9c3d2198a3b464d76fc546c07df9ba666b7736c83b2b587c39aa533b489cd812",
+    "input_tokens": 13858,
+    "output_tokens": 864,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:03:40.389685+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "9629882c0b339746ce3ed7f8d231a62dfaddad6c94140aae702ff23f39cb2bd2",
+    "input_tokens": 14006,
+    "output_tokens": 1297,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:11:11.037431+00:00"
+  }
+}

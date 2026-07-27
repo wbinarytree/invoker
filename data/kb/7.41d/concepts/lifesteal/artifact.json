@@ -1,0 +1,47 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "lifesteal",
+  "title": "Lifesteal",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ae6fbe26ecedd0acebe59cae7e332bd123a478077baf010f1de0cce22ed000a4",
+  "citations": [
+    "corpus:liquipedia_dota2/lifesteal@2393558",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Definition",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Total_Lifesteal",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Lifesteal_Manipulation",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Equations",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Conditional_Attack_Damage_Bonus",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Sources",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Items",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Talents",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Pseudo-Lifesteal",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Spell_Lifesteal",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Gallery",
+    "corpus:liquipedia_dota2/lifesteal@2393558#Recent_Changes"
+  ],
+  "packet_sha256": "27aae82fdbe592671a56b30ec14f87468c34ee10ed2eff5fefb3a3e3a527d7f5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "5",
+    "request_sha256": "4d4a9556b52a83b636d1bad7302e6e5a5bd6e4f5ed9300906ce2020a4dca9e29",
+    "input_tokens": 16793,
+    "output_tokens": 7622,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:05:28.955685+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "5",
+    "request_sha256": "6a580461459012cdba3e74897e7afeb2638ab2c24b617bddbd7ea020199d4c46",
+    "input_tokens": 16550,
+    "output_tokens": 2033,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:06:32.327373+00:00"
+  }
+}

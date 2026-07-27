@@ -1,0 +1,41 @@
+{
+  "schema_version": 3,
+  "kind": "concept",
+  "slug": "attack_immunity",
+  "title": "Attack Immunity",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "dcb860dee87a94f8f9fd0a050e7967bc261f15cd2d449e7494a5d17ea076f19c",
+  "citations": [
+    "corpus:liquipedia_dota2/attack_immunity@2299977",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Definition",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Unselectability",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Ethereal",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Version_History",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Patch_History",
+    "corpus:liquipedia_dota2/attack_immunity@2299977#Gallery"
+  ],
+  "packet_sha256": "4abe9cbbe9670b64d68e7dce7afeec2185c6d9c985db80386b940bac8ac6020c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-article",
+    "prompt_version": "6",
+    "request_sha256": "1c3f1628ee073053614fd3427db057f7ebd25b3e03802418e97e32dab595fff7",
+    "input_tokens": 15348,
+    "output_tokens": 2236,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:22:04.591004+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "concept-card",
+    "prompt_version": "6",
+    "request_sha256": "9189fe6f1b47a75b95f017d009da7a4488d70ba1cbc53fde0e515e6c7118f7ed",
+    "input_tokens": 15339,
+    "output_tokens": 1860,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T20:23:01.040528+00:00"
+  }
+}
