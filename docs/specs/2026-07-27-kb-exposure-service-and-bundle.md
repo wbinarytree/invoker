@@ -1,7 +1,9 @@
 # KB Exposure — Service Ladder + Consumer Bundle
 
 **Date:** 2026-07-27
-**Status:** draft (pending discussion)
+**Status:** accepted (user sign-off 2026-07-27; open questions resolved to
+recommendations — shared bundle root, slug+title concept resolution this
+slice, structured card payload)
 **Direction:** `docs/specs/2026-07-25-grounded-reasoner-rethink.md` (agent
 exposure model). First implementation slice of the exposure milestone,
 scoped by the 2026-07-27 collaboration decisions with phylactery (below).
@@ -166,18 +168,13 @@ choice, never an export-time transformation.
 - `docs/architecture.md` service + bundle sections updated;
   `docs/CURRENT_DIRECTION.md` entry added.
 
-## Open questions
+## Open questions (resolved at sign-off, 2026-07-27)
 
-1. **One bundle root or two?** This spec assumes the KB rides in the same
-   resource-bundle root as game constants and teams (one root, one
-   service). The alternative — a standalone KB-only bundle — makes
-   phylactery's staging smaller but splits `bundle.json` governance.
-   Recommend: same root.
-2. **Concept aliases.** Items get source-backed aliases from
-   localization; concepts have only slug + title in this slice. Is
-   title/slug resolution enough for now, or should the corpus registry
-   contribute redirect titles as aliases?
-3. **Card payload shape.** `kb_card` returns structured sentences (text +
-   marks per sentence, as stored). Confirm phylactery's wiki/tool side
-   prefers structured over a rendered markdown string — the artifact
-   stores structure, so serving structure is the no-loss default.
+1. **One bundle root or two?** Resolved: same root. The KB rides in the
+   resource-bundle root alongside game constants and teams — one root,
+   one service, one `bundle.json`.
+2. **Concept aliases.** Resolved: slug + casefolded title is enough this
+   slice. Corpus redirect titles as aliases is a later, additive change.
+3. **Card payload shape.** Resolved: structured sentences (text + marks
+   per sentence, as stored in the artifact) — the no-loss default;
+   consumers render markdown themselves if they want a string.
