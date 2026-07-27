@@ -91,7 +91,14 @@ def main() -> int:
     }
     for slug in slugs:
         entity_dir = kb / f"{args.kind}s" / slug
-        if not (entity_dir / "artifact.json").exists():
+        # item slugs are internal names (flask, devastator); show the
+        # display name the artifact records (Healing Salve, Parasma)
+        artifact_file = entity_dir / "artifact.json"
+        if args.kind == "item" and artifact_file.exists():
+            title = json.loads(artifact_file.read_text()).get("title", "")
+            if title and title.lower() != slug.replace("_", " "):
+                slug = f"{slug} ({title})"
+        if not artifact_file.exists():
             attempts = rejected / f"{args.kind}s" / slug
             note = ""
             if attempts.exists():

@@ -54,6 +54,16 @@ def check_marks(used: list[str], valid: set[str], what: str, slug: str) -> None:
         raise GenerationError(f"{slug}: {what} contains no citation marks")
 
 
+def check_title_heading(text: str, title: str, slug: str) -> None:
+    """The article opens with `# <title>` — 4 of 292 fleet articles
+    skipped the heading when the prompt merely implied it."""
+    first = text.strip().splitlines()[0].strip() if text.strip() else ""
+    if first != f"# {title}":
+        raise GenerationError(
+            f"{slug}: article does not open with '# {title}' (got {first!r})"
+        )
+
+
 def check_coverage(cited: list[str], valid: set[str], what: str, slug: str) -> None:
     """Every packet section must be cited — the article is a lossless
     compression, so an uncited section is dropped content. Anchors in

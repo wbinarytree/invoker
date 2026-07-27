@@ -26,6 +26,7 @@ from invoker.gen.checks import (
     check_coverage,
     check_marks,
     check_numbers,
+    check_title_heading,
     extract_marks,
 )
 from invoker.gen.client import GenerationError
@@ -33,7 +34,7 @@ from invoker.gen.concepts import GenerationBackend, persist_rejected
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "7"
+ITEM_PROMPT_VERSION = "8"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -80,7 +81,8 @@ state the patch or its version anywhere in the article, including the title.
 - If the sources do not cover something, leave it out. Never fill a gap with \
 a plausible value.
 - Markdown, a few short sections, no preamble, no meta-commentary about \
-sources or citations."""
+sources or citations. The article's first line is a level-one heading \
+naming the item exactly as the request names it: `# <item name>`."""
 
 ITEM_CARD_SYSTEM_PROMPT = """You compress a grounded encyclopedia article into a card.
 
@@ -246,6 +248,7 @@ def generate_item(
     )
     card = None
     try:
+        check_title_heading(article.text, context.name, slug)
         citations = extract_marks(article.text)
         check_marks(citations, valid_marks, "article", slug)
         check_coverage(citations, valid_marks, "article", slug)

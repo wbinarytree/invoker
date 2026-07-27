@@ -197,7 +197,7 @@ def test_unknown_mark_fails_loudly(tmp_path):
 
 
 def test_article_without_marks_fails_loudly(tmp_path):
-    backend = FakeBackend("Prose without citations.", good_card())
+    backend = FakeBackend("# Mage Slayer\n\nProse without citations.", good_card())
     with pytest.raises(GenerationError, match="no citation marks"):
         run_generate(tmp_path, backend)
 
@@ -266,6 +266,12 @@ def test_regenerate_card_rejects_marks_outside_the_article(tmp_path):
     with pytest.raises(GenerationError, match="card"):
         regenerate_item_card(FakeBackend("unused", bad_card), artifact_path=path)
     assert path.read_text() == before  # nothing written on failure
+
+
+def test_article_without_title_heading_fails_loudly(tmp_path):
+    headless = good_article().removeprefix("# Mage Slayer\n\n")
+    with pytest.raises(GenerationError, match="does not open with"):
+        run_generate(tmp_path, FakeBackend(headless, good_card()))
 
 
 def test_unknown_item_fails_loudly(tmp_path):
