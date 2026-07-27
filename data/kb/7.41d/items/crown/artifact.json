@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "crown",
+  "title": "Crown",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1f3a8dbe371989d706f6fda1387ac774f9822bff5018c92e0fa2fa7aea847124",
+  "citations": [
+    "gamefile:items/item_crown#cost",
+    "gamefile:items/item_crown#attribs",
+    "gamefile:items/item_crown#mechanics",
+    "gamefile:items/item_crown#components",
+    "loc:DOTA_Tooltip_ability_item_crown_Lore"
+  ],
+  "packet_sha256": "1075c2eaeee4d0138bf4388cba4f7a23aa44082b45d171890121cbe9838bba3c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d3ebfe857e9998ac9a7aa84977c6d5fa7f27d6b8b2dc3f75c4e58bfef9e5cb2a",
+    "input_tokens": 14225,
+    "output_tokens": 760,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:22.761724+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3b5d60cd3cfd89d96a82b2c2a7a15ce850ea03c9caf6d33b1604f55fbada5b05",
+    "input_tokens": 14268,
+    "output_tokens": 282,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:30.851202+00:00"
+  }
+}

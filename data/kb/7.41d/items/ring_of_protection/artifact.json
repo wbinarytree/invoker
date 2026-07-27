@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ring_of_protection",
+  "title": "Ring of Protection",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "410b535826cd769ee9ab50793e4562ece30d1383ddeefea59596c79884fe275e",
+  "citations": [
+    "gamefile:items/item_ring_of_protection#cost",
+    "gamefile:items/item_ring_of_protection#attribs",
+    "gamefile:items/item_ring_of_protection#mechanics",
+    "gamefile:items/item_ring_of_protection#components",
+    "loc:DOTA_Tooltip_ability_item_ring_of_protection_Lore"
+  ],
+  "packet_sha256": "e625421409867a887aa200fa5eb8470d9bb65911a366e9d217a2110f27a86175",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d5ab41d37ab80652efa6ba6e8a31c3bc33849cbe063301168db6e45a6cff0745",
+    "input_tokens": 13790,
+    "output_tokens": 682,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:26.656631+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "915e79b6e37dda047f1fc440fe534f066880858d5ef99151e63b3cc8aed5df74",
+    "input_tokens": 14267,
+    "output_tokens": 432,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:38.950681+00:00"
+  }
+}

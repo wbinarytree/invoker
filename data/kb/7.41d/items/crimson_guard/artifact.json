@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "crimson_guard",
+  "title": "Crimson Guard",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "5a539cdd044560e858dfce8a2b135cc581987cb83f98dadb744973a13e657c44",
+  "citations": [
+    "gamefile:items/item_crimson_guard#cost",
+    "gamefile:items/item_crimson_guard#attribs",
+    "loc:DOTA_Tooltip_ability_item_crimson_guard_Description",
+    "gamefile:items/item_crimson_guard#components",
+    "gamefile:items/item_crimson_guard#mechanics",
+    "loc:DOTA_Tooltip_ability_item_crimson_guard_Lore"
+  ],
+  "packet_sha256": "47a5f4d43610219efdce8f636c042e1e8a9f30b1c3131b63ffcbde1ad92907b8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "60960827e77dfdc97c3b7197b4b5d22bfc414e8755308a3f88467646a5199b38",
+    "input_tokens": 14385,
+    "output_tokens": 1495,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:43.275786+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "424bef80aaf1f8b5a8f0191b9834ae6707c5fa17411ac4024082d36a8a77b7c3",
+    "input_tokens": 14486,
+    "output_tokens": 1359,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:11.800481+00:00"
+  }
+}

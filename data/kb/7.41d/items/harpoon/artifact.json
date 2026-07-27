@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "harpoon",
+  "title": "Harpoon",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "687da1fbdff6df29730c03a6fcd678ac49e41f3db8484301c4dad9193107bbeb",
+  "citations": [
+    "gamefile:items/item_harpoon#attribs",
+    "loc:DOTA_Tooltip_Ability_item_harpoon_Description",
+    "gamefile:items/item_harpoon#components",
+    "gamefile:items/item_harpoon#cost",
+    "gamefile:items/item_harpoon#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_harpoon_Lore"
+  ],
+  "packet_sha256": "3148768f14e30f63f3cda203f090e97579dc6d61211a17810ccc3f47705a24e1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "769dbb07bd5a8bef4ccfb89e30a44205a3345347c725c3124603f48bc5ec869e",
+    "input_tokens": 14447,
+    "output_tokens": 2076,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:20.486716+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f8556a9e07a93b86dd8fb93f9dbb47476d06ac67a78b24e38d907dfeb4952c00",
+    "input_tokens": 14553,
+    "output_tokens": 2147,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:05.270066+00:00"
+  }
+}

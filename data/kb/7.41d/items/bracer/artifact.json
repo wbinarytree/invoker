@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bracer",
+  "title": "Bracer",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "72bf78edc349f5b3558a024a1005f520bb4bd6bdaf87b74e9dbe5c9f33126e3a",
+  "citations": [
+    "gamefile:items/item_bracer#cost",
+    "gamefile:items/item_bracer#attribs",
+    "gamefile:items/item_bracer#components",
+    "gamefile:items/item_bracer#mechanics",
+    "loc:DOTA_Tooltip_ability_item_bracer_Lore"
+  ],
+  "packet_sha256": "daf94c9db61ab47f18d94d4c70aa591060280392fc08699f27da023ce8863022",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5a5740d9a647faa598a12b083d5c0886e650741a6d9b72e0ab1bf50a9706b625",
+    "input_tokens": 13777,
+    "output_tokens": 742,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:38.342216+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "0890c59eae1f544211d4a11481df8101686729aa5547f2a59cd7e5b26f4ef58c",
+    "input_tokens": 14285,
+    "output_tokens": 653,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:54:02.174638+00:00"
+  }
+}

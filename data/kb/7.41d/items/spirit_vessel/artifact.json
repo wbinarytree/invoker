@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "spirit_vessel",
+  "title": "Spirit Vessel",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "723fd89b9caf5c908d8528ed70b38bdcc5e3fd6ead159ee4ab9c9d13195c4668",
+  "citations": [
+    "gamefile:items/item_spirit_vessel#cost",
+    "gamefile:items/item_spirit_vessel#attribs",
+    "loc:DOTA_Tooltip_ability_item_spirit_vessel_Description",
+    "gamefile:items/item_spirit_vessel#components",
+    "gamefile:items/item_spirit_vessel#mechanics"
+  ],
+  "packet_sha256": "615063fc4d0436608d453f43e35c70e191a1cae75367500b29c591748d995a2d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f331b9b1f76268bf8832fb733cae77f5d093d3776284afefc9f42e072647f2af",
+    "input_tokens": 13958,
+    "output_tokens": 1500,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:40.734188+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "0878bc24d34ca096aa97a5f05bf8a3c7f2c43e620f56e226ebde7afd9c959412",
+    "input_tokens": 14496,
+    "output_tokens": 1646,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:17.315302+00:00"
+  }
+}

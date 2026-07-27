@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "shawl",
+  "title": "Shawl",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "0636d1d1f45dc1e93c37284a3b4b2e16e646c6065324270e807acc61255a9f44",
+  "citations": [
+    "gamefile:items/item_shawl#cost",
+    "gamefile:items/item_shawl#attribs",
+    "gamefile:items/item_shawl#components",
+    "gamefile:items/item_shawl#mechanics"
+  ],
+  "packet_sha256": "5257a7bbbf99644b6694c987613c37ec86e861245d7e5641e7430fb94f67581d",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "6d463ecb3b5186218f5fc2602c014ae40d8e9e685cd06d0100cb03291a6bd876",
+    "input_tokens": 14159,
+    "output_tokens": 475,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:25.588731+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "9f94bbfec3e00cafca42c6564e9943ea7900eab2267a444c43719da0d4309f46",
+    "input_tokens": 14230,
+    "output_tokens": 511,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:40.952948+00:00"
+  }
+}

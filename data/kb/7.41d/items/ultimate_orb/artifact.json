@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "ultimate_orb",
+  "title": "Ultimate Orb",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "009b59feb80963ce97a520069a5122573edc8e70d6659aa6542b80593b615ea4",
+  "citations": [
+    "gamefile:items/item_ultimate_orb#cost",
+    "gamefile:items/item_ultimate_orb#mechanics",
+    "gamefile:items/item_ultimate_orb#attribs",
+    "gamefile:items/item_ultimate_orb#components",
+    "loc:DOTA_Tooltip_ability_item_ultimate_orb_Lore"
+  ],
+  "packet_sha256": "24367fe924013e1320c70cd41e3f386b51d76e9d6187180d8c44cc68a0e7d1a3",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "f6f1a75087a05439c1923146bf783a97e98a04f38757871e598f911ee05b8171",
+    "input_tokens": 14203,
+    "output_tokens": 750,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:43.556403+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "60946b5b99cbcc27f8ee57920016a001105e01d9c319aa84cdc89f0e99bdc87b",
+    "input_tokens": 14262,
+    "output_tokens": 273,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:18:53.164327+00:00"
+  }
+}

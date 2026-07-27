@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "41b75297f34f17c92bc9ae43f567cb9a30c7bb230cec77075b887b02d2b9258f",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_urn_of_shadows#components",
+      "fact": "Sage's Mask has the internal identifier item_sobi_mask."
+    },
+    {
+      "section": "gamefile:items/item_urn_of_shadows#components",
+      "fact": "Ring of Protection has the internal identifier item_ring_of_protection."
+    },
+    {
+      "section": "gamefile:items/item_urn_of_shadows#components",
+      "fact": "Circlet has the internal identifier item_circlet."
+    },
+    {
+      "section": "gamefile:items/item_urn_of_shadows#components",
+      "fact": "Essence Distiller has the internal identifier item_essence_distiller."
+    },
+    {
+      "section": "gamefile:items/item_urn_of_shadows#components",
+      "fact": "Spirit Vessel has the internal identifier item_spirit_vessel."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "ba7371c367865c9c787050563210bf7de7315f16a2fcdfcf6ae6d086903a262e",
+    "input_tokens": 14670,
+    "output_tokens": 593,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:26.716173+00:00"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "5c72abe03f67a400e6f7ed911dd8cc9de2da21d89d02bb2e167c248ed2a4d61c",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_gungir#cost",
+      "fact": "Gleipnir's internal item identifier is item_gungir."
+    },
+    {
+      "section": "gamefile:items/item_gungir#components",
+      "fact": "Rod of Atos has the internal item identifier item_rod_of_atos."
+    },
+    {
+      "section": "gamefile:items/item_gungir#components",
+      "fact": "Point Booster has the internal item identifier item_point_booster."
+    },
+    {
+      "section": "gamefile:items/item_gungir#components",
+      "fact": "Chasm Stone has the internal item identifier item_chasm_stone."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "78df2f3e8c9d4ec0cf050096bf7233d2e8e31161c999e21851ba14ed809fc951",
+    "input_tokens": 14493,
+    "output_tokens": 604,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:19.540095+00:00"
+  }
+}

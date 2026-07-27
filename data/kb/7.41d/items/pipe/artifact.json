@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "pipe",
+  "title": "Pipe of Insight",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1be7bdaeb7395966fa3be18c5bd0ec1ba73c15b0870e49987ebdaee7330622da",
+  "citations": [
+    "gamefile:items/item_pipe#cost",
+    "gamefile:items/item_pipe#attribs",
+    "loc:DOTA_Tooltip_ability_item_pipe_Description",
+    "gamefile:items/item_pipe#mechanics",
+    "gamefile:items/item_pipe#components",
+    "loc:DOTA_Tooltip_ability_item_pipe_Lore"
+  ],
+  "packet_sha256": "de0e6b2ecdc6eaddd2f399a3ff4e93b8f8cc4699d4475f66ca1b443856cb9cf0",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "3eb79df52fb6c289ec0cd23d33a72a3cb1b8fb1474b3a52489ac454f4c49bf66",
+    "input_tokens": 14362,
+    "output_tokens": 1458,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:44.913233+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "16218b21e8e33e81831dae91976a9579f8941117a1265118c642eb6cbcd3bae5",
+    "input_tokens": 14452,
+    "output_tokens": 1115,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:14.057240+00:00"
+  }
+}

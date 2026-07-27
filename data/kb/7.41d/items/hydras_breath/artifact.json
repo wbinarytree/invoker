@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "hydras_breath",
+  "title": "Hydra's Breath",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "927522ea5180d5512f80c3147745a3b614585b10e95c08213e22af7f8295ca87",
+  "citations": [
+    "gamefile:items/item_hydras_breath#cost",
+    "gamefile:items/item_hydras_breath#attribs",
+    "loc:DOTA_Tooltip_Ability_item_hydras_breath_Description",
+    "gamefile:items/item_hydras_breath#mechanics",
+    "gamefile:items/item_hydras_breath#components"
+  ],
+  "packet_sha256": "e4b21f95f014a407a46769cf7ac403b5c126ce70a553a18a45e7b6187b1fc6cf",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c1279d592c7795f19eb6bd7da10a8a6966c57eb8458b1e37a2a65f614dd1e9f0",
+    "input_tokens": 14461,
+    "output_tokens": 2095,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:20.687009+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "e56f3638f7cd6db178c48980bf06290549d7b85a05195b870b34a7ceab40cea6",
+    "input_tokens": 14574,
+    "output_tokens": 3875,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:55.782909+00:00"
+  }
+}

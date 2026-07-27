@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "butterfly",
+  "title": "Butterfly",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cd6b8569eb53770e4095afadd31b8a6ec063c0265725bed6d2af059074c25761",
+  "citations": [
+    "gamefile:items/item_butterfly#cost",
+    "gamefile:items/item_butterfly#attribs",
+    "gamefile:items/item_butterfly#components",
+    "gamefile:items/item_butterfly#mechanics",
+    "loc:DOTA_Tooltip_ability_item_butterfly_Lore"
+  ],
+  "packet_sha256": "32b4cde7d180e58ff323c2aaf92a2626c015fdb624923750d631ae8378c48c94",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5fac974fe595f3a53c6074a56342e45ec77068cb246b09bab1f899fb830c9829",
+    "input_tokens": 14213,
+    "output_tokens": 674,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:21.572643+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5b9678cf82bde419e29378b422f166816083edbf765ce97fa7f133a0de54834c",
+    "input_tokens": 14281,
+    "output_tokens": 325,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:30.801626+00:00"
+  }
+}

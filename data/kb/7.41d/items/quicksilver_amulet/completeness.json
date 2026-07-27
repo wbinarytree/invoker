@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "8025e2232ac9c1efbfceba1b1095d76fdbcb14a84979925306db287f45291c56",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Description",
+      "fact": "Quicksilver grants exactly 5% bonus movement speed and 20 attack speed while one of the bearer’s abilities is on cooldown."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "a428a21ead2e2d808a09bf3f114caa0b51eb5e422726cf753a7809bc2d32519d",
+    "input_tokens": 14338,
+    "output_tokens": 354,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:36.354845+00:00"
+  }
+}

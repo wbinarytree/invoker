@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "headdress",
+  "title": "Headdress",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "8ea188305596c41c379a99e36efed267520b4391edd7a025c0ad1bc5ffa69c38",
+  "citations": [
+    "gamefile:items/item_headdress#cost",
+    "gamefile:items/item_headdress#attribs",
+    "loc:DOTA_Tooltip_ability_item_headdress_Description",
+    "gamefile:items/item_headdress#mechanics",
+    "gamefile:items/item_headdress#components",
+    "loc:DOTA_Tooltip_ability_item_headdress_Lore"
+  ],
+  "packet_sha256": "229fbcc0de8ea44b1fe424a81e50cb7116becd6f74eca9386211dfc365ed85c1",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4d32d166e40d422ff8c9ea3d2b7c517a1b7a05a482c4c99c063563d4b8669038",
+    "input_tokens": 14251,
+    "output_tokens": 1889,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:09.222885+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "187ecf28d43ac733d21aba70d651bfcea3a4fd9473cf7ed8a0be0599ee928d87",
+    "input_tokens": 14364,
+    "output_tokens": 636,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:32.252991+00:00"
+  }
+}

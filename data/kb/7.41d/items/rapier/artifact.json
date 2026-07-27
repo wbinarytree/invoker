@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "rapier",
+  "title": "Divine Rapier",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ab87fc521c599b4dac90a28dd5ca413b93d26b144c39c342b51be2b9762853d9",
+  "citations": [
+    "gamefile:items/item_rapier#cost",
+    "loc:DOTA_Tooltip_ability_item_rapier_Description",
+    "gamefile:items/item_rapier#components",
+    "gamefile:items/item_rapier#attribs",
+    "gamefile:items/item_rapier#mechanics",
+    "loc:DOTA_Tooltip_ability_item_rapier_Lore"
+  ],
+  "packet_sha256": "a03317fe9b97b92546ec66048ebf2fa7cdf3aaeb02288ce53e3e55b3769f2c23",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ac9a9a469d0f14f2c84adf41de0820dcea568798b35e4eba2fa63cffec6832bc",
+    "input_tokens": 14286,
+    "output_tokens": 1376,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:43.408642+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7f68b98389c21ee6cafb07a501512082453a21fc8a7e66618040e1570ddc84ba",
+    "input_tokens": 14373,
+    "output_tokens": 1800,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:30.670124+00:00"
+  }
+}

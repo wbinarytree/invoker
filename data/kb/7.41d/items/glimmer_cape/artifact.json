@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "glimmer_cape",
+  "title": "Glimmer Cape",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "2bf9a51ad1bfbfa92a11d2db97e4c2543ac9e38526e19e74732810b8c2918dad",
+  "citations": [
+    "gamefile:items/item_glimmer_cape#cost",
+    "gamefile:items/item_glimmer_cape#attribs",
+    "loc:DOTA_Tooltip_ability_item_glimmer_cape_Description",
+    "gamefile:items/item_glimmer_cape#components",
+    "gamefile:items/item_glimmer_cape#mechanics",
+    "loc:DOTA_Tooltip_ability_item_glimmer_cape_Lore"
+  ],
+  "packet_sha256": "3bcd8d9d306b213276285c3f12b568498d2b30335d57177802e13e9ff70a46d6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5da117cf974b8e68f22905ea58ba7580ff1f276d86a3ea800030b670c58fdf56",
+    "input_tokens": 13917,
+    "output_tokens": 1443,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:05.400647+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "b28bbe917d0c97e4f85d4e5a6301104b966bdaa201715c7aaf6fdbdd27f31a37",
+    "input_tokens": 14440,
+    "output_tokens": 1374,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:37.876508+00:00"
+  }
+}

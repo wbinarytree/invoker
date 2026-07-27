@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "cd5c51d116647523430efd9fba01c68f16d32bfab46ea0b3cd71f5bfc50b5514",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_devastator_Description",
+      "fact": "Witch Blade's poison lasts for 4 seconds."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "ed64713f3d118ad399e680cdf1cec021dced2a6b143102c94189dc56f0f82d29",
+    "input_tokens": 14555,
+    "output_tokens": 1074,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:01:51.116172+00:00"
+  }
+}

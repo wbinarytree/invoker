@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "blitz_knuckles",
+  "title": "Blitz Knuckles",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "bfb9cc58af55305711bf94ebbc85f69bb203d8cf42c56231181f6d959248add1",
+  "citations": [
+    "gamefile:items/item_blitz_knuckles#cost",
+    "gamefile:items/item_blitz_knuckles#attribs",
+    "gamefile:items/item_blitz_knuckles#mechanics",
+    "gamefile:items/item_blitz_knuckles#components",
+    "loc:DOTA_Tooltip_ability_item_blitz_knuckles_Lore"
+  ],
+  "packet_sha256": "e78280c5bb4bd29324cfef7c05d38a7010137b8a43aceb67251c62bb40f344c8",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "dc125762a921e001aa5d7cb888903671d1dd94a7258fedecf9958a68a077e333",
+    "input_tokens": 14194,
+    "output_tokens": 576,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:35.805086+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "76f77117e3ab7446b5b22b296d2d97ac655d68231ffa4b4255bbc718cf335918",
+    "input_tokens": 14260,
+    "output_tokens": 337,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:45.529917+00:00"
+  }
+}

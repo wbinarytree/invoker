@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "phylactery",
+  "title": "Phylactery",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "653a223b73cc01ba6505b83d9a075e23c9fa575f2b6dbe0da4253d39f9d357b7",
+  "citations": [
+    "gamefile:items/item_phylactery#cost",
+    "gamefile:items/item_phylactery#attribs",
+    "gamefile:items/item_phylactery#components",
+    "gamefile:items/item_phylactery#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_phylactery_Description",
+    "loc:DOTA_Tooltip_Ability_item_phylactery_Lore"
+  ],
+  "packet_sha256": "094bfe415e6c012726c9076cf7cc8c56195b310fd116a86a46ddb032d8acec2a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "192c8929760f9828c901671b433dcef8c6d75b8915184ac42fc48ae5435c7d40",
+    "input_tokens": 14323,
+    "output_tokens": 1550,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:40.597838+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ce72bd283d6fd1c990d6983fb90c8a17d3578c43344e3a286b583686785dce73",
+    "input_tokens": 14447,
+    "output_tokens": 1262,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:13.763091+00:00"
+  }
+}

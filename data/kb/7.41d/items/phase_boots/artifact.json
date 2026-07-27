@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "phase_boots",
+  "title": "Phase Boots",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "40cd3ac2f00c7105e83063dad415f99b9a42522918b3f11e9046248c1d478e7a",
+  "citations": [
+    "gamefile:items/item_phase_boots#cost",
+    "gamefile:items/item_phase_boots#attribs",
+    "loc:DOTA_Tooltip_ability_item_phase_boots_Description",
+    "gamefile:items/item_phase_boots#components",
+    "gamefile:items/item_phase_boots#mechanics",
+    "loc:DOTA_Tooltip_ability_item_phase_boots_Lore"
+  ],
+  "packet_sha256": "e90ebf540812c81719c560514c613e4425baa6790e15e142ae59eb9e604cbaac",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8e70f8416cc2d3e62ec5fa98afa8d8e207da0a0df2e4952bfd155796b23d2c2c",
+    "input_tokens": 14322,
+    "output_tokens": 1458,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:40.470002+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a7f38550d418c2f257342f297da369db00217856cea5f18a5a0a2991d1171338",
+    "input_tokens": 14452,
+    "output_tokens": 1056,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:07.998720+00:00"
+  }
+}

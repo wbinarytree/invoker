@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "f34cf08c19d779d9447d1c257d4a98468fb03646edce8890c6ffe1e615bfff34",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_assault#components",
+      "fact": "The Buckler component has the identifier item_buckler."
+    },
+    {
+      "section": "gamefile:items/item_assault#components",
+      "fact": "The Hyperstone component has the identifier item_hyperstone."
+    },
+    {
+      "section": "gamefile:items/item_assault#components",
+      "fact": "The Platemail component has the identifier item_platemail."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "84dab6d3b41f33b35454596d7e9df5fb24fcfb4384e275b8ae79554d7cbceebe",
+    "input_tokens": 14467,
+    "output_tokens": 306,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:40.303288+00:00"
+  }
+}

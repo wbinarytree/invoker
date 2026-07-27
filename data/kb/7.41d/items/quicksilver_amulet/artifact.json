@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "quicksilver_amulet",
+  "title": "Quicksilver Amulet",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "1646f4168989b8834cbd6d890dd3f8b4b3c8a19c0ae133ec1e343fa4443bbdbc",
+  "citations": [
+    "gamefile:items/item_quicksilver_amulet#cost",
+    "gamefile:items/item_quicksilver_amulet#attribs",
+    "gamefile:items/item_quicksilver_amulet#mechanics",
+    "loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Description",
+    "loc:DOTA_Tooltip_ability_item_quicksilver_amulet_Lore"
+  ],
+  "packet_sha256": "8025e2232ac9c1efbfceba1b1095d76fdbcb14a84979925306db287f45291c56",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "139e2bf508068c2036bbef0a8a155d55d4d52b204bb05a4728cb8bf8012dfe90",
+    "input_tokens": 14216,
+    "output_tokens": 2930,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:09.682595+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "626d0a40cbc9295eb8252959127c459da63d8e8ce737518f2a4877f93e0be5c9",
+    "input_tokens": 14374,
+    "output_tokens": 714,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:26.067215+00:00"
+  }
+}

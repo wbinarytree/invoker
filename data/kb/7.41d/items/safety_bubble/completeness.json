@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "67090bbb6b3954e2495b642ddccae59bcc2b1a7f27eee735a10bd7a757e74d37",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_safety_bubble_Description",
+      "fact": "The barrier fully regenerates after not receiving damage for 8 seconds."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "e96b050c5c0d759a5fe76f6cc9299692e27222e5fc980c4db45c036e8fcd3804",
+    "input_tokens": 14172,
+    "output_tokens": 194,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:36.447733+00:00"
+  }
+}

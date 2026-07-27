@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "sange_and_yasha",
+  "title": "Sange and Yasha",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "fba118852d65447f852487585b8e380b990f10f66bdda512e639db35e5e9300c",
+  "citations": [
+    "gamefile:items/item_sange_and_yasha#cost",
+    "gamefile:items/item_sange_and_yasha#mechanics",
+    "gamefile:items/item_sange_and_yasha#attribs",
+    "gamefile:items/item_sange_and_yasha#components",
+    "loc:DOTA_Tooltip_ability_item_sange_and_yasha_Lore"
+  ],
+  "packet_sha256": "f5a039ecdbd86464613e3d21d27556a8d4cf0e642833d865a55b02f700c3e598",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "dd9e7fa93bd6e8e28e2686d79ca60bdaea9d54cfca0e5c173085792c633a2be0",
+    "input_tokens": 14246,
+    "output_tokens": 1089,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:40.950168+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "a17a7bd65a9ba604a1e603c8e88f66024c1a867f08c2fd60bb6801de6cc3bdd0",
+    "input_tokens": 14337,
+    "output_tokens": 440,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:15:52.578760+00:00"
+  }
+}

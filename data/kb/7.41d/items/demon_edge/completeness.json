@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "1f8635eb4e6b320fe8c7099a37e9a9482533bbe944eb93c64c277cdf41427d45",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_demon_edge#components",
+      "fact": "Daedalus has the internal item identifier item_greater_crit."
+    },
+    {
+      "section": "gamefile:items/item_demon_edge#components",
+      "fact": "Monkey King Bar has the internal item identifier item_monkey_king_bar."
+    },
+    {
+      "section": "gamefile:items/item_demon_edge#components",
+      "fact": "Divine Rapier has the internal item identifier item_rapier."
+    },
+    {
+      "section": "gamefile:items/item_demon_edge#components",
+      "fact": "Silver Edge has the internal item identifier item_silver_edge."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "3bcec9afaa87506e9ff3e60db5e4e1c9532fcbb58ab081df4cb3a6a38994beab",
+    "input_tokens": 14222,
+    "output_tokens": 379,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:39.618418+00:00"
+  }
+}

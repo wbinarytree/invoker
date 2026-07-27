@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "615063fc4d0436608d453f43e35c70e191a1cae75367500b29c591748d995a2d",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_spirit_vessel_Description",
+      "fact": "Against enemies, the 4% current-health reduction occurs per second."
+    },
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_spirit_vessel_Description",
+      "fact": "Against enemies, Soul Release deals 25 damage per second."
+    },
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_spirit_vessel_Description",
+      "fact": "On allies, Soul Release provides 40 health regeneration per second."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "ed1bf544fd3f2e06bc99f8514806b3ef487cd6a3aa43296b92e675e236f891d5",
+    "input_tokens": 14628,
+    "output_tokens": 511,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:32.864710+00:00"
+  }
+}

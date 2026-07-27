@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "greater_crit",
+  "title": "Daedalus",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "7b5b55f8743e036ce898830f389eeeb540f499444ea3ddd1f154a3f6d9fb738c",
+  "citations": [
+    "gamefile:items/item_greater_crit#cost",
+    "gamefile:items/item_greater_crit#attribs",
+    "gamefile:items/item_greater_crit#components",
+    "gamefile:items/item_greater_crit#mechanics",
+    "loc:DOTA_Tooltip_ability_item_greater_crit_Description",
+    "loc:DOTA_Tooltip_ability_item_greater_crit_Lore"
+  ],
+  "packet_sha256": "ef807596822da9bc00c0f7131c00ed12a5ed7670eb72474573410752f3195d5e",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "0b2b9befe7e4e8e3db1886fe15458190de1e8a2eee75a482e6065948e63810ea",
+    "input_tokens": 13817,
+    "output_tokens": 786,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:03.552782+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "c9444735e687999d30686c29590e128d19d935ca2bab8f9dece7ff7205a64d6b",
+    "input_tokens": 14304,
+    "output_tokens": 386,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:04:14.338245+00:00"
+  }
+}

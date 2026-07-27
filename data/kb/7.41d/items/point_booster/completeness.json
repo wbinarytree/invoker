@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "cde8b3f0254d454d62e7499f4b49f17d1d13d20d5e1c48559d1ea8881fe42448",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_point_booster#cost",
+      "fact": "Point Booster's item identifier is item_point_booster."
+    },
+    {
+      "section": "gamefile:items/item_point_booster#components",
+      "fact": "Dagon's item identifier is item_dagon."
+    },
+    {
+      "section": "gamefile:items/item_point_booster#components",
+      "fact": "Gleipnir's item identifier is item_gungir."
+    },
+    {
+      "section": "gamefile:items/item_point_booster#components",
+      "fact": "Soul Booster's item identifier is item_soul_booster."
+    },
+    {
+      "section": "gamefile:items/item_point_booster#components",
+      "fact": "Aghanim's Scepter's item identifier is item_ultimate_scepter."
+    },
+    {
+      "section": "gamefile:items/item_point_booster#components",
+      "fact": "Wraith Pact's item identifier is item_wraith_pact."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "5f347a845791bf69fab2447b37172a5223f0ce5c968e1b5abcb428d8fb8ffede",
+    "input_tokens": 14267,
+    "output_tokens": 839,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:12:56.016664+00:00"
+  }
+}

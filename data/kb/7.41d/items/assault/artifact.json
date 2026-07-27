@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "assault",
+  "title": "Assault Cuirass",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "ac452bfe862f57877027c20099b5be2224bfe60b5964b504ca52369592f122d8",
+  "citations": [
+    "gamefile:items/item_assault#cost",
+    "gamefile:items/item_assault#attribs",
+    "gamefile:items/item_assault#mechanics",
+    "loc:DOTA_Tooltip_ability_item_assault_Description",
+    "gamefile:items/item_assault#components",
+    "loc:DOTA_Tooltip_ability_item_assault_Lore"
+  ],
+  "packet_sha256": "f34cf08c19d779d9447d1c257d4a98468fb03646edce8890c6ffe1e615bfff34",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "663923ac81c62e64bd76e99cfd439d6e6b9cb4d9bbfda5e63c519c3ed1774700",
+    "input_tokens": 14300,
+    "output_tokens": 1940,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:06.494555+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "5d2e11dc24c4d855be1da30f32b793ab5eb6329ef67faefcbb49c564d3bc9bcd",
+    "input_tokens": 14416,
+    "output_tokens": 1018,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:51:31.099566+00:00"
+  }
+}

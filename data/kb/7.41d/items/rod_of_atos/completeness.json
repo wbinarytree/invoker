@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "a1e7bc7bd04c2014efa441f8bee840346574cc2132550031a8bc2d447832fa91",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_rod_of_atos#components",
+      "fact": "Staff of Wizardry has the internal item identifier item_staff_of_wizardry."
+    },
+    {
+      "section": "gamefile:items/item_rod_of_atos#components",
+      "fact": "Vitality Booster has the internal item identifier item_vitality_booster."
+    },
+    {
+      "section": "gamefile:items/item_rod_of_atos#components",
+      "fact": "Gleipnir has the internal item identifier item_gungir."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "31e03a80a018b87ecb5d42f5020932b974d81eb8f90450ce851a86b4e157825e",
+    "input_tokens": 14450,
+    "output_tokens": 770,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:54.094733+00:00"
+  }
+}

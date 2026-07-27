@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "staff_of_wizardry",
+  "title": "Staff of Wizardry",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "79b829a46f0487c09cf0778f320c584d7bebd6c9213f07cb2f9ec5f9dfa07ca2",
+  "citations": [
+    "gamefile:items/item_staff_of_wizardry#cost",
+    "gamefile:items/item_staff_of_wizardry#attribs",
+    "gamefile:items/item_staff_of_wizardry#mechanics",
+    "gamefile:items/item_staff_of_wizardry#components",
+    "loc:DOTA_Tooltip_ability_item_staff_of_wizardry_Lore"
+  ],
+  "packet_sha256": "08d803c25c03e56d4177839abff22d689445623fb790e27bd77910f2483a9c19",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "40900737d8fd51183fd37ba46fe3670a4e155bffca348f62ab7783c98e108023",
+    "input_tokens": 13810,
+    "output_tokens": 736,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:40.585421+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7b15a6b4bea0e60d3cf7e05d5a91d02a0b1e98455f1006652594feb8ac8006eb",
+    "input_tokens": 14288,
+    "output_tokens": 324,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:52.775871+00:00"
+  }
+}

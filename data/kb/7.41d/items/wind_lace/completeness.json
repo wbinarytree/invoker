@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "69d34d41964d5ae6bdd88c8ff2a51b0adf7a34b79d4559d3f313dda697479f77",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_wind_lace#cost",
+      "fact": "Wind Lace's internal item identifier is item_wind_lace."
+    },
+    {
+      "section": "gamefile:items/item_wind_lace#components",
+      "fact": "Drum of Endurance's internal item identifier is item_ancient_janggo."
+    },
+    {
+      "section": "gamefile:items/item_wind_lace#components",
+      "fact": "Eul's Scepter of Divinity's internal item identifier is item_cyclone."
+    },
+    {
+      "section": "gamefile:items/item_wind_lace#components",
+      "fact": "Solar Crest's internal item identifier is item_solar_crest."
+    },
+    {
+      "section": "gamefile:items/item_wind_lace#components",
+      "fact": "Tranquil Boots' internal item identifier is item_tranquil_boots."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "94bff2eaf9658f470f6e5e20f5872fe2e75186a4edf76a30af6f3c6ee242f882",
+    "input_tokens": 14286,
+    "output_tokens": 649,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:24.532795+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "tiara_of_selemene",
+  "title": "Tiara of Selemene",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "be441594c6d0433343df995a9f4f1d8e5d6c3a59fd5951a61ade28fbca0d2de5",
+  "citations": [
+    "gamefile:items/item_tiara_of_selemene#cost",
+    "gamefile:items/item_tiara_of_selemene#attribs",
+    "gamefile:items/item_tiara_of_selemene#components",
+    "gamefile:items/item_tiara_of_selemene#mechanics",
+    "loc:DOTA_Tooltip_ability_item_tiara_of_selemene_Lore"
+  ],
+  "packet_sha256": "a3d4828ad0ea0414435ac6cbd04b2b087f8340e1a515266834f5306cbce7e4c5",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d2dabebf8e0f0fe2ba3dc8b27013ab117985b9c13fe470b9b867dd817109b274",
+    "input_tokens": 13796,
+    "output_tokens": 1130,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:11.529532+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f80ea301514f2e1b57ec5eff9431d0961d18b492674eba3025744273e2c7b491",
+    "input_tokens": 14282,
+    "output_tokens": 327,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:20.295406+00:00"
+  }
+}

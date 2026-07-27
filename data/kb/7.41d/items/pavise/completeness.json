@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "8e612ab53008b1526cfb8e34908ae278648f4282c1a2942e381e546771cf28d6",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_pavise#cost",
+      "fact": "Pavise's item identifier is item_pavise."
+    },
+    {
+      "section": "gamefile:items/item_pavise#components",
+      "fact": "The component item identifiers are item_wizard_hat for Wizard Hat, item_fluffy_hat for Fluffy Hat, and item_ring_of_protection for Ring of Protection."
+    },
+    {
+      "section": "gamefile:items/item_pavise#components",
+      "fact": "Solar Crest's item identifier is item_solar_crest."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "cfcc0df5aafa1e753892d2eb49233306c5c29f1f74382c35bf3a2c08674943ce",
+    "input_tokens": 14467,
+    "output_tokens": 518,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:30.898978+00:00"
+  }
+}

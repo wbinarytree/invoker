@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "6d7ab648b6899d6d240b352bc116a7eef90085c5562bcd104c18de199ef078de",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_orchid#cost",
+      "fact": "Orchid Malevolence’s internal item identifier is item_orchid."
+    },
+    {
+      "section": "gamefile:items/item_orchid#components",
+      "fact": "Oblivion Staff’s internal item identifier is item_oblivion_staff."
+    },
+    {
+      "section": "gamefile:items/item_orchid#components",
+      "fact": "Claymore’s internal item identifier is item_claymore."
+    },
+    {
+      "section": "gamefile:items/item_orchid#components",
+      "fact": "Bloodthorn’s internal item identifier is item_bloodthorn."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "678abdc9dd55287e2d4512acb0dfcfbd5d5c6ca2a8df6a8e11c2cbe02af31b16",
+    "input_tokens": 14502,
+    "output_tokens": 877,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:46.414710+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "illusionsts_cape",
+  "title": "Illusionist's Cape",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "cf8b8764d9e3256e70c251bb74ca5036f829e3ee577da2e44207d7126f1981d9",
+  "citations": [
+    "gamefile:items/item_illusionsts_cape#attribs",
+    "loc:DOTA_Tooltip_Ability_item_illusionsts_cape_Description",
+    "gamefile:items/item_illusionsts_cape#cost",
+    "gamefile:items/item_illusionsts_cape#mechanics",
+    "loc:DOTA_Tooltip_Ability_item_illusionsts_cape_Lore"
+  ],
+  "packet_sha256": "b7b82305213ce7086d65cc7a2c141bb0101415f2372e0d2dd5a54406e53122bc",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c8d2d018840dcb27f370471b34f5ff1a24147e9b675bef7423a4b96a6a4572fa",
+    "input_tokens": 13850,
+    "output_tokens": 1725,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:20.607894+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3877f2f04955139d8c30346da77782a429ebdc93edd47e73b0e4db0f22d7390a",
+    "input_tokens": 14407,
+    "output_tokens": 1276,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:55.349528+00:00"
+  }
+}

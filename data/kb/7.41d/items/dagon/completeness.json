@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "949d86693a5cbd9dad14352c80f7f89304d88f73b6d708e4f0b3721216210946",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_dagon#components",
+      "fact": "Point Booster's item identifier is item_point_booster."
+    },
+    {
+      "section": "gamefile:items/item_dagon#components",
+      "fact": "Crown's item identifier is item_crown."
+    },
+    {
+      "section": "gamefile:items/item_dagon#components",
+      "fact": "Wizard Hat's item identifier is item_wizard_hat."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "817bde57f58d88f2f5dc04f9399b44828787df306e3efecfb10b2d5d62435111",
+    "input_tokens": 14617,
+    "output_tokens": 408,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:57:58.364147+00:00"
+  }
+}

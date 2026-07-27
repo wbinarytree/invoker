@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "nullifier",
+  "title": "Nullifier",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "de7b65281d74e4e38a562324af288a8f9323138e51b34c6efe362bbea758c27d",
+  "citations": [
+    "gamefile:items/item_nullifier#cost",
+    "gamefile:items/item_nullifier#attribs",
+    "loc:DOTA_Tooltip_ability_item_nullifier_Description",
+    "gamefile:items/item_nullifier#components",
+    "gamefile:items/item_nullifier#mechanics"
+  ],
+  "packet_sha256": "9671d5c6bc908397b34a58cbda763bff7f4e6c2fc6d610b2cdf957d91e1e0459",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1601ff2de625f0e36fe4cd60020be86e798a82425e63c422019961a60d75c20e",
+    "input_tokens": 13826,
+    "output_tokens": 1733,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:17.431447+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7b9ea048003c2da1a317e4df87b5f8102db5dcb00cfeb8991cdedded3d25939c",
+    "input_tokens": 14361,
+    "output_tokens": 2335,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:10.461075+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mystic_staff",
+  "title": "Mystic Staff",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d4339304d57ce96ed218fe4ae931b41fdf6d6e710ec21bdaef889a3efe7f9046",
+  "citations": [
+    "gamefile:items/item_mystic_staff#cost",
+    "gamefile:items/item_mystic_staff#attribs",
+    "gamefile:items/item_mystic_staff#mechanics",
+    "gamefile:items/item_mystic_staff#components",
+    "loc:DOTA_Tooltip_ability_item_mystic_staff_Lore"
+  ],
+  "packet_sha256": "96c1b2f072bc6da24957bc7f53818e60628f1956a32410da0c1948a89b3a297a",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "1eea2914581b0b5f2b605e5e591e8acf11b1174e82f2db418fd0508812ca00f8",
+    "input_tokens": 14204,
+    "output_tokens": 666,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:09.981049+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "ce7a44833962da157c4206aed3fe4981e11450e2693f4df2c1eb244185febfaa",
+    "input_tokens": 14259,
+    "output_tokens": 256,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:17.530592+00:00"
+  }
+}

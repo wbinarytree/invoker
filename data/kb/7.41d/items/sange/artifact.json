@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "sange",
+  "title": "Sange",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "f0a6d0002b603adca837190354b1b8ee703916805f90f94819be893821b2a1c4",
+  "citations": [
+    "gamefile:items/item_sange#cost",
+    "gamefile:items/item_sange#attribs",
+    "gamefile:items/item_sange#components",
+    "gamefile:items/item_sange#mechanics",
+    "loc:DOTA_Tooltip_ability_item_sange_Lore"
+  ],
+  "packet_sha256": "9d92b3cadd4b65c2e2152dbef59b0db65e928cd630c7d7f99d9afbd48255155c",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "612b1fadefa3c1bcb73265eee7d3cd1882ca4cfc7b276c2c0d29c6fd428e25de",
+    "input_tokens": 13837,
+    "output_tokens": 645,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:54.779377+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "547244512fb0051f984c7225400b344693b386614c6d7d82ec068c80da3dd576",
+    "input_tokens": 14317,
+    "output_tokens": 347,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:08.837758+00:00"
+  }
+}

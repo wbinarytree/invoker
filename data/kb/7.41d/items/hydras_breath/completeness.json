@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "e4b21f95f014a407a46769cf7ac403b5c126ce70a553a18a45e7b6187b1fc6cf",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_hydras_breath#components",
+      "fact": "Specialist's Array has the internal identifier item_specialists_array."
+    },
+    {
+      "section": "gamefile:items/item_hydras_breath#components",
+      "fact": "Dragon Lance has the internal identifier item_dragon_lance."
+    },
+    {
+      "section": "gamefile:items/item_hydras_breath#components",
+      "fact": "Orb of Venom has the internal identifier item_orb_of_venom."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "8517c863cdc0b8d87b3e3f9daefd3ba2a8b8a131c73a01036f5751f7920b490a",
+    "input_tokens": 14784,
+    "output_tokens": 1146,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:08:32.041677+00:00"
+  }
+}

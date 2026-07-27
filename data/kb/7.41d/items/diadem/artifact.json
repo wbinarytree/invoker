@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "diadem",
+  "title": "Diadem",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e0c4b847b2195ea02862a6bde2ef088697d34d5c61c26e7870ea8ea6ec52c193",
+  "citations": [
+    "gamefile:items/item_diadem#cost",
+    "gamefile:items/item_diadem#attribs",
+    "gamefile:items/item_diadem#mechanics",
+    "gamefile:items/item_diadem#components",
+    "loc:DOTA_Tooltip_ability_item_diadem_Lore"
+  ],
+  "packet_sha256": "25ba3488ceddc13fc58bba94bdaf42e33347764e2b1d2707375f36ea65e3ab67",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "d5089b01ac0c89a0906a1e0f5b5f5532cb9bcdcba8b927d93089f489b2a3fbd6",
+    "input_tokens": 14181,
+    "output_tokens": 717,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:33.801658+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "0f8465cab21c2ca54062b5af6d701fd0f774e3acddcbb2c541959df6512cf5c9",
+    "input_tokens": 14226,
+    "output_tokens": 326,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:59:43.202534+00:00"
+  }
+}

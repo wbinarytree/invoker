@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "veil_of_discord",
+  "title": "Veil of Discord",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d9e3c610b8346fe76e34e2d8721788addd0a8b09f4df8fc9bfe74b2179b63120",
+  "citations": [
+    "gamefile:items/item_veil_of_discord#cost",
+    "gamefile:items/item_veil_of_discord#attribs",
+    "loc:DOTA_Tooltip_ability_item_veil_of_discord_Description",
+    "gamefile:items/item_veil_of_discord#mechanics",
+    "gamefile:items/item_veil_of_discord#components",
+    "loc:DOTA_Tooltip_ability_item_veil_of_discord_Lore"
+  ],
+  "packet_sha256": "8b2c523bb4d7a679d3e4b9f4dc0e53b539b28503cb8d91e818376fefc5413d90",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "c4ea56122f2817db6e38abb0f773813f525fc3c02795fd8b8afa8e27817b644a",
+    "input_tokens": 13948,
+    "output_tokens": 2067,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:53.178821+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "959ee2c8b84bc88ec103e1bc8b09e6826c9f6fe10b06a3bfad50256b990cc05d",
+    "input_tokens": 14548,
+    "output_tokens": 1306,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:24.438573+00:00"
+  }
+}

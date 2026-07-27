@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "66ff6201bc18a65ea9a2eb68b275d53b761cfcd6349bd87341e72373846a8901",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_claymore#components",
+      "fact": "The internal item identifiers for the build products are absent: Butterfly is item_butterfly, Shadow Blade is item_invis_sword, Crystalys is item_lesser_crit, Orchid Malevolence is item_orchid, and Satanic is item_satanic."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "5846df8dc7a69f588ed216954879f5ff58fe08265898ee99b972709dc96ceeaf",
+    "input_tokens": 14247,
+    "output_tokens": 370,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:55.546037+00:00"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "2b568fbddc08371af06f8ef466271e900cf80055016159e382421c09d87b44aa",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_crellas_crozier_Description",
+      "fact": "All of the lost Health Restoration is redirected to the user every second."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "9c37e53712bc28db7dd4d63065057f7f5822a446abcbb157af700d26aaf79f33",
+    "input_tokens": 14649,
+    "output_tokens": 1027,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:58:32.606522+00:00"
+  }
+}

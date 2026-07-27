@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "claymore",
+  "title": "Claymore",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e8185d081eb5860bb1f35077948f710ec6477174c02c58dfcc6a0237c1b77816",
+  "citations": [
+    "gamefile:items/item_claymore#cost",
+    "gamefile:items/item_claymore#attribs",
+    "gamefile:items/item_claymore#components",
+    "gamefile:items/item_claymore#mechanics",
+    "loc:DOTA_Tooltip_ability_item_claymore_Lore"
+  ],
+  "packet_sha256": "66ff6201bc18a65ea9a2eb68b275d53b761cfcd6349bd87341e72373846a8901",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "4ca6ff1665b8cad6e593e1a3a8f055f754e0f524fa633e1e7b1bb4c86e913b6a",
+    "input_tokens": 14212,
+    "output_tokens": 1149,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:31.745062+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "09f4d23638cc3e48559691a4a5a0b2fd4a1b0df23a253b596cdca8239fa98943",
+    "input_tokens": 14281,
+    "output_tokens": 425,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:42.359624+00:00"
+  }
+}

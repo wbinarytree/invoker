@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "cloak",
+  "title": "Cloak",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "423b88fdebbb837a9d490774af5f4e846902a82b2f480b46c082e2b4367d816d",
+  "citations": [
+    "gamefile:items/item_cloak#cost",
+    "gamefile:items/item_cloak#attribs",
+    "gamefile:items/item_cloak#components",
+    "gamefile:items/item_cloak#mechanics",
+    "loc:DOTA_Tooltip_ability_item_cloak_Lore"
+  ],
+  "packet_sha256": "55c12b978b8d0ed8d8bf6e2c0498d1c048ef18e479700b470081552cebc9908b",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "ab67594498e42a2a45fb9bbcfede69da891065ae7c4250206817866f633c5edc",
+    "input_tokens": 14190,
+    "output_tokens": 869,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:20.607439+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "68630ce7a9c9ad97866794c35581a4cdeff4d99b6b45a7415ab1ec1980cd735d",
+    "input_tokens": 14261,
+    "output_tokens": 324,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:29.654499+00:00"
+  }
+}

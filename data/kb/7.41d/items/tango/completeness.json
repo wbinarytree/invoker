@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "7ed668ed78df2652ba155e4a33666f52ff4bed4111f880aff8e051c2ed63fd4b",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_tango#cost",
+      "fact": "The item's internal identifier is item_tango."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "702486f70e70b9813faf09448191d86416b6295b941229fdd6c4cae4561298ec",
+    "input_tokens": 14316,
+    "output_tokens": 386,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:45.995403+00:00"
+  }
+}

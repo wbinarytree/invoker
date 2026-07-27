@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "d00723ca8c7788e8debb32a8ce43ffdc88dcaa9f236d24147c4e0802170d4a5f",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_flask_Description",
+      "fact": "Use: Salve"
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "ba834bd7caeb6d259c7afaf0d3e9fcb9a6238ada84e6467321c6fbe0cc743a96",
+    "input_tokens": 14305,
+    "output_tokens": 286,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:06:32.975198+00:00"
+  }
+}

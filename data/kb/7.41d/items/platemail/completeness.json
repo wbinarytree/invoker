@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "4b68853c509e6ac5fe5b0f85ecdabeb13bf885295b8a87ea6d3730163d8eeff2",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_platemail#cost",
+      "fact": "Platemail's internal item identifier is item_platemail."
+    },
+    {
+      "section": "gamefile:items/item_platemail#components",
+      "fact": "The items it builds into have the internal identifiers item_assault (Assault Cuirass), item_lotus_orb (Lotus Orb), and item_shivas_guard (Shiva's Guard)."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "689415ec476ca5d15fed55b2c6437c5b954cae066a0f73d6c40f9752b169877e",
+    "input_tokens": 14190,
+    "output_tokens": 617,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:02.707943+00:00"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "32b4cde7d180e58ff323c2aaf92a2626c015fdb624923750d631ae8378c48c94",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_butterfly#cost",
+      "fact": "Butterfly's item identifier is item_butterfly."
+    },
+    {
+      "section": "gamefile:items/item_butterfly#components",
+      "fact": "Eaglesong's item identifier is item_eagle."
+    },
+    {
+      "section": "gamefile:items/item_butterfly#components",
+      "fact": "Claymore's item identifier is item_claymore."
+    },
+    {
+      "section": "gamefile:items/item_butterfly#components",
+      "fact": "Talisman of Evasion's item identifier is item_talisman_of_evasion."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "d78fab51eeacad137e3eb8bb258c9f606655b24f393817ec6aea619f75749ccb",
+    "input_tokens": 14248,
+    "output_tokens": 460,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:56:44.999653+00:00"
+  }
+}

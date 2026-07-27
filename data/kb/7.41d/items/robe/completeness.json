@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "3e8dcf0bf261351a898a9a06ded8c7bae46c5999d89844ffd7b64259296ba2e4",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_robe#cost",
+      "fact": "Robe of the Magi has the item identifier item_robe."
+    },
+    {
+      "section": "gamefile:items/item_robe#components",
+      "fact": "Diffusal Blade has the item identifier item_diffusal_blade."
+    },
+    {
+      "section": "gamefile:items/item_robe#components",
+      "fact": "Kaya has the item identifier item_kaya."
+    },
+    {
+      "section": "gamefile:items/item_robe#components",
+      "fact": "Oblivion Staff has the item identifier item_oblivion_staff."
+    },
+    {
+      "section": "gamefile:items/item_robe#components",
+      "fact": "Veil of Discord has the item identifier item_veil_of_discord."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "92fa3b9736a8da5a8239bce2fc54c96eeed789f5913fb714896648df7b4ca05c",
+    "input_tokens": 14215,
+    "output_tokens": 400,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:14:07.764275+00:00"
+  }
+}

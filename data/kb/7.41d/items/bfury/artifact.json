@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bfury",
+  "title": "Battle Fury",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "4c0885eeabb6639e22fb6651092d045bb2afea69fd1364d062f9fd7a9a5677d0",
+  "citations": [
+    "gamefile:items/item_bfury#cost",
+    "gamefile:items/item_bfury#attribs",
+    "loc:DOTA_Tooltip_ability_item_bfury_Description",
+    "gamefile:items/item_bfury#components",
+    "gamefile:items/item_bfury#mechanics",
+    "loc:DOTA_Tooltip_ability_item_bfury_Lore"
+  ],
+  "packet_sha256": "7635c83d7ff455fa11f213c719afc1dd6ad334c71703f0baf279f11bee0f1027",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "07675c3a8df8be1b7f85feafdb499aa7564be01f10b79aba4d9d8a9a2a725758",
+    "input_tokens": 14420,
+    "output_tokens": 1479,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:51.356119+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "332f4b9f8b38239b9569d2e32eaba3b4faa34c35b6fe2f4a91c022a1170f9a44",
+    "input_tokens": 14520,
+    "output_tokens": 2190,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:43.316046+00:00"
+  }
+}

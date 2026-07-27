@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "a3d4828ad0ea0414435ac6cbd04b2b087f8340e1a515266834f5306cbce7e4c5",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_tiara_of_selemene#components",
+      "fact": "The internal identifiers of the items it builds into are item_octarine_core for Octarine Core, item_refresher for Refresher Orb, and item_sheepstick for Scythe of Vyse."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "51d662c501bf82ab29309824951308e95580c07629080a49148c90562894661b",
+    "input_tokens": 14247,
+    "output_tokens": 385,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:34.972579+00:00"
+  }
+}

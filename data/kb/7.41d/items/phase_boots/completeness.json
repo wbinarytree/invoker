@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "e90ebf540812c81719c560514c613e4425baa6790e15e142ae59eb9e604cbaac",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_phase_boots#cost",
+      "fact": "The item's internal identifier is item_phase_boots."
+    },
+    {
+      "section": "gamefile:items/item_phase_boots#components",
+      "fact": "Boots of Speed has the internal identifier item_boots."
+    },
+    {
+      "section": "gamefile:items/item_phase_boots#components",
+      "fact": "Chainmail has the internal identifier item_chainmail."
+    },
+    {
+      "section": "gamefile:items/item_phase_boots#components",
+      "fact": "Blades of Attack has the internal identifier item_blades_of_attack."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "b393acdaface4bf645106807a2147dfc9ee498cd22e523966fd09089398398e0",
+    "input_tokens": 14527,
+    "output_tokens": 536,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:13:23.752727+00:00"
+  }
+}

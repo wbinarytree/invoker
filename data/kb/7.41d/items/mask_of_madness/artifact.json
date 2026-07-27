@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "mask_of_madness",
+  "title": "Mask of Madness",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "e70ffd085ab6c248cb416c85abede4056a9a6f5b07c4ac726430dd38da835a5b",
+  "citations": [
+    "gamefile:items/item_mask_of_madness#cost",
+    "gamefile:items/item_mask_of_madness#attribs",
+    "loc:DOTA_Tooltip_ability_item_mask_of_madness_Description",
+    "gamefile:items/item_mask_of_madness#components",
+    "gamefile:items/item_mask_of_madness#mechanics",
+    "loc:DOTA_Tooltip_ability_item_mask_of_madness_Lore"
+  ],
+  "packet_sha256": "b5b8d69f8fcb96b1b5e4bc988b9d95491bb8758e2ff8e8b341013ca94cdb3990",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5f26db6d23e4a2abe6c9b6346459c8e770759920335d2fddaa53203f0944c1d8",
+    "input_tokens": 13954,
+    "output_tokens": 1477,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:32.557577+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "2a4985a6120d09e02611ca9c36bb938b7a32f61d91ef204e47e56529940dab4d",
+    "input_tokens": 14475,
+    "output_tokens": 798,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:09:50.862690+00:00"
+  }
+}

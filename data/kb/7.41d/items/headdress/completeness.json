@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "229fbcc0de8ea44b1fe424a81e50cb7116becd6f74eca9386211dfc365ed85c1",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "gamefile:items/item_headdress#components",
+      "fact": "Ring of Regen has the internal identifier item_ring_of_regen."
+    },
+    {
+      "section": "gamefile:items/item_headdress#components",
+      "fact": "Drum of Endurance has the internal identifier item_ancient_janggo."
+    },
+    {
+      "section": "gamefile:items/item_headdress#components",
+      "fact": "Mekansm has the internal identifier item_mekansm."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "1c7b281fcf577584d251c4385d861594a12f7883e34e6343213be000ecdc800a",
+    "input_tokens": 14369,
+    "output_tokens": 1302,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:07:10.579896+00:00"
+  }
+}

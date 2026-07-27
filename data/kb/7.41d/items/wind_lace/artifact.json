@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "wind_lace",
+  "title": "Wind Lace",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3f92f48ce32a0881da03bfbdef59b56a617a88aecd19ad9ac57c50ccdc79459a",
+  "citations": [
+    "gamefile:items/item_wind_lace#cost",
+    "gamefile:items/item_wind_lace#attribs",
+    "gamefile:items/item_wind_lace#mechanics",
+    "gamefile:items/item_wind_lace#components",
+    "loc:DOTA_Tooltip_Ability_item_wind_lace_Description",
+    "loc:DOTA_Tooltip_Ability_item_wind_lace_Lore"
+  ],
+  "packet_sha256": "69d34d41964d5ae6bdd88c8ff2a51b0adf7a34b79d4559d3f313dda697479f77",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "bbeb409c3eea636227d8c619504e97ffb9236ffc0272a9cc42a892d001cb9f67",
+    "input_tokens": 13812,
+    "output_tokens": 1302,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:19:51.574670+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "3329fe23f38770bff38c712ca05896dcb76f05bc6e158103916ea9ea145a471c",
+    "input_tokens": 14298,
+    "output_tokens": 536,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:20:07.210483+00:00"
+  }
+}

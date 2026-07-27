@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "3bcd8d9d306b213276285c3f12b568498d2b30335d57177802e13e9ff70a46d6",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_ability_item_glimmer_cape_Description",
+      "fact": "The barrier specifically absorbs magic damage (up to 375 damage)."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "665b63f7cff2f0238a664864f7bcb207249c8cb886fa8114da01957befc06dce",
+    "input_tokens": 14529,
+    "output_tokens": 1025,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:05:03.384589+00:00"
+  }
+}

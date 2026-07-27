@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_file": "artifact.json",
+  "packet_sha256": "257c7c8502df1dbf8b69e36d0bb91a2193a303c0150c04dd80e31bd3af8cf343",
+  "packet_matches_artifact": true,
+  "missing": [
+    {
+      "section": "loc:DOTA_Tooltip_Ability_item_specialists_array_Description",
+      "fact": "The primary attack deals 20 + 100% of the damage of a normal attack."
+    }
+  ],
+  "guard_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "completeness-guard",
+    "prompt_version": "1",
+    "request_sha256": "70b435d0ba9b3ff59514f3e2c2ed28c48215c5b74e7850615c5595aa37477d97",
+    "input_tokens": 14615,
+    "output_tokens": 962,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:17:42.321942+00:00"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "oblivion_staff",
+  "title": "Oblivion Staff",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d4cd07074170dad587a7719fe0635223d65af920ed6996a90588dd18219ab174",
+  "citations": [
+    "gamefile:items/item_oblivion_staff#cost",
+    "gamefile:items/item_oblivion_staff#attribs",
+    "gamefile:items/item_oblivion_staff#components",
+    "gamefile:items/item_oblivion_staff#mechanics",
+    "loc:DOTA_Tooltip_ability_item_oblivion_staff_Lore"
+  ],
+  "packet_sha256": "1bc3a40dc1aeaf1e9476459022459e67a6200c194a2cf1ccb678ebd9e4137b70",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a3f9fc0a73afc70093aa7e777b147bb8a1d933180e51d9a82a058f6511e163cc",
+    "input_tokens": 13846,
+    "output_tokens": 1023,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:01.965913+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "f4c6fc18cca2d8daf3432fe7833673f88c8cbf9f59aed480483a5a4cdcbf7c20",
+    "input_tokens": 14333,
+    "output_tokens": 528,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:19.277202+00:00"
+  }
+}

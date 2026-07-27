@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "bloodstone",
+  "title": "Bloodstone",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "6252da1afe8b07dbc77a62a31c7c3509f1eb9c8de79a8be918a2e280a9f03354",
+  "citations": [
+    "gamefile:items/item_bloodstone#cost",
+    "gamefile:items/item_bloodstone#attribs",
+    "loc:DOTA_Tooltip_ability_item_bloodstone_Description",
+    "gamefile:items/item_bloodstone#components",
+    "gamefile:items/item_bloodstone#mechanics",
+    "loc:DOTA_Tooltip_ability_item_bloodstone_Lore"
+  ],
+  "packet_sha256": "0d69341189518d6b0b84b05e6a1d7c097fc245889f6e369601998ec15dc856f2",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "5e026e41843abff0a92484ae910205a384c4bbf66f68eac2b0988329e3e7aa49",
+    "input_tokens": 14346,
+    "output_tokens": 945,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:52:37.639145+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "c7034105ee89e2270d1dc48bb16aa7c840f6544e42bb1356ba5a29bae2d6427b",
+    "input_tokens": 14460,
+    "output_tokens": 1927,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T22:53:19.199570+00:00"
+  }
+}

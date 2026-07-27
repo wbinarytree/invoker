@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "octarine_core",
+  "title": "Octarine Core",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "529f8983ba4fe21a08e6f2de78269a28505d2df62d6c7af50d2b0319437cae8c",
+  "citations": [
+    "gamefile:items/item_octarine_core#cost",
+    "gamefile:items/item_octarine_core#attribs",
+    "gamefile:items/item_octarine_core#mechanics",
+    "gamefile:items/item_octarine_core#components",
+    "loc:DOTA_Tooltip_ability_item_octarine_core_Lore"
+  ],
+  "packet_sha256": "fdffe60643fe5482418cf7e3398132f2701d1bd7742bcc3abdffb984e4ad5eb4",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "68bf01c4185c3def63f46b7a0830d3289a92573213d745643e93745de135c9ea",
+    "input_tokens": 13794,
+    "output_tokens": 722,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:07.988169+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "7b010c925a6a4c2fdd656a5f071ddfe931edae0086efab9784870b9d435ad187",
+    "input_tokens": 14291,
+    "output_tokens": 455,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:20.959470+00:00"
+  }
+}

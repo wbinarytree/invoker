@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "pavise",
+  "title": "Pavise",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "d5000b20e7fd38e1d2f601079f4b959858104a5a19e595e563ae59ae71765cae",
+  "citations": [
+    "gamefile:items/item_pavise#cost",
+    "gamefile:items/item_pavise#attribs",
+    "loc:DOTA_Tooltip_ability_item_pavise_Description",
+    "gamefile:items/item_pavise#components",
+    "gamefile:items/item_pavise#mechanics",
+    "loc:DOTA_Tooltip_ability_item_pavise_Lore"
+  ],
+  "packet_sha256": "8e612ab53008b1526cfb8e34908ae278648f4282c1a2942e381e546771cf28d6",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "a9f3037358ac86b9651ea3f6c109cb82f50a8912e7f11b7593bc9dd802b48c8f",
+    "input_tokens": 13876,
+    "output_tokens": 1421,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:10:47.607580+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "694b4dccd2e709f4babb4bca0ecb3417602396994f84fe1e8d12ac9ec676cdbd",
+    "input_tokens": 14414,
+    "output_tokens": 1063,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:11:13.795278+00:00"
+  }
+}

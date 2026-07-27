@@ -1,0 +1,40 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "soul_ring",
+  "title": "Soul Ring",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "742234749f19ebbfbebd5f00c84641b34fecdd10952b7f064728e7318c21e8c0",
+  "citations": [
+    "gamefile:items/item_soul_ring#cost",
+    "gamefile:items/item_soul_ring#attribs",
+    "loc:DOTA_Tooltip_ability_item_soul_ring_Description",
+    "gamefile:items/item_soul_ring#components",
+    "gamefile:items/item_soul_ring#mechanics",
+    "loc:DOTA_Tooltip_ability_item_soul_ring_Lore"
+  ],
+  "packet_sha256": "5043bb5c1fa3d68dab9003fb63a897e8f7ed13e22a41b5c1f601a2a96db84722",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "6",
+    "request_sha256": "8ae8e06c8a12c12e42b6883ffc81d2b4113ea715e5e051ef16221c64a6a8e5bd",
+    "input_tokens": 13860,
+    "output_tokens": 1216,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:23.206135+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "6",
+    "request_sha256": "57d9cb02a44f3b9484b9bc06379256f02fa41084b4b466730c454e98f6a5d914",
+    "input_tokens": 14352,
+    "output_tokens": 937,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-26T23:16:48.707304+00:00"
+  }
+}
