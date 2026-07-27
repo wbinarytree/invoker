@@ -55,7 +55,7 @@ def item_slug(name: str) -> str:
     return name.removeprefix("item_")
 
 
-def discover_items(game_data_dir: Path, patch: str, kb: Path) -> list[str]:
+def item_scope(game_data_dir: Path, patch: str) -> list[str]:
     """Item scope per the generators spec rule, from file-native flags."""
     records = json.loads((game_data_dir / patch / "items.json").read_text())
     loc = json.loads(
@@ -87,9 +87,17 @@ def discover_items(game_data_dir: Path, patch: str, kb: Path) -> list[str]:
         in_scope = neutral or (
             purchasable and (cost > 0 or name in built or "ItemStockMax" in rec)
         )
-        if in_scope and not (kb / "items" / item_slug(name) / "artifact.json").exists():
+        if in_scope:
             pending.append(name)
     return pending
+
+
+def discover_items(game_data_dir: Path, patch: str, kb: Path) -> list[str]:
+    return [
+        name
+        for name in item_scope(game_data_dir, patch)
+        if not (kb / "items" / item_slug(name) / "artifact.json").exists()
+    ]
 
 
 def bucket_for(entity_dir: Path) -> str:
