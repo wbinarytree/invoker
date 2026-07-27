@@ -43,6 +43,9 @@ This file is the shortest path to the active design direction. Anything not list
   12 flagged; items 291/292: 200 clean, 91 flagged — 69 identifier-only
   — aeon_disk parked):
   [docs/specs/2026-07-26-batch-kb-generation.md](specs/2026-07-26-batch-kb-generation.md)
+- Item KB quality follow-ups — mechanics packet policy, guard v2,
+  qualifier prompt, card lore (draft, needs sign-off):
+  [docs/specs/2026-07-27-item-kb-quality-followups.md](specs/2026-07-27-item-kb-quality-followups.md)
 
 ## Active plans
 
