@@ -12,6 +12,7 @@ from invoker.benchmark.report import CaseResult, RunReport, SkippedCase
 from invoker.benchmark.schemas import QACase
 from invoker.benchmark.scorer import JUDGE_PROMPT_VERSION, Judge, score_case
 from invoker.corpus.store import CorpusStore
+from invoker.gen.artifacts import kb_fingerprint
 from invoker.gen.client import GenerationError
 from invoker.gen.concepts import GenerationBackend
 
@@ -25,19 +26,6 @@ def cases_fingerprint(cases: list[QACase]) -> str:
     return digest.hexdigest()
 
 
-def kb_fingerprint(kb_dir: Path) -> tuple[str, int]:
-    """Content hash over every file in the KB archive plus the artifact
-    count — the run report's record of exactly which KB state was measured."""
-    digest = hashlib.sha256()
-    count = 0
-    if kb_dir.is_dir():
-        for path in sorted(kb_dir.rglob("*")):
-            if path.is_file():
-                digest.update(str(path.relative_to(kb_dir)).encode())
-                digest.update(path.read_bytes())
-                if path.name == "artifact.json":
-                    count += 1
-    return digest.hexdigest(), count
 
 
 def run_benchmark(

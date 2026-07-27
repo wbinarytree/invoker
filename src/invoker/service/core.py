@@ -9,16 +9,25 @@ from typing import Any
 
 import yaml
 
-from invoker.identity import IdentityExportError, available_locales, hero_lookup_candidates
+from invoker.gen.artifacts import EntityArtifact, load_entity_article
+from invoker.gen.client import GenerationError
+from invoker.identity import (
+    IdentityExportError,
+    available_locales,
+    export_identity_localization,
+    hero_lookup_candidates,
+)
 from invoker.kg.hero_context import (
     HeroNotFoundError,
     build_hero_context_from_source,
 )
 from invoker.paths import team_index_file, team_registry_file
+from invoker.service.kb_bundle import KB_INDEX_SCHEMA_VERSION, KB_KIND_CLASSES
+from invoker.snapshot.changelog import search_changelog as search_changelog_entries
 from invoker.sources.game_files import GameFilesSource, GameFilesSourceError
 
 SERVICE_SCHEMA_VERSION = 1
-BUNDLE_SCHEMA_VERSION = 1
+BUNDLE_SCHEMA_VERSION = 2
 
 
 class KnowledgeServiceError(LookupError):
@@ -94,12 +103,29 @@ class KnowledgeService:
         raw = self.metadata.get("default_patch")
         return raw if isinstance(raw, str) and raw else None
 
+    @cached_property
+    def kb_patches(self) -> list[str]:
+        raw = self.metadata.get("kb_patches")
+        if isinstance(raw, list):
+            return sorted({str(p) for p in raw if isinstance(p, str) and p})
+        return []
+
+    @cached_property
+    def available_patches(self) -> list[str]:
+        """Union of game-constants/derived patches and KB patches — a
+        KB-only bundle must resolve its patch without claiming game data."""
+        return sorted({*self.patches, *self.kb_patches})
+
     def list_bundle_patches(self) -> dict[str, Any]:
-        patch = self.default_patch if self.default_patch in self.patches else None
+        patch = self.default_patch if self.default_patch in self.available_patches else None
         return self._envelope(
             kind="bundle_patches",
             patch=patch,
-            data={"patches": self.patches, "default_patch": patch},
+            data={
+                "patches": self.patches,
+                "default_patch": patch,
+                "kb_patches": self.kb_patches,
+            },
             source={
                 "artifact": "bundle_metadata",
                 "schema_version": _int_or_none(self.metadata.get("schema_version")),
@@ -147,6 +173,136 @@ class KnowledgeService:
             patch=resolved_patch,
             data=dataclasses.asdict(packet),
             source=self._game_source_metadata(resolved_patch),
+        )
+
+    def kb_catalog(self, patch: str | None = None, kind: str | None = None) -> dict[str, Any]:
+        resolved_patch = self._resolve_patch(patch)
+        entries = list(self._kb_entry_map(resolved_patch).values())
+        if kind is not None:
+            if kind not in KB_KIND_CLASSES:
+                raise KnowledgeServiceError(
+                    "invalid_kb_kind",
+                    f"unknown KB kind {kind!r}",
+                    details={"available_kinds": sorted(KB_KIND_CLASSES)},
+                )
+            entries = [entry for entry in entries if entry.get("kind") == kind]
+        return self._envelope(
+            kind="kb_catalog",
+            patch=resolved_patch,
+            data={"kind": kind, "count": len(entries), "entries": entries},
+            source=self._kb_source(resolved_patch),
+        )
+
+    def kb_resolve(self, query: str, patch: str | None = None) -> dict[str, Any]:
+        """Deterministic, conservative KB entity resolution: exact ids,
+        slugs, casefolded titles, plus source-backed item names/aliases from
+        every bundled locale — resolution keys may be any locale, the
+        resolved content is English. Ambiguity returns candidates; no fuzzy
+        matching."""
+        resolved_patch = self._resolve_patch(patch)
+        entry_map = self._kb_entry_map(resolved_patch)
+        token = _normalize(str(query))
+        candidates: dict[str, dict[str, Any]] = {}
+        if token:
+            for entry_id, entry in entry_map.items():
+                matches = [
+                    {"field": field, "value": entry.get(field), "source": "kb_index"}
+                    for field in ("id", "slug", "title")
+                    if _normalize(str(entry.get(field) or "")) == token
+                ]
+                if matches:
+                    candidates[entry_id] = {**entry, "matches": matches}
+        alias_index, alias_source = self._kb_item_aliases(resolved_patch)
+        if token:
+            for match in alias_index.get(token, []):
+                entry_id = str(match["id"])
+                candidate = candidates.get(entry_id)
+                if candidate is None:
+                    base = entry_map.get(entry_id)
+                    if base is None:
+                        continue
+                    candidate = candidates.setdefault(entry_id, {**base, "matches": []})
+                candidate["matches"].append(
+                    {key: value for key, value in match.items() if key != "id"}
+                )
+        return self._envelope(
+            kind="kb_resolution",
+            patch=resolved_patch,
+            data={
+                "query": str(query),
+                "candidates": list(candidates.values()),
+                "alias_source": alias_source,
+            },
+            source=self._kb_source(resolved_patch),
+        )
+
+    def kb_card(self, entity_id: str, patch: str | None = None) -> dict[str, Any]:
+        resolved_patch = self._resolve_patch(patch)
+        artifact, _body, _entity_dir = self._load_kb_entity(entity_id, resolved_patch)
+        return self._envelope(
+            kind="kb_card",
+            patch=resolved_patch,
+            data={
+                "id": entity_id,
+                "kind": artifact.kind,
+                "slug": artifact.slug,
+                "title": artifact.title,
+                "identity_line": artifact.card.sentences[0].text,
+                "card": artifact.card.model_dump(),
+                "card_provenance": artifact.card_provenance.model_dump(),
+            },
+            source=self._kb_entity_source(resolved_patch, artifact),
+        )
+
+    def kb_article(self, entity_id: str, patch: str | None = None) -> dict[str, Any]:
+        resolved_patch = self._resolve_patch(patch)
+        artifact, _body, entity_dir = self._load_kb_entity(entity_id, resolved_patch)
+        file_text = (entity_dir / artifact.article_file).read_text()
+        return self._envelope(
+            kind="kb_article",
+            patch=resolved_patch,
+            data={
+                "id": entity_id,
+                "kind": artifact.kind,
+                "slug": artifact.slug,
+                "title": artifact.title,
+                "article": file_text,
+                "citations": artifact.citations,
+                "packet_sha256": artifact.packet_sha256,
+                "article_provenance": artifact.article_provenance.model_dump(),
+            },
+            source=self._kb_entity_source(resolved_patch, artifact),
+        )
+
+    def search_changelog(
+        self,
+        grep: str | None = None,
+        entity: str | None = None,
+        note_patch: str | None = None,
+        patch: str | None = None,
+    ) -> dict[str, Any]:
+        resolved_patch = self._resolve_patch(patch)
+        if grep is None and entity is None and note_patch is None:
+            raise KnowledgeServiceError(
+                "changelog_query_required",
+                "provide at least one of: grep, entity, note_patch",
+            )
+        changelog = self._changelog(resolved_patch)
+        hits = search_changelog_entries(
+            changelog, grep=grep, entity=entity, note_patch=note_patch, locale="english"
+        )
+        return self._envelope(
+            kind="changelog_search",
+            patch=resolved_patch,
+            data={
+                "query": {"grep": grep, "entity": entity, "note_patch": note_patch},
+                "count": len(hits),
+                "hits": hits,
+            },
+            source={
+                "artifact": "changelog",
+                "schema_version": _int_or_none(changelog.get("schema_version")),
+            },
         )
 
     def resolve_team(self, query: str | int, patch: str | None = None) -> dict[str, Any]:
@@ -264,22 +420,22 @@ class KnowledgeService:
 
     def _resolve_patch(self, patch: str | None) -> str:
         if patch is not None:
-            if patch not in self.patches:
+            if patch not in self.available_patches:
                 raise KnowledgeServiceError(
                     "patch_not_found",
                     f"resource bundle does not contain patch={patch!r}",
                     status_code=404,
-                    details={"available_patches": self.patches},
+                    details={"available_patches": self.available_patches},
                 )
             return patch
-        if self.default_patch in self.patches:
+        if self.default_patch in self.available_patches:
             return str(self.default_patch)
-        if len(self.patches) == 1:
-            return self.patches[0]
+        if len(self.available_patches) == 1:
+            return self.available_patches[0]
         raise KnowledgeServiceError(
             "patch_ambiguous",
             "resource bundle contains multiple patches and no default patch",
-            details={"available_patches": self.patches},
+            details={"available_patches": self.available_patches},
         )
 
     def _game_source(self, patch: str) -> GameFilesSource:
@@ -323,6 +479,185 @@ class KnowledgeService:
             locales = ("english",)
         self.__dict__[cache_name] = locales
         return locales
+
+    def _kb_index(self, patch: str) -> dict[str, Any]:
+        cache_name = f"_kb_index_{_safe_attr(patch)}"
+        cached = self.__dict__.get(cache_name)
+        if cached is not None:
+            return cached
+        path = self.bundle_root / "kb" / patch / "index.json"
+        if not path.exists():
+            raise KnowledgeServiceError(
+                "missing_kb",
+                f"resource bundle does not contain a KB for patch={patch}; "
+                f"missing {path}. Run: invoker export-kb --patch {patch} "
+                f"--out-dir {self.bundle_root}",
+                status_code=404,
+            )
+        raw = json.loads(path.read_text())
+        if not isinstance(raw, dict) or raw.get("schema_version") != KB_INDEX_SCHEMA_VERSION:
+            raise KnowledgeServiceError(
+                "invalid_kb_index",
+                "KB index must be a JSON object with schema_version="
+                f"{KB_INDEX_SCHEMA_VERSION}: {path}",
+                status_code=500,
+            )
+        if raw.get("patch") != patch:
+            raise KnowledgeServiceError(
+                "invalid_kb_index",
+                f"KB index patch {raw.get('patch')!r} does not match its "
+                f"directory patch {patch!r}: {path}",
+                status_code=500,
+            )
+        self.__dict__[cache_name] = raw
+        return raw
+
+    def _kb_entry_map(self, patch: str) -> dict[str, dict[str, Any]]:
+        cache_name = f"_kb_entries_{_safe_attr(patch)}"
+        cached = self.__dict__.get(cache_name)
+        if cached is None:
+            cached = {
+                str(entry["id"]): entry
+                for entry in self._kb_index(patch).get("entries") or []
+                if isinstance(entry, dict) and entry.get("id")
+            }
+            self.__dict__[cache_name] = cached
+        return cached
+
+    def _kb_source(self, patch: str) -> dict[str, Any]:
+        index = self._kb_index(patch)
+        return {
+            "artifact": "kb_index",
+            "schema_version": _int_or_none(index.get("schema_version")),
+            "kb_sha256": index.get("kb_sha256"),
+            "artifact_count": _int_or_none(index.get("artifact_count")),
+        }
+
+    def _kb_entity_source(self, patch: str, artifact: EntityArtifact) -> dict[str, Any]:
+        index = self._kb_index(patch)
+        return {
+            "artifact": "kb_entity",
+            "schema_version": artifact.schema_version,
+            "article_sha256": artifact.article_sha256,
+            "kb_sha256": index.get("kb_sha256"),
+        }
+
+    def _load_kb_entity(self, entity_id: str, patch: str) -> tuple[EntityArtifact, str, Path]:
+        kind, sep, slug = str(entity_id).partition("/")
+        if not sep or kind not in KB_KIND_CLASSES or not slug:
+            raise KnowledgeServiceError(
+                "invalid_kb_id",
+                "KB entity id must be '<kind>/<slug>' with kind in "
+                f"{sorted(KB_KIND_CLASSES)}; got {entity_id!r}",
+            )
+        self._kb_index(patch)
+        entity_dir = self.bundle_root / "kb" / patch / KB_KIND_CLASSES[kind] / slug
+        artifact_path = entity_dir / "artifact.json"
+        if not artifact_path.exists():
+            raise KnowledgeServiceError(
+                "kb_entity_not_found",
+                f"KB has no entity {entity_id!r} for patch={patch}; "
+                "use kb_resolve or kb_catalog to find valid ids",
+                status_code=404,
+            )
+        try:
+            artifact, body = load_entity_article(artifact_path)
+        except GenerationError as exc:
+            raise KnowledgeServiceError(
+                "invalid_kb_artifact",
+                f"{entity_id}: {exc}",
+                status_code=500,
+            ) from exc
+        return artifact, body, entity_dir
+
+    def _kb_item_aliases(
+        self, patch: str
+    ) -> tuple[dict[str, list[dict[str, Any]]], str | None]:
+        """Token index over item identity data for the KB items present in
+        the index. Aliases and display names come from every bundled locale
+        — they are lookup keys, not content. Returns (index, alias_source);
+        alias_source is None when the bundle has no usable game constants,
+        which degrades resolution to slug/title, recorded — not hidden."""
+        cache_name = f"_kb_item_aliases_{_safe_attr(patch)}"
+        cached = self.__dict__.get(cache_name)
+        if cached is not None:
+            return cached
+        kb_item_ids = {
+            entry_id
+            for entry_id, entry in self._kb_entry_map(patch).items()
+            if entry.get("kind") == "item"
+        }
+        alias_index: dict[str, list[dict[str, Any]]] = {}
+        alias_source: str | None = None
+        identity: dict[str, Any] | None = None
+        if kb_item_ids:
+            try:
+                identity = export_identity_localization(
+                    self.bundle_root / "game_constants",
+                    patch,
+                    locales=self._game_locales(patch),
+                )
+            except IdentityExportError:
+                identity = None
+        if identity is not None:
+            alias_source = "game_constants"
+
+            def add(
+                entry_id: str, field: str, value: Any, locale: str | None = None
+            ) -> None:
+                token = _normalize(str(value))
+                if not token:
+                    return
+                match: dict[str, Any] = {
+                    "id": entry_id,
+                    "field": field,
+                    "value": value,
+                    "source": "game_constants",
+                }
+                if locale is not None:
+                    match["locale"] = locale
+                alias_index.setdefault(token, []).append(match)
+
+            for item in identity.get("items") or []:
+                internal_name = str(item.get("internal_name") or "")
+                entry_id = f"item/{internal_name.removeprefix('item_')}"
+                if entry_id not in kb_item_ids:
+                    continue
+                add(entry_id, "internal_name", internal_name)
+                if item.get("item_id") is not None:
+                    add(entry_id, "item_id", item["item_id"])
+                for locale, name in (item.get("display_names") or {}).items():
+                    add(entry_id, "display_name", name, locale)
+                for locale, aliases in (item.get("aliases") or {}).items():
+                    for alias in aliases:
+                        add(entry_id, "alias", alias, locale)
+        result = (alias_index, alias_source)
+        self.__dict__[cache_name] = result
+        return result
+
+    def _changelog(self, patch: str) -> dict[str, Any]:
+        cache_name = f"_changelog_{_safe_attr(patch)}"
+        cached = self.__dict__.get(cache_name)
+        if cached is not None:
+            return cached
+        path = self.bundle_root / "game_constants" / patch / "changelog.json"
+        if not path.exists():
+            raise KnowledgeServiceError(
+                "missing_changelog",
+                f"resource bundle does not contain changelog.json for patch={patch}; "
+                "regenerate the game-file snapshot with patch-note files present "
+                "(docs/game-files-snapshot.md) and re-assemble the bundle",
+                status_code=404,
+            )
+        raw = json.loads(path.read_text())
+        if not isinstance(raw, dict):
+            raise KnowledgeServiceError(
+                "invalid_changelog",
+                f"changelog must be a JSON object: {path}",
+                status_code=500,
+            )
+        self.__dict__[cache_name] = raw
+        return raw
 
     def _team_index_source(self, patch: str) -> dict[str, Any]:
         index = self._team_index(patch)
@@ -778,7 +1113,9 @@ def _strip_internal_storage(value: Any) -> Any:
 
 
 def _normalize(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "", value.lower())
+    # Unicode-aware (same rule as invoker.identity): resolution keys may be
+    # any bundled locale, so CJK names must survive normalization.
+    return "".join(char for char in value.casefold() if char.isalnum())
 
 
 def _int_or_none(value: Any) -> int | None:

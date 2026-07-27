@@ -46,6 +46,9 @@ This file is the shortest path to the active design direction. Anything not list
   qualifier prompts v7/v8 + mandatory H1, card lore (executed
   2026-07-27; all runs complete, corpus accepted):
   [docs/specs/2026-07-27-item-kb-quality-followups.md](specs/2026-07-27-item-kb-quality-followups.md)
+- KB exposure — service ladder + consumer bundle for phylactery
+  (accepted 2026-07-27; invoker-side slice implemented):
+  [docs/specs/2026-07-27-kb-exposure-service-and-bundle.md](specs/2026-07-27-kb-exposure-service-and-bundle.md)
 
 ## Active plans
 

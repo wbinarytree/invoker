@@ -818,6 +818,39 @@ def export_game_resources_cmd(
     typer.echo(f"Locales: {', '.join(bundle['locales'])}")
 
 
+@app.command("export-kb")
+def export_kb_cmd(
+    patch: Annotated[str, typer.Option(help="Patch whose committed KB to export.")],
+    out_dir: Annotated[
+        Path,
+        typer.Option(
+            "--out-dir",
+            help="Resource bundle root to write kb/<patch>/ into (bundle.json is "
+            "created or updated to record the KB patch).",
+        ),
+    ],
+    kb_dir_override: KbDirOption = None,
+) -> None:
+    """Export data/kb/<patch>/ into a consumer resource bundle: verified
+    article/artifact pairs plus index.json (catalog + KB fingerprint) and
+    sources.json (corpus hosts for citation links)."""
+    from invoker.gen.client import GenerationError
+    from invoker.paths import kb_dir
+    from invoker.service.kb_bundle import KbExportError, export_kb_bundle
+
+    cfg = _load_config()
+    source = kb_dir_override or kb_dir(cfg.data_dir, patch)
+    try:
+        report = export_kb_bundle(source, patch, out_dir)
+    except (KbExportError, GenerationError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"KB bundle: {report.out_dir}")
+    for kind in sorted(report.counts):
+        typer.echo(f"{kind.capitalize()}s: {report.counts[kind]}")
+    typer.echo(f"Fingerprint: {report.kb_sha256}")
+
+
 @app.command("build-team-profile")
 def build_team_profile_cmd(
     team_id: int = typer.Option(..., "--team-id", help="OpenDota team ID to profile."),

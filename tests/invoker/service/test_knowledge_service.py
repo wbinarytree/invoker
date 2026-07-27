@@ -24,7 +24,7 @@ def _write_bundle(
     (bundle / "bundle.json").write_text(
         json.dumps(
             {
-                "schema_version": 1,
+                "schema_version": 2,
                 "default_patch": "7.41b",
                 "patches": ["7.41b"],
                 "generated_at": "2026-05-01T00:00:00Z",
@@ -253,6 +253,22 @@ def test_team_queries_match_profile_and_do_not_expose_roster_hash(tmp_path):
     assert hero_pool["data"]["hero_pool"][0]["hero_id"] == 73
     assert player_pool["data"]["hero_pool"][0]["localized_name"] == "Alchemist"
     assert "roster_hash" not in json.dumps(profile)
+
+
+def test_team_resolution_is_unicode_aware(tmp_path):
+    # Normalization keeps non-ASCII word characters: a CJK alias resolves,
+    # and an unrelated CJK query no longer collapses to "" and false-matches.
+    bundle = _write_bundle(
+        tmp_path,
+        teams=[
+            {"team_id": 123, "name": "Example Team", "aliases": ["液体"]},
+            {"team_id": 456, "name": "Other Team"},
+        ],
+    )
+    service = KnowledgeService(bundle)
+    hits = service.resolve_team("液体")["data"]["candidates"]
+    assert [candidate["team_id"] for candidate in hits] == [123]
+    assert service.resolve_team("闪电战队")["data"]["candidates"] == []
 
 
 def test_resolution_returns_candidates_instead_of_guessing_ambiguous_names(tmp_path):

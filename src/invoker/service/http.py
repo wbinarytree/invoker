@@ -83,6 +83,21 @@ def _dispatch(
         return service.lookup_hero(args["query"], patch=args.get("patch"))
     if name == "get_hero_constants":
         return service.get_hero_constants(args["hero"], patch=args.get("patch"))
+    if name == "kb_catalog":
+        return service.kb_catalog(patch=args.get("patch"), kind=args.get("kind"))
+    if name == "kb_resolve":
+        return service.kb_resolve(args["query"], patch=args.get("patch"))
+    if name == "kb_card":
+        return service.kb_card(args["id"], patch=args.get("patch"))
+    if name == "kb_article":
+        return service.kb_article(args["id"], patch=args.get("patch"))
+    if name == "search_changelog":
+        return service.search_changelog(
+            grep=args.get("grep"),
+            entity=args.get("entity"),
+            note_patch=args.get("note_patch"),
+            patch=args.get("patch"),
+        )
     if name == "resolve_team":
         return service.resolve_team(args["query"], patch=args.get("patch"))
     if name == "resolve_player":

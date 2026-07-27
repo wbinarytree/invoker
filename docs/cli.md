@@ -28,6 +28,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
 - `invoker export-game-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
+- `invoker export-kb --patch <patch> --out-dir <bundle-root> [--kb-dir <dir>]`
 - `invoker build-team-profile --team-id <id> --patch <patch> [--limit 50] [--force] [--exclude-standins]`
 - `invoker serve-knowledge --bundle <path> [--host 127.0.0.1] [--port 8765]`
 - `invoker vocab-audit`
@@ -505,10 +506,13 @@ and [src/invoker/service/http.py](../src/invoker/service/http.py).
 
 Required resource bundle layout:
 
-- `bundle.json`
+- `bundle.json` (schema 2; records `patches` and `kb_patches`)
 - `authored/teams.yaml`
 - `game_constants/<patch>/...` with the same JSON files produced by
-  `snapshot-game-files`
+  `snapshot-game-files` (including `changelog.json` when the service should
+  answer changelog queries)
+- `kb/<patch>/...` written by `export-kb` (when the service should serve
+  the KB ladder)
 - `derived/<patch>/teams/index.json`
 - `derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 
@@ -518,6 +522,11 @@ routes matching the service method names:
 - `/list_bundle_patches`
 - `/lookup_hero`
 - `/get_hero_constants`
+- `/kb_catalog`
+- `/kb_resolve`
+- `/kb_card`
+- `/kb_article`
+- `/search_changelog`
 - `/resolve_team`
 - `/resolve_player`
 - `/get_team_profile`
@@ -534,6 +543,33 @@ from the registry are available for exact resolution and roster responses.
 and source aliases across all locales present in the bundled game-file snapshot.
 Each candidate includes matched field evidence so consumers can audit why the
 query resolved.
+
+The KB ladder (spec:
+[2026-07-27-kb-exposure-service-and-bundle.md](specs/2026-07-27-kb-exposure-service-and-bundle.md))
+serves the exported KB tree: `kb_catalog` lists entries (optionally by
+kind), `kb_resolve` matches ids/slugs/casefolded titles plus item display
+names and source-backed aliases from every bundled locale (resolution keys
+may be any locale; content is English), `kb_card` returns the structured
+card (sentences with marks) and `kb_article` the verbatim article file —
+both verify the article sha binding at read time and refuse drifted files.
+`search_changelog` greps the bundled `changelog.json` (English note text)
+and requires at least one of `grep`, `entity`, `note_patch`.
+
+### `export-kb`
+
+Exports the committed KB archive (`data/kb/<patch>/`) into a consumer
+resource bundle root: `kb/<patch>/` with verified `article.md` +
+`artifact.json` pairs, `index.json` (catalog entries with identity lines
+plus the KB content fingerprint), and `sources.json` (corpus host base
+URLs and licenses for rendering `corpus:` marks as pinned links).
+Every artifact is loaded through `load_entity_article` before copying, so
+a drifted article fails the export. `bundle.json` in the target root is
+created or updated (schema 2, `kb_patches`). Re-exporting an unchanged KB
+is byte-stable. `--kb-dir` points experiment variants at another archive.
+
+```bash
+uv run invoker export-kb --patch 7.41d --out-dir dist/kb-bundle
+```
 
 ### `vocab-audit`
 
