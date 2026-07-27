@@ -29,14 +29,14 @@ from concept_batch import item_scope, item_slug  # noqa: E402
 
 from invoker.config import Config  # noqa: E402
 from invoker.corpus.store import CorpusStore  # noqa: E402
-from invoker.gen.checks import COVERAGE_ALLOWLIST  # noqa: E402
+from invoker.gen.checks import is_allowlisted_anchor  # noqa: E402
 from invoker.paths import corpus_dir, kb_dir, rejected_dir  # noqa: E402
 
 IDENTIFIER_FACT = re.compile(r"\bitem_[a-z0-9_]+")
 
 
 def is_boilerplate_flag(section: str) -> bool:
-    return section.rpartition("#")[2] in COVERAGE_ALLOWLIST
+    return is_allowlisted_anchor(section.rpartition("#")[2])
 
 
 def annotate_concept(missing: list[dict]) -> tuple[str, list[str]]:
