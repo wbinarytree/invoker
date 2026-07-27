@@ -144,6 +144,7 @@ def export_kb_bundle(
     entities = _scan_kb(kb_source_dir, patch)
     index = _index_payload(entities, kb_source_dir, patch)
     sources = build_kb_sources(registry_path)
+    metadata = _validated_bundle_metadata(bundle_root)
 
     target = bundle_root / "kb" / patch
     if target.exists():
@@ -157,7 +158,7 @@ def export_kb_bundle(
         counts[entity.kind] = counts.get(entity.kind, 0) + 1
     (target / "index.json").write_text(json.dumps(index, indent=2) + "\n")
     (target / "sources.json").write_text(json.dumps(sources, indent=2) + "\n")
-    _record_kb_patch(bundle_root, patch)
+    _record_kb_patch(bundle_root, patch, metadata)
     return KbExportReport(
         patch=patch,
         out_dir=target,
@@ -172,7 +173,9 @@ def export_kb_bundle(
 _GAME_RESOURCE_BUNDLE_KEYS = frozenset({"files", "locales", "counts"})
 
 
-def _record_kb_patch(bundle_root: Path, patch: str) -> None:
+def _validated_bundle_metadata(bundle_root: Path) -> dict:
+    """Pre-flight check of the target bundle.json, before anything is
+    written — a refused export must leave the target untouched."""
     from invoker.service.core import BUNDLE_SCHEMA_VERSION
 
     path = bundle_root / "bundle.json"
@@ -194,8 +197,14 @@ def _record_kb_patch(bundle_root: Path, patch: str) -> None:
         raise KbExportError(
             f"bundle metadata has unsupported schema_version={schema!r}: {path}"
         )
+    return raw
+
+
+def _record_kb_patch(bundle_root: Path, patch: str, raw: dict) -> None:
+    from invoker.service.core import BUNDLE_SCHEMA_VERSION
+
     raw["schema_version"] = BUNDLE_SCHEMA_VERSION
     kb_patches = {value for value in raw.get("kb_patches") or [] if isinstance(value, str)}
     kb_patches.add(patch)
     raw["kb_patches"] = sorted(kb_patches)
-    path.write_text(json.dumps(raw, indent=2) + "\n")
+    (bundle_root / "bundle.json").write_text(json.dumps(raw, indent=2) + "\n")

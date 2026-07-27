@@ -216,6 +216,7 @@ def test_export_refuses_game_resource_bundle_target(tmp_path):
     kb_root = _write_kb_source(tmp_path)
     with pytest.raises(KbExportError, match="game-resource"):
         export_kb_bundle(kb_root, PATCH, out)
+    assert not (out / "kb").exists()
 
 
 def test_kb_only_bundle_resolves_patch_without_claiming_game_data(tmp_path):
@@ -230,6 +231,13 @@ def test_kb_only_bundle_resolves_patch_without_claiming_game_data(tmp_path):
     with pytest.raises(KnowledgeServiceError) as excinfo:
         service.get_hero_constants("invoker")
     assert excinfo.value.code == "missing_game_constants"
+    metadata_path = out / "bundle.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata["default_patch"] = PATCH
+    metadata_path.write_text(json.dumps(metadata))
+    assert (
+        KnowledgeService(out).list_bundle_patches()["data"]["default_patch"] == PATCH
+    )
 
 
 def test_export_replaces_stale_entities(tmp_path):

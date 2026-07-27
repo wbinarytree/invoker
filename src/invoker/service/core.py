@@ -117,7 +117,7 @@ class KnowledgeService:
         return sorted({*self.patches, *self.kb_patches})
 
     def list_bundle_patches(self) -> dict[str, Any]:
-        patch = self.default_patch if self.default_patch in self.patches else None
+        patch = self.default_patch if self.default_patch in self.available_patches else None
         return self._envelope(
             kind="bundle_patches",
             patch=patch,
