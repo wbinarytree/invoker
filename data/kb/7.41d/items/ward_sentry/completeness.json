@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "bf82569985d2f20ad005d898cf36b8a77afa0e095cea5bf1486186194de80ebe",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_ward_sentry#components",
-      "fact": "Observer and Sentry Wards has the item identifier item_ward_dispenser."
-    }
-  ],
+  "packet_sha256": "a52026dc0d1d8a018303cebd676f1d3435845737feb7a52eb10f0581c9a52785",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "394dbf9c9394b082ce606aef1cf15c2496cf0547f4b6ef9edaa44ed84f702527",
-    "input_tokens": 14453,
-    "output_tokens": 537,
+    "prompt_version": "2",
+    "request_sha256": "0b86bcafc48af58c24488ab52ad081d2fd47b4c66b9dbe56f9a33f95eb84083b",
+    "input_tokens": 14121,
+    "output_tokens": 371,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:36.967627+00:00"
+    "generated_at": "2026-07-27T11:56:18.294042+00:00"
   }
 }

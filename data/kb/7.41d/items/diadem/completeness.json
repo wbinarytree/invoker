@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "25ba3488ceddc13fc58bba94bdaf42e33347764e2b1d2707375f36ea65e3ab67",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_diadem#components",
-      "fact": "Harpoon's internal item identifier is item_harpoon."
-    },
-    {
-      "section": "gamefile:items/item_diadem#components",
-      "fact": "Manta Style's internal item identifier is item_manta."
-    },
-    {
-      "section": "gamefile:items/item_diadem#components",
-      "fact": "Phylactery's internal item identifier is item_phylactery."
-    },
-    {
-      "section": "gamefile:items/item_diadem#components",
-      "fact": "Spirit Vessel's internal item identifier is item_spirit_vessel."
-    }
-  ],
+  "packet_sha256": "5859fe146597c65eef1e7b3af58e099c1e11dfef4ebadf92f858242c38d438c9",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "2b560a3e5131da641e2a4ae231c95cad1dc3229fc47e11ca9bf16abc0c9394b1",
-    "input_tokens": 14163,
-    "output_tokens": 645,
+    "prompt_version": "2",
+    "request_sha256": "0768a52eed86c356f646c8b3a554b338c9c911c4671cad4f20a350e93ae4966f",
+    "input_tokens": 13838,
+    "output_tokens": 70,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:05.604840+00:00"
+    "generated_at": "2026-07-27T11:54:18.689813+00:00"
   }
 }

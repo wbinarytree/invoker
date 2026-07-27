@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "9d92b3cadd4b65c2e2152dbef59b0db65e928cd630c7d7f99d9afbd48255155c",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_sange#components",
-      "fact": "The item identifiers are absent: Ogre Axe is item_ogre_axe; Belt of Strength is item_belt_of_strength; Abyssal Blade is item_abyssal_blade; Kaya and Sange is item_kaya_and_sange; Sange and Yasha is item_sange_and_yasha; and Trident is item_trident."
-    }
-  ],
+  "packet_sha256": "7a3dab1779d5be9153177fb74b38adb3f37e27e92f53e30a1c2bd6e78a8dc877",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "4b75a63394de6348cbe43a6000690c75ffcc89376f33e8af74f4eb45e2348054",
-    "input_tokens": 14329,
-    "output_tokens": 577,
+    "prompt_version": "2",
+    "request_sha256": "5b808c5c6bbb36a98c0522ac8a9f5a6e3b8aa6df1e2161b376161907c4fac10b",
+    "input_tokens": 14419,
+    "output_tokens": 94,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:27.317239+00:00"
+    "generated_at": "2026-07-27T11:55:42.621788+00:00"
   }
 }

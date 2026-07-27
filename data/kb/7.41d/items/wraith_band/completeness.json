@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "14ee9c7340260d46f24d53234b838557c8e82da58ddec60a5a882afbb877936b",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_wraith_band#cost",
-      "fact": "Wraith Band's item identifier is item_wraith_band."
-    },
-    {
-      "section": "gamefile:items/item_wraith_band#components",
-      "fact": "Circlet's item identifier is item_circlet."
-    },
-    {
-      "section": "gamefile:items/item_wraith_band#components",
-      "fact": "Slippers of Agility's item identifier is item_slippers."
-    }
-  ],
+  "packet_sha256": "55964a81767334f924c8dc106f9fc6a6b9c7b52adf0734b38a127372729d921c",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "180730bd07b2f7e9d4ac8d640eaba22f84ffd4b28f1a5e501596e9194458f202",
-    "input_tokens": 14220,
-    "output_tokens": 328,
+    "prompt_version": "2",
+    "request_sha256": "958e29691e59c469f8ec623b2cf2bd2ecffa84efad4c9d07ba2dba1be0e1cbd2",
+    "input_tokens": 13890,
+    "output_tokens": 72,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:39.779582+00:00"
+    "generated_at": "2026-07-27T11:56:14.723899+00:00"
   }
 }

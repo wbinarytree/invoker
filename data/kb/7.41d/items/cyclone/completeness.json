@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "c24746044dbb04d74d2839142851adf9c40ec3b43fb72da8f9aba6cacb084aef",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_cyclone#components",
-      "fact": "The Staff of Wizardry component has the internal identifier item_staff_of_wizardry."
-    },
-    {
-      "section": "gamefile:items/item_cyclone#components",
-      "fact": "The Void Stone component has the internal identifier item_void_stone."
-    },
-    {
-      "section": "gamefile:items/item_cyclone#components",
-      "fact": "The Wind Lace component has the internal identifier item_wind_lace."
-    },
-    {
-      "section": "gamefile:items/item_cyclone#components",
-      "fact": "Wind Waker has the internal identifier item_wind_waker."
-    }
-  ],
+  "packet_sha256": "c229f69b32815975d10a53ce4da4fbde50a0d6badc9d473e44dfb00aa930e915",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "90559138ae63260394ec63b6f244cca30910ee7c9fc467c3cbb35c562258cd01",
-    "input_tokens": 14611,
-    "output_tokens": 654,
+    "prompt_version": "2",
+    "request_sha256": "c73d458829cfdec56bcd0f4c4d5b1582ea98a0e40688140889ebfb25aa95fa99",
+    "input_tokens": 14290,
+    "output_tokens": 230,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:58:03.435333+00:00"
+    "generated_at": "2026-07-27T11:54:20.032452+00:00"
   }
 }

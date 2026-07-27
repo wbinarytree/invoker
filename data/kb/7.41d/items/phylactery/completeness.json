@@ -3,29 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "094bfe415e6c012726c9076cf7cc8c56195b310fd116a86a46ddb032d8acec2a",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_phylactery#components",
-      "fact": "Perseverance has the internal item identifier item_pers."
-    },
-    {
-      "section": "gamefile:items/item_phylactery#components",
-      "fact": "Diadem has the internal item identifier item_diadem."
-    },
-    {
-      "section": "gamefile:items/item_phylactery#components",
-      "fact": "Khanda has the internal item identifier item_angels_demise."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "4c21e4102ced80fa2000e0dd3f0b542fe4b94ef04846eba248c79115d5b61399",
-    "input_tokens": 14518,
-    "output_tokens": 947,
+    "prompt_version": "2",
+    "request_sha256": "bcf03f57f12f928b4d577ac9cf40ad184788671b38b3ef0a790f29edf7ee6bcd",
+    "input_tokens": 14204,
+    "output_tokens": 252,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:47.426007+00:00"
+    "generated_at": "2026-07-27T11:55:03.080476+00:00"
   }
 }

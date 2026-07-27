@@ -1,47 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "9e8f43802caadcce1e3a441dc744413d0f59099e78ba445c42ff8851161e4e0e",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_kaya#cost",
-      "fact": "Kaya's item identifier is item_kaya."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Staff of Wizardry's item identifier is item_staff_of_wizardry."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Robe of the Magi's item identifier is item_robe."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Kaya and Sange's item identifier is item_kaya_and_sange."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Meteor Hammer's item identifier is item_meteor_hammer."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Trident's item identifier is item_trident."
-    },
-    {
-      "section": "gamefile:items/item_kaya#components",
-      "fact": "Yasha and Kaya's item identifier is item_yasha_and_kaya."
-    }
-  ],
+  "packet_sha256": "c40cedd604506a78330d5f43ed52591292d7c542f272beab8dc4cc30ac33726e",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "95b68f71bb1e40d409cbe264cd9413d2fda4538b19852ea0205ce217542e3e6a",
-    "input_tokens": 14264,
-    "output_tokens": 562,
+    "prompt_version": "2",
+    "request_sha256": "4945efd55dd10ee4c11b0abc6ab55d72fe9e4edbc5ad4f1e4c1f0113fce7db3d",
+    "input_tokens": 13937,
+    "output_tokens": 79,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:07:56.836599+00:00"
+    "generated_at": "2026-07-27T11:54:43.048442+00:00"
   }
 }

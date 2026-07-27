@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "c7481631bd7964fbc37329afed31fa9e83e7236542d9ad745dc8ee3ca6b090da",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_gloves#components",
-      "fact": "The build targets’ internal IDs are item_armlet, item_hand_of_midas, item_maelstrom, and item_power_treads, respectively."
-    }
-  ],
+  "packet_sha256": "25034da1ccc11f98975b2b7b286cadc6ac26fc188c06397c1ece8c75934f588c",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "894ec666daf57c8053c998bac4ae5b95a5bca64d82d6b00e8382452cc72f8ce2",
-    "input_tokens": 14209,
-    "output_tokens": 324,
+    "prompt_version": "2",
+    "request_sha256": "a1a64af7cc3b684574b04daba03a6df5cf0b56dcdc148f0230b16cb2c9cf362a",
+    "input_tokens": 13878,
+    "output_tokens": 64,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:15.612992+00:00"
+    "generated_at": "2026-07-27T11:54:27.832867+00:00"
   }
 }

@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "17f1e70f338de4247c20aa224d1d31d61e86262301437e7957b7d18e97f7fd01",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_hand_of_midas#components",
-      "fact": "Gloves of Haste has the item identifier item_gloves."
-    }
-  ],
+  "packet_sha256": "a7efe4a6bd4f99f48bffa466109415c941d022019b0eeb5297325c6c2aa0f669",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "c763362b0f1b3a2f8b2c6830c6af4c1621cf3e505fd424683f9124027ee35cc9",
-    "input_tokens": 14404,
-    "output_tokens": 348,
+    "prompt_version": "2",
+    "request_sha256": "c669513c981692ca01872de3ebae9c789abfdab35e854cbf0ca66ea9f76df145",
+    "input_tokens": 14079,
+    "output_tokens": 482,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:39.041933+00:00"
+    "generated_at": "2026-07-27T11:54:41.376825+00:00"
   }
 }

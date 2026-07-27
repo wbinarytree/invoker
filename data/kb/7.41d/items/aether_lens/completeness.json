@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "94810d3c015b854374747cffaf484e6a12f82a3b2627a8f664c8b19aa9529caa",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_aether_lens#components",
-      "fact": "Energy Booster's item identifier is item_energy_booster."
-    },
-    {
-      "section": "gamefile:items/item_aether_lens#components",
-      "fact": "Void Stone's item identifier is item_void_stone."
-    }
-  ],
+  "packet_sha256": "4a4ce3428911cd87cfe202162bf8296ee3ba083c4906f679d55716c4c8205701",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "abacfea93c022d12ecef61ba0f25257af89fa1de243a4299b77d44eefee2ba31",
-    "input_tokens": 14226,
-    "output_tokens": 265,
+    "prompt_version": "2",
+    "request_sha256": "d54b0a0594105868acbe2165e9fcfbfc92678acc5797d3e0507809a8a046d3d1",
+    "input_tokens": 14318,
+    "output_tokens": 62,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:50:47.385795+00:00"
+    "generated_at": "2026-07-27T11:54:03.390660+00:00"
   }
 }

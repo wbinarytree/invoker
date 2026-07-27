@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "3bf0422aa2f81f5da58b7543d04076b3b92f6894d8f0b88cd47452a993ee194d",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_talisman_of_evasion#cost",
-      "fact": "Talisman of Evasion's internal identifier is item_talisman_of_evasion."
-    },
-    {
-      "section": "gamefile:items/item_talisman_of_evasion#components",
-      "fact": "Butterfly's internal identifier is item_butterfly."
-    },
-    {
-      "section": "gamefile:items/item_talisman_of_evasion#components",
-      "fact": "Heaven's Halberd's internal identifier is item_heavens_halberd."
-    },
-    {
-      "section": "gamefile:items/item_talisman_of_evasion#components",
-      "fact": "Radiance's internal identifier is item_radiance."
-    }
-  ],
+  "packet_sha256": "7f802488f09470828564c02adeb84732ec48d1593692a00f008c7e4985404853",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "7b884b466ca035156b18f845d2346d3ec1ac3f66b63ccf6b0072a1e77f734ea3",
-    "input_tokens": 14244,
-    "output_tokens": 358,
+    "prompt_version": "2",
+    "request_sha256": "0ac6ab4ca1f5df2f6b655f02b77cca924cb2f5af1e81d074f9831b815a33f61c",
+    "input_tokens": 13911,
+    "output_tokens": 77,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:19.924222+00:00"
+    "generated_at": "2026-07-27T11:56:04.115794+00:00"
   }
 }

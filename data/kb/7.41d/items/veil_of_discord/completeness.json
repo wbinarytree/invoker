@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "8b2c523bb4d7a679d3e4b9f4dc0e53b539b28503cb8d91e818376fefc5413d90",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_veil_of_discord#components",
-      "fact": "Voodoo Mask has the internal identifier item_voodoo_mask."
-    },
-    {
-      "section": "gamefile:items/item_veil_of_discord#components",
-      "fact": "Robe of the Magi has the internal identifier item_robe."
-    },
-    {
-      "section": "gamefile:items/item_veil_of_discord#components",
-      "fact": "Fluffy Hat has the internal identifier item_fluffy_hat."
-    },
-    {
-      "section": "gamefile:items/item_veil_of_discord#components",
-      "fact": "Bloodstone has the internal identifier item_bloodstone."
-    }
-  ],
+  "packet_sha256": "ba3f5f52acc83a4628a2015cac5a2f53aef90f66f249c4b8af37ad25f9954d52",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "fa330bc82a81a18ab601d2d4a7ba035df958a001da97f96e78a02d6ce9d6e7b1",
-    "input_tokens": 14665,
-    "output_tokens": 656,
+    "prompt_version": "2",
+    "request_sha256": "c79ed27a270c8313f09c90646dc641fb3228778a2924d70ade22fe48ade2fc05",
+    "input_tokens": 14756,
+    "output_tokens": 204,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:46.256952+00:00"
+    "generated_at": "2026-07-27T11:56:14.012469+00:00"
   }
 }

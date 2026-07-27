@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "55c12b978b8d0ed8d8bf6e2c0498d1c048ef18e479700b470081552cebc9908b",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_cloak#cost",
-      "fact": "Cloak’s internal item identifier is item_cloak."
-    },
-    {
-      "section": "gamefile:items/item_cloak#components",
-      "fact": "The build targets’ internal identifiers are Eternal Shroud (item_eternal_shroud), Mage Slayer (item_mage_slayer), and Pipe of Insight (item_pipe)."
-    }
-  ],
+  "packet_sha256": "f62a26f5804e7d4e4190dec7ffebcd540c03ab3eb72d65560faf60b86e5b5bcc",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "4cf713468254c32ff95eaed1ac89557716bb14245543be6e00420e1f8efbf7da",
-    "input_tokens": 14204,
-    "output_tokens": 384,
+    "prompt_version": "2",
+    "request_sha256": "0e22c63aaaf0284381e3e0dc206718486199df82f3d5ae21bb044307e3fbab3d",
+    "input_tokens": 13875,
+    "output_tokens": 64,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:45.719703+00:00"
+    "generated_at": "2026-07-27T11:54:11.889324+00:00"
   }
 }

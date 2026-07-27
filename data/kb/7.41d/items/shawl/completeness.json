@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "5257a7bbbf99644b6694c987613c37ec86e861245d7e5641e7430fb94f67581d",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_shawl#cost",
-      "fact": "Shawl's item identifier is item_shawl."
-    },
-    {
-      "section": "gamefile:items/item_shawl#components",
-      "fact": "The build targets have the identifiers item_consecrated_wraps (Consecrated Wraps), item_glimmer_cape (Glimmer Cape), and item_pipe (Pipe of Insight)."
-    }
-  ],
+  "packet_sha256": "808588fd2b45cadc73aab186f5e103434e184106fbf3d807ab2d073ea00d7bbb",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "edc3709113f82a37c173f996c395ca08ca2f8672e4bbc5a22462d60ebcae9c82",
-    "input_tokens": 14142,
-    "output_tokens": 418,
+    "prompt_version": "2",
+    "request_sha256": "a86e8288648d23232ed26f4528c1bf150d9c4fc61ef61bd46ec480d07ac3b000",
+    "input_tokens": 13813,
+    "output_tokens": 67,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:00.503045+00:00"
+    "generated_at": "2026-07-27T11:55:49.392430+00:00"
   }
 }

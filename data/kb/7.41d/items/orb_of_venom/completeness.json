@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "bfb32b31aed6c15a26012ec61864ea12c2b47502d2bec1a2c8ff9c71658e418b",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_orb_of_venom#components",
-      "fact": "The build targets’ internal item identifiers are Hydra's Breath (`item_hydras_breath`), Mage Slayer (`item_mage_slayer`), and Witch Blade (`item_witch_blade`)."
-    }
-  ],
+  "packet_sha256": "e29874fb20696d7638a119ef19faebfc2819109f583f5d7a42d605acc44d9022",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "e322006551818966b72a2268fb3552c5b716fd9924510e6d01c7110f4889808f",
-    "input_tokens": 14476,
-    "output_tokens": 592,
+    "prompt_version": "2",
+    "request_sha256": "40293f72bd589b20218493be44a9a0c09c1f67e037d0cf485266bee1c6e50ce1",
+    "input_tokens": 14153,
+    "output_tokens": 141,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:38.643924+00:00"
+    "generated_at": "2026-07-27T11:54:54.808799+00:00"
   }
 }

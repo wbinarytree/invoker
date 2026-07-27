@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "3ce1c44bbdf531343f9f7a572ff23e70faf4d922800421ce321ec0a32e7adbcc",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_abyssal_blade#components",
-      "fact": "Skull Basher's internal item identifier is item_basher."
-    },
-    {
-      "section": "gamefile:items/item_abyssal_blade#components",
-      "fact": "Sange's internal item identifier is item_sange."
-    }
-  ],
+  "packet_sha256": "7ea2756e8a66d88e9e4a6b727dcc6be923a25b9af6ec4c379cf70731c48f586e",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "cedad0fa882b688b71f0a2e5f007087994e94d58f4ac6c72b9b06d772c178e67",
-    "input_tokens": 14633,
-    "output_tokens": 730,
+    "prompt_version": "2",
+    "request_sha256": "e2d357ad6883990e7c548ecbe0bf63b33968dfb4f68f8352e8d859e273d9862a",
+    "input_tokens": 14737,
+    "output_tokens": 188,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:49:31.318807+00:00"
+    "generated_at": "2026-07-27T11:54:05.328218+00:00"
   }
 }

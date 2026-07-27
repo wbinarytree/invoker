@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "b5b8d69f8fcb96b1b5e4bc988b9d95491bb8758e2ff8e8b341013ca94cdb3990",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_mask_of_madness#cost",
-      "fact": "The item’s internal identifier is item_mask_of_madness."
-    },
-    {
-      "section": "gamefile:items/item_mask_of_madness#components",
-      "fact": "The component identifiers are item_broadsword for Broadsword and item_lifesteal for Morbid Mask."
-    }
-  ],
+  "packet_sha256": "f6a5c0dd27f11094c9ffbd95eb3afee4d2c5d601ecd1204789e051736f44df9d",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "f7566455f831b6c219c36679c313f1e23e03766fe2a88533f1ca0089d08e993d",
-    "input_tokens": 14600,
-    "output_tokens": 598,
+    "prompt_version": "2",
+    "request_sha256": "257f594841f5968e69de8c07fa3e0ca36c06b61f4af66de6173b18b5c6a8a540",
+    "input_tokens": 14281,
+    "output_tokens": 197,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:08.306778+00:00"
+    "generated_at": "2026-07-27T11:54:50.813045+00:00"
   }
 }

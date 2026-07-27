@@ -3,25 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "ef807596822da9bc00c0f7131c00ed12a5ed7670eb72474573410752f3195d5e",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_greater_crit#components",
-      "fact": "Crystalys has the internal item identifier item_lesser_crit."
-    },
-    {
-      "section": "gamefile:items/item_greater_crit#components",
-      "fact": "Demon Edge has the internal item identifier item_demon_edge."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "7a4c38682d3c2e636142851d41b3240f98c5cdda5dc5e4e20eabd152e183f9c4",
-    "input_tokens": 14290,
-    "output_tokens": 370,
+    "prompt_version": "2",
+    "request_sha256": "7d45fa4b5f25c6b25ded427271373f7d104b92d2eae7cffb638f7b3f4835ee1d",
+    "input_tokens": 13974,
+    "output_tokens": 165,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:27.126085+00:00"
+    "generated_at": "2026-07-27T11:54:30.218250+00:00"
   }
 }

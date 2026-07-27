@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "fdffe60643fe5482418cf7e3398132f2701d1bd7742bcc3abdffb984e4ad5eb4",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_octarine_core#components",
-      "fact": "Soul Booster has the internal identifier item_soul_booster."
-    },
-    {
-      "section": "gamefile:items/item_octarine_core#components",
-      "fact": "Tiara of Selemene has the internal identifier item_tiara_of_selemene."
-    }
-  ],
+  "packet_sha256": "2ccd687a06df87c163e29788643463259c3ffa9f611b77dbee26fda4af46562b",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "1654aed50fde18e46215e6ba011bfb930c785783624a08de4578dd3c9eb04b36",
-    "input_tokens": 14256,
-    "output_tokens": 379,
+    "prompt_version": "2",
+    "request_sha256": "253e779b1a78a1b404a8d3696970ebda7e2385c4ea969876a18201e9432363d1",
+    "input_tokens": 13924,
+    "output_tokens": 43,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:33.090240+00:00"
+    "generated_at": "2026-07-27T11:54:53.325696+00:00"
   }
 }

@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "c8c0f0f2f76a1371ee9908037fe1749e928ea047cb04fcd3d9939e28493ac5f7",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_relic#cost",
-      "fact": "Sacred Relic's item identifier is item_relic."
-    },
-    {
-      "section": "gamefile:items/item_relic#components",
-      "fact": "Nullifier's item identifier is item_nullifier."
-    },
-    {
-      "section": "gamefile:items/item_relic#components",
-      "fact": "Radiance's item identifier is item_radiance."
-    },
-    {
-      "section": "gamefile:items/item_relic#components",
-      "fact": "Divine Rapier's item identifier is item_rapier."
-    }
-  ],
+  "packet_sha256": "779eaf8c85aa64ccd36f9bf0c63eb4bdd7619a856f7d066e6b7adc18037294ac",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "4385072b8d5eb42b06159877313855750f4047a827f2acf2c50ba00fccf1bbc0",
-    "input_tokens": 14153,
-    "output_tokens": 475,
+    "prompt_version": "2",
+    "request_sha256": "9cdc593dd05ed231b56e7c7377ccef5a7b44718de8998a476dfbd9dda534158d",
+    "input_tokens": 13824,
+    "output_tokens": 63,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:22.148889+00:00"
+    "generated_at": "2026-07-27T11:55:43.569847+00:00"
   }
 }

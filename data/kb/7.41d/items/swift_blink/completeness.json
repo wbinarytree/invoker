@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "489fca059bfd005bfb68d39d19831989e1184165032dd6fc368cf6f0dac63547",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_swift_blink#components",
-      "fact": "Blink Dagger's internal item identifier is item_blink."
-    },
-    {
-      "section": "gamefile:items/item_swift_blink#components",
-      "fact": "Eaglesong's internal item identifier is item_eagle."
-    }
-  ],
+  "packet_sha256": "9dca01620f2ecbc17df93a7c1437325e26a583f39905fffe2d70174b4eda41fb",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "2465f7c752507904103d3ddc7fa51273571c607e09c13620b35e766e6ecd38e3",
-    "input_tokens": 14572,
-    "output_tokens": 974,
+    "prompt_version": "2",
+    "request_sha256": "da9f937cbe62c0c149e2abe8a9a2992dd94289aa4ffdab6305a8972f54c67e07",
+    "input_tokens": 14228,
+    "output_tokens": 177,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:59.081006+00:00"
+    "generated_at": "2026-07-27T11:56:03.873104+00:00"
   }
 }

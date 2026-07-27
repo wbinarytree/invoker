@@ -1,47 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "512e31ed1415372a84b81bfd17594e8eb916542f5f68cf1b7627e59329bbc49a",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_chainmail#cost",
-      "fact": "Chainmail's item identifier is item_chainmail."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Essence Distiller's item identifier is item_essence_distiller."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Medallion Of Courage's item identifier is item_medallion_of_courage."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Mekansm's item identifier is item_mekansm."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Phase Boots' item identifier is item_phase_boots."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Solar Crest's item identifier is item_solar_crest."
-    },
-    {
-      "section": "gamefile:items/item_chainmail#components",
-      "fact": "Witch Blade's item identifier is item_witch_blade."
-    }
-  ],
+  "packet_sha256": "6b271392581d44371d0c84b2d9c2ab5963ab855790607072e0798a09e557e45f",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "9be62667d95d13793691b4b7d3b6642d4994645a3af581cce8b2c373285501d7",
-    "input_tokens": 14231,
-    "output_tokens": 406,
+    "prompt_version": "2",
+    "request_sha256": "c6b113d22f2bea39f744545782af8197cef38d44aad60585f8517c0c7472ed88",
+    "input_tokens": 13902,
+    "output_tokens": 73,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:46.435713+00:00"
+    "generated_at": "2026-07-27T11:54:11.950549+00:00"
   }
 }

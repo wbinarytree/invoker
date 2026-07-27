@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "daf94c9db61ab47f18d94d4c70aa591060280392fc08699f27da023ce8863022",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_bracer#cost",
-      "fact": "Bracer's internal identifier is item_bracer."
-    },
-    {
-      "section": "gamefile:items/item_bracer#components",
-      "fact": "Circlet's internal identifier is item_circlet."
-    },
-    {
-      "section": "gamefile:items/item_bracer#components",
-      "fact": "Gauntlets of Strength's internal identifier is item_gauntlets."
-    }
-  ],
+  "packet_sha256": "688a9eb29bf70a0a3bb5c5725059245a84c50ee00cf5759b3aee2505de3aebce",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "a97932b1d1b0f27029767739a915f146b93166ffb15c076947a1b76f69cbb63f",
-    "input_tokens": 14239,
-    "output_tokens": 394,
+    "prompt_version": "2",
+    "request_sha256": "dc433a15d91bb0e563938b6cf414de5040d69d69876011cec76ae903f1ad8ce6",
+    "input_tokens": 14337,
+    "output_tokens": 87,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:15.985034+00:00"
+    "generated_at": "2026-07-27T11:54:03.227025+00:00"
   }
 }

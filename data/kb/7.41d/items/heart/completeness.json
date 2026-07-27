@@ -3,25 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "3b672e65335e7e6fb0d1fb5b4ed829485f12a28060ab99f25e8d922cfb1c9d85",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_heart#components",
-      "fact": "Reaver has the item identifier item_reaver."
-    },
-    {
-      "section": "gamefile:items/item_heart#components",
-      "fact": "Ring of Tarrasque has the item identifier item_ring_of_tarrasque."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "456132700f15c3a5ab24eb09ac5ae595b15504388f83b1c95a3a9bca39348f3e",
-    "input_tokens": 14290,
-    "output_tokens": 477,
+    "prompt_version": "2",
+    "request_sha256": "d18c14cfb7a45a90ee813341b62d083d106704a6901c6936b8b4e8bc87e450ef",
+    "input_tokens": 13978,
+    "output_tokens": 117,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:06:21.248787+00:00"
+    "generated_at": "2026-07-27T11:54:36.123207+00:00"
   }
 }

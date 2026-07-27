@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "5043bb5c1fa3d68dab9003fb63a897e8f7ed13e22a41b5c1f601a2a96db84722",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_soul_ring_Description",
-      "fact": "Sacrifice consumes %AbilityHealthCost% health."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "1293de918e88b047e9a4c86cfd7ea1ff6f40bd1bc13322e3bebe3725cfc7c695",
-    "input_tokens": 14389,
-    "output_tokens": 400,
+    "prompt_version": "2",
+    "request_sha256": "8ea034887d4da8b0fc8a17b578daf7de70858e46b866d39628a9cca079e99c03",
+    "input_tokens": 14081,
+    "output_tokens": 128,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:02.597203+00:00"
+    "generated_at": "2026-07-27T11:55:55.584395+00:00"
   }
 }

@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "a03317fe9b97b92546ec66048ebf2fa7cdf3aaeb02288ce53e3e55b3769f2c23",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_rapier#components",
-      "fact": "The component internal IDs are item_relic for Sacred Relic and item_demon_edge for Demon Edge."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "ea041ecc9822c08b9e8b45545d46381db8aec615e9773c9e1eccce59741791c6",
-    "input_tokens": 14408,
-    "output_tokens": 570,
+    "prompt_version": "2",
+    "request_sha256": "9e50e45da195d099f531e4d22ecca1c8513a8310d78d7b888302dde16052a489",
+    "input_tokens": 14092,
+    "output_tokens": 115,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:46.412332+00:00"
+    "generated_at": "2026-07-27T11:55:46.868230+00:00"
   }
 }

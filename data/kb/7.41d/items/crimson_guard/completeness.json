@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "47a5f4d43610219efdce8f636c042e1e8a9f30b1c3131b63ffcbde1ad92907b8",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_crimson_guard#cost",
-      "fact": "Crimson Guard's item identifier is item_crimson_guard."
-    },
-    {
-      "section": "gamefile:items/item_crimson_guard#components",
-      "fact": "Vanguard's item identifier is item_vanguard."
-    },
-    {
-      "section": "gamefile:items/item_crimson_guard#components",
-      "fact": "Helm of Iron Will's item identifier is item_helm_of_iron_will."
-    }
-  ],
+  "packet_sha256": "0b80aa81fb3d38c895c7e65d57de1bc123989865d27394f11afb326b29521bd3",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "f846e2eafbc3d87ac35a6442fd117ab5b31b6e99caf5016de775c279d64c732d",
-    "input_tokens": 14627,
-    "output_tokens": 833,
+    "prompt_version": "2",
+    "request_sha256": "962eb41459acab5072303cadcd24b9a8f5b0c8c710ab1174d78d5d50e7b2b952",
+    "input_tokens": 14308,
+    "output_tokens": 354,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:57:34.037962+00:00"
+    "generated_at": "2026-07-27T11:54:21.873793+00:00"
   }
 }

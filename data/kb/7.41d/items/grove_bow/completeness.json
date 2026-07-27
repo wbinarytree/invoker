@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "50d1fa36a32a09d5850c858b410f7ed69bd464720bd89d9d092864e37011c1aa",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_grove_bow_Description",
-      "fact": "Magic Amp reduces the attacked enemy's magic resistance by 20%."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "3536b6b99a7d3d592e338784d144a965adfab08b2604569306e7e372577de421",
-    "input_tokens": 14193,
-    "output_tokens": 50,
+    "prompt_version": "2",
+    "request_sha256": "72e21e8f5c6e2ad69ae9835c3f0aa6e035a4fc9f369794c8dd73d6e7d1a1d531",
+    "input_tokens": 13881,
+    "output_tokens": 81,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:04:44.574202+00:00"
+    "generated_at": "2026-07-27T11:54:28.437282+00:00"
   }
 }

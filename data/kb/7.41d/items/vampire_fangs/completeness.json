@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "8de738940217b9b7ef08de2663857b04538b699c2a771bcdae472f594e50b73b",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_vampire_fangs#cost",
-      "fact": "Vampire Fangs has the internal item identifier item_vampire_fangs."
-    }
-  ],
+  "packet_sha256": "cb160f4bc8700f89581fc33db5526b760f979b7718dc50b88dca877b08a52e73",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "dd1cb7c86d6a982b47c164ccfca99ee8efc9017e064d659bc887c85ccd9bd852",
-    "input_tokens": 14091,
-    "output_tokens": 292,
+    "prompt_version": "2",
+    "request_sha256": "472926fe0d334201a1216a022ad03e32a43bac06b8139189be52473b63b286f3",
+    "input_tokens": 13763,
+    "output_tokens": 14,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:00.077953+00:00"
+    "generated_at": "2026-07-27T11:56:15.959916+00:00"
   }
 }

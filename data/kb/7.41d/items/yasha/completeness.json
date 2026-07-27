@@ -1,47 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "c7335ab93ee45479a93aee3dadcc16054ad0b8a547d81efc4fd0de66c65abd6a",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_yasha#cost",
-      "fact": "Yasha's item identifier is item_yasha."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Blade of Alacrity's item identifier is item_blade_of_alacrity."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Band of Elvenskin's item identifier is item_boots_of_elves."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Manta Style's item identifier is item_manta."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Sange and Yasha's item identifier is item_sange_and_yasha."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Trident's item identifier is item_trident."
-    },
-    {
-      "section": "gamefile:items/item_yasha#components",
-      "fact": "Yasha and Kaya's item identifier is item_yasha_and_kaya."
-    }
-  ],
+  "packet_sha256": "bed3ba44f84f9d16bf834e7c2905d0c8621610d7f1308f9ddedb1825f5b3d820",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "f8571ceba9c0ce14791fd2d1913015e3f6a480613d935b196c9606881e2d2a7c",
-    "input_tokens": 14333,
-    "output_tokens": 642,
+    "prompt_version": "2",
+    "request_sha256": "8c9cab917c67c79bb26c4c7e22e75d0d75b5b2054ceb5518a4299eb4544d12b8",
+    "input_tokens": 14006,
+    "output_tokens": 80,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:48.367615+00:00"
+    "generated_at": "2026-07-27T11:56:18.220998+00:00"
   }
 }

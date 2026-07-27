@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "4c7e3f7b614ec6fd6f7977ad59d2cc00447bc8e03d41caa5cee078d338d1ab2a",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_refresher#cost",
-      "fact": "The internal item identifier for Refresher Orb is item_refresher."
-    },
-    {
-      "section": "gamefile:items/item_refresher#components",
-      "fact": "Ring of Tarrasque has the internal identifier item_ring_of_tarrasque."
-    },
-    {
-      "section": "gamefile:items/item_refresher#components",
-      "fact": "Tiara of Selemene has the internal identifier item_tiara_of_selemene."
-    }
-  ],
+  "packet_sha256": "7632e57348a355263609b70ffa23730c6ce86c8171332f9e87b95722911ad8f1",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "6008fca802280447a38cd4795577ac6851b09438ea2051d7ba0249958da6e162",
-    "input_tokens": 14451,
-    "output_tokens": 341,
+    "prompt_version": "2",
+    "request_sha256": "7dbb6f2b1b6e38c4d87836f69642980bcc8195c73370bbd210d0f6ffcd9a3eac",
+    "input_tokens": 14131,
+    "output_tokens": 311,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:15.487653+00:00"
+    "generated_at": "2026-07-27T11:55:55.950649+00:00"
   }
 }

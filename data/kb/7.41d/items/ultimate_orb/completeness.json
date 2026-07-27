@@ -1,39 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "24367fe924013e1320c70cd41e3f386b51d76e9d6187180d8c44cc68a0e7d1a3",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_ultimate_orb#cost",
-      "fact": "Ultimate Orb's internal item identifier is item_ultimate_orb."
-    },
-    {
-      "section": "gamefile:items/item_ultimate_orb#components",
-      "fact": "Ethereal Blade's internal item identifier is item_ethereal_blade."
-    },
-    {
-      "section": "gamefile:items/item_ultimate_orb#components",
-      "fact": "Helm of the Overlord's internal item identifier is item_helm_of_the_overlord."
-    },
-    {
-      "section": "gamefile:items/item_ultimate_orb#components",
-      "fact": "Eye of Skadi's internal item identifier is item_skadi."
-    },
-    {
-      "section": "gamefile:items/item_ultimate_orb#components",
-      "fact": "Linken's Sphere's internal item identifier is item_sphere."
-    }
-  ],
+  "packet_sha256": "df473ff54a834a93424018dab908a3e8c1310881a15de2a7f26073a247552ae3",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "b133e77dbc40d25d818365b977a80c1b5577011304e11867c2bfa2c89d03fdb6",
-    "input_tokens": 14218,
-    "output_tokens": 547,
+    "prompt_version": "2",
+    "request_sha256": "c0756d2e2e4d5d0e09932fd746d05060df791facecb4046101931487fff12646",
+    "input_tokens": 13885,
+    "output_tokens": 32,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:08.910569+00:00"
+    "generated_at": "2026-07-27T11:56:14.878145+00:00"
   }
 }

@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "de0e6b2ecdc6eaddd2f399a3ff4e93b8f8cc4699d4475f66ca1b443856cb9cf0",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_pipe#cost",
-      "fact": "Pipe of Insight's item identifier is item_pipe."
-    },
-    {
-      "section": "gamefile:items/item_pipe#components",
-      "fact": "The component identifiers are item_ring_of_tarrasque for Ring of Tarrasque, item_cloak for Cloak, and item_shawl for Shawl."
-    }
-  ],
+  "packet_sha256": "da13f69feba018757b76ed37b9e9694e04381a97adee4adeaa8de92b5bca5512",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "f09d63ce6ebae03636070d4f2149541d3b133a993a38b8bab050b813846d3a6e",
-    "input_tokens": 14566,
-    "output_tokens": 587,
+    "prompt_version": "2",
+    "request_sha256": "3985170f91cd0089abd81379d160e5b5d12f4bd6608af718f2f9b3659ab52b4d",
+    "input_tokens": 14247,
+    "output_tokens": 306,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:31.925831+00:00"
+    "generated_at": "2026-07-27T11:55:02.050460+00:00"
   }
 }

@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "96c1b2f072bc6da24957bc7f53818e60628f1956a32410da0c1948a89b3a297a",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_mystic_staff#cost",
-      "fact": "Mystic Staff's internal item identifier is item_mystic_staff."
-    },
-    {
-      "section": "gamefile:items/item_mystic_staff#components",
-      "fact": "The build-into item identifiers are Arcane Blink (item_arcane_blink), Parasma (item_devastator), Scythe of Vyse (item_sheepstick), and Wind Waker (item_wind_waker)."
-    }
-  ],
+  "packet_sha256": "e5bcac6b0516829a1f3c44a2a46d1170511ed582cee53c803d0b549384def4ae",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "7a53d2527a41072ea1d7124b62c6ba0ae9c4244f0e48c09a12680c6004ebd03b",
-    "input_tokens": 14218,
-    "output_tokens": 630,
+    "prompt_version": "2",
+    "request_sha256": "708aeec389763e01c0bf308d054da86b1f2d6c89039f9e24a1cb113cbd4f48ac",
+    "input_tokens": 13891,
+    "output_tokens": 58,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:09:36.188960+00:00"
+    "generated_at": "2026-07-27T11:54:49.357499+00:00"
   }
 }

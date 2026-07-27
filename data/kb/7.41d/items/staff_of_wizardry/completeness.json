@@ -1,43 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "08d803c25c03e56d4177839abff22d689445623fb790e27bd77910f2483a9c19",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#cost",
-      "fact": "The item's internal identifier is item_staff_of_wizardry."
-    },
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#components",
-      "fact": "Eul's Scepter of Divinity has the internal identifier item_cyclone."
-    },
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#components",
-      "fact": "Force Staff has the internal identifier item_force_staff."
-    },
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#components",
-      "fact": "Kaya has the internal identifier item_kaya."
-    },
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#components",
-      "fact": "Rod of Atos has the internal identifier item_rod_of_atos."
-    },
-    {
-      "section": "gamefile:items/item_staff_of_wizardry#components",
-      "fact": "Aghanim's Scepter has the internal identifier item_ultimate_scepter."
-    }
-  ],
+  "packet_sha256": "73749618ef16ccb73848435caa0bfcdf6184bfc49825fb4be0e24042adb32ae6",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "fe53c404c928d09dc5f028f938663349da15684e1e423dea5caef074b9db5ee0",
-    "input_tokens": 14270,
-    "output_tokens": 652,
+    "prompt_version": "2",
+    "request_sha256": "b1555ada8a4711608b7cf4c63342fb0d0fdb798effbe7cb8e86750a3a90cbe5c",
+    "input_tokens": 13938,
+    "output_tokens": 73,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:10.865363+00:00"
+    "generated_at": "2026-07-27T11:55:58.427650+00:00"
   }
 }

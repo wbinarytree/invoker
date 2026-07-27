@@ -3,33 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "ec5268f28536dcce96903ccb82277642b9341e2128c55a851af331ebebf250d6",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_magic_wand#cost",
-      "fact": "Magic Wand's internal item identifier is item_magic_wand."
-    },
-    {
-      "section": "gamefile:items/item_magic_wand#components",
-      "fact": "Magic Stick's internal item identifier is item_magic_stick."
-    },
-    {
-      "section": "gamefile:items/item_magic_wand#components",
-      "fact": "Both Iron Branch components have the internal item identifier item_branches."
-    },
-    {
-      "section": "gamefile:items/item_magic_wand#components",
-      "fact": "Holy Locket's internal item identifier is item_holy_locket."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "af5256c37cb73226c7e228d949ee2ff9cd91221fd2c342ae66f72b2bf97391c1",
-    "input_tokens": 14443,
-    "output_tokens": 1166,
+    "prompt_version": "2",
+    "request_sha256": "8a2da58986f104e27d0c380e3843525c955c725d3a0b60162337ab29e7f254c4",
+    "input_tokens": 14135,
+    "output_tokens": 120,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:10:28.284594+00:00"
+    "generated_at": "2026-07-27T11:54:49.120256+00:00"
   }
 }

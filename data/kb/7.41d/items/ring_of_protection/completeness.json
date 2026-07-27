@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "e625421409867a887aa200fa5eb8470d9bb65911a366e9d217a2110f27a86175",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_ring_of_protection#components",
-      "fact": "The internal item identifiers are item_buckler for Buckler, item_iron_talon for Iron Talon, item_pavise for Pavise, item_soul_ring for Soul Ring, and item_urn_of_shadows for Urn of Shadows."
-    }
-  ],
+  "packet_sha256": "e56ab6b2208442f657fe26d95be61a71dcf2689394ce15cc7f71a22a17c514f2",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "f43007922ad741e130f92d44518b5616a7d93c4203b90d7131d61fa977f50a1a",
-    "input_tokens": 14229,
-    "output_tokens": 326,
+    "prompt_version": "2",
+    "request_sha256": "662ca1a66e4fbce8cd21ec82598043347233e4dd9ebef9a233c8ad02a4525494",
+    "input_tokens": 13900,
+    "output_tokens": 60,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:54.649907+00:00"
+    "generated_at": "2026-07-27T11:55:41.847379+00:00"
   }
 }

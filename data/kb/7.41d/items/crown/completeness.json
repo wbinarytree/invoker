@@ -1,39 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "1075c2eaeee4d0138bf4388cba4f7a23aa44082b45d171890121cbe9838bba3c",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_crown#components",
-      "fact": "Consecrated Wraps has the internal identifier item_consecrated_wraps."
-    },
-    {
-      "section": "gamefile:items/item_crown#components",
-      "fact": "Dagon has the internal identifier item_dagon."
-    },
-    {
-      "section": "gamefile:items/item_crown#components",
-      "fact": "Helm of the Dominator has the internal identifier item_helm_of_the_dominator."
-    },
-    {
-      "section": "gamefile:items/item_crown#components",
-      "fact": "Holy Locket has the internal identifier item_holy_locket."
-    },
-    {
-      "section": "gamefile:items/item_crown#components",
-      "fact": "Meteor Hammer has the internal identifier item_meteor_hammer."
-    }
-  ],
+  "packet_sha256": "6d48b617c3352c741a22283dec64ef0f486683e7200fbe77e5266e1ee07c0573",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "e0d6161076702c20ce1573cd59f114718fcfef4f9231ef134231d08a964d8089",
-    "input_tokens": 14251,
-    "output_tokens": 575,
+    "prompt_version": "2",
+    "request_sha256": "0566da87ef36b09058370327e03d3510bda0c540fc962bda20c86be27188a02c",
+    "input_tokens": 13928,
+    "output_tokens": 62,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:47.695354+00:00"
+    "generated_at": "2026-07-27T11:54:20.858976+00:00"
   }
 }

@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "f5a039ecdbd86464613e3d21d27556a8d4cf0e642833d865a55b02f700c3e598",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_sange_and_yasha#components",
-      "fact": "The Sange component has the identifier item_sange."
-    },
-    {
-      "section": "gamefile:items/item_sange_and_yasha#components",
-      "fact": "The Yasha component has the identifier item_yasha."
-    }
-  ],
+  "packet_sha256": "e491f51a86f1593cc740283b5dc7d5e49896388c8677fa169596cedcac9436e2",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "8c8f89a9537c5e6096a73e8b857d8a9fb4b34c94c1e01f9e39bea085a46aac7e",
-    "input_tokens": 14331,
-    "output_tokens": 461,
+    "prompt_version": "2",
+    "request_sha256": "ac15272874cf4ebb2d2a3f2afe9796674c8c3c1982228c8e8abcf276b00f9814",
+    "input_tokens": 13999,
+    "output_tokens": 103,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:04.425961+00:00"
+    "generated_at": "2026-07-27T11:55:49.980923+00:00"
   }
 }

@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "e78280c5bb4bd29324cfef7c05d38a7010137b8a43aceb67251c62bb40f344c8",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_blitz_knuckles#cost",
-      "fact": "Blitz Knuckles has the internal identifier item_blitz_knuckles."
-    },
-    {
-      "section": "gamefile:items/item_blitz_knuckles#components",
-      "fact": "Shadow Blade has the internal identifier item_invis_sword."
-    },
-    {
-      "section": "gamefile:items/item_blitz_knuckles#components",
-      "fact": "Monkey King Bar has the internal identifier item_monkey_king_bar."
-    },
-    {
-      "section": "gamefile:items/item_blitz_knuckles#components",
-      "fact": "Oblivion Staff has the internal identifier item_oblivion_staff."
-    }
-  ],
+  "packet_sha256": "8d7e502cf57d3dfc126cded5b0bc1500782441c987b075f1180d7674a9a18e68",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "13bc45c1a2cfe38310c51d6aad6eb8b1823e612ab12ace88daca008bdb4f4805",
-    "input_tokens": 14204,
-    "output_tokens": 615,
+    "prompt_version": "2",
+    "request_sha256": "0f8f788bf59cf34198125c5a9a68b521ca91fa02aa6ab587eaf3c5af0bf2594a",
+    "input_tokens": 14296,
+    "output_tokens": 80,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:04.990866+00:00"
+    "generated_at": "2026-07-27T11:54:04.043154+00:00"
   }
 }

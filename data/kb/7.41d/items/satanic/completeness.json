@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "3caf1d376158c70ba41ddc26992db47bc27b089b1544ac5ef01e5aa9a4477937",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_satanic#components",
-      "fact": "The component identifiers are Reaver (item_reaver), Claymore (item_claymore), and Morbid Mask (item_lifesteal)."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "00c3325f5327080e9c0bb12c18b676bad2a799109237786b067a0b363304c4d2",
-    "input_tokens": 14469,
-    "output_tokens": 961,
+    "prompt_version": "2",
+    "request_sha256": "b84c4cfb3b01b4076f434e1f42d7d1ca53d82c792539189835e5c4c5f38e81f6",
+    "input_tokens": 14155,
+    "output_tokens": 214,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:34.481786+00:00"
+    "generated_at": "2026-07-27T11:55:52.753798+00:00"
   }
 }

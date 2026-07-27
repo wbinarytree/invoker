@@ -3,25 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "8d887612369ce41b6e2fd8f334a9a20556bbd1885c1cb9db997cb5e50dbb7fa9",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_voodoo_mask#components",
-      "fact": "Revenant's Brooch has the internal item identifier item_revenants_brooch."
-    },
-    {
-      "section": "gamefile:items/item_voodoo_mask#components",
-      "fact": "Veil of Discord has the internal item identifier item_veil_of_discord."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "80c4512cd6281c699a0746d1af8bec3dec964560688eff45f7d76f71d0f34425",
-    "input_tokens": 14257,
-    "output_tokens": 463,
+    "prompt_version": "2",
+    "request_sha256": "55826dd344aa6e0a5db2097589ca4d2c3fbe11c62fe3aa735e9c049186449e18",
+    "input_tokens": 14368,
+    "output_tokens": 14,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:54.233075+00:00"
+    "generated_at": "2026-07-27T11:56:10.038463+00:00"
   }
 }

@@ -1,23 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "9671d5c6bc908397b34a58cbda763bff7f4e6c2fc6d610b2cdf957d91e1e0459",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_nullifier_Description",
-      "fact": "The Nullify debuff lasts 4.0 seconds."
-    }
-  ],
+  "packet_sha256": "6d099e189693f286d1d5c6af9476a41a2b53a9fb06577f5b76204bca05a771f4",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "838239006634bb00f317b14bcabf4c933c8e74b03b8e039c665fe88ea8d6493e",
-    "input_tokens": 14365,
-    "output_tokens": 399,
+    "prompt_version": "2",
+    "request_sha256": "f329217462f7e155476dac04c4b86356135ddb5ecc70bc4099dfdcf6335c8a9e",
+    "input_tokens": 14049,
+    "output_tokens": 176,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:11:23.743699+00:00"
+    "generated_at": "2026-07-27T11:54:52.574087+00:00"
   }
 }

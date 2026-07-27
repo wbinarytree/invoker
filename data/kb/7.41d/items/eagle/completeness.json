@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "4a4086c0d6cb742a4623a6133f0a80a95439968c6a11db0606b68ff53b4b4389",
-  "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_eagle#components",
-      "fact": "Butterfly has the internal item identifier item_butterfly."
-    },
-    {
-      "section": "gamefile:items/item_eagle#components",
-      "fact": "Disperser has the internal item identifier item_disperser."
-    },
-    {
-      "section": "gamefile:items/item_eagle#components",
-      "fact": "Swift Blink has the internal item identifier item_swift_blink."
-    }
-  ],
+  "packet_sha256": "d126bca7d0b3c277747f7c710e8af88e0a9bbaa21c9601b67362e4f034e3bbad",
+  "packet_matches_artifact": false,
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "9397c84e1c677c31599a09204d99f1d94eb2bf95b2328c16b6f7e41971586d94",
-    "input_tokens": 14174,
-    "output_tokens": 384,
+    "prompt_version": "2",
+    "request_sha256": "77131eb7625b025fcfb8d2ada5e66fe64a7c5f8aa8194331370628acfb4e5ba5",
+    "input_tokens": 14270,
+    "output_tokens": 94,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:03.567139+00:00"
+    "generated_at": "2026-07-27T11:54:28.045813+00:00"
   }
 }
