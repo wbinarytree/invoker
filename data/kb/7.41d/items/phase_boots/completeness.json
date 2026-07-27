@@ -1,35 +1,23 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "e90ebf540812c81719c560514c613e4425baa6790e15e142ae59eb9e604cbaac",
+  "packet_sha256": "a53cfd6a2af60d4242233e8f6eb1c9f71515ed1e7fb3fe5861aef140789b7b61",
   "packet_matches_artifact": true,
   "missing": [
     {
-      "section": "gamefile:items/item_phase_boots#cost",
-      "fact": "The item's internal identifier is item_phase_boots."
-    },
-    {
-      "section": "gamefile:items/item_phase_boots#components",
-      "fact": "Boots of Speed has the internal identifier item_boots."
-    },
-    {
-      "section": "gamefile:items/item_phase_boots#components",
-      "fact": "Chainmail has the internal identifier item_chainmail."
-    },
-    {
-      "section": "gamefile:items/item_phase_boots#components",
-      "fact": "Blades of Attack has the internal identifier item_blades_of_attack."
+      "section": "loc:DOTA_Tooltip_ability_item_phase_boots_Description",
+      "fact": "Phase gives 20% increased movement speed to melee heroes and 10% to ranged heroes."
     }
   ],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "b393acdaface4bf645106807a2147dfc9ee498cd22e523966fd09089398398e0",
-    "input_tokens": 14527,
-    "output_tokens": 536,
+    "prompt_version": "2",
+    "request_sha256": "1e8e833565dd8ba3e2f437f538bf47ede0de79e9b21a6ed56b56e585d5aceac0",
+    "input_tokens": 14594,
+    "output_tokens": 572,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:13:23.752727+00:00"
+    "generated_at": "2026-07-27T12:03:48.448807+00:00"
   }
 }

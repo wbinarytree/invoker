@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "kind": "item",
+  "slug": "aeon_disk",
+  "title": "Aeon Disk",
+  "patch": "7.41d",
+  "article_file": "article.md",
+  "article_sha256": "3fa92ea698d7c3c858d1cfc97292a65720f3f31ed543e2c36c18f6aac4693473",
+  "citations": [
+    "gamefile:items/item_aeon_disk#cost",
+    "gamefile:items/item_aeon_disk#attribs",
+    "gamefile:items/item_aeon_disk#mechanics",
+    "loc:DOTA_Tooltip_ability_item_aeon_disk_Description",
+    "gamefile:items/item_aeon_disk#components"
+  ],
+  "packet_sha256": "4e70c1326ec09f5b466f20c351ee7348d526c9181bede9eaccbaa9489c5d42eb",
+  "article_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-article",
+    "prompt_version": "7",
+    "request_sha256": "a24ae9d0e16112978b1328b33a05c82bba01a6733d2f81ca266f8a8b13fcd140",
+    "input_tokens": 13978,
+    "output_tokens": 2803,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:05:28.650915+00:00"
+  },
+  "card_provenance": {
+    "model": "gpt-5.6-sol",
+    "transport": "codex-app-server",
+    "prompt_name": "item-card",
+    "prompt_version": "7",
+    "request_sha256": "72fe12ab15a0ba1791d5eb4cbb28666392ec5a18d6e6c050379c3fac23cab58e",
+    "input_tokens": 14469,
+    "output_tokens": 1788,
+    "stop_reason": "completed",
+    "generated_at": "2026-07-27T12:06:08.200631+00:00"
+  }
+}

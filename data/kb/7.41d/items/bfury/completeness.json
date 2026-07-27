@@ -3,29 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "7635c83d7ff455fa11f213c719afc1dd6ad334c71703f0baf279f11bee0f1027",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_bfury#cost",
-      "fact": "Battle Fury's internal item identifier is item_bfury."
-    },
-    {
-      "section": "gamefile:items/item_bfury#components",
-      "fact": "The component identifiers are item_pers for Perseverance, item_broadsword for each Broadsword, and item_quelling_blade for Quelling Blade."
-    },
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_bfury_Description",
-      "fact": "Chop Tree is active, while Quell and Cleave are passive."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "ce745f458bcc5de38c5a940f4f8bed9402c2390e050c1d4b79336f5935878761",
-    "input_tokens": 14694,
-    "output_tokens": 854,
+    "prompt_version": "2",
+    "request_sha256": "51f0350a922afd340e62f68c849c4936beac1cac2d4e9c7936bae4c8febd8f64",
+    "input_tokens": 14894,
+    "output_tokens": 244,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:09.862826+00:00"
+    "generated_at": "2026-07-27T11:58:54.911267+00:00"
   }
 }

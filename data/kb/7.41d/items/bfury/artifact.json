@@ -5,7 +5,7 @@
   "title": "Battle Fury",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "4c0885eeabb6639e22fb6651092d045bb2afea69fd1364d062f9fd7a9a5677d0",
+  "article_sha256": "b83ba7e923bcfaa62fabacce02cb70a06c324d81734310a4e7d98e2aa9e0b44e",
   "citations": [
     "gamefile:items/item_bfury#cost",
     "gamefile:items/item_bfury#attribs",
@@ -19,22 +19,22 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "07675c3a8df8be1b7f85feafdb499aa7564be01f10b79aba4d9d8a9a2a725758",
-    "input_tokens": 14420,
-    "output_tokens": 1479,
+    "prompt_version": "7",
+    "request_sha256": "5de47d3c525dff1bf3f728cc26ea0eb76dc5d0578b2e6da8d085809bc4f7b40a",
+    "input_tokens": 14510,
+    "output_tokens": 2242,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:51.356119+00:00"
+    "generated_at": "2026-07-27T11:58:05.919738+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "332f4b9f8b38239b9569d2e32eaba3b4faa34c35b6fe2f4a91c022a1170f9a44",
-    "input_tokens": 14520,
-    "output_tokens": 2190,
+    "prompt_version": "7",
+    "request_sha256": "bda173b1aa6e4239f3371bbadc762ff2bea75bda3d0162f83b41533eb20c1e8f",
+    "input_tokens": 14661,
+    "output_tokens": 1972,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:43.316046+00:00"
+    "generated_at": "2026-07-27T11:58:44.555157+00:00"
   }
 }

@@ -5,7 +5,7 @@
   "title": "Boots of Bearing",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "eccfceffd179177fabf7d7873c0d6e7ab97e355de9f515ff567ab8816c7ae3f7",
+  "article_sha256": "779c6950529584bfacc98970ce0e99981b74ccdab3b48e0c76a35957da1ac91d",
   "citations": [
     "gamefile:items/item_boots_of_bearing#cost",
     "gamefile:items/item_boots_of_bearing#attribs",
@@ -14,27 +14,27 @@
     "gamefile:items/item_boots_of_bearing#mechanics",
     "loc:DOTA_Tooltip_ability_item_boots_of_bearing_Lore"
   ],
-  "packet_sha256": "8a6c5a1c7642451b7d101e7829308ee433e2342b86b204a87f1e2b46d7f579ad",
+  "packet_sha256": "d03d5a6c466df577a3e03e96ca0ebf13eabc85d51e9dbeeee86815d6b03d1f11",
   "article_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "9292992bb28a962dd3e5fc23613020ea2b7d83ba71629f8950a934a94f5af1d3",
-    "input_tokens": 14012,
-    "output_tokens": 1682,
+    "prompt_version": "7",
+    "request_sha256": "f48662a7ab6363c4950d8c1b6cca66174473db282873deceedfd210013d0add8",
+    "input_tokens": 14522,
+    "output_tokens": 4594,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:43.774413+00:00"
+    "generated_at": "2026-07-27T11:59:11.958263+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "422def751bae660478ccd09c1b8f94a7681981d36bd15c149fda4db22b51ee45",
-    "input_tokens": 14513,
-    "output_tokens": 1437,
+    "prompt_version": "7",
+    "request_sha256": "223e48a9c352bc35fe84b4d75d3fad60ab9cb1c4f1b43cacd363f0b6c8c764bd",
+    "input_tokens": 14537,
+    "output_tokens": 1870,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:22.733715+00:00"
+    "generated_at": "2026-07-27T11:59:50.173854+00:00"
   }
 }

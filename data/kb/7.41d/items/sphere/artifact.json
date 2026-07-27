@@ -5,7 +5,7 @@
   "title": "Linken's Sphere",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "8d6076e4883c369a5cd9a9e9f7a35baf1f0823b7061278c6bd26ad3185cb0bff",
+  "article_sha256": "c742478a19746448795db5ea39e186a49e8b062800add7fd6b0f3abe1dce1873",
   "citations": [
     "gamefile:items/item_sphere#cost",
     "gamefile:items/item_sphere#attribs",
@@ -14,27 +14,27 @@
     "gamefile:items/item_sphere#mechanics",
     "loc:DOTA_Tooltip_ability_item_sphere_Lore"
   ],
-  "packet_sha256": "ad07e4640ec00337a33c0b9b89e9eef7bea7be9f4b2ffdc9669db6eb8f1fc962",
+  "packet_sha256": "34b98bab2a8e977d7c2470fc44783d9b7ed86a46456cc8e06a1988d8a75dfc1c",
   "article_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "f2a38b31f0c31650c72742fbb83c60cd616070ce79ae5446ba0c1441966d1e51",
-    "input_tokens": 14298,
-    "output_tokens": 1965,
+    "prompt_version": "8",
+    "request_sha256": "4ba743e9bc6ea3264a5d57b77415e8b30eb0f0dbb2b029371e6f77e2a4414626",
+    "input_tokens": 14408,
+    "output_tokens": 1436,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:55.291020+00:00"
+    "generated_at": "2026-07-27T12:37:45.979135+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "291cd394cc9d51e884d4fece01bd244a1cb17e925cf764bb7999d3d3430cb0ab",
-    "input_tokens": 14443,
-    "output_tokens": 690,
+    "prompt_version": "8",
+    "request_sha256": "984b78c4c8bb20d5a15927bf19844892b9af4177f912ea1a64825b4666383267",
+    "input_tokens": 14496,
+    "output_tokens": 1695,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:17:10.857852+00:00"
+    "generated_at": "2026-07-27T12:38:25.265810+00:00"
   }
 }

@@ -11,25 +11,22 @@ card:
     marks:
     - gamefile:items/item_kaya_and_sange#cost
     - gamefile:items/item_kaya_and_sange#attribs
-  - text: Its build formula is Kaya (2100 gold) and Sange (2100 gold).
+  - text: 'Build formula: Kaya (2100 gold) + Sange (2100 gold), for a total cost of
+      4200 gold.'
     marks:
     - gamefile:items/item_kaya_and_sange#components
-  - text: Its behavior is passive.
+    - gamefile:items/item_kaya_and_sange#cost
+  - text: Two of three known items of unimaginable power that many believe were crafted
+      at the same enchanter's forge.
     marks:
-    - gamefile:items/item_kaya_and_sange#mechanics
+    - loc:DOTA_Tooltip_ability_item_kaya_and_sange_Lore
 ---
+
+# Kaya and Sange
 
 Kaya and Sange is an artifact item that grants Intelligence, Strength, Health Restoration, Mana Regen Multiplier, Manacost Reduction, Slow Resistance, and Spell Amp. [gamefile:items/item_kaya_and_sange#cost] [gamefile:items/item_kaya_and_sange#attribs]
 
-## Cost
-
-| Cost |
-|---:|
-| 4200 gold |
-
-[gamefile:items/item_kaya_and_sange#cost]
-
-## Attributes
+## Stats
 
 | Stat | Value |
 |---|---:|
@@ -49,11 +46,8 @@ Kaya and Sange is an artifact item that grants Intelligence, Strength, Health Re
 |---|---:|
 | Kaya | 2100 gold |
 | Sange | 2100 gold |
+| **Total cost** | **4200 gold** |
 
-[gamefile:items/item_kaya_and_sange#components]
-
-## Mechanics
-
-Its behavior is passive. [gamefile:items/item_kaya_and_sange#mechanics]
+[gamefile:items/item_kaya_and_sange#components] [gamefile:items/item_kaya_and_sange#cost]
 
 *Two of three known items of unimaginable power that many believe were crafted at the same enchanter's forge.* [loc:DOTA_Tooltip_ability_item_kaya_and_sange_Lore]

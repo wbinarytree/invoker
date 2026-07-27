@@ -5,46 +5,41 @@ patch: 7.41d
 card:
   entity: boots_of_bearing
   sentences:
-  - text: Boots of Bearing is a rare item costing 4225 gold that grants 65 Movement
-      Speed, 18 Health Regeneration, and 8 Strength, provides allies 15 Movement Speed
-      and 2.5 Health Regeneration through Swiftness Aura, and activates Endurance
-      to grant nearby allies Bonus Attack Speed Pct 50, Bonus Movement Speed Pct 15%,
-      and slow immunity.
+  - text: Boots of Bearing is a rare 4225-gold item granting 65 movement speed, 18
+      health regeneration, and 8 strength; Endurance affects allies within 1200 radius
+      for 6 seconds, granting 50% bonus attack speed, 15% bonus movement speed with
+      a 1.5-second duration, and slow immunity at the start, while Swiftness Aura
+      grants allies 15 movement speed and 2.5 health regeneration.
     marks:
     - gamefile:items/item_boots_of_bearing#cost
     - gamefile:items/item_boots_of_bearing#attribs
     - loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description
-  - text: The build formula is Tranquil Boots (900 gold), Drum of Endurance (1625
-      gold), and Ring of Tarrasque (1700 gold).
+  - text: Its build formula is Tranquil Boots for 900 gold, Drum of Endurance for
+      1625 gold, and Ring of Tarrasque for 1700 gold.
     marks:
     - gamefile:items/item_boots_of_bearing#components
-  - text: Endurance has Duration 6 and Radius 1200.
-    marks:
-    - gamefile:items/item_boots_of_bearing#attribs
-  - text: Its Bonus MS Duration is 1.5.
-    marks:
-    - gamefile:items/item_boots_of_bearing#attribs
-  - text: Endurance has a Cooldown of 30.0.
+  - text: Endurance is Immediate, No Target, and Usable While Channelling.
     marks:
     - gamefile:items/item_boots_of_bearing#mechanics
-  - text: Its behavior is Immediate, No Target, and DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL.
+  - text: Endurance has a 30.0-second cooldown.
     marks:
     - gamefile:items/item_boots_of_bearing#mechanics
-  - text: Affected allies are immune to slows at the start of Endurance.
-    marks:
-    - loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description
   - text: Movement speed bonuses from multiple pairs of boots do not stack.
     marks:
     - loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description
+  - text: “Resplendent footwear fashioned for the ancient herald that first dared
+      spread the glory of Stonehall beyond the original borders of its nascent claim.”
+    marks:
+    - loc:DOTA_Tooltip_ability_item_boots_of_bearing_Lore
 ---
 
 # Boots of Bearing
 
-Boots of Bearing is a rare item that grants Movement Speed, Health Regeneration, and Strength, provides allied Movement Speed and Health Regeneration through Swiftness Aura, and activates Endurance to grant nearby allies Attack Speed, Movement Speed, and slow immunity. [gamefile:items/item_boots_of_bearing#cost] [gamefile:items/item_boots_of_bearing#attribs] [loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description]
+Boots of Bearing is a rare item that grants movement speed, health regeneration, and strength; its active Endurance grants nearby allies attack speed and movement speed with immunity to slows at the start of the effect, while its passive Swiftness Aura grants allies movement speed and health regeneration. [gamefile:items/item_boots_of_bearing#cost] [gamefile:items/item_boots_of_bearing#attribs] [loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description]
 
 ## Components
 
-| Component | Gold cost |
+| Build entry | Gold cost |
 |---|---:|
 | Tranquil Boots | 900 gold |
 | Drum of Endurance | 1625 gold |
@@ -57,14 +52,14 @@ Boots of Bearing is a rare item that grants Movement Speed, Health Regeneration,
 
 | Stat | Value |
 |---|---:|
-| Aura Health Regen | 2.5 |
-| Aura Movement Speed | 15 |
-| Bonus Attack Speed Pct | 50 |
-| Health Regeneration | 18 |
+| Aura health regen | 2.5 |
+| Aura movement speed | 15 |
+| Bonus attack speed pct | 50 |
+| Health regeneration | 18 |
 | Intelligence | 0 |
-| Movement Speed | 65 |
-| Bonus Movement Speed Pct | 15% |
-| Bonus MS Duration | 1.5 |
+| Movement speed | 65 |
+| Bonus movement speed pct | 15% |
+| Bonus movement speed duration | 1.5 |
 | Strength | 8 |
 | Duration | 6 |
 | Radius | 1200 |
@@ -75,11 +70,11 @@ Boots of Bearing is a rare item that grants Movement Speed, Health Regeneration,
 
 | Property | Value |
 |---|---|
-| Behavior | Immediate, No Target, DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL |
+| Behavior | Immediate, No Target, Usable While Channelling |
 | Cooldown | 30.0 |
 
 [gamefile:items/item_boots_of_bearing#mechanics]
 
-Endurance affects nearby allies; at the start of its effect, affected allies are immune to slows. Swiftness Aura affects allies, and movement speed bonuses from multiple pairs of boots do not stack. [loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description]
+Movement speed bonuses from multiple pairs of boots do not stack. [loc:DOTA_Tooltip_ability_item_boots_of_bearing_Description]
 
 *Resplendent footwear fashioned for the ancient herald that first dared spread the glory of Stonehall beyond the original borders of its nascent claim.* [loc:DOTA_Tooltip_ability_item_boots_of_bearing_Lore]

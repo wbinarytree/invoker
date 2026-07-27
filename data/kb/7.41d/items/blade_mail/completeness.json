@@ -1,35 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "508c1310903484af1d9a3a61b2560a70acb3c040e19020f68c8d454788bbcec1",
+  "packet_sha256": "62b88043d4f7851d10cf6badd02310d7984e1a43cd6aaf2867d0e02e69dc67de",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_blade_mail#cost",
-      "fact": "Blade Mail's internal item ID is item_blade_mail."
-    },
-    {
-      "section": "gamefile:items/item_blade_mail#components",
-      "fact": "Broadsword's internal item ID is item_broadsword."
-    },
-    {
-      "section": "gamefile:items/item_blade_mail#components",
-      "fact": "Splintmail's internal item ID is item_splintmail."
-    },
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_blade_mail_Description",
-      "fact": "The active Damage Return duration is measured in seconds: 5.5 seconds."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "d8779c08cf7efabe4a3cb1b2489df69d46b1d623efb5b56daefef3344e47d36f",
-    "input_tokens": 14484,
-    "output_tokens": 1037,
+    "prompt_version": "2",
+    "request_sha256": "6df6d4eb2b1dd3def4e58cb0020c6fa9d4ceea53cd8c533548b7566898e78f40",
+    "input_tokens": 14592,
+    "output_tokens": 208,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:01.186808+00:00"
+    "generated_at": "2026-07-27T12:00:14.276404+00:00"
   }
 }

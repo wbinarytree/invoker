@@ -1,27 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "53ec2e9d02e6bae6a518a2281525e13a682f74e6315c8df1c6d2a930894965de",
+  "packet_sha256": "e95ed27d684ae8e6d334f695c8e71f5ad7ffc4f37c9e45360ef98b2a2c4720e9",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_silver_edge#components",
-      "fact": "Shadow Blade has the internal identifier item_invis_sword."
-    },
-    {
-      "section": "gamefile:items/item_silver_edge#components",
-      "fact": "Demon Edge has the internal identifier item_demon_edge."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "bc7e1890bf0eeb450c21d12566d4777e8f5da777fd294b65c7176de0c059cdde",
-    "input_tokens": 14642,
-    "output_tokens": 457,
+    "prompt_version": "2",
+    "request_sha256": "d9582665c968fe5424e74338de3428ef717f1ce7b4dec5c192d4d1e397ac90a6",
+    "input_tokens": 14737,
+    "output_tokens": 282,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:16:34.439909+00:00"
+    "generated_at": "2026-07-27T12:01:31.536132+00:00"
   }
 }

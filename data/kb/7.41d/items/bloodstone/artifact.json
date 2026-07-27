@@ -5,36 +5,36 @@
   "title": "Bloodstone",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6252da1afe8b07dbc77a62a31c7c3509f1eb9c8de79a8be918a2e280a9f03354",
+  "article_sha256": "7a59cb6ee5d814304be2ddeb7ab60592b273967d78510a0b5e3ec351204c6da7",
   "citations": [
     "gamefile:items/item_bloodstone#cost",
     "gamefile:items/item_bloodstone#attribs",
     "loc:DOTA_Tooltip_ability_item_bloodstone_Description",
-    "gamefile:items/item_bloodstone#components",
     "gamefile:items/item_bloodstone#mechanics",
+    "gamefile:items/item_bloodstone#components",
     "loc:DOTA_Tooltip_ability_item_bloodstone_Lore"
   ],
-  "packet_sha256": "0d69341189518d6b0b84b05e6a1d7c097fc245889f6e369601998ec15dc856f2",
+  "packet_sha256": "3989e60f9634c284e2ce38f95eea53ed8ed7065baa31861a216ef191c54dbb5a",
   "article_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "5e026e41843abff0a92484ae910205a384c4bbf66f68eac2b0988329e3e7aa49",
-    "input_tokens": 14346,
-    "output_tokens": 945,
+    "prompt_version": "7",
+    "request_sha256": "78325cba3816eada5ea6344beb926852476aea048b291625be0257763ed28a89",
+    "input_tokens": 14424,
+    "output_tokens": 1708,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:37.639145+00:00"
+    "generated_at": "2026-07-27T11:58:01.636574+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "c7034105ee89e2270d1dc48bb16aa7c840f6544e42bb1356ba5a29bae2d6427b",
-    "input_tokens": 14460,
-    "output_tokens": 1927,
+    "prompt_version": "7",
+    "request_sha256": "4d331c54ff432df567268e8dcfae631ea7815993dc5ea4addd16dfa5dc42d9ca",
+    "input_tokens": 14497,
+    "output_tokens": 1305,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:19.199570+00:00"
+    "generated_at": "2026-07-27T11:58:31.270745+00:00"
   }
 }

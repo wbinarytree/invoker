@@ -5,13 +5,13 @@
   "title": "Disperser",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6123ef9f2c0d5da1b8cba1cce46f8ee34f94aa63394ef05584566034db19e896",
+  "article_sha256": "7dc54ea54967471a1d9089dc72892beb181bf4f435786a47ebe1629cf248e6f9",
   "citations": [
     "gamefile:items/item_disperser#cost",
     "gamefile:items/item_disperser#attribs",
     "loc:DOTA_Tooltip_ability_item_disperser_Description",
-    "gamefile:items/item_disperser#components",
     "gamefile:items/item_disperser#mechanics",
+    "gamefile:items/item_disperser#components",
     "loc:DOTA_Tooltip_ability_item_disperser_Lore"
   ],
   "packet_sha256": "86a02037bc70f1a9d956daeed5a1648e01355322cc502a4dcc841091adb015c7",
@@ -19,22 +19,22 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "f7e5778ab8bdd9e0c6d0eabb4c4e4c66875ab6bc7b3e0e0e3a1dbe428d61ad4a",
-    "input_tokens": 14047,
-    "output_tokens": 2064,
+    "prompt_version": "7",
+    "request_sha256": "4f7178a71f517c187ad53bd94b61e7de84ae53ba65a1528aab3895377b3d357b",
+    "input_tokens": 14137,
+    "output_tokens": 3209,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:00:03.314059+00:00"
+    "generated_at": "2026-07-27T11:59:53.749372+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "b21345f4ddf70c59fecb035f1162e562f0a2dddcf85d953ad7c1f804ffc2219b",
-    "input_tokens": 14541,
-    "output_tokens": 4603,
+    "prompt_version": "7",
+    "request_sha256": "6cffe31c6115cc7d327d08fec78f6961a94475d76205922ab2b154e76ebe61b7",
+    "input_tokens": 14702,
+    "output_tokens": 2906,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:01:41.195397+00:00"
+    "generated_at": "2026-07-27T12:01:19.185620+00:00"
   }
 }

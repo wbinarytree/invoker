@@ -6,43 +6,44 @@ card:
   entity: sphere
   sentences:
   - text: Linken's Sphere is an epic item costing 4800 gold that grants 16 All Attributes,
-      6.5 Health Regeneration, 4.25 Mana Regeneration, and 300 Damage Absorb, with
-      passive Spellblock once every 14.0 seconds and active Transfer Spellblock for
-      14.0 seconds.
+      6.5 Health Regeneration, 4.25 Mana Regeneration, 300 Damage Absorb, and 10.0
+      Upgrade Absorb Duration, with passive Spellblock once every 14.0 seconds and
+      active Transfer Spellblock for 14.0 seconds.
     marks:
     - gamefile:items/item_sphere#cost
     - gamefile:items/item_sphere#attribs
     - loc:DOTA_Tooltip_ability_item_sphere_Description
-  - text: Its Upgrade Absorb Duration is 10.0.
-    marks:
-    - gamefile:items/item_sphere#attribs
-  - text: It is built from Perseverance for 1400 gold, Ultimate Orb for 2800 gold,
-      and a Recipe for 600 gold.
+  - text: The build formula is Perseverance for 1400 gold, Ultimate Orb for 2800 gold,
+      and Recipe for 600 gold, totaling 4800 gold.
     marks:
     - gamefile:items/item_sphere#components
-  - text: Transfer Spellblock is unit-targeted with 700 cast range.
+    - gamefile:items/item_sphere#cost
+  - text: Block Cooldown is 14.0.
     marks:
-    - gamefile:items/item_sphere#mechanics
-  - text: Its active cooldown is 14.0.
-    marks:
-    - gamefile:items/item_sphere#mechanics
+    - gamefile:items/item_sphere#attribs
   - text: Spellblock blocks most targeted spells.
     marks:
     - loc:DOTA_Tooltip_ability_item_sphere_Description
-  - text: Transfer Spellblock temporarily removes Spellblock from the owner and transfers
-      it to an allied unit.
+  - text: Transfer Spellblock temporarily removes Spellblock from the item’s owner
+      and transfers it to an allied unit.
     marks:
     - loc:DOTA_Tooltip_ability_item_sphere_Description
+  - text: Transfer Spellblock has Unit Target behavior.
+    marks:
+    - gamefile:items/item_sphere#mechanics
+  - text: Transfer Spellblock has 700 cast range.
+    marks:
+    - gamefile:items/item_sphere#mechanics
+  - text: This magical sphere once protected one of the most famous heroes in history.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_sphere_Lore
 ---
 
-Linken's Sphere is an epic item that provides All Attributes, Health Regeneration, Mana Regeneration, Damage Absorb, passive Spellblock, and active Transfer Spellblock. [gamefile:items/item_sphere#cost] [gamefile:items/item_sphere#attribs] [loc:DOTA_Tooltip_ability_item_sphere_Description]
+# Linken's Sphere
+
+Linken's Sphere is an epic item with Block Cooldown, All Attributes, Health Regeneration, Mana Regeneration, Damage Absorb, and Upgrade Absorb Duration, plus passive Spellblock and active Transfer Spellblock. [gamefile:items/item_sphere#cost] [gamefile:items/item_sphere#attribs] [loc:DOTA_Tooltip_ability_item_sphere_Description]
 
 ## Stats
-
-| Stat | Value |
-|---|---:|
-| Cost | 4800 gold |
-[gamefile:items/item_sphere#cost]
 
 | Stat | Value |
 |---|---:|
@@ -52,6 +53,7 @@ Linken's Sphere is an epic item that provides All Attributes, Health Regeneratio
 | Mana Regeneration | 4.25 |
 | Damage Absorb | 300 |
 | Upgrade Absorb Duration | 10.0 |
+
 [gamefile:items/item_sphere#attribs]
 
 ## Components
@@ -61,23 +63,25 @@ Linken's Sphere is an epic item that provides All Attributes, Health Regeneratio
 | Perseverance | 1400 gold |
 | Ultimate Orb | 2800 gold |
 | Recipe | 600 gold |
-[gamefile:items/item_sphere#components]
+| **Total** | **4800 gold** |
 
-## Mechanics
+[gamefile:items/item_sphere#components] [gamefile:items/item_sphere#cost]
 
-| Property | Value |
-|---|---:|
-| Behavior | Unit Target |
-| Cast range | 700 |
-| Cooldown | 14.0 |
-[gamefile:items/item_sphere#mechanics]
+## Abilities
 
-Spellblock blocks most targeted spells. Transfer Spellblock temporarily removes Spellblock from the item's owner and transfers it to an allied unit. [loc:DOTA_Tooltip_ability_item_sphere_Description]
+| Ability | Classification | Timing |
+|---|---|---:|
+| Spellblock | Passive | Once every 14.0 seconds |
+| Transfer Spellblock | Active | 14.0 seconds |
 
-| Effect | Duration or interval |
-|---|---:|
-| Spellblock | Once every 14.0 seconds |
-| Transfer Spellblock | 14.0 seconds |
 [loc:DOTA_Tooltip_ability_item_sphere_Description]
+
+Spellblock blocks most targeted spells. Transfer Spellblock temporarily removes Spellblock from the item’s owner and transfers it to an allied unit. [loc:DOTA_Tooltip_ability_item_sphere_Description]
+
+| Behavior | Cast range |
+|---|---:|
+| Unit Target | 700 |
+
+[gamefile:items/item_sphere#mechanics]
 
 *This magical sphere once protected one of the most famous heroes in history.* [loc:DOTA_Tooltip_ability_item_sphere_Lore]

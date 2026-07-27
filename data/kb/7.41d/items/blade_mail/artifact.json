@@ -5,7 +5,7 @@
   "title": "Blade Mail",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "6b189026044a30aa971935c833067237dedd02fba26bf14d4202ecf98d6af789",
+  "article_sha256": "614b1c3e9a378e42f3a1f5cc97fc26b75360d411d46a7334f2c3fa1218f9ccd8",
   "citations": [
     "gamefile:items/item_blade_mail#cost",
     "gamefile:items/item_blade_mail#attribs",
@@ -14,27 +14,27 @@
     "gamefile:items/item_blade_mail#mechanics",
     "loc:DOTA_Tooltip_ability_item_blade_mail_Lore"
   ],
-  "packet_sha256": "508c1310903484af1d9a3a61b2560a70acb3c040e19020f68c8d454788bbcec1",
+  "packet_sha256": "62b88043d4f7851d10cf6badd02310d7984e1a43cd6aaf2867d0e02e69dc67de",
   "article_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "10901a5b2202bad3755a76f14b7b9922868cdcfa1ccb65b144a1766c5f8f52e8",
-    "input_tokens": 14322,
-    "output_tokens": 751,
+    "prompt_version": "7",
+    "request_sha256": "e380e92c70412f7ab6e397079b4e102c20750bb6de54bc798b7b88a934d4c1b0",
+    "input_tokens": 13986,
+    "output_tokens": 1415,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:52:43.663069+00:00"
+    "generated_at": "2026-07-27T11:59:36.700156+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "182bde9dd2bf4783d20dfc38f5b7381ed3312b07eac08b95026f72faa5de99f8",
-    "input_tokens": 14410,
-    "output_tokens": 1995,
+    "prompt_version": "7",
+    "request_sha256": "ed57dff75c5f64a4f976da8df3c1364feb37a27bbc8d03c9c92402aca156ef77",
+    "input_tokens": 14462,
+    "output_tokens": 1206,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:53:27.941727+00:00"
+    "generated_at": "2026-07-27T12:00:04.468768+00:00"
   }
 }

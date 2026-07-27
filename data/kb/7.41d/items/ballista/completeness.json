@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "bd28bb2fb3739539b6866f8401fab8911643de8c85e73805bda13e40c34b05a3",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "loc:DOTA_Tooltip_Ability_item_ballista_Description",
-      "fact": "Every attack deals 50 pure damage."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "b60d7ac18f336468946677e3308bd9e62c0b04951e2ab18171ef06aa0cdd287a",
-    "input_tokens": 14201,
-    "output_tokens": 192,
+    "prompt_version": "2",
+    "request_sha256": "b8f2cbeda9580d56dc0b4be8a35ff5bb991e9ccef47655b8d7a9ddc706d6e9a7",
+    "input_tokens": 14348,
+    "output_tokens": 14,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:51:00.858343+00:00"
+    "generated_at": "2026-07-27T11:58:44.169130+00:00"
   }
 }

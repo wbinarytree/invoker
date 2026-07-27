@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "67090bbb6b3954e2495b642ddccae59bcc2b1a7f27eee735a10bd7a757e74d37",
+  "packet_sha256": "4e70c1326ec09f5b466f20c351ee7348d526c9181bede9eaccbaa9489c5d42eb",
   "packet_matches_artifact": true,
   "missing": [],
   "guard_provenance": {
@@ -9,10 +9,10 @@
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
     "prompt_version": "2",
-    "request_sha256": "59f212f71d14af23d97286d0775ba0f3fd2d68496fce5ddfff7f084120afaa18",
-    "input_tokens": 14249,
-    "output_tokens": 102,
+    "request_sha256": "c60318a2691d66d2caa35a7975a0f35a73007a0c1e53a33c4daaaf1dc2cf3798",
+    "input_tokens": 14592,
+    "output_tokens": 189,
     "stop_reason": "completed",
-    "generated_at": "2026-07-27T11:59:42.233093+00:00"
+    "generated_at": "2026-07-27T12:06:17.775646+00:00"
   }
 }

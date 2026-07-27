@@ -6,56 +6,45 @@ card:
   entity: devastator
   sentences:
   - text: Parasma is a rare 5975-gold item granting 7 Armor, 40 Attack Speed, 40 Intelligence,
-      1.5 Mana Regeneration, and 300 Projectile Speed, whose Witch Blade slows by
-      25% and whose Magic Corruption reduces magic resistance by 20% for 4 seconds.
+      1.5 Mana Regeneration, and 300 Projectile Speed; every 4 seconds, Witch Blade
+      gives the next attack true strike and a poison with a 25% slow for 4 seconds
+      and a 0.75 Intelligence damage multiplier every second, while Magic Corruption
+      reduces enemy Magic resistance by 20% for 4 seconds.
     marks:
     - gamefile:items/item_devastator#cost
     - gamefile:items/item_devastator#attribs
+    - gamefile:items/item_devastator#mechanics
     - loc:DOTA_Tooltip_ability_item_devastator_Description
-  - text: It is built from Witch Blade for 2775 gold, Mystic Staff for 2800 gold,
-      and a Recipe for 400 gold.
+  - text: It is built from Witch Blade (2775 gold), Mystic Staff (2800 gold), and
+      a Recipe (400 gold).
     marks:
     - gamefile:items/item_devastator#components
   - text: Witch Blade causes the next attack to have true strike and apply a poison
-      that deals intelligence-based damage every second.
+      that slows and deals damage based on the wielder’s Intelligence every second.
     marks:
     - loc:DOTA_Tooltip_ability_item_devastator_Description
-  - text: The INT DAMAGE MULTIPLIER is 0.75.
-    marks:
-    - gamefile:items/item_devastator#attribs
-  - text: The SLOW DURATION is 4.
-    marks:
-    - gamefile:items/item_devastator#attribs
-  - text: The statistics list PASSIVE COOLDOWN as 4.
-    marks:
-    - gamefile:items/item_devastator#attribs
-  - text: The mechanics list its Behavior as Passive.
-    marks:
-    - gamefile:items/item_devastator#mechanics
-  - text: The mechanics list its Cooldown as 7.
-    marks:
-    - gamefile:items/item_devastator#mechanics
-  - text: Magic Corruption causes attacks to reduce the enemy’s Magic resistance.
+  - text: Magic Corruption causes attacks to reduce the enemy’s Magic resistance for
+      4 seconds.
     marks:
     - loc:DOTA_Tooltip_ability_item_devastator_Description
+  - text: '“Warning: There is no antidote if picked up by the wrong end.”'
+    marks:
+    - loc:DOTA_Tooltip_ability_item_devastator_Lore
 ---
 
 # Parasma
 
-Parasma is a rare item that grants Armor, Attack Speed, Intelligence, Mana Regeneration, and Projectile Speed, and provides the Witch Blade and Magic Corruption passives. [gamefile:items/item_devastator#cost] [gamefile:items/item_devastator#attribs] [loc:DOTA_Tooltip_ability_item_devastator_Description]
+Parasma is a rare item that grants Armor, Attack Speed, Intelligence, Mana Regeneration, and Projectile Speed and has the passive effects Witch Blade—true strike, poison, slow, and Intelligence-based damage every second—and Magic Corruption—enemy Magic resistance reduction. [gamefile:items/item_devastator#cost] [gamefile:items/item_devastator#attribs] [gamefile:items/item_devastator#mechanics] [loc:DOTA_Tooltip_ability_item_devastator_Description]
 
-## Components
+## Cost
 
-| Component | Gold cost |
+| Stat | Value |
 |---|---:|
-| Witch Blade | 2775 gold |
-| Mystic Staff | 2800 gold |
-| Recipe | 400 gold |
-| **Parasma** | **5975 gold** |
+| Cost | 5975 gold |
 
-[gamefile:items/item_devastator#components] [gamefile:items/item_devastator#cost]
+[gamefile:items/item_devastator#cost]
 
-## Statistics
+## Stats
 
 | Stat | Value |
 |---|---:|
@@ -69,19 +58,21 @@ Parasma is a rare item that grants Armor, Attack Speed, Intelligence, Mana Regen
 | PROJECTILE SPEED | 300 |
 | SLOW | 25% |
 | SLOW DURATION | 4 |
-| Magic Corruption duration | 4 seconds |
 
-[gamefile:items/item_devastator#attribs] [loc:DOTA_Tooltip_ability_item_devastator_Description]
+[gamefile:items/item_devastator#attribs]
+
+## Components
+
+| Component | Gold cost |
+|---|---:|
+| Witch Blade | 2775 gold |
+| Mystic Staff | 2800 gold |
+| Recipe | 400 gold |
+
+[gamefile:items/item_devastator#components]
 
 ## Mechanics
 
-| Property | Value |
-|---|---:|
-| Behavior | Passive |
-| Cooldown | 7 |
-
-[gamefile:items/item_devastator#mechanics]
-
-**Witch Blade** causes the next attack to have true strike and apply a poison that slows and deals damage based on intelligence every second. **Magic Corruption** causes attacks to reduce the enemy’s Magic resistance. [loc:DOTA_Tooltip_ability_item_devastator_Description]
+Witch Blade causes the next attack to have true strike and apply a poison that slows and deals damage based on the wielder’s Intelligence every second. Magic Corruption causes attacks to reduce the enemy’s Magic resistance; the reduction lasts 4 seconds. [loc:DOTA_Tooltip_ability_item_devastator_Description]
 
 *Warning: There is no antidote if picked up by the wrong end.* [loc:DOTA_Tooltip_ability_item_devastator_Lore]

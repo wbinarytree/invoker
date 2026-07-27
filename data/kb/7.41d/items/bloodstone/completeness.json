@@ -1,31 +1,18 @@
 {
   "schema_version": 1,
   "artifact_file": "artifact.json",
-  "packet_sha256": "0d69341189518d6b0b84b05e6a1d7c097fc245889f6e369601998ec15dc856f2",
+  "packet_sha256": "3989e60f9634c284e2ce38f95eea53ed8ed7065baa31861a216ef191c54dbb5a",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "gamefile:items/item_bloodstone#components",
-      "fact": "Veil of Discord’s internal item identifier is item_veil_of_discord."
-    },
-    {
-      "section": "gamefile:items/item_bloodstone#components",
-      "fact": "Soul Booster’s internal item identifier is item_soul_booster."
-    },
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_bloodstone_Description",
-      "fact": "Spell Weakness Aura is a passive ability."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "0642bab50792eb9dfd580f6a08d45f3f3e727ee248ad05a543cdfcef6d03eb7e",
-    "input_tokens": 14556,
-    "output_tokens": 1659,
+    "prompt_version": "2",
+    "request_sha256": "262397a09d2752e7142d1dd5b646b29c53b7aa8615af473e5a2308549b31d10d",
+    "input_tokens": 14646,
+    "output_tokens": 95,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:54:07.268019+00:00"
+    "generated_at": "2026-07-27T11:58:42.193129+00:00"
   }
 }

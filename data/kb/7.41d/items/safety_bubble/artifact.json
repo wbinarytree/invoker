@@ -5,11 +5,11 @@
   "title": "Safety Bubble",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "3b6e27cb3a05c50711ce59a86f55cf4b1015a70daca74ddd75a69e7496768b44",
+  "article_sha256": "75fae717ae883d52d5a429e28ceb18db8b5f4e06d81e8562dd88cd92fc5ab288",
   "citations": [
     "gamefile:items/item_safety_bubble#mechanics",
-    "gamefile:items/item_safety_bubble#attribs",
     "loc:DOTA_Tooltip_ability_item_safety_bubble_Description",
+    "gamefile:items/item_safety_bubble#attribs",
     "gamefile:items/item_safety_bubble#cost"
   ],
   "packet_sha256": "67090bbb6b3954e2495b642ddccae59bcc2b1a7f27eee735a10bd7a757e74d37",
@@ -17,22 +17,22 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "7345daf31cf2083ad7a4f03d60c63ac6b9028a1b55b3128255ce8e59678496c8",
-    "input_tokens": 13736,
-    "output_tokens": 1266,
+    "prompt_version": "7",
+    "request_sha256": "416ace1badb622c5269e9ef2317e54b9496d797840e88f4b43697afd7aa3f876",
+    "input_tokens": 13826,
+    "output_tokens": 1143,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:06.071894+00:00"
+    "generated_at": "2026-07-27T11:59:19.688245+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "14aaf772a171669de9322c83667e933ba5fe6eebdff5bfa65dcb000d0defad3e",
-    "input_tokens": 14262,
-    "output_tokens": 738,
+    "prompt_version": "7",
+    "request_sha256": "84445f88385f6b5349c6e2c58e31e173c077a41c6e9b268c5942bc0ed353a370",
+    "input_tokens": 14280,
+    "output_tokens": 638,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:14:28.004031+00:00"
+    "generated_at": "2026-07-27T11:59:36.096887+00:00"
   }
 }

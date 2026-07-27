@@ -5,7 +5,7 @@
   "title": "Crella's Crozier",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "85869b7dba42046fa5a517e3b085f3e48ae6c73d8d88e64bbaf3c9474aaa3e71",
+  "article_sha256": "6e3ed6898fa6e6ea140a4c600f42058016b4bae87800910a145938e4c16de851",
   "citations": [
     "gamefile:items/item_crellas_crozier#cost",
     "gamefile:items/item_crellas_crozier#attribs",
@@ -18,22 +18,22 @@
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "1371aa0eeeb37b344812e2dd2b711e125475cbf8de9db0f983aa9ab5febc3770",
-    "input_tokens": 14391,
-    "output_tokens": 2011,
+    "prompt_version": "7",
+    "request_sha256": "96ea2a7d5b6288008ac7a7880f1d862d77d02829659c5fe25aac7875d25ca0f6",
+    "input_tokens": 14479,
+    "output_tokens": 2114,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:56:52.001344+00:00"
+    "generated_at": "2026-07-27T11:58:09.448078+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "084a5d297eba5a1ca9215d0f9565486c99dba26fbca257a77f9c5eb59d6665d7",
-    "input_tokens": 14511,
-    "output_tokens": 2904,
+    "prompt_version": "7",
+    "request_sha256": "c50fb6a7abaee1220cc6b913cd4155ae2b0bea95cf123c8ba50743f538a5e8f4",
+    "input_tokens": 14644,
+    "output_tokens": 2068,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T22:58:07.755542+00:00"
+    "generated_at": "2026-07-27T11:58:50.671300+00:00"
   }
 }

@@ -3,21 +3,16 @@
   "artifact_file": "artifact.json",
   "packet_sha256": "86a02037bc70f1a9d956daeed5a1648e01355322cc502a4dcc841091adb015c7",
   "packet_matches_artifact": true,
-  "missing": [
-    {
-      "section": "loc:DOTA_Tooltip_ability_item_disperser_Description",
-      "fact": "Both the movement-speed reduction and increase start at 100%."
-    }
-  ],
+  "missing": [],
   "guard_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "completeness-guard",
-    "prompt_version": "1",
-    "request_sha256": "5c651d20ec816333651b7e415bae5c1fd3ee1fe5c34ab163088bdae1832c0295",
-    "input_tokens": 14762,
-    "output_tokens": 1084,
+    "prompt_version": "2",
+    "request_sha256": "f3d27e002571300725126ccc2e44d6f2fc5a7f1f1ccbac3f79e7bea075992460",
+    "input_tokens": 14982,
+    "output_tokens": 289,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:02:21.889404+00:00"
+    "generated_at": "2026-07-27T12:01:28.898769+00:00"
   }
 }

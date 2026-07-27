@@ -5,48 +5,50 @@ patch: 7.41d
 card:
   entity: glimmer_cape
   sentences:
-  - text: Glimmer Cape is a rare item costing 2150 gold that provides 20% Magic Resistance
-      and whose Glimmer active grants 20 Active Movement Speed, 375 Barrier Block,
-      and invisibility for a Duration of 5 after an Initial Fade Delay of 0.5.
+  - text: Glimmer Cape is a rare 2150-gold item with Magic Resistance whose active
+      Glimmer grants invisibility, 20 Active Movement Speed, 20% Magic Resistance,
+      and a 375-magic-damage barrier for 5 seconds, with a 0.5-second Initial Fade
+      Delay and 0.5 Secondary Fade Delay.
     marks:
     - gamefile:items/item_glimmer_cape#cost
     - gamefile:items/item_glimmer_cape#attribs
     - loc:DOTA_Tooltip_ability_item_glimmer_cape_Description
   - text: It is built from Shadow Amulet for 900 gold, Shawl for 450 gold, and a Recipe
-      for 800 gold.
+      costing 800 gold.
     marks:
     - gamefile:items/item_glimmer_cape#components
-    - gamefile:items/item_glimmer_cape#cost
-  - text: Its Secondary Fade Delay is 0.5.
-    marks:
-    - gamefile:items/item_glimmer_cape#attribs
-  - text: Glimmer has Immediate, Unit Target, DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL,
-      and DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT behavior.
-    marks:
-    - gamefile:items/item_glimmer_cape#mechanics
-  - text: Glimmer is dispellable.
-    marks:
-    - gamefile:items/item_glimmer_cape#mechanics
-  - text: Its cast range is 600.
-    marks:
-    - gamefile:items/item_glimmer_cape#mechanics
-  - text: Its mana cost is 125.
-    marks:
-    - gamefile:items/item_glimmer_cape#mechanics
-  - text: Its cooldown is 15.0.
-    marks:
-    - gamefile:items/item_glimmer_cape#mechanics
-  - text: Glimmer can target the holder or an allied unit.
+  - text: Glimmer can be applied to the user or a target allied unit.
     marks:
     - loc:DOTA_Tooltip_ability_item_glimmer_cape_Description
-  - text: Glimmer can be cast while channeling.
+  - text: Glimmer has 600 cast range.
     marks:
-    - loc:DOTA_Tooltip_ability_item_glimmer_cape_Description
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: Glimmer costs 125 mana.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: Glimmer has a 15.0 cooldown.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: Its behavior is Immediate and Unit Target.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: It is usable while channelling.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: It does not resume movement.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: It is dispellable.
+    marks:
+    - gamefile:items/item_glimmer_cape#mechanics
+  - text: The stolen cape of a master illusionist.
+    marks:
+    - loc:DOTA_Tooltip_ability_item_glimmer_cape_Lore
 ---
 
 # Glimmer Cape
 
-Glimmer Cape is a rare item with Magic Resistance and the Glimmer active, which grants Active Movement Speed, Barrier Block, and invisibility. [gamefile:items/item_glimmer_cape#cost] [gamefile:items/item_glimmer_cape#attribs] [loc:DOTA_Tooltip_ability_item_glimmer_cape_Description]
+Glimmer Cape is a rare item with Magic Resistance whose active Glimmer grants invisibility, Active Movement Speed, and a magic damage barrier. [gamefile:items/item_glimmer_cape#cost] [gamefile:items/item_glimmer_cape#attribs] [loc:DOTA_Tooltip_ability_item_glimmer_cape_Description]
 
 ## Components
 
@@ -55,35 +57,33 @@ Glimmer Cape is a rare item with Magic Resistance and the Glimmer active, which 
 | Shadow Amulet | 900 gold |
 | Shawl | 450 gold |
 | Recipe | 800 gold |
-| **Total cost** | **2150 gold** |
+| **Glimmer Cape** | **2150 gold** |
 
 [gamefile:items/item_glimmer_cape#components] [gamefile:items/item_glimmer_cape#cost]
 
-## Stats
+## Glimmer
 
 | Stat | Value |
 |---|---:|
 | Active Movement Speed | 20 |
-| Barrier Block | 375 |
+| Barrier Block | 375 magic damage |
 | Magic Resistance | 20% |
-| Duration | 5 |
-| Initial Fade Delay | 0.5 |
+| Duration | 5 seconds |
+| Initial Fade Delay | 0.5 seconds |
 | Secondary Fade Delay | 0.5 |
 
-[gamefile:items/item_glimmer_cape#attribs]
+[gamefile:items/item_glimmer_cape#attribs] [loc:DOTA_Tooltip_ability_item_glimmer_cape_Description]
 
-## Glimmer
+Glimmer can be applied to the user or a target allied unit; invisibility begins after a delay, while the barrier absorbs magic damage. [loc:DOTA_Tooltip_ability_item_glimmer_cape_Description]
 
-| Property | Value |
-|---|---|
-| Behavior | Immediate, Unit Target, DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL, DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT |
-| Dispellable | Yes |
+| Use stat | Value |
+|---|---:|
 | Cast range | 600 |
 | Mana cost | 125 |
 | Cooldown | 15.0 |
 
 [gamefile:items/item_glimmer_cape#mechanics]
 
-Glimmer can target the holder or an allied unit and can be cast while channeling; after its delay, it grants invisibility and the listed active effects for its duration. [loc:DOTA_Tooltip_ability_item_glimmer_cape_Description]
+Its behavior is Immediate and Unit Target; it is usable while channelling, does not resume movement, and is dispellable. [gamefile:items/item_glimmer_cape#mechanics]
 
 *The stolen cape of a master illusionist.* [loc:DOTA_Tooltip_ability_item_glimmer_cape_Lore]

@@ -5,7 +5,7 @@
   "title": "Urn of Shadows",
   "patch": "7.41d",
   "article_file": "article.md",
-  "article_sha256": "1cc1f3a3f66b66ed6bfcdc2a1a9d3eb46cca60b667d60e4d409d9da005875a8b",
+  "article_sha256": "7bdfffad609e2927b3197e64835f348c3cc1bd221d449a07029fe98674cda086",
   "citations": [
     "gamefile:items/item_urn_of_shadows#cost",
     "gamefile:items/item_urn_of_shadows#attribs",
@@ -14,27 +14,27 @@
     "gamefile:items/item_urn_of_shadows#components",
     "loc:DOTA_Tooltip_ability_item_urn_of_shadows_Lore"
   ],
-  "packet_sha256": "41b75297f34f17c92bc9ae43f567cb9a30c7bb230cec77075b887b02d2b9258f",
+  "packet_sha256": "59e487c0331444f7b25dbf3349e6bce7a096dc94dea07bb94a600ac4b1b25584",
   "article_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-article",
-    "prompt_version": "6",
-    "request_sha256": "0210727e93e23c5d5bb21fede9e19054746b4817688ccf646a057b3d5d509723",
-    "input_tokens": 13982,
-    "output_tokens": 1905,
+    "prompt_version": "8",
+    "request_sha256": "3ce023ec7429c9e698f268d28923df418f52db5847419b7e793036ea8e69ae8a",
+    "input_tokens": 14478,
+    "output_tokens": 3541,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:19:38.709739+00:00"
+    "generated_at": "2026-07-27T12:38:25.036309+00:00"
   },
   "card_provenance": {
     "model": "gpt-5.6-sol",
     "transport": "codex-app-server",
     "prompt_name": "item-card",
-    "prompt_version": "6",
-    "request_sha256": "31ebb5318bed44e645a6c637176c7fe2e84ba9c27d0d976388f0db9d1497fd39",
-    "input_tokens": 14515,
-    "output_tokens": 1275,
+    "prompt_version": "8",
+    "request_sha256": "aa28d086ac2b262b557c97b4b86e36a5973189b3d97683b2d3bc6c3e310fde58",
+    "input_tokens": 14552,
+    "output_tokens": 1033,
     "stop_reason": "completed",
-    "generated_at": "2026-07-26T23:20:05.605717+00:00"
+    "generated_at": "2026-07-27T12:38:52.905347+00:00"
   }
 }
