@@ -17,9 +17,11 @@ from invoker.gen.artifacts import (
     EntityArtifact,
     EntityCard,
     article_file_text,
+    load_entity_article,
     write_entity_artifact,
 )
 from invoker.gen.checks import (
+    article_segments,
     check_article_numbers,
     check_coverage,
     check_marks,
@@ -295,3 +297,56 @@ def generate_item(
         )
         raise
     return artifact, path
+
+
+def regenerate_item_card(
+    backend: GenerationBackend,
+    *,
+    artifact_path: Path,
+    effort: str | None = None,
+) -> tuple[EntityArtifact, Path]:
+    """Regenerate only the card from the stored article, leaving the
+    article untouched (card-lore pass, quality-followups spec).
+
+    Card marks and numbers validate against the article's own citation
+    structure, not today's packet: the card compresses the article, and
+    the packet may legitimately have changed since the article was
+    generated. A failed check propagates and writes nothing — the stored
+    artifact stays as it was."""
+    artifact, body = load_entity_article(artifact_path)
+    if artifact.kind != "item":
+        raise GenerationError(f"{artifact.slug}: card regeneration is item-only")
+    card = backend.generate_structured(
+        EntityCard,
+        prompt_name="item-card",
+        prompt_version=ITEM_PROMPT_VERSION,
+        system=ITEM_CARD_SYSTEM_PROMPT,
+        user_content=f"Entity: {artifact.slug}\n\nArticle:\n\n{body}",
+        effort=effort,
+    )
+    text_by_mark: dict[str, str] = {}
+    for text, marks in article_segments(body):
+        for mark in marks:
+            text_by_mark[mark] = f"{text_by_mark.get(mark, '')}\n{text}"
+    card_marks = [mark for sentence in card.output.sentences for mark in sentence.marks]
+    check_marks(card_marks, set(artifact.citations), "card", artifact.slug)
+    for position, sentence in enumerate(card.output.sentences, start=1):
+        cited_text = "\n".join(text_by_mark.get(mark, "") for mark in sentence.marks)
+        check_numbers(sentence.text, cited_text, f"card sentence {position}", artifact.slug)
+
+    file_text = article_file_text(
+        title=artifact.title,
+        kind="item",
+        patch=artifact.patch,
+        card=card.output,
+        body=body,
+    )
+    updated = artifact.model_copy(
+        update={
+            "article_sha256": hashlib.sha256(file_text.encode()).hexdigest(),
+            "card": card.output,
+            "card_provenance": card.provenance,
+        }
+    )
+    path = write_entity_artifact(artifact_path.parent, updated, file_text)
+    return updated, path

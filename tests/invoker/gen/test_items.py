@@ -1,3 +1,4 @@
+import dataclasses
 import json
 from pathlib import Path
 
@@ -94,7 +95,7 @@ def test_packet_recipe_graph_both_directions():
 
 
 def make_context(**overrides) -> ItemContext:
-    fields = dict(
+    base = ItemContext(
         patch="7.41b",
         internal_name="item_stick",
         name="Stick",
@@ -112,8 +113,7 @@ def make_context(**overrides) -> ItemContext:
         components=None,
         builds_into=[],
     )
-    fields.update(overrides)
-    return ItemContext(**fields)
+    return dataclasses.replace(base, **overrides)
 
 
 def test_boilerplate_passive_emits_no_mechanics_section():
@@ -228,6 +228,44 @@ def test_card_number_check_scoped_to_cited_section(tmp_path):
     backend = FakeBackend(good_article(), bad)
     with pytest.raises(GenerationError, match=r"card sentence 1.*99"):
         run_generate(tmp_path, backend)
+
+
+def test_regenerate_card_swaps_card_and_keeps_article(tmp_path):
+    from invoker.gen.artifacts import load_entity_article
+    from invoker.gen.items import regenerate_item_card
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    lore_card = EntityCard(
+        entity="mage_slayer",
+        sentences=[
+            CardSentence(text="Rare item, 3100 gold.", marks=[COST]),
+            CardSentence(text="Forged to end the reign of mages.", marks=[LORE]),
+        ],
+    )
+    backend = FakeBackend("unused", lore_card)
+    updated, path2 = regenerate_item_card(backend, artifact_path=path)
+    assert path2 == path
+    assert updated.card.sentences[-1].marks == [LORE]
+    # sha rebinds and the article body is byte-identical
+    reloaded, body = load_entity_article(path)
+    assert reloaded.card == lore_card
+    assert body == good_article()
+    # only the card call went to the backend — the article was not regenerated
+    assert [call["prompt_name"] for call in backend.calls] == ["item-card"]
+
+
+def test_regenerate_card_rejects_marks_outside_the_article(tmp_path):
+    from invoker.gen.items import regenerate_item_card
+
+    _, path = run_generate(tmp_path, FakeBackend(good_article(), good_card()))
+    before = path.read_text()
+    bad_card = EntityCard(
+        entity="mage_slayer",
+        sentences=[CardSentence(text="Rare item.", marks=["gamefile:items/item_mage_slayer#nope"])],
+    )
+    with pytest.raises(GenerationError, match="card"):
+        regenerate_item_card(FakeBackend("unused", bad_card), artifact_path=path)
+    assert path.read_text() == before  # nothing written on failure
 
 
 def test_unknown_item_fails_loudly(tmp_path):

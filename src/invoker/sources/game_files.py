@@ -593,7 +593,8 @@ def _behavior(value: Any) -> list[str]:
         # a flag unseen in any snapshot still never reaches prose raw
         return part.removeprefix("DOTA_ABILITY_BEHAVIOR_").replace("_", " ").title()
 
-    return [mapping.get(part.strip(), fallback(part.strip())) for part in value.split("|") if part.strip()]
+    parts = [part.strip() for part in value.split("|") if part.strip()]
+    return [mapping.get(part, fallback(part)) for part in parts]
 
 
 def _damage_type(value: Any) -> str | None:

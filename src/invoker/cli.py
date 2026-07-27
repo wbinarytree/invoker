@@ -467,6 +467,48 @@ def generate_item_cmd(
         _close_backends(client, guard_client or client)
 
 
+@app.command("regenerate-item-card")
+def regenerate_item_card_cmd(
+    item: str = typer.Argument(..., help="Item slug under data/kb/<patch>/items/."),
+    patch: str = typer.Option(..., help="Patch of the stored artifact."),
+    effort: str | None = typer.Option(None, help="Generation effort level override."),
+    backend: GenBackendOption = "claude-cli",
+    model: GenModelOption = None,
+    kb_dir_override: KbDirOption = None,
+) -> None:
+    """Regenerate only an item's card from its stored article.
+
+    The article and completeness report are untouched; card marks and
+    numbers validate against the article's citation structure. A failed
+    check exits 1 and writes nothing (quality-followups spec: card-lore
+    pass over an already-accepted corpus).
+    """
+    from invoker.gen.client import GenerationError
+    from invoker.gen.items import regenerate_item_card
+    from invoker.paths import kb_dir
+
+    cfg = _load_config()
+    client = _make_backend(backend, model)
+    try:
+        artifact, path = regenerate_item_card(
+            client,
+            artifact_path=(kb_dir_override or kb_dir(cfg.data_dir, patch))
+            / "items"
+            / item
+            / "artifact.json",
+            effort=effort,
+        )
+        typer.echo(
+            f"Wrote {path} (card: {len(artifact.card.sentences)} sentences, "
+            f"model {artifact.card_provenance.model})"
+        )
+    except GenerationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    finally:
+        _close_backends(client)
+
+
 @app.command("guard-artifact")
 def guard_artifact_cmd(
     artifact: Annotated[Path, typer.Argument(help="Path to an entity artifact.json.")],
