@@ -231,6 +231,14 @@ def test_card_number_check_scoped_to_cited_section(tmp_path):
         run_generate(tmp_path, backend)
 
 
+def test_fabricated_item_heading_number_fails_loudly(tmp_path):
+    # the item generator wires check_heading_numbers too — a heading
+    # value found nowhere in the packet is rejected on this path as well
+    article = good_article() + "\n\n### Bonus Damage = 999\n"
+    with pytest.raises(GenerationError, match="headings contain numbers"):
+        run_generate(tmp_path, FakeBackend(article, good_card()))
+
+
 def test_check_failure_persists_rejected_item_article(tmp_path):
     # parity with the concept side: a coverage failure after a paid
     # article call lands article + error under rejected/items/<slug>/

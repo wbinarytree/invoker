@@ -47,6 +47,17 @@ def test_breaker_rate_trip_waits_for_min_attempts():
     assert "exceeds 30%" in breaker.tripped
 
 
+def test_breaker_rate_boundary_is_strictly_greater():
+    breaker = make_breaker()
+    # exactly 30% (3/10, interleaved so no consecutive trip) must NOT
+    # halt — three transient hiccups early in a big fleet are normal
+    for failed in (True, False, False, True, False, False, True, False, False, False):
+        breaker.record(failed=failed)
+    assert breaker.tripped is None
+    breaker.record(failed=True)
+    assert breaker.tripped is not None
+
+
 def test_bucket_for_disk_states(tmp_path):
     assert bucket_for(tmp_path / "absent") == "failed"
 
