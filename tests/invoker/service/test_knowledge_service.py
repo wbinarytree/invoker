@@ -255,6 +255,22 @@ def test_team_queries_match_profile_and_do_not_expose_roster_hash(tmp_path):
     assert "roster_hash" not in json.dumps(profile)
 
 
+def test_team_resolution_is_unicode_aware(tmp_path):
+    # Normalization keeps non-ASCII word characters: a CJK alias resolves,
+    # and an unrelated CJK query no longer collapses to "" and false-matches.
+    bundle = _write_bundle(
+        tmp_path,
+        teams=[
+            {"team_id": 123, "name": "Example Team", "aliases": ["液体"]},
+            {"team_id": 456, "name": "Other Team"},
+        ],
+    )
+    service = KnowledgeService(bundle)
+    hits = service.resolve_team("液体")["data"]["candidates"]
+    assert [candidate["team_id"] for candidate in hits] == [123]
+    assert service.resolve_team("闪电战队")["data"]["candidates"] == []
+
+
 def test_resolution_returns_candidates_instead_of_guessing_ambiguous_names(tmp_path):
     bundle = _write_bundle(
         tmp_path,

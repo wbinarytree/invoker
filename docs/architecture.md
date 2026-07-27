@@ -248,9 +248,17 @@ The bundle layout is:
 - `derived/<patch>/teams/<team_id>/<roster_hash>/profile.json`
 
 `bundle.json` records `schema_version` (2), `patches`, `kb_patches`, and
-optional `default_patch`. If a bundle has one patch, service callers do not
-need to pass `patch`. If it has multiple patches and no default, patch-free
-calls fail with a clear ambiguity error listing available patches.
+optional `default_patch`. The schema 1→2 bump is a hard break (pre-1.0, no
+compat shims): the service requires exact schema equality, so existing
+schema-1 bundles must be re-assembled or have their metadata updated.
+`patches` lists game-constants/derived patches, `kb_patches` lists KB
+trees; patch resolution accepts the union, so a KB-only bundle works
+without claiming game data. `export-kb` refuses to touch a `bundle.json`
+that is actually an `export-game-resources` artifact (same filename,
+different schema). If a bundle has one patch, service callers do not
+need to pass `patch`. If it has multiple patches and no default,
+patch-free calls fail with a clear ambiguity error listing available
+patches.
 
 **KB ladder** (spec:
 `docs/specs/2026-07-27-kb-exposure-service-and-bundle.md`): the service

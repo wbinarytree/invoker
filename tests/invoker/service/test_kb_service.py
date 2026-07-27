@@ -154,7 +154,6 @@ def test_export_writes_entities_index_and_sources(tmp_path):
     metadata = json.loads((bundle / "bundle.json").read_text())
     assert metadata["schema_version"] == 2
     assert metadata["kb_patches"] == [PATCH]
-    assert PATCH in metadata["patches"]
 
 
 def test_export_is_byte_stable(tmp_path):
@@ -206,6 +205,31 @@ def test_export_refuses_patch_mismatch(tmp_path):
     )
     with pytest.raises(KbExportError, match="patch"):
         export_kb_bundle(kb_root, PATCH, bundle)
+
+
+def test_export_refuses_game_resource_bundle_target(tmp_path):
+    out = tmp_path / "game-resource-bundle"
+    out.mkdir()
+    (out / "bundle.json").write_text(
+        json.dumps({"schema_version": 2, "patch": PATCH, "locales": ["english"], "files": {}})
+    )
+    kb_root = _write_kb_source(tmp_path)
+    with pytest.raises(KbExportError, match="game-resource"):
+        export_kb_bundle(kb_root, PATCH, out)
+
+
+def test_kb_only_bundle_resolves_patch_without_claiming_game_data(tmp_path):
+    out = tmp_path / "kb-only-bundle"
+    kb_root = _write_kb_source(tmp_path)
+    export_kb_bundle(kb_root, PATCH, out)
+    service = KnowledgeService(out)
+    assert service.kb_catalog()["data"]["count"] == 2
+    patches = service.list_bundle_patches()["data"]
+    assert patches["kb_patches"] == [PATCH]
+    assert patches["patches"] == []
+    with pytest.raises(KnowledgeServiceError) as excinfo:
+        service.get_hero_constants("invoker")
+    assert excinfo.value.code == "missing_game_constants"
 
 
 def test_export_replaces_stale_entities(tmp_path):
@@ -286,6 +310,33 @@ def test_kb_resolve_accepts_any_bundled_locale(tmp_path):
         match["field"] == "display_name" and match["locale"] == "schinese"
         for match in candidates[0]["matches"]
     )
+
+
+def test_kb_resolve_ambiguity_returns_all_candidates(tmp_path):
+    bundle = _write_bundle(tmp_path)
+    kb_root = tmp_path / "ambiguous-kb"
+    _write_entity(
+        kb_root,
+        kind="concept",
+        class_dir="concepts",
+        slug="blink",
+        title="Blink",
+        identity_line="Blink is instant point-to-point movement.",
+        body="Concept body. [corpus:host/page@1#anchor]",
+    )
+    _write_entity(
+        kb_root,
+        kind="item",
+        class_dir="items",
+        slug="blink",
+        title="Blink Dagger",
+        identity_line="Blink Dagger teleports its holder 1200 units.",
+        body="Item body. [corpus:host/page@1#anchor]",
+    )
+    export_kb_bundle(kb_root, PATCH, bundle)
+    service = KnowledgeService(bundle)
+    candidates = service.kb_resolve("blink")["data"]["candidates"]
+    assert {candidate["id"] for candidate in candidates} == {"concept/blink", "item/blink"}
 
 
 def test_kb_resolve_ignores_items_outside_kb(tmp_path):

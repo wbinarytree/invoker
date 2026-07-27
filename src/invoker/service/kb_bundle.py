@@ -166,6 +166,12 @@ def export_kb_bundle(
     )
 
 
+# Keys that identify a *game-resource* bundle.json (export-game-resources
+# output) — a different artifact that shares the filename. Refusing on them
+# keeps export-kb from silently rewriting one.
+_GAME_RESOURCE_BUNDLE_KEYS = frozenset({"files", "locales", "counts"})
+
+
 def _record_kb_patch(bundle_root: Path, patch: str) -> None:
     from invoker.service.core import BUNDLE_SCHEMA_VERSION
 
@@ -176,6 +182,11 @@ def _record_kb_patch(bundle_root: Path, patch: str) -> None:
         if not isinstance(loaded, dict):
             raise KbExportError(f"bundle metadata must be a JSON object: {path}")
         raw = loaded
+    if _GAME_RESOURCE_BUNDLE_KEYS & raw.keys() or isinstance(raw.get("patch"), str):
+        raise KbExportError(
+            f"{path} is a game-resource bundle (export-game-resources output), "
+            "not a service resource bundle root; choose a different --out-dir"
+        )
     schema = raw.get("schema_version")
     if schema is not None and not (
         isinstance(schema, int) and schema <= BUNDLE_SCHEMA_VERSION
@@ -184,8 +195,7 @@ def _record_kb_patch(bundle_root: Path, patch: str) -> None:
             f"bundle metadata has unsupported schema_version={schema!r}: {path}"
         )
     raw["schema_version"] = BUNDLE_SCHEMA_VERSION
-    for key in ("patches", "kb_patches"):
-        values = {value for value in raw.get(key) or [] if isinstance(value, str)}
-        values.add(patch)
-        raw[key] = sorted(values)
+    kb_patches = {value for value in raw.get("kb_patches") or [] if isinstance(value, str)}
+    kb_patches.add(patch)
+    raw["kb_patches"] = sorted(kb_patches)
     path.write_text(json.dumps(raw, indent=2) + "\n")

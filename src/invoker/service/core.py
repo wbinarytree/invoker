@@ -110,6 +110,12 @@ class KnowledgeService:
             return sorted({str(p) for p in raw if isinstance(p, str) and p})
         return []
 
+    @cached_property
+    def available_patches(self) -> list[str]:
+        """Union of game-constants/derived patches and KB patches — a
+        KB-only bundle must resolve its patch without claiming game data."""
+        return sorted({*self.patches, *self.kb_patches})
+
     def list_bundle_patches(self) -> dict[str, Any]:
         patch = self.default_patch if self.default_patch in self.patches else None
         return self._envelope(
@@ -414,22 +420,22 @@ class KnowledgeService:
 
     def _resolve_patch(self, patch: str | None) -> str:
         if patch is not None:
-            if patch not in self.patches:
+            if patch not in self.available_patches:
                 raise KnowledgeServiceError(
                     "patch_not_found",
                     f"resource bundle does not contain patch={patch!r}",
                     status_code=404,
-                    details={"available_patches": self.patches},
+                    details={"available_patches": self.available_patches},
                 )
             return patch
-        if self.default_patch in self.patches:
+        if self.default_patch in self.available_patches:
             return str(self.default_patch)
-        if len(self.patches) == 1:
-            return self.patches[0]
+        if len(self.available_patches) == 1:
+            return self.available_patches[0]
         raise KnowledgeServiceError(
             "patch_ambiguous",
             "resource bundle contains multiple patches and no default patch",
-            details={"available_patches": self.patches},
+            details={"available_patches": self.available_patches},
         )
 
     def _game_source(self, patch: str) -> GameFilesSource:
