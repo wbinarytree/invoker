@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-27 (item KB quality follow-ups: #mechanics packet policy, guard prompt v2 register rules, item prompt v7 qualifiers + card lore, regenerate-item-card CLI)
+Last updated: 2026-07-27 (debt clearing: heading digits checked against whole packet, casefolded allowlist/degenerate matching, persist_rejected home in artifacts.py, item card prompt v9 table-value citation, driver timeout≠transport, scripts under pyright)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -500,15 +500,20 @@ checks (shared `gen/checks.py`, same code path as items), layered: every
 mark in article and card must resolve against the packet; every packet
 section must be cited by the article (`check_coverage` — lossless
 compression, so an uncited section is dropped content; boilerplate
-anchors — `References`, `Gallery`, `See_Also`/`See_also`, enumerated
-across the full corpus per the batch KB generation spec — are exempt);
+anchors — references, gallery, see_also, compared casefolded via
+`is_allowlisted_anchor`, enumerated across the full corpus per the
+batch KB generation spec — are exempt);
 numbers must appear in their cited section, after stripping markdown
 heading lines and ordered-list markers (structural digits mirror source
 section titles or carry the model's own numbering — they are not
-claims; list/table content stays checked). Any failure aborts
+per-section claims; list/table content stays checked). Heading digits
+are additionally checked against the whole packet
+(`check_heading_numbers`): a model-authored heading value found
+nowhere in the packet fails loudly. Any failure aborts
 generation listing the offenders; marks are never checked against live
 sources. Any failure after the article call also persists the paid
-output (article, card when present, error text) under
+output (article, card when present, error text; `persist_rejected` in
+`artifacts.py`) under
 `data/logs/rejected/<patch>/concepts/<slug>/<ts>/` before the abort
 propagates — never committed, post-mortem evidence only.
 Artifacts (schema v3): one folder per entity —
@@ -527,7 +532,9 @@ prose). CLI: `invoker generate-concept <slug> --patch <patch>`. Batch
 runs are shell-level per the specs: `scripts/concept_batch.py` (worker
 pool of per-entity CLI subprocesses on the codex backend, JSONL
 manifest under `data/logs/batch/`, circuit breaker, transport-class
-re-queue-once) and `scripts/concept_report.py` (clean/flagged/
+re-queue-once — transport-class means nothing was paid: no artifact,
+no rejected entry, and not a timeout, since a 15-minute kill likely
+interrupted a paid call) and `scripts/concept_report.py` (clean/flagged/
 unguarded/failed buckets from disk state; committing is the acceptance
 act). Both scripts take `--kind concept|item`; the report annotates
 the known-unresolvable flag classes per kind — concept flags citing
@@ -556,12 +563,15 @@ literal % after the value). The article prompt enforces the stat-table
 register: every value the cited section carries goes in a table (no
 trimming, no value restated in prose), the components section renders
 the formula with its prices, prose is behavior semantics, and the
-article closes with the lore as a flavor line (prompt v7 — lore is
+article closes with the lore as a flavor line (prompt v9 — lore is
 required coverage, never allowlisted, user direction 2026-07-26; v6
 ports the concept-fleet v8–v10 hardening; v7 requires source
 qualifiers — cadence, damage-type restriction, trigger condition,
 active/passive classification — to survive into prose, and the card
-closes with the lore line, user direction 2026-07-27) —
+closes with the lore line, user direction 2026-07-27; v8 mandates the
+`# <item name>` opening heading, enforced by `check_title_heading`;
+v9 requires a card sentence carrying a stat-table value to cite the
+table's section) —
 each tier (identity line, card, article) adds information over the one
 above. The `#mechanics` packet section applies the quality-followups
 policy: bare `Passive` on a record with no description (engine
