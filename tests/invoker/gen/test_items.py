@@ -6,7 +6,8 @@ import pytest
 from invoker.gen.artifacts import CardSentence, EntityCard
 from invoker.gen.client import GenerationError
 from invoker.gen.items import build_item_packet, generate_item
-from invoker.kg.item_context import build_item_context
+from invoker.kg.ability_context import AttribEntry
+from invoker.kg.item_context import ItemContext, build_item_context
 
 # reuse the queued-output fake from the concept tests
 from tests.invoker.gen.test_concepts import FakeBackend
@@ -90,6 +91,70 @@ def test_packet_recipe_graph_both_directions():
     _, text_by_mark, _ = build_item_packet(costed)
     section = text_by_mark["gamefile:items/item_costed_recipe_thing#components"]
     assert "- Recipe — 250 gold" in section
+
+
+def make_context(**overrides) -> ItemContext:
+    fields = dict(
+        patch="7.41b",
+        internal_name="item_stick",
+        name="Stick",
+        cost=1350,
+        recipe_cost=None,
+        quality="component",
+        behavior=["Passive"],
+        damage_type=None,
+        dispellable=None,
+        description=None,
+        description_token=None,
+        lore=None,
+        lore_token=None,
+        attribs=[AttribEntry(header="DAMAGE:", value="20", key="bonus_damage")],
+        components=None,
+        builds_into=[],
+    )
+    fields.update(overrides)
+    return ItemContext(**fields)
+
+
+def test_boilerplate_passive_emits_no_mechanics_section():
+    # bare Passive on a stat-stick (no description = no ability) is engine
+    # boilerplate; the section vanishes rather than forcing a vacuous
+    # "has Passive behavior" sentence into every article
+    _, text_by_mark, _ = build_item_packet(make_context())
+    assert "gamefile:items/item_stick#mechanics" not in text_by_mark
+
+
+def test_passive_kept_when_item_has_an_ability():
+    _, text_by_mark, _ = build_item_packet(
+        make_context(
+            description="Passive: Combo Breaker",
+            description_token="DOTA_Tooltip_ability_item_stick_Description",
+        )
+    )
+    assert "Behavior: Passive" in text_by_mark["gamefile:items/item_stick#mechanics"]
+
+
+def test_mechanics_value_duplicating_attrib_row_is_dropped():
+    # the KV stores aeon_disk's cooldown twice (AbilityCooldown and an
+    # AbilityValues key); only the attribs row survives
+    _, text_by_mark, _ = build_item_packet(
+        make_context(
+            description="Passive: Combo Breaker",
+            description_token="DOTA_Tooltip_ability_item_stick_Description",
+            attribs=[
+                AttribEntry(
+                    header="COOLDOWN DURATION:",
+                    value=["105.0", "125.0", "145.0", "165.0"],
+                    key="cooldown_duration",
+                )
+            ],
+            cooldown=["105.0", "125.0", "145.0", "165.0"],
+            mana_cost="150",
+        )
+    )
+    mechanics = text_by_mark["gamefile:items/item_stick#mechanics"]
+    assert "Cooldown" not in mechanics
+    assert "Mana cost: 150" in mechanics
 
 
 def test_packet_sections_match_resolver_vocabulary():

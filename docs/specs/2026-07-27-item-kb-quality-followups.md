@@ -1,6 +1,6 @@
 # Item KB quality follow-ups: mechanics packet policy, guard v2, qualifiers, card lore
 
-**Status:** draft — needs sign-off
+**Status:** accepted (user sign-off 2026-07-27; codex spend approved, cards-only lore pass now rather than waiting for 7.42)
 
 **Context.** The 7.41d item fleet (batch KB generation spec) produced 291/292
 artifacts; the acceptance triage (2026-07-27, this branch) classified every

@@ -166,18 +166,29 @@ def build_item_packet(context: ItemContext) -> tuple[str, dict[str, str], str]:
         )
 
     mechanics_lines = []
-    if context.behavior:
+    # bare Passive on a record with no ability (no description) is engine
+    # boilerplate, not game information (quality-followups spec)
+    boilerplate_passive = context.behavior == ["Passive"] and context.description is None
+    if context.behavior and not boilerplate_passive:
         mechanics_lines.append(f"Behavior: {', '.join(context.behavior)}")
     if context.damage_type:
         mechanics_lines.append(f"Damage type: {context.damage_type}")
     if context.dispellable:
         mechanics_lines.append(f"Dispellable: {context.dispellable}")
-    if context.cast_range is not None:
-        mechanics_lines.append(f"Cast range: {_value_text(context.cast_range, False)}")
-    if context.mana_cost is not None:
-        mechanics_lines.append(f"Mana cost: {_value_text(context.mana_cost, False)}")
-    if context.cooldown is not None:
-        mechanics_lines.append(f"Cooldown: {_value_text(context.cooldown, False)}")
+    # the KV stores some values twice (e.g. AbilityCooldown and an
+    # AbilityValues cooldown key); a value already carried by an attribs
+    # row is a duplicate, not a second fact (quality-followups spec)
+    attrib_values = {_value_text(a.value, a.percent) for a in context.attribs}
+    for label, value in (
+        ("Cast range", context.cast_range),
+        ("Mana cost", context.mana_cost),
+        ("Cooldown", context.cooldown),
+    ):
+        if value is None:
+            continue
+        rendered = _value_text(value, False)
+        if rendered not in attrib_values:
+            mechanics_lines.append(f"{label}: {rendered}")
     if mechanics_lines:
         sections.append((f"{base}#mechanics", "\n".join(mechanics_lines)))
 

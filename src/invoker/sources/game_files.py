@@ -570,8 +570,30 @@ def _behavior(value: Any) -> list[str]:
         "DOTA_ABILITY_BEHAVIOR_CHANNELLED": "Channelled",
         "DOTA_ABILITY_BEHAVIOR_TOGGLE": "Toggle",
         "DOTA_ABILITY_BEHAVIOR_IMMEDIATE": "Immediate",
+        "DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK": "Doesn't Resume Attack",
+        "DOTA_ABILITY_BEHAVIOR_SUPPRESS_ASSOCIATED_CONSUMABLE": "Suppresses Associated Consumable",
+        "DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL": "Usable While Channelling",
+        "DOTA_ABILITY_BEHAVIOR_OPTIONAL_UNIT_TARGET": "Optional Unit Target",
+        "DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES": "Root Disables",
+        "DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES": "Doesn't Proc Other Abilities",
+        "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL": "Directional",
+        "DOTA_ABILITY_BEHAVIOR_OVERSHOOT": "Overshoot",
+        "DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT": "Doesn't Cancel Movement",
+        "DOTA_ABILITY_BEHAVIOR_UNSWAPPABLE": "Unswappable",
+        "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING": "Ignores Backswing",
+        "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE": "Not Learnable",
+        "DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT": "Doesn't Resume Movement",
+        "DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING": "Vector Targeting",
+        "DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE": "Ignores Invisible",
+        "DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE": "Ignores Pseudo Queue",
+        "DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_CHANNEL": "Doesn't Cancel Channel",
     }
-    return [mapping.get(part.strip(), part.strip()) for part in value.split("|") if part.strip()]
+
+    def fallback(part: str) -> str:
+        # a flag unseen in any snapshot still never reaches prose raw
+        return part.removeprefix("DOTA_ABILITY_BEHAVIOR_").replace("_", " ").title()
+
+    return [mapping.get(part.strip(), fallback(part.strip())) for part in value.split("|") if part.strip()]
 
 
 def _damage_type(value: Any) -> str | None:
