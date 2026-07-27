@@ -31,7 +31,7 @@ from invoker.gen.concepts import GenerationBackend, persist_rejected
 from invoker.kg.ability_context import AttribEntry
 from invoker.kg.item_context import ItemContext, ItemRef, build_item_context
 
-ITEM_PROMPT_VERSION = "6"
+ITEM_PROMPT_VERSION = "7"
 
 ITEM_ARTICLE_SYSTEM_PROMPT = """You write reference articles for a grounded Dota 2 \
 encyclopedia. This article covers one item.
@@ -62,6 +62,12 @@ builds-into line when the packet carries one. Every price the section \
 states appears in the table.
 - Prose is reserved for what the item does: behavior, mechanics, \
 interactions, dispellability. Keep it dense; no value appears twice.
+- Every qualifier a source attaches to a value survives into the article: \
+a cadence ("per second"), a damage-type restriction ("magic damage only"), \
+a trigger condition, an ability's active or passive classification. "Deals \
+25 damage" and "deals 25 damage per second" are different facts — carry \
+the source's version. When both a gamefile section and the description \
+state an ability's classification, cite the gamefile section for it.
 - When the sources carry lore, close the article with it as a short \
 flavor line citing its section — the lore is part of the record.
 - Numbers must match the cited section exactly: reproduce values as the \
@@ -101,6 +107,10 @@ section states — never attach a mark to a sentence whose facts come from \
 elsewhere. Cite the narrowest key that states the fact; never pad with \
 broader keys.
 - Keep the load-bearing facts and exact numbers; drop narrative padding.
+- When the article closes with a lore flavor line, the card's last sentence \
+carries that lore as the article states it, with the lore section's mark — \
+the one exception to the no-flavor rule: it is quoted record content, not \
+your language.
 - Every number must appear literally in the article text a sentence's marks \
 cover: never count list entries or table rows yourself, and never derive, \
 sum, convert, or round a value.

@@ -14,7 +14,7 @@ from invoker.gen.concepts import GenerationBackend, build_packet
 from invoker.gen.items import build_item_packet
 from invoker.kg.item_context import build_item_context
 
-GUARD_PROMPT_VERSION = "1"
+GUARD_PROMPT_VERSION = "2"
 GUARD_SCHEMA_VERSION = 1
 REPORT_FILENAME = "completeness.json"
 
@@ -29,6 +29,15 @@ Load-bearing: exact values, enumerations (lists of items, abilities, talents,
 sources with their numbers), interaction rules, conditions and exceptions.
 Not load-bearing: prose style, ordering, phrasing, section structure,
 reference/citation boilerplate, wiki housekeeping.
+
+The article's register splits facts deliberately: values live in table rows,
+meaning lives in prose. A fact is carried when its value appears in a table
+and its meaning appears anywhere in the article — never demand they be
+restated together in one sentence. Internal identifiers (item_* names,
+section keys, engine enum strings) are presentation the article correctly
+omits; their absence is never a missing fact. Bare display labels with no
+value ("Use: Salve") and unsubstituted template variables (%some_var%) are
+not facts.
 
 For each missing fact, copy the packet section key it comes from into
 `section` exactly as it appears between the brackets. Judge only absence —
