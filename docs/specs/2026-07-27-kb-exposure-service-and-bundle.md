@@ -39,13 +39,16 @@ contract:
   source links (the KB site renderer already proves this mapping).
 - **Heroes deferred** until the hero generator lands; the layout grammar
   already reserves `heroes/<slug>/`.
-- **English only** (user decision 2026-07-27). i18n is explicitly out of
-  scope for the KB contract — even Liquipedia doesn't handle it well.
-  Resolution, changelog text, and article payloads are English; the
-  bundle does not carry non-English locales for KB purposes. If
-  translation is ever genuinely needed, it is a downstream LLM/codex
-  pass with a term-hint glossary on the consumer side, never a bundle or
-  service concern.
+- **English-only content, any-locale resolution** (user decision
+  2026-07-27). i18n is explicitly out of scope for KB *content* — even
+  Liquipedia doesn't handle it well. Cards, articles, and changelog text
+  are served in English. Resolution is different: it is an index, not
+  content, and localized item display names/aliases come for free from
+  the localization files already in the game-constants snapshot — so
+  `kb_resolve` accepts them as lookup keys (a localized query resolves
+  to the English article). If content translation is ever genuinely
+  needed, it is a downstream LLM/codex pass with a term-hint glossary on
+  the consumer side, never a bundle or service concern.
 
 ## Design
 
@@ -99,9 +102,11 @@ existing method-per-route/tool pattern:
   agents that need discovery, not lookup.
 - `kb_resolve(query, patch=None)` — deterministic and conservative,
   matching the existing resolution rules: exact `<kind>/<slug>` ids,
-  slugs, casefolded titles; for items additionally English display names
-  and source-backed English aliases from the game-constants snapshot
-  already in the bundle (the `lookup_hero` machinery, pointed at items).
+  slugs, casefolded titles; for items additionally localized display
+  names and source-backed aliases from every localization file present
+  in the game-constants snapshot already in the bundle (the
+  `lookup_hero` machinery, pointed at items — resolution keys may be any
+  bundled locale; the resolved payload is English).
   Ambiguity returns candidates; getters fail rather than choose; no
   fuzzy matching.
 - `kb_card(id, patch=None)` — title, identity line, card sentences with
@@ -140,7 +145,8 @@ choice, never an export-time transformation.
 - Phylactery-side work: coach tools, staging, wiki tab — specced in that
   repo against this contract once it freezes.
 - Serving raw corpus documents through the service or bundle.
-- i18n / translated KB payloads (English-only decision above).
+- i18n / translated KB payloads (English-only content decision above;
+  multi-locale applies to resolution keys only).
 
 ## Acceptance
 
