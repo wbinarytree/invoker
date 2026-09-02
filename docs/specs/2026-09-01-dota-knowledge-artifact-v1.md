@@ -277,8 +277,10 @@ dota-kb-<patch>/
   `data/kb/` stays the browsable source in the meantime.
 - **Bundle continuity.** `index.json` and `sources.json` are the files the
   2026-07-27 consumer bundle already ships; this spec bumps the index schema
-  rather than adding a second catalog. Phylactery's vendored bundle keeps
-  working against the bumped index.
+  rather than adding a second catalog. A schema bump is a re-vendor event for
+  phylactery, as the bundle 1→2 bump was; consumers may refuse a mismatched
+  `schema_version` (GUIDELINES), so nothing claims the old vendored copy keeps
+  working.
 - **Links.** Every entity mention links on first occurrence
   (`[[heroes/storm_spirit|Storm Spirit]]`); a link that does not resolve in
   the catalog fails generation, exactly like an unresolvable mark. Marks
@@ -306,9 +308,10 @@ Owned by the KB; index data, not content, so the patch test does not apply.
   a given name is shipped is checked against the localization snapshot at
   compile time, never assumed; the user's examples (滚滚 for Pangolier, 蓝猫
   for Storm Spirit, short forms like "qop") are ledger candidates until that
-  check runs. One line per alias with a source tag. Bootstrapped by generator proposals marked
-  unverified; the user's acceptance is the source mark, so nothing enters
-  from model memory as fact. This replaces the phylactery-side slang ledger.
+  check runs. One line per alias with a source tag. Bootstrapped by
+  generator proposals marked unverified; the user's acceptance is the source
+  mark, so nothing enters from model memory as fact. This replaces the
+  phylactery-side slang ledger.
 - **Fuzzy tier:** edit-distance or trigram matching over the whole alias
   table, candidates on ambiguity as `kb_resolve` does today. No model.
 
