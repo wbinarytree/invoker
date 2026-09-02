@@ -717,14 +717,20 @@ per-match picks by side, per-hero pick counts and game ids, and the
 co-occurrence pair set (`ally_games` / `enemy_games` per unordered pair,
 slugs ordered lexically so pair ids are stable), plus a `patch_check` that
 resolves every match date against the manual patch windows and records
-whether all games fall in the KB patch. Payloads that disagree on league or
-series, sides without exactly five picks, unparsed `picks_bans`, or hero
-ids absent from the snapshot raise `RosterError`. `fetch_match_details`
-goes through the shared OpenDota cache. Roster files live under
-`benchmarks/rosters/` and are committed; the first is
+whether all games fall in the KB patch and whether that window is
+open-ended (the boolean is only as strong as the windows). The artifact
+carries the GUIDELINES derived-file header (`schema_version`,
+`generator_version`, `source_patch`, `generated_at`) and a `fingerprint`
+(sha256 over everything except provenance) so a rebuild's determinism is
+checked by comparing fingerprints, not timestamps. Payloads that disagree
+on league or series, duplicate match ids, sides without exactly five
+distinct picks, a hero on both sides, unparsed `picks_bans`, or hero ids
+absent from the snapshot raise `RosterError`. `fetch_match_details` goes
+through the shared OpenDota cache (`force` refetches). Roster files live
+under `benchmarks/rosters/` and are committed; the first is
 `ti15-grand-final.json` (five games, 33 heroes, 201 pairs, all in the
-7.41d window). Statistics are deliberately not read from the payloads
-(spec non-goal).
+7.41d window). Match outcomes and statistics are deliberately not read
+from the payloads (spec non-goal).
 
 **Known limit (accepted 2026-07-25):** mark resolution proves
 traceability, not content faithfulness — the scorer never checks that

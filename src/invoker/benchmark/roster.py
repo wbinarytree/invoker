@@ -10,6 +10,7 @@ patch windows. Anything that does not line up fails loudly.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from datetime import UTC, datetime
 from itertools import combinations
@@ -18,9 +19,10 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict
 
-from invoker.patches import PatchWindow, patch_window_for_timestamp
+from invoker.patches import PatchWindow, load_patch_windows, patch_window_for_timestamp
 
 SCHEMA_VERSION = 1
+GENERATOR_VERSION = "1"
 PICKS_PER_SIDE = 5
 RADIANT, DIRE = 0, 1
 
@@ -59,7 +61,6 @@ class RosterMatch(BaseModel):
     start_date: str
     radiant_team: str | None
     dire_team: str | None
-    radiant_win: bool | None
     radiant_picks: list[str]
     dire_picks: list[str]
     opendota_patch_id: int | None
@@ -83,16 +84,25 @@ class PatchCheck(BaseModel):
     windows_source: str
     match_windows: dict[str, str | None]
     all_in_kb_patch: bool
+    kb_window_open_ended: bool
     note: str
 
 
 class RosterProvenance(BaseModel):
+    """Derived-file header per GUIDELINES: schema/generator version, source patch, timestamp.
+
+    `generated_at` is wall-clock; `RosterArtifact.fingerprint` (sha256 over everything
+    except provenance) is the field to compare when checking that a rebuild changed
+    nothing.
+    """
+
     model_config = ConfigDict(extra="forbid")
 
     source: str
-    endpoints: list[str]
+    generator_version: str
+    source_patch: str
     hero_identity_source: str
-    built_at: str
+    generated_at: str
 
 
 class RosterArtifact(BaseModel):
@@ -101,12 +111,18 @@ class RosterArtifact(BaseModel):
     schema_version: int
     label: str
     kb_patch: str
+    fingerprint: str
     sampling_frame: SamplingFrame
     matches: list[RosterMatch]
     heroes: list[RosterHero]
     pairs: list[RosterPair]
     patch_check: PatchCheck
     provenance: RosterProvenance
+
+
+def _fingerprint(payload: dict[str, Any]) -> str:
+    body = {k: v for k, v in payload.items() if k not in ("fingerprint", "provenance")}
+    return hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
 def _int_or_none(value: Any) -> int | None:
@@ -147,6 +163,10 @@ def _picks_by_side(
             raise RosterError(
                 f"match {match_id} side {team} has {len(picks)} picks, expected {PICKS_PER_SIDE}"
             )
+        if len(set(picks)) != PICKS_PER_SIDE:
+            raise RosterError(f"match {match_id} side {team} picks a hero twice: {picks}")
+    if set(sides[RADIANT]) & set(sides[DIRE]):
+        raise RosterError(f"match {match_id} has a hero on both sides")
     return sides
 
 
@@ -174,6 +194,9 @@ def build_roster(
     """
     if not matches:
         raise RosterError("no matches given")
+    match_ids = [str(m.get("match_id")) for m in matches]
+    if len(set(match_ids)) != len(match_ids):
+        raise RosterError(f"duplicate match ids given: {sorted(match_ids)}")
     hero_index = {int(record["id"]): record for record in hero_records}
 
     league_id = _same_or_fail([_int_or_none(m.get("leagueid")) for m in matches], field="leagueid")
@@ -217,9 +240,6 @@ def build_roster(
                 start_date=datetime.fromtimestamp(start_time, UTC).date().isoformat(),
                 radiant_team=_team_name(match, "radiant"),
                 dire_team=_team_name(match, "dire"),
-                radiant_win=match.get("radiant_win")
-                if isinstance(match.get("radiant_win"), bool)
-                else None,
                 radiant_picks=[slug_of(h) for h in sides[RADIANT]],
                 dire_picks=[slug_of(h) for h in sides[DIRE]],
                 opendota_patch_id=_int_or_none(match.get("patch")),
@@ -282,15 +302,19 @@ def build_roster(
 
     match_windows = {str(m.match_id): m.patch_window for m in roster_matches}
     all_in = all(window == kb_patch for window in match_windows.values())
+    kb_window = next((w for w in (windows or load_patch_windows()) if w.patch == kb_patch), None)
+    open_ended = kb_window is not None and kb_window.end_date_exclusive is None
     note = (
-        "Match dates are resolved against the manual patch windows; a window equal to the KB "
-        "patch means the games were played on the KB's patch as far as the windows know. "
-        "OpenDota's numeric patch id is recorded as reported and not mapped."
+        "Match dates are resolved against the manual patch windows. all_in_kb_patch is only as "
+        "strong as the windows: when kb_window_open_ended is true, a later patch may exist that "
+        "the windows do not record yet. OpenDota's numeric patch id is recorded as reported and "
+        "not mapped."
     )
-    return RosterArtifact(
+    artifact = RosterArtifact(
         schema_version=SCHEMA_VERSION,
         label=label,
         kb_patch=kb_patch,
+        fingerprint="",
         sampling_frame=SamplingFrame(
             league_id=league_id,
             league_name=league_name,
@@ -306,24 +330,30 @@ def build_roster(
             windows_source=windows_source,
             match_windows=match_windows,
             all_in_kb_patch=all_in,
+            kb_window_open_ended=open_ended,
             note=note,
         ),
         provenance=RosterProvenance(
-            source="opendota",
-            endpoints=[f"/matches/{m.match_id}" for m in roster_matches],
+            source="opendota:/matches/{match_id}",
+            generator_version=GENERATOR_VERSION,
+            source_patch=kb_patch,
             hero_identity_source=hero_identity_source,
-            built_at=datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+            generated_at=datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         ),
     )
+    artifact.fingerprint = _fingerprint(artifact.model_dump())
+    return artifact
 
 
-async def fetch_match_details(cache_root: Path, match_ids: list[int]) -> list[dict[str, Any]]:
-    """Match-detail payloads through the shared OpenDota cache (cache-first)."""
+async def fetch_match_details(
+    cache_root: Path, match_ids: list[int], *, patch: str, force: bool = False
+) -> list[dict[str, Any]]:
+    """Match-detail payloads through the shared OpenDota cache (cache-first; `force` refetches)."""
     from invoker.sources.opendota import OpenDotaFetcher
 
-    fetcher = OpenDotaFetcher(cache_root, patch="")
+    fetcher = OpenDotaFetcher(cache_root, patch)
     try:
-        return [await fetcher.match_detail(match_id) for match_id in match_ids]
+        return [await fetcher.match_detail(match_id, force=force) for match_id in match_ids]
     finally:
         await fetcher.close()
 

@@ -687,6 +687,9 @@ def build_roster_cmd(
     patch: Annotated[str, typer.Option(help="KB patch whose game snapshot resolves hero ids.")],
     out: Annotated[Path, typer.Option(help="Roster JSON to write, e.g. benchmarks/rosters/x.json")],
     label: Annotated[str, typer.Option(help="Human label for the sampling frame.")],
+    force: Annotated[
+        bool, typer.Option("--force", help="Refetch match details instead of using the cache.")
+    ] = False,
 ) -> None:
     """Build a benchmark roster (heroes + co-occurrence pairs) from real matches."""
     import asyncio
@@ -704,7 +707,7 @@ def build_roster_cmd(
         typer.echo("INVOKER_GAME_DATA_DIR is required for build-roster.", err=True)
         raise typer.Exit(code=1)
     source = GameFilesSource(cfg.game_data_dir, patch)
-    matches = asyncio.run(fetch_match_details(cfg.cache_dir, match_id))
+    matches = asyncio.run(fetch_match_details(cfg.cache_dir, match_id, patch=patch, force=force))
     try:
         artifact = build_roster(
             matches,
@@ -730,6 +733,7 @@ def build_roster_cmd(
             f"{patch}; see patch_check in the roster file",
             err=True,
         )
+
 
 @app.command("snapshot-game-files")
 def snapshot_game_files_cmd(

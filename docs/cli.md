@@ -369,8 +369,13 @@ patch's game-file snapshot; the match dates resolve against the manual
 patch windows in `src/invoker/patches.json` and the roster records whether
 every game falls in the KB patch (`patch_check`). Matches that disagree on
 league or series, sides without exactly five picks, unparsed picks/bans, or
-hero ids missing from the snapshot fail the build. Match ids are given
-explicitly so the roster file carries its own provenance.
+hero ids missing from the snapshot fail the build, as do duplicate match
+ids, a hero picked twice on one side, or a hero on both sides. Match ids
+are given explicitly so the roster file carries its own provenance;
+`--force` refetches the match details when OpenDota has parsed a match
+since it was cached. The roster's `fingerprint` (everything except
+provenance) is what to compare after a rebuild; `generated_at` always
+changes.
 
 ```bash
 uv run invoker build-roster --patch 7.41d \

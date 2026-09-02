@@ -2,6 +2,7 @@
   "schema_version": 1,
   "label": "TI15 grand final (The International 2026), best of five",
   "kb_patch": "7.41d",
+  "fingerprint": "c84952bb0dd3fe04b36e1a49fdcb2ab1fef1bb4454deb9a82f759f62231dee52",
   "sampling_frame": {
     "league_id": 19719,
     "league_name": "The International 2026",
@@ -19,7 +20,6 @@
       "start_date": "2026-08-23",
       "radiant_team": "Team Spirit",
       "dire_team": "TEAM VISION",
-      "radiant_win": true,
       "radiant_picks": [
         "slark",
         "dark_willow",
@@ -43,7 +43,6 @@
       "start_date": "2026-08-23",
       "radiant_team": "TEAM VISION",
       "dire_team": "Team Spirit",
-      "radiant_win": true,
       "radiant_picks": [
         "earth_spirit",
         "enchantress",
@@ -67,7 +66,6 @@
       "start_date": "2026-08-23",
       "radiant_team": "Team Spirit",
       "dire_team": "TEAM VISION",
-      "radiant_win": true,
       "radiant_picks": [
         "furion",
         "dark_willow",
@@ -91,7 +89,6 @@
       "start_date": "2026-08-23",
       "radiant_team": "TEAM VISION",
       "dire_team": "Team Spirit",
-      "radiant_win": true,
       "radiant_picks": [
         "keeper_of_the_light",
         "doom_bringer",
@@ -115,7 +112,6 @@
       "start_date": "2026-08-23",
       "radiant_team": "TEAM VISION",
       "dire_team": "Team Spirit",
-      "radiant_win": false,
       "radiant_picks": [
         "invoker",
         "rubick",
@@ -2544,18 +2540,14 @@
       "8960991322": "7.41d"
     },
     "all_in_kb_patch": true,
-    "note": "Match dates are resolved against the manual patch windows; a window equal to the KB patch means the games were played on the KB's patch as far as the windows know. OpenDota's numeric patch id is recorded as reported and not mapped."
+    "kb_window_open_ended": true,
+    "note": "Match dates are resolved against the manual patch windows. all_in_kb_patch is only as strong as the windows: when kb_window_open_ended is true, a later patch may exist that the windows do not record yet. OpenDota's numeric patch id is recorded as reported and not mapped."
   },
   "provenance": {
-    "source": "opendota",
-    "endpoints": [
-      "/matches/8960577698",
-      "/matches/8960655084",
-      "/matches/8960762254",
-      "/matches/8960882635",
-      "/matches/8960991322"
-    ],
+    "source": "opendota:/matches/{match_id}",
+    "generator_version": "1",
+    "source_patch": "7.41d",
     "hero_identity_source": "game_files:7.41d",
-    "built_at": "2026-09-02T10:41:19.451812Z"
+    "generated_at": "2026-09-02T10:49:12.409459Z"
   }
 }
