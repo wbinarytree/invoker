@@ -7,8 +7,8 @@ same day)
 proposal; the spec was revised in the same PR, so "the spec says" below
 refers to the pre-revision text. The **Decision log** below is the
 authoritative record; the **Original review** sections after it are the
-starting point and the reasoning, kept as written. The v1 spec has not been
-revised yet; that is the next work item.
+starting point and the reasoning, kept as written. The v1 spec was revised
+in the same PR as this note.
 
 ## Outcome of the walkthrough
 

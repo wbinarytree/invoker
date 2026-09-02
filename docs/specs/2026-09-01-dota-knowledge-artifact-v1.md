@@ -10,7 +10,12 @@ revised text is up for PR review
 `docs/specs/2026-07-25-grounded-reasoner-rethink.md`; the hero-generator
 deferral and the phylactery-side slang ledger in
 `docs/specs/2026-07-27-kb-exposure-service-and-bundle.md` (the bundle
-contract there stays; this spec extends it). Implemented behavior in
+contract there stays; this spec bumps its index schema). **Amends** the
+"no fuzzy matching" rule for `kb_resolve` in that spec and in
+`docs/architecture.md`: the alias layer adds a fuzzy tier that returns
+candidates, never a silent choice. Builds on the hero generator design in
+`docs/specs/2026-07-26-game-file-grounded-generators.md` ("the accepted
+generators spec" below). Implemented behavior in
 `docs/architecture.md` remains authoritative until slices land.
 
 ## Outcome
@@ -249,7 +254,8 @@ command and can be deleted.
 ```text
 dota-kb-<patch>/
   index.md            entry for humans and agents: categorized TOC, one line per page
-  index.json          catalog: id, kind, slug, title, aliases, identity line, valve ids
+  index.json          the existing bundle index (schema bump: aliases, Valve ids, new kinds)
+  sources.json        corpus host base URLs + licenses (existing; renders corpus marks as links)
   graph.json          nodes (pages) + typed edges (link | hook | pair)
   kb.sqlite           derived: FTS5 over pages and observations, mentions, edges
   SKILL.md            how an agent navigates: index → page → observation
@@ -261,9 +267,18 @@ dota-kb-<patch>/
 ```
 
 - **Flat layout, emitted by the compiler.** Obsidian resolves links by file
-  name; the repo's `<slug>/article.md` layout stays as the build source and
-  the export step renames. Repository-native outputs remain diffable
-  Markdown and JSON.
+  name; the repo's `data/kb/<patch>/<kind>/<slug>/article.md` layout stays
+  as the committed build source and the compiler renames on export.
+  Repository-native outputs remain diffable Markdown and JSON.
+- **Output path.** The compiler writes `dist/dota-kb-<patch>/` (untracked,
+  like the existing bundle export) and the release is that folder zipped.
+  Whether the compiled vault also gets its own public git tree (a mirror
+  repository) is a distribution decision after the slice passes; this repo's
+  `data/kb/` stays the browsable source in the meantime.
+- **Bundle continuity.** `index.json` and `sources.json` are the files the
+  2026-07-27 consumer bundle already ships; this spec bumps the index schema
+  rather than adding a second catalog. Phylactery's vendored bundle keeps
+  working against the bumped index.
 - **Links.** Every entity mention links on first occurrence
   (`[[heroes/storm_spirit|Storm Spirit]]`); a link that does not resolve in
   the catalog fails generation, exactly like an unresolvable mark. Marks
@@ -287,9 +302,11 @@ Owned by the KB; index data, not content, so the patch test does not apply.
 - **Valve-shipped tier:** localized display names in every bundled locale
   plus Valve's alias keys from the localization files (the service resolves
   these today).
-- **Community ledger:** names Valve does not ship (the user's examples: 滚滚
-  for Pangolier, 蓝猫 for Storm Spirit; short forms like "qop"). One line per
-  alias with a source tag. Bootstrapped by generator proposals marked
+- **Community ledger:** names not present in Valve's shipped aliases. Whether
+  a given name is shipped is checked against the localization snapshot at
+  compile time, never assumed; the user's examples (滚滚 for Pangolier, 蓝猫
+  for Storm Spirit, short forms like "qop") are ledger candidates until that
+  check runs. One line per alias with a source tag. Bootstrapped by generator proposals marked
   unverified; the user's acceptance is the source mark, so nothing enters
   from model memory as fact. This replaces the phylactery-side slang ledger.
 - **Fuzzy tier:** edit-distance or trigram matching over the whole alias
@@ -328,8 +345,14 @@ stays a non-goal.
 
 ### Cases
 
-20–30 cases, each with a user-authored rubric in the existing case schema
-(expected facts, forbidden assertions, expected entities, word cap):
+20–30 cases, each with a user-authored rubric. The existing `QACase` schema
+(`src/invoker/benchmark/schemas.py`) needs a bump for this: new categories
+(`pair`, `matchup`, `item-adaptation`, `alias`), `expected_marks` made
+optional (observations carry no marks), and two new fields —
+`expected_entities` (ids the answer must resolve) and `expected_sources`
+(page or observation ids the rubric relies on, which the retrieval-miss
+number reads). Existing fields (expected facts, forbidden assertions, word
+cap) stay:
 
 - pair synergy, ~8 (the user's Keeper of the Light and Slardar seeds first);
 - matchup, ~8 (Storm Spirit into Queen of Pain first);
@@ -429,8 +452,9 @@ architecture date bumped. `CONTEXT.md` terms are updated with this spec.
 - Every generated link and ref resolves in the substrate or Mechanics
   Library; every quoted number appears in its referenced data.
 - The compiled vault opens in Obsidian with the shipped color groups;
-  `graph.json`, `index.json`, and `kb.sqlite` rebuild from the vault
-  byte-stably.
+  `graph.json` and `index.json` rebuild from the vault byte-stably, and
+  `kb.sqlite` rebuilds to the same logical content hash (SQLite files are
+  not byte-stable across rebuilds).
 - The alias layer resolves Valve-shipped names in every bundled locale, the
   accepted community ledger, and near-miss typos, returning candidates on
   ambiguity.
@@ -446,7 +470,7 @@ These are resolved before their implementation slice and do not change the
 direction:
 
 1. The exact roles-and-rules sidecar schema and the hook sidecar schema
-   (slice 2 and 4).
+   (slice 2 and 4), and the `QACase` schema bump (slice 1).
 2. The rank/drop materiality rule for the pair job without statistics: what
    makes a matched candidate "immaterial" (slice 5).
 3. The backfill linker's stoplist and the first-occurrence rule's scope
