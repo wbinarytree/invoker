@@ -194,7 +194,12 @@ def build_roster(
     """
     if not matches:
         raise RosterError("no matches given")
-    match_ids = [str(m.get("match_id")) for m in matches]
+    match_ids: list[int] = []
+    for match in matches:
+        match_id = match.get("match_id")
+        if not isinstance(match_id, int):
+            raise RosterError(f"match payload missing match_id: {str(match)[:120]}")
+        match_ids.append(match_id)
     if len(set(match_ids)) != len(match_ids):
         raise RosterError(f"duplicate match ids given: {sorted(match_ids)}")
     hero_index = {int(record["id"]): record for record in hero_records}
@@ -303,7 +308,9 @@ def build_roster(
     match_windows = {str(m.match_id): m.patch_window for m in roster_matches}
     all_in = all(window == kb_patch for window in match_windows.values())
     kb_window = next((w for w in (windows or load_patch_windows()) if w.patch == kb_patch), None)
-    open_ended = kb_window is not None and kb_window.end_date_exclusive is None
+    if kb_window is None:
+        raise RosterError(f"kb patch {kb_patch} has no window in {windows_source}")
+    open_ended = kb_window.end_date_exclusive is None
     note = (
         "Match dates are resolved against the manual patch windows. all_in_kb_patch is only as "
         "strong as the windows: when kb_window_open_ended is true, a later patch may exist that "
@@ -373,4 +380,8 @@ def load_roster(path: Path) -> RosterArtifact:
         raise RosterError(
             f"roster schema {raw.get('schema_version')} at {path}; expected {SCHEMA_VERSION}"
         )
-    return RosterArtifact.model_validate(raw)
+    artifact = RosterArtifact.model_validate(raw)
+    expected = _fingerprint(artifact.model_dump())
+    if artifact.fingerprint != expected:
+        raise RosterError(f"roster fingerprint mismatch at {path}: file was edited or is stale")
+    return artifact

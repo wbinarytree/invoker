@@ -1,3 +1,4 @@
+import json
 from datetime import date
 
 import pytest
@@ -147,3 +148,20 @@ def test_write_and_load_round_trip(tmp_path):
     assert loaded == roster
     with pytest.raises(RosterError, match="not found"):
         load_roster(tmp_path / "missing.json")
+    tampered = json.loads(path.read_text())
+    tampered["heroes"][0]["picks"] = 99
+    path.write_text(json.dumps(tampered))
+    with pytest.raises(RosterError, match="fingerprint mismatch"):
+        load_roster(path)
+
+
+def test_kb_patch_without_a_window_fails():
+    with pytest.raises(RosterError, match="has no window"):
+        build_roster(
+            [_match(1, [1, 2, 3, 4, 5], [6, 7, 8, 9, 10])],
+            HEROES,
+            kb_patch="7.99",
+            label="test",
+            hero_identity_source="game_files:7.99",
+            windows=WINDOWS,
+        )
