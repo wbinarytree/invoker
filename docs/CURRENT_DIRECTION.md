@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-07-26
+Last updated: 2026-09-02
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -26,7 +26,9 @@ This file is the shortest path to the active design direction. Anything not list
   [docs/specs/2026-05-16-741c-identity-localization-export.md](specs/2026-05-16-741c-identity-localization-export.md)
 - Consolidated game resource export:
   [docs/specs/2026-05-17-consolidated-game-resource-export.md](specs/2026-05-17-consolidated-game-resource-export.md)
-- Grounded reasoner rethink (governing direction since 2026-07-25):
+- Grounded reasoner rethink (governing direction 2026-07-25 → 2026-09-01;
+  product priority and sequencing superseded by the Knowledge Artifact v1
+  spec below, stances on grounding and generation still apply):
   [docs/specs/2026-07-25-grounded-reasoner-rethink.md](specs/2026-07-25-grounded-reasoner-rethink.md)
 - Basic-QA benchmark runner:
   [docs/specs/2026-07-25-basic-qa-benchmark-runner.md](specs/2026-07-25-basic-qa-benchmark-runner.md)
@@ -49,6 +51,11 @@ This file is the shortest path to the active design direction. Anything not list
 - KB exposure — service ladder + consumer bundle for phylactery
   (accepted 2026-07-27; invoker-side slice implemented):
   [docs/specs/2026-07-27-kb-exposure-service-and-bundle.md](specs/2026-07-27-kb-exposure-service-and-bundle.md)
+- **Dota Knowledge Artifact v1 — explained interactions, vertical slice
+  (governing direction since 2026-09-02; nine decisions accepted in the
+  walkthrough, revised text in PR review):**
+  [docs/specs/2026-09-01-dota-knowledge-artifact-v1.md](specs/2026-09-01-dota-knowledge-artifact-v1.md)
+  — product terms in [CONTEXT.md](../CONTEXT.md)
 
 ## Active plans
 
@@ -87,6 +94,9 @@ Historical design specs were archived on 2026-04-28:
 
 - Retrospective brainstorm/decision notes:
   [docs/notes/](notes/)
+- **Knowledge Artifact v1 first-principles review and decision log**
+  (2026-09-02; authoritative record behind the v1 spec revision):
+  [docs/notes/2026-09-02-knowledge-artifact-first-principles-review.md](notes/2026-09-02-knowledge-artifact-first-principles-review.md)
 - **OpenDota constants staleness** (not patch-versioned, silently drifts after patch):
   [docs/notes/2026-04-26-opendota-constants-not-patch-versioned.md](notes/2026-04-26-opendota-constants-not-patch-versioned.md)
 - **Legacy OpenDota constants cache payloads**:
