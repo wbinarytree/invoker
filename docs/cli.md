@@ -24,6 +24,7 @@ Implemented in [src/invoker/cli.py](../src/invoker/cli.py).
 - `invoker guard-artifact ARTIFACT_JSON [--host <key>] [--guard-backend <name>] [--guard-model <id>]`
 - `invoker render-kb --patch <patch> [--out <dir>]`
 - `invoker run-benchmark --patch <patch> [--case <id> ...] [--answerer-model <id>] [--judge-model <id>] [--answerer-backend <name>] [--judge-backend <name>] [--kb-dir <dir>]`
+- `invoker build-roster --patch <patch> --label <text> --out <path> --match-id <id> [--match-id <id> ...]`
 - `invoker changelog --patch <patch> [--grep <text>] [--for <entity>] [--note-patch <version>] [--locale <name>] [--limit <n>]`
 - `invoker export-identity-localization --patch <patch> --out <path> [--locale <name> ...]`
 - `invoker export-localized-resources --patch <patch> --out-dir <dir> [--locale <name> ...]`
@@ -355,6 +356,34 @@ uv run invoker run-benchmark --patch 7.41d --case uphill-miss --case facet-remov
   `resolution-miss / fact-missing / fact-contradicted / trap-triggered /
   mark-pattern-missing / mark-unresolvable / over-length / answerer-error /
   judge-error`. Any failing case exits 1.
+
+### `build-roster`
+
+Builds a benchmark roster from real professional matches (spec
+`docs/specs/2026-09-01-dota-knowledge-artifact-v1.md`, slice 1). Match
+detail payloads come from OpenDota through the shared cache (cache-first,
+same envelope as `build-team-profile`); picks give the roster, and every
+pair that shared a side or faced each other gives the co-occurrence pair
+set with the game ids for each relation. Hero ids resolve against the KB
+patch's game-file snapshot; the match dates resolve against the manual
+patch windows in `src/invoker/patches.json` and the roster records whether
+every game falls in the KB patch (`patch_check`). Matches that disagree on
+league or series, sides without exactly five picks, unparsed picks/bans, or
+hero ids missing from the snapshot fail the build, as do duplicate match
+ids, a hero picked twice on one side, or a hero on both sides. Match ids
+are given explicitly so the roster file carries its own provenance;
+`--force` refetches the match details when OpenDota has parsed a match
+since it was cached. The roster's `fingerprint` (everything except
+provenance) is what to compare after a rebuild; `generated_at` always
+changes.
+
+```bash
+uv run invoker build-roster --patch 7.41d \
+  --label "TI15 grand final (The International 2026), best of five" \
+  --out benchmarks/rosters/ti15-grand-final.json \
+  --match-id 8960577698 --match-id 8960655084 --match-id 8960762254 \
+  --match-id 8960882635 --match-id 8960991322
+```
 
 ### `changelog`
 

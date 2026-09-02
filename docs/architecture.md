@@ -1,6 +1,6 @@
 # Invoker — Architecture (Implementation Artifact)
 
-Last updated: 2026-07-27 (KB exposure: export-kb consumer bundle + KnowledgeService KB ladder — kb_catalog/kb_resolve/kb_card/kb_article/search_changelog — over bundle schema 2; Unicode-aware service normalization)
+Last updated: 2026-09-02 (benchmark roster: `invoker build-roster` + `benchmark/roster.py` derive heroes and co-occurrence pairs from OpenDota match details; 7.41d patch window)
 Current implementation state: Stage 2 is landed, Stage 3 authoring is
 implemented, Stage 4 authoring-context hardening is implemented, and Stage 4
 vocabulary review reaches a guarded promotion loop (parse → review → promote)
@@ -707,6 +707,30 @@ eval for the KB and the M1 gate. Two halves with a hard boundary:
   content fingerprints of the KB *and* the case set (so two reports can
   distinguish "KB changed" from "questions changed"); cases pinned to
   another patch are recorded as skipped. Any failing case exits 1.
+
+**Roster** (`benchmark/roster.py`, spec
+`docs/specs/2026-09-01-dota-knowledge-artifact-v1.md` slice 1): the
+vertical-slice hero set is sampled from real matches rather than chosen by
+hand. `build_roster` takes OpenDota match-detail payloads plus
+`GameFilesSource.heroes()` and derives a `RosterArtifact` (schema 1):
+per-match picks by side, per-hero pick counts and game ids, and the
+co-occurrence pair set (`ally_games` / `enemy_games` per unordered pair,
+slugs ordered lexically so pair ids are stable), plus a `patch_check` that
+resolves every match date against the manual patch windows and records
+whether all games fall in the KB patch and whether that window is
+open-ended (the boolean is only as strong as the windows). The artifact
+carries the GUIDELINES derived-file header (`schema_version`,
+`generator_version`, `source_patch`, `generated_at`) and a `fingerprint`
+(sha256 over everything except provenance) so a rebuild's determinism is
+checked by comparing fingerprints, not timestamps. Payloads that disagree
+on league or series, duplicate match ids, sides without exactly five
+distinct picks, a hero on both sides, unparsed `picks_bans`, or hero ids
+absent from the snapshot raise `RosterError`. `fetch_match_details` goes
+through the shared OpenDota cache (`force` refetches). Roster files live
+under `benchmarks/rosters/` and are committed; the first is
+`ti15-grand-final.json` (five games, 33 heroes, 201 pairs, all in the
+7.41d window). Match outcomes and statistics are deliberately not read
+from the payloads (spec non-goal).
 
 **Known limit (accepted 2026-07-25):** mark resolution proves
 traceability, not content faithfulness — the scorer never checks that

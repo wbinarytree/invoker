@@ -1,0 +1,2553 @@
+{
+  "schema_version": 1,
+  "label": "TI15 grand final (The International 2026), best of five",
+  "kb_patch": "7.41d",
+  "fingerprint": "c84952bb0dd3fe04b36e1a49fdcb2ab1fef1bb4454deb9a82f759f62231dee52",
+  "sampling_frame": {
+    "league_id": 19719,
+    "league_name": "The International 2026",
+    "series_id": 1133004,
+    "series_type": 2,
+    "teams": [
+      "TEAM VISION",
+      "Team Spirit"
+    ]
+  },
+  "matches": [
+    {
+      "match_id": 8960577698,
+      "start_time": 1787465757,
+      "start_date": "2026-08-23",
+      "radiant_team": "Team Spirit",
+      "dire_team": "TEAM VISION",
+      "radiant_picks": [
+        "slark",
+        "dark_willow",
+        "nevermore",
+        "disruptor",
+        "undying"
+      ],
+      "dire_picks": [
+        "ember_spirit",
+        "mirana",
+        "wisp",
+        "axe",
+        "hoodwink"
+      ],
+      "opendota_patch_id": 60,
+      "patch_window": "7.41d"
+    },
+    {
+      "match_id": 8960655084,
+      "start_time": 1787470563,
+      "start_date": "2026-08-23",
+      "radiant_team": "TEAM VISION",
+      "dire_team": "Team Spirit",
+      "radiant_picks": [
+        "earth_spirit",
+        "enchantress",
+        "rubick",
+        "abyssal_underlord",
+        "life_stealer"
+      ],
+      "dire_picks": [
+        "nevermore",
+        "slardar",
+        "hoodwink",
+        "undying",
+        "axe"
+      ],
+      "opendota_patch_id": 60,
+      "patch_window": "7.41d"
+    },
+    {
+      "match_id": 8960762254,
+      "start_time": 1787476452,
+      "start_date": "2026-08-23",
+      "radiant_team": "Team Spirit",
+      "dire_team": "TEAM VISION",
+      "radiant_picks": [
+        "furion",
+        "dark_willow",
+        "tusk",
+        "axe",
+        "terrorblade"
+      ],
+      "dire_picks": [
+        "nevermore",
+        "enchantress",
+        "slardar",
+        "pangolier",
+        "marci"
+      ],
+      "opendota_patch_id": 60,
+      "patch_window": "7.41d"
+    },
+    {
+      "match_id": 8960882635,
+      "start_time": 1787482181,
+      "start_date": "2026-08-23",
+      "radiant_team": "TEAM VISION",
+      "dire_team": "Team Spirit",
+      "radiant_picks": [
+        "keeper_of_the_light",
+        "doom_bringer",
+        "life_stealer",
+        "mirana",
+        "sand_king"
+      ],
+      "dire_picks": [
+        "winter_wyvern",
+        "centaur",
+        "rattletrap",
+        "templar_assassin",
+        "storm_spirit"
+      ],
+      "opendota_patch_id": 60,
+      "patch_window": "7.41d"
+    },
+    {
+      "match_id": 8960991322,
+      "start_time": 1787486918,
+      "start_date": "2026-08-23",
+      "radiant_team": "TEAM VISION",
+      "dire_team": "Team Spirit",
+      "radiant_picks": [
+        "invoker",
+        "rubick",
+        "axe",
+        "hoodwink",
+        "juggernaut"
+      ],
+      "dire_picks": [
+        "bane",
+        "pangolier",
+        "mirana",
+        "life_stealer",
+        "dark_seer"
+      ],
+      "opendota_patch_id": 60,
+      "patch_window": "7.41d"
+    }
+  ],
+  "heroes": [
+    {
+      "hero_id": 108,
+      "internal_name": "npc_dota_hero_abyssal_underlord",
+      "slug": "abyssal_underlord",
+      "display_name": "Underlord",
+      "picks": 1,
+      "games": [
+        8960655084
+      ]
+    },
+    {
+      "hero_id": 2,
+      "internal_name": "npc_dota_hero_axe",
+      "slug": "axe",
+      "display_name": "Axe",
+      "picks": 4,
+      "games": [
+        8960577698,
+        8960655084,
+        8960762254,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 3,
+      "internal_name": "npc_dota_hero_bane",
+      "slug": "bane",
+      "display_name": "Bane",
+      "picks": 1,
+      "games": [
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 96,
+      "internal_name": "npc_dota_hero_centaur",
+      "slug": "centaur",
+      "display_name": "Centaur Warrunner",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 55,
+      "internal_name": "npc_dota_hero_dark_seer",
+      "slug": "dark_seer",
+      "display_name": "Dark Seer",
+      "picks": 1,
+      "games": [
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 119,
+      "internal_name": "npc_dota_hero_dark_willow",
+      "slug": "dark_willow",
+      "display_name": "Dark Willow",
+      "picks": 2,
+      "games": [
+        8960577698,
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 87,
+      "internal_name": "npc_dota_hero_disruptor",
+      "slug": "disruptor",
+      "display_name": "Disruptor",
+      "picks": 1,
+      "games": [
+        8960577698
+      ]
+    },
+    {
+      "hero_id": 69,
+      "internal_name": "npc_dota_hero_doom_bringer",
+      "slug": "doom_bringer",
+      "display_name": "Doom",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 107,
+      "internal_name": "npc_dota_hero_earth_spirit",
+      "slug": "earth_spirit",
+      "display_name": "Earth Spirit",
+      "picks": 1,
+      "games": [
+        8960655084
+      ]
+    },
+    {
+      "hero_id": 106,
+      "internal_name": "npc_dota_hero_ember_spirit",
+      "slug": "ember_spirit",
+      "display_name": "Ember Spirit",
+      "picks": 1,
+      "games": [
+        8960577698
+      ]
+    },
+    {
+      "hero_id": 58,
+      "internal_name": "npc_dota_hero_enchantress",
+      "slug": "enchantress",
+      "display_name": "Enchantress",
+      "picks": 2,
+      "games": [
+        8960655084,
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 53,
+      "internal_name": "npc_dota_hero_furion",
+      "slug": "furion",
+      "display_name": "Nature's Prophet",
+      "picks": 1,
+      "games": [
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 123,
+      "internal_name": "npc_dota_hero_hoodwink",
+      "slug": "hoodwink",
+      "display_name": "Hoodwink",
+      "picks": 3,
+      "games": [
+        8960577698,
+        8960655084,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 74,
+      "internal_name": "npc_dota_hero_invoker",
+      "slug": "invoker",
+      "display_name": "Invoker",
+      "picks": 1,
+      "games": [
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 8,
+      "internal_name": "npc_dota_hero_juggernaut",
+      "slug": "juggernaut",
+      "display_name": "Juggernaut",
+      "picks": 1,
+      "games": [
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 90,
+      "internal_name": "npc_dota_hero_keeper_of_the_light",
+      "slug": "keeper_of_the_light",
+      "display_name": "Keeper of the Light",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 54,
+      "internal_name": "npc_dota_hero_life_stealer",
+      "slug": "life_stealer",
+      "display_name": "Lifestealer",
+      "picks": 3,
+      "games": [
+        8960655084,
+        8960882635,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 136,
+      "internal_name": "npc_dota_hero_marci",
+      "slug": "marci",
+      "display_name": "Marci",
+      "picks": 1,
+      "games": [
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 9,
+      "internal_name": "npc_dota_hero_mirana",
+      "slug": "mirana",
+      "display_name": "Mirana",
+      "picks": 3,
+      "games": [
+        8960577698,
+        8960882635,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 11,
+      "internal_name": "npc_dota_hero_nevermore",
+      "slug": "nevermore",
+      "display_name": "Shadow Fiend",
+      "picks": 3,
+      "games": [
+        8960577698,
+        8960655084,
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 120,
+      "internal_name": "npc_dota_hero_pangolier",
+      "slug": "pangolier",
+      "display_name": "Pangolier",
+      "picks": 2,
+      "games": [
+        8960762254,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 51,
+      "internal_name": "npc_dota_hero_rattletrap",
+      "slug": "rattletrap",
+      "display_name": "Clockwerk",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 86,
+      "internal_name": "npc_dota_hero_rubick",
+      "slug": "rubick",
+      "display_name": "Rubick",
+      "picks": 2,
+      "games": [
+        8960655084,
+        8960991322
+      ]
+    },
+    {
+      "hero_id": 16,
+      "internal_name": "npc_dota_hero_sand_king",
+      "slug": "sand_king",
+      "display_name": "Sand King",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 28,
+      "internal_name": "npc_dota_hero_slardar",
+      "slug": "slardar",
+      "display_name": "Slardar",
+      "picks": 2,
+      "games": [
+        8960655084,
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 93,
+      "internal_name": "npc_dota_hero_slark",
+      "slug": "slark",
+      "display_name": "Slark",
+      "picks": 1,
+      "games": [
+        8960577698
+      ]
+    },
+    {
+      "hero_id": 17,
+      "internal_name": "npc_dota_hero_storm_spirit",
+      "slug": "storm_spirit",
+      "display_name": "Storm Spirit",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 46,
+      "internal_name": "npc_dota_hero_templar_assassin",
+      "slug": "templar_assassin",
+      "display_name": "Templar Assassin",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 109,
+      "internal_name": "npc_dota_hero_terrorblade",
+      "slug": "terrorblade",
+      "display_name": "Terrorblade",
+      "picks": 1,
+      "games": [
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 100,
+      "internal_name": "npc_dota_hero_tusk",
+      "slug": "tusk",
+      "display_name": "Tusk",
+      "picks": 1,
+      "games": [
+        8960762254
+      ]
+    },
+    {
+      "hero_id": 85,
+      "internal_name": "npc_dota_hero_undying",
+      "slug": "undying",
+      "display_name": "Undying",
+      "picks": 2,
+      "games": [
+        8960577698,
+        8960655084
+      ]
+    },
+    {
+      "hero_id": 112,
+      "internal_name": "npc_dota_hero_winter_wyvern",
+      "slug": "winter_wyvern",
+      "display_name": "Winter Wyvern",
+      "picks": 1,
+      "games": [
+        8960882635
+      ]
+    },
+    {
+      "hero_id": 91,
+      "internal_name": "npc_dota_hero_wisp",
+      "slug": "wisp",
+      "display_name": "Io",
+      "picks": 1,
+      "games": [
+        8960577698
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "a": "abyssal_underlord",
+      "b": "axe",
+      "a_hero_id": 108,
+      "b_hero_id": 2,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "earth_spirit",
+      "a_hero_id": 108,
+      "b_hero_id": 107,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "enchantress",
+      "a_hero_id": 108,
+      "b_hero_id": 58,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "hoodwink",
+      "a_hero_id": 108,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "life_stealer",
+      "a_hero_id": 108,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "nevermore",
+      "a_hero_id": 108,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "rubick",
+      "a_hero_id": 108,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "slardar",
+      "a_hero_id": 108,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "abyssal_underlord",
+      "b": "undying",
+      "a_hero_id": 108,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "bane",
+      "a_hero_id": 2,
+      "b_hero_id": 3,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "dark_seer",
+      "a_hero_id": 2,
+      "b_hero_id": 55,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "dark_willow",
+      "a_hero_id": 2,
+      "b_hero_id": 119,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "disruptor",
+      "a_hero_id": 2,
+      "b_hero_id": 87,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "earth_spirit",
+      "a_hero_id": 2,
+      "b_hero_id": 107,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "ember_spirit",
+      "a_hero_id": 2,
+      "b_hero_id": 106,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "enchantress",
+      "a_hero_id": 2,
+      "b_hero_id": 58,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084,
+        8960762254
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "furion",
+      "a_hero_id": 2,
+      "b_hero_id": 53,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "hoodwink",
+      "a_hero_id": 2,
+      "b_hero_id": 123,
+      "ally_games": [
+        8960577698,
+        8960655084,
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "invoker",
+      "a_hero_id": 2,
+      "b_hero_id": 74,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "juggernaut",
+      "a_hero_id": 2,
+      "b_hero_id": 8,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "life_stealer",
+      "a_hero_id": 2,
+      "b_hero_id": 54,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084,
+        8960991322
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "marci",
+      "a_hero_id": 2,
+      "b_hero_id": 136,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "mirana",
+      "a_hero_id": 2,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "nevermore",
+      "a_hero_id": 2,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960577698,
+        8960762254
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "pangolier",
+      "a_hero_id": 2,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254,
+        8960991322
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "rubick",
+      "a_hero_id": 2,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "slardar",
+      "a_hero_id": 2,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "slark",
+      "a_hero_id": 2,
+      "b_hero_id": 93,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "terrorblade",
+      "a_hero_id": 2,
+      "b_hero_id": 109,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "tusk",
+      "a_hero_id": 2,
+      "b_hero_id": 100,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "axe",
+      "b": "undying",
+      "a_hero_id": 2,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "axe",
+      "b": "wisp",
+      "a_hero_id": 2,
+      "b_hero_id": 91,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "bane",
+      "b": "dark_seer",
+      "a_hero_id": 3,
+      "b_hero_id": 55,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "bane",
+      "b": "hoodwink",
+      "a_hero_id": 3,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "bane",
+      "b": "invoker",
+      "a_hero_id": 3,
+      "b_hero_id": 74,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "bane",
+      "b": "juggernaut",
+      "a_hero_id": 3,
+      "b_hero_id": 8,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "bane",
+      "b": "life_stealer",
+      "a_hero_id": 3,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "bane",
+      "b": "mirana",
+      "a_hero_id": 3,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "bane",
+      "b": "pangolier",
+      "a_hero_id": 3,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "bane",
+      "b": "rubick",
+      "a_hero_id": 3,
+      "b_hero_id": 86,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "doom_bringer",
+      "a_hero_id": 96,
+      "b_hero_id": 69,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "keeper_of_the_light",
+      "a_hero_id": 96,
+      "b_hero_id": 90,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "life_stealer",
+      "a_hero_id": 96,
+      "b_hero_id": 54,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "mirana",
+      "a_hero_id": 96,
+      "b_hero_id": 9,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "rattletrap",
+      "a_hero_id": 96,
+      "b_hero_id": 51,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "centaur",
+      "b": "sand_king",
+      "a_hero_id": 96,
+      "b_hero_id": 16,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "centaur",
+      "b": "storm_spirit",
+      "a_hero_id": 96,
+      "b_hero_id": 17,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "centaur",
+      "b": "templar_assassin",
+      "a_hero_id": 96,
+      "b_hero_id": 46,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "centaur",
+      "b": "winter_wyvern",
+      "a_hero_id": 96,
+      "b_hero_id": 112,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_seer",
+      "b": "hoodwink",
+      "a_hero_id": 55,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "dark_seer",
+      "b": "invoker",
+      "a_hero_id": 55,
+      "b_hero_id": 74,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "dark_seer",
+      "b": "juggernaut",
+      "a_hero_id": 55,
+      "b_hero_id": 8,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "dark_seer",
+      "b": "life_stealer",
+      "a_hero_id": 55,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_seer",
+      "b": "mirana",
+      "a_hero_id": 55,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_seer",
+      "b": "pangolier",
+      "a_hero_id": 55,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_seer",
+      "b": "rubick",
+      "a_hero_id": 55,
+      "b_hero_id": 86,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "disruptor",
+      "a_hero_id": 119,
+      "b_hero_id": 87,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "ember_spirit",
+      "a_hero_id": 119,
+      "b_hero_id": 106,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "enchantress",
+      "a_hero_id": 119,
+      "b_hero_id": 58,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "furion",
+      "a_hero_id": 119,
+      "b_hero_id": 53,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "hoodwink",
+      "a_hero_id": 119,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "marci",
+      "a_hero_id": 119,
+      "b_hero_id": 136,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "mirana",
+      "a_hero_id": 119,
+      "b_hero_id": 9,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "nevermore",
+      "a_hero_id": 119,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "pangolier",
+      "a_hero_id": 119,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "slardar",
+      "a_hero_id": 119,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "dark_willow",
+      "b": "slark",
+      "a_hero_id": 119,
+      "b_hero_id": 93,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "terrorblade",
+      "a_hero_id": 119,
+      "b_hero_id": 109,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "tusk",
+      "a_hero_id": 119,
+      "b_hero_id": 100,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "undying",
+      "a_hero_id": 119,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "dark_willow",
+      "b": "wisp",
+      "a_hero_id": 119,
+      "b_hero_id": 91,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "disruptor",
+      "b": "ember_spirit",
+      "a_hero_id": 87,
+      "b_hero_id": 106,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "disruptor",
+      "b": "hoodwink",
+      "a_hero_id": 87,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "disruptor",
+      "b": "mirana",
+      "a_hero_id": 87,
+      "b_hero_id": 9,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "disruptor",
+      "b": "nevermore",
+      "a_hero_id": 87,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "disruptor",
+      "b": "slark",
+      "a_hero_id": 87,
+      "b_hero_id": 93,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "disruptor",
+      "b": "undying",
+      "a_hero_id": 87,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "disruptor",
+      "b": "wisp",
+      "a_hero_id": 87,
+      "b_hero_id": 91,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "doom_bringer",
+      "b": "keeper_of_the_light",
+      "a_hero_id": 69,
+      "b_hero_id": 90,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "doom_bringer",
+      "b": "life_stealer",
+      "a_hero_id": 69,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "doom_bringer",
+      "b": "mirana",
+      "a_hero_id": 69,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "doom_bringer",
+      "b": "rattletrap",
+      "a_hero_id": 69,
+      "b_hero_id": 51,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "doom_bringer",
+      "b": "sand_king",
+      "a_hero_id": 69,
+      "b_hero_id": 16,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "doom_bringer",
+      "b": "storm_spirit",
+      "a_hero_id": 69,
+      "b_hero_id": 17,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "doom_bringer",
+      "b": "templar_assassin",
+      "a_hero_id": 69,
+      "b_hero_id": 46,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "doom_bringer",
+      "b": "winter_wyvern",
+      "a_hero_id": 69,
+      "b_hero_id": 112,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "earth_spirit",
+      "b": "enchantress",
+      "a_hero_id": 107,
+      "b_hero_id": 58,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "earth_spirit",
+      "b": "hoodwink",
+      "a_hero_id": 107,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "earth_spirit",
+      "b": "life_stealer",
+      "a_hero_id": 107,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "earth_spirit",
+      "b": "nevermore",
+      "a_hero_id": 107,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "earth_spirit",
+      "b": "rubick",
+      "a_hero_id": 107,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "earth_spirit",
+      "b": "slardar",
+      "a_hero_id": 107,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "earth_spirit",
+      "b": "undying",
+      "a_hero_id": 107,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "ember_spirit",
+      "b": "hoodwink",
+      "a_hero_id": 106,
+      "b_hero_id": 123,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "ember_spirit",
+      "b": "mirana",
+      "a_hero_id": 106,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "ember_spirit",
+      "b": "nevermore",
+      "a_hero_id": 106,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "ember_spirit",
+      "b": "slark",
+      "a_hero_id": 106,
+      "b_hero_id": 93,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "ember_spirit",
+      "b": "undying",
+      "a_hero_id": 106,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "ember_spirit",
+      "b": "wisp",
+      "a_hero_id": 106,
+      "b_hero_id": 91,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "enchantress",
+      "b": "furion",
+      "a_hero_id": 58,
+      "b_hero_id": 53,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "hoodwink",
+      "a_hero_id": 58,
+      "b_hero_id": 123,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "life_stealer",
+      "a_hero_id": 58,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "enchantress",
+      "b": "marci",
+      "a_hero_id": 58,
+      "b_hero_id": 136,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "enchantress",
+      "b": "nevermore",
+      "a_hero_id": 58,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "pangolier",
+      "a_hero_id": 58,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "enchantress",
+      "b": "rubick",
+      "a_hero_id": 58,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "enchantress",
+      "b": "slardar",
+      "a_hero_id": 58,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "terrorblade",
+      "a_hero_id": 58,
+      "b_hero_id": 109,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "tusk",
+      "a_hero_id": 58,
+      "b_hero_id": 100,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "enchantress",
+      "b": "undying",
+      "a_hero_id": 58,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "furion",
+      "b": "marci",
+      "a_hero_id": 53,
+      "b_hero_id": 136,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "furion",
+      "b": "nevermore",
+      "a_hero_id": 53,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "furion",
+      "b": "pangolier",
+      "a_hero_id": 53,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "furion",
+      "b": "slardar",
+      "a_hero_id": 53,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "furion",
+      "b": "terrorblade",
+      "a_hero_id": 53,
+      "b_hero_id": 109,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "furion",
+      "b": "tusk",
+      "a_hero_id": 53,
+      "b_hero_id": 100,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "hoodwink",
+      "b": "invoker",
+      "a_hero_id": 123,
+      "b_hero_id": 74,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "hoodwink",
+      "b": "juggernaut",
+      "a_hero_id": 123,
+      "b_hero_id": 8,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "hoodwink",
+      "b": "life_stealer",
+      "a_hero_id": 123,
+      "b_hero_id": 54,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084,
+        8960991322
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "mirana",
+      "a_hero_id": 123,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "nevermore",
+      "a_hero_id": 123,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "pangolier",
+      "a_hero_id": 123,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "rubick",
+      "a_hero_id": 123,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "slardar",
+      "a_hero_id": 123,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "hoodwink",
+      "b": "slark",
+      "a_hero_id": 123,
+      "b_hero_id": 93,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "undying",
+      "a_hero_id": 123,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "hoodwink",
+      "b": "wisp",
+      "a_hero_id": 123,
+      "b_hero_id": 91,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "invoker",
+      "b": "juggernaut",
+      "a_hero_id": 74,
+      "b_hero_id": 8,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "invoker",
+      "b": "life_stealer",
+      "a_hero_id": 74,
+      "b_hero_id": 54,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "invoker",
+      "b": "mirana",
+      "a_hero_id": 74,
+      "b_hero_id": 9,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "invoker",
+      "b": "pangolier",
+      "a_hero_id": 74,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "invoker",
+      "b": "rubick",
+      "a_hero_id": 74,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "juggernaut",
+      "b": "life_stealer",
+      "a_hero_id": 8,
+      "b_hero_id": 54,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "juggernaut",
+      "b": "mirana",
+      "a_hero_id": 8,
+      "b_hero_id": 9,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "juggernaut",
+      "b": "pangolier",
+      "a_hero_id": 8,
+      "b_hero_id": 120,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "juggernaut",
+      "b": "rubick",
+      "a_hero_id": 8,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "life_stealer",
+      "a_hero_id": 90,
+      "b_hero_id": 54,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "mirana",
+      "a_hero_id": 90,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "rattletrap",
+      "a_hero_id": 90,
+      "b_hero_id": 51,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "sand_king",
+      "a_hero_id": 90,
+      "b_hero_id": 16,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "storm_spirit",
+      "a_hero_id": 90,
+      "b_hero_id": 17,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "templar_assassin",
+      "a_hero_id": 90,
+      "b_hero_id": 46,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "keeper_of_the_light",
+      "b": "winter_wyvern",
+      "a_hero_id": 90,
+      "b_hero_id": 112,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "mirana",
+      "a_hero_id": 54,
+      "b_hero_id": 9,
+      "ally_games": [
+        8960882635,
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "life_stealer",
+      "b": "nevermore",
+      "a_hero_id": 54,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "pangolier",
+      "a_hero_id": 54,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "life_stealer",
+      "b": "rattletrap",
+      "a_hero_id": 54,
+      "b_hero_id": 51,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "rubick",
+      "a_hero_id": 54,
+      "b_hero_id": 86,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "sand_king",
+      "a_hero_id": 54,
+      "b_hero_id": 16,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "life_stealer",
+      "b": "slardar",
+      "a_hero_id": 54,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "storm_spirit",
+      "a_hero_id": 54,
+      "b_hero_id": 17,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "templar_assassin",
+      "a_hero_id": 54,
+      "b_hero_id": 46,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "undying",
+      "a_hero_id": 54,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "life_stealer",
+      "b": "winter_wyvern",
+      "a_hero_id": 54,
+      "b_hero_id": 112,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "marci",
+      "b": "nevermore",
+      "a_hero_id": 136,
+      "b_hero_id": 11,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "marci",
+      "b": "pangolier",
+      "a_hero_id": 136,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "marci",
+      "b": "slardar",
+      "a_hero_id": 136,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "marci",
+      "b": "terrorblade",
+      "a_hero_id": 136,
+      "b_hero_id": 109,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "marci",
+      "b": "tusk",
+      "a_hero_id": 136,
+      "b_hero_id": 100,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "nevermore",
+      "a_hero_id": 9,
+      "b_hero_id": 11,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "pangolier",
+      "a_hero_id": 9,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960991322
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "mirana",
+      "b": "rattletrap",
+      "a_hero_id": 9,
+      "b_hero_id": 51,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "rubick",
+      "a_hero_id": 9,
+      "b_hero_id": 86,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "sand_king",
+      "a_hero_id": 9,
+      "b_hero_id": 16,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "mirana",
+      "b": "slark",
+      "a_hero_id": 9,
+      "b_hero_id": 93,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "storm_spirit",
+      "a_hero_id": 9,
+      "b_hero_id": 17,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "templar_assassin",
+      "a_hero_id": 9,
+      "b_hero_id": 46,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "undying",
+      "a_hero_id": 9,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "winter_wyvern",
+      "a_hero_id": 9,
+      "b_hero_id": 112,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "mirana",
+      "b": "wisp",
+      "a_hero_id": 9,
+      "b_hero_id": 91,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "nevermore",
+      "b": "pangolier",
+      "a_hero_id": 11,
+      "b_hero_id": 120,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "nevermore",
+      "b": "rubick",
+      "a_hero_id": 11,
+      "b_hero_id": 86,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "nevermore",
+      "b": "slardar",
+      "a_hero_id": 11,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960655084,
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "nevermore",
+      "b": "slark",
+      "a_hero_id": 11,
+      "b_hero_id": 93,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "nevermore",
+      "b": "terrorblade",
+      "a_hero_id": 11,
+      "b_hero_id": 109,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "nevermore",
+      "b": "tusk",
+      "a_hero_id": 11,
+      "b_hero_id": 100,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "nevermore",
+      "b": "undying",
+      "a_hero_id": 11,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960577698,
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "nevermore",
+      "b": "wisp",
+      "a_hero_id": 11,
+      "b_hero_id": 91,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "pangolier",
+      "b": "rubick",
+      "a_hero_id": 120,
+      "b_hero_id": 86,
+      "ally_games": [],
+      "enemy_games": [
+        8960991322
+      ]
+    },
+    {
+      "a": "pangolier",
+      "b": "slardar",
+      "a_hero_id": 120,
+      "b_hero_id": 28,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "pangolier",
+      "b": "terrorblade",
+      "a_hero_id": 120,
+      "b_hero_id": 109,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "pangolier",
+      "b": "tusk",
+      "a_hero_id": 120,
+      "b_hero_id": 100,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "rattletrap",
+      "b": "sand_king",
+      "a_hero_id": 51,
+      "b_hero_id": 16,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "rattletrap",
+      "b": "storm_spirit",
+      "a_hero_id": 51,
+      "b_hero_id": 17,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "rattletrap",
+      "b": "templar_assassin",
+      "a_hero_id": 51,
+      "b_hero_id": 46,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "rattletrap",
+      "b": "winter_wyvern",
+      "a_hero_id": 51,
+      "b_hero_id": 112,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "rubick",
+      "b": "slardar",
+      "a_hero_id": 86,
+      "b_hero_id": 28,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "rubick",
+      "b": "undying",
+      "a_hero_id": 86,
+      "b_hero_id": 85,
+      "ally_games": [],
+      "enemy_games": [
+        8960655084
+      ]
+    },
+    {
+      "a": "sand_king",
+      "b": "storm_spirit",
+      "a_hero_id": 16,
+      "b_hero_id": 17,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "sand_king",
+      "b": "templar_assassin",
+      "a_hero_id": 16,
+      "b_hero_id": 46,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "sand_king",
+      "b": "winter_wyvern",
+      "a_hero_id": 16,
+      "b_hero_id": 112,
+      "ally_games": [],
+      "enemy_games": [
+        8960882635
+      ]
+    },
+    {
+      "a": "slardar",
+      "b": "terrorblade",
+      "a_hero_id": 28,
+      "b_hero_id": 109,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "slardar",
+      "b": "tusk",
+      "a_hero_id": 28,
+      "b_hero_id": 100,
+      "ally_games": [],
+      "enemy_games": [
+        8960762254
+      ]
+    },
+    {
+      "a": "slardar",
+      "b": "undying",
+      "a_hero_id": 28,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960655084
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "slark",
+      "b": "undying",
+      "a_hero_id": 93,
+      "b_hero_id": 85,
+      "ally_games": [
+        8960577698
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "slark",
+      "b": "wisp",
+      "a_hero_id": 93,
+      "b_hero_id": 91,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    },
+    {
+      "a": "storm_spirit",
+      "b": "templar_assassin",
+      "a_hero_id": 17,
+      "b_hero_id": 46,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "storm_spirit",
+      "b": "winter_wyvern",
+      "a_hero_id": 17,
+      "b_hero_id": 112,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "templar_assassin",
+      "b": "winter_wyvern",
+      "a_hero_id": 46,
+      "b_hero_id": 112,
+      "ally_games": [
+        8960882635
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "terrorblade",
+      "b": "tusk",
+      "a_hero_id": 109,
+      "b_hero_id": 100,
+      "ally_games": [
+        8960762254
+      ],
+      "enemy_games": []
+    },
+    {
+      "a": "undying",
+      "b": "wisp",
+      "a_hero_id": 85,
+      "b_hero_id": 91,
+      "ally_games": [],
+      "enemy_games": [
+        8960577698
+      ]
+    }
+  ],
+  "patch_check": {
+    "kb_patch": "7.41d",
+    "windows_source": "src/invoker/patches.json",
+    "match_windows": {
+      "8960577698": "7.41d",
+      "8960655084": "7.41d",
+      "8960762254": "7.41d",
+      "8960882635": "7.41d",
+      "8960991322": "7.41d"
+    },
+    "all_in_kb_patch": true,
+    "kb_window_open_ended": true,
+    "note": "Match dates are resolved against the manual patch windows. all_in_kb_patch is only as strong as the windows: when kb_window_open_ended is true, a later patch may exist that the windows do not record yet. OpenDota's numeric patch id is recorded as reported and not mapped."
+  },
+  "provenance": {
+    "source": "opendota:/matches/{match_id}",
+    "generator_version": "1",
+    "source_patch": "7.41d",
+    "hero_identity_source": "game_files:7.41d",
+    "generated_at": "2026-09-02T10:49:12.409459Z"
+  }
+}

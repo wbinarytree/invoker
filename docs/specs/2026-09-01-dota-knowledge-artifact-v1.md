@@ -348,7 +348,16 @@ stays a non-goal.
 
 ### Cases
 
-20–30 cases, each with a user-authored rubric. The existing `QACase` schema
+20–30 cases. Rubrics are **harvested, not authored** (amended 2026-09-02:
+the user cannot enumerate a pair's interactions by hand, and should not
+have to — judging a stated claim is the human-sized job). After the pair
+pages exist, the user ticks or crosses each observation on a reviewed pair
+page; a tick becomes "must mention" for that pair's case, a cross becomes
+"must not claim" plus a hook or rule fix. After the paired run, true
+statements the baseline made that the KB missed are ticked too and logged
+as hook gaps, so the gold does not favor the KB by construction.
+Current-patch-delta and alias cases keep one-line fact rubrics. The
+existing `QACase` schema
 (`src/invoker/benchmark/schemas.py`) needs a bump for this: new categories
 (`pair`, `matchup`, `item-adaptation`, `alias`), `expected_marks` made
 optional (observations carry no marks), and two new fields —
@@ -413,9 +422,12 @@ until then.
 
 Implementation begins after this revised spec is accepted in PR review.
 
-1. **Roster and cases** — fetch the TI15 grand-final match details from
-   OpenDota; write the roster and co-occurrence pair set with provenance and
-   the patch check; the user writes the rubric cases.
+1. **Roster** — fetch the TI15 grand-final match details from OpenDota;
+   write the roster and co-occurrence pair set with provenance and the patch
+   check (`invoker build-roster`, landed 2026-09-02:
+   `benchmarks/rosters/ti15-grand-final.json`). Cases move to after the pair
+   pages (slice 5a): rubrics are harvested from the user's tick/cross review
+   of generated observations, per the Evaluation section.
 2. **Concept Interactions blocks** — generate roles and rules for the 98
    concepts from their own articles, with a structured sidecar; the user
    reviews once.
@@ -427,6 +439,9 @@ Implementation begins after this revised spec is accepted in PR review.
 5. **Join and pair job** — deterministic join over concept rules; pair job
    with rank/drop/write and the escape hatch; run the co-occurrence set;
    report the escape-hatch count.
+   5a. **Review and cases** — the user ticks/crosses observations on the
+   generated pair pages; cases compile from the marks (plus one-line
+   current-patch-delta and alias cases); `QACase` schema bump lands here.
 6. **Smoke paired evaluation** — on the existing answerer rails, no compiler,
    no graph. Decides whether derived pair knowledge moves a downstream agent
    before any plumbing is built.
