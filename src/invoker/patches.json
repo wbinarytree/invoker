@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "date_basis": "UTC match start date; exact patch release time is not encoded",
-  "source": "manual dota2.com patch-note release dates",
+  "source": "manual dota2.com patch-note release dates; 7.41d date from the 7.41d client changelog (patchnotes manifest)",
   "windows": [
     {
       "patch": "7.40b",
@@ -31,6 +31,11 @@
     {
       "patch": "7.41c",
       "start_date": "2026-05-06",
+      "end_date_exclusive": "2026-06-04"
+    },
+    {
+      "patch": "7.41d",
+      "start_date": "2026-06-04",
       "end_date_exclusive": null
     }
   ]

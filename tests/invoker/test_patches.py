@@ -16,6 +16,7 @@ def test_load_patch_windows_resolves_current_manual_windows():
         "7.41a",
         "7.41b",
         "7.41c",
+        "7.41d",
     ]
     current = patch_window_for_timestamp(1778889600, windows)
     last_patch = patch_window_for_timestamp(1775606400, windows)
