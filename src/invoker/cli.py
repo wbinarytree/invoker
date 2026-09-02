@@ -678,6 +678,59 @@ def run_benchmark_cmd(
         raise typer.Exit(code=1)
 
 
+@app.command("build-roster")
+def build_roster_cmd(
+    match_id: Annotated[
+        list[int],
+        typer.Option("--match-id", help="OpenDota match id; repeat once per game of the series."),
+    ],
+    patch: Annotated[str, typer.Option(help="KB patch whose game snapshot resolves hero ids.")],
+    out: Annotated[Path, typer.Option(help="Roster JSON to write, e.g. benchmarks/rosters/x.json")],
+    label: Annotated[str, typer.Option(help="Human label for the sampling frame.")],
+) -> None:
+    """Build a benchmark roster (heroes + co-occurrence pairs) from real matches."""
+    import asyncio
+
+    from invoker.benchmark.roster import (
+        RosterError,
+        build_roster,
+        fetch_match_details,
+        write_roster,
+    )
+    from invoker.sources.game_files import GameFilesSource
+
+    cfg = _load_config()
+    if cfg.game_data_dir is None:
+        typer.echo("INVOKER_GAME_DATA_DIR is required for build-roster.", err=True)
+        raise typer.Exit(code=1)
+    source = GameFilesSource(cfg.game_data_dir, patch)
+    matches = asyncio.run(fetch_match_details(cfg.cache_dir, match_id))
+    try:
+        artifact = build_roster(
+            matches,
+            source.heroes(),
+            kb_patch=patch,
+            label=label,
+            hero_identity_source=f"game_files:{patch}",
+        )
+    except RosterError as exc:
+        typer.echo(f"build-roster failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    path = write_roster(artifact, out)
+    frame = artifact.sampling_frame
+    typer.echo(
+        f"wrote {path}: {frame.league_name} series {frame.series_id} "
+        f"({' vs '.join(frame.teams)}), {len(artifact.matches)} games, "
+        f"{len(artifact.heroes)} heroes, {len(artifact.pairs)} pairs, "
+        f"all_in_kb_patch={artifact.patch_check.all_in_kb_patch}"
+    )
+    if not artifact.patch_check.all_in_kb_patch:
+        typer.echo(
+            f"warning: match windows {artifact.patch_check.match_windows} do not all equal "
+            f"{patch}; see patch_check in the roster file",
+            err=True,
+        )
+
 @app.command("snapshot-game-files")
 def snapshot_game_files_cmd(
     vpk: SnapshotVpkOption,
