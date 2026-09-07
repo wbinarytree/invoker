@@ -1,6 +1,6 @@
 # Current Direction
 
-Last updated: 2026-09-02
+Last updated: 2026-09-07
 
 This file is the shortest path to the active design direction. Anything not listed here or in `docs/architecture.md` is not authoritative.
 
@@ -56,6 +56,10 @@ This file is the shortest path to the active design direction. Anything not list
   walkthrough, revised text in PR review):**
   [docs/specs/2026-09-01-dota-knowledge-artifact-v1.md](specs/2026-09-01-dota-knowledge-artifact-v1.md)
   — product terms in [CONTEXT.md](../CONTEXT.md)
+  - Slice 2, concept Interactions blocks — roles-and-rules sidecar schema,
+    checks, review flow (proposed 2026-09-07, resolves v1 open question 1
+    for roles and rules):
+    [docs/specs/2026-09-07-concept-interactions-blocks.md](specs/2026-09-07-concept-interactions-blocks.md)
 
 ## Active plans
 
